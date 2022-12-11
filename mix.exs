@@ -52,8 +52,8 @@ defmodule FleetYards.Umbrella.MixProject do
 
   defp releases do
     [
-      fleet_yards: [
-        applications: [fleet_yards: :permanent]
+      fleet_yards_web: [
+        applications: [fleet_yards_web: :permanent]
       ]
     ]
   end

@@ -11,7 +11,8 @@ import Config
 
 # Configure Mix tasks and generators
 config :fleet_yards,
-  ecto_repos: [FleetYards.Repo]
+  ecto_repos: [FleetYards.Repo],
+  version_name: "Elixir"
 
 # Configures the mailer
 #
