@@ -53,7 +53,7 @@ defmodule FleetYardsWeb.Schemas.Single do
       type: :object,
       properties: %{
         code: %Schema{type: :string, example: "not_found"},
-        message: %Schema{type: :string}
+        message: %Schema{type: :string, example: "Not Found"}
       },
       required: [:code]
     })
