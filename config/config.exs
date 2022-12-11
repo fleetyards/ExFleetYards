@@ -30,6 +30,9 @@ config :fleet_yards_web,
   ecto_repos: [FleetYards.Repo],
   generators: [context_app: :fleet_yards]
 
+# if inline_endpoint is false, `port` and `url` become availabe.
+config :fleet_yards_web, FleetYardsWeb.Api, inline_endpoint: true, port: 4001
+
 # Configures the endpoint
 config :fleet_yards_web, FleetYardsWeb.Endpoint,
   url: [host: "localhost"],

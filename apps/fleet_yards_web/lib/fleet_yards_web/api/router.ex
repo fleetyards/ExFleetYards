@@ -9,7 +9,14 @@ defmodule FleetYardsWeb.Api.Router do
     plug OpenApiSpex.Plug.PutApiSpec, module: FleetYardsWeb.ApiSpec
   end
 
-  scope "/api" do
+  root =
+    if FleetYards.Config.get(:fleet_yards_web, [FleetYardsWeb.Api, :inline_endpoint], true) do
+      "/api"
+    else
+      "/"
+    end
+
+  scope root do
     pipe_through :api
 
     get "/openapi", OpenApiSpex.Plug.RenderSpec, []
