@@ -24,6 +24,8 @@ defmodule FleetYardsWeb do
       import Plug.Conn
       import FleetYardsWeb.Gettext
       alias FleetYardsWeb.Router.Helpers, as: Routes
+
+      use OpenApiSpex.ControllerSpecs
     end
   end
 

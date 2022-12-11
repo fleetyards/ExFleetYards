@@ -41,7 +41,8 @@ defmodule FleetYards.MixProject do
       {:ecto_sql, "~> 3.6"},
       {:postgrex, ">= 0.0.0"},
       {:jason, "~> 1.2"},
-      {:swoosh, "~> 1.3"}
+      {:swoosh, "~> 1.3"},
+      {:open_api_spex, "~> 3.16"}
     ]
   end
 

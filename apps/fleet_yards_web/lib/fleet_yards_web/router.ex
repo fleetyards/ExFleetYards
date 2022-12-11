@@ -12,6 +12,7 @@ defmodule FleetYardsWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug OpenApiSpex.Plug.PutApiSpec, module: FleetYardsWeb.ApiSpec
   end
 
   scope "/", FleetYardsWeb do
@@ -20,10 +21,21 @@ defmodule FleetYardsWeb.Router do
     get "/", PageController, :index
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", FleetYardsWeb do
-  #   pipe_through :api
-  # end
+  scope "/" do
+    pipe_through :browser
+
+    get "/swaggerui", OpenApiSpex.Plug.SwaggerUI, path: "/api/openapi"
+  end
+
+  scope "/api" do
+    pipe_through :api
+
+    get "/openapi", OpenApiSpex.Plug.RenderSpec, []
+
+    scope "/v2", FleetYardsWeb do
+      get "/version", ApiV2VersionController, :index
+    end
+  end
 
   # Enables LiveDashboard only for development
   #

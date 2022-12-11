@@ -50,7 +50,8 @@ defmodule FleetYardsWeb.MixProject do
       {:gettext, "~> 0.18"},
       {:fleet_yards, in_umbrella: true},
       {:jason, "~> 1.2"},
-      {:plug_cowboy, "~> 2.5"}
+      {:plug_cowboy, "~> 2.5"},
+      {:open_api_spex, "~> 3.16"}
     ]
   end
 
