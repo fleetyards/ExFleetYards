@@ -27,6 +27,9 @@ defmodule FleetYardsWeb.Telemetry do
       summary("phoenix.endpoint.stop.duration",
         unit: {:native, :millisecond}
       ),
+      summary("phoenix.api.endpoint.stop.duration",
+        unit: {:native, :millisecond}
+      ),
       summary("phoenix.router_dispatch.stop.duration",
         tags: [:route],
         unit: {:native, :millisecond}

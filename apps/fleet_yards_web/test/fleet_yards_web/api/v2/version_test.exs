@@ -5,7 +5,7 @@ defmodule FleetYardsWeb.Api.V2.VersionTest do
   test "version produces a VersionResponse", %{conn: conn} do
     json =
       conn
-      |> get(Routes.api_v2_version_path(conn, :index))
+      |> get_api(ApiRoutes.version_path(conn, :index))
       |> json_response(200)
 
     api_spec = FleetYardsWeb.ApiSpec.spec()

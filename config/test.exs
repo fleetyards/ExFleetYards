@@ -16,7 +16,19 @@ config :fleet_yards, FleetYards.Repo,
 # We don't run a server during test. If one is required,
 # you can enable the server option below.
 config :fleet_yards_web, FleetYardsWeb.Endpoint,
-  http: [ip: {127, 0, 0, 1}, port: 4002],
+  http: [
+    ip: {127, 0, 0, 1},
+    port: 4002,
+    dispatch: [
+      {
+        :_,
+        [
+          {"/api/[...]", Phoenix.Endpoint.Cowboy2Handler, {FleetYardsWeb.Api.Endpoint, []}},
+          {:_, Phoenix.Endpoint.Cowboy2Handler, {FleetYardsWeb.Endpoint, []}}
+        ]
+      }
+    ]
+  ],
   secret_key_base: "MWnMFg79YoPGiD41M5xSRapqHYo9TIQ46u+XEfb8GeSGJ7LE77sHfuAgSfqDHr67",
   server: false
 

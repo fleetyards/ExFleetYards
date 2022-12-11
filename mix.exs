@@ -46,7 +46,9 @@ defmodule FleetYards.Umbrella.MixProject do
     [
       # run `mix setup` in all child apps
       setup: ["cmd mix setup"],
-      fmt: ["format"]
+      fmt: ["format"],
+      "api.routes": ["phx.routes FleetYardsWeb.Api.Router"],
+      routes: ["phx.routes FleetYardsWeb.Router"]
     ]
   end
 

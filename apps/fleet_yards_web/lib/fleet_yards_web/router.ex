@@ -10,6 +10,7 @@ defmodule FleetYardsWeb.Router do
     plug :put_secure_browser_headers
   end
 
+  # only used for openapi endpoint
   pipeline :api do
     plug :accepts, ["json"]
     plug OpenApiSpex.Plug.PutApiSpec, module: FleetYardsWeb.ApiSpec
@@ -21,19 +22,15 @@ defmodule FleetYardsWeb.Router do
     get "/", PageController, :index
   end
 
-  scope "/" do
+  scope "/openapi" do
     pipe_through :browser
 
-    get "/swaggerui", OpenApiSpex.Plug.SwaggerUI, path: "/api/openapi"
-  end
+    get "/", OpenApiSpex.Plug.SwaggerUI, path: "/openapi/spec/v2.json"
 
-  scope "/api" do
-    pipe_through :api
+    scope "/spec" do
+      pipe_through :api
 
-    get "/openapi", OpenApiSpex.Plug.RenderSpec, []
-
-    scope "/v2", FleetYardsWeb do
-      get "/version", ApiV2VersionController, :index
+      get "/v2.json", OpenApiSpex.Plug.RenderSpec, []
     end
   end
 

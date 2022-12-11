@@ -4,7 +4,7 @@ defmodule FleetYardsWeb.ApiSpec do
   """
 
   alias OpenApiSpex.{Components, Info, OpenApi, Paths, Server, SecurityScheme}
-  alias FleetYardsWeb.{Endpoint, Router}
+  alias FleetYardsWeb.Api.{Endpoint, Router}
   @behaviour OpenApi
 
   @impl OpenApi

@@ -25,6 +25,7 @@ defmodule FleetYardsWeb.ConnCase do
       import FleetYardsWeb.ConnCase
 
       alias FleetYardsWeb.Router.Helpers, as: Routes
+      alias FleetYardsWeb.Api.Router.Helpers, as: ApiRoutes
 
       # The default endpoint for testing
       @endpoint FleetYardsWeb.Endpoint
@@ -33,6 +34,29 @@ defmodule FleetYardsWeb.ConnCase do
 
   setup tags do
     FleetYards.DataCase.setup_sandbox(tags)
+
     {:ok, conn: Phoenix.ConnTest.build_conn()}
+  end
+
+  @http_methods [:get, :post, :put, :patch, :delete, :options, :connect, :trace, :head]
+
+  for method <- @http_methods do
+    @doc """
+    Dispatches to the current endpoint.
+    See `dispatch/5` for more information.
+    """
+    defmacro unquote(:"#{method}_api")(conn, path_or_action, params_or_body \\ nil) do
+      method = unquote(method)
+
+      quote do
+        Phoenix.ConnTest.dispatch(
+          unquote(conn),
+          FleetYardsWeb.Api.Endpoint,
+          unquote(method),
+          unquote(path_or_action),
+          unquote(params_or_body)
+        )
+      end
+    end
   end
 end
