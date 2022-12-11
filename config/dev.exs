@@ -2,8 +2,8 @@ import Config
 
 # Configure your database
 config :fleet_yards, FleetYards.Repo,
-  username: "postgres",
-  password: "postgres",
+  username: "fleet_yards_dev",
+  password: "fleet_yards_dev",
   hostname: "localhost",
   database: "fleet_yards_dev",
   stacktrace: true,

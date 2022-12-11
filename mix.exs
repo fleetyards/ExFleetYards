@@ -8,7 +8,8 @@ defmodule FleetYards.Umbrella.MixProject do
       version: "0.1.0",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
-      aliases: aliases()
+      aliases: aliases(),
+      releases: releases()
     ]
   end
 
@@ -46,6 +47,14 @@ defmodule FleetYards.Umbrella.MixProject do
       # run `mix setup` in all child apps
       setup: ["cmd mix setup"],
       fmt: ["format"]
+    ]
+  end
+
+  defp releases do
+    [
+      fleet_yards: [
+        applications: [fleet_yards: :permanent]
+      ]
     ]
   end
 end

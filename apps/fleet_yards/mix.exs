@@ -13,7 +13,8 @@ defmodule FleetYards.MixProject do
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      releases: releases()
     ]
   end
 
@@ -53,6 +54,14 @@ defmodule FleetYards.MixProject do
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"]
+    ]
+  end
+
+  defp releases do
+    [
+      fleet_yards: [
+        config_providers: [{FleetYards.Config.ReleaseRuntimeProvider, []}]
+      ]
     ]
   end
 end
