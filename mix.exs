@@ -3,6 +3,7 @@ defmodule FleetYards.Umbrella.MixProject do
 
   def project do
     [
+      name: "Fleetyards",
       apps_path: "apps",
       version: "0.1.0",
       start_permanent: Mix.env() == :prod,
@@ -24,7 +25,11 @@ defmodule FleetYards.Umbrella.MixProject do
   # Dependencies listed here are available only for this project
   # and cannot be accessed from applications inside the apps/ folder.
   defp deps do
-    []
+    [
+      # Dev
+      {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
+      {:ex_doc, "~> 0.27", only: :dev, runtime: false}
+    ]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.
@@ -39,7 +44,8 @@ defmodule FleetYards.Umbrella.MixProject do
   defp aliases do
     [
       # run `mix setup` in all child apps
-      setup: ["cmd mix setup"]
+      setup: ["cmd mix setup"],
+      fmt: ["format"]
     ]
   end
 end
