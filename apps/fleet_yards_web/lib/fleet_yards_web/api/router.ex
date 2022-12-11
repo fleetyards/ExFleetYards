@@ -23,6 +23,11 @@ defmodule FleetYardsWeb.Api.Router do
 
     scope "/v2", FleetYardsWeb.Api do
       get "/version", VersionController, :index
+
+      scope "/game" do
+        get "/manufactuers", ManufactureController, :index
+        get "/manufactuer/:slug", ManufactureController, :show
+      end
     end
   end
 end

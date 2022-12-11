@@ -40,7 +40,9 @@ config :fleet_yards_web, FleetYardsWeb.Endpoint,
   pubsub_server: FleetYards.PubSub,
   live_view: [signing_salt: "D5yRC+hm"]
 
-config :fleet_yards_web, FleetYardsWeb.Api.Endpoint, server: false
+config :fleet_yards_web, FleetYardsWeb.Api.Endpoint,
+  server: false,
+  render_errors: [view: FleetYardsWeb.Api.Views.ErrorView, accepts: ~w(json), layout: false]
 
 # Configure esbuild (the version is required)
 config :esbuild,
