@@ -1,10 +1,10 @@
-defmodule FleetYards.Repo.Game.Manufacture do
+defmodule FleetYards.Repo.Game.Manufacturer do
   use Ecto.Schema
   import Ecto.Changeset
 
   @primary_key {:id, Ecto.UUID, []}
 
-  schema "manufactures" do
+  schema "manufacturers" do
     field :name, :string
     field :slug, :string
     field :known_for, :string
@@ -17,8 +17,8 @@ defmodule FleetYards.Repo.Game.Manufacture do
   end
 
   ## Changeset
-  def create_changeset(manufacture \\ %__MODULE__{}, attrs) do
-    manufacture
+  def create_changeset(manufacturer \\ %__MODULE__{}, attrs) do
+    manufacturer
     |> cast(attrs, [
       :id,
       :name,

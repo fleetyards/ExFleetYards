@@ -4,7 +4,7 @@ defmodule FleetYards.Repo.Migrations.Manufactures do
   def change do
     execute "CREATE EXTENSION IF NOT EXISTS pgcrypto", ""
 
-    create table(:manufactures, primary_key: false) do
+    create table(:manufacturers, primary_key: false) do
       add :id, :uuid, primary_key: true, null: false, default: fragment("gen_random_uuid()")
       add :name, :string, size: 255
       add :slug, :string, size: 255
@@ -17,6 +17,6 @@ defmodule FleetYards.Repo.Migrations.Manufactures do
       timestamps(inserted_at: :created_at)
     end
 
-    create unique_index(:manufactures, [:slug])
+    create unique_index(:manufacturers, [:slug])
   end
 end

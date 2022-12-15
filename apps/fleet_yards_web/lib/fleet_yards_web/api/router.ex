@@ -19,14 +19,14 @@ defmodule FleetYardsWeb.Api.Router do
   scope root do
     pipe_through :api
 
-    get "/openapi", OpenApiSpex.Plug.RenderSpec, []
+    get "/", OpenApiSpex.Plug.RenderSpec, []
 
     scope "/v2", FleetYardsWeb.Api do
       get "/version", VersionController, :index
 
       scope "/game" do
-        get "/manufactuers", ManufactureController, :index
-        get "/manufactuer/:slug", ManufactureController, :show
+        get "/manufacturers", ManufacturerController, :index
+        get "/manufacturer/:slug", ManufacturerController, :show
       end
     end
   end

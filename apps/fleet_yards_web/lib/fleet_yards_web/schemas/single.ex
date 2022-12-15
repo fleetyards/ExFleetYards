@@ -1,12 +1,14 @@
 defmodule FleetYardsWeb.Schemas.Single do
   alias OpenApiSpex.Schema
+  require FleetYardsWeb.Schemas.Gen
+  import FleetYardsWeb.Schemas.Gen
   @moduledoc false
 
-  defmodule Manufacture do
+  defmodule Manufacturer do
     require OpenApiSpex
 
     OpenApiSpex.schema(%{
-      description: "Manufacture in the star citizen univers",
+      description: "Manufacturer in the star citizen univers",
       type: :object,
       properties: %{
         name: %Schema{type: :string},
@@ -26,9 +28,9 @@ defmodule FleetYardsWeb.Schemas.Single do
       "x-struct": __MODULE__
     })
 
-    def convert(%FleetYards.Repo.Game.Manufacture{} = manufacture) do
-      manufacture =
-        manufacture
+    def convert(%FleetYards.Repo.Game.Manufacturer{} = manufacturer) do
+      manufacturer =
+        manufacturer
         |> Map.from_struct()
         |> Map.new(fn
           {:created_at, data} -> {:createdAt, data}
@@ -36,7 +38,7 @@ defmodule FleetYardsWeb.Schemas.Single do
           v -> v
         end)
 
-      struct(__MODULE__, manufacture)
+      struct(__MODULE__, manufacturer)
     end
 
     def convert(list) when is_list(list) do
@@ -58,4 +60,19 @@ defmodule FleetYardsWeb.Schemas.Single do
       required: [:code]
     })
   end
+
+  # Gen.type(Error, %{
+  # description: "Generic error",
+  # type: :object,
+  # properties: %{
+  #   code: %Schema{type: :string, example: "not_found"},
+  #   message: %Schema{type: :string, example: "Not Found"}
+  # },
+  # required: [:code]
+  # })
+
+  # type(Error, description: "Generic error", type: :object, properties: %{
+  #    code: %Schema{type: :string, example: "not_found"},
+  #    message: %Schema{type: :string, example: "Not Found"}
+  # }, required: [:code])
 end
