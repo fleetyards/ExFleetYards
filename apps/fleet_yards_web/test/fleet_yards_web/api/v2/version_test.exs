@@ -1,5 +1,5 @@
 defmodule FleetYardsWeb.Api.V2.VersionTest do
-  use FleetYardsWeb.ConnCase
+  use FleetYardsWeb.ConnCase, async: true
   import OpenApiSpex.TestAssertions
 
   test "version produces a VersionResponse", %{conn: conn} do

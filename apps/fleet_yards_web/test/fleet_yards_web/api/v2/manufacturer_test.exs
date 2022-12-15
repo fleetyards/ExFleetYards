@@ -1,5 +1,5 @@
 defmodule FleetYardsWeb.Api.V2.ManufacturerTest do
-  use FleetYardsWeb.ConnCase
+  use FleetYardsWeb.ConnCase, async: true
   import OpenApiSpex.TestAssertions
 
   alias FleetYards.Repo.Game
@@ -14,13 +14,22 @@ defmodule FleetYardsWeb.Api.V2.ManufacturerTest do
   describe "Api V2 Game Manufacturer" do
     setup [:create_manufacturer]
 
-    test "Get Manufacturer by slug", %{conn: conn, api_spec: api_spec} do
+    test "Manufacturere spec compliance (:show)", %{conn: conn, api_spec: api_spec} do
       json =
         conn
         |> get_api(ApiRoutes.manufacturer_path(conn, :show, "argo-astronautics"))
         |> json_response(200)
 
       assert_schema json, "Manufacturer", api_spec
+    end
+
+    test "Manufacturere spec compliance (:index)", %{conn: conn, api_spec: api_spec} do
+      json =
+        conn
+        |> get_api(ApiRoutes.manufacturer_path(conn, :index))
+        |> json_response(200)
+
+      assert_schema json, "ManufacturerList", api_spec
     end
   end
 
