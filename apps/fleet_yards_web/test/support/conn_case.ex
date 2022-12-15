@@ -29,13 +29,14 @@ defmodule FleetYardsWeb.ConnCase do
 
       # The default endpoint for testing
       @endpoint FleetYardsWeb.Endpoint
+      @moduledoc false
     end
   end
 
   setup tags do
     FleetYards.DataCase.setup_sandbox(tags)
 
-    {:ok, conn: Phoenix.ConnTest.build_conn()}
+    {:ok, conn: Phoenix.ConnTest.build_conn(), api_spec: FleetYardsWeb.ApiSpec.spec()}
   end
 
   @http_methods [:get, :post, :put, :patch, :delete, :options, :connect, :trace, :head]

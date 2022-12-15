@@ -13,8 +13,8 @@ defmodule FleetYardsWeb.Schemas.Single do
       properties: %{
         name: %Schema{type: :string},
         slug: %Schema{type: :string},
-        code: %Schema{type: :string},
-        logo: %Schema{type: :string},
+        code: %Schema{type: :string, nullable: true},
+        logo: %Schema{type: :string, nullable: true},
         createdAt: %Schema{type: :string, description: "Create timestamp", format: :"date-time"},
         updatedAt: %Schema{type: :string, description: "Update timestamp", format: :"date-time"}
       },

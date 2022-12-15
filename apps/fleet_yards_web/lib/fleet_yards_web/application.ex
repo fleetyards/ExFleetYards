@@ -38,11 +38,11 @@ defmodule FleetYardsWeb.Application do
   end
 
   defp merge_config(true) do
-    config = [
-      url: get_conf(:url),
-      http: [ip: get_conf([:http, :ip]), port: get_conf([:http, :port])],
-      server: false
-    ]
+    config =
+      Application.fetch_env!(:fleet_yards_web, FleetYardsWeb.Api.Endpoint)
+      |> Keyword.put(:url, get_conf(:url))
+      |> Keyword.put(:http, get_conf(:http))
+      |> Keyword.put(:server, false)
 
     Application.put_env(:fleet_yards_web, FleetYardsWeb.Api.Endpoint, config)
   end

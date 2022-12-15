@@ -24,6 +24,17 @@ defmodule FleetYardsWeb do
       import Plug.Conn
       import FleetYardsWeb.Gettext
       alias FleetYardsWeb.Router.Helpers, as: Routes
+    end
+  end
+
+  def api_controller do
+    quote do
+      use Phoenix.Controller, namespace: FleetYardsWeb
+
+      import Plug.Conn
+      import FleetYardsWeb.Gettext
+      alias FleetYardsWeb.Api.Router.Helpers, as: Routes
+      alias FleetYardsWeb.Api.NotFoundException
 
       use OpenApiSpex.ControllerSpecs
     end

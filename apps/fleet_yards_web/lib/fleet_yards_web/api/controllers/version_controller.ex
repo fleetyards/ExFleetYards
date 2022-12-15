@@ -1,5 +1,5 @@
 defmodule FleetYardsWeb.Api.VersionController do
-  use FleetYardsWeb, :controller
+  use FleetYardsWeb, :api_controller
 
   tags ["version"]
 

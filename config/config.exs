@@ -42,7 +42,7 @@ config :fleet_yards_web, FleetYardsWeb.Endpoint,
 
 config :fleet_yards_web, FleetYardsWeb.Api.Endpoint,
   server: false,
-  render_errors: [view: FleetYardsWeb.Api.Views.ErrorView, accepts: ~w(json), layout: false]
+  render_errors: [view: FleetYardsWeb.Api.ErrorView, accepts: ~w(json), layout: false]
 
 # Configure esbuild (the version is required)
 config :esbuild,

@@ -25,8 +25,9 @@ defmodule FleetYardsWeb.Api.Router do
       get "/version", VersionController, :index
 
       scope "/game" do
-        get "/manufacturers", ManufacturerController, :index
-        get "/manufacturer/:slug", ManufacturerController, :show
+        # get "/manufacturers", ManufacturerController, :index
+        # get "/manufacturer/:slug", ManufacturerController, :show
+        resources "/manufacturers", ManufacturerController, only: [:index, :show]
       end
     end
   end
