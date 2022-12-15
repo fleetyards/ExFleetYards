@@ -24,6 +24,7 @@ defmodule FleetYardsWeb do
       import Plug.Conn
       import FleetYardsWeb.Gettext
       alias FleetYardsWeb.Router.Helpers, as: Routes
+      @moduledoc "Controller"
     end
   end
 
@@ -35,8 +36,10 @@ defmodule FleetYardsWeb do
       import FleetYardsWeb.Gettext
       alias FleetYardsWeb.Api.Router.Helpers, as: Routes
       alias FleetYardsWeb.Api.NotFoundException
+      alias FleetYards.Repo
 
       use OpenApiSpex.ControllerSpecs
+      @moduledoc "Controller used for Api"
     end
   end
 
@@ -52,6 +55,23 @@ defmodule FleetYardsWeb do
 
       # Include shared imports and aliases for views
       unquote(view_helpers())
+      @moduledoc "View Module"
+    end
+  end
+
+  def api_view do
+    quote do
+      use Phoenix.View,
+        root: "lib/fleet_yards_web/templates",
+        namespace: FleetYardsWeb
+
+      # Import convenience functions from controllers
+      import Phoenix.Controller,
+        only: [dview_module: 1, view_template: 1]
+
+      # Include shared imports and aliases for views
+      unquote(view_helpers(true))
+      @moduledoc "View module used for api"
     end
   end
 
@@ -97,7 +117,7 @@ defmodule FleetYardsWeb do
     end
   end
 
-  defp view_helpers do
+  defp view_helpers(api \\ false) do
     quote do
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
@@ -110,7 +130,13 @@ defmodule FleetYardsWeb do
 
       import FleetYardsWeb.ErrorHelpers
       import FleetYardsWeb.Gettext
-      alias FleetYardsWeb.Router.Helpers, as: Routes
+      unquote do
+        if api do
+          quote do alias FleetYardsWeb.Api.Router.Helpers, as: Routes end
+        else
+          quote do alias FleetYardsWeb.Router.Helpers, as: Routes end
+        end
+      end
     end
   end
 

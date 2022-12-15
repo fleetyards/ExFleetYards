@@ -12,7 +12,12 @@ defmodule FleetYardsWeb.Api.ErrorView do
     %{"code" => "not_found", "message" => message}
   end
 
-  def render("404.json", assigns) do
+  def render("404.json", _assigns) do
     %{"code" => "not_found", "message" => "Not Found"}
+  end
+
+  def render("500.json", %{reason: reason}) do
+    IO.inspect(reason)
+    %{"code" => "internal_error"}
   end
 end

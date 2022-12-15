@@ -47,6 +47,41 @@ defmodule FleetYardsWeb.Schemas.Single do
     end
   end
 
+  defmodule Component do
+    require OpenApiSpex
+
+    OpenApiSpex.schema(%{
+      description: "Component",
+      type: :object,
+      properties: %{
+        id: %Schema{type: :string, format: :uuid},
+        name: %Schema{type: :string},
+        slug: %Schema{type: :string},
+        grade: %Schema{type: :string, nullable: true},
+        class: %Schema{type: :string, nullable: true},
+        size: %Schema{type: :string, nullable: true},
+        # type: %Schema{type: :string, nullable: true},
+        # typeLabel
+        # itemClass
+        # itemClassLabel
+        # trackingSignal
+        # trackingSignalLabel
+        storeImageIsFallback: %Schema{type: :boolean, nullable: true},
+        # storeImage
+        # storeImageMediam
+        # storeImageSmall
+        # soldAt: %Schema{type: :array, items: }
+        # boughtAt
+        # listedAt
+        manufacturer: Manufacturer,
+        createdAt: %Schema{type: :string, description: "Create timestamp", format: :"date-time"},
+        updatedAt: %Schema{type: :string, description: "Update timestamp", format: :"date-time"}
+      },
+      required: [:id, :slug, :name, :createdAt],
+      "x-struct": __MODULE__
+    })
+  end
+
   defmodule Error do
     require OpenApiSpex
 

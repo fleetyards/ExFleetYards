@@ -1,4 +1,4 @@
-defmodule FleetYardsWeb.Api.ManufacturerController do
+defmodule FleetYardsWeb.Api.ComponentController do
   use FleetYardsWeb, :api_controller
 
   tags ["game"]
@@ -9,7 +9,7 @@ defmodule FleetYardsWeb.Api.ManufacturerController do
       limit: [in: :query, type: :integer, example: 25]
     ],
     responses: [
-      ok: {"Manufacturers", "application/json", FleetYardsWeb.Schemas.List.ManufacturerList},
+      ok: {"Components", "application/json", FleetYardsWeb.Schemas.List.ComponentList},
       internal_server_error: {"Error", "application/json", FleetYardsWeb.Schemas.Single.Error}
     ]
 
@@ -18,30 +18,33 @@ defmodule FleetYardsWeb.Api.ManufacturerController do
     limit = Map.get(params, "limit", 25)
 
     {data, metadata} =
-      FleetYards.Repo.Pagination.page(FleetYards.Repo.Game.Manufacturer, offset, limit)
+      FleetYards.Repo.Pagination.page(FleetYards.Repo.Game.Component, offset, limit)
 
-    render(conn, "index.json", data: data, metadata: metadata)
+    render(conn, "index.json", data: data |> Repo.preload(:manufacturer), metadata: metadata)
   end
 
   operation :show,
     parameters: [
-      slug: [in: :path, type: :string, example: "argo-astronautics"]
+      slug: [in: :path, type: :string]
     ],
     responses: [
-      ok: {"Manufacturer", "application/json", FleetYardsWeb.Schemas.Single.Manufacturer},
+      ok: {"Component", "application/json", FleetYardsWeb.Schemas.Single.Component},
       not_found: {"Error", "application/json", FleetYardsWeb.Schemas.Single.Error},
       internal_server_error: {"Error", "application/json", FleetYardsWeb.Schemas.Single.Error}
     ]
 
   def show(conn, %{"id" => slug}) do
-    FleetYards.Repo.Game.get_manufacturer_slug(slug)
+    FleetYards.Repo.Game.get_component_slug(slug)
     |> case do
       nil ->
-        raise(NotFoundException, "Manufacturer `#{slug}` not found")
+        raise(NotFoundException, "Component `#{slug}` not found")
 
-      manufacturer ->
-        # json(conn, FleetYardsWeb.Schemas.Single.Manufacturer.convert(manufacturer))
-        render(conn, "show.json", manufacturer: manufacturer)
+      component ->
+        component =
+          component
+          |> Repo.preload(:manufacturer)
+
+        render(conn, "show.json", component: component)
     end
   end
 end

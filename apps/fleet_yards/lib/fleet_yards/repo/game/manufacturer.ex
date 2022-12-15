@@ -1,6 +1,7 @@
 defmodule FleetYards.Repo.Game.Manufacturer do
   use Ecto.Schema
   import Ecto.Changeset
+  alias FleetYards.Repo.Game
 
   @primary_key {:id, Ecto.UUID, []}
 
@@ -12,6 +13,8 @@ defmodule FleetYards.Repo.Game.Manufacturer do
     field :logo, :string
     field :rsi_id, :integer
     field :code, :string
+
+    has_many :components, Game.Component
 
     timestamps(inserted_at: :created_at)
   end

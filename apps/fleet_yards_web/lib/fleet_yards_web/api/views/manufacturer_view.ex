@@ -8,6 +8,7 @@ defmodule FleetYardsWeb.Api.ManufacturerView do
     }
   end
 
+  def render("show.json", %{manufacturer: nil}), do: nil
   def render("show.json", %{manufacturer: manufacturer}) do
     %{
       name: manufacturer.name,

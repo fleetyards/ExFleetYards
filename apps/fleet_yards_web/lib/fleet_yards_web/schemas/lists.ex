@@ -3,4 +3,5 @@ defmodule FleetYardsWeb.Schemas.List do
   import FleetYardsWeb.Schemas.Gen
 
   gen_pagination(FleetYardsWeb.Schemas.Single.Manufacturer)
+  gen_pagination(FleetYardsWeb.Schemas.Single.Component)
 end
