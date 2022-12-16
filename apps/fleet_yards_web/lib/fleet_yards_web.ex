@@ -130,11 +130,16 @@ defmodule FleetYardsWeb do
 
       import FleetYardsWeb.ErrorHelpers
       import FleetYardsWeb.Gettext
+
       unquote do
         if api do
-          quote do alias FleetYardsWeb.Api.Router.Helpers, as: Routes end
+          quote do
+            alias FleetYardsWeb.Api.Router.Helpers, as: Routes
+          end
         else
-          quote do alias FleetYardsWeb.Router.Helpers, as: Routes end
+          quote do
+            alias FleetYardsWeb.Router.Helpers, as: Routes
+          end
         end
       end
     end

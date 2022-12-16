@@ -14,6 +14,8 @@ config :fleet_yards,
   ecto_repos: [FleetYards.Repo],
   version_name: "Elixir"
 
+config :fleet_yards, FleetYards.Repo, migration_source: "ecto_schema_migrations"
+
 # Configures the mailer
 #
 # By default it uses the "Local" adapter which stores the emails

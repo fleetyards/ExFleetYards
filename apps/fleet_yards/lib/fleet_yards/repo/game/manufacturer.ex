@@ -34,5 +34,6 @@ defmodule FleetYards.Repo.Game.Manufacturer do
       :created_at,
       :updated_at
     ])
+    |> unique_constraint(:id)
   end
 end

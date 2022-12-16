@@ -2,13 +2,14 @@ defmodule FleetYards.Repo.Migrations.Components do
   use Ecto.Migration
 
   def change do
-    create table(:components, primary_key: false) do
+    create_if_not_exists table(:components, primary_key: false) do
+      add :id, :uuid, primary_key: true, null: false, default: fragment("gen_random_uuid()")
       add :name, :string
       add :size, :string
       add :component_class, :string
       add :slug, :string, null: false
       add :item_type, :string
-      add :description, :binary
+      add :description, :text
       add :store_image, :string
       add :grade, :string
       add :item_class, :integer
@@ -16,7 +17,7 @@ defmodule FleetYards.Repo.Migrations.Components do
       add :sc_identifier, :string
       add :type_data, :string
       add :durability, :string
-      add :power_connection, :string
+      add :power_connection, :strin
       add :heat_connection, :string
       add :ammunition, :string
 
@@ -25,7 +26,7 @@ defmodule FleetYards.Repo.Migrations.Components do
       timestamps(inserted_at: :created_at)
     end
 
-    create unique_index(:components, [:slug])
-    create index(:components, [:manufacturer_id])
+    # create_if_not_exists unique_index(:components, [:slug])
+    create_if_not_exists index(:components, [:manufacturer_id])
   end
 end
