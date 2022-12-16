@@ -31,16 +31,18 @@ defmodule FleetYards.Repo.Pagination do
     Repo.aggregate(module, :count)
   end
 
-  def page(module, offset \\ 0, limit \\ 25)
+  def page(module, offset \\ 0, limit \\ 25, preload \\ [])
 
-  def page(module, offset, limit) when is_binary(offset),
-    do: page(module, String.to_integer(offset), limit)
+  def page(module, offset, limit, preload) when is_binary(offset),
+    do: page(module, String.to_integer(offset), limit, preload)
 
-  def page(module, offset, limit) when is_binary(limit),
-    do: page(module, offset, String.to_integer(limit))
+  def page(module, offset, limit, preload) when is_binary(limit),
+    do: page(module, offset, String.to_integer(limit), preload)
 
-  def page(module, offset, limit) when is_integer(offset) and is_integer(limit) do
-    data = get_page(module, offset, limit)
+  def page(module, offset, limit, preload) when is_integer(offset) and is_integer(limit) do
+    data =
+      get_page(module, offset, limit)
+      |> Repo.preload(preload)
 
     metadata = %FleetYards.Schemas.PaginationMetadata{
       count: Enum.count(data),

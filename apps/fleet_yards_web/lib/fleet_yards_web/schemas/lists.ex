@@ -4,4 +4,5 @@ defmodule FleetYardsWeb.Schemas.List do
 
   gen_pagination(FleetYardsWeb.Schemas.Single.Manufacturer)
   gen_pagination(FleetYardsWeb.Schemas.Single.Component)
+  gen_pagination(FleetYardsWeb.Schemas.Single.StarSystem)
 end

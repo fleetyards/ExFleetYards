@@ -67,7 +67,7 @@ defmodule FleetYardsWeb do
 
       # Import convenience functions from controllers
       import Phoenix.Controller,
-        only: [dview_module: 1, view_template: 1]
+        only: [view_module: 1, view_template: 1]
 
       # Include shared imports and aliases for views
       unquote(view_helpers(true))
@@ -122,9 +122,6 @@ defmodule FleetYardsWeb do
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
 
-      # Import LiveView and .heex helpers (live_render, live_patch, <.form>, etc)
-      import Phoenix.LiveView.Helpers
-
       # Import basic rendering functionality (render, render_layout, etc)
       import Phoenix.View
 
@@ -138,6 +135,8 @@ defmodule FleetYardsWeb do
           end
         else
           quote do
+            # Import LiveView and .heex helpers (live_render, live_patch, <.form>, etc)
+            import Phoenix.LiveView.Helpers
             alias FleetYardsWeb.Router.Helpers, as: Routes
           end
         end

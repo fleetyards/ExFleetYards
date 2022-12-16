@@ -5,6 +5,7 @@ defmodule FleetYardsWeb.Schemas.Single do
   @moduledoc false
 
   defmodule Manufacturer do
+    @moduledoc "Manufacturer"
     require OpenApiSpex
 
     OpenApiSpex.schema(%{
@@ -48,6 +49,7 @@ defmodule FleetYardsWeb.Schemas.Single do
   end
 
   defmodule Component do
+    @moduledoc "Component"
     require OpenApiSpex
 
     OpenApiSpex.schema(%{
@@ -79,6 +81,35 @@ defmodule FleetYardsWeb.Schemas.Single do
       },
       required: [:id, :slug, :name, :createdAt],
       "x-struct": __MODULE__
+    })
+  end
+
+  defmodule StarSystem do
+    @moduledoc "StarSystem"
+    require OpenApiSpex
+
+    OpenApiSpex.schema(%{
+      description: "Star System",
+      type: :object,
+      properties: %{
+        name: %Schema{type: :string, description: "Name fo the system", example: "Stanton"},
+        slug: %Schema{type: :string, description: "Slug of the system", example: "stanton"},
+        # storeImages
+        mapX: %Schema{type: :string},
+        mapY: %Schema{type: :string},
+        description: %Schema{type: String, description: "Description of the system"},
+        type: %Schema{type: :string, example: "Single star"},
+        size: %Schema{type: :string},
+        population: %Schema{type: :integer, example: 10},
+        economy: %Schema{type: :integer, example: 10},
+        danger: %Schema{type: :integer},
+        status: %Schema{type: :string},
+        locationLabel: %Schema{type: :string, example: "UEE"},
+        # celestialObjects: %Schema{type: :array, item: }
+        createdAt: %Schema{type: :string, format: :"date-time"},
+        updatedAt: %Schema{type: :string, format: :"date-time"}
+      },
+      required: [:name, :slug]
     })
   end
 

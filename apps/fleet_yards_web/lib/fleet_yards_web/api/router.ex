@@ -29,6 +29,7 @@ defmodule FleetYardsWeb.Api.Router do
         # get "/manufacturer/:slug", ManufacturerController, :show
         resources "/manufacturers", ManufacturerController, only: [:index, :show]
         resources "/components", ComponentController, only: [:index, :show]
+        resources "/starsystems", StarSystemController, only: [:index, :show]
       end
     end
   end
