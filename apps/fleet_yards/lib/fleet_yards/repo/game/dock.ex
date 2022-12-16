@@ -1,30 +1,24 @@
-defmodule FleetYards.Repo.Game.System.Station.Dock do
+defmodule FleetYards.Repo.Game.Dock do
   @moduledoc """
   Dockingport on a station
   """
   use Ecto.Schema
   import Ecto.Changeset
+  alias FleetYards.Repo.Game
+  alias FleetYards.Repo.Types
 
   @primary_key {:id, Ecto.UUID, []}
 
   schema "docks" do
-    field :dock_type, Ecto.Enum,
-      values: [
-        extra_extra_small: -1,
-        extra_small: 0,
-        small: 1,
-        medium: 2,
-        large: 3,
-        extra_large: 4,
-        capital: 5
-      ]
+    field :dock_type, Types.DockType
 
-    # field :station_id, reference
+    belongs_to :station, Game.Station, type: Ecto.UUID
     field :name, :string
-    field :max_ship_size, :integer
-    field :min_ship_size, :integer
-    field :ship_size, :integer
+    field :max_ship_size, Types.ShipSize
+    field :min_ship_size, Types.ShipSize
+    field :ship_size, Types.ShipSize
     # field :model_id, reference
+    # belongs_to :model, Game.Model, type: Ecto.UUID
     field :height, :float
     field :length, :float
     field :group, :string

@@ -1,8 +1,9 @@
-defmodule FleetYards.Repo.Game.System.CelestialObject do
+defmodule FleetYards.Repo.Game.CelestialObject do
   @moduledoc "Celestial Object"
   use Ecto.Schema
   import Ecto.Changeset
   alias FleetYards.Repo.Game
+  alias FleetYards.Repo.Types
 
   @primary_key {:id, Ecto.UUID, []}
 
@@ -10,10 +11,9 @@ defmodule FleetYards.Repo.Game.System.CelestialObject do
     field :name, :string
     field :slug, :string
     # , primary_key: true
-    belongs_to :starsystem, Game.System, type: Ecto.UUID
+    belongs_to :starsystem, Game.StarSystem, type: Ecto.UUID
 
-    field :object_type, Ecto.Enum,
-      values: [planet: "PLANET", asteroid_belt: "ASTEROID_BELT", satellite: "SATELLITE"]
+    field :object_type, Types.CelestialObjectType
 
     field :rsi_id, :integer
     field :code, :string
@@ -36,6 +36,7 @@ defmodule FleetYards.Repo.Game.System.CelestialObject do
 
     timestamps(inserted_at: :created_at)
 
-    has_many :stations, Game.System.Station
+    has_many :stations, Game.Station
+    has_many :childs, __MODULE__
   end
 end

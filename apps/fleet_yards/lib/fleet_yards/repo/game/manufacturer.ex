@@ -15,6 +15,7 @@ defmodule FleetYards.Repo.Game.Manufacturer do
     field :code, :string
 
     has_many :components, Game.Component
+    has_many :models, Game.Model
 
     timestamps(inserted_at: :created_at)
   end

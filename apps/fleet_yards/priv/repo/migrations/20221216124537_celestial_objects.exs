@@ -6,7 +6,7 @@ defmodule FleetYards.Repo.Migrations.CelectialObjects do
       add :id, :uuid, primary_key: true, null: false, default: fragment("gen_random_uuid()")
       add :name, :string
       add :slug, :string
-      add :starsystem_id, reference(:starsystems, type: :uuid)
+      add :starsystem_id, references(:starsystems, type: :uuid)
       add :object_type, :string
       add :rsi_id, :integer
       add :code, :string
@@ -24,11 +24,9 @@ defmodule FleetYards.Repo.Migrations.CelectialObjects do
       add :size, :string
       add :sub_type, :string
       add :store_image, :string
-      add :parent_id, reference(:celestial_objects, type: :uuid)
+      add :parent_id, references(:celestial_objects, type: :uuid)
 
       timestamps(inserted_at: :created_at)
-
-      has_many(:childs, __MODULE__)
     end
 
     create_if_not_exists unique_index(:celestial_objects, [:slug])

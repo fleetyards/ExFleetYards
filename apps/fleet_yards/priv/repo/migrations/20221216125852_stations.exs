@@ -13,7 +13,7 @@ defmodule FleetYards.Repo.Migrations.Stations do
       add :location, :string
       add :map, :string
       add :description, :text
-      add :celestial_object_id, reference(:celestial_objects, type: :uuid)
+      add :celestial_object_id, references(:celestial_objects, type: :uuid)
       add :status, :integer
       add :images_count, :integer, default: 0
       add :cargo_hub, :boolean

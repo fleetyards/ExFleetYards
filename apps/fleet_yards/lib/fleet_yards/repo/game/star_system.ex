@@ -1,4 +1,4 @@
-defmodule FleetYards.Repo.Game.System do
+defmodule FleetYards.Repo.Game.StarSystem do
   @moduledoc """
   Star system
   """
@@ -33,6 +33,6 @@ defmodule FleetYards.Repo.Game.System do
 
     timestamps(inserted_at: :created_at)
 
-    has_many :celestial_objects, Game.System.CelestialObject, foreign_key: :starsystem_id
+    has_many :celestial_objects, Game.CelestialObject, foreign_key: :starsystem_id
   end
 end
