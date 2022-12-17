@@ -1,4 +1,4 @@
-defmodule FleetYardsWeb.Api.ManufacturerController do
+defmodule FleetYardsWeb.Api.CelestialObjectController do
   use FleetYardsWeb, :api_controller
 
   tags ["game"]
@@ -10,8 +10,7 @@ defmodule FleetYardsWeb.Api.ManufacturerController do
       before: [in: :query, type: :string]
     ],
     responses: [
-      ok: {"Manufacturers", "application/json", FleetYardsWeb.Schemas.List.ManufacturerList},
-      bad_request: {"Error", "application/json", Error},
+      ok: {"Components", "application/json", FleetYardsWeb.Schemas.List.CelestialObjectList},
       internal_server_error: {"Error", "application/json", Error}
     ]
 
@@ -25,7 +24,7 @@ defmodule FleetYardsWeb.Api.ManufacturerController do
     IO.warn(cursor)
 
     page =
-      type_query(Game.Manufacturer)
+      query()
       |> Repo.paginate!(:slug, :asc, first: limit, after: cursor)
 
     render(conn, "index.json", page: page)
@@ -33,7 +32,7 @@ defmodule FleetYardsWeb.Api.ManufacturerController do
 
   def index(conn, %{"before" => cursor}, limit) do
     page =
-      type_query(Game.Manufacturer)
+      query()
       |> Repo.paginate!(:slug, :asc, last: limit, before: cursor)
 
     render(conn, "index.json", page: page)
@@ -43,22 +42,34 @@ defmodule FleetYardsWeb.Api.ManufacturerController do
 
   operation :show,
     parameters: [
-      id: [in: :path, type: :string, example: "argo-astronautics"]
+      id: [in: :path, type: :string]
     ],
     responses: [
-      ok: {"Manufacturer", "application/json", FleetYardsWeb.Schemas.Single.Manufacturer},
+      ok: {"Component", "application/json", FleetYardsWeb.Schemas.Single.CelestialObject},
       not_found: {"Error", "application/json", Error},
       internal_server_error: {"Error", "application/json", Error}
     ]
 
   def show(conn, %{"id" => slug}) do
-    FleetYards.Repo.Game.get_manufacturer_slug(slug)
+    query(slug)
+    |> Repo.one()
     |> case do
       nil ->
-        raise(NotFoundException, "Manufacturer `#{slug}` not found")
+        raise(NotFoundException, "Celestial Object `#{slug}` not found")
 
-      manufacturer ->
-        render(conn, "show.json", manufacturer: manufacturer)
+      object ->
+        render(conn, "show.json", celestial_object: object)
     end
   end
+
+  defp query(), do: type_query(Game.CelestialObject, preload: :starsystem)
+
+  defp query(slug),
+    do:
+      from(d in Game.CelestialObject,
+        as: :data,
+        join: s in assoc(d, :starsystem),
+        where: d.slug == ^slug,
+        preload: [:starsystem]
+      )
 end

@@ -19,7 +19,7 @@ defmodule FleetYardsWeb.Api.ViewHelpers do
   end
 
   defmacro page_view(opts \\ []) do
-    template = Keyword.get(opts, :name, "show.json")
+    template = Keyword.get(opts, :name, "index.json")
 
     quote do
       def render(unquote(template), %{page: page}), do: render_page(page, unquote(opts))

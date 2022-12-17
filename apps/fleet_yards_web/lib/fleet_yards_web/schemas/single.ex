@@ -105,11 +105,44 @@ defmodule FleetYardsWeb.Schemas.Single do
         danger: %Schema{type: :integer},
         status: %Schema{type: :string},
         locationLabel: %Schema{type: :string, example: "UEE"},
-        # celestialObjects: %Schema{type: :array, item: }
+        celestialObjects: %Schema{
+          type: :array,
+          items: FleetYardsWeb.Schemas.Single.CelestialObject
+        },
         createdAt: %Schema{type: :string, format: :"date-time"},
         updatedAt: %Schema{type: :string, format: :"date-time"}
       },
       required: [:name, :slug]
+    })
+  end
+
+  defmodule CelestialObject do
+    @moduledoc false
+    require OpenApiSpex
+
+    OpenApiSpex.schema(%{
+      description: "Celestial Object",
+      type: :object,
+      properties: %{
+        name: %Schema{type: :string, description: "Name of the object", example: "microTech"},
+        slug: %Schema{type: :string, example: "microtech"},
+        type: %Schema{
+          type: :string,
+          enum: ["planet", "satellite", "asteroid_belt", "asteroid_field"]
+        },
+        designation: %Schema{type: :string},
+        description: %Schema{type: :string},
+        # TODO: images
+        habitable: %Schema{type: :boolean},
+        fairchanceact: %Schema{type: :boolean, nullable: true},
+        subType: %Schema{type: :string},
+        size: %Schema{type: :string},
+        danger: %Schema{type: :integer},
+        economy: %Schema{type: :integer},
+        population: %Schema{type: :integer},
+        starsystem: FleetYardsWeb.Schemas.Single.StarSystem
+      },
+      required: [:slug, :name, :type]
     })
   end
 

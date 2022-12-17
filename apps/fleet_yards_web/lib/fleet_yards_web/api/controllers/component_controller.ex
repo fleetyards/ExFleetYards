@@ -42,7 +42,7 @@ defmodule FleetYardsWeb.Api.ComponentController do
 
   operation :show,
     parameters: [
-      slug: [in: :path, type: :string]
+      id: [in: :path, type: :string]
     ],
     responses: [
       ok: {"Component", "application/json", FleetYardsWeb.Schemas.Single.Component},

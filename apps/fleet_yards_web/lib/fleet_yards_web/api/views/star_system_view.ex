@@ -15,19 +15,29 @@ defmodule FleetYardsWeb.Api.StarSystemView do
       size: data.aggregated_size,
       population: data.aggregated_population,
       economy: data.aggregated_economy,
-      dange: data.aggregated_danger,
+      danger: data.aggregated_danger,
       status: data.status,
       # TODO: locationlabel
-      # TODO: celectialobjects
-      celestialObjects:
-        render_many(
-          data.celestial_objects,
-          FleetYardsWeb.Api.CelestialObjectView,
-          "overview.json"
-        ),
       createdAt: data.created_at |> DateTime.from_naive!("Etc/UTC") |> DateTime.to_iso8601(),
       updatedAt: data.updated_at |> DateTime.from_naive!("Etc/UTC") |> DateTime.to_iso8601()
     }
+    |> add_objects(data.celestial_objects)
+  end
+
+  def add_objects(map, assoc) do
+    if Ecto.assoc_loaded?(assoc) do
+      Map.put(
+        map,
+        :celestialObjects,
+        render_many(
+          assoc,
+          FleetYardsWeb.Api.CelestialObjectView,
+          "show.json"
+        )
+      )
+    else
+      map
+    end
   end
 
   def system_type("SINGLE_STAR"), do: "Single star"

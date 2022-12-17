@@ -30,6 +30,7 @@ defmodule FleetYardsWeb.Api.Router do
         resources "/manufacturers", ManufacturerController, only: [:index, :show]
         resources "/components", ComponentController, only: [:index, :show]
         resources "/starsystems", StarSystemController, only: [:index, :show]
+        resources "/celestial-objects", CelestialObjectController, only: [:index, :show]
       end
     end
   end

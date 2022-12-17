@@ -1,24 +1,37 @@
 defmodule FleetYardsWeb.Api.CelestialObjectView do
   use FleetYardsWeb, :api_view
 
-  def render("overview.json", %{celestial_object: data, include_system: true}) do
-    # TODO: merge with system
-    render("overview.json", %{celestial_object: data})
-  end
+  page_view()
 
-  def render("overview.json", %{celestial_object: data}) do
-    overview = %{
+  def render("show.json", %{celestial_object: data}) do
+    %{
       name: data.name,
       slug: data.slug,
       type: data.object_type,
+      designation: data.designation,
       # TODO: images
       description: data.description,
       habitable: data.habitable,
       fairchanceact: data.fairchanceact,
       subType: data.sub_type,
-      size: data.size
-      # TODO: danger: data.danger, economy, population
-      # TODO: locationlabel
+      size: data.size,
+      danger: data.sensor_danger,
+      economy: data.sensor_economy,
+      population: data.sensor_population
+      # TODO: locationLabel
     }
+    |> add_system(data.starsystem)
+  end
+
+  def add_system(map, v) do
+    if Ecto.assoc_loaded?(v) do
+      Map.put(
+        map,
+        :starsystem,
+        FleetYardsWeb.Api.StarSystemView.render("show.json", %{star_system: v})
+      )
+    else
+      map
+    end
   end
 end
