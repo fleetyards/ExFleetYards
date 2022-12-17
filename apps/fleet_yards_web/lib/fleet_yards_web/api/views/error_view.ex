@@ -16,8 +16,13 @@ defmodule FleetYardsWeb.Api.ErrorView do
     %{"code" => "not_found", "message" => "Not Found"}
   end
 
+  def render("400.json", %{
+        reason: %FleetYardsWeb.Api.InvalidPaginationException{message: message}
+      }) do
+    %{"code" => "invalid_pagination", "message" => message}
+  end
+
   def render("500.json", %{reason: reason}) do
-    IO.inspect(reason)
     %{"code" => "internal_error"}
   end
 end

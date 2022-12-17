@@ -113,6 +113,22 @@ defmodule FleetYardsWeb.Schemas.Single do
     })
   end
 
+  defmodule PaginationMetadata do
+    require OpenApiSpex
+
+    OpenApiSpex.schema(%{
+      description: "Pagination metadata",
+      type: :object,
+      properties: %{
+        limit: %Schema{type: :integer, example: 25},
+        next: %Schema{type: :string},
+        previous: %Schema{type: :string},
+        strategy: %Schema{type: :string, example: :slug}
+      },
+      required: [:limit, :strategy]
+    })
+  end
+
   defmodule Error do
     require OpenApiSpex
 

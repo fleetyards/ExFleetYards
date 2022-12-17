@@ -11,10 +11,9 @@ defmodule FleetYardsWeb.Schemas.Gen do
           type: :object,
           properties: %{
             data: %OpenApiSpex.Schema{type: :array, items: unquote(inner)},
-            metadata: FleetYards.Schemas.PaginationMetadata
+            metadata: FleetYardsWeb.Schemas.Single.PaginationMetadata
           },
-          required: [:data, :metadata],
-          example: %{data: [], metadata: %{count: 0, offset: 0, limit: 25, total: 0}}
+          required: [:data, :metadata]
         })
 
         def inner(), do: unquote(inner)

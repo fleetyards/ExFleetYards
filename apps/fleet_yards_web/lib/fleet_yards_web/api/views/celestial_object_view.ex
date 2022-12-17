@@ -16,10 +16,9 @@ defmodule FleetYardsWeb.Api.CelestialObjectView do
       habitable: data.habitable,
       fairchanceact: data.fairchanceact,
       subType: data.sub_type,
-      size: data.size,
+      size: data.size
       # TODO: danger: data.danger, economy, population
       # TODO: locationlabel
     }
-
   end
 end

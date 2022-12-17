@@ -30,16 +30,21 @@ defmodule FleetYardsWeb do
 
   def api_controller do
     quote do
+      @moduledoc "Controller used for Api"
       use Phoenix.Controller, namespace: FleetYardsWeb
 
       import Plug.Conn
       import FleetYardsWeb.Gettext
       alias FleetYardsWeb.Api.Router.Helpers, as: Routes
       alias FleetYardsWeb.Api.NotFoundException
+      alias FleetYardsWeb.Api.InvalidPaginationException
       alias FleetYards.Repo
+      alias FleetYards.Repo.Game
 
       use OpenApiSpex.ControllerSpecs
-      @moduledoc "Controller used for Api"
+      alias FleetYardsWeb.Schemas.Single.Error
+
+      use FleetYardsWeb.Api
     end
   end
 
@@ -132,6 +137,7 @@ defmodule FleetYardsWeb do
         if api do
           quote do
             alias FleetYardsWeb.Api.Router.Helpers, as: Routes
+            import FleetYardsWeb.Api.ViewHelpers
           end
         else
           quote do

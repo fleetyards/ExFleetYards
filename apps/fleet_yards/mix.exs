@@ -42,7 +42,8 @@ defmodule FleetYards.MixProject do
       {:postgrex, ">= 0.0.0"},
       {:jason, "~> 1.2"},
       {:swoosh, "~> 1.3"},
-      {:open_api_spex, "~> 3.16"}
+      {:open_api_spex, "~> 3.16"},
+      {:chunkr, "~> 0.2.1"}
     ]
   end
 
