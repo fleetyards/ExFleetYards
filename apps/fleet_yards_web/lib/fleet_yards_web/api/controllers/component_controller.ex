@@ -24,7 +24,7 @@ defmodule FleetYardsWeb.Api.ComponentController do
     IO.warn(cursor)
 
     page =
-      query
+      query()
       |> Repo.paginate!(:slug, :asc, first: limit, after: cursor)
 
     render(conn, "index.json", page: page)
@@ -32,7 +32,7 @@ defmodule FleetYardsWeb.Api.ComponentController do
 
   def index(conn, %{"before" => cursor}, limit) do
     page =
-      query
+      query()
       |> Repo.paginate!(:slug, :asc, last: limit, before: cursor)
 
     render(conn, "index.json", page: page)
@@ -51,19 +51,25 @@ defmodule FleetYardsWeb.Api.ComponentController do
     ]
 
   def show(conn, %{"id" => slug}) do
-    FleetYards.Repo.Game.get_component_slug(slug)
+    query(slug)
+    |> Repo.one!()
     |> case do
       nil ->
         raise(NotFoundException, "Component `#{slug}` not found")
 
       component ->
-        component =
-          component
-          |> Repo.preload(:manufacturer)
-
         render(conn, "show.json", component: component)
     end
   end
 
-  defp query, do: type_query(Game.Component, preload: :manufacturer)
+  defp query(), do: type_query(Game.Component, preload: :manufacturer)
+
+  defp query(slug),
+    do:
+      from(d in Game.Component,
+        as: :data,
+        join: m in assoc(d, :manufacturer),
+        where: d.slug == ^slug,
+        preload: [:manufacturer]
+      )
 end

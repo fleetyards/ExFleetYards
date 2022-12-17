@@ -52,8 +52,8 @@ defmodule FleetYardsWeb.Api.StarSystemController do
     ]
 
   def show(conn, %{"id" => slug}) do
-    FleetYards.Repo.Game.get_star_system_slug(slug)
-    |> Repo.preload(:celestial_objects)
+    query(slug)
+    |> Repo.one!()
     |> case do
       nil ->
         raise(NotFoundException, "Star System `#{slug}` not found")
@@ -63,5 +63,22 @@ defmodule FleetYardsWeb.Api.StarSystemController do
     end
   end
 
-  defp query, do: type_query(Game.StarSystem, preload: :celestial_objects)
+  defp query,
+    do:
+      from(d in Game.StarSystem,
+        as: :data,
+        join: c in assoc(d, :celestial_objects),
+        where: is_nil(c.parent_id),
+        preload: [celestial_objects: c]
+      )
+
+  defp query(slug),
+    do:
+      from(d in Game.StarSystem,
+        as: :data,
+        join: c in assoc(d, :celestial_objects),
+        where: is_nil(c.parent_id),
+        where: d.slug == ^slug,
+        preload: [celestial_objects: c]
+      )
 end
