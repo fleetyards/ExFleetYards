@@ -1,12 +1,7 @@
 defmodule FleetYardsWeb.Api.ManufacturerView do
-  use FleetYardsWeb, :view
+  use FleetYardsWeb, :api_view
 
-  def render("index.json", %{data: manufactureres, metadata: metadata}) do
-    %{
-      data: render_many(manufactureres, __MODULE__, "show.json"),
-      metadata: metadata
-    }
-  end
+  page_view()
 
   def render("show.json", %{manufacturer: nil}), do: nil
 

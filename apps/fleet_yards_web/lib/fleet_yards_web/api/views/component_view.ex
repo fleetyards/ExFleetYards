@@ -1,12 +1,7 @@
 defmodule FleetYardsWeb.Api.ComponentView do
-  use FleetYardsWeb, :view
+  use FleetYardsWeb, :api_view
 
-  def render("index.json", %{data: components, metadata: metadata}) do
-    %{
-      data: render_many(components, __MODULE__, "show.json"),
-      metadata: metadata
-    }
-  end
+  page_view()
 
   def render("show.json", %{component: component}) do
     %{

@@ -1,12 +1,7 @@
 defmodule FleetYardsWeb.Api.StarSystemView do
   use FleetYardsWeb, :api_view
 
-  def render("index.json", %{data: data, page: page}) do
-    %{
-      data: render_many(data, __MODULE__, "show.json"),
-      metadata: render_meta(page)
-    }
-  end
+  page_view()
 
   def render("show.json", %{star_system: data}) do
     %{

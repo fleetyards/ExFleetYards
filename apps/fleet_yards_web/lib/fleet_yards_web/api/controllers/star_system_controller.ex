@@ -28,9 +28,7 @@ defmodule FleetYardsWeb.Api.StarSystemController do
       query()
       |> Repo.paginate!(:slug, :asc, first: limit, after: cursor)
 
-    data = page |> Chunkr.Page.records() |> Repo.preload(:celestial_objects)
-
-    render(conn, "index.json", data: data, page: page)
+    render(conn, "index.json", page: page)
   end
 
   def index(conn, %{"before" => cursor}, limit) do
@@ -38,9 +36,7 @@ defmodule FleetYardsWeb.Api.StarSystemController do
       query()
       |> Repo.paginate!(:slug, :asc, last: limit, before: cursor)
 
-    data = page |> Chunkr.Page.records() |> Repo.preload(:celestial_objects)
-
-    render(conn, "index.json", data: data, page: page)
+    render(conn, "index.json", page: page)
   end
 
   def index(conn, %{}, limit), do: index(conn, %{"after" => nil}, limit)
