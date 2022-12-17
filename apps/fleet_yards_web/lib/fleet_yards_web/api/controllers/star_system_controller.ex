@@ -37,6 +37,7 @@ defmodule FleetYardsWeb.Api.StarSystemController do
 
   def show(conn, %{"id" => slug}) do
     FleetYards.Repo.Game.get_star_system_slug(slug)
+    |> Repo.preload(:celestial_objects)
     |> case do
       nil ->
         raise(NotFoundException, "Star System `#{slug}` not found")

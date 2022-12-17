@@ -24,6 +24,7 @@ defmodule FleetYardsWeb.Api.StarSystemView do
       status: data.status,
       # TODO: locationlabel
       # TODO: celectialobjects
+      celestialObjects: render_many(data.celestial_objects, FleetYardsWeb.Api.CelestialObjectView, "overview.json"),
       createdAt: data.created_at |> DateTime.from_naive!("Etc/UTC") |> DateTime.to_iso8601(),
       updatedAt: data.updated_at |> DateTime.from_naive!("Etc/UTC") |> DateTime.to_iso8601()
     }
