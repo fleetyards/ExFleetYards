@@ -3,6 +3,7 @@ defmodule FleetYardsWeb.Api do
   Api Module
   """
   import Ecto.Query
+  alias FleetYardsWeb.Api.InvalidPaginationException
 
   defmacro __using__(_) do
     quote do
@@ -16,6 +17,76 @@ defmodule FleetYardsWeb.Api do
   def get_limit(%{"limit" => limit}, _) when is_binary(limit), do: String.to_integer(limit)
   def get_limit(%{"limit" => limit}, _) when is_integer(limit), do: limit
   def get_limit(_, default), do: default
+
+  def get_pagination_args(%{"after" => _, "before" => _}), do: raise(InvalidPaginationException)
+
+  def get_pagination_args(%{"after" => cursor} = args),
+    do: [first: get_limit(args), after: cursor]
+
+  def get_pagination_args(%{"before" => cursor} = args),
+    do: [last: get_limit(args), before: cursor]
+
+  def get_pagination_args(%{} = args), do: [first: get_limit(args)]
+
+  defmacro paged_index(type \\ nil, opts \\ [])
+
+  defmacro paged_index(nil, opts) when is_list(opts) do
+    strategy = Keyword.get(opts, :strategy, :slug)
+    template = Keyword.get(opts, :template, "index.json")
+
+    quote do
+      def index(conn, params) do
+        page =
+          query()
+          |> FleetYards.Repo.paginate!(unquote(strategy), :asc, get_pagination_args(params))
+
+        render(conn, unquote(template), page: page)
+      end
+    end
+  end
+
+  defmacro paged_index(type, opts) do
+    type_mod = Macro.expand_once(type, __CALLER__)
+
+    name =
+      try do
+        Module.split(type_mod)
+        |> List.last()
+      rescue
+        _ -> type_mod
+      end
+
+    list_name = Keyword.get(opts, :list_name, "#{name}List")
+
+    list_type =
+      Keyword.get(opts, :list_type, Module.concat(FleetYardsWeb.Schemas.List, list_name))
+
+    add_query = Keyword.get(opts, :query, false)
+
+    quote do
+      unquote do
+        if add_query do
+          quote do
+            defp query(), do: type_query(unquote(type_mod))
+          end
+        end
+      end
+
+      operation :index,
+        parameters: [
+          limit: [in: :query, type: :integer, example: 25],
+          after: [in: :query, type: :string],
+          before: [in: :query, type: :string]
+        ],
+        responses: [
+          ok: {unquote(list_name), "application/json", unquote(list_type)},
+          bad_request: {"Error", "application/json", FleetYardsWeb.Schemas.Single.Error},
+          internal_server_error: {"Error", "application/json", FleetYardsWeb.Schemas.Single.Error}
+        ]
+
+      paged_index(nil, unquote(opts))
+    end
+  end
 
   # def type_query(type) do: from d in ^type, as: data
   # defmacro type_query(type, extra), do: from d in ^type, as: data, extra

@@ -3,43 +3,7 @@ defmodule FleetYardsWeb.Api.ManufacturerController do
 
   tags ["game"]
 
-  operation :index,
-    parameters: [
-      limit: [in: :query, type: :integer, example: 25],
-      after: [in: :query, type: :string],
-      before: [in: :query, type: :string]
-    ],
-    responses: [
-      ok: {"Manufacturers", "application/json", FleetYardsWeb.Schemas.List.ManufacturerList},
-      bad_request: {"Error", "application/json", Error},
-      internal_server_error: {"Error", "application/json", Error}
-    ]
-
-  def index(conn, params), do: index(conn, params, get_limit(params))
-
-  def index(_, %{"after" => _, "before" => _}, _) do
-    raise(InvalidPaginationException)
-  end
-
-  def index(conn, %{"after" => cursor}, limit) do
-    IO.warn(cursor)
-
-    page =
-      type_query(Game.Manufacturer)
-      |> Repo.paginate!(:slug, :asc, first: limit, after: cursor)
-
-    render(conn, "index.json", page: page)
-  end
-
-  def index(conn, %{"before" => cursor}, limit) do
-    page =
-      type_query(Game.Manufacturer)
-      |> Repo.paginate!(:slug, :asc, last: limit, before: cursor)
-
-    render(conn, "index.json", page: page)
-  end
-
-  def index(conn, %{}, limit), do: index(conn, %{"after" => nil}, limit)
+  paged_index(Game.Manufacturer, query: true)
 
   operation :show,
     parameters: [
