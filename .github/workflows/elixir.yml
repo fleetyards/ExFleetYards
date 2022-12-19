@@ -28,9 +28,9 @@ jobs:
         image: postgres:9
         ports: ['5432:5432']
         env:
-          POSTGRES_PASSWORD: fleet_yards_test
-          POSTGRES_USER: fleet_yards_test
-          POSTGRES_DB: fleet_yards_test
+          POSTGRES_PASSWORD: fleet_yards_dev
+          POSTGRES_USER: fleet_yards_dev
+          POSTGRES_DB: fleet_yards_dev
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
