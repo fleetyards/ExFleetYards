@@ -97,7 +97,7 @@ defmodule FleetYardsWeb.Schemas.Single do
         # storeImages
         mapX: %Schema{type: :string},
         mapY: %Schema{type: :string},
-        description: %Schema{type: String, description: "Description of the system"},
+        description: %Schema{type: :string, description: "Description of the system"},
         type: %Schema{type: :string, example: "Single star"},
         size: %Schema{type: :string},
         population: %Schema{type: :integer, example: 10},
@@ -183,7 +183,8 @@ defmodule FleetYardsWeb.Schemas.Single do
         model: FleetYardsWeb.Schemas.Single.Model,
         createdAt: %Schema{type: :string, format: :"date-time"},
         updatedAt: %Schema{type: :string, format: :"date-time"}
-      }
+      },
+      required: [:id, :name]
     })
   end
 

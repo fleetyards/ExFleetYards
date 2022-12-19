@@ -37,7 +37,7 @@ defmodule FleetYardsWeb.Api.Router do
 
       get "/roadmap/active", RoadmapController, :active
       get "/roadmap/released", RoadmapController, :released
-      get "/roadmap/un-released", RoadmapController, :un_released
+      get "/roadmap/unreleased", RoadmapController, :unreleased
       resources "/roadmap", RoadmapController, only: [:index, :show]
     end
   end
