@@ -28,24 +28,36 @@ defmodule FleetYardsWeb.Api do
 
   def get_pagination_args(%{} = args), do: [first: get_limit(args)]
 
-  defmacro paged_index(type \\ nil, opts \\ [])
+  defmacro list_operation(operation, list_name, opts \\ [])
 
-  defmacro paged_index(nil, opts) when is_list(opts) do
-    strategy = Keyword.get(opts, :strategy, :slug)
-    template = Keyword.get(opts, :template, "index.json")
+  defmacro list_operation(operation, list_name, opts) do
+    list_name =
+      list_name
+      |> Macro.expand_once(__CALLER__)
+      |> case do
+        v when is_atom(v) -> Atom.to_string(v)
+        v when is_binary(v) -> v
+      end
+
+    list_type =
+      Keyword.get(opts, :list_type, Module.concat(FleetYardsWeb.Schemas.List, list_name))
 
     quote do
-      def index(conn, params) do
-        page =
-          query()
-          |> FleetYards.Repo.paginate!(unquote(strategy), :asc, get_pagination_args(params))
-
-        render(conn, unquote(template), page: page)
-      end
+      operation unquote(operation),
+        parameters: [
+          limit: [in: :query, type: :integer, example: 25],
+          after: [in: :query, type: :string],
+          before: [in: :query, type: :string]
+        ],
+        responses: [
+          ok: {unquote(list_name), "application/json", unquote(list_type)},
+          bad_request: {"Error", "application/json", FleetYardsWeb.Schemas.Single.Error},
+          internal_server_error: {"Error", "application/json", FleetYardsWeb.Schemas.Single.Error}
+        ]
     end
   end
 
-  defmacro paged_index(type, opts) do
+  defmacro paged_list(opt, type, opts \\ []) do
     type_mod = Macro.expand_once(type, __CALLER__)
 
     name =
@@ -58,33 +70,37 @@ defmodule FleetYardsWeb.Api do
 
     list_name = Keyword.get(opts, :list_name, "#{name}List")
 
-    list_type =
-      Keyword.get(opts, :list_type, Module.concat(FleetYardsWeb.Schemas.List, list_name))
-
     add_query = Keyword.get(opts, :query, false)
+
+    strategy = Keyword.get(opts, :strategy, :slug)
+    template = Keyword.get(opts, :template, "index.json")
 
     quote do
       unquote do
         if add_query do
           quote do
-            defp query(), do: type_query(unquote(type_mod))
+            defp query, do: type_query(unquote(type_mod))
           end
         end
       end
 
-      operation :index,
-        parameters: [
-          limit: [in: :query, type: :integer, example: 25],
-          after: [in: :query, type: :string],
-          before: [in: :query, type: :string]
-        ],
-        responses: [
-          ok: {unquote(list_name), "application/json", unquote(list_type)},
-          bad_request: {"Error", "application/json", FleetYardsWeb.Schemas.Single.Error},
-          internal_server_error: {"Error", "application/json", FleetYardsWeb.Schemas.Single.Error}
-        ]
+      defp query(:index), do: query()
 
-      paged_index(nil, unquote(opts))
+      list_operation(unquote(opt), unquote(list_name))
+
+      def unquote(opt)(conn, params) do
+        page =
+          query(unquote(opt))
+          |> FleetYards.Repo.paginate!(unquote(strategy), :asc, get_pagination_args(params))
+
+        render(conn, unquote(template), page: page)
+      end
+    end
+  end
+
+  defmacro paged_index(type, opts \\ []) do
+    quote do
+      paged_list(:index, unquote(type), unquote(opts))
     end
   end
 
@@ -117,7 +133,7 @@ defmodule FleetYardsWeb.Api do
       unquote do
         if add_query do
           quote do
-            defp query(slug) do
+            defp query(slug) when is_binary(slug) do
               from(d in unquote(type_mod),
                 as: :data,
                 where: d.slug == ^slug
@@ -142,7 +158,8 @@ defmodule FleetYardsWeb.Api do
         |> FleetYards.Repo.one()
         |> case do
           nil ->
-            raise(FleetYardsWeb.Api.NotFoundException, unquote("#{name} `\#{slug}` not found"))
+            # raise(FleetYardsWeb.Api.NotFoundException, unquote("#{name} `\#{slug}` not found"))
+            raise(FleetYardsWeb.Api.NotFoundException, module: unquote(name), slug: slug)
 
           v ->
             render(conn, unquote(template), [{unquote(render_param), v}])
@@ -172,6 +189,14 @@ defmodule FleetYardsWeb.Api do
     Could not find resource error.
     """
     defexception [:message]
+
+    @impl Exception
+    def exception([]), do: %__MODULE__{message: "Not Found"}
+    @impl Exception
+    def exception(message: message), do: %__MODULE__{message: message}
+    @impl Exception
+    def exception(module: module, slug: slug),
+      do: %__MODULE__{message: "#{module}: `#{slug}` not found"}
   end
 
   defimpl Plug.Exception, for: NotFoundException do

@@ -42,4 +42,14 @@ defmodule FleetYardsWeb.Api.ViewHelpers do
       map
     end
   end
+
+  def render_timestamps(map, data) do
+    Map.merge(
+      %{
+        createdAt: data.created_at |> DateTime.from_naive!("Etc/UTC") |> DateTime.to_iso8601(),
+        updatedAt: data.updated_at |> DateTime.from_naive!("Etc/UTC") |> DateTime.to_iso8601()
+      },
+      map
+    )
+  end
 end

@@ -6,4 +6,6 @@ defmodule FleetYardsWeb.Schemas.List do
   gen_pagination(FleetYardsWeb.Schemas.Single.Component)
   gen_pagination(FleetYardsWeb.Schemas.Single.StarSystem)
   gen_pagination(FleetYardsWeb.Schemas.Single.CelestialObject)
+  gen_pagination(FleetYardsWeb.Schemas.Single.RoadmapItem)
+  gen_pagination(FleetYardsWeb.Schemas.Single.Model)
 end

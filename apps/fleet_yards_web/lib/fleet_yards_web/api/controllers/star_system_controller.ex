@@ -16,7 +16,7 @@ defmodule FleetYardsWeb.Api.StarSystemController do
         preload: [celestial_objects: c]
       )
 
-  defp query(slug),
+  defp query(slug) when is_binary(slug),
     do:
       from(d in Game.StarSystem,
         as: :data,

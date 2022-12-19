@@ -14,9 +14,8 @@ defmodule FleetYardsWeb.Api.ComponentView do
       manufacturer:
         FleetYardsWeb.Api.ManufacturerView.render("show.json", %{
           manufacturer: component.manufacturer
-        }),
-      createdAt: component.created_at |> DateTime.from_naive!("Etc/UTC") |> DateTime.to_iso8601(),
-      updatedAt: component.updated_at |> DateTime.from_naive!("Etc/UTC") |> DateTime.to_iso8601()
+        })
     }
+    |> render_timestamps(component)
   end
 end

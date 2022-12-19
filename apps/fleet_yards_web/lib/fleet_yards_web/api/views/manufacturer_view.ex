@@ -10,11 +10,8 @@ defmodule FleetYardsWeb.Api.ManufacturerView do
       name: manufacturer.name,
       slug: manufacturer.slug,
       code: manufacturer.code,
-      logo: manufacturer.logo,
-      createdAt:
-        manufacturer.created_at |> DateTime.from_naive!("Etc/UTC") |> DateTime.to_iso8601(),
-      updatedAt:
-        manufacturer.updated_at |> DateTime.from_naive!("Etc/UTC") |> DateTime.to_iso8601()
+      logo: manufacturer.logo
     }
+    |> render_timestamps(manufacturer)
   end
 end

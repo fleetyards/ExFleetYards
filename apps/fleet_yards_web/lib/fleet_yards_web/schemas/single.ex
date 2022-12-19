@@ -146,6 +146,47 @@ defmodule FleetYardsWeb.Schemas.Single do
     })
   end
 
+  defmodule Model do
+    @moduledoc false
+    require OpenApiSpex
+
+    OpenApiSpex.schema(%{
+      description: "Model",
+      type: :object,
+      properties: %{
+        manufacturer: FleetYardsWeb.Schemas.Single.Manufacturer,
+        createdAt: %Schema{type: :string, format: :"date-time"},
+        updatedAt: %Schema{type: :string, format: :"date-time"}
+      }
+    })
+  end
+
+  defmodule RoadmapItem do
+    @moduledoc false
+    require OpenApiSpex
+
+    OpenApiSpex.schema(%{
+      description: "Roadmap item",
+      type: :object,
+      properties: %{
+        id: %Schema{type: :string, format: :uuid},
+        name: %Schema{type: :string},
+        release: %Schema{type: :string, format: :version},
+        releaseDescription: %Schema{type: :string},
+        rsiReleaseId: %Schema{type: :integer},
+        description: %Schema{type: :string},
+        body: %Schema{type: :string},
+        rsiCategoryId: %Schema{type: :integer},
+        released: %Schema{type: :boolean},
+        commited: %Schema{type: :boolean},
+        active: %Schema{type: :boolean},
+        model: FleetYardsWeb.Schemas.Single.Model,
+        createdAt: %Schema{type: :string, format: :"date-time"},
+        updatedAt: %Schema{type: :string, format: :"date-time"}
+      }
+    })
+  end
+
   defmodule PaginationMetadata do
     require OpenApiSpex
 

@@ -27,11 +27,18 @@ defmodule FleetYardsWeb.Api.Router do
       scope "/game" do
         # get "/manufacturers", ManufacturerController, :index
         # get "/manufacturer/:slug", ManufacturerController, :show
+        get "/manufacturers/with-models", ManufacturerController, :with_models
         resources "/manufacturers", ManufacturerController, only: [:index, :show]
+
         resources "/components", ComponentController, only: [:index, :show]
         resources "/starsystems", StarSystemController, only: [:index, :show]
         resources "/celestial-objects", CelestialObjectController, only: [:index, :show]
       end
+
+      get "/roadmap/active", RoadmapController, :active
+      get "/roadmap/released", RoadmapController, :released
+      get "/roadmap/un-released", RoadmapController, :un_released
+      resources "/roadmap", RoadmapController, only: [:index, :show]
     end
   end
 end
