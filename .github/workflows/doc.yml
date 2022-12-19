@@ -8,9 +8,6 @@ on:
 permissions:
   contents: write
 
-env:
-  FLEET_BOT_TOKEN: ""
-
 jobs:
   build-and-deploy:
     concurrency: ci-${{ github.ref }} # Recommended if you intend to make multiple deployments in quick succession.
