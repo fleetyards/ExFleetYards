@@ -17,7 +17,7 @@ defmodule FleetYards.Repo.Migrations.Components do
       add :sc_identifier, :string
       add :type_data, :string
       add :durability, :string
-      add :power_connection, :strin
+      add :power_connection, :string
       add :heat_connection, :string
       add :ammunition, :string
 
