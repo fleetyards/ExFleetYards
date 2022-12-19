@@ -5,27 +5,7 @@ defmodule FleetYardsWeb.Api.ComponentController do
 
   paged_index(Game.Component)
 
-  operation :show,
-    parameters: [
-      id: [in: :path, type: :string]
-    ],
-    responses: [
-      ok: {"Component", "application/json", FleetYardsWeb.Schemas.Single.Component},
-      not_found: {"Error", "application/json", FleetYardsWeb.Schemas.Single.Error},
-      internal_server_error: {"Error", "application/json", FleetYardsWeb.Schemas.Single.Error}
-    ]
-
-  def show(conn, %{"id" => slug}) do
-    query(slug)
-    |> Repo.one!()
-    |> case do
-      nil ->
-        raise(NotFoundException, "Component `#{slug}` not found")
-
-      component ->
-        render(conn, "show.json", component: component)
-    end
-  end
+  show_slug(Game.Component, example: "5ca-akura")
 
   defp query(), do: type_query(Game.Component, preload: :manufacturer)
 

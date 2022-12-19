@@ -88,6 +88,75 @@ defmodule FleetYardsWeb.Api do
     end
   end
 
+  defmacro show_slug(type, opts \\ []) do
+    type_mod = Macro.expand_once(type, __CALLER__)
+
+    name =
+      try do
+        Module.split(type_mod)
+        |> List.last()
+      rescue
+        _ -> type_mod
+      end
+
+    add_query = Keyword.get(opts, :query, false)
+    schema_type = Keyword.get(opts, :type, Module.concat(FleetYardsWeb.Schemas.Single, name))
+    template = Keyword.get(opts, :template, "show.json")
+
+    render_param =
+      __CALLER__.module
+      |> resource_name
+
+    example =
+      Keyword.get(opts, :example)
+      |> Macro.escape()
+
+    path_params = [in: :path, type: :string, example: example]
+
+    quote do
+      unquote do
+        if add_query do
+          quote do
+            defp query(slug) do
+              from(d in unquote(type_mod),
+                as: :data,
+                where: d.slug == ^slug
+              )
+            end
+          end
+        end
+      end
+
+      operation :show,
+        parameters: [
+          id: [in: :path, type: :string, example: unquote(example)]
+        ],
+        responses: [
+          ok: {unquote(name), "application/json", unquote(schema_type)},
+          not_found: {"Error", "application/json", FleetYardsWeb.Schemas.Single.Error},
+          internal_server_error: {"Error", "application/json", FleetYardsWeb.Schemas.Single.Error}
+        ]
+
+      def show(conn, %{"id" => slug}) do
+        query(slug)
+        |> FleetYards.Repo.one()
+        |> case do
+          nil ->
+            raise(FleetYardsWeb.Api.NotFoundException, unquote("#{name} `\#{slug}` not found"))
+
+          v ->
+            render(conn, unquote(template), [{unquote(render_param), v}])
+        end
+      end
+    end
+  end
+
+  defp resource_name(module) do
+    view = Phoenix.Controller.__view__(module)
+
+    view.__resource__
+  end
+
   # def type_query(type) do: from d in ^type, as: data
   # defmacro type_query(type, extra), do: from d in ^type, as: data, extra
   defmacro type_query(type, extra \\ []) do

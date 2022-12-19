@@ -5,27 +5,7 @@ defmodule FleetYardsWeb.Api.StarSystemController do
 
   paged_index(FleetYards.Repo.Game.StarSystem)
 
-  operation :show,
-    parameters: [
-      id: [in: :path, type: :string, example: "stanton"]
-    ],
-    responses: [
-      ok: {"StarSystem", "application/json", FleetYardsWeb.Schemas.Single.StarSystem},
-      not_found: {"Error", "application/json", FleetYardsWeb.Schemas.Single.Error},
-      internal_server_error: {"Error", "application/json", FleetYardsWeb.Schemas.Single.Error}
-    ]
-
-  def show(conn, %{"id" => slug}) do
-    query(slug)
-    |> Repo.one!()
-    |> case do
-      nil ->
-        raise(NotFoundException, "Star System `#{slug}` not found")
-
-      system ->
-        render(conn, "show.json", star_system: system)
-    end
-  end
+  show_slug(Game.StarSystem, example: "stanton")
 
   defp query,
     do:
