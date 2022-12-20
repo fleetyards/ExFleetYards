@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.29.1">
+    <meta name="project" content="Fleetyards v0.1.0">
+
+    <title>API Reference — Fleetyards v0.1.0</title>
+    <link rel="stylesheet" href="dist/html-elixir-V2ETBPMB.css" />
+
+
+    <script src="dist/handlebars.runtime-NWIB6V2M.js"></script>
+    <script src="dist/handlebars.templates-IV5W3OL2.js"></script>
+    <script src="dist/sidebar_items-3A6A71B0.js"></script>
+
+      <script src="docs_config.js"></script>
+
+    <script async src="dist/html-XN2TSG4M.js"></script>
+
+
+  </head>
+  <body data-type="extras" class="page-extra">
+    <script>
+
+      try {
+        var settings = JSON.parse(localStorage.getItem('ex_doc:settings') || '{}');
+
+        if (settings.theme === 'dark' ||
+           ((settings.theme === 'system' || settings.theme == null) &&
+             window.matchMedia('(prefers-color-scheme: dark)').matches)
+           ) {
+          document.body.classList.add('dark')
+        }
+      } catch (error) { }
+    </script>
+
+<div class="main">
+
+<button class="sidebar-button sidebar-toggle" aria-label="toggle sidebar">
+  <i class="ri-menu-line ri-lg" title="Collapse/expand sidebar"></i>
+</button>
+
+<section class="sidebar">
+  <form class="sidebar-search" action="search.html">
+    <button type="submit" class="search-button" aria-label="Submit Search">
+      <i class="ri-search-2-line" aria-hidden="true" title="Submit search"></i>
+    </button>
+    <button type="button" tabindex="-1" class="search-close-button" aria-label="Cancel Search">
+      <i class="ri-close-line ri-lg" aria-hidden="true" title="Cancel search"></i>
+    </button>
+    <label class="search-label">
+      <p class="sr-only">Search</p>
+      <input name="q" type="text" class="search-input" placeholder="Search..." aria-label="Input your search terms" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+    </label>
+  </form>
+
+  <div class="autocomplete">
+    <div class="autocomplete-results">
+    </div>
+  </div>
+
+  <div class="sidebar-header">
+
+    <div class="sidebar-projectDetails">
+      <a href="api-reference.html" class="sidebar-projectName" translate="no">
+Fleetyards
+      </a>
+      <strong class="sidebar-projectVersion" translate="no">
+        v0.1.0
+      </strong>
+    </div>
+    <ul class="sidebar-listNav">
+      <li><a id="extras-list-link" href="#full-list">Pages</a></li>
+
+        <li><a id="modules-list-link" href="#full-list">Modules</a></li>
+
+
+        <li><a id="tasks-list-link" href="#full-list"><span translate="no">Mix</span> Tasks</a></li>
+
+    </ul>
+  </div>
+
+  <div class="gradient"></div>
+  <ul id="full-list" class="sidebar-fullList"></ul>
+</section>
+
+<section class="content">
+  <output role="status" id="toast"></output>
+  <div class="content-outer">
+    <div id="content" class="content-inner">
+
+<h1>
+<button class="icon-action display-settings">
+  <i class="ri-settings-3-line"></i>
+  <span class="sr-only">Settings</span>
+</button>
+
+
+
+  <span>API Reference <small class="app-vsn">Fleetyards v0.1.0</small></span>
+</h1>
+
+
+  <section class="details-list">
+    <h2 id="modules" class="section-heading">
+  <a href="#modules" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
+  <p class="sr-only">modules</p>
+  </a>
+  Modules
+</h2>
+
+    <div class="summary">
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="FleetYards.html" translate="no">FleetYards</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>FleetYards keeps the contexts that define your domain
+and business logic.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="FleetYards.Config.html" translate="no">FleetYards.Config</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Config accessing functions</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="FleetYards.Release.Ecto.html" translate="no">FleetYards.Release.Ecto</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Ecto release helper to migrate database</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="FleetYards.Release.Tasks.html" translate="no">FleetYards.Release.Tasks</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Release tasks to run in production</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="FleetYards.Repo.html" translate="no">FleetYards.Repo</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="FleetYards.Repo.Game.html" translate="no">FleetYards.Repo.Game</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="FleetYards.Repo.Game.CelestialObject.html" translate="no">FleetYards.Repo.Game.CelestialObject</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Celestial Object</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="FleetYards.Repo.Game.Component.html" translate="no">FleetYards.Repo.Game.Component</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="FleetYards.Repo.Game.Dock.html" translate="no">FleetYards.Repo.Game.Dock</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Dockingport on a station</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="FleetYards.Repo.Game.Manufacturer.html" translate="no">FleetYards.Repo.Game.Manufacturer</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="FleetYards.Repo.Game.Model.html" translate="no">FleetYards.Repo.Game.Model</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Model</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="FleetYards.Repo.Game.StarSystem.html" translate="no">FleetYards.Repo.Game.StarSystem</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Star system</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="FleetYards.Repo.Game.Station.html" translate="no">FleetYards.Repo.Game.Station</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Station</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="FleetYards.Repo.Import.html" translate="no">FleetYards.Repo.Import</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>SC data import state</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="FleetYards.Repo.RoadmapItem.html" translate="no">FleetYards.Repo.RoadmapItem</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Roadmap item</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="FleetYards.Repo.Types.html" translate="no">FleetYards.Repo.Types</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Types used for the database</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="FleetYards.Repo.Types.CelestialObjectType.html" translate="no">FleetYards.Repo.Types.CelestialObjectType</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Elixir.CelestialObjectType Database enum type</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="FleetYards.Repo.Types.DockType.html" translate="no">FleetYards.Repo.Types.DockType</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Elixir.DockType Database enum type</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="FleetYards.Repo.Types.ImportState.html" translate="no">FleetYards.Repo.Types.ImportState</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Elixir.ImportState Database enum type</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="FleetYards.Repo.Types.ImportType.html" translate="no">FleetYards.Repo.Types.ImportType</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Elixir.ImportType Database enum type</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="FleetYards.Repo.Types.ShipSize.html" translate="no">FleetYards.Repo.Types.ShipSize</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Elixir.ShipSize Database enum type</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="FleetYards.Repo.Types.StationType.html" translate="no">FleetYards.Repo.Types.StationType</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Elixir.StationType Database enum type</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="FleetYards.Schemas.html" translate="no">FleetYards.Schemas</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="FleetYards.Schemas.PaginationMetadata.html" translate="no">FleetYards.Schemas.PaginationMetadata</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="FleetYards.Version.html" translate="no">FleetYards.Version</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Get server version</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="FleetYardsWeb.html" translate="no">FleetYardsWeb</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>The entrypoint for defining your web interface, such
+as controllers, views, channels and so on.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="FleetYardsWeb.Api.html" translate="no">FleetYardsWeb.Api</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Api Module</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="FleetYardsWeb.Api.CelestialObjectController.html" translate="no">FleetYardsWeb.Api.CelestialObjectController</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Controller used for Api</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="FleetYardsWeb.Api.CelestialObjectView.html" translate="no">FleetYardsWeb.Api.CelestialObjectView</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>View module used for api</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="FleetYardsWeb.Api.ComponentController.html" translate="no">FleetYardsWeb.Api.ComponentController</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Controller used for Api</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="FleetYardsWeb.Api.ComponentView.html" translate="no">FleetYardsWeb.Api.ComponentView</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>View module used for api</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="FleetYardsWeb.Api.Endpoint.html" translate="no">FleetYardsWeb.Api.Endpoint</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="FleetYardsWeb.Api.ErrorView.html" translate="no">FleetYardsWeb.Api.ErrorView</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>View Module</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="FleetYardsWeb.Api.InvalidPaginationException.html" translate="no">FleetYardsWeb.Api.InvalidPaginationException</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Invalid request to paginated api.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="FleetYardsWeb.Api.ManufacturerController.html" translate="no">FleetYardsWeb.Api.ManufacturerController</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Controller used for Api</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="FleetYardsWeb.Api.ManufacturerView.html" translate="no">FleetYardsWeb.Api.ManufacturerView</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>View module used for api</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="FleetYardsWeb.Api.ModelView.html" translate="no">FleetYardsWeb.Api.ModelView</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>View module used for api</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="FleetYardsWeb.Api.NotFoundException.html" translate="no">FleetYardsWeb.Api.NotFoundException</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Could not find resource error.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="FleetYardsWeb.Api.RoadmapController.html" translate="no">FleetYardsWeb.Api.RoadmapController</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Controller used for Api</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="FleetYardsWeb.Api.RoadmapView.html" translate="no">FleetYardsWeb.Api.RoadmapView</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>View module used for api</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="FleetYardsWeb.Api.Router.html" translate="no">FleetYardsWeb.Api.Router</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="FleetYardsWeb.Api.Router.Helpers.html" translate="no">FleetYardsWeb.Api.Router.Helpers</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Module with named helpers generated from FleetYardsWeb.Api.Router.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="FleetYardsWeb.Api.StarSystemController.html" translate="no">FleetYardsWeb.Api.StarSystemController</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Controller used for Api</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="FleetYardsWeb.Api.StarSystemView.html" translate="no">FleetYardsWeb.Api.StarSystemView</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>View module used for api</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="FleetYardsWeb.Api.VersionController.html" translate="no">FleetYardsWeb.Api.VersionController</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Controller used for Api</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="FleetYardsWeb.ApiSpec.html" translate="no">FleetYardsWeb.ApiSpec</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>OpenApi Spec definition root</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="FleetYardsWeb.Endpoint.html" translate="no">FleetYardsWeb.Endpoint</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="FleetYardsWeb.ErrorHelpers.html" translate="no">FleetYardsWeb.ErrorHelpers</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Conveniences for translating and building error messages.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="FleetYardsWeb.ErrorView.html" translate="no">FleetYardsWeb.ErrorView</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>View Module</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="FleetYardsWeb.Gettext.html" translate="no">FleetYardsWeb.Gettext</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>A module providing Internationalization with a gettext-based API.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="FleetYardsWeb.LayoutView.html" translate="no">FleetYardsWeb.LayoutView</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>View Module</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="FleetYardsWeb.PageController.html" translate="no">FleetYardsWeb.PageController</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Controller</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="FleetYardsWeb.PageView.html" translate="no">FleetYardsWeb.PageView</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>View Module</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="FleetYardsWeb.Router.html" translate="no">FleetYardsWeb.Router</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="FleetYardsWeb.Router.Helpers.html" translate="no">FleetYardsWeb.Router.Helpers</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Module with named helpers generated from FleetYardsWeb.Router.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="FleetYardsWeb.Schemas.Gen.html" translate="no">FleetYardsWeb.Schemas.Gen</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="FleetYardsWeb.Schemas.List.html" translate="no">FleetYardsWeb.Schemas.List</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="FleetYardsWeb.Schemas.List.CelestialObjectList.html" translate="no">FleetYardsWeb.Schemas.List.CelestialObjectList</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="FleetYardsWeb.Schemas.List.ComponentList.html" translate="no">FleetYardsWeb.Schemas.List.ComponentList</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="FleetYardsWeb.Schemas.List.ManufacturerList.html" translate="no">FleetYardsWeb.Schemas.List.ManufacturerList</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="FleetYardsWeb.Schemas.List.ModelList.html" translate="no">FleetYardsWeb.Schemas.List.ModelList</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="FleetYardsWeb.Schemas.List.RoadmapItemList.html" translate="no">FleetYardsWeb.Schemas.List.RoadmapItemList</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="FleetYardsWeb.Schemas.List.StarSystemList.html" translate="no">FleetYardsWeb.Schemas.List.StarSystemList</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="FleetYardsWeb.Schemas.Single.Component.html" translate="no">FleetYardsWeb.Schemas.Single.Component</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Component</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="FleetYardsWeb.Schemas.Single.Error.html" translate="no">FleetYardsWeb.Schemas.Single.Error</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="FleetYardsWeb.Schemas.Single.Manufacturer.html" translate="no">FleetYardsWeb.Schemas.Single.Manufacturer</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Manufacturer</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="FleetYardsWeb.Schemas.Single.PaginationMetadata.html" translate="no">FleetYardsWeb.Schemas.Single.PaginationMetadata</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="FleetYardsWeb.Schemas.Single.StarSystem.html" translate="no">FleetYardsWeb.Schemas.Single.StarSystem</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>StarSystem</p></div>
+
+</div>
+
+    </div>
+  </section>
+
+
+  <section class="details-list">
+    <h2 id="mix-tasks" class="section-heading">
+  <a href="#mix-tasks" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
+  <p class="sr-only">mix-tasks</p>
+  </a>
+  Mix Tasks
+</h2>
+
+    <div class="summary">
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Mix.Tasks.Api.Spec.html" translate="no">mix api.spec</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Openapi spec file</p></div>
+
+</div>
+
+    </div>
+  </section>
+
+<div class="bottom-actions">
+  <div class="bottom-actions-item">
+
+  </div>
+  <div class="bottom-actions-item">
+
+  </div>
+</div>
+      <footer class="footer">
+        <p>
+
+          <span class="line">
+            <button class="a-main footer-button display-quick-switch" title="Search HexDocs packages">
+              Search HexDocs
+            </button>
+
+              <a href="Fleetyards.epub" title="ePub version">
+                Download ePub version
+              </a>
+
+          </span>
+        </p>
+
+        <p class="built-using">
+          Built using
+          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.29.1) for the
+
+            <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
+
+        </p>
+      </footer>
+    </div>
+  </div>
+</section>
+</div>
+
+
+  </body>
+</html>
