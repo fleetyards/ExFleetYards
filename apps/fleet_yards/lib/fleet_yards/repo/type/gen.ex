@@ -12,6 +12,8 @@ defmodule FleetYards.Repo.TypeGen do
     name = Macro.expand_once(name, __ENV__)
     doc = "#{name} Database enum type"
 
+    all = types |> Keyword.keys()
+
     content =
       quote do
         @moduledoc unquote(doc)
@@ -30,8 +32,13 @@ defmodule FleetYards.Repo.TypeGen do
         end
 
         def dump(_), do: :error
-        def load(_), do: :error
+        # def load(_), do: :error
         def cast(_), do: :error
+
+        # FIXME: remove
+        def load(_), do: {:ok, :error}
+
+        def all, do: unquote(all)
       end
 
     module =

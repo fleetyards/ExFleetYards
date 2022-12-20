@@ -11,6 +11,20 @@ defmodule FleetYards.Repo.Types do
     aid_shelter: 5
   )
 
+  enum(StationClassification,
+    city: 0,
+    trading: 1,
+    mining: 2,
+    salvaging: 3,
+    farming: 4,
+    science: 5,
+    security: 6,
+    rest_stop: 7,
+    settlement: 8,
+    town: 9,
+    drug_lab: 10
+  )
+
   enum(DockType, vehiclepad: 0, garage: 1, landingpad: 2, dockingport: 3, hangar: 4)
 
   enum(ShipSize,

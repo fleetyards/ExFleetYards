@@ -34,6 +34,7 @@ defmodule FleetYardsWeb.Api.Router do
         resources "/components", ComponentController, only: [:index, :show]
         resources "/starsystems", StarSystemController, only: [:index, :show]
         resources "/celestial-objects", CelestialObjectController, only: [:index, :show]
+        resources "/stations", StationController, only: [:index, :show]
       end
 
       get "/roadmap/active", RoadmapController, :active

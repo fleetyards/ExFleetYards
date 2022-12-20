@@ -8,4 +8,5 @@ defmodule FleetYardsWeb.Schemas.List do
   gen_pagination(FleetYardsWeb.Schemas.Single.CelestialObject)
   gen_pagination(FleetYardsWeb.Schemas.Single.RoadmapItem)
   gen_pagination(FleetYardsWeb.Schemas.Single.Model)
+  gen_pagination(FleetYardsWeb.Schemas.Single.Station)
 end
