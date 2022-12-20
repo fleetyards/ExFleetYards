@@ -29,4 +29,15 @@ defmodule FleetYards.Repo.Types do
     asteroid_belt: "ASTEROID_BELT",
     asteroid_field: "ASTEROID_FIELD"
   )
+
+  enum(ImportState,
+    created: "created",
+    started: "started",
+    finished: "finished",
+    failed: "failed"
+  )
+
+  enum(ImportType,
+    sc_data_import: "Imports::ScDataImport"
+  )
 end

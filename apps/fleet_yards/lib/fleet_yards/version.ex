@@ -14,7 +14,7 @@ defmodule FleetYards.Version do
       version: %Schema{type: :string},
       codename: %Schema{type: :string, format: :version}
     },
-    required: [:version, :codename],
+    required: [:version],
     example: %{"codename" => "Elixir", "version" => "v0.1.0"},
     "x-struct": __MODULE__
   })

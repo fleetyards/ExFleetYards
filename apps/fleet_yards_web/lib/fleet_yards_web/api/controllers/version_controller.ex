@@ -12,4 +12,14 @@ defmodule FleetYardsWeb.Api.VersionController do
   def index(conn, _params) do
     json(conn, FleetYards.Version.version())
   end
+
+  operation :sc_data,
+    summary: "Get Star Citizen data version",
+    responses: [
+      ok: {"Version", "application/json", FleetYards.Version}
+    ]
+
+  def sc_data(conn, _params) do
+    json(conn, %{version: FleetYards.Repo.Import.current_version()})
+  end
 end
