@@ -8,9 +8,19 @@ defmodule FleetYards.Repo.TypeGen do
     end
   end
 
+  defp humanize(atom) do
+    string =
+      Atom.to_string(atom)
+      |> String.split("_")
+      |> Enum.map(&String.capitalize/1)
+      |> Enum.join(" ")
+  end
+
   defmacro enum(name, types) do
     name = Macro.expand_once(name, __ENV__)
     doc = "#{name} Database enum type"
+
+    all = types |> Keyword.keys()
 
     content =
       quote do
@@ -20,18 +30,25 @@ defmodule FleetYards.Repo.TypeGen do
         def type, do: :atom
 
         unquote do
-          for {atom, num} <- types do
+          for {atom, num} when is_atom(atom) <- types do
             quote do
               def load(unquote(num)), do: {:ok, unquote(atom)}
               def cast(unquote(atom)), do: {:ok, unquote(num)}
               def dump(unquote(atom)), do: {:ok, unquote(num)}
+
+              def humanize(unquote(atom)), do: unquote(humanize(atom))
             end
           end
         end
 
         def dump(_), do: :error
-        def load(_), do: :error
+        # def load(_), do: :error
         def cast(_), do: :error
+
+        # FIXME: remove
+        def load(_), do: {:ok, :error}
+
+        def all, do: unquote(all)
       end
 
     module =

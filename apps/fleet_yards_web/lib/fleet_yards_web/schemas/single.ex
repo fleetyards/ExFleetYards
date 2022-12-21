@@ -13,7 +13,7 @@ defmodule FleetYardsWeb.Schemas.Single do
       type: :object,
       properties: %{
         name: %Schema{type: :string},
-        slug: %Schema{type: :string},
+        slug: %Schema{type: :string, format: :slug},
         code: %Schema{type: :string, nullable: true},
         logo: %Schema{type: :string, nullable: true},
         createdAt: %Schema{type: :string, description: "Create timestamp", format: :"date-time"},
@@ -58,7 +58,7 @@ defmodule FleetYardsWeb.Schemas.Single do
       properties: %{
         id: %Schema{type: :string, format: :uuid},
         name: %Schema{type: :string},
-        slug: %Schema{type: :string},
+        slug: %Schema{type: :string, format: :slug},
         grade: %Schema{type: :string, nullable: true},
         class: %Schema{type: :string, nullable: true},
         size: %Schema{type: :string, nullable: true},
@@ -93,7 +93,12 @@ defmodule FleetYardsWeb.Schemas.Single do
       type: :object,
       properties: %{
         name: %Schema{type: :string, description: "Name fo the system", example: "Stanton"},
-        slug: %Schema{type: :string, description: "Slug of the system", example: "stanton"},
+        slug: %Schema{
+          type: :string,
+          description: "Slug of the system",
+          example: "stanton",
+          format: :slug
+        },
         # storeImages
         mapX: %Schema{type: :string},
         mapY: %Schema{type: :string},
@@ -125,7 +130,7 @@ defmodule FleetYardsWeb.Schemas.Single do
       type: :object,
       properties: %{
         name: %Schema{type: :string, description: "Name of the object", example: "microTech"},
-        slug: %Schema{type: :string, example: "microtech"},
+        slug: %Schema{type: :string, example: "microtech", format: :slug},
         type: %Schema{
           type: :string,
           enum: ["planet", "satellite", "asteroid_belt", "asteroid_field"]
@@ -157,6 +162,114 @@ defmodule FleetYardsWeb.Schemas.Single do
         manufacturer: FleetYardsWeb.Schemas.Single.Manufacturer,
         createdAt: %Schema{type: :string, format: :"date-time"},
         updatedAt: %Schema{type: :string, format: :"date-time"}
+      }
+    })
+  end
+
+  defmodule Station do
+    @moduledoc false
+    require OpenApiSpex
+
+    OpenApiSpex.schema(%{
+      description: "Station",
+      type: :object,
+      properties: %{
+        name: %Schema{type: :string},
+        slug: %Schema{type: :string, format: :slug},
+        type: %Schema{type: :string, enum: FleetYards.Repo.Types.StationType.all()},
+        typeLabel: %Schema{type: :string},
+        classification: %Schema{
+          type: :string,
+          enum: FleetYards.Repo.Types.StationClassification.all()
+        },
+        classificationLabel: %Schema{type: :string},
+        habitable: %Schema{type: :boolean},
+        location: %Schema{type: :string},
+        locationLabel: %Schema{type: :string},
+        # TODO: images
+        description: %Schema{type: :string},
+        dockCounts: %Schema{
+          type: :array,
+          items: %Schema{
+            type: :object,
+            properties: %{
+              size: %Schema{type: :string, enum: FleetYards.Repo.Types.ShipSize.all()},
+              sizeLabel: %Schema{type: :string},
+              type: %Schema{type: :string, enum: FleetYards.Repo.Types.DockType.all()},
+              typeLabel: %Schema{type: :string},
+              count: %Schema{type: :integer}
+            }
+          }
+        },
+        docks: %Schema{
+          type: :array,
+          items: %Schema{
+            type: :object,
+            properties: %{
+              name: %Schema{type: :string},
+              group: %Schema{type: :group},
+              size: %Schema{type: :string, enum: FleetYards.Repo.Types.ShipSize.all()},
+              sizeLabel: %Schema{type: :string},
+              type: %Schema{type: :string, enum: FleetYards.Repo.Types.DockType.all()},
+              typeLabel: %Schema{type: :string}
+            }
+          }
+        },
+        habitationCounts: %Schema{
+          type: :array,
+          items: %Schema{
+            type: :object,
+            properties: %{
+              count: %Schema{type: :integer},
+              type: %Schema{type: :string, enum: FleetYards.Repo.Types.HabitationType.all()},
+              typeLabel: %Schema{type: :string}
+            }
+          }
+        },
+        habitations: %Schema{
+          type: :array,
+          items: %Schema{
+            type: :object,
+            properties: %{
+              name: %Schema{type: :string},
+              habitationName: %Schema{type: :string},
+              type: %Schema{type: :string, enum: FleetYards.Repo.Types.HabitationType.all()},
+              typeLabel: %Schema{type: :string}
+            }
+          }
+        },
+        shops: %Schema{type: :array, items: FleetYardsWeb.Schemas.Single.Shop},
+        celestialObject: FleetYardsWeb.Schemas.Single.CelestialObject,
+        refinery: %Schema{type: :boolean},
+        cargoHub: %Schema{type: :boolean},
+        shopListLabel: %Schema{type: :string},
+        createdAt: %Schema{type: :string, format: :"date-time"},
+        updatedAt: %Schema{type: :string, format: :"date-time"}
+      }
+    })
+  end
+
+  defmodule Shop do
+    @moduledoc false
+    require OpenApiSpex
+
+    OpenApiSpex.schema(%{
+      description: "in game shop",
+      type: :object,
+      properties: %{
+        id: %Schema{type: :string, format: :uuid},
+        name: %Schema{type: :string, example: "Planetary Services"},
+        slug: %Schema{type: :string, format: :slug, example: "planetary-services"},
+        type: %Schema{type: :string, enum: FleetYards.Repo.Types.ShopType.all()},
+        typeLabel: %Schema{type: :string},
+        stationLabel: %Schema{type: :string},
+        location: %Schema{type: :string, example: "The Commons"},
+        locationLabel: %Schema{type: :string},
+        rental: %Schema{type: :boolean},
+        buying: %Schema{type: :boolean},
+        selling: %Schema{type: :boolean},
+        # TODO: images
+        refineryTerminal: %Schema{type: :boolean}
       }
     })
   end
