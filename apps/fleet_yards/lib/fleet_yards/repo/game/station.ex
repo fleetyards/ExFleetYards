@@ -69,4 +69,12 @@ defmodule FleetYards.Repo.Game.Station do
     |> Enum.group_by(&Map.get(&1, :habitation_type))
     |> Enum.map(fn {type, habitations} -> {type, Enum.count(habitations)} end)
   end
+
+  def shop_list_label(%__MODULE__{shops: shops}), do: shop_list_label(shops)
+
+  def shop_list_label(shops) when is_list(shops),
+    do:
+      shops
+      |> Enum.map(&Map.get(&1, :name))
+      |> Enum.join(", ")
 end

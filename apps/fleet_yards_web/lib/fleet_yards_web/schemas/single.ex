@@ -242,6 +242,7 @@ defmodule FleetYardsWeb.Schemas.Single do
         celestialObject: FleetYardsWeb.Schemas.Single.CelestialObject,
         refinery: %Schema{type: :boolean},
         cargoHub: %Schema{type: :boolean},
+        shopListLabel: %Schema{type: :string},
         createdAt: %Schema{type: :string, format: :"date-time"},
         updatedAt: %Schema{type: :string, format: :"date-time"}
       }

@@ -49,6 +49,7 @@ defmodule FleetYardsWeb.Api.StationView do
           __MODULE__,
           "habitation_count.json"
         ),
+      shopListLabel: Station.shop_list_label(station),
       celestialObject:
         FleetYardsWeb.Api.CelestialObjectView.render("show.json", %{
           celestial_object: station.celestial_object
