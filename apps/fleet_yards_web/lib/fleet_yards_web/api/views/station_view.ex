@@ -19,7 +19,7 @@ defmodule FleetYardsWeb.Api.StationView do
     render("show.json", station: station, params: Map.delete(params, "shops"))
     |> Map.put(
       :shops,
-      render_many(station.shops, __MODULE__, "shops.json", as: :shop, station: station)
+      render_many(station.shops, __MODULE__, "shop.json", as: :shop, station: station)
     )
   end
 
@@ -100,7 +100,7 @@ defmodule FleetYardsWeb.Api.StationView do
   end
 
   # TODO: Extract to ShopView
-  def render("shops.json", %{shop: shop, station: station}) do
+  def render("shop.json", %{shop: shop, station: station}) do
     %{
       id: shop.id,
       name: shop.name,
@@ -115,6 +115,32 @@ defmodule FleetYardsWeb.Api.StationView do
       selling: shop.selling,
       # TODO: images
       refineryTerminal: shop.refinery_terminal
+    }
+  end
+
+  def render("shop.json", %{shop: shop}) do
+    %{
+      id: shop.id,
+      name: shop.name,
+      slug: shop.slug,
+      type: shop.shop_type,
+      typeLabel: FleetYards.Repo.Types.ShopType.humanize(shop.shop_type),
+      stationLabel: Shop.station_label(shop),
+      location: shop.location,
+      locationLabel: Shop.location_label(shop),
+      rental: shop.rental,
+      buying: shop.buying,
+      selling: shop.selling,
+      # TODO: images
+      refineryTerminal: shop.refinery_terminal,
+      station: %{
+        name: shop.station.name,
+        slug: shop.station.slug
+      },
+      celestialObject:
+        FleetYardsWeb.Api.CelestialObjectView.render("show.json",
+          celestial_object: shop.station.celestial_object
+        )
     }
   end
 

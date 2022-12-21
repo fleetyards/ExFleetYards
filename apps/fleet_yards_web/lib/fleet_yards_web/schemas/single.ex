@@ -269,7 +269,12 @@ defmodule FleetYardsWeb.Schemas.Single do
         buying: %Schema{type: :boolean},
         selling: %Schema{type: :boolean},
         # TODO: images
-        refineryTerminal: %Schema{type: :boolean}
+        refineryTerminal: %Schema{type: :boolean},
+        station: %Schema{
+          type: :object,
+          properties: %{name: %Schema{type: :string}, slug: %Schema{type: :string, format: :slug}}
+        },
+        celestialObject: FleetYardsWeb.Schemas.Single.CelestialObject
       }
     })
   end
