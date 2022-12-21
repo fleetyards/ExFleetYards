@@ -5,8 +5,10 @@ FleetYards.Release.Tasks.html
 FleetYards.Repo.Game.CelestialObject.html
 FleetYards.Repo.Game.Component.html
 FleetYards.Repo.Game.Dock.html
+FleetYards.Repo.Game.Habitation.html
 FleetYards.Repo.Game.Manufacturer.html
 FleetYards.Repo.Game.Model.html
+FleetYards.Repo.Game.Shop.html
 FleetYards.Repo.Game.StarSystem.html
 FleetYards.Repo.Game.Station.html
 FleetYards.Repo.Game.html
@@ -14,9 +16,12 @@ FleetYards.Repo.Import.html
 FleetYards.Repo.RoadmapItem.html
 FleetYards.Repo.Types.CelestialObjectType.html
 FleetYards.Repo.Types.DockType.html
+FleetYards.Repo.Types.HabitationType.html
 FleetYards.Repo.Types.ImportState.html
 FleetYards.Repo.Types.ImportType.html
 FleetYards.Repo.Types.ShipSize.html
+FleetYards.Repo.Types.ShopType.html
+FleetYards.Repo.Types.StationClassification.html
 FleetYards.Repo.Types.StationType.html
 FleetYards.Repo.Types.html
 FleetYards.Repo.html
@@ -41,6 +46,8 @@ FleetYardsWeb.Api.Router.Helpers.html
 FleetYardsWeb.Api.Router.html
 FleetYardsWeb.Api.StarSystemController.html
 FleetYardsWeb.Api.StarSystemView.html
+FleetYardsWeb.Api.StationController.html
+FleetYardsWeb.Api.StationView.html
 FleetYardsWeb.Api.VersionController.html
 FleetYardsWeb.Api.html
 FleetYardsWeb.ApiSpec.html
@@ -60,6 +67,7 @@ FleetYardsWeb.Schemas.List.ManufacturerList.html
 FleetYardsWeb.Schemas.List.ModelList.html
 FleetYardsWeb.Schemas.List.RoadmapItemList.html
 FleetYardsWeb.Schemas.List.StarSystemList.html
+FleetYardsWeb.Schemas.List.StationList.html
 FleetYardsWeb.Schemas.List.html
 FleetYardsWeb.Schemas.Single.Component.html
 FleetYardsWeb.Schemas.Single.Error.html
@@ -94,7 +102,7 @@ dist/merriweather-latin-ext-300-normal-K6L27CZ5.woff2
 dist/merriweather-vietnamese-300-italic-EHHNZPUO.woff2
 dist/merriweather-vietnamese-300-normal-U376L4Z4.woff2
 dist/remixicon-NKANDIL5.woff2
-dist/search_items-5361AFD1.js
-dist/sidebar_items-3A6A71B0.js
+dist/search_items-D084EDFF.js
+dist/sidebar_items-F484D480.js
 index.html
 search.html
