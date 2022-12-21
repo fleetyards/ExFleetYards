@@ -30,6 +30,7 @@ defmodule FleetYards.Repo.Game.Station do
 
     has_many :docks, Game.Dock
     has_many :habitations, Game.Habitation
+    has_many :shops, Game.Shop
   end
 
   ## Helpers

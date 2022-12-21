@@ -238,11 +238,37 @@ defmodule FleetYardsWeb.Schemas.Single do
             }
           }
         },
+        shops: %Schema{type: :array, items: FleetYardsWeb.Schemas.Single.Shop},
         celestialObject: FleetYardsWeb.Schemas.Single.CelestialObject,
         refinery: %Schema{type: :boolean},
         cargoHub: %Schema{type: :boolean},
         createdAt: %Schema{type: :string, format: :"date-time"},
         updatedAt: %Schema{type: :string, format: :"date-time"}
+      }
+    })
+  end
+
+  defmodule Shop do
+    @moduledoc false
+    require OpenApiSpex
+
+    OpenApiSpex.schema(%{
+      description: "in game shop",
+      type: :object,
+      properties: %{
+        id: %Schema{type: :string, format: :uuid},
+        name: %Schema{type: :string, example: "Planetary Services"},
+        slug: %Schema{type: :string, format: :slug, example: "planetary-services"},
+        type: %Schema{type: :string, enum: FleetYards.Repo.Types.ShopType.all()},
+        typeLabel: %Schema{type: :string},
+        stationLabel: %Schema{type: :string},
+        location: %Schema{type: :string, example: "The Commons"},
+        locationLabel: %Schema{type: :string},
+        rental: %Schema{type: :boolean},
+        buying: %Schema{type: :boolean},
+        selling: %Schema{type: :boolean},
+        # TODO: images
+        refineryTerminal: %Schema{type: :boolean}
       }
     })
   end

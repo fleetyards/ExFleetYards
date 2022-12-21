@@ -1,5 +1,7 @@
 defmodule FleetYardsWeb.Api.StationView do
   use FleetYardsWeb, :api_view
+  alias FleetYards.Repo.Game.Shop
+  alias FleetYards.Repo.Game.Station
 
   page_view()
 
@@ -11,6 +13,14 @@ defmodule FleetYardsWeb.Api.StationView do
   def render("show.json", %{station: station, params: %{"habitations" => "true"} = params}) do
     render("show.json", station: station, params: Map.delete(params, "habitations"))
     |> Map.put(:habitations, render_many(station.habitations, __MODULE__, "habitation.json"))
+  end
+
+  def render("show.json", %{station: station, params: %{"shops" => "true"} = params}) do
+    render("show.json", station: station, params: Map.delete(params, "shops"))
+    |> Map.put(
+      :shops,
+      render_many(station.shops, __MODULE__, "shops.json", as: :shop, station: station)
+    )
   end
 
   def render("show.json", %{station: station}) do
@@ -85,6 +95,25 @@ defmodule FleetYardsWeb.Api.StationView do
       habitationName: habitation.habitation_name,
       type: habitation.habitation_type,
       typeLabel: FleetYards.Repo.Types.HabitationType.humanize(habitation.habitation_type)
+    }
+  end
+
+  # TODO: Extract to ShopView
+  def render("shops.json", %{shop: shop, station: station}) do
+    %{
+      id: shop.id,
+      name: shop.name,
+      slug: shop.slug,
+      type: shop.shop_type,
+      typeLabel: FleetYards.Repo.Types.ShopType.humanize(shop.shop_type),
+      stationLabel: Shop.station_label(station),
+      location: shop.location,
+      locationLabel: Shop.location_label(station, shop),
+      rental: shop.rental,
+      buying: shop.buying,
+      selling: shop.selling,
+      # TODO: images
+      refineryTerminal: shop.refinery_terminal
     }
   end
 
