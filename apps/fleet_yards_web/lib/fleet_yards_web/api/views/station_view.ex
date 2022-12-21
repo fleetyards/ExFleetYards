@@ -3,9 +3,14 @@ defmodule FleetYardsWeb.Api.StationView do
 
   page_view()
 
-  def render("show.json", %{station: station, params: %{"docks" => "true"}}) do
-    render("show.json", station: station)
+  def render("show.json", %{station: station, params: %{"docks" => "true"} = params}) do
+    render("show.json", station: station, params: Map.delete(params, "docks"))
     |> Map.put(:docks, render_many(station.docks, __MODULE__, "dock.json"))
+  end
+
+  def render("show.json", %{station: station, params: %{"habitations" => "true"} = params}) do
+    render("show.json", station: station, params: Map.delete(params, "habitations"))
+    |> Map.put(:habitations, render_many(station.habitations, __MODULE__, "habitation.json"))
   end
 
   def render("show.json", %{station: station}) do
@@ -27,6 +32,12 @@ defmodule FleetYardsWeb.Api.StationView do
           FleetYards.Repo.Game.Station.dock_count(station),
           __MODULE__,
           "dock_count.json"
+        ),
+      habitationCounts:
+        render_many(
+          FleetYards.Repo.Game.Station.habitation_count(station),
+          __MODULE__,
+          "habitation_count.json"
         ),
       celestialObject:
         FleetYardsWeb.Api.CelestialObjectView.render("show.json", %{
@@ -57,6 +68,23 @@ defmodule FleetYardsWeb.Api.StationView do
       sizeLabel: FleetYards.Repo.Types.ShipSize.humanize(dock.ship_size),
       type: dock.dock_type,
       typeLabel: FleetYards.Repo.Types.DockType.humanize(dock.dock_type)
+    }
+  end
+
+  def render("habitation_count.json", %{station: {type, count}}) do
+    %{
+      count: count,
+      type: type,
+      typeLabel: FleetYards.Repo.Types.HabitationType.humanize(type)
+    }
+  end
+
+  def render("habitation.json", %{station: habitation}) do
+    %{
+      name: habitation.name,
+      habitationName: habitation.habitation_name,
+      type: habitation.habitation_type,
+      typeLabel: FleetYards.Repo.Types.HabitationType.humanize(habitation.habitation_type)
     }
   end
 

@@ -215,6 +215,29 @@ defmodule FleetYardsWeb.Schemas.Single do
             }
           }
         },
+        habitationCounts: %Schema{
+          type: :array,
+          items: %Schema{
+            type: :object,
+            properties: %{
+              count: %Schema{type: :integer},
+              type: %Schema{type: :string, enum: FleetYards.Repo.Types.HabitationType.all()},
+              typeLabel: %Schema{type: :string}
+            }
+          }
+        },
+        habitations: %Schema{
+          type: :array,
+          items: %Schema{
+            type: :object,
+            properties: %{
+              name: %Schema{type: :string},
+              habitationName: %Schema{type: :string},
+              type: %Schema{type: :string, enum: FleetYards.Repo.Types.HabitationType.all()},
+              typeLabel: %Schema{type: :string}
+            }
+          }
+        },
         celestialObject: FleetYardsWeb.Schemas.Single.CelestialObject,
         refinery: %Schema{type: :boolean},
         cargoHub: %Schema{type: :boolean},

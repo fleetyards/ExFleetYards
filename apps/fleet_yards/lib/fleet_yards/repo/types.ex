@@ -54,4 +54,12 @@ defmodule FleetYards.Repo.Types do
   enum(ImportType,
     sc_data_import: "Imports::ScDataImport"
   )
+
+  enum(HabitationType,
+    container: 0,
+    small_apartment: 1,
+    medium_apartment: 2,
+    large_apartment: 3,
+    suite: 4
+  )
 end

@@ -29,6 +29,7 @@ defmodule FleetYards.Repo.Game.Station do
     timestamps(inserted_at: :created_at)
 
     has_many :docks, Game.Dock
+    has_many :habitations, Game.Habitation
   end
 
   ## Helpers
@@ -58,5 +59,13 @@ defmodule FleetYards.Repo.Game.Station do
     docks
     |> Enum.group_by(&Map.get(&1, :ship_size))
     |> Enum.map(fn {dock_type, docks} -> {type, dock_type, Enum.count(docks)} end)
+  end
+
+  def habitation_count(%__MODULE__{habitations: habitations}), do: habitation_count(habitations)
+
+  def habitation_count(habitations) when is_list(habitations) do
+    habitations
+    |> Enum.group_by(&Map.get(&1, :habitation_type))
+    |> Enum.map(fn {type, habitations} -> {type, Enum.count(habitations)} end)
   end
 end
