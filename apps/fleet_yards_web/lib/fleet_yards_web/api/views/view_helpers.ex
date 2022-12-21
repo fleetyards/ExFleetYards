@@ -1,28 +1,21 @@
 defmodule FleetYardsWeb.Api.ViewHelpers do
   @moduledoc false
 
-  defmacro render_page_entries(page, opts \\ []) do
+  defmacro page_view(opts \\ []) do
+    name = Keyword.get(opts, :name, "index.json")
     template = Keyword.get(opts, :template, "show.json")
 
     quote do
-      render_many(Chunkr.Page.records(unquote(page)), __MODULE__, unquote(template))
-    end
-  end
+      # , do: render_page(page, assigns, unquote(opts))
+      def render(unquote(name), %{page: page} = assigns) do
+        params = Map.get(assigns, :params)
 
-  defmacro render_page(page, opts \\ []) do
-    quote do
-      %{
-        data: render_page_entries(unquote(page), unquote(opts)),
-        metadata: render_meta(unquote(page))
-      }
-    end
-  end
-
-  defmacro page_view(opts \\ []) do
-    template = Keyword.get(opts, :name, "index.json")
-
-    quote do
-      def render(unquote(template), %{page: page}), do: render_page(page, unquote(opts))
+        %{
+          data:
+            render_many(Chunkr.Page.records(page), __MODULE__, unquote(template), params: params),
+          metadata: render_meta(page)
+        }
+      end
     end
   end
 

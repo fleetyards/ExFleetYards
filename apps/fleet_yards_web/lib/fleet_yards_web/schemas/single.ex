@@ -188,6 +188,33 @@ defmodule FleetYardsWeb.Schemas.Single do
         locationLabel: %Schema{type: :string},
         # TODO: images
         description: %Schema{type: :string},
+        dockCounts: %Schema{
+          type: :array,
+          items: %Schema{
+            type: :object,
+            properties: %{
+              size: %Schema{type: :string, enum: FleetYards.Repo.Types.ShipSize.all()},
+              sizeLabel: %Schema{type: :string},
+              type: %Schema{type: :string, enum: FleetYards.Repo.Types.DockType.all()},
+              typeLabel: %Schema{type: :string},
+              count: %Schema{type: :integer}
+            }
+          }
+        },
+        docks: %Schema{
+          type: :array,
+          items: %Schema{
+            type: :object,
+            properties: %{
+              name: %Schema{type: :string},
+              group: %Schema{type: :group},
+              size: %Schema{type: :string, enum: FleetYards.Repo.Types.ShipSize.all()},
+              sizeLabel: %Schema{type: :string},
+              type: %Schema{type: :string, enum: FleetYards.Repo.Types.DockType.all()},
+              typeLabel: %Schema{type: :string}
+            }
+          }
+        },
         celestialObject: FleetYardsWeb.Schemas.Single.CelestialObject,
         refinery: %Schema{type: :boolean},
         cargoHub: %Schema{type: :boolean},

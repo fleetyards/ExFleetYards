@@ -42,13 +42,22 @@ defmodule FleetYardsWeb.Api do
     list_type =
       Keyword.get(opts, :list_type, Module.concat(FleetYardsWeb.Schemas.List, list_name))
 
+    extra_parameters =
+      Keyword.get(opts, :extra_parameters, Macro.escape([]))
+      |> Macro.expand(__CALLER__)
+
+    parameters =
+      [
+        limit: [in: :query, type: :integer, example: 25],
+        after: [in: :query, type: :string],
+        before: [in: :query, type: :string]
+      ]
+      |> Keyword.merge(extra_parameters)
+      |> Macro.escape()
+
     quote do
       operation unquote(operation),
-        parameters: [
-          limit: [in: :query, type: :integer, example: 25],
-          after: [in: :query, type: :string],
-          before: [in: :query, type: :string]
-        ],
+        parameters: unquote(parameters),
         responses: [
           ok: {unquote(list_name), "application/json", unquote(list_type)},
           bad_request: {"Error", "application/json", FleetYardsWeb.Schemas.Single.Error},
@@ -86,14 +95,14 @@ defmodule FleetYardsWeb.Api do
 
       defp query(:index), do: query()
 
-      list_operation(unquote(opt), unquote(list_name))
+      list_operation(unquote(opt), unquote(list_name), unquote(opts))
 
       def unquote(opt)(conn, params) do
         page =
           query(unquote(opt))
           |> FleetYards.Repo.paginate!(unquote(strategy), :asc, get_pagination_args(params))
 
-        render(conn, unquote(template), page: page)
+        render(conn, unquote(template), page: page, params: params)
       end
     end
   end
@@ -127,7 +136,14 @@ defmodule FleetYardsWeb.Api do
       Keyword.get(opts, :example)
       |> Macro.escape()
 
-    path_params = [in: :path, type: :string, example: example]
+    extra_parameters =
+      Keyword.get(opts, :extra_parameters, Macro.escape([]))
+      |> Macro.expand(__CALLER__)
+
+    path_params =
+      [id: [in: :path, type: :string, example: example]]
+      |> Keyword.merge(extra_parameters)
+      |> Macro.escape()
 
     quote do
       unquote do
@@ -144,16 +160,14 @@ defmodule FleetYardsWeb.Api do
       end
 
       operation :show,
-        parameters: [
-          id: [in: :path, type: :string, example: unquote(example)]
-        ],
+        parameters: unquote(path_params),
         responses: [
           ok: {unquote(name), "application/json", unquote(schema_type)},
           not_found: {"Error", "application/json", FleetYardsWeb.Schemas.Single.Error},
           internal_server_error: {"Error", "application/json", FleetYardsWeb.Schemas.Single.Error}
         ]
 
-      def show(conn, %{"id" => slug}) do
+      def show(conn, %{"id" => slug} = params) do
         query(slug)
         |> FleetYards.Repo.one()
         |> case do
@@ -162,7 +176,7 @@ defmodule FleetYardsWeb.Api do
             raise(FleetYardsWeb.Api.NotFoundException, module: unquote(name), slug: slug)
 
           v ->
-            render(conn, unquote(template), [{unquote(render_param), v}])
+            render(conn, unquote(template), [{unquote(render_param), v}, {:params, params}])
         end
       end
     end

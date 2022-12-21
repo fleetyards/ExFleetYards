@@ -3,14 +3,22 @@ defmodule FleetYardsWeb.Api.StationController do
 
   tags ["game"]
 
-  paged_index(Game.Station)
+  paged_index(Game.Station, extra_parameters: [docks: [in: :query, type: :boolean]])
 
-  show_slug(Game.Station)
+  show_slug(Game.Station,
+    extra_parameters: [docks: [in: :query, type: :boolean]],
+    example: "new-babbage"
+  )
 
   defp query,
     do:
       type_query(Game.Station,
-        preload: [:celestial_object, celestial_object: :starsystem, celestial_object: :parent]
+        preload: [
+          :celestial_object,
+          :docks,
+          celestial_object: :starsystem,
+          celestial_object: :parent
+        ]
       )
       |> where(hidden: false)
 

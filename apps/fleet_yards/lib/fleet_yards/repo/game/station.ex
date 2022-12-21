@@ -32,32 +32,6 @@ defmodule FleetYards.Repo.Game.Station do
   end
 
   ## Helpers
-
-  def type_label(%__MODULE__{station_type: type}), do: type_label(type)
-  def type_label(:landing_zone), do: "Landing Zone"
-  def type_label(:station), do: "Station"
-  def type_label(:asteroid_station), do: "Asteroid Station"
-  def type_label(:district), do: "District"
-  def type_label(:outpost), do: "Outpost"
-  def type_label(:aid_shelter), do: "Aid Shelter"
-  def type_label(_), do: "Unknown"
-
-  def classification_label(%__MODULE__{classification: classification}),
-    do: classification_label(classification)
-
-  def classification_label(:city), do: "City"
-  def classification_label(:trading), do: "Trading"
-  def classification_label(:mining), do: "Mining"
-  def classification_label(:salvaging), do: "Salvaging"
-  def classification_label(:farming), do: "Farming"
-  def classification_label(:science), do: "Science"
-  def classification_label(:security), do: "Security"
-  def classification_label(:rest_stop), do: "Rest stop"
-  def classification_label(:settlement), do: "Settlement"
-  def classification_label(:town), do: "Town"
-  def classification_label(:drug_lab), do: "Drug lab"
-  def classification_label(_), do: "Unknown"
-
   def location_prefix(%__MODULE__{station_type: :station}), do: "in orbit around"
   def location_prefix(%__MODULE__{station_type: :asteroid_station}), do: "on asteroid near"
   def location_prefix(%__MODULE__{location: location}) when not is_nil(location), do: "near"
@@ -70,4 +44,19 @@ defmodule FleetYards.Repo.Game.Station do
 
   def location_label(%__MODULE__{location: location} = station),
     do: location_prefix(station) <> " " <> location
+
+  def dock_count(%__MODULE__{docks: docks}), do: dock_count(docks)
+
+  def dock_count(docks) when is_list(docks) do
+    docks
+    |> Enum.group_by(&Map.get(&1, :dock_type))
+    |> Enum.map(&dock_type_count/1)
+    |> List.flatten()
+  end
+
+  def dock_type_count({type, docks}) do
+    docks
+    |> Enum.group_by(&Map.get(&1, :ship_size))
+    |> Enum.map(fn {dock_type, docks} -> {type, dock_type, Enum.count(docks)} end)
+  end
 end
