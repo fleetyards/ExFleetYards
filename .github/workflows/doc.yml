@@ -30,6 +30,8 @@ jobs:
 
       - name: Build doc
         run: mix docs
+      - name: Build api spec
+        run: mix api.spec doc/fleetyards.json
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4

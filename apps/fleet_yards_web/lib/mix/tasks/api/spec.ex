@@ -21,8 +21,9 @@ defmodule Mix.Tasks.Api.Spec do
 
     spec = FleetYardsWeb.ApiSpec.spec()
 
-    spec = Jason.encode_to_iodata!(spec)
-    |> Jason.Formatter.pretty_print_to_iodata()
+    spec =
+      Jason.encode_to_iodata!(spec)
+      |> Jason.Formatter.pretty_print_to_iodata()
 
     File.write!(file, spec)
   end
