@@ -29,7 +29,6 @@ defmodule FleetYards.Repo.Migrations.ShopCommodities do
       add :last_sign_in_at, :naive_datetime
       add :current_sign_in_ip, :string
       add :confirmation_token, :string
-      add :confirmation_token, :string
       add :confirmed_at, :naive_datetime
       add :confirmation_sent_at, :naive_datetime
       add :unconfirmed_email, :string
