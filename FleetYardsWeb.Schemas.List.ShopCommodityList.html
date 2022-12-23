@@ -7,7 +7,7 @@
     <meta name="generator" content="ExDoc v0.29.1">
     <meta name="project" content="Fleetyards v0.1.0">
 
-    <title>FleetYardsWeb.Api.CelestialObjectController — Fleetyards v0.1.0</title>
+    <title>FleetYardsWeb.Schemas.List.ShopCommodityList — Fleetyards v0.1.0</title>
     <link rel="stylesheet" href="dist/html-elixir-V2ETBPMB.css" />
 
 
@@ -98,15 +98,11 @@ Fleetyards
 </button>
 
 
-  <span translate="no">FleetYardsWeb.Api.CelestialObjectController</span> 
+  <span translate="no">FleetYardsWeb.Schemas.List.ShopCommodityList</span> 
   <small class="app-vsn" translate="no">(Fleetyards v0.1.0)</small>
 
 </h1>
 
-
-  <section id="moduledoc">
-<p>Controller used for Api</p>
-  </section>
 
 
   <section id="summary" class="details-list">
@@ -117,6 +113,20 @@ Fleetyards
       </a>
       Summary
     </h1>
+<div class="summary-types summary">
+  <h2>
+    <a href="#types">Types</a>
+  </h2>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#t:t/0" translate="no">t()</a>
+
+      </div>
+
+    </div>
+
+</div>
 <div class="summary-functions summary">
   <h2>
     <a href="#functions">Functions</a>
@@ -124,7 +134,7 @@ Fleetyards
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#index/2" translate="no">index(conn, params)</a>
+        <a href="#inner/0" translate="no">inner()</a>
 
       </div>
 
@@ -132,33 +142,11 @@ Fleetyards
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#open_api_operation/1" translate="no">open_api_operation(action)</a>
+        <a href="#schema/0" translate="no">schema()</a>
 
       </div>
 
-    </div>
-
-    <div class="summary-row">
-      <div class="summary-signature">
-        <a href="#shared_security/0" translate="no">shared_security()</a>
-
-      </div>
-
-    </div>
-
-    <div class="summary-row">
-      <div class="summary-signature">
-        <a href="#shared_tags/0" translate="no">shared_tags()</a>
-
-      </div>
-
-    </div>
-
-    <div class="summary-row">
-      <div class="summary-signature">
-        <a href="#show/2" translate="no">show(conn, params)</a>
-
-      </div>
+        <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/open_api_spex/3.16.0/OpenApiSpex.Schema.html#c:schema/0"><code class="inline">OpenApiSpex.Schema.schema/0</code></a>.</p></div>
 
     </div>
 
@@ -166,6 +154,46 @@ Fleetyards
 
   </section>
 
+
+  <section id="types" class="details-list">
+    <h1 class="section-heading">
+      <a class="hover-link" href="#types">
+        <i class="ri-link-m" aria-hidden="true"></i>
+        <span class="sr-only">Link to this section</span>
+      </a>
+Types
+    </h1>
+    <div class="types-list">
+<section class="detail" id="t:t/0">
+
+  <div class="detail-header">
+    <a href="#t:t/0" class="detail-link" title="Link to this type">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this type</span>
+    </a>
+    <h1 class="signature" translate="no">t()</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@type</span> t() :: %FleetYardsWeb.Schemas.List.ShopCommodityList{
+  data: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  metadata: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  shop: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>()
+}</pre>
+
+      </div>
+
+
+  </section>
+</section>
+
+    </div>
+  </section>
 
   <section id="functions" class="details-list">
     <h1 class="section-heading">
@@ -176,14 +204,14 @@ Fleetyards
 Functions
     </h1>
     <div class="functions-list">
-<section class="detail" id="index/2">
+<section class="detail" id="inner/0">
 
   <div class="detail-header">
-    <a href="#index/2" class="detail-link" title="Link to this function">
+    <a href="#inner/0" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">index(conn, params)</h1>
+    <h1 class="signature" translate="no">inner()</h1>
 
 
   </div>
@@ -193,78 +221,21 @@ Functions
 
   </section>
 </section>
-<section class="detail" id="open_api_operation/1">
+<section class="detail" id="schema/0">
 
   <div class="detail-header">
-    <a href="#open_api_operation/1" class="detail-link" title="Link to this function">
+    <a href="#schema/0" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">open_api_operation(action)</h1>
+    <h1 class="signature" translate="no">schema()</h1>
 
 
   </div>
 
   <section class="docstring">
 
-      <div class="specs">
-
-          <pre translate="no"><span class="attribute">@spec</span> open_api_operation(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>()) :: <a href="https://hexdocs.pm/open_api_spex/3.16.0/OpenApiSpex.Operation.html#t:t/0">OpenApiSpex.Operation.t</a>()</pre>
-
-      </div>
-
-
-  </section>
-</section>
-<section class="detail" id="shared_security/0">
-
-  <div class="detail-header">
-    <a href="#shared_security/0" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">shared_security()</h1>
-
-
-  </div>
-
-  <section class="docstring">
-
-
-  </section>
-</section>
-<section class="detail" id="shared_tags/0">
-
-  <div class="detail-header">
-    <a href="#shared_tags/0" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">shared_tags()</h1>
-
-
-  </div>
-
-  <section class="docstring">
-
-
-  </section>
-</section>
-<section class="detail" id="show/2">
-
-  <div class="detail-header">
-    <a href="#show/2" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">show(conn, params)</h1>
-
-
-  </div>
-
-  <section class="docstring">
-
-
+<p>Callback implementation for <a href="https://hexdocs.pm/open_api_spex/3.16.0/OpenApiSpex.Schema.html#c:schema/0"><code class="inline">OpenApiSpex.Schema.schema/0</code></a>.</p>
   </section>
 </section>
 

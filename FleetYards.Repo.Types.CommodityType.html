@@ -7,7 +7,7 @@
     <meta name="generator" content="ExDoc v0.29.1">
     <meta name="project" content="Fleetyards v0.1.0">
 
-    <title>FleetYardsWeb.Api.CelestialObjectController — Fleetyards v0.1.0</title>
+    <title>FleetYards.Repo.Types.CommodityType — Fleetyards v0.1.0</title>
     <link rel="stylesheet" href="dist/html-elixir-V2ETBPMB.css" />
 
 
@@ -98,14 +98,14 @@ Fleetyards
 </button>
 
 
-  <span translate="no">FleetYardsWeb.Api.CelestialObjectController</span> 
+  <span translate="no">FleetYards.Repo.Types.CommodityType</span> 
   <small class="app-vsn" translate="no">(Fleetyards v0.1.0)</small>
 
 </h1>
 
 
   <section id="moduledoc">
-<p>Controller used for Api</p>
+<p>Elixir.CommodityType Database enum type</p>
   </section>
 
 
@@ -124,7 +124,7 @@ Fleetyards
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#index/2" translate="no">index(conn, params)</a>
+        <a href="#all/0" translate="no">all()</a>
 
       </div>
 
@@ -132,7 +132,47 @@ Fleetyards
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#open_api_operation/1" translate="no">open_api_operation(action)</a>
+        <a href="#cast/1" translate="no">cast(arg1)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/ecto/3.9.2/Ecto.Type.html#c:cast/1"><code class="inline">Ecto.Type.cast/1</code></a>.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#dump/1" translate="no">dump(arg1)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/ecto/3.9.2/Ecto.Type.html#c:dump/1"><code class="inline">Ecto.Type.dump/1</code></a>.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#embed_as/1" translate="no">embed_as(_)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/ecto/3.9.2/Ecto.Type.html#c:embed_as/1"><code class="inline">Ecto.Type.embed_as/1</code></a>.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#equal?/2" translate="no">equal?(term1, term2)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/ecto/3.9.2/Ecto.Type.html#c:equal?/2"><code class="inline">Ecto.Type.equal?/2</code></a>.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#humanize/1" translate="no">humanize(atom)</a>
 
       </div>
 
@@ -140,25 +180,21 @@ Fleetyards
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#shared_security/0" translate="no">shared_security()</a>
+        <a href="#load/1" translate="no">load(arg1)</a>
 
       </div>
+
+        <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/ecto/3.9.2/Ecto.Type.html#c:load/1"><code class="inline">Ecto.Type.load/1</code></a>.</p></div>
 
     </div>
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#shared_tags/0" translate="no">shared_tags()</a>
+        <a href="#type/0" translate="no">type()</a>
 
       </div>
 
-    </div>
-
-    <div class="summary-row">
-      <div class="summary-signature">
-        <a href="#show/2" translate="no">show(conn, params)</a>
-
-      </div>
+        <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/ecto/3.9.2/Ecto.Type.html#c:type/0"><code class="inline">Ecto.Type.type/0</code></a>.</p></div>
 
     </div>
 
@@ -176,14 +212,14 @@ Fleetyards
 Functions
     </h1>
     <div class="functions-list">
-<section class="detail" id="index/2">
+<section class="detail" id="all/0">
 
   <div class="detail-header">
-    <a href="#index/2" class="detail-link" title="Link to this function">
+    <a href="#all/0" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">index(conn, params)</h1>
+    <h1 class="signature" translate="no">all()</h1>
 
 
   </div>
@@ -193,78 +229,123 @@ Functions
 
   </section>
 </section>
-<section class="detail" id="open_api_operation/1">
+<section class="detail" id="cast/1">
 
   <div class="detail-header">
-    <a href="#open_api_operation/1" class="detail-link" title="Link to this function">
+    <a href="#cast/1" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">open_api_operation(action)</h1>
+    <h1 class="signature" translate="no">cast(arg1)</h1>
 
 
   </div>
 
   <section class="docstring">
 
-      <div class="specs">
+<p>Callback implementation for <a href="https://hexdocs.pm/ecto/3.9.2/Ecto.Type.html#c:cast/1"><code class="inline">Ecto.Type.cast/1</code></a>.</p>
+  </section>
+</section>
+<section class="detail" id="dump/1">
 
-          <pre translate="no"><span class="attribute">@spec</span> open_api_operation(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>()) :: <a href="https://hexdocs.pm/open_api_spex/3.16.0/OpenApiSpex.Operation.html#t:t/0">OpenApiSpex.Operation.t</a>()</pre>
+  <div class="detail-header">
+    <a href="#dump/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">dump(arg1)</h1>
 
-      </div>
+
+  </div>
+
+  <section class="docstring">
+
+<p>Callback implementation for <a href="https://hexdocs.pm/ecto/3.9.2/Ecto.Type.html#c:dump/1"><code class="inline">Ecto.Type.dump/1</code></a>.</p>
+  </section>
+</section>
+<section class="detail" id="embed_as/1">
+
+  <div class="detail-header">
+    <a href="#embed_as/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">embed_as(_)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Callback implementation for <a href="https://hexdocs.pm/ecto/3.9.2/Ecto.Type.html#c:embed_as/1"><code class="inline">Ecto.Type.embed_as/1</code></a>.</p>
+  </section>
+</section>
+<section class="detail" id="equal?/2">
+
+  <div class="detail-header">
+    <a href="#equal?/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">equal?(term1, term2)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Callback implementation for <a href="https://hexdocs.pm/ecto/3.9.2/Ecto.Type.html#c:equal?/2"><code class="inline">Ecto.Type.equal?/2</code></a>.</p>
+  </section>
+</section>
+<section class="detail" id="humanize/1">
+
+  <div class="detail-header">
+    <a href="#humanize/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">humanize(atom)</h1>
+
+
+  </div>
+
+  <section class="docstring">
 
 
   </section>
 </section>
-<section class="detail" id="shared_security/0">
+<section class="detail" id="load/1">
 
   <div class="detail-header">
-    <a href="#shared_security/0" class="detail-link" title="Link to this function">
+    <a href="#load/1" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">shared_security()</h1>
+    <h1 class="signature" translate="no">load(arg1)</h1>
 
 
   </div>
 
   <section class="docstring">
 
-
+<p>Callback implementation for <a href="https://hexdocs.pm/ecto/3.9.2/Ecto.Type.html#c:load/1"><code class="inline">Ecto.Type.load/1</code></a>.</p>
   </section>
 </section>
-<section class="detail" id="shared_tags/0">
+<section class="detail" id="type/0">
 
   <div class="detail-header">
-    <a href="#shared_tags/0" class="detail-link" title="Link to this function">
+    <a href="#type/0" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">shared_tags()</h1>
+    <h1 class="signature" translate="no">type()</h1>
 
 
   </div>
 
   <section class="docstring">
 
-
-  </section>
-</section>
-<section class="detail" id="show/2">
-
-  <div class="detail-header">
-    <a href="#show/2" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">show(conn, params)</h1>
-
-
-  </div>
-
-  <section class="docstring">
-
-
+<p>Callback implementation for <a href="https://hexdocs.pm/ecto/3.9.2/Ecto.Type.html#c:type/0"><code class="inline">Ecto.Type.type/0</code></a>.</p>
   </section>
 </section>
 

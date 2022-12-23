@@ -364,6 +364,9 @@
           "buying": {
             "type": "boolean"
           },
+          "celestialObject": {
+            "$ref": "#/components/schemas/CelestialObject"
+          },
           "id": {
             "format": "uuid",
             "type": "string"
@@ -392,6 +395,18 @@
             "example": "planetary-services",
             "format": "slug",
             "type": "string"
+          },
+          "station": {
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "slug": {
+                "format": "slug",
+                "type": "string"
+              }
+            },
+            "type": "object"
           },
           "stationLabel": {
             "type": "string"
@@ -430,6 +445,40 @@
           }
         },
         "title": "Shop",
+        "type": "object"
+      },
+      "ShopCommodity": {
+        "description": "Shop Commodity",
+        "properties": {
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "title": "ShopCommodity",
+        "type": "object"
+      },
+      "ShopCommodityList": {
+        "description": "ShopCommodity List",
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/ShopCommodity"
+            },
+            "type": "array"
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/PaginationMetadata"
+          },
+          "shop": {
+            "$ref": "#/components/schemas/Shop"
+          }
+        },
+        "required": [
+          "data",
+          "metadata"
+        ],
+        "title": "ShopCommodityList",
         "type": "object"
       },
       "StarSystem": {
@@ -1513,6 +1562,160 @@
               }
             },
             "description": "Station"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          }
+        },
+        "tags": [
+          "game"
+        ]
+      }
+    },
+    "/api/v2/game/stations/{id}/shops/{shop}": {
+      "get": {
+        "callbacks": {},
+        "operationId": "FleetYardsWeb.Api.StationController.shop",
+        "parameters": [
+          {
+            "description": "",
+            "example": "new-babbage",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "",
+            "example": "trade-development-division",
+            "in": "path",
+            "name": "shop",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Shop"
+                }
+              }
+            },
+            "description": "Shop"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          }
+        },
+        "tags": [
+          "game"
+        ]
+      }
+    },
+    "/api/v2/game/stations/{id}/shops/{shop}/commodities": {
+      "get": {
+        "callbacks": {},
+        "operationId": "FleetYardsWeb.Api.StationController.commodities",
+        "parameters": [
+          {
+            "description": "",
+            "example": "new-babbage",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "",
+            "example": "trade-development-division",
+            "in": "path",
+            "name": "shop",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "",
+            "example": 25,
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "description": "",
+            "in": "query",
+            "name": "after",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "",
+            "in": "query",
+            "name": "before",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ShopCommodityList"
+                }
+              }
+            },
+            "description": "ShopCommodityList"
           },
           "404": {
             "content": {
