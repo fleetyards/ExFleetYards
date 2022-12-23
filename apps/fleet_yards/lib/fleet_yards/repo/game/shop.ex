@@ -22,6 +22,8 @@ defmodule FleetYards.Repo.Game.Shop do
     field :location, :string
 
     timestamps(inserted_at: :created_at)
+
+    has_many :commodities, Game.ShopCommodity
   end
 
   def location_label(%Game.Station{name: name} = station, %{location: location}) do

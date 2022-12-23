@@ -10,12 +10,13 @@ defmodule FleetYardsWeb.Api.ComponentView do
       slug: component.slug,
       grade: component.grade,
       class: component.component_class,
-      size: component.size,
-      manufacturer:
-        FleetYardsWeb.Api.ManufacturerView.render("show.json", %{
-          manufacturer: component.manufacturer
-        })
+      size: component.size
     }
+    |> render_loaded(
+      :manufacturer,
+      component.manufacturer,
+      &FleetYardsWeb.Api.ManufacturerView.render("show.json", manufacturer: &1)
+    )
     |> render_timestamps(component)
   end
 end

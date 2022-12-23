@@ -1,6 +1,20 @@
 defmodule FleetYardsWeb.Schemas.Gen do
-  defmacro gen_pagination(inner) do
-    name = Macro.expand_once(inner, __ENV__) |> Module.split() |> List.last()
+  defmacro gen_pagination(inner, opts \\ []) do
+    inner = inner |> Macro.expand_once(__CALLER__)
+    name = inner |> Module.split() |> List.last()
+
+    extra_properties =
+      Keyword.get(opts, :extra_properties, Macro.escape([]))
+      |> Macro.expand(__CALLER__)
+      |> Map.new(fn {k, v} -> {k, Macro.expand(v, __CALLER__)} end)
+
+    properties =
+      %{
+        data: %OpenApiSpex.Schema{type: :array, items: inner},
+        metadata: FleetYardsWeb.Schemas.Single.PaginationMetadata
+      }
+      |> Map.merge(extra_properties)
+      |> Macro.escape()
 
     content =
       quote do
@@ -9,10 +23,7 @@ defmodule FleetYardsWeb.Schemas.Gen do
         OpenApiSpex.schema(%{
           description: unquote("#{name} List"),
           type: :object,
-          properties: %{
-            data: %OpenApiSpex.Schema{type: :array, items: unquote(inner)},
-            metadata: FleetYardsWeb.Schemas.Single.PaginationMetadata
-          },
+          properties: unquote(properties),
           required: [:data, :metadata]
         })
 
