@@ -97,5 +97,4 @@ defmodule FleetYardsWeb.Api.StationController do
       |> where(hidden: false)
 
   defp query(slug), do: query() |> where(slug: ^slug)
-
 end
