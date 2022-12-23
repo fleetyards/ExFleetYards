@@ -5,18 +5,35 @@ defmodule FleetYardsWeb.Api.ViewHelpers do
     name = Keyword.get(opts, :name, "index.json")
     template = Keyword.get(opts, :template, "show.json")
 
-    quote do
-      # , do: render_page(page, assigns, unquote(opts))
-      def render(unquote(name), %{page: page} = assigns) do
-        params = Map.get(assigns, :params)
+    as =
+      Keyword.get(
+        opts,
+        :as,
+        quote do
+          __MODULE__.__resource__()
+        end
+      )
 
-        %{
-          data:
-            render_many(Chunkr.Page.records(page), __MODULE__, unquote(template), params: params),
-          metadata: render_meta(page)
-        }
+    quote do
+      def render(unquote(name), %{page: page} = assigns) do
+        params = Map.get(assigns, :params, %{})
+
+        render_page(page, __MODULE__, unquote(template), params: params, as: unquote(as))
       end
     end
+  end
+
+  def render_page(page, module, template, params \\ []) do
+    %{
+      data:
+        Phoenix.View.render_many(
+          Chunkr.Page.records(page),
+          module,
+          template,
+          Keyword.put_new(params, :as, :data)
+        ),
+      metadata: render_meta(page)
+    }
   end
 
   def render_meta(page) do
@@ -44,5 +61,19 @@ defmodule FleetYardsWeb.Api.ViewHelpers do
       },
       map
     )
+  end
+
+  def render_loaded(map, key, assoc, render_fun) do
+    if Ecto.assoc_loaded?(assoc) do
+      render_fun.(assoc)
+      Map.put(map, key, render_fun.(assoc))
+    else
+      map
+    end
+  end
+
+  def render_loaded(map, key, assoc, render_fun, default) do
+    render_loaded(map, key, assoc, render_fun)
+    |> Map.put_new(key, default)
   end
 end

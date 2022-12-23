@@ -36,6 +36,7 @@ defmodule FleetYardsWeb.Api.Router do
         resources "/celestial-objects", CelestialObjectController, only: [:index, :show]
 
         get "/stations/:id/shops/:shop", StationController, :shop
+        get "/stations/:id/shops/:shop/commodities", StationController, :commodities
         resources "/stations", StationController, only: [:index, :show]
       end
 

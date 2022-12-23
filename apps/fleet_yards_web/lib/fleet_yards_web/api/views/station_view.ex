@@ -1,7 +1,9 @@
 defmodule FleetYardsWeb.Api.StationView do
   use FleetYardsWeb, :api_view
   alias FleetYards.Repo.Game.Shop
+  alias FleetYards.Repo.Game.ShopCommodity
   alias FleetYards.Repo.Game.Station
+  alias FleetYards.Repo.Types
 
   page_view()
 
@@ -144,6 +146,35 @@ defmodule FleetYardsWeb.Api.StationView do
     }
   end
 
+  def render("commodities.json", %{shop: shop, commodities: commodities}) do
+    render_page(commodities, __MODULE__, "commodity.json", as: :commodity, shop: shop)
+    |> Map.put(:shop, render("shop.json", shop: shop))
+  end
+
+  def render("commodity.json", %{commodity: commodity, shop: shop}) do
+    view = commodity_item_view(commodity.commodity_item_type)
+    item = sub_item(commodity)
+
+    %{
+      id: commodity.id,
+      confirmed: commodity.confirmed,
+      locationLabel: ShopCommodity.location_label(shop, commodity),
+      pricePerUnit: commodity.price_per_unit,
+      sellPrice: commodity.sell_price,
+      averageSellPrice: commodity.average_sell_price,
+      buyPrice: commodity.buy_price,
+      category: commodity.commodity_item_type,
+      name: item.name,
+      slug: item.slug,
+      item: view.render("show.json", [{view.__resource__(), item}])
+    }
+  end
+
   def add(map, _key, nil), do: map
   def add(map, key, v), do: Map.put(map, key, v)
+
+  # Commodity render helpers
+  def commodity_item_view(:component), do: FleetYardsWeb.Api.ComponentView
+
+  def sub_item(%{commodity_item_type: :component, component: component}), do: component
 end

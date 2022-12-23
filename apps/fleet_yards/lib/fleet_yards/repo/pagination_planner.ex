@@ -12,4 +12,9 @@ defmodule FleetYards.Repo.PaginationPlanner do
     sort(:asc, as(:data).rsi_id)
     sort(:asc, as(:data).id)
   end
+
+  paginate_by :id_shop_commodity do
+    sort(:asc, as(:data).commodity_item_type)
+    sort(:asc, as(:data).id)
+  end
 end

@@ -279,6 +279,20 @@ defmodule FleetYardsWeb.Schemas.Single do
     })
   end
 
+  defmodule ShopCommodity do
+    @moduledoc false
+    require OpenApiSpex
+
+    OpenApiSpex.schema(%{
+      description: "Shop Commodity",
+      type: :object,
+      properties: %{
+        id: %Schema{type: :string, format: :uuid}
+        # TODO: more
+      }
+    })
+  end
+
   defmodule RoadmapItem do
     @moduledoc false
     require OpenApiSpex

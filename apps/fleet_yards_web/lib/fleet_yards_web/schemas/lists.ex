@@ -9,4 +9,8 @@ defmodule FleetYardsWeb.Schemas.List do
   gen_pagination(FleetYardsWeb.Schemas.Single.RoadmapItem)
   gen_pagination(FleetYardsWeb.Schemas.Single.Model)
   gen_pagination(FleetYardsWeb.Schemas.Single.Station)
+
+  gen_pagination(FleetYardsWeb.Schemas.Single.ShopCommodity,
+    extra_properties: [shop: FleetYardsWeb.Schemas.Single.Shop]
+  )
 end

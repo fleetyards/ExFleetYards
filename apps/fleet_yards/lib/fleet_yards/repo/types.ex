@@ -89,4 +89,29 @@ defmodule FleetYards.Repo.Types do
     kiosk: 22,
     ship_customizations: 23
   )
+
+  enum(ShopCommodityItemType,
+    model: "Model",
+    component: "Component",
+    commodity: "Commodity",
+    equipment: "Equipment",
+    model_module: "ModelModule",
+    model_paint: "ModelPaint"
+  )
+
+  enum(CommodityType,
+    gas: 0,
+    metal: 1,
+    mineral: 2,
+    non_metals: 3,
+    agricultural_supply: 4,
+    food: 5,
+    medical_supply: 6,
+    processed_goods: 7,
+    waste: 8,
+    scrap: 9,
+    vice: 10,
+    harvestable: 11,
+    consumer_goods: 12
+  )
 end
