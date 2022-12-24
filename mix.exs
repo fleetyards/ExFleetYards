@@ -1,4 +1,4 @@
-defmodule FleetYards.Umbrella.MixProject do
+defmodule ExFleetYards.Umbrella.MixProject do
   use Mix.Project
 
   def project do
@@ -47,15 +47,15 @@ defmodule FleetYards.Umbrella.MixProject do
       # run `mix setup` in all child apps
       setup: ["cmd mix setup"],
       fmt: ["format"],
-      "api.routes": ["phx.routes FleetYardsWeb.Api.Router"],
-      routes: ["phx.routes FleetYardsWeb.Router"]
+      "api.routes": ["phx.routes ExFleetYardsWeb.Api.Router"],
+      routes: ["phx.routes ExFleetYardsWeb.Router"]
     ]
   end
 
   defp releases do
     [
-      fleet_yards_web: [
-        applications: [fleet_yards_web: :permanent]
+      ex_fleet_yards_web: [
+        applications: [ex_fleet_yards_web: :permanent]
       ]
     ]
   end

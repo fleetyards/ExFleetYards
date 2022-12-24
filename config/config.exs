@@ -10,11 +10,11 @@
 import Config
 
 # Configure Mix tasks and generators
-config :fleet_yards,
-  ecto_repos: [FleetYards.Repo],
+config :ex_fleet_yards,
+  ecto_repos: [ExFleetYards.Repo],
   version_name: "Elixir"
 
-config :fleet_yards, FleetYards.Repo, migration_source: "ecto_schema_migrations"
+config :ex_fleet_yards, ExFleetYards.Repo, migration_source: "ecto_schema_migrations"
 
 # Configures the mailer
 #
@@ -23,28 +23,28 @@ config :fleet_yards, FleetYards.Repo, migration_source: "ecto_schema_migrations"
 #
 # For production it's recommended to configure a different adapter
 # at the `config/runtime.exs`.
-config :fleet_yards, FleetYards.Mailer, adapter: Swoosh.Adapters.Local
+config :ex_fleet_yards, ExFleetYards.Mailer, adapter: Swoosh.Adapters.Local
 
 # Swoosh API client is needed for adapters other than SMTP.
 config :swoosh, :api_client, false
 
-config :fleet_yards_web,
-  ecto_repos: [FleetYards.Repo],
-  generators: [context_app: :fleet_yards]
+config :ex_fleet_yards_web,
+  ecto_repos: [ExFleetYards.Repo],
+  generators: [context_app: :ex_fleet_yards]
 
 # if inline_endpoint is false, `port` and `url` become availabe.
-config :fleet_yards_web, FleetYardsWeb.Api, inline_endpoint: true, port: 4001
+config :ex_fleet_yards_web, ExFleetYardsWeb.Api, inline_endpoint: true, port: 4001
 
 # Configures the endpoint
-config :fleet_yards_web, FleetYardsWeb.Endpoint,
+config :ex_fleet_yards_web, ExFleetYardsWeb.Endpoint,
   url: [host: "localhost"],
-  render_errors: [view: FleetYardsWeb.ErrorView, accepts: ~w(html json), layout: false],
-  pubsub_server: FleetYards.PubSub,
+  render_errors: [view: ExFleetYardsWeb.ErrorView, accepts: ~w(html json), layout: false],
+  pubsub_server: ExFleetYards.PubSub,
   live_view: [signing_salt: "D5yRC+hm"]
 
-config :fleet_yards_web, FleetYardsWeb.Api.Endpoint,
+config :ex_fleet_yards_web, ExFleetYardsWeb.Api.Endpoint,
   server: false,
-  render_errors: [view: FleetYardsWeb.Api.ErrorView, accepts: ~w(json), layout: false]
+  render_errors: [view: ExFleetYardsWeb.Api.ErrorView, accepts: ~w(json), layout: false]
 
 # Configure esbuild (the version is required)
 config :esbuild,
@@ -52,7 +52,7 @@ config :esbuild,
   default: [
     args:
       ~w(js/app.js --bundle --target=es2017 --outdir=../priv/static/assets --external:/fonts/* --external:/images/*),
-    cd: Path.expand("../apps/fleet_yards_web/assets", __DIR__),
+    cd: Path.expand("../apps/ex_fleet_yards_web/assets", __DIR__),
     env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
   ]
 

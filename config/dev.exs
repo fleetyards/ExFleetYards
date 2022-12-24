@@ -1,7 +1,7 @@
 import Config
 
 # Configure your database
-config :fleet_yards, FleetYards.Repo,
+config :ex_fleet_yards, ExFleetYards.Repo,
   username: "fleet_yards_dev",
   password: "fleet_yards_dev",
   hostname: "localhost",
@@ -16,7 +16,7 @@ config :fleet_yards, FleetYards.Repo,
 # The watchers configuration can be used to run external
 # watchers to your application. For example, we use it
 # with esbuild to bundle .js and .css sources.
-config :fleet_yards_web, FleetYardsWeb.Endpoint,
+config :ex_fleet_yards_web, ExFleetYardsWeb.Endpoint,
   # Binding to loopback ipv4 address prevents access from other machines.
   # Change to `ip: {0, 0, 0, 0}` to allow access from other machines.
   http: [
@@ -26,8 +26,8 @@ config :fleet_yards_web, FleetYardsWeb.Endpoint,
       {
         :_,
         [
-          {"/api/[...]", Phoenix.Endpoint.Cowboy2Handler, {FleetYardsWeb.Api.Endpoint, []}},
-          {:_, Phoenix.Endpoint.Cowboy2Handler, {FleetYardsWeb.Endpoint, []}}
+          {"/api/[...]", Phoenix.Endpoint.Cowboy2Handler, {ExFleetYardsWeb.Api.Endpoint, []}},
+          {:_, Phoenix.Endpoint.Cowboy2Handler, {ExFleetYardsWeb.Endpoint, []}}
         ]
       }
     ]
@@ -66,13 +66,13 @@ config :fleet_yards_web, FleetYardsWeb.Endpoint,
 # different ports.
 
 # Watch static and templates for browser reloading.
-config :fleet_yards_web, FleetYardsWeb.Endpoint,
+config :ex_fleet_yards_web, ExFleetYardsWeb.Endpoint,
   live_reload: [
     patterns: [
       ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",
       ~r"priv/gettext/.*(po)$",
-      ~r"lib/fleet_yards_web/(live|views)/.*(ex)$",
-      ~r"lib/fleet_yards_web/templates/.*(eex)$"
+      ~r"lib/ex_fleet_yards_web/(live|views)/.*(ex)$",
+      ~r"lib/ex_fleet_yards_web/templates/.*(eex)$"
     ]
   ]
 
