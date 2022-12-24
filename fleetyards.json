@@ -847,7 +847,7 @@
     "/api/v2/game/celestial-objects": {
       "get": {
         "callbacks": {},
-        "operationId": "FleetYardsWeb.Api.CelestialObjectController.index",
+        "operationId": "ExFleetYardsWeb.Api.CelestialObjectController.index",
         "parameters": [
           {
             "description": "",
@@ -918,7 +918,7 @@
     "/api/v2/game/celestial-objects/{id}": {
       "get": {
         "callbacks": {},
-        "operationId": "FleetYardsWeb.Api.CelestialObjectController.show",
+        "operationId": "ExFleetYardsWeb.Api.CelestialObjectController.show",
         "parameters": [
           {
             "description": "",
@@ -971,7 +971,7 @@
     "/api/v2/game/components": {
       "get": {
         "callbacks": {},
-        "operationId": "FleetYardsWeb.Api.ComponentController.index",
+        "operationId": "ExFleetYardsWeb.Api.ComponentController.index",
         "parameters": [
           {
             "description": "",
@@ -1042,7 +1042,7 @@
     "/api/v2/game/components/{id}": {
       "get": {
         "callbacks": {},
-        "operationId": "FleetYardsWeb.Api.ComponentController.show",
+        "operationId": "ExFleetYardsWeb.Api.ComponentController.show",
         "parameters": [
           {
             "description": "",
@@ -1095,7 +1095,7 @@
     "/api/v2/game/manufacturers": {
       "get": {
         "callbacks": {},
-        "operationId": "FleetYardsWeb.Api.ManufacturerController.index",
+        "operationId": "ExFleetYardsWeb.Api.ManufacturerController.index",
         "parameters": [
           {
             "description": "",
@@ -1166,7 +1166,7 @@
     "/api/v2/game/manufacturers/with-models": {
       "get": {
         "callbacks": {},
-        "operationId": "FleetYardsWeb.Api.ManufacturerController.with_models",
+        "operationId": "ExFleetYardsWeb.Api.ManufacturerController.with_models",
         "parameters": [
           {
             "description": "",
@@ -1237,7 +1237,7 @@
     "/api/v2/game/manufacturers/{id}": {
       "get": {
         "callbacks": {},
-        "operationId": "FleetYardsWeb.Api.ManufacturerController.show",
+        "operationId": "ExFleetYardsWeb.Api.ManufacturerController.show",
         "parameters": [
           {
             "description": "",
@@ -1290,7 +1290,7 @@
     "/api/v2/game/starsystems": {
       "get": {
         "callbacks": {},
-        "operationId": "FleetYardsWeb.Api.StarSystemController.index",
+        "operationId": "ExFleetYardsWeb.Api.StarSystemController.index",
         "parameters": [
           {
             "description": "",
@@ -1361,7 +1361,7 @@
     "/api/v2/game/starsystems/{id}": {
       "get": {
         "callbacks": {},
-        "operationId": "FleetYardsWeb.Api.StarSystemController.show",
+        "operationId": "ExFleetYardsWeb.Api.StarSystemController.show",
         "parameters": [
           {
             "description": "",
@@ -1414,7 +1414,7 @@
     "/api/v2/game/stations": {
       "get": {
         "callbacks": {},
-        "operationId": "FleetYardsWeb.Api.StationController.index",
+        "operationId": "ExFleetYardsWeb.Api.StationController.index",
         "parameters": [
           {
             "description": "",
@@ -1512,7 +1512,7 @@
     "/api/v2/game/stations/{id}": {
       "get": {
         "callbacks": {},
-        "operationId": "FleetYardsWeb.Api.StationController.show",
+        "operationId": "ExFleetYardsWeb.Api.StationController.show",
         "parameters": [
           {
             "description": "",
@@ -1592,7 +1592,7 @@
     "/api/v2/game/stations/{id}/shops/{shop}": {
       "get": {
         "callbacks": {},
-        "operationId": "FleetYardsWeb.Api.StationController.shop",
+        "operationId": "ExFleetYardsWeb.Api.StationController.shop",
         "parameters": [
           {
             "description": "",
@@ -1655,7 +1655,7 @@
     "/api/v2/game/stations/{id}/shops/{shop}/commodities": {
       "get": {
         "callbacks": {},
-        "operationId": "FleetYardsWeb.Api.StationController.commodities",
+        "operationId": "ExFleetYardsWeb.Api.StationController.commodities",
         "parameters": [
           {
             "description": "",
@@ -1746,7 +1746,7 @@
     "/api/v2/roadmap": {
       "get": {
         "callbacks": {},
-        "operationId": "FleetYardsWeb.Api.RoadmapController.index",
+        "operationId": "ExFleetYardsWeb.Api.RoadmapController.index",
         "parameters": [
           {
             "description": "",
@@ -1817,7 +1817,7 @@
     "/api/v2/roadmap/active": {
       "get": {
         "callbacks": {},
-        "operationId": "FleetYardsWeb.Api.RoadmapController.active",
+        "operationId": "ExFleetYardsWeb.Api.RoadmapController.active",
         "parameters": [
           {
             "description": "",
@@ -1888,7 +1888,7 @@
     "/api/v2/roadmap/released": {
       "get": {
         "callbacks": {},
-        "operationId": "FleetYardsWeb.Api.RoadmapController.released",
+        "operationId": "ExFleetYardsWeb.Api.RoadmapController.released",
         "parameters": [
           {
             "description": "",
@@ -1959,7 +1959,7 @@
     "/api/v2/roadmap/unreleased": {
       "get": {
         "callbacks": {},
-        "operationId": "FleetYardsWeb.Api.RoadmapController.unreleased",
+        "operationId": "ExFleetYardsWeb.Api.RoadmapController.unreleased",
         "parameters": [
           {
             "description": "",
@@ -2030,7 +2030,7 @@
     "/api/v2/roadmap/{id}": {
       "get": {
         "callbacks": {},
-        "operationId": "FleetYardsWeb.Api.RoadmapController.show",
+        "operationId": "ExFleetYardsWeb.Api.RoadmapController.show",
         "parameters": [
           {
             "description": "",
@@ -2082,7 +2082,7 @@
     "/api/v2/version": {
       "get": {
         "callbacks": {},
-        "operationId": "FleetYardsWeb.Api.VersionController.index",
+        "operationId": "ExFleetYardsWeb.Api.VersionController.index",
         "parameters": [],
         "responses": {
           "200": {
@@ -2105,7 +2105,7 @@
     "/api/v2/version/sc-data": {
       "get": {
         "callbacks": {},
-        "operationId": "FleetYardsWeb.Api.VersionController.sc_data",
+        "operationId": "ExFleetYardsWeb.Api.VersionController.sc_data",
         "parameters": [],
         "responses": {
           "200": {
