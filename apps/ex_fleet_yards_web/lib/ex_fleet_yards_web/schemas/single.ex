@@ -29,7 +29,7 @@ defmodule ExFleetYardsWeb.Schemas.Single do
       "x-struct": __MODULE__
     })
 
-    def convert(%FleetYards.Repo.Game.Manufacturer{} = manufacturer) do
+    def convert(%ExFleetYards.Repo.Game.Manufacturer{} = manufacturer) do
       manufacturer =
         manufacturer
         |> Map.from_struct()
@@ -176,11 +176,11 @@ defmodule ExFleetYardsWeb.Schemas.Single do
       properties: %{
         name: %Schema{type: :string},
         slug: %Schema{type: :string, format: :slug},
-        type: %Schema{type: :string, enum: FleetYards.Repo.Types.StationType.all()},
+        type: %Schema{type: :string, enum: ExFleetYards.Repo.Types.StationType.all()},
         typeLabel: %Schema{type: :string},
         classification: %Schema{
           type: :string,
-          enum: FleetYards.Repo.Types.StationClassification.all()
+          enum: ExFleetYards.Repo.Types.StationClassification.all()
         },
         classificationLabel: %Schema{type: :string},
         habitable: %Schema{type: :boolean},
@@ -193,9 +193,9 @@ defmodule ExFleetYardsWeb.Schemas.Single do
           items: %Schema{
             type: :object,
             properties: %{
-              size: %Schema{type: :string, enum: FleetYards.Repo.Types.ShipSize.all()},
+              size: %Schema{type: :string, enum: ExFleetYards.Repo.Types.ShipSize.all()},
               sizeLabel: %Schema{type: :string},
-              type: %Schema{type: :string, enum: FleetYards.Repo.Types.DockType.all()},
+              type: %Schema{type: :string, enum: ExFleetYards.Repo.Types.DockType.all()},
               typeLabel: %Schema{type: :string},
               count: %Schema{type: :integer}
             }
@@ -208,9 +208,9 @@ defmodule ExFleetYardsWeb.Schemas.Single do
             properties: %{
               name: %Schema{type: :string},
               group: %Schema{type: :group},
-              size: %Schema{type: :string, enum: FleetYards.Repo.Types.ShipSize.all()},
+              size: %Schema{type: :string, enum: ExFleetYards.Repo.Types.ShipSize.all()},
               sizeLabel: %Schema{type: :string},
-              type: %Schema{type: :string, enum: FleetYards.Repo.Types.DockType.all()},
+              type: %Schema{type: :string, enum: ExFleetYards.Repo.Types.DockType.all()},
               typeLabel: %Schema{type: :string}
             }
           }
@@ -221,7 +221,7 @@ defmodule ExFleetYardsWeb.Schemas.Single do
             type: :object,
             properties: %{
               count: %Schema{type: :integer},
-              type: %Schema{type: :string, enum: FleetYards.Repo.Types.HabitationType.all()},
+              type: %Schema{type: :string, enum: ExFleetYards.Repo.Types.HabitationType.all()},
               typeLabel: %Schema{type: :string}
             }
           }
@@ -233,7 +233,7 @@ defmodule ExFleetYardsWeb.Schemas.Single do
             properties: %{
               name: %Schema{type: :string},
               habitationName: %Schema{type: :string},
-              type: %Schema{type: :string, enum: FleetYards.Repo.Types.HabitationType.all()},
+              type: %Schema{type: :string, enum: ExFleetYards.Repo.Types.HabitationType.all()},
               typeLabel: %Schema{type: :string}
             }
           }
@@ -260,7 +260,7 @@ defmodule ExFleetYardsWeb.Schemas.Single do
         id: %Schema{type: :string, format: :uuid},
         name: %Schema{type: :string, example: "Planetary Services"},
         slug: %Schema{type: :string, format: :slug, example: "planetary-services"},
-        type: %Schema{type: :string, enum: FleetYards.Repo.Types.ShopType.all()},
+        type: %Schema{type: :string, enum: ExFleetYards.Repo.Types.ShopType.all()},
         typeLabel: %Schema{type: :string},
         stationLabel: %Schema{type: :string},
         location: %Schema{type: :string, example: "The Commons"},

@@ -1,7 +1,7 @@
 import Config
 
 # Configure your database
-config :ex_fleet_yards, FleetYards.Repo,
+config :ex_fleet_yards, ExFleetYards.Repo,
   username: "fleet_yards_dev",
   password: "fleet_yards_dev",
   hostname: "localhost",

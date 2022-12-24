@@ -1,11 +1,11 @@
-defmodule FleetYards.Repo.Game.StarSystem do
+defmodule ExFleetYards.Repo.Game.StarSystem do
   @moduledoc """
   Star system
   """
 
   use Ecto.Schema
   import Ecto.Changeset
-  alias FleetYards.Repo.Game
+  alias ExFleetYards.Repo.Game
 
   @primary_key {:id, Ecto.UUID, []}
 

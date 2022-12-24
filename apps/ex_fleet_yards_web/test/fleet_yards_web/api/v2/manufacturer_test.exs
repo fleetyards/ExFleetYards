@@ -2,7 +2,7 @@ defmodule ExFleetYardsWeb.Api.V2.ManufacturerTest do
   use ExFleetYardsWeb.ConnCase, async: true
   import OpenApiSpex.TestAssertions
 
-  alias FleetYards.Repo.Game
+  alias ExFleetYards.Repo.Game
 
   def fixture(:manufacturer) do
     {:ok, manufacturer} =

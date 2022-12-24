@@ -1,4 +1,4 @@
-defmodule FleetYards.Umbrella.MixProject do
+defmodule ExFleetYards.Umbrella.MixProject do
   use Mix.Project
 
   def project do

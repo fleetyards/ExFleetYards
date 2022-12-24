@@ -1,4 +1,4 @@
-defmodule FleetYards.Repo.TypeGen do
+defmodule ExFleetYards.Repo.TypeGen do
   @moduledoc false
 
   defmacro __using__(_) do

@@ -1,4 +1,4 @@
-defmodule FleetYards.Version do
+defmodule ExFleetYards.Version do
   @moduledoc """
   Get server version
   """
@@ -20,7 +20,7 @@ defmodule FleetYards.Version do
   })
 
   def version_name() do
-    FleetYards.Config.fetch!(:version_name)
+    ExFleetYards.Config.fetch!(:version_name)
   end
 
   def version_number() do

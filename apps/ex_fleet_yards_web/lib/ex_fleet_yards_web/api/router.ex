@@ -10,7 +10,7 @@ defmodule ExFleetYardsWeb.Api.Router do
   end
 
   root =
-    if FleetYards.Config.get(:ex_fleet_yards_web, [ExFleetYardsWeb.Api, :inline_endpoint], true) do
+    if ExFleetYards.Config.get(:ex_fleet_yards_web, [ExFleetYardsWeb.Api, :inline_endpoint], true) do
       "/api"
     else
       "/"

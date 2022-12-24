@@ -3,7 +3,7 @@ defmodule ExFleetYardsWeb.Api.StarSystemController do
 
   tags ["game"]
 
-  paged_index(FleetYards.Repo.Game.StarSystem)
+  paged_index(ExFleetYards.Repo.Game.StarSystem)
 
   show_slug(Game.StarSystem, example: "stanton")
 

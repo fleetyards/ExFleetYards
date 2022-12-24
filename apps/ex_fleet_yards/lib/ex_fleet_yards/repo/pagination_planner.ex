@@ -1,4 +1,4 @@
-defmodule FleetYards.Repo.PaginationPlanner do
+defmodule ExFleetYards.Repo.PaginationPlanner do
   @moduledoc false
 
   use Chunkr.PaginationPlanner

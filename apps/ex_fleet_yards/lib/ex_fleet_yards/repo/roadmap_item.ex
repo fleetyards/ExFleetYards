@@ -1,7 +1,7 @@
-defmodule FleetYards.Repo.RoadmapItem do
+defmodule ExFleetYards.Repo.RoadmapItem do
   @moduledoc "Roadmap item"
   use Ecto.Schema
-  alias FleetYards.Repo.Game
+  alias ExFleetYards.Repo.Game
 
   @primary_key {:id, Ecto.UUID, []}
 

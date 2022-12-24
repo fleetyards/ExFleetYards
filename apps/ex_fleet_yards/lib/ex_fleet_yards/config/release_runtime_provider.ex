@@ -1,4 +1,4 @@
-defmodule FleetYards.Config.ReleaseRuntimeProvider do
+defmodule ExFleetYards.Config.ReleaseRuntimeProvider do
   @moduledoc false
   @behaviour Config.Provider
 

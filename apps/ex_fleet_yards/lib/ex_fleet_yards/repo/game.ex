@@ -1,8 +1,8 @@
-defmodule FleetYards.Repo.Game do
-  alias FleetYards.Repo
+defmodule ExFleetYards.Repo.Game do
+  alias ExFleetYards.Repo
   import Ecto.Query
 
-  alias FleetYards.Repo.Game
+  alias ExFleetYards.Repo.Game
 
   def create_manufacturer(attrs) do
     Game.Manufacturer.create_changeset(attrs)

@@ -1,4 +1,4 @@
-defmodule FleetYards.Release.Ecto do
+defmodule ExFleetYards.Release.Ecto do
   @moduledoc """
   Ecto release helper to migrate database
   """

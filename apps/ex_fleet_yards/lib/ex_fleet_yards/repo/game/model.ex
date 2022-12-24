@@ -1,9 +1,9 @@
-defmodule FleetYards.Repo.Game.Model do
+defmodule ExFleetYards.Repo.Game.Model do
   @moduledoc "Model"
 
   use Ecto.Schema
   import Ecto.Changeset
-  alias FleetYards.Repo.Game
+  alias ExFleetYards.Repo.Game
 
   @primary_key {:id, Ecto.UUID, []}
 

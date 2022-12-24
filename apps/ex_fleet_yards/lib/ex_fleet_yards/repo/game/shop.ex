@@ -1,9 +1,9 @@
-defmodule FleetYards.Repo.Game.Shop do
+defmodule ExFleetYards.Repo.Game.Shop do
   @moduledoc "Shop in a Station"
 
   use Ecto.Schema
-  alias FleetYards.Repo.Game
-  alias FleetYards.Repo.Types
+  alias ExFleetYards.Repo.Game
+  alias ExFleetYards.Repo.Types
 
   @primary_key {:id, Ecto.UUID, []}
 

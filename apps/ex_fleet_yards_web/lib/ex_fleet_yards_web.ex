@@ -38,8 +38,8 @@ defmodule ExFleetYardsWeb do
       alias ExFleetYardsWeb.Api.Router.Helpers, as: Routes
       alias ExFleetYardsWeb.Api.NotFoundException
       alias ExFleetYardsWeb.Api.InvalidPaginationException
-      alias FleetYards.Repo
-      alias FleetYards.Repo.Game
+      alias ExFleetYards.Repo
+      alias ExFleetYards.Repo.Game
 
       use OpenApiSpex.ControllerSpecs
       alias ExFleetYardsWeb.Schemas.Single.Error

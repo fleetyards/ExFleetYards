@@ -1,10 +1,10 @@
-defmodule FleetYards.Repo.Game.Station do
+defmodule ExFleetYards.Repo.Game.Station do
   @moduledoc "Station"
 
   use Ecto.Schema
   import Ecto.Changeset
-  alias FleetYards.Repo.Game
-  alias FleetYards.Repo.Types
+  alias ExFleetYards.Repo.Game
+  alias ExFleetYards.Repo.Types
 
   @primary_key {:id, Ecto.UUID, []}
 

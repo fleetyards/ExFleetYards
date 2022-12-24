@@ -1,4 +1,4 @@
-defmodule FleetYards.Repo.Migrations.CelectialObjects do
+defmodule ExFleetYards.Repo.Migrations.CelectialObjects do
   use Ecto.Migration
 
   def change do

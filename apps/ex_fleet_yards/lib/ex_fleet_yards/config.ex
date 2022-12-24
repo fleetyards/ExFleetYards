@@ -1,4 +1,4 @@
-defmodule FleetYards.Config do
+defmodule ExFleetYards.Config do
   @moduledoc """
   Config accessing functions
   """

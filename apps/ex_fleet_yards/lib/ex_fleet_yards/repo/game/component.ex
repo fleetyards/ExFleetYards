@@ -1,7 +1,7 @@
-defmodule FleetYards.Repo.Game.Component do
+defmodule ExFleetYards.Repo.Game.Component do
   use Ecto.Schema
   import Ecto.Changeset
-  alias FleetYards.Repo.Game
+  alias ExFleetYards.Repo.Game
 
   @primary_key {:id, Ecto.UUID, []}
 

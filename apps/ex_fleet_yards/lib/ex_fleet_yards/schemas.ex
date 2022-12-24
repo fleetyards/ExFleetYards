@@ -1,4 +1,4 @@
-defmodule FleetYards.Schemas do
+defmodule ExFleetYards.Schemas do
   alias OpenApiSpex.Schema
 
   # Pagination

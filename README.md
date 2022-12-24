@@ -1,6 +1,6 @@
 # ExFleetYards
 
-Elixir backend written for FleetYards.
+Elixir backend written for ExFleetYards.
 
 [![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-yellow.svg)](https://opensource.org/licenses/) [![Main](https://github.com/fleetyards/ExFleetYards/actions/workflows/elixir.yml/badge.svg)](https://github.com/fleetyards/ExFleetYards/actions/workflows/elixir.yml)
 
@@ -18,6 +18,6 @@ This is the umbrella repo, actual code is in the apps folder.
 <!-- 
 ### Nix
 
-# FleetYards.Umbrella
+# ExFleetYards.Umbrella
 -->
 

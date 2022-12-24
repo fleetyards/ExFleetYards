@@ -1,4 +1,4 @@
-defmodule FleetYards do
+defmodule ExFleetYards do
   @moduledoc """
   FleetYards keeps the contexts that define your domain
   and business logic.

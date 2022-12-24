@@ -1,10 +1,10 @@
-defmodule FleetYards.Repo.Import do
+defmodule ExFleetYards.Repo.Import do
   @moduledoc """
   SC data import state
   """
   use Ecto.Schema
   import Ecto.Query
-  alias FleetYards.Repo
+  alias ExFleetYards.Repo
 
   @primary_key {:id, Ecto.UUID, []}
 

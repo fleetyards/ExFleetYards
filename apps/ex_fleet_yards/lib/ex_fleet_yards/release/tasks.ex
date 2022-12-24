@@ -1,4 +1,4 @@
-defmodule FleetYards.Release.Tasks do
+defmodule ExFleetYards.Release.Tasks do
   @moduledoc """
   Release tasks to run in production
   """
@@ -20,7 +20,7 @@ defmodule FleetYards.Release.Tasks do
 
   def migrate(_args) do
     # TODO: args
-    FleetYards.Release.Ecto.migrate()
+    ExFleetYards.Release.Ecto.migrate()
   end
 
   def rollback(_args) do

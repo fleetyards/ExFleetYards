@@ -1,7 +1,7 @@
-defmodule FleetYards.Repo do
+defmodule ExFleetYards.Repo do
   use Ecto.Repo,
     otp_app: :ex_fleet_yards,
     adapter: Ecto.Adapters.Postgres
 
-  use Chunkr, planner: FleetYards.Repo.PaginationPlanner
+  use Chunkr, planner: ExFleetYards.Repo.PaginationPlanner
 end

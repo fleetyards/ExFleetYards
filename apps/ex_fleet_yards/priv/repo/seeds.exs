@@ -5,7 +5,7 @@
 # Inside the script, you can read and write to any of your
 # repositories directly:
 #
-#     FleetYards.Repo.insert!(%FleetYards.SomeSchema{})
+#     ExFleetYards.Repo.insert!(%ExFleetYards.SomeSchema{})
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.

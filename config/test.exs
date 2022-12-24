@@ -5,7 +5,7 @@ import Config
 # The MIX_TEST_PARTITION environment variable can be used
 # to provide built-in test partitioning in CI environment.
 # Run `mix help test` for more information.
-config :ex_fleet_yards, FleetYards.Repo,
+config :ex_fleet_yards, ExFleetYards.Repo,
   username: "fleet_yards_dev",
   password: "fleet_yards_dev",
   hostname: "localhost",
@@ -36,7 +36,7 @@ config :ex_fleet_yards_web, ExFleetYardsWeb.Endpoint,
 config :logger, level: :warn
 
 # In test we don't send emails.
-config :ex_fleet_yards, FleetYards.Mailer, adapter: Swoosh.Adapters.Test
+config :ex_fleet_yards, ExFleetYards.Mailer, adapter: Swoosh.Adapters.Test
 
 # Initialize plugs at runtime for faster test compilation
 config :phoenix, :plug_init_mode, :runtime

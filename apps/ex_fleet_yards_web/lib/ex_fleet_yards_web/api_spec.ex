@@ -15,7 +15,7 @@ defmodule ExFleetYardsWeb.ApiSpec do
       ],
       info: %Info{
         title: "Fleetyards",
-        version: FleetYards.Version.version_number()
+        version: ExFleetYards.Version.version_number()
       },
       paths: Paths.from_router(Router),
       components: %Components{

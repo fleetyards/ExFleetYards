@@ -1,4 +1,4 @@
-defmodule FleetYards.Repo.Migrations.Import do
+defmodule ExFleetYards.Repo.Migrations.Import do
   use Ecto.Migration
 
   def change do

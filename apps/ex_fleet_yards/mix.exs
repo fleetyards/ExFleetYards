@@ -1,4 +1,4 @@
-defmodule FleetYards.MixProject do
+defmodule ExFleetYards.MixProject do
   use Mix.Project
 
   def project do
@@ -23,7 +23,7 @@ defmodule FleetYards.MixProject do
   # Type `mix help compile.app` for more information.
   def application do
     [
-      mod: {FleetYards.Application, []},
+      mod: {ExFleetYards.Application, []},
       extra_applications: [:logger, :runtime_tools]
     ]
   end
@@ -62,7 +62,7 @@ defmodule FleetYards.MixProject do
   defp releases do
     [
       fleet_yards: [
-        config_providers: [{FleetYards.Config.ReleaseRuntimeProvider, []}]
+        config_providers: [{ExFleetYards.Config.ReleaseRuntimeProvider, []}]
       ]
     ]
   end

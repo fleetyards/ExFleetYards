@@ -6,20 +6,20 @@ defmodule ExFleetYardsWeb.Api.VersionController do
   operation :index,
     summary: "Get server version",
     responses: [
-      ok: {"Version", "application/json", FleetYards.Version}
+      ok: {"Version", "application/json", ExFleetYards.Version}
     ]
 
   def index(conn, _params) do
-    json(conn, FleetYards.Version.version())
+    json(conn, ExFleetYards.Version.version())
   end
 
   operation :sc_data,
     summary: "Get Star Citizen data version",
     responses: [
-      ok: {"Version", "application/json", FleetYards.Version}
+      ok: {"Version", "application/json", ExFleetYards.Version}
     ]
 
   def sc_data(conn, _params) do
-    json(conn, %{version: FleetYards.Repo.Import.current_version()})
+    json(conn, %{version: ExFleetYards.Repo.Import.current_version()})
   end
 end

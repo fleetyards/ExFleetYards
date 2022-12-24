@@ -1,9 +1,9 @@
-defmodule FleetYards.Repo.Game.CelestialObject do
+defmodule ExFleetYards.Repo.Game.CelestialObject do
   @moduledoc "Celestial Object"
   use Ecto.Schema
   import Ecto.Changeset
-  alias FleetYards.Repo.Game
-  alias FleetYards.Repo.Types
+  alias ExFleetYards.Repo.Game
+  alias ExFleetYards.Repo.Types
 
   @primary_key {:id, Ecto.UUID, []}
 

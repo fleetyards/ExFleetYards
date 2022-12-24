@@ -100,7 +100,7 @@ defmodule ExFleetYardsWeb.Api do
       def unquote(opt)(conn, params) do
         page =
           query(unquote(opt))
-          |> FleetYards.Repo.paginate!(unquote(strategy), :asc, get_pagination_args(params))
+          |> ExFleetYards.Repo.paginate!(unquote(strategy), :asc, get_pagination_args(params))
 
         render(conn, unquote(template), page: page, params: params)
       end
@@ -169,7 +169,7 @@ defmodule ExFleetYardsWeb.Api do
 
       def show(conn, %{"id" => slug} = params) do
         query(slug)
-        |> FleetYards.Repo.one()
+        |> ExFleetYards.Repo.one()
         |> case do
           nil ->
             # raise(ExFleetYardsWeb.Api.NotFoundException, unquote("#{name} `\#{slug}` not found"))

@@ -1,4 +1,4 @@
-defmodule FleetYards.Application do
+defmodule ExFleetYards.Application do
   # See https://hexdocs.pm/elixir/Application.html
   # for more information on OTP Applications
   @moduledoc false
@@ -9,13 +9,13 @@ defmodule FleetYards.Application do
   def start(_type, _args) do
     children = [
       # Start the Ecto repository
-      FleetYards.Repo,
+      ExFleetYards.Repo,
       # Start the PubSub system
-      {Phoenix.PubSub, name: FleetYards.PubSub}
-      # Start a worker by calling: FleetYards.Worker.start_link(arg)
-      # {FleetYards.Worker, arg}
+      {Phoenix.PubSub, name: ExFleetYards.PubSub}
+      # Start a worker by calling: ExFleetYards.Worker.start_link(arg)
+      # {ExFleetYards.Worker, arg}
     ]
 
-    Supervisor.start_link(children, strategy: :one_for_one, name: FleetYards.Supervisor)
+    Supervisor.start_link(children, strategy: :one_for_one, name: ExFleetYards.Supervisor)
   end
 end

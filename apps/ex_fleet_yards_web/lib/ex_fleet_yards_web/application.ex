@@ -4,12 +4,12 @@ defmodule ExFleetYardsWeb.Application do
   @moduledoc false
 
   use Application
-  alias FleetYards.Config
+  alias ExFleetYards.Config
 
   @impl true
   def start(_type, _args) do
     merge_config(
-      FleetYards.Config.get(:ex_fleet_yards_web, [ExFleetYardsWeb.Api, :inline_endpoint], true)
+      ExFleetYards.Config.get(:ex_fleet_yards_web, [ExFleetYardsWeb.Api, :inline_endpoint], true)
     )
 
     children = [

@@ -76,7 +76,7 @@ defmodule ExFleetYardsWeb.Api.StationController do
         where: c.shop_id == ^shop.id,
         preload: [:commodity, :component]
       )
-      |> FleetYards.Repo.paginate!(:id_shop_commodity, :asc, get_pagination_args(params))
+      |> ExFleetYards.Repo.paginate!(:id_shop_commodity, :asc, get_pagination_args(params))
 
     render(conn, "commodities.json", shop: shop, commodities: commodities)
   end

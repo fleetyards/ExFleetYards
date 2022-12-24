@@ -34,7 +34,7 @@ defmodule ExFleetYardsWeb.ConnCase do
   end
 
   setup tags do
-    FleetYards.DataCase.setup_sandbox(tags)
+    ExFleetYards.DataCase.setup_sandbox(tags)
 
     {:ok, conn: Phoenix.ConnTest.build_conn(), api_spec: ExFleetYardsWeb.ApiSpec.spec()}
   end

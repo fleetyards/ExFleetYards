@@ -1,9 +1,9 @@
 defmodule ExFleetYardsWeb.Api.StationView do
   use ExFleetYardsWeb, :api_view
-  alias FleetYards.Repo.Game.Shop
-  alias FleetYards.Repo.Game.ShopCommodity
-  alias FleetYards.Repo.Game.Station
-  alias FleetYards.Repo.Types
+  alias ExFleetYards.Repo.Game.Shop
+  alias ExFleetYards.Repo.Game.ShopCommodity
+  alias ExFleetYards.Repo.Game.Station
+  alias ExFleetYards.Repo.Types
 
   page_view()
 
@@ -30,24 +30,24 @@ defmodule ExFleetYardsWeb.Api.StationView do
       name: station.name,
       slug: station.slug,
       type: station.station_type,
-      typeLabel: FleetYards.Repo.Types.StationType.humanize(station.station_type),
+      typeLabel: ExFleetYards.Repo.Types.StationType.humanize(station.station_type),
       classification: station.classification,
       classificationLabel:
-        FleetYards.Repo.Types.StationClassification.humanize(station.classification),
+        ExFleetYards.Repo.Types.StationClassification.humanize(station.classification),
       habitable: station.habitable,
       location: station.location,
-      locationLabel: FleetYards.Repo.Game.Station.location_label(station),
+      locationLabel: ExFleetYards.Repo.Game.Station.location_label(station),
       # TODO: images
       description: station.description,
       dockCounts:
         render_many(
-          FleetYards.Repo.Game.Station.dock_count(station),
+          ExFleetYards.Repo.Game.Station.dock_count(station),
           __MODULE__,
           "dock_count.json"
         ),
       habitationCounts:
         render_many(
-          FleetYards.Repo.Game.Station.habitation_count(station),
+          ExFleetYards.Repo.Game.Station.habitation_count(station),
           __MODULE__,
           "habitation_count.json"
         ),
@@ -66,9 +66,9 @@ defmodule ExFleetYardsWeb.Api.StationView do
   def render("dock_count.json", %{station: {type, ship_size, count}}) do
     %{
       size: ship_size,
-      sizeLabel: FleetYards.Repo.Types.ShipSize.humanize(ship_size),
+      sizeLabel: ExFleetYards.Repo.Types.ShipSize.humanize(ship_size),
       type: type,
-      typeLabel: FleetYards.Repo.Types.DockType.humanize(type),
+      typeLabel: ExFleetYards.Repo.Types.DockType.humanize(type),
       count: count
     }
   end
@@ -78,9 +78,9 @@ defmodule ExFleetYardsWeb.Api.StationView do
       name: dock.name,
       group: dock.group,
       size: dock.ship_size,
-      sizeLabel: FleetYards.Repo.Types.ShipSize.humanize(dock.ship_size),
+      sizeLabel: ExFleetYards.Repo.Types.ShipSize.humanize(dock.ship_size),
       type: dock.dock_type,
-      typeLabel: FleetYards.Repo.Types.DockType.humanize(dock.dock_type)
+      typeLabel: ExFleetYards.Repo.Types.DockType.humanize(dock.dock_type)
     }
   end
 
@@ -88,7 +88,7 @@ defmodule ExFleetYardsWeb.Api.StationView do
     %{
       count: count,
       type: type,
-      typeLabel: FleetYards.Repo.Types.HabitationType.humanize(type)
+      typeLabel: ExFleetYards.Repo.Types.HabitationType.humanize(type)
     }
   end
 
@@ -97,7 +97,7 @@ defmodule ExFleetYardsWeb.Api.StationView do
       name: habitation.name,
       habitationName: habitation.habitation_name,
       type: habitation.habitation_type,
-      typeLabel: FleetYards.Repo.Types.HabitationType.humanize(habitation.habitation_type)
+      typeLabel: ExFleetYards.Repo.Types.HabitationType.humanize(habitation.habitation_type)
     }
   end
 
@@ -108,7 +108,7 @@ defmodule ExFleetYardsWeb.Api.StationView do
       name: shop.name,
       slug: shop.slug,
       type: shop.shop_type,
-      typeLabel: FleetYards.Repo.Types.ShopType.humanize(shop.shop_type),
+      typeLabel: ExFleetYards.Repo.Types.ShopType.humanize(shop.shop_type),
       stationLabel: Shop.station_label(station),
       location: shop.location,
       locationLabel: Shop.location_label(station, shop),
@@ -126,7 +126,7 @@ defmodule ExFleetYardsWeb.Api.StationView do
       name: shop.name,
       slug: shop.slug,
       type: shop.shop_type,
-      typeLabel: FleetYards.Repo.Types.ShopType.humanize(shop.shop_type),
+      typeLabel: ExFleetYards.Repo.Types.ShopType.humanize(shop.shop_type),
       stationLabel: Shop.station_label(shop),
       location: shop.location,
       locationLabel: Shop.location_label(shop),

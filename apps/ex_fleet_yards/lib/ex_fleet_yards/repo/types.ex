@@ -1,6 +1,6 @@
-defmodule FleetYards.Repo.Types do
+defmodule ExFleetYards.Repo.Types do
   @moduledoc "Types used for the database"
-  use FleetYards.Repo.TypeGen
+  use ExFleetYards.Repo.TypeGen
 
   enum(StationType,
     landing_zone: 0,
