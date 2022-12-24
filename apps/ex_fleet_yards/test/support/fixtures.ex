@@ -5,16 +5,16 @@ defmodule ExFleetYards.Fixtures do
 
   def fixture(fixture, opts \\ []) do
     fixture_opts = Keyword.get(opts, :fixture_opts, [])
-    data = apply(__MODULE__, :fixture_data, [fixture, [fixture_opts] ])
+    data = apply(__MODULE__, :fixture_data, [fixture, [fixture_opts]])
 
     insert? = Keyword.get(opts, :insert, true)
 
     if insert? do
-      fixture_opts
-      |> Enum.map(insert_fixture)
+      data
+      |> Enum.map(&insert_fixture/1)
       |> Enum.into(%{})
     else
-      fixture_opts
+      data
     end
   end
 
@@ -66,12 +66,19 @@ defmodule ExFleetYards.Fixtures do
 
   # macro
   defmacro __using__(opts \\ []) do
-    fixtures = opts
+    fixtures =
+      opts
+      |> Keyword.get(:fixtures, [])
+
     quote do
       import unquote(__MODULE__)
+
       unquote do
         for fixture <- fixtures do
-          name = "create_#{fixture}"
+          name =
+            "create_#{fixture}"
+            |> String.to_atom()
+
           quote do
             defp unquote(name)(_) do
               %{unquote(fixture) => fixture(unquote(fixture))}
@@ -81,6 +88,7 @@ defmodule ExFleetYards.Fixtures do
       end
     end
   end
+
   # Private helpers
   def insert_fixture({name, data}) do
     data = Repo.insert!(data)
