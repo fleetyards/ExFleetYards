@@ -54,7 +54,8 @@ defmodule ExFleetYardsWeb.Api.StationController do
       before: [in: :query, type: :string]
     ],
     responses: [
-      ok: {"ShopCommodityList", "application/json", ExFleetYardsWeb.Schemas.List.ShopCommodityList},
+      ok:
+        {"ShopCommodityList", "application/json", ExFleetYardsWeb.Schemas.List.ShopCommodityList},
       not_found: {"Error", "application/json", ExFleetYardsWeb.Schemas.Single.Error},
       internal_server_error: {"Error", "application/json", ExFleetYardsWeb.Schemas.Single.Error}
     ]

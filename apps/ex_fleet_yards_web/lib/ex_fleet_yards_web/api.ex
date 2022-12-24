@@ -61,7 +61,8 @@ defmodule ExFleetYardsWeb.Api do
         responses: [
           ok: {unquote(list_name), "application/json", unquote(list_type)},
           bad_request: {"Error", "application/json", ExFleetYardsWeb.Schemas.Single.Error},
-          internal_server_error: {"Error", "application/json", ExFleetYardsWeb.Schemas.Single.Error}
+          internal_server_error:
+            {"Error", "application/json", ExFleetYardsWeb.Schemas.Single.Error}
         ]
     end
   end
@@ -164,7 +165,8 @@ defmodule ExFleetYardsWeb.Api do
         responses: [
           ok: {unquote(name), "application/json", unquote(schema_type)},
           not_found: {"Error", "application/json", ExFleetYardsWeb.Schemas.Single.Error},
-          internal_server_error: {"Error", "application/json", ExFleetYardsWeb.Schemas.Single.Error}
+          internal_server_error:
+            {"Error", "application/json", ExFleetYardsWeb.Schemas.Single.Error}
         ]
 
       def show(conn, %{"id" => slug} = params) do
