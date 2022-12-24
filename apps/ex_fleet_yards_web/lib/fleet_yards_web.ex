@@ -1,0 +1,159 @@
+defmodule ExFleetYardsWeb do
+  @moduledoc """
+  The entrypoint for defining your web interface, such
+  as controllers, views, channels and so on.
+
+  This can be used in your application as:
+
+      use ExFleetYardsWeb, :controller
+      use ExFleetYardsWeb, :view
+
+  The definitions below will be executed for every view,
+  controller, etc, so keep them short and clean, focused
+  on imports, uses and aliases.
+
+  Do NOT define functions inside the quoted expressions
+  below. Instead, define any helper function in modules
+  and import those modules here.
+  """
+
+  def controller do
+    quote do
+      use Phoenix.Controller, namespace: ExFleetYardsWeb
+
+      import Plug.Conn
+      import ExFleetYardsWeb.Gettext
+      alias ExFleetYardsWeb.Router.Helpers, as: Routes
+      @moduledoc "Controller"
+    end
+  end
+
+  def api_controller do
+    quote do
+      @moduledoc "Controller used for Api"
+      use Phoenix.Controller, namespace: ExFleetYardsWeb
+
+      import Plug.Conn
+      import ExFleetYardsWeb.Gettext
+      alias ExFleetYardsWeb.Api.Router.Helpers, as: Routes
+      alias ExFleetYardsWeb.Api.NotFoundException
+      alias ExFleetYardsWeb.Api.InvalidPaginationException
+      alias FleetYards.Repo
+      alias FleetYards.Repo.Game
+
+      use OpenApiSpex.ControllerSpecs
+      alias ExFleetYardsWeb.Schemas.Single.Error
+
+      use ExFleetYardsWeb.Api
+    end
+  end
+
+  def view do
+    quote do
+      use Phoenix.View,
+        root: "lib/ex_fleet_yards_web/templates",
+        namespace: ExFleetYardsWeb
+
+      # Import convenience functions from controllers
+      import Phoenix.Controller,
+        only: [get_flash: 1, get_flash: 2, view_module: 1, view_template: 1]
+
+      # Include shared imports and aliases for views
+      unquote(view_helpers())
+      @moduledoc "View Module"
+    end
+  end
+
+  def api_view do
+    quote do
+      use Phoenix.View,
+        root: "lib/ex_fleet_yards_web/templates",
+        namespace: ExFleetYardsWeb
+
+      # Import convenience functions from controllers
+      import Phoenix.Controller,
+        only: [view_module: 1, view_template: 1]
+
+      # Include shared imports and aliases for views
+      unquote(view_helpers(true))
+      @moduledoc "View module used for api"
+    end
+  end
+
+  def live_view do
+    quote do
+      use Phoenix.LiveView,
+        layout: {ExFleetYardsWeb.LayoutView, "live.html"}
+
+      unquote(view_helpers())
+    end
+  end
+
+  def live_component do
+    quote do
+      use Phoenix.LiveComponent
+
+      unquote(view_helpers())
+    end
+  end
+
+  def component do
+    quote do
+      use Phoenix.Component
+
+      unquote(view_helpers())
+    end
+  end
+
+  def router do
+    quote do
+      use Phoenix.Router
+
+      import Plug.Conn
+      import Phoenix.Controller
+      import Phoenix.LiveView.Router
+    end
+  end
+
+  def channel do
+    quote do
+      use Phoenix.Channel
+      import ExFleetYardsWeb.Gettext
+    end
+  end
+
+  defp view_helpers(api \\ false) do
+    quote do
+      # Use all HTML functionality (forms, tags, etc)
+      use Phoenix.HTML
+
+      # Import basic rendering functionality (render, render_layout, etc)
+      import Phoenix.View
+
+      import ExFleetYardsWeb.ErrorHelpers
+      import ExFleetYardsWeb.Gettext
+
+      unquote do
+        if api do
+          quote do
+            alias ExFleetYardsWeb.Api.Router.Helpers, as: Routes
+            import ExFleetYardsWeb.Api.ViewHelpers
+          end
+        else
+          quote do
+            # Import LiveView and .heex helpers (live_render, live_patch, <.form>, etc)
+            import Phoenix.LiveView.Helpers
+            alias ExFleetYardsWeb.Router.Helpers, as: Routes
+          end
+        end
+      end
+    end
+  end
+
+  @doc """
+  When used, dispatch to the appropriate controller/view/etc.
+  """
+  defmacro __using__(which) when is_atom(which) do
+    apply(__MODULE__, which, [])
+  end
+end

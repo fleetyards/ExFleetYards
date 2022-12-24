@@ -5,7 +5,7 @@ import Config
 # The MIX_TEST_PARTITION environment variable can be used
 # to provide built-in test partitioning in CI environment.
 # Run `mix help test` for more information.
-config :fleet_yards, FleetYards.Repo,
+config :ex_fleet_yards, FleetYards.Repo,
   username: "fleet_yards_dev",
   password: "fleet_yards_dev",
   hostname: "localhost",
@@ -15,7 +15,7 @@ config :fleet_yards, FleetYards.Repo,
 
 # We don't run a server during test. If one is required,
 # you can enable the server option below.
-config :fleet_yards_web, FleetYardsWeb.Endpoint,
+config :ex_fleet_yards_web, ExFleetYardsWeb.Endpoint,
   http: [
     ip: {127, 0, 0, 1},
     port: 4002,
@@ -23,8 +23,8 @@ config :fleet_yards_web, FleetYardsWeb.Endpoint,
       {
         :_,
         [
-          {"/api/[...]", Phoenix.Endpoint.Cowboy2Handler, {FleetYardsWeb.Api.Endpoint, []}},
-          {:_, Phoenix.Endpoint.Cowboy2Handler, {FleetYardsWeb.Endpoint, []}}
+          {"/api/[...]", Phoenix.Endpoint.Cowboy2Handler, {ExFleetYardsWeb.Api.Endpoint, []}},
+          {:_, Phoenix.Endpoint.Cowboy2Handler, {ExFleetYardsWeb.Endpoint, []}}
         ]
       }
     ]
@@ -36,7 +36,7 @@ config :fleet_yards_web, FleetYardsWeb.Endpoint,
 config :logger, level: :warn
 
 # In test we don't send emails.
-config :fleet_yards, FleetYards.Mailer, adapter: Swoosh.Adapters.Test
+config :ex_fleet_yards, FleetYards.Mailer, adapter: Swoosh.Adapters.Test
 
 # Initialize plugs at runtime for faster test compilation
 config :phoenix, :plug_init_mode, :runtime
