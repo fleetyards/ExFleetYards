@@ -61,6 +61,8 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
+config :telemetry_metrics_telegraf, log_telegraf_config_on_start: false
+
 config :fleet_yards_web, FleetYardsWeb.Telemetry.InstreamConnection,
   enabled: false,
   version: :v2,

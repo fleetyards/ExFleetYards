@@ -1,5 +1,7 @@
 defmodule FleetYardsWeb.Telemetry.InstreamBufferedWritter do
-  @moduledoc false
+  @moduledoc """
+  Buffered write adapter for an Instream connection
+  """
   use GenServer
   @behaviour TelemetryMetricsTelegraf.Writer
 
@@ -14,7 +16,7 @@ defmodule FleetYardsWeb.Telemetry.InstreamBufferedWritter do
     {:ok,
      %{
        connection: Keyword.get(opts, :connection),
-       log: Keyword.get(opts, :log, false)
+       log: Keyword.get(opts, :log, FleetYardsWeb.Telemetry.InstreamConnection.config(:log))
      }}
   end
 
@@ -80,7 +82,7 @@ defmodule FleetYardsWeb.Telemetry.InstreamBufferedWritter do
     {points, state} = Map.pop(state, :cache, [])
 
     state.connection.write(points,
-      log: Map.get(state, :log, FleetYardsWeb.Telemetry.InstreamConnection.config(:log))
+      log: Map.get(state, log: Map.get(state, :log, false))
     )
 
     reset_timer()
