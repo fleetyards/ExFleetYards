@@ -24,13 +24,13 @@ defmodule ExFleetYardsWeb.Telemetry do
 
   @doc false
   def instream_childs do
-    if FleetYardsWeb.Telemetry.InstreamConnection.start_instream?() do
+    if ExFleetYardsWeb.Telemetry.InstreamConnection.start_instream?() do
       [
-        FleetYardsWeb.Telemetry.InstreamConnection,
-        {FleetYardsWeb.Telemetry.InstreamBufferedWritter,
-         [connection: FleetYardsWeb.Telemetry.InstreamConnection]},
+        ExFleetYardsWeb.Telemetry.InstreamConnection,
+        {ExFleetYardsWeb.Telemetry.InstreamBufferedWritter,
+         [connection: ExFleetYardsWeb.Telemetry.InstreamConnection]},
         {TelemetryMetricsTelegraf,
-         metrics: metrics(), adapter: FleetYardsWeb.Telemetry.InstreamBufferedWritter}
+         metrics: metrics(), adapter: ExFleetYardsWeb.Telemetry.InstreamBufferedWritter}
       ]
     else
       []

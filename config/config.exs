@@ -63,7 +63,7 @@ config :logger, :console,
 
 config :telemetry_metrics_telegraf, log_telegraf_config_on_start: false
 
-config :fleet_yards_web, FleetYardsWeb.Telemetry.InstreamConnection,
+config :ex_fleet_yards_web, ExFleetYardsWeb.Telemetry.InstreamConnection,
   enabled: false,
   version: :v2,
   auth: [method: :token],

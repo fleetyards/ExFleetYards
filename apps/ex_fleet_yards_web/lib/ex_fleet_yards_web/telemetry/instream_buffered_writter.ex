@@ -1,4 +1,4 @@
-defmodule FleetYardsWeb.Telemetry.InstreamBufferedWritter do
+defmodule ExFleetYardsWeb.Telemetry.InstreamBufferedWritter do
   @moduledoc """
   Buffered write adapter for an Instream connection
   """
@@ -16,7 +16,7 @@ defmodule FleetYardsWeb.Telemetry.InstreamBufferedWritter do
     {:ok,
      %{
        connection: Keyword.get(opts, :connection),
-       log: Keyword.get(opts, :log, FleetYardsWeb.Telemetry.InstreamConnection.config(:log))
+       log: Keyword.get(opts, :log, ExFleetYardsWeb.Telemetry.InstreamConnection.config(:log))
      }}
   end
 
