@@ -10,9 +10,7 @@ defmodule ExFleetYards.Fixtures do
     insert? = Keyword.get(opts, :insert, true)
 
     if insert? do
-      data
-      |> Enum.map(&insert_fixture/1)
-      |> Enum.into(%{})
+      insert_fixture_data(data)
     else
       data
     end
@@ -23,12 +21,38 @@ defmodule ExFleetYards.Fixtures do
   def fixture_data(:manufacturers, _) do
     %{
       origin: %Game.Manufacturer{
-        name: "Origin",
-        slug: "origin"
+        name: "Origin Jumpworks",
+        slug: "origin-jumpworks"
       },
       rsi: %Game.Manufacturer{
-        name: "RSI",
-        slug: "rsi"
+        name: "Roberts Space Industries",
+        slug: "roberts-space-industries"
+      },
+      knight: %Game.Manufacturer{
+        name: "KnightBridge Arms",
+        slug: "knightbridge-arms"
+      }
+    }
+  end
+
+  def fixture_data(:components, opts) do
+    manufacturers = fixture(:manufacturers, opts)
+
+    %{
+      knight_auto: %Game.Component{
+        slug: "10-series-greatsword-ballastic-autocannon",
+        name: "10-Series Greatsword Ballastic Autocannon",
+        size: "2",
+        component_class: "RSIWeapon",
+        manufacturer: manufacturers.knight
+      },
+      akura: %Game.Component{
+        slug: "5ca-akura",
+        name: "5CA 'Akura'",
+        grade: "C",
+        size: "3",
+        component_class: "RSIModular",
+        manufacturer: manufacturers.knight
       }
     }
   end
@@ -90,8 +114,24 @@ defmodule ExFleetYards.Fixtures do
   end
 
   # Private helpers
+  def insert_fixture_data(fixtures) when is_map(fixtures) do
+    fixtures
+    |> Enum.map(&insert_fixture/1)
+    |> Enum.into(%{})
+  end
+
+  def insert_fixture_data(fixtures) when is_list(fixtures) do
+    fixtures
+    |> Enum.map(&insert_fixture_data/1)
+  end
+
+  def insert_fixture_data({fixtures, assocs}) when is_map(fixtures) do
+    insert_fixture_data(assocs)
+    insert_fixture_data(fixtures)
+  end
+
   def insert_fixture({name, data}) do
-    data = Repo.insert!(data)
+    data = Repo.insert!(data, returning: true)
     {name, data}
   end
 end

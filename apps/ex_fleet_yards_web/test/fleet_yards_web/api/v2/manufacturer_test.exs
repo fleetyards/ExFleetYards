@@ -11,7 +11,7 @@ defmodule ExFleetYardsWeb.Api.V2.ManufacturerTest do
     test "Manufacturer spec compliance (:show)", %{conn: conn, api_spec: api_spec} do
       json =
         conn
-        |> get_api(ApiRoutes.manufacturer_path(conn, :show, "origin"))
+        |> get_api(ApiRoutes.manufacturer_path(conn, :show, "origin-jumpworks"))
         |> json_response(200)
 
       assert_schema json, "Manufacturer", api_spec
