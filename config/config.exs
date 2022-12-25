@@ -61,6 +61,14 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
+config :telemetry_metrics_telegraf, log_telegraf_config_on_start: false
+
+config :ex_fleet_yards_web, ExFleetYardsWeb.Telemetry.InstreamConnection,
+  enabled: false,
+  version: :v2,
+  auth: [method: :token],
+  log: false
+
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 

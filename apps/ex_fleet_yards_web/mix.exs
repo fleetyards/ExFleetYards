@@ -51,7 +51,9 @@ defmodule ExFleetYardsWeb.MixProject do
       {:ex_fleet_yards, in_umbrella: true},
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
-      {:open_api_spex, "~> 3.16"}
+      {:open_api_spex, "~> 3.16"},
+      {:instream, "~> 2.0"},
+      {:telemetry_metrics_telegraf, "~> 0.3.0"}
     ]
   end
 

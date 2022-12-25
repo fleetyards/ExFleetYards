@@ -24,3 +24,5 @@ erl_crash.dump
 
 # Api spec
 fleetyards.json
+
+/config/*.secrets.exs
