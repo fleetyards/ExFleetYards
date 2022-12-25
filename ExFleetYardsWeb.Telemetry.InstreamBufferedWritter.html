@@ -7,7 +7,7 @@
     <meta name="generator" content="ExDoc v0.29.1">
     <meta name="project" content="Fleetyards v0.1.0">
 
-    <title>ExFleetYardsWeb.Api.RoadmapView — Fleetyards v0.1.0</title>
+    <title>ExFleetYardsWeb.Telemetry.InstreamBufferedWritter — Fleetyards v0.1.0</title>
     <link rel="stylesheet" href="dist/html-elixir-V2ETBPMB.css" />
 
 
@@ -98,14 +98,14 @@ Fleetyards
 </button>
 
 
-  <span translate="no">ExFleetYardsWeb.Api.RoadmapView</span> 
+  <span translate="no">ExFleetYardsWeb.Telemetry.InstreamBufferedWritter</span> 
   <small class="app-vsn" translate="no">(Fleetyards v0.1.0)</small>
 
 </h1>
 
 
   <section id="moduledoc">
-<p>View module used for api</p>
+<p>Buffered write adapter for an Instream connection</p>
   </section>
 
 
@@ -124,33 +124,43 @@ Fleetyards
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#__resource__/0" translate="no">__resource__()</a>
+        <a href="#child_spec/1" translate="no">child_spec(init_arg)</a>
 
       </div>
 
-        <div class="summary-synopsis"><p>The resource name, as an atom, for this view</p></div>
+        <div class="summary-synopsis"><p>Returns a specification to start this module under a supervisor.</p></div>
 
     </div>
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#render/2" translate="no">render(template, assigns \\ %{})</a>
+        <a href="#count/0" translate="no">count()</a>
 
       </div>
-
-        <div class="summary-synopsis"><p>Renders the given template locally.</p></div>
 
     </div>
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#template_not_found/2" translate="no">template_not_found(template, assigns)</a>
+        <a href="#flush/0" translate="no">flush()</a>
 
       </div>
 
-        <div class="summary-synopsis"><p>Callback invoked when no template is found.
-By default it raises but can be customized
-to render a particular template.</p></div>
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#get/0" translate="no">get()</a>
+
+      </div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#start_link/1" translate="no">start_link(opts)</a>
+
+      </div>
 
     </div>
 
@@ -168,65 +178,89 @@ to render a particular template.</p></div>
 Functions
     </h1>
     <div class="functions-list">
-<section class="detail" id="__resource__/0">
+<section class="detail" id="child_spec/1">
 
   <div class="detail-header">
-    <a href="#__resource__/0" class="detail-link" title="Link to this function">
+    <a href="#child_spec/1" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">__resource__()</h1>
+    <h1 class="signature" translate="no">child_spec(init_arg)</h1>
 
 
   </div>
 
   <section class="docstring">
 
-<p>The resource name, as an atom, for this view</p>
+<p>Returns a specification to start this module under a supervisor.</p><p>See <a href="https://hexdocs.pm/elixir/Supervisor.html"><code class="inline">Supervisor</code></a>.</p>
   </section>
 </section>
-<section class="detail" id="render/2">
-
-    <span id="render/1"></span>
+<section class="detail" id="count/0">
 
   <div class="detail-header">
-    <a href="#render/2" class="detail-link" title="Link to this function">
+    <a href="#count/0" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">render(template, assigns \\ %{})</h1>
+    <h1 class="signature" translate="no">count()</h1>
 
 
   </div>
 
   <section class="docstring">
 
-<p>Renders the given template locally.</p>
+
   </section>
 </section>
-<section class="detail" id="template_not_found/2">
+<section class="detail" id="flush/0">
 
   <div class="detail-header">
-    <a href="#template_not_found/2" class="detail-link" title="Link to this function">
+    <a href="#flush/0" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">template_not_found(template, assigns)</h1>
+    <h1 class="signature" translate="no">flush()</h1>
 
 
   </div>
 
   <section class="docstring">
 
-      <div class="specs">
 
-          <pre translate="no"><span class="attribute">@spec</span> template_not_found(<a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">binary</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>()) :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">no_return</a>()</pre>
+  </section>
+</section>
+<section class="detail" id="get/0">
 
-      </div>
+  <div class="detail-header">
+    <a href="#get/0" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">get()</h1>
 
-<p>Callback invoked when no template is found.
-By default it raises but can be customized
-to render a particular template.</p>
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="start_link/1">
+
+  <div class="detail-header">
+    <a href="#start_link/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">start_link(opts)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+
   </section>
 </section>
 

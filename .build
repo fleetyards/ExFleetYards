@@ -80,6 +80,8 @@ ExFleetYardsWeb.Schemas.Single.Error.html
 ExFleetYardsWeb.Schemas.Single.Manufacturer.html
 ExFleetYardsWeb.Schemas.Single.PaginationMetadata.html
 ExFleetYardsWeb.Schemas.Single.StarSystem.html
+ExFleetYardsWeb.Telemetry.InstreamBufferedWritter.html
+ExFleetYardsWeb.Telemetry.InstreamConnection.html
 ExFleetYardsWeb.html
 Mix.Tasks.Api.Spec.html
 api-reference.html
@@ -108,7 +110,7 @@ dist/merriweather-latin-ext-300-normal-K6L27CZ5.woff2
 dist/merriweather-vietnamese-300-italic-EHHNZPUO.woff2
 dist/merriweather-vietnamese-300-normal-U376L4Z4.woff2
 dist/remixicon-NKANDIL5.woff2
-dist/search_items-2CB0E34F.js
-dist/sidebar_items-910BBABE.js
+dist/search_items-B0740C9C.js
+dist/sidebar_items-0D3D189E.js
 index.html
 search.html
