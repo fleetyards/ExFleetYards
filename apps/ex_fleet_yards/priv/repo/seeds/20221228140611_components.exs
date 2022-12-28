@@ -24,7 +24,6 @@ defmodule ExFleetYards.Repo.Seeds.Components do
          }
        ],
        fn component ->
-         component
          {m_slug, component} = Map.pop!(component, :manufacturer)
 
          manufacturer = Repo.get_by!(Game.Manufacturer, slug: m_slug)

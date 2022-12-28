@@ -14,9 +14,12 @@ config :ex_fleet_yards,
   ecto_repos: [ExFleetYards.Repo],
   version_name: "Elixir"
 
+#  seeds_path = Application.app_dir(:ex_fleet_yards)
+#  |> IO.inspect
 config :seedex,
-  repo: ExFleetYards.Repo,
-  seeds_path: "apps/ex_fleet_yards/priv/repo/seeds"
+  repo: ExFleetYards.Repo
+
+#  seeds_path: "apps/ex_fleet_yards/priv/repo/seeds"
 
 config :ex_fleet_yards, ExFleetYards.Repo, migration_source: "ecto_schema_migrations"
 

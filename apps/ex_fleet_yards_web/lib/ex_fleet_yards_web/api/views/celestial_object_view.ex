@@ -21,6 +21,7 @@ defmodule ExFleetYardsWeb.Api.CelestialObjectView do
       # TODO: locationLabel
     }
     |> add_system(data.starsystem)
+    |> filter_null(ExFleetYardsWeb.Schemas.Single.CelestialObject)
   end
 
   def add_system(map, v) do

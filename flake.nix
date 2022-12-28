@@ -12,7 +12,7 @@
   };
 
   inputs.seedex = {
-    url = "github:fleetyards/seedex/gen_seed";
+    url = "github:fleetyards/seedex/seeds_path";
     flake = false;
   };
 

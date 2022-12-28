@@ -16,12 +16,12 @@ defmodule ExFleetYardsWeb.Api.StarSystemView do
       population: data.aggregated_population,
       economy: data.aggregated_economy,
       danger: data.aggregated_danger,
-      status: data.status,
+      status: data.status
       # TODO: locationlabel
-      createdAt: data.created_at |> DateTime.from_naive!("Etc/UTC") |> DateTime.to_iso8601(),
-      updatedAt: data.updated_at |> DateTime.from_naive!("Etc/UTC") |> DateTime.to_iso8601()
     }
     |> add_objects(data.celestial_objects)
+    |> render_timestamps(data)
+    |> filter_null(ExFleetYardsWeb.Schemas.Single.StarSystem)
   end
 
   def add_objects(map, assoc) do

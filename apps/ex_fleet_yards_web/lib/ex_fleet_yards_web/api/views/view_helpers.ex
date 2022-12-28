@@ -76,4 +76,20 @@ defmodule ExFleetYardsWeb.Api.ViewHelpers do
     render_loaded(map, key, assoc, render_fun)
     |> Map.put_new(key, default)
   end
+
+  def filter_null(map, required \\ [])
+  def filter_null(map, nil), do: filter_null(map, [])
+
+  def filter_null(map, schema) when is_atom(schema) do
+    filter_null(map, schema.schema().required)
+  end
+
+  def filter_null(map, required) do
+    map
+    |> Enum.filter(fn
+      {name, nil} -> Enum.member?(required, name)
+      _ -> true
+    end)
+    |> Enum.into(%{})
+  end
 end

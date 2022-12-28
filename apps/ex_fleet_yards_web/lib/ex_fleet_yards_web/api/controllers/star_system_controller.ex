@@ -11,18 +11,13 @@ defmodule ExFleetYardsWeb.Api.StarSystemController do
     do:
       from(d in Game.StarSystem,
         as: :data,
-        join: c in assoc(d, :celestial_objects),
+        left_join: c in assoc(d, :celestial_objects),
         where: is_nil(c.parent_id),
         preload: [celestial_objects: c]
       )
 
   defp query(slug) when is_binary(slug),
     do:
-      from(d in Game.StarSystem,
-        as: :data,
-        join: c in assoc(d, :celestial_objects),
-        where: is_nil(c.parent_id),
-        where: d.slug == ^slug,
-        preload: [celestial_objects: c]
-      )
+      query()
+      |> where(slug: ^slug)
 end

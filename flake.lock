@@ -233,16 +233,16 @@
     "seedex": {
       "flake": false,
       "locked": {
-        "lastModified": 1672236742,
-        "narHash": "sha256-/N8YcTvLOErwKFZEHg0vknb2HzX1a2eA3YTBxmoiesc=",
+        "lastModified": 1672239937,
+        "narHash": "sha256-jLMMsUgNbhyom+yA38K+XzxZ+2n08Jcl+8LwfxRw+XQ=",
         "owner": "fleetyards",
         "repo": "seedex",
-        "rev": "d04c718a9979026ae80148efdb73366e586603f8",
+        "rev": "dbd9b819cfc76c1c5c337a65d3da4149d214c9d6",
         "type": "github"
       },
       "original": {
         "owner": "fleetyards",
-        "ref": "gen_seed",
+        "ref": "seeds_path",
         "repo": "seedex",
         "type": "github"
       }

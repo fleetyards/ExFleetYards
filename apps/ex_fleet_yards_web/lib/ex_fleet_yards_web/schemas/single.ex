@@ -102,7 +102,11 @@ defmodule ExFleetYardsWeb.Schemas.Single do
         # storeImages
         mapX: %Schema{type: :string},
         mapY: %Schema{type: :string},
-        description: %Schema{type: :string, description: "Description of the system"},
+        description: %Schema{
+          type: :string,
+          description: "Description of the system",
+          nullable: true
+        },
         type: %Schema{type: :string, example: "Single star"},
         size: %Schema{type: :string},
         population: %Schema{type: :integer, example: 10},
@@ -117,7 +121,7 @@ defmodule ExFleetYardsWeb.Schemas.Single do
         createdAt: %Schema{type: :string, format: :"date-time"},
         updatedAt: %Schema{type: :string, format: :"date-time"}
       },
-      required: [:name, :slug]
+      required: [:name, :slug, :createdAt]
     })
   end
 
