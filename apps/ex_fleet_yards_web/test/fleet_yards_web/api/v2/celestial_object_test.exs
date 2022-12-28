@@ -12,6 +12,7 @@ defmodule ExFleetYardsWeb.Api.V2.CelestialObjectTest do
       assert json["slug"] == "crusader"
       assert json["name"] == "Crusader"
       assert json["starsystem"]["slug"] == "stanton"
+      assert json["locationLabel"] == "in the Stanton system"
       assert json["moons"] |> Enum.count() == 2
       yela = json["moons"] |> hd
       assert yela["slug"] == "yela"

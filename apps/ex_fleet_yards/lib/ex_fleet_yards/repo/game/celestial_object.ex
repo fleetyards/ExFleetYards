@@ -39,5 +39,14 @@ defmodule ExFleetYards.Repo.Game.CelestialObject do
     has_many :stations, Game.Station
     # FIXME: does not work, where: [object_type: :satellite]
     has_many :moons, __MODULE__, foreign_key: :parent_id
+    field :location_label, :string, virtual: true
   end
+
+  def location_label(systems) when is_list(systems), do: Enum.map(systems, &location_label/1)
+
+  def location_label(%__MODULE__{starsystem: %{name: name}} = object) do
+    Map.put(object, :location_label, "in the #{name} system")
+  end
+
+  def location_label(v), do: v
 end
