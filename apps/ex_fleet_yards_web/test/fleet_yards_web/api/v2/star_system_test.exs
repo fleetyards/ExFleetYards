@@ -3,7 +3,7 @@ defmodule ExFleetYardsWeb.Api.V2.StarSystemTest do
   import OpenApiSpex.TestAssertions
 
   describe "Api V2 Game Star System" do
-    test "keys stanton", %{
+    test "show stanton", %{
       conn: conn
     } do
       json =
@@ -11,8 +11,10 @@ defmodule ExFleetYardsWeb.Api.V2.StarSystemTest do
         |> get_api(ApiRoutes.star_system_path(conn, :show, "stanton"))
         |> json_response(200)
 
-      assert Map.get(json, "slug") == "stanton"
-      assert Enum.count(Map.get(json, "celestialObjects")) == 3
+      assert json["slug"] == "stanton"
+      assert json["name"] == "Stanton"
+      # assert json["locationLabel"] == "foo" # TODO: implement
+      assert json["celestialObjects"] |> Enum.count() == 2
     end
 
     test "spec compliance (:show)", %{
@@ -34,6 +36,7 @@ defmodule ExFleetYardsWeb.Api.V2.StarSystemTest do
         |> json_response(200)
 
       assert_schema json, "StarSystemList", api_spec
+      assert json["data"] |> Enum.count() > 0
     end
   end
 end

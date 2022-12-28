@@ -19,6 +19,7 @@ defmodule FleetYardsWeb.Api.V2.ComponentTest do
         |> json_response(200)
 
       assert_schema json, "ComponentList", api_spec
+      assert json["data"] |> Enum.count() > 0
     end
   end
 end

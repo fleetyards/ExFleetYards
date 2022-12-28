@@ -21,6 +21,7 @@ defmodule ExFleetYardsWeb.Api.V2.ManufacturerTest do
         |> json_response(200)
 
       assert_schema json, "ManufacturerList", api_spec
+      assert json["data"] |> Enum.count() > 0
     end
   end
 end

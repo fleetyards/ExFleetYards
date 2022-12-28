@@ -61,6 +61,7 @@ defmodule ExFleetYardsWeb.Api.StationView do
     |> add(:refinery, station.refinery)
     |> add(:cargoHub, station.cargo_hub)
     |> render_timestamps(station)
+    |> filter_null(ExFleetYardsWeb.Schemas.Single.Station)
   end
 
   def render("dock_count.json", %{station: {type, ship_size, count}}) do

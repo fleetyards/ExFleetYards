@@ -13,6 +13,7 @@ defmodule ExFleetYardsWeb.Api.StarSystemController do
         as: :data,
         left_join: c in assoc(d, :celestial_objects),
         where: is_nil(c.parent_id),
+        where: not c.hidden,
         preload: [celestial_objects: c]
       )
 
