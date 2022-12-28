@@ -63,6 +63,8 @@ defmodule ExFleetYardsWeb.Api.ViewHelpers do
     )
   end
 
+  def render_loaded(map, _, nil, _), do: map
+
   def render_loaded(map, key, assoc, render_fun) do
     if Ecto.assoc_loaded?(assoc) do
       render_fun.(assoc)

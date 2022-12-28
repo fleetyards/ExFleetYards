@@ -3,7 +3,7 @@ defmodule ExFleetYardsWeb.Api.ManufacturerController do
 
   tags ["game"]
 
-  paged_index(Game.Manufacturer, query: true)
+  paged_index(Game.Manufacturer)
 
   list_operation(:with_models, ManufacturerList)
 
