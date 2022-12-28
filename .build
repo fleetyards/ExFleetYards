@@ -84,6 +84,7 @@ ExFleetYardsWeb.Telemetry.InstreamBufferedWritter.html
 ExFleetYardsWeb.Telemetry.InstreamConnection.html
 ExFleetYardsWeb.html
 Mix.Tasks.Api.Spec.html
+Mix.Tasks.Nix.Appsignal.html
 api-reference.html
 dist/handlebars.runtime-NWIB6V2M.js
 dist/handlebars.templates-IV5W3OL2.js
@@ -110,7 +111,7 @@ dist/merriweather-latin-ext-300-normal-K6L27CZ5.woff2
 dist/merriweather-vietnamese-300-italic-EHHNZPUO.woff2
 dist/merriweather-vietnamese-300-normal-U376L4Z4.woff2
 dist/remixicon-NKANDIL5.woff2
-dist/search_items-B0740C9C.js
-dist/sidebar_items-0D3D189E.js
+dist/search_items-BE52B8BD.js
+dist/sidebar_items-B9BCD9C0.js
 index.html
 search.html
