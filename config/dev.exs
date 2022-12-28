@@ -1,11 +1,16 @@
 import Config
 
 # Configure your database
+if System.get_env("FLEETYARDS_IN_DEVENV") == "1" do
+else
+  config :ex_fleet_yards, ExFleetYards.Repo,
+    username: "fleet_yards_dev",
+    password: "fleet_yards_dev"
+end
+
 config :ex_fleet_yards, ExFleetYards.Repo,
-  username: "fleet_yards_dev",
-  password: "fleet_yards_dev",
-  hostname: "localhost",
   database: "fleet_yards_dev",
+  hostname: "localhost",
   stacktrace: true,
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
@@ -85,6 +90,10 @@ config :phoenix, :plug_init_mode, :runtime
 # Set a higher stacktrace during development. Avoid configuring such
 # in production as building large stacktraces may be expensive.
 config :phoenix, :stacktrace_depth, 20
+
+config :appsignal, :config,
+  active: false,
+  env: :dev
 
 if File.exists?("./config/dev.secrets.exs") do
   import_config "dev.secrets.exs"

@@ -53,7 +53,8 @@ defmodule ExFleetYardsWeb.MixProject do
       {:plug_cowboy, "~> 2.5"},
       {:open_api_spex, "~> 3.16"},
       {:instream, "~> 2.0"},
-      {:telemetry_metrics_telegraf, "~> 0.3.0"}
+      {:telemetry_metrics_telegraf, "~> 0.3.0"},
+      {:appsignal, "~> 2.0"}
     ]
   end
 

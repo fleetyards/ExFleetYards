@@ -48,7 +48,8 @@ defmodule ExFleetYards.Umbrella.MixProject do
       setup: ["cmd mix setup"],
       fmt: ["format"],
       "api.routes": ["phx.routes ExFleetYardsWeb.Api.Router"],
-      routes: ["phx.routes ExFleetYardsWeb.Router"]
+      routes: ["phx.routes ExFleetYardsWeb.Router"],
+      nix: ["cmd mix2nix mix.lock > nix/mix.nix", "nix.appsignal"]
     ]
   end
 

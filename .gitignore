@@ -26,3 +26,10 @@ erl_crash.dump
 fleetyards.json
 
 /config/*.secrets.exs
+
+# Nix
+result
+result-*
+.devenv/
+.devenv.*
+.pre-commit-config.yaml
