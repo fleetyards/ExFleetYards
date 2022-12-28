@@ -499,6 +499,7 @@
           },
           "description": {
             "description": "Description of the system",
+            "nullable": true,
             "type": "string"
           },
           "economy": {
@@ -547,7 +548,8 @@
         },
         "required": [
           "name",
-          "slug"
+          "slug",
+          "createdAt"
         ],
         "title": "StarSystem",
         "type": "object"
