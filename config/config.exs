@@ -69,10 +69,10 @@ config :ex_fleet_yards_web, ExFleetYardsWeb.Telemetry.InstreamConnection,
   auth: [method: :token],
   log: false
 
-  # Appsignal
- config :appsignal, :config,
-   otp_app: :ex_fleet_yards,
-   name: "ex_fleet_yards"
+# Appsignal
+config :appsignal, :config,
+  otp_app: :ex_fleet_yards,
+  name: "ex_fleet_yards"
 
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason

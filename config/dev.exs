@@ -3,10 +3,11 @@ import Config
 # Configure your database
 if System.get_env("FLEETYARDS_IN_DEVENV") == "1" do
 else
-config :ex_fleet_yards, ExFleetYards.Repo,
-  username: "fleet_yards_dev",
-  password: "fleet_yards_dev"
+  config :ex_fleet_yards, ExFleetYards.Repo,
+    username: "fleet_yards_dev",
+    password: "fleet_yards_dev"
 end
+
 config :ex_fleet_yards, ExFleetYards.Repo,
   database: "fleet_yards_dev",
   hostname: "localhost",
