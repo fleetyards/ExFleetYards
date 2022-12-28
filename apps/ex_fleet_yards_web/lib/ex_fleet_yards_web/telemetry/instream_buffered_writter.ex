@@ -15,7 +15,7 @@ defmodule ExFleetYardsWeb.Telemetry.InstreamBufferedWritter do
 
     {:ok,
      %{
-       connection: Keyword.get(opts, :connection),
+       connection: Keyword.get(opts, :connection, ExFleetYardsWeb.Telemetry.InstreamConnection),
        log: Keyword.get(opts, :log, ExFleetYardsWeb.Telemetry.InstreamConnection.config(:log))
      }}
   end
@@ -57,7 +57,7 @@ defmodule ExFleetYardsWeb.Telemetry.InstreamBufferedWritter do
   def handle_cast({:write, name, tags, fields, _opts}, state) do
     elem = %{
       measurement: name,
-      tags: tags,
+      tags: Map.merge(tags, %{otp_app: state.connection.config(:otp_app), node: Node.self()}),
       fields: fields,
       timestamp: DateTime.utc_now() |> DateTime.to_unix(:nanosecond)
     }

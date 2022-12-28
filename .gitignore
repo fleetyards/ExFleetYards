@@ -26,3 +26,7 @@ erl_crash.dump
 fleetyards.json
 
 /config/*.secrets.exs
+
+# Nix
+result
+result-*

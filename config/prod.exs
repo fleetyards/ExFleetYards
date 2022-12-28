@@ -47,5 +47,9 @@ config :ex_fleet_yards_web, ExFleetYardsWeb.Endpoint,
 #
 # Check `Plug.SSL` for all available options in `force_ssl`.
 
+config :appsignal, :config,
+  active: false,
+  env: :prod
+
 # Do not print debug messages in production
 config :logger, level: :info

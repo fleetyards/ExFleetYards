@@ -86,6 +86,10 @@ config :phoenix, :plug_init_mode, :runtime
 # in production as building large stacktraces may be expensive.
 config :phoenix, :stacktrace_depth, 20
 
+config :appsignal, :config,
+  active: false,
+  env: :dev
+
 if File.exists?("./config/dev.secrets.exs") do
   import_config "dev.secrets.exs"
 end
