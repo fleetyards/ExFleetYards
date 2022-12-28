@@ -4,6 +4,8 @@ defmodule ExFleetYardsWeb.Api.CelestialObjectView do
   page_view()
 
   def render("show.json", %{celestial_object: data}) do
+    data = ExFleetYards.Repo.Game.CelestialObject.location_label(data)
+
     %{
       name: data.name,
       slug: data.slug,
@@ -17,10 +19,11 @@ defmodule ExFleetYardsWeb.Api.CelestialObjectView do
       size: data.size,
       danger: data.sensor_danger,
       economy: data.sensor_economy,
-      population: data.sensor_population
-      # TODO: locationLabel
+      population: data.sensor_population,
+      locationLabel: data.location_label
     }
     |> add_system(data.starsystem)
+    |> render_loaded(:moons, data.moons, &render_many(&1, __MODULE__, "show.json"))
     |> filter_null(ExFleetYardsWeb.Schemas.Single.CelestialObject)
   end
 

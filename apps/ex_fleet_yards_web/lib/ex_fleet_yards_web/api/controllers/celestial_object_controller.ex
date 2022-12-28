@@ -14,7 +14,8 @@ defmodule ExFleetYardsWeb.Api.CelestialObjectController do
       from(d in Game.CelestialObject,
         as: :data,
         join: s in assoc(d, :starsystem),
+        where: not d.hidden,
         where: d.slug == ^slug,
-        preload: [:starsystem]
+        preload: [:starsystem, :moons]
       )
 end

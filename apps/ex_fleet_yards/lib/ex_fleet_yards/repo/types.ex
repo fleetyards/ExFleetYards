@@ -2,7 +2,7 @@ defmodule ExFleetYards.Repo.Types do
   @moduledoc "Types used for the database"
   use ExFleetYards.Repo.TypeGen
 
-  enum(StationType,
+  enum(StationType, :integer,
     landing_zone: 0,
     station: 1,
     asteroid_station: 2,
@@ -11,7 +11,7 @@ defmodule ExFleetYards.Repo.Types do
     aid_shelter: 5
   )
 
-  enum(StationClassification,
+  enum(StationClassification, :integer,
     city: 0,
     trading: 1,
     mining: 2,
@@ -25,9 +25,9 @@ defmodule ExFleetYards.Repo.Types do
     drug_lab: 10
   )
 
-  enum(DockType, vehiclepad: 0, garage: 1, landingpad: 2, dockingport: 3, hangar: 4)
+  enum(DockType, :integer, vehiclepad: 0, garage: 1, landingpad: 2, dockingport: 3, hangar: 4)
 
-  enum(ShipSize,
+  enum(ShipSize, :integer,
     extra_extra_small: -1,
     extra_small: 0,
     small: 1,
@@ -37,25 +37,23 @@ defmodule ExFleetYards.Repo.Types do
     capital: 5
   )
 
-  enum(CelestialObjectType,
+  enum(CelestialObjectType, :string,
     planet: "PLANET",
     satellite: "SATELLITE",
     asteroid_belt: "ASTEROID_BELT",
     asteroid_field: "ASTEROID_FIELD"
   )
 
-  enum(ImportState,
+  enum(ImportState, :string,
     created: "created",
     started: "started",
     finished: "finished",
     failed: "failed"
   )
 
-  enum(ImportType,
-    sc_data_import: "Imports::ScDataImport"
-  )
+  enum(ImportType, :string, sc_data_import: "Imports::ScDataImport")
 
-  enum(HabitationType,
+  enum(HabitationType, :integer,
     container: 0,
     small_apartment: 1,
     medium_apartment: 2,
@@ -63,7 +61,7 @@ defmodule ExFleetYards.Repo.Types do
     suite: 4
   )
 
-  enum(ShopType,
+  enum(ShopType, :integer,
     clothing: 0,
     armor: 1,
     weapons: 2,
@@ -90,7 +88,7 @@ defmodule ExFleetYards.Repo.Types do
     ship_customizations: 23
   )
 
-  enum(ShopCommodityItemType,
+  enum(ShopCommodityItemType, :string,
     model: "Model",
     component: "Component",
     commodity: "Commodity",
@@ -99,7 +97,7 @@ defmodule ExFleetYards.Repo.Types do
     model_paint: "ModelPaint"
   )
 
-  enum(CommodityType,
+  enum(CommodityType, :integer,
     gas: 0,
     metal: 1,
     mineral: 2,

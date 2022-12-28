@@ -12,9 +12,10 @@ defmodule ExFleetYardsWeb.Api.V2.CelestialObjectTest do
       assert json["slug"] == "crusader"
       assert json["name"] == "Crusader"
       assert json["starsystem"]["slug"] == "stanton"
-      # TODO: assert json["moonds"] |> Enum.count == 1
-      # yela = json["moons"] |> hd
-      # assert yela["slug"] == "yela"
+      assert json["locationLabel"] == "in the Stanton system"
+      assert json["moons"] |> Enum.count() == 2
+      yela = json["moons"] |> hd
+      assert yela["slug"] == "yela"
     end
 
     test "spec compliance (:show)", %{conn: conn, api_spec: spec} do

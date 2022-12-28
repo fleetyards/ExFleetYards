@@ -16,7 +16,7 @@ defmodule ExFleetYards.Repo.TypeGen do
       |> Enum.join(" ")
   end
 
-  defmacro enum(name, types) do
+  defmacro enum(name, type, types) do
     name = Macro.expand_once(name, __ENV__)
     doc = "#{name} Database enum type"
 
@@ -27,7 +27,7 @@ defmodule ExFleetYards.Repo.TypeGen do
         @moduledoc unquote(doc)
         use Ecto.Type
 
-        def type, do: :atom
+        def type, do: unquote(type)
 
         unquote do
           for {atom, num} when is_atom(atom) <- types do
