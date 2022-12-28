@@ -1,6 +1,6 @@
 defmodule ExFleetYards.Repo.Seeds.Components do
   import Seedex
-  
+
   alias ExFleetYards.Repo
   alias ExFleetYards.Repo.Game
 
