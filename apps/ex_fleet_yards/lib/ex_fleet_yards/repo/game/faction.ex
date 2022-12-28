@@ -13,6 +13,6 @@ defmodule ExFleetYards.Repo.Game.Faction do
     field :slug, :string
     field :rsi_id, :integer
 
-    timestamps(inserted_at: :created_at)
+    timestamps(inserted_at: :created_at, type: :utc_datetime)
   end
 end
