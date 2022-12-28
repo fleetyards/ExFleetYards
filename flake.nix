@@ -72,7 +72,7 @@
       legacyPackages = forAllSystems (system: nixpkgsFor.${system});
 
       devShells = forAllSystems (system:
-        let pkgs = import nixpkgs { inherit system; };
+        let pkgs = nixpkgsFor.${system};
         in {
           default = devenv.lib.mkShell {
             inherit inputs pkgs;
@@ -85,9 +85,9 @@
                 pre-commit.hooks.actionlint.enable = true;
                 pre-commit.hooks.nixfmt.enable = true;
                 pre-commit.hooks.mixfmt = {
-                  enable = true;
+                  enable = false; # Broken??
                   name = "Mix format";
-                  entry = "mix format";
+                  entry = "${pkgs.elixir}/bin/mix format";
                   files = "\\.(ex|exs)$";
 
                   types = [ "text" ];
