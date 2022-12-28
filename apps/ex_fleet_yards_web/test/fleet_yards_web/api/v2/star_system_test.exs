@@ -13,7 +13,7 @@ defmodule ExFleetYardsWeb.Api.V2.StarSystemTest do
 
       assert json["slug"] == "stanton"
       assert json["name"] == "Stanton"
-      # assert json["locationLabel"] == "foo" # TODO: implement
+      assert json["locationLabel"] == "UEE"
       assert json["celestialObjects"] |> Enum.count() == 2
     end
 

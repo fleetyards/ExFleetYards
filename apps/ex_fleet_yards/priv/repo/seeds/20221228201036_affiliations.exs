@@ -18,8 +18,6 @@ defmodule ExFleetYards.Repo.Seeds.Affiliations do
          }
        ],
        fn affiliation ->
-         affiliation
-
          faction = Repo.get_by!(Repo.Game.Faction, slug: affiliation.faction_id).id
 
          module =

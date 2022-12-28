@@ -4,6 +4,8 @@ defmodule ExFleetYardsWeb.Api.StarSystemView do
   page_view()
 
   def render("show.json", %{star_system: data}) do
+    data = ExFleetYards.Repo.Game.StarSystem.load(data)
+
     %{
       name: data.name,
       slug: data.slug,
@@ -16,8 +18,8 @@ defmodule ExFleetYardsWeb.Api.StarSystemView do
       population: data.aggregated_population,
       economy: data.aggregated_economy,
       danger: data.aggregated_danger,
-      status: data.status
-      # TODO: locationlabel
+      status: data.status,
+      locationLabel: data.location_label
     }
     |> add_objects(data.celestial_objects)
     |> render_timestamps(data)
