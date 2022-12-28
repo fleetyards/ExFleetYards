@@ -226,7 +226,25 @@
       "inputs": {
         "devenv": "devenv",
         "flake-compat": "flake-compat_2",
-        "nixpkgs": "nixpkgs_2"
+        "nixpkgs": "nixpkgs_2",
+        "seedex": "seedex"
+      }
+    },
+    "seedex": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1672235822,
+        "narHash": "sha256-RXYUXcFKZ0MNQrPIx3bpf/7QVxJUN5fjj9C0DjJjHLw=",
+        "owner": "fleetyards",
+        "repo": "seedex",
+        "rev": "5428894ba97e81c6d1e76a505198366fe689c5aa",
+        "type": "github"
+      },
+      "original": {
+        "owner": "fleetyards",
+        "ref": "gen_seed",
+        "repo": "seedex",
+        "type": "github"
       }
     }
   },
