@@ -25,6 +25,6 @@ defmodule ExFleetYards.Repo.Game.Component do
 
     belongs_to :manufacturer, Game.Manufacturer, type: Ecto.UUID, primary_key: true
 
-    timestamps(inserted_at: :created_at)
+    timestamps(inserted_at: :created_at, type: :utc_datetime)
   end
 end

@@ -56,8 +56,8 @@ defmodule ExFleetYardsWeb.Api.ViewHelpers do
   def render_timestamps(map, data) do
     Map.merge(
       %{
-        createdAt: data.created_at |> DateTime.from_naive!("Etc/UTC") |> DateTime.to_iso8601(),
-        updatedAt: data.updated_at |> DateTime.from_naive!("Etc/UTC") |> DateTime.to_iso8601()
+        createdAt: data.created_at |> DateTime.to_iso8601(),
+        updatedAt: data.updated_at |> DateTime.to_iso8601()
       },
       map
     )

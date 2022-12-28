@@ -39,9 +39,9 @@ defmodule ExFleetYards.Repo.Game.Model do
     field :yaxis_acceleration, :decimal
     field :zaxis_acceleration, :decimal
     field :fleetchart_image, :string
-    field :store_images_updated_at, :naive_datetime
+    field :store_images_updated_at, :utc_datetime
     field :hidden, :boolean
-    field :last_updated_at, :naive_datetime
+    field :last_updated_at, :utc_datetime
     field :last_pledge_price, :decimal
     field :rsi_name, :string
     field :rsi_slug, :string
@@ -106,6 +106,6 @@ defmodule ExFleetYards.Repo.Game.Model do
     field :side_view_height, :integer
     field :side_view_width, :integer
 
-    timestamps(inserted_at: :created_at)
+    timestamps(inserted_at: :created_at, type: :utc_datetime)
   end
 end

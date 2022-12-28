@@ -17,7 +17,7 @@ defmodule ExFleetYards.Repo.Game.Manufacturer do
     has_many :components, Game.Component
     has_many :models, Game.Model
 
-    timestamps(inserted_at: :created_at)
+    timestamps(inserted_at: :created_at, type: :utc_datetime)
   end
 
   ## Changeset

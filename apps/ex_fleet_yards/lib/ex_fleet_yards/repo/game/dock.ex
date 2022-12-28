@@ -23,7 +23,7 @@ defmodule ExFleetYards.Repo.Game.Dock do
     field :length, :float
     field :group, :string
 
-    timestamps(inserted_at: :created_at)
+    timestamps(inserted_at: :created_at, type: :utc_datetime)
   end
 
   ## Changeset

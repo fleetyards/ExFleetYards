@@ -24,6 +24,6 @@ defmodule ExFleetYards.Repo.RoadmapItem do
 
     belongs_to :model, Game.Model, type: Ecto.UUID
 
-    timestamps(inserted_at: :created_at)
+    timestamps(inserted_at: :created_at, type: :utc_datetime)
   end
 end
