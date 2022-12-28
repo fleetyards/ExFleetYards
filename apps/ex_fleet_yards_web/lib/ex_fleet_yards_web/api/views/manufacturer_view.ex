@@ -3,8 +3,6 @@ defmodule ExFleetYardsWeb.Api.ManufacturerView do
 
   page_view()
 
-  def render("show.json", %{manufacturer: nil}), do: nil
-
   def render("show.json", %{manufacturer: manufacturer}) do
     %{
       name: manufacturer.name,
