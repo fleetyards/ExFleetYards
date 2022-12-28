@@ -6,10 +6,20 @@ import Config
 # to provide built-in test partitioning in CI environment.
 # Run `mix help test` for more information.
 config :ex_fleet_yards, ExFleetYards.Repo,
-  username: "fleet_yards_dev",
-  password: "fleet_yards_dev",
-  hostname: "localhost",
   database: "fleet_yards_test#{System.get_env("MIX_TEST_PARTITION")}",
+  hostname: "localhost",
+  stacktrace: true,
+  show_sensitive_data_on_connection_error: true,
+  pool_size: 10
+
+if is_nil(System.get_env("FLEETYARDS_IN_DEVENV")) do
+  config :ex_fleet_yards, ExFleetYards.Repo,
+    username: "fleet_yards_dev",
+    password: "fleet_yards_dev"
+end
+
+config :ex_fleet_yards, ExFleetYards.Repo,
+  hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox,
   pool_size: 10
 

@@ -16,7 +16,7 @@ config :ex_fleet_yards,
 
 config :seedex,
   repo: ExFleetYards.Repo,
-  seeds_path: "priv/repo/seeds"
+  seeds_path: "apps/ex_fleet_yards/priv/repo/seeds"
 
 config :ex_fleet_yards, ExFleetYards.Repo, migration_source: "ecto_schema_migrations"
 
