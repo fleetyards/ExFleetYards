@@ -11,7 +11,12 @@
     flake = false;
   };
 
-  outputs = { self, nixpkgs, devenv, ... }@inputs:
+  inputs.seedex = {
+    url = "github:fleetyards/seedex/gen_seed";
+    flake = false;
+  };
+
+  outputs = { self, nixpkgs, devenv, seedex, ... }@inputs:
     let
       systems =
         [ "x86_64-linux" "x86_64-darwin" "aarch64-linux" "aarch64-darwin" ];
@@ -52,6 +57,12 @@
                   prePatch = ''
                     cp ${appsignal_nif}/* c_src
                   '';
+                };
+                seedex = beamPackages.buildMix {
+                  name = "seedex";
+                  version = "gen_seed";
+                  beamDeps = with self; [ ecto ecto_sql ];
+                  src = seedex;
                 };
               });
             in packages.mixRelease {

@@ -46,6 +46,7 @@ defmodule ExFleetYards.Umbrella.MixProject do
     [
       # run `mix setup` in all child apps
       setup: ["cmd mix setup"],
+      "ecto.reset": ["cmd mix ecto.reset"],
       fmt: ["format"],
       "api.routes": ["phx.routes ExFleetYardsWeb.Api.Router"],
       routes: ["phx.routes ExFleetYardsWeb.Router"],

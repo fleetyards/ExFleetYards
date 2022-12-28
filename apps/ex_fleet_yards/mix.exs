@@ -43,7 +43,8 @@ defmodule ExFleetYards.MixProject do
       {:jason, "~> 1.2"},
       {:swoosh, "~> 1.3"},
       {:open_api_spex, "~> 3.16"},
-      {:chunkr, "~> 0.2.1"}
+      {:chunkr, "~> 0.2.1"},
+      {:seedex, "~> 0.3.0", only: [:dev, :test], github: "fleetyards/seedex", branch: "gen_seed"}
     ]
   end
 
@@ -53,9 +54,9 @@ defmodule ExFleetYards.MixProject do
   defp aliases do
     [
       setup: ["deps.get", "ecto.setup"],
-      "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
+      "ecto.setup": ["ecto.create", "ecto.migrate", "seedex.seed"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
-      test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"]
+      test: ["ecto.create --quiet", "ecto.migrate --quiet", "seedex.seed", "test"]
     ]
   end
 
