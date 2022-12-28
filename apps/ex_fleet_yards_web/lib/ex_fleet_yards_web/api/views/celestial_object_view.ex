@@ -21,6 +21,7 @@ defmodule ExFleetYardsWeb.Api.CelestialObjectView do
       # TODO: locationLabel
     }
     |> add_system(data.starsystem)
+    |> render_loaded(:moons, data.moons, &render_many(&1, __MODULE__, "show.json"))
     |> filter_null(ExFleetYardsWeb.Schemas.Single.CelestialObject)
   end
 
