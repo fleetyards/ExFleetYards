@@ -75,16 +75,44 @@
               inherit inputs pkgs;
               modules = [
                 {
-                  # https://devenv.sh/reference/options/
-                  packages = [ pkgs.hello ];
+                  packages = with pkgs; [ mix2nix git ];
+                  languages.elixir.enable = true;
 
                   enterShell = ''
-                    hello
                   '';
+                  pre-commit.hooks.actionlint.enable = true;
+                  pre-commit.hooks.nixfmt.enable = true;
+                  pre-commit.hooks.mixfmt = {
+                    enable = true;
+                    name = "Mix format";
+                    entry = "mix format";
+                    files = "\\.(ex|exs)$";
+
+                    types = [ "text" "ex" "exs "];
+                    language = "system";
+                    pass_filenames = false;
+                  };
                 }
+                {
+                  env.FLEETYARDS_IN_DEVENV = 1;
+                  services.postgres.enable = true;
+                  services.postgres.initialDatabases = [{
+                      name = "fleet_yards_dev";
+                    }
+                  ];
+                }
+                ({config, ...}: {
+                  process.implementation = "hivemind";
+                  scripts.devenv-up.exec = ''
+                    ${config.procfileScript}
+                  '';
+
+                })
               ];
             };
           });
+
+          checks = forAllSystems (system: {devenv_ci = self.devShells.${system}.default.ci; });
     };
 
   nixConfig = {
