@@ -21,7 +21,7 @@ defmodule ExFleetYards.Repo.Game.StarSystem do
     field :position_y, :string
     field :position_z, :string
     field :status, :string
-    field :last_updated_at, :naive_datetime
+    field :last_updated_at, :utc_datetime
     field :system_type, :string
     field :aggregated_size, :string
     field :aggregated_population, :integer
@@ -32,7 +32,7 @@ defmodule ExFleetYards.Repo.Game.StarSystem do
     field :map_y, :string
     field :map_x, :string
 
-    timestamps(inserted_at: :created_at)
+    timestamps(inserted_at: :created_at, type: :utc_datetime)
 
     has_many :celestial_objects, Game.CelestialObject, foreign_key: :starsystem_id
     has_many :affiliations, Game.Affiliation, foreign_key: :affiliationable_id

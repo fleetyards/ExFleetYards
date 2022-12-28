@@ -19,7 +19,7 @@ defmodule ExFleetYards.Repo.Game.CelestialObject do
     field :code, :string
     field :status, :string
     field :designation, :string
-    field :last_updated_at, :naive_datetime
+    field :last_updated_at, :utc_datetime
     field :description, :string
     field :hidden, :boolean
     field :orbit_period, :string
@@ -34,7 +34,7 @@ defmodule ExFleetYards.Repo.Game.CelestialObject do
 
     belongs_to :parent, __MODULE__, type: Ecto.UUID
 
-    timestamps(inserted_at: :created_at)
+    timestamps(inserted_at: :created_at, type: :utc_datetime)
 
     has_many :stations, Game.Station
     # FIXME: does not work, where: [object_type: :satellite]

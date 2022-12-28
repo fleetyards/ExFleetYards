@@ -13,6 +13,6 @@ defmodule ExFleetYards.Repo.Game.Habitation do
     belongs_to :station, Game.Station, type: Ecto.UUID
     field :habitation_name, :string
 
-    timestamps(inserted_at: :created_at)
+    timestamps(inserted_at: :created_at, type: :utc_datetime)
   end
 end

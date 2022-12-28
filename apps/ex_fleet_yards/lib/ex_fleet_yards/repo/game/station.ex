@@ -26,7 +26,7 @@ defmodule ExFleetYards.Repo.Game.Station do
     field :classification, Types.StationClassification
     field :habitable, :boolean
 
-    timestamps(inserted_at: :created_at)
+    timestamps(inserted_at: :created_at, type: :utc_datetime)
 
     has_many :docks, Game.Dock
     has_many :habitations, Game.Habitation

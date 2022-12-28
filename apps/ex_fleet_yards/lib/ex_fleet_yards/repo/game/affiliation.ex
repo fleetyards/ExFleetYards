@@ -19,7 +19,7 @@ defmodule ExFleetYards.Repo.Game.Affiliation do
       foreign_key: :affiliationable_id,
       define_field: false
 
-    timestamps(inserted_at: :created_at)
+    timestamps(inserted_at: :created_at, type: :utc_datetime)
   end
 
   def load(affiliations) when is_list(affiliations), do: Enum.map(affiliations, &load/1)

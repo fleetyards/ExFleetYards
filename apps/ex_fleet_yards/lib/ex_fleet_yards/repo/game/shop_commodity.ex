@@ -32,7 +32,7 @@ defmodule ExFleetYards.Repo.Game.ShopCommodity do
     field :confirmed, :boolean, default: false
     # field :submitted_by, references(:users, type: :uuid)
 
-    timestamps(inserted_at: :created_at)
+    timestamps(inserted_at: :created_at, type: :utc_datetime)
   end
 
   def location_label(%__MODULE__{shop: shop} = commodity), do: location_label(shop, commodity)
