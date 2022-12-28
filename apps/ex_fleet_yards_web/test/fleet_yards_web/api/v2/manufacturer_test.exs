@@ -14,6 +14,15 @@ defmodule ExFleetYardsWeb.Api.V2.ManufacturerTest do
       assert_schema json, "Manufacturer", api_spec
     end
 
+    test "spec compliance (:with_models)", %{conn: conn, api_spec: spec} do
+      json =
+        conn
+        |> get_api(ApiRoutes.manufacturer_path(conn, :with_models))
+        |> json_response(200)
+
+      assert_schema json, "ManufacturerList", spec
+    end
+
     test "spec compliance (:index)", %{conn: conn, api_spec: api_spec} do
       json =
         conn
@@ -21,6 +30,7 @@ defmodule ExFleetYardsWeb.Api.V2.ManufacturerTest do
         |> json_response(200)
 
       assert_schema json, "ManufacturerList", api_spec
+      assert json["data"] |> Enum.count() > 0
     end
   end
 end

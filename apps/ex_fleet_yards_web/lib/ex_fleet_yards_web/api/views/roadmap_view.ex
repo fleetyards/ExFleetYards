@@ -19,17 +19,12 @@ defmodule ExFleetYardsWeb.Api.RoadmapView do
       committed: item.committed,
       active: item.active
     }
-    |> add_model(item.model)
+    |> render_loaded(
+      :model,
+      item.model,
+      &ExFleetYardsWeb.Api.ModelView.render("show.json", model: &1)
+    )
     |> render_timestamps(item)
-  end
-
-  defp add_model(map, nil), do: map
-
-  defp add_model(map, v) do
-    if Ecto.assoc_loaded?(v) do
-      Map.put(map, :model, ExFleetYardsWeb.Api.ModelView.render("show.json", %{model: v}))
-    else
-      map
-    end
+    |> filter_null(ExFleetYardsWeb.Schemas.Single.RoadmapItem)
   end
 end
