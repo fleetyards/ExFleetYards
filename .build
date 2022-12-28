@@ -2,10 +2,12 @@
 ExFleetYards.Config.html
 ExFleetYards.Release.Ecto.html
 ExFleetYards.Release.Tasks.html
+ExFleetYards.Repo.Game.Affiliation.html
 ExFleetYards.Repo.Game.CelestialObject.html
 ExFleetYards.Repo.Game.Commodity.html
 ExFleetYards.Repo.Game.Component.html
 ExFleetYards.Repo.Game.Dock.html
+ExFleetYards.Repo.Game.Faction.html
 ExFleetYards.Repo.Game.Habitation.html
 ExFleetYards.Repo.Game.Manufacturer.html
 ExFleetYards.Repo.Game.Model.html
@@ -111,7 +113,7 @@ dist/merriweather-latin-ext-300-normal-K6L27CZ5.woff2
 dist/merriweather-vietnamese-300-italic-EHHNZPUO.woff2
 dist/merriweather-vietnamese-300-normal-U376L4Z4.woff2
 dist/remixicon-NKANDIL5.woff2
-dist/search_items-BE52B8BD.js
-dist/sidebar_items-B9BCD9C0.js
+dist/search_items-5E51C660.js
+dist/sidebar_items-639DC310.js
 index.html
 search.html
