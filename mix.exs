@@ -59,7 +59,10 @@ defmodule ExFleetYards.Umbrella.MixProject do
     [
       ex_fleet_yards_web: [
         applications: [ex_fleet_yards_web: :permanent]
+      ],
+      ex_fleet_yards_web: [
+      applications: [ex_fleet_yards_api: :permanent]
       ]
-    ]
-  end
+]
+end
 end

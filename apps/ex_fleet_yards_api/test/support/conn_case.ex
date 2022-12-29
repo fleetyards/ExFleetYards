@@ -1,4 +1,4 @@
-defmodule ExFleetYardsWeb.ConnCase do
+defmodule ExFleetYardsApi.ConnCase do
   @moduledoc """
   This module defines the test case to be used by
   tests that require setting up a connection.
@@ -11,7 +11,7 @@ defmodule ExFleetYardsWeb.ConnCase do
   we enable the SQL sandbox, so changes done to the database
   are reverted at the end of every test. If you are using
   PostgreSQL, you can even run database tests asynchronously
-  by setting `use ExFleetYardsWeb.ConnCase, async: true`, although
+  by setting `use ExFleetYardsApi.ConnCase, async: true`, although
   this option is not recommended for other databases.
   """
 
@@ -22,12 +22,12 @@ defmodule ExFleetYardsWeb.ConnCase do
       # Import conveniences for testing with connections
       import Plug.Conn
       import Phoenix.ConnTest
-      import ExFleetYardsWeb.ConnCase
+      import ExFleetYardsApi.ConnCase
 
-      alias ExFleetYardsWeb.Router.Helpers, as: Routes
+      alias ExFleetYardsApi.Router.Helpers, as: Routes
 
       # The default endpoint for testing
-      @endpoint ExFleetYardsWeb.Endpoint
+      @endpoint ExFleetYardsApi.Endpoint
       @moduledoc false
     end
   end
@@ -35,7 +35,7 @@ defmodule ExFleetYardsWeb.ConnCase do
   setup tags do
     ExFleetYards.DataCase.setup_sandbox(tags)
 
-    {:ok, conn: Phoenix.ConnTest.build_conn()}
+    {:ok, conn: Phoenix.ConnTest.build_conn(), api_spec: ExFleetYardsApi.ApiSpec.spec()}
   end
 
 end

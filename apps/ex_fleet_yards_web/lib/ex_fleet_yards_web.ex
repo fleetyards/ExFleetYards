@@ -28,26 +28,6 @@ defmodule ExFleetYardsWeb do
     end
   end
 
-  def api_controller do
-    quote do
-      @moduledoc "Controller used for Api"
-      use Phoenix.Controller, namespace: ExFleetYardsWeb
-
-      import Plug.Conn
-      import ExFleetYardsWeb.Gettext
-      alias ExFleetYardsWeb.Api.Router.Helpers, as: Routes
-      alias ExFleetYardsWeb.Api.NotFoundException
-      alias ExFleetYardsWeb.Api.InvalidPaginationException
-      alias ExFleetYards.Repo
-      alias ExFleetYards.Repo.Game
-
-      use OpenApiSpex.ControllerSpecs
-      alias ExFleetYardsWeb.Schemas.Single.Error
-
-      use ExFleetYardsWeb.Api
-    end
-  end
-
   def view do
     quote do
       use Phoenix.View,
@@ -61,22 +41,6 @@ defmodule ExFleetYardsWeb do
       # Include shared imports and aliases for views
       unquote(view_helpers())
       @moduledoc "View Module"
-    end
-  end
-
-  def api_view do
-    quote do
-      use Phoenix.View,
-        root: "lib/ex_fleet_yards_web/templates",
-        namespace: ExFleetYardsWeb
-
-      # Import convenience functions from controllers
-      import Phoenix.Controller,
-        only: [view_module: 1, view_template: 1]
-
-      # Include shared imports and aliases for views
-      unquote(view_helpers(true))
-      @moduledoc "View module used for api"
     end
   end
 
@@ -133,20 +97,9 @@ defmodule ExFleetYardsWeb do
       import ExFleetYardsWeb.ErrorHelpers
       import ExFleetYardsWeb.Gettext
 
-      unquote do
-        if api do
-          quote do
-            alias ExFleetYardsWeb.Api.Router.Helpers, as: Routes
-            import ExFleetYardsWeb.Api.ViewHelpers
-          end
-        else
-          quote do
-            # Import LiveView and .heex helpers (live_render, live_patch, <.form>, etc)
-            import Phoenix.LiveView.Helpers
-            alias ExFleetYardsWeb.Router.Helpers, as: Routes
-          end
-        end
-      end
+      # Import LiveView and .heex helpers (live_render, live_patch, <.form>, etc)
+      import Phoenix.LiveView.Helpers
+      alias ExFleetYardsWeb.Router.Helpers, as: Routes
     end
   end
 

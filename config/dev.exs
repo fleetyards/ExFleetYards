@@ -31,7 +31,7 @@ config :ex_fleet_yards_web, ExFleetYardsWeb.Endpoint,
       {
         :_,
         [
-          {"/api/[...]", Phoenix.Endpoint.Cowboy2Handler, {ExFleetYardsWeb.Api.Endpoint, []}},
+          {"/api/[...]", Phoenix.Endpoint.Cowboy2Handler, {ExFleetYardsApi.Endpoint, []}},
           {:_, Phoenix.Endpoint.Cowboy2Handler, {ExFleetYardsWeb.Endpoint, []}}
         ]
       }
