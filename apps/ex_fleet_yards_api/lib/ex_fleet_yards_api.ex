@@ -20,11 +20,9 @@ defmodule ExFleetYardsApi do
   def controller do
     quote do
       @moduledoc "Controller used for Api"
-      use Phoenix.Controller, namespace: ExFleetYardsWeb
+      use Phoenix.Controller, namespace: ExFleetYardsApi
 
       import Plug.Conn
-      import ExFleetYardsWeb.Gettext
-      alias ExFleetYardsApi.Router.Helpers, as: Routes
       alias ExFleetYardsApi.NotFoundException
       alias ExFleetYardsApi.InvalidPaginationException
       alias ExFleetYards.Repo
@@ -71,7 +69,7 @@ defmodule ExFleetYardsApi do
       # Import basic rendering functionality (render, render_layout, etc)
       import Phoenix.View
 
-      import ExFleetYardsWeb.ErrorHelpers
+      # import ExFleetYardsApi.ErrorHelpers
 
       alias ExFleetYardsApi.Router.Helpers, as: Routes
       import ExFleetYardsApi.ViewHelpers
