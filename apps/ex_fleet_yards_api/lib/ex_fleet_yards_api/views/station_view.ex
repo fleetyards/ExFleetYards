@@ -53,7 +53,9 @@ defmodule ExFleetYardsApi.StationView do
         ),
       shopListLabel: Station.shop_list_label(station),
       celestialObject:
-        ExFleetYardsApi.CelestialObjectView.render("show.json", celestial_object: station.celestial_object)
+        ExFleetYardsApi.CelestialObjectView.render("show.json",
+          celestial_object: station.celestial_object
+        )
       # TODO: habitationCounts, dockCounts,
     }
     |> add(:refinery, station.refinery)

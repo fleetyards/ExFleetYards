@@ -38,6 +38,7 @@ defmodule ExFleetYardsWeb.Application do
       Application.fetch_env!(:ex_fleet_yards_api, ExFleetYardsApi.Endpoint)
       |> Keyword.put(:url, get_conf(:url))
       |> Keyword.put(:http, get_conf(:http))
+      |> Keyword.put_new(:secret_key_base, get_conf(:secret_key_base))
       |> Keyword.put(:server, false)
 
     Application.put_env(:ex_fleet_yards_api, ExFleetYardsApi.Endpoint, config)

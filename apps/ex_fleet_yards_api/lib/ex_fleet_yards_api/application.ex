@@ -5,14 +5,13 @@ defmodule ExFleetYardsApi.Application do
 
   use Application
 
-
   @impl true
   def start(_type, _args) do
     children = [
       # Start the Telemetry supervisor
       ExFleetYardsApi.Telemetry,
       # Start the Endpoint (http/https)
-      ExFleetYardsApi.Endpoint,
+      ExFleetYardsApi.Endpoint
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

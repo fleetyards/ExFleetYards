@@ -6,11 +6,19 @@ defmodule ExFleetYardsApi.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
-    plug OpenApiSpex.Plug.PutApiSpec, module: ExFleetYardsApi.Spec
+    plug OpenApiSpex.Plug.PutApiSpec, module: ExFleetYardsApi.ApiSpec
+  end
+
+  pipeline :ui do
+    plug :accepts, ["html"]
+    plug :fetch_session
+    plug :put_root_layout, {ExFleetYardsWeb.LayoutView, :root}
+    # plug :protect_from_forgery
+    plug :put_secure_browser_headers
   end
 
   root =
-    if ExFleetYards.Config.get(:ex_fleet_yards_api, [ExFleetYardsWeb.Api, :inline_endpoint], false) do
+    if ExFleetYards.Config.get(:ex_fleet_yards_api, [ExFleetYardsApi, :inline_endpoint], false) do
       "/api"
     else
       "/"
@@ -19,7 +27,12 @@ defmodule ExFleetYardsApi.Router do
   scope root do
     pipe_through :api
 
-    get "/", OpenApiSpex.Plug.RenderSpec, []
+    get "/v2.json", OpenApiSpex.Plug.RenderSpec, []
+
+    scope "/ui" do
+      pipe_through :ui
+      get "/", OpenApiSpex.Plug.SwaggerUI, path: root <> "/v2.json"
+    end
 
     scope "/v2", ExFleetYardsApi do
       get "/version", VersionController, :index

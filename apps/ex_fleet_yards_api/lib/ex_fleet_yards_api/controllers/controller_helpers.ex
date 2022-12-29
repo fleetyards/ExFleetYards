@@ -21,10 +21,10 @@ defmodule ExFleetYardsApi.ControllerHelpers do
   def get_pagination_args(%{"after" => _, "before" => _}), do: raise(InvalidPaginationException)
 
   def get_pagination_args(%{"after" => cursor} = args),
-      do: [first: get_limit(args), after: cursor]
+    do: [first: get_limit(args), after: cursor]
 
   def get_pagination_args(%{"before" => cursor} = args),
-      do: [last: get_limit(args), before: cursor]
+    do: [last: get_limit(args), before: cursor]
 
   def get_pagination_args(%{} = args), do: [first: get_limit(args)]
 
@@ -35,9 +35,9 @@ defmodule ExFleetYardsApi.ControllerHelpers do
       list_name
       |> Macro.expand_once(__CALLER__)
       |> case do
-           v when is_atom(v) -> Atom.to_string(v)
-           v when is_binary(v) -> v
-         end
+        v when is_atom(v) -> Atom.to_string(v)
+        v when is_binary(v) -> v
+      end
 
     list_type =
       Keyword.get(opts, :list_type, Module.concat(ExFleetYardsApi.Schemas.List, list_name))
@@ -57,13 +57,13 @@ defmodule ExFleetYardsApi.ControllerHelpers do
 
     quote do
       operation unquote(operation),
-                parameters: unquote(parameters),
-                responses: [
-                  ok: {unquote(list_name), "application/json", unquote(list_type)},
-                  bad_request: {"Error", "application/json", ExFleetYardsApi.Schemas.Single.Error},
-                  internal_server_error:
-                    {"Error", "application/json", ExFleetYardsApi.Schemas.Single.Error}
-                ]
+        parameters: unquote(parameters),
+        responses: [
+          ok: {unquote(list_name), "application/json", unquote(list_type)},
+          bad_request: {"Error", "application/json", ExFleetYardsApi.Schemas.Single.Error},
+          internal_server_error:
+            {"Error", "application/json", ExFleetYardsApi.Schemas.Single.Error}
+        ]
     end
   end
 
@@ -161,25 +161,25 @@ defmodule ExFleetYardsApi.ControllerHelpers do
       end
 
       operation :show,
-                parameters: unquote(path_params),
-                responses: [
-                  ok: {unquote(name), "application/json", unquote(schema_type)},
-                  not_found: {"Error", "application/json", ExFleetYardsApi.Schemas.Single.Error},
-                  internal_server_error:
-                    {"Error", "application/json", ExFleetYardsApi.Schemas.Single.Error}
-                ]
+        parameters: unquote(path_params),
+        responses: [
+          ok: {unquote(name), "application/json", unquote(schema_type)},
+          not_found: {"Error", "application/json", ExFleetYardsApi.Schemas.Single.Error},
+          internal_server_error:
+            {"Error", "application/json", ExFleetYardsApi.Schemas.Single.Error}
+        ]
 
       def show(conn, %{"id" => slug} = params) do
         query(slug)
         |> ExFleetYards.Repo.one()
         |> case do
-             nil ->
-               # raise(ExFleetYardsApi.NotFoundException, unquote("#{name} `\#{slug}` not found"))
-               raise(ExFleetYardsApi.NotFoundException, module: unquote(name), slug: slug)
+          nil ->
+            # raise(ExFleetYardsApi.NotFoundException, unquote("#{name} `\#{slug}` not found"))
+            raise(ExFleetYardsApi.NotFoundException, module: unquote(name), slug: slug)
 
-             v ->
-               render(conn, unquote(template), [{unquote(render_param), v}, {:params, params}])
-           end
+          v ->
+            render(conn, unquote(template), [{unquote(render_param), v}, {:params, params}])
+        end
       end
     end
   end
@@ -199,5 +199,4 @@ defmodule ExFleetYardsApi.ControllerHelpers do
       from(d in unquote(type), unquote(args))
     end
   end
-
 end

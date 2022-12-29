@@ -47,7 +47,7 @@ defmodule ExFleetYards.Umbrella.MixProject do
       # run `mix setup` in all child apps
       setup: ["cmd mix setup"],
       fmt: ["format"],
-      "api.routes": ["phx.routes ExFleetYardsWeb.Api.Router"],
+      "api.routes": ["phx.routes ExFleetYardsApi.Router"],
       "ecto.setup": ["cmd --app ex_fleet_yards mix ecto.setup"],
       "ecto.reset": ["cmd --app ex_fleet_yards mix ecto.reset"],
       routes: ["phx.routes ExFleetYardsWeb.Router"],
@@ -61,8 +61,8 @@ defmodule ExFleetYards.Umbrella.MixProject do
         applications: [ex_fleet_yards_web: :permanent]
       ],
       ex_fleet_yards_web: [
-      applications: [ex_fleet_yards_api: :permanent]
+        applications: [ex_fleet_yards_api: :permanent]
       ]
-]
-end
+    ]
+  end
 end

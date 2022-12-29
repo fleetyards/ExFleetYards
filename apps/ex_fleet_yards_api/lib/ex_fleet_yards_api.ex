@@ -40,12 +40,12 @@ defmodule ExFleetYardsApi do
   def view do
     quote do
       use Phoenix.View,
-          root: "lib/ex_fleet_yards_api/templates",
-          namespace: ExFleetYardsApi
+        root: "lib/ex_fleet_yards_api/templates",
+        namespace: ExFleetYardsApi
 
       # Import convenience functions from controllers
       import Phoenix.Controller,
-             only: [view_module: 1, view_template: 1]
+        only: [view_module: 1, view_template: 1]
 
       # Include shared imports and aliases for views
       unquote(view_helpers())
@@ -97,7 +97,7 @@ defmodule ExFleetYardsApi do
     def exception(message: message), do: %__MODULE__{message: message}
     @impl Exception
     def exception(module: module, slug: slug),
-        do: %__MODULE__{message: "#{module}: `#{slug}` not found"}
+      do: %__MODULE__{message: "#{module}: `#{slug}` not found"}
   end
 
   defimpl Plug.Exception, for: NotFoundException do

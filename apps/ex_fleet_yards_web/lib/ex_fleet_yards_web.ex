@@ -24,6 +24,7 @@ defmodule ExFleetYardsWeb do
       import Plug.Conn
       import ExFleetYardsWeb.Gettext
       alias ExFleetYardsWeb.Router.Helpers, as: Routes
+      alias ExFleetYardsApi.Router.Helpers, as: ApiRoutes
       @moduledoc "Controller"
     end
   end
@@ -100,6 +101,7 @@ defmodule ExFleetYardsWeb do
       # Import LiveView and .heex helpers (live_render, live_patch, <.form>, etc)
       import Phoenix.LiveView.Helpers
       alias ExFleetYardsWeb.Router.Helpers, as: Routes
+      alias ExFleetYardsApi.Router.Helpers, as: ApiRoutes
     end
   end
 

@@ -37,5 +37,4 @@ defmodule ExFleetYardsApi.ConnCase do
 
     {:ok, conn: Phoenix.ConnTest.build_conn(), api_spec: ExFleetYardsApi.ApiSpec.spec()}
   end
-
 end

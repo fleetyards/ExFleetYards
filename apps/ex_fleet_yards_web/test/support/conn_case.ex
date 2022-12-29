@@ -37,5 +37,4 @@ defmodule ExFleetYardsWeb.ConnCase do
 
     {:ok, conn: Phoenix.ConnTest.build_conn()}
   end
-
 end
