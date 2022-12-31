@@ -6,7 +6,6 @@ let
   buildErlangMk = lib.makeOverridable beamPackages.buildErlangMk;
 
   self = packages // (overrides self packages);
-
   packages = with beamPackages;
     with self; {
       appsignal = buildMix rec {

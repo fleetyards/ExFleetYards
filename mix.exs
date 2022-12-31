@@ -9,7 +9,8 @@ defmodule ExFleetYards.Umbrella.MixProject do
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       aliases: aliases(),
-      releases: releases()
+      releases: releases(),
+      default_release: :ex_fleet_yards_web
     ]
   end
 
@@ -47,11 +48,11 @@ defmodule ExFleetYards.Umbrella.MixProject do
       # run `mix setup` in all child apps
       setup: ["cmd mix setup"],
       fmt: ["format"],
-      "api.routes": ["phx.routes ExFleetYardsWeb.Api.Router"],
+      "api.routes": ["phx.routes ExFleetYardsApi.Router"],
       "ecto.setup": ["cmd --app ex_fleet_yards mix ecto.setup"],
       "ecto.reset": ["cmd --app ex_fleet_yards mix ecto.reset"],
       routes: ["phx.routes ExFleetYardsWeb.Router"],
-      nix: ["cmd mix2nix mix.lock > nix/mix.nix", "nix.appsignal"]
+      nix: ["nix.mix2nix", "nix.appsignal"]
     ]
   end
 
@@ -59,6 +60,9 @@ defmodule ExFleetYards.Umbrella.MixProject do
     [
       ex_fleet_yards_web: [
         applications: [ex_fleet_yards_web: :permanent]
+      ],
+      ex_fleet_yards_api: [
+        applications: [ex_fleet_yards_api: :permanent]
       ]
     ]
   end

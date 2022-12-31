@@ -39,8 +39,12 @@ config :ex_fleet_yards_web,
   ecto_repos: [ExFleetYards.Repo],
   generators: [context_app: :ex_fleet_yards]
 
+config :ex_fleet_yards_api,
+  ecto_repos: [ExFleetYards.Repo],
+  generators: [context_app: :ex_fleet_yards]
+
 # if inline_endpoint is false, `port` and `url` become availabe.
-config :ex_fleet_yards_web, ExFleetYardsWeb.Api, inline_endpoint: true, port: 4001
+config :ex_fleet_yards_api, ExFleetYardsApi, inline_endpoint: true, port: 4001
 
 # Configures the endpoint
 config :ex_fleet_yards_web, ExFleetYardsWeb.Endpoint,
@@ -49,9 +53,9 @@ config :ex_fleet_yards_web, ExFleetYardsWeb.Endpoint,
   pubsub_server: ExFleetYards.PubSub,
   live_view: [signing_salt: "D5yRC+hm"]
 
-config :ex_fleet_yards_web, ExFleetYardsWeb.Api.Endpoint,
+config :ex_fleet_yards_api, ExFleetYardsApi.Endpoint,
   server: false,
-  render_errors: [view: ExFleetYardsWeb.Api.ErrorView, accepts: ~w(json), layout: false]
+  render_errors: [view: ExFleetYardsApi.ErrorView, accepts: ~w(json), layout: false]
 
 # Configure esbuild (the version is required)
 config :esbuild,
@@ -70,7 +74,7 @@ config :logger, :console,
 
 config :telemetry_metrics_telegraf, log_telegraf_config_on_start: false
 
-config :ex_fleet_yards_web, ExFleetYardsWeb.Telemetry.InstreamConnection,
+config :ex_fleet_yards_api, ExFleetYardsWeb.Telemetry.InstreamConnection,
   enabled: false,
   version: :v2,
   auth: [method: :token],

@@ -9,14 +9,11 @@ defmodule ExFleetYardsWeb.Application do
   @impl true
   def start(_type, _args) do
     merge_config(
-      ExFleetYards.Config.get(:ex_fleet_yards_web, [ExFleetYardsWeb.Api, :inline_endpoint], true)
+      ExFleetYards.Config.get(:ex_fleet_yards_api, [ExFleetYardsWeb.Api, :inline_endpoint], true)
     )
 
     children = [
-      # Start the Telemetry supervisor
-      ExFleetYardsWeb.Telemetry,
       # Start the Endpoint (http/https)
-      ExFleetYardsWeb.Api.Endpoint,
       ExFleetYardsWeb.Endpoint
       # Start a worker by calling: ExFleetYardsWeb.Worker.start_link(arg)
       # {ExFleetYardsWeb.Worker, arg}
@@ -33,28 +30,28 @@ defmodule ExFleetYardsWeb.Application do
   @impl true
   def config_change(changed, _new, removed) do
     ExFleetYardsWeb.Endpoint.config_change(changed, removed)
-    ExFleetYardsWeb.Api.Endpoint.config_change(changed, removed)
     :ok
   end
 
   defp merge_config(true) do
     config =
-      Application.fetch_env!(:ex_fleet_yards_web, ExFleetYardsWeb.Api.Endpoint)
+      Application.fetch_env!(:ex_fleet_yards_api, ExFleetYardsApi.Endpoint)
       |> Keyword.put(:url, get_conf(:url))
       |> Keyword.put(:http, get_conf(:http))
+      |> Keyword.put_new(:secret_key_base, get_conf(:secret_key_base))
       |> Keyword.put(:server, false)
 
-    Application.put_env(:ex_fleet_yards_web, ExFleetYardsWeb.Api.Endpoint, config)
+    Application.put_env(:ex_fleet_yards_api, ExFleetYardsApi.Endpoint, config)
   end
 
   defp merge_config(false) do
     # config = Keyword.put(get_conf([]), :server, true)
     config =
-      Application.fetch_env!(:ex_fleet_yards_web, ExFleetYardsWeb.Api.Endpoint)
+      Application.fetch_env!(:ex_fleet_yards_api, ExFleetYardsApi.Endpoint)
       |> Keyword.put(:server, true)
 
     config =
-      case Config.fetch(:ex_fleet_yards_web, [ExFleetYardsWeb.Api, :port]) do
+      case Config.fetch(:ex_fleet_yards_api, [ExFleetYardsApi, :port]) do
         {:ok, port} ->
           Keyword.put(config, :http, ip: get_conf([:http, :ip]), port: port)
 
@@ -63,7 +60,7 @@ defmodule ExFleetYardsWeb.Application do
       end
 
     config =
-      case Config.fetch(:ex_fleet_yards_web, [ExFleetYardsWeb.Api, :url]) do
+      case Config.fetch(:ex_fleet_yards_api, [ExFleetYardsApi, :url]) do
         {:ok, url} when is_list(url) ->
           Keyword.put(config, :url, url)
 
@@ -74,7 +71,7 @@ defmodule ExFleetYardsWeb.Application do
           Keyword.put(config, :url, get_conf(:url))
       end
 
-    Application.put_env(:ex_fleet_yards_web, ExFleetYardsWeb.Api.Endpoint, config)
+    Application.put_env(:ex_fleet_yards_api, ExFleetYardsApi.Endpoint, config)
   end
 
   def get_conf(key) when is_atom(key), do: get_conf([key])
