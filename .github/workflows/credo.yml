@@ -2,17 +2,15 @@ name: credo
 
 on:
   push:
-    branches: [ "main", "dev" ]
+    branches: [ "main", "staging", "trying" ]
     tags: ['v*']
   pull_request:
     branches: [ "main" ]
 
 permissions:
   contents: read
-  pull-requests: write
-
-env:
-  FLEET_BOT_TOKEN: ""
+  security-events: write
+  actions: read
 
 jobs:
   credo:
@@ -23,8 +21,8 @@ jobs:
     - name: Set up Elixir
       uses: erlef/setup-beam@v1
       with:
-        elixir-version: '1.13.4'
-        otp-version: '24.1'
+        elixir-version: '1.14.2'
+        otp-version: '25.1'
     - name: Restore dependencies cache
       uses: actions/cache@v3
       with:
@@ -33,9 +31,12 @@ jobs:
         restore-keys: ${{ runner.os }}-mix-
     - name: Install dependencies
       run: mix deps.get
+    - name: compile
+      run: mix compile
     - name: credo
-      #uses: red-shirts/reviewdog-action-credo@v1
-      uses: davidwebster48/reviewdog-action-credo@d173c76dabfb9d68bb47e2aae8709ba11a3dfc6c
+      run: mix credo list --format=sarif --mute-exit-status > credo.sarif
+    - name: Upload analysis results to GitHub
+      uses: github/codeql-action/upload-sarif@v2
       with:
-        github_token: ${{ secrets.github_token }}
-        reporter: github-pr-review # Change reporter.
+        sarif_file: credo.sarif
+        wait-for-processing: true

@@ -12,8 +12,7 @@ defmodule ExFleetYards.Repo.TypeGen do
     string =
       Atom.to_string(atom)
       |> String.split("_")
-      |> Enum.map(&String.capitalize/1)
-      |> Enum.join(" ")
+      |> Enum.map_join(" ", &String.capitalize/1)
   end
 
   defmacro enum(name, type, types) do
@@ -42,11 +41,15 @@ defmodule ExFleetYards.Repo.TypeGen do
         end
 
         def dump(_), do: :error
-        # def load(_), do: :error
         def cast(_), do: :error
 
-        # FIXME: remove
-        def load(_), do: {:ok, :error}
+        unquote do
+          if ExFleetYards.Config.prod?() do
+            quote do: def(load(_), do: :error)
+          else
+            quote do: def(load(_), do: {:ok, :error})
+          end
+        end
 
         def all, do: unquote(all)
       end

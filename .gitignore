@@ -22,6 +22,9 @@ erl_crash.dump
 # Temporary files, for example, from tests.
 /tmp
 
+# Credo output
+credo.sarif
+
 # Api spec
 fleetyards.json
 
@@ -33,3 +36,4 @@ result-*
 .devenv/
 .devenv.*
 .pre-commit-config.yaml
+
