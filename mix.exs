@@ -9,7 +9,8 @@ defmodule ExFleetYards.Umbrella.MixProject do
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       aliases: aliases(),
-      releases: releases()
+      releases: releases(),
+      default_release: :ex_fleet_yards_web
     ]
   end
 
@@ -60,7 +61,7 @@ defmodule ExFleetYards.Umbrella.MixProject do
       ex_fleet_yards_web: [
         applications: [ex_fleet_yards_web: :permanent]
       ],
-      ex_fleet_yards_web: [
+      ex_fleet_yards_api: [
         applications: [ex_fleet_yards_api: :permanent]
       ]
     ]

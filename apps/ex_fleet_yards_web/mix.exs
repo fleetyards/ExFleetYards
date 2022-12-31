@@ -47,6 +47,7 @@ defmodule ExFleetYardsWeb.MixProject do
       {:esbuild, "~> 0.4", runtime: Mix.env() == :dev},
       {:gettext, "~> 0.18"},
       {:ex_fleet_yards, in_umbrella: true},
+      {:ex_fleet_yards_api, in_umbrella: true},
       {:jason, "~> 1.2"}
     ]
   end

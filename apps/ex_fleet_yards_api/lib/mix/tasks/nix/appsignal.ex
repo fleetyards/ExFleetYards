@@ -17,8 +17,6 @@ defmodule Mix.Tasks.Nix.Appsignal do
   defp get_appsignal_version() do
   end
 
-  # defp priv_path, do: :code.priv_dir(:appsignal)
-  # Mix.Project.deps_path() <> "appsignal/agent.exs"
   defp lock_file,
     do:
       Mix.Project.deps_path()
