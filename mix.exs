@@ -51,7 +51,7 @@ defmodule ExFleetYards.Umbrella.MixProject do
       "ecto.setup": ["cmd --app ex_fleet_yards mix ecto.setup"],
       "ecto.reset": ["cmd --app ex_fleet_yards mix ecto.reset"],
       routes: ["phx.routes ExFleetYardsWeb.Router"],
-      nix: ["cmd mix2nix mix.lock > nix/mix.nix", "nix.appsignal"]
+      nix: ["nix.mix2nix", "nix.appsignal"]
     ]
   end
 

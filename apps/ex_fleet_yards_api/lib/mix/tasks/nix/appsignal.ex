@@ -18,7 +18,12 @@ defmodule Mix.Tasks.Nix.Appsignal do
   end
 
   # defp priv_path, do: :code.priv_dir(:appsignal)
-  defp lock_file, do: "deps/appsignal/agent.exs"
+  # Mix.Project.deps_path() <> "appsignal/agent.exs"
+  defp lock_file,
+    do:
+      Mix.Project.deps_path()
+      |> Path.join("appsignal/agent.exs")
+
   defp load_agent, do: Code.require_file(lock_file())
 
   defp get_map,

@@ -17,9 +17,9 @@ defmodule Mix.Tasks.Api.Spec do
   end
 
   defp write_spec(file) do
-    ExFleetYardsWeb.Api.Endpoint.start_link()
+    ExFleetYardsApi.Endpoint.start_link()
 
-    spec = ExFleetYardsWeb.ApiSpec.spec()
+    spec = ExFleetYardsApi.ApiSpec.spec()
 
     spec =
       Jason.encode_to_iodata!(spec)
