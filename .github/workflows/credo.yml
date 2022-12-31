@@ -35,11 +35,6 @@ jobs:
       run: mix compile
     - name: credo
       run: mix credo list --format=sarif --mute-exit-status > credo.sarif
-    - name: Archive code coverage results
-      uses: actions/upload-artifact@v3
-      with:
-        name: code-coverage-report
-        path: credo.sarif
     - name: Upload analysis results to GitHub
       uses: github/codeql-action/upload-sarif@v2
       with:

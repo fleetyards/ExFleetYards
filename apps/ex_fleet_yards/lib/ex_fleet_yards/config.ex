@@ -57,4 +57,18 @@ defmodule ExFleetYards.Config do
         )
     end
   end
+
+  @doc "Get application environment"
+  @spec env() :: atom()
+  def env, do: get(:env)
+
+  @doc "Test if dev environment"
+  @spec dev?() :: boolean()
+  def dev?, do: env() == :dev
+  @doc "Test if prod environment"
+  @spec prod?() :: boolean()
+  def prod?, do: env() == :prod
+  @doc "Test if prod environment"
+  @spec test?() :: boolean()
+  def test?, do: env() == :test
 end

@@ -12,7 +12,8 @@ import Config
 # Configure Mix tasks and generators
 config :ex_fleet_yards,
   ecto_repos: [ExFleetYards.Repo],
-  version_name: "Elixir"
+  version_name: "Elixir",
+  env: config_env()
 
 #  seeds_path = Application.app_dir(:ex_fleet_yards)
 #  |> IO.inspect

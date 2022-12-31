@@ -75,6 +75,5 @@ defmodule ExFleetYards.Repo.Game.Station do
   def shop_list_label(shops) when is_list(shops),
     do:
       shops
-      |> Enum.map(&Map.get(&1, :name))
-      |> Enum.join(", ")
+      |> Enum.map_join(", ", &Map.get(&1, :name))
 end
