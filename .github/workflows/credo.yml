@@ -31,6 +31,8 @@ jobs:
         restore-keys: ${{ runner.os }}-mix-
     - name: Install dependencies
       run: mix deps.get
+    - name: compile
+      run: mix compile
     - name: credo
       run: mix credo list --format=sarif --mute-exit-status > credo.sarif
     - name: Archive code coverage results
