@@ -340,6 +340,22 @@ defmodule ExFleetYardsApi.Schemas.Single do
     })
   end
 
+  defmodule UserSession do
+    require OpenApiSpex
+
+    OpenApiSpex.schema(%{
+      description: "Login information",
+      type: :object,
+      properties: %{
+        scopes: %Schema{type: :object, properties: ExFleetYardsApi.Schemas.Gen.scope_properties()},
+        username: %Schema{type: :string},
+        password: %Schema{type: :string},
+        totp: %Schema{type: :string, format: :totp}
+      },
+      required: [:scopes]
+    })
+  end
+
   defmodule Error do
     require OpenApiSpex
 

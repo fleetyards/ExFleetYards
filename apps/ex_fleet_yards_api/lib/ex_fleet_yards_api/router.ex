@@ -37,8 +37,14 @@ defmodule ExFleetYardsApi.Router do
     end
 
     scope "/v2", ExFleetYardsApi do
-      get "/version", VersionController, :index
-      get "/version/sc-data", VersionController, :sc_data
+      scope "/session" do
+        post "/", UserSessionController, :create
+      end
+
+      scope "/version" do
+        get "/", VersionController, :index
+        get "/sc-data", VersionController, :sc_data
+      end
 
       scope "/game" do
         # get "/manufacturers", ManufacturerController, :index
@@ -55,10 +61,12 @@ defmodule ExFleetYardsApi.Router do
         resources "/stations", StationController, only: [:index, :show]
       end
 
-      get "/roadmap/active", RoadmapController, :active
-      get "/roadmap/released", RoadmapController, :released
-      get "/roadmap/unreleased", RoadmapController, :unreleased
-      resources "/roadmap", RoadmapController, only: [:index, :show]
+      scope "/roadmap" do
+        get "/active", RoadmapController, :active
+        get "/released", RoadmapController, :released
+        get "/unreleased", RoadmapController, :unreleased
+        resources "/", RoadmapController, only: [:index, :show]
+      end
     end
   end
 end

@@ -28,6 +28,13 @@ defmodule ExFleetYards.Repo.Account.UserToken do
   @hash_algorithm :sha256
   @rand_size 48
 
+  # Scopes
+  @scopes %{
+    "fleet" => ["read", "write", "admin"],
+    "hangar" => ["read", "write", "admin"],
+    "api" => ["read", "write", "admin"]
+  }
+
   @doc """
   Generates a token that will be stored in a signed place,
   such as session or cookie. As they are signed, those
@@ -43,6 +50,7 @@ defmodule ExFleetYards.Repo.Account.UserToken do
   end
 
   def build_api_token(user, scopes) do
+    scopes = transform_scopes(scopes)
     {token, db} = build_hashed_token(user, "api")
     {Base.url_encode64(token, padding: false), put_change(db, :scopes, scopes)}
   end
@@ -65,14 +73,16 @@ defmodule ExFleetYards.Repo.Account.UserToken do
   end
 
   def verify_token(token, context, nil) do
-    query = from(t in token_and_context_query(token, context))
+    query = from t in token_and_context_query(token, context), preload: :user
 
     {:ok, query}
   end
 
   def verify_token(token, context, days) when is_number(days) do
     query =
-      from t in token_and_context_query(token, context), where: t.created_at > ago(^days, "day")
+      from t in token_and_context_query(token, context),
+        where: t.created_at > ago(^days, "day"),
+        preload: :user
 
     {:ok, query}
   end
@@ -96,4 +106,30 @@ defmodule ExFleetYards.Repo.Account.UserToken do
   def user_and_contexts_query(user, contexts) when is_list(contexts) do
     from t in __MODULE__, where: t.user_id == ^user.id and t.context in ^contexts
   end
+
+  def transform_scopes(scopes) do
+    keys = Map.keys(@scopes)
+
+    scopes
+    |> Enum.filter(fn {key, _} -> Enum.member?(keys, key) end)
+    |> Enum.map(fn {key, _} = elem -> {key, transform_scope(elem)} end)
+    |> Enum.into(%{})
+  end
+
+  def transform_scope({key, scope}) when is_list(scope) do
+    scopes = @scopes[key]
+
+    scope
+    |> Enum.filter(fn key -> Enum.member?(scopes, key) end)
+  end
+
+  def transform_scope({key, scope}) when is_binary(scope) do
+    scopes = @scopes[key]
+
+    if Enum.member?(scopes, scope) do
+      [scope]
+    end
+  end
+
+  def scopes, do: @scopes
 end

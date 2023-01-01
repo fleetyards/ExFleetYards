@@ -10,15 +10,21 @@ defmodule ExFleetYardsApi.ErrorView do
     %{"code" => "invalid_pagination", "message" => message}
   end
 
+  def render("400.json", %{}) do
+    %{"code" => "invalid_argument"}
+  end
+
   def render("401.json", %{
-        reason: %ExFleetYardsApi.UnauthorizedException{message: message, scopes: scopes}
+        reason: %ExFleetYardsApi.UnauthorizedException{message: message} = error
       }) do
     json = %{"code" => "unauthorized", "message" => message}
 
-    if scopes do
-      Map.put(json, :scopes, scopes)
-    else
-      json
+    case Map.get(error, :scopes) do
+      nil ->
+        json
+
+      scopes ->
+        Map.put(json, :scopes, scopes)
     end
   end
 

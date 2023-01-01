@@ -25,6 +25,8 @@ defmodule ExFleetYardsApi do
       import Plug.Conn
       alias ExFleetYardsApi.NotFoundException
       alias ExFleetYardsApi.InvalidPaginationException
+      alias ExFleetYardsApi.UnauthorizedException
+
       alias ExFleetYards.Repo
       alias ExFleetYards.Repo.Game
 
@@ -129,19 +131,23 @@ defmodule ExFleetYardsApi do
     defexception [:message, :scopes]
 
     @impl Exception
-    def exception([]) do
+    def exception(list) do
       %__MODULE__{message: "You are not authorized to access this"}
+      |> add_message(list)
+      |> add_scopes(list)
     end
 
-    @impl Exception
-    def exception(scopes: scopes) do
-      Map.put(exception([]), :scopes, scopes)
+    def add_message(error, message: message) do
+      Map.put(error, :message, message)
     end
 
-    @impl Exception
-    def exception(message: message, scopes: scopes) do
-      %__MODULE__{message: message, scopes: scopes}
+    def add_message(error, _), do: error
+
+    def add_scopes(error, scopes: scopes) do
+      Map.put(error, :scopes, scopes)
     end
+
+    def add_scopes(error, _), do: error
   end
 
   defimpl Plug.Exception, for: UnauthorizedException do
