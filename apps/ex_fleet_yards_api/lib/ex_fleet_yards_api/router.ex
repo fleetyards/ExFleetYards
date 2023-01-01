@@ -11,6 +11,10 @@ defmodule ExFleetYardsApi.Router do
     plug :fetch_api_token
   end
 
+  pipeline :scope_api_read do
+    plug :required_api_scope, %{"api" => "read"}
+  end
+
   pipeline :ui do
     plug :accepts, ["html"]
     plug :fetch_session
@@ -33,12 +37,24 @@ defmodule ExFleetYardsApi.Router do
 
     scope "/ui" do
       pipe_through :ui
-      get "/", OpenApiSpex.Plug.SwaggerUI, path: root <> "/v2.json"
+      get "/", OpenApiSpex.Plug.SwaggerUI, path: root <> "/v2.json", persist_authorization: true
     end
 
     scope "/v2", ExFleetYardsApi do
       scope "/session" do
         post "/", UserSessionController, :create
+        get "/", UserSessionController, :get
+        delete "/logout", UserSessionController, :delete
+        delete "/logout/:id", UserSessionController, :delete_other
+        delete "/logout/all", UserSessionController, :delete_other
+
+        scope "/" do
+          pipe_through :scope_api_read
+
+          get "/tokens/:id", UserSessionController, :get
+
+          get "/tokens", UserSessionController, :list
+        end
       end
 
       scope "/version" do

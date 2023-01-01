@@ -13,4 +13,14 @@ defmodule ExFleetYardsApi.Schemas.List do
   gen_pagination(ExFleetYardsApi.Schemas.Single.ShopCommodity,
     extra_properties: [shop: ExFleetYardsApi.Schemas.Single.Shop]
   )
+
+  defmodule UserTokenList do
+    require OpenApiSpex
+
+    OpenApiSpex.schema(%{
+      description: "User Token",
+      type: :array,
+      items: ExFleetYardsApi.Schemas.Single.UserToken
+    })
+  end
 end

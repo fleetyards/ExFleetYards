@@ -17,7 +17,7 @@ defmodule ExFleetYards.Repo.Account.UserToken do
     field :scopes, {:map, {:array, :string}}
     belongs_to :fleet, Game.Fleet, type: Ecto.UUID
 
-    timestamps(inserted_at: :created_at, updated_at: false)
+    timestamps(inserted_at: :created_at, updated_at: false, type: :utc_datetime)
   end
 
   def changeset(token \\ %__MODULE__{}, attrs) do
@@ -103,8 +103,15 @@ defmodule ExFleetYards.Repo.Account.UserToken do
     from t in __MODULE__, where: t.user_id == ^user.id
   end
 
+  def user_and_contexts_query(user, context) when is_binary(context),
+    do: user_and_contexts_query(user, [context])
+
   def user_and_contexts_query(user, contexts) when is_list(contexts) do
     from t in __MODULE__, where: t.user_id == ^user.id and t.context in ^contexts
+  end
+
+  def user_and_id_query(user, id) when is_binary(id) do
+    from t in __MODULE__, where: t.user_id == ^user.id and t.id == ^id
   end
 
   def transform_scopes(scopes) do

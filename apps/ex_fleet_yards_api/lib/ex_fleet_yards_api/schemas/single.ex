@@ -356,6 +356,22 @@ defmodule ExFleetYardsApi.Schemas.Single do
     })
   end
 
+  defmodule UserToken do
+    require OpenApiSpex
+
+    OpenApiSpex.schema(%{
+      description: "User Token",
+      type: :object,
+      properties: %{
+        id: %Schema{type: :string, format: :uuid},
+        scopes: %Schema{type: :object, properties: ExFleetYardsApi.Schemas.Gen.scope_properties()},
+        createdAt: %Schema{type: :string, description: "Create timestamp", format: :"date-time"},
+        context: %Schema{type: :string, example: "api"}
+      },
+      required: [:id, :scopes, :context]
+    })
+  end
+
   defmodule Error do
     require OpenApiSpex
 

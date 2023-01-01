@@ -47,7 +47,7 @@ defmodule ExFleetYards.Repo.Account.User do
     field :normalized_email, :string
     field :hangar_updated_at, :naive_datetime
 
-    timestamps(inserted_at: :created_at)
+    timestamps(inserted_at: :created_at, type: :utc_datetime)
   end
 
   def registration_changeset(user \\ %__MODULE__{}, attrs) do
