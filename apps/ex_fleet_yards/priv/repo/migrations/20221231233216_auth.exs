@@ -8,11 +8,11 @@ defmodule ExFleetYards.Repo.Migrations.Auth do
       add :id, :uuid, primary_key: true, null: false, default: fragment("gen_random_uuid()")
       add :user_id, references(:users, on_delete: :delete_all, type: :uuid), null: false
       add :token, :binary, null: false
-      add :context, :binary, null: false
+      add :context, :string, null: false
       add :scopes, :jsonb
       add :fleet_id, references(:fleets, on_delete: :nilify_all, type: :uuid)
 
-      timestamps(inserted_at: :created_at)
+      timestamps(inserted_at: :created_at, updated_at: false)
     end
   end
 end

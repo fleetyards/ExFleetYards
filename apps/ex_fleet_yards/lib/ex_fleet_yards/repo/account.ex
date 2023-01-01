@@ -57,4 +57,18 @@ defmodule ExFleetYards.Repo.Account do
     |> User.registration_changeset(attrs)
     |> Repo.insert()
   end
+
+  def get_api_token(user, scopes) do
+    {token, user_token} = UserToken.build_api_token(user, scopes)
+    Repo.insert!(user_token)
+    token
+  end
+
+  def get_user_by_token(token, context \\ "api") do
+    UserToken.verify_hashed_token(token, context)
+    |> case do
+      {:ok, query} -> Repo.one(query)
+      :error -> nil
+    end
+  end
 end
