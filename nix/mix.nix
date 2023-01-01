@@ -6,6 +6,7 @@ let
   buildErlangMk = lib.makeOverridable beamPackages.buildErlangMk;
 
   self = packages // (overrides self packages);
+
   packages = with beamPackages;
     with self; {
       appsignal = buildMix rec {
@@ -19,6 +20,19 @@ let
         };
 
         beamDeps = [ decorator hackney jason telemetry ];
+      };
+
+      bcrypt_elixir = buildMix rec {
+        name = "bcrypt_elixir";
+        version = "3.0.1";
+
+        src = fetchHex {
+          pkg = "${name}";
+          version = "${version}";
+          sha256 = "1kwnzcjf6v4af12nzw5b2fksk1m1fvbxvhclczy1wpb4zdgbjss8";
+        };
+
+        beamDeps = [ comeonin elixir_make ];
       };
 
       bunt = buildMix rec {
@@ -71,6 +85,19 @@ let
         };
 
         beamDeps = [ ecto_sql ];
+      };
+
+      comeonin = buildMix rec {
+        name = "comeonin";
+        version = "5.3.3";
+
+        src = fetchHex {
+          pkg = "${name}";
+          version = "${version}";
+          sha256 = "1pw4rhhsh8mwj26dkbxz2niih9j8pc3qijlpcl8jh208rg1cjf1y";
+        };
+
+        beamDeps = [ ];
       };
 
       connection = buildMix rec {
@@ -127,12 +154,12 @@ let
 
       credo = buildMix rec {
         name = "credo";
-        version = "1.6.7";
+        version = "1.7.0-rc.1";
 
         src = fetchHex {
           pkg = "${name}";
           version = "${version}";
-          sha256 = "1lvxzksdrc2lbl0rzrww4q5rmayf37q0phcpz2kyvxq7n2zi1qa1";
+          sha256 = "10q8w67gmw90hbwal3gvlba1z3zzrc567l8vz5r2s2mxiyyi6cjj";
         };
 
         beamDeps = [ bunt file_system jason ];
@@ -214,6 +241,19 @@ let
         };
 
         beamDeps = [ db_connection ecto postgrex telemetry ];
+      };
+
+      elixir_make = buildMix rec {
+        name = "elixir_make";
+        version = "0.7.3";
+
+        src = fetchHex {
+          pkg = "${name}";
+          version = "${version}";
+          sha256 = "0x5jw9n6xxmiybrv0y5n2w6kvfpjbsci9ji4l0gyvnvak7is7b94";
+        };
+
+        beamDeps = [ castore ];
       };
 
       esbuild = buildMix rec {
