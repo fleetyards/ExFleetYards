@@ -24,28 +24,32 @@ defmodule ExFleetYardsApi.Auth do
         raise(UnauthorizedException, scopes: scopes)
 
       token ->
-        check_scopes(token, scopes)
+        if !check_scopes(token, scopes) do
+          raise(UnauthorizedException, scopes: scopes)
+        end
+
         conn
     end
   end
 
   def check_scopes(token, scopes) do
-    for {scope, access} <- scopes do
-      check_scope(access, scopes, token.scopes[scope])
-    end
+    value =
+      Enum.map(scopes, fn {scope, access} -> check_scope(access, token.scopes[scope]) end)
+      |> Enum.member?(false)
 
-    true
+    !value
   end
 
-  def check_scope(_, scopes, nil) do
-    raise(UnauthorizedException, scopes: scopes)
+  def check_scope(_, nil) do
+    false
   end
 
-  def check_scope(access, scopes, token) when is_binary(access) do
-    if !Enum.member?(token, access) do
-      raise(UnauthorizedException, scopes: scopes)
-    end
+  def check_scope(access, token) when is_binary(access) do
+    Enum.member?(token, access)
   end
 
-  def check_scope(access, scopes, token), do: Enum.map(access, &check_scope(&1, scopes, token))
+  def check_scope(access, token) when is_list(access) do
+    value = Enum.map(access, &check_scope(&1, token)) |> Enum.member?(false)
+    !value
+  end
 end
