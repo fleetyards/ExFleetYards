@@ -3,10 +3,12 @@ defmodule ExFleetYardsApi.Router do
 
   import Plug.Conn
   import Phoenix.Controller
+  import ExFleetYardsApi.Auth
 
   pipeline :api do
     plug :accepts, ["json"]
     plug OpenApiSpex.Plug.PutApiSpec, module: ExFleetYardsApi.ApiSpec
+    plug :fetch_api_token
   end
 
   pipeline :ui do

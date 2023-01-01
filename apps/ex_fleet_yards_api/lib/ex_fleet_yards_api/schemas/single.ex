@@ -348,7 +348,8 @@ defmodule ExFleetYardsApi.Schemas.Single do
       type: :object,
       properties: %{
         code: %Schema{type: :string, example: "not_found"},
-        message: %Schema{type: :string, example: "Not Found"}
+        message: %Schema{type: :string, example: "Not Found"},
+        scopes: %Schema{type: :object, example: %{hangar: ["read"]}}
       },
       required: [:code]
     })

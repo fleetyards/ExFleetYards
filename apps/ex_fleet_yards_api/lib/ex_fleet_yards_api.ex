@@ -124,4 +124,28 @@ defmodule ExFleetYardsApi do
     def status(_), do: 400
     def actions(_), do: []
   end
+
+  defmodule UnauthorizedException do
+    defexception [:message, :scopes]
+
+    @impl Exception
+    def exception([]) do
+      %__MODULE__{message: "You are not authorized to access this"}
+    end
+
+    @impl Exception
+    def exception(scopes: scopes) do
+      Map.put(exception([]), :scopes, scopes)
+    end
+
+    @impl Exception
+    def exception(message: message, scopes: scopes) do
+      %__MODULE__{message: message, scopes: scopes}
+    end
+  end
+
+  defimpl Plug.Exception, for: UnauthorizedException do
+    def status(_), do: 401
+    def actions(_), do: []
+  end
 end
