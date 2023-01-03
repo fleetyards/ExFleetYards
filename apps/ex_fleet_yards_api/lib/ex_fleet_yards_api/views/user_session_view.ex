@@ -4,6 +4,7 @@ defmodule ExFleetYardsApi.UserSessionView do
   def render("create.json", %{token: token}) do
     %{
       code: "success",
+      context: "api",
       token: token
     }
   end

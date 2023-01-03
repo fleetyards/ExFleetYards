@@ -84,7 +84,8 @@ defmodule ExFleetYards.Repo.Account.User do
     |> prepare_changes(&hash_password/1)
   end
 
-  defp hash_password(changeset) do
+  @doc false
+  def hash_password(changeset) do
     password = get_change(changeset, :password)
 
     changeset

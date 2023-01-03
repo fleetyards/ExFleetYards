@@ -36,7 +36,9 @@ defmodule ExFleetYardsApi.UserSessionController do
 
     token = Account.get_api_token(user, scopes)
 
-    render(conn, "create.json", token: token)
+    conn
+    |> put_status(:created)
+    |> render("create.json", token: token)
   end
 
   def create(conn, %{"scopes" => scopes}) do
@@ -46,7 +48,9 @@ defmodule ExFleetYardsApi.UserSessionController do
 
     token = Account.get_api_token(user, scopes)
 
-    render(conn, "create.json", token: token)
+    conn
+    |> put_status(:created)
+    |> render("create.json", token: token)
   end
 
   operation :list,
