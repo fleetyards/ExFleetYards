@@ -211,7 +211,7 @@ defmodule ExFleetYardsApi.Schemas.Single do
             type: :object,
             properties: %{
               name: %Schema{type: :string},
-              group: %Schema{type: :group},
+              group: %Schema{type: :string},
               size: %Schema{type: :string, enum: ExFleetYards.Repo.Types.ShipSize.all()},
               sizeLabel: %Schema{type: :string},
               type: %Schema{type: :string, enum: ExFleetYards.Repo.Types.DockType.all()},
@@ -340,6 +340,38 @@ defmodule ExFleetYardsApi.Schemas.Single do
     })
   end
 
+  defmodule UserSession do
+    require OpenApiSpex
+
+    OpenApiSpex.schema(%{
+      description: "Login information",
+      type: :object,
+      properties: %{
+        scopes: %Schema{type: :object, properties: ExFleetYardsApi.Schemas.Gen.scope_properties()},
+        username: %Schema{type: :string},
+        password: %Schema{type: :string},
+        totp: %Schema{type: :string, format: :totp}
+      },
+      required: [:scopes]
+    })
+  end
+
+  defmodule UserToken do
+    require OpenApiSpex
+
+    OpenApiSpex.schema(%{
+      description: "User Token",
+      type: :object,
+      properties: %{
+        id: %Schema{type: :string, format: :uuid},
+        scopes: %Schema{type: :object, properties: ExFleetYardsApi.Schemas.Gen.scope_properties()},
+        createdAt: %Schema{type: :string, description: "Create timestamp", format: :"date-time"},
+        context: %Schema{type: :string, example: "api"}
+      },
+      required: [:id, :scopes, :context]
+    })
+  end
+
   defmodule Error do
     require OpenApiSpex
 
@@ -348,7 +380,8 @@ defmodule ExFleetYardsApi.Schemas.Single do
       type: :object,
       properties: %{
         code: %Schema{type: :string, example: "not_found"},
-        message: %Schema{type: :string, example: "Not Found"}
+        message: %Schema{type: :string, example: "Not Found"},
+        scopes: %Schema{type: :object, example: %{hangar: ["read"]}}
       },
       required: [:code]
     })

@@ -112,4 +112,10 @@ defmodule ExFleetYards.Repo.Types do
     harvestable: 11,
     consumer_goods: 12
   )
+
+  enum(TokenScope, :string,
+    read: "read",
+    write: "write",
+    admin: "admin"
+  )
 end
