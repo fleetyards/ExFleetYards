@@ -167,6 +167,14 @@
           "message": {
             "example": "Not Found",
             "type": "string"
+          },
+          "scopes": {
+            "example": {
+              "hangar": [
+                "read"
+              ]
+            },
+            "type": "object"
           }
         },
         "required": [
@@ -652,7 +660,7 @@
             "items": {
               "properties": {
                 "group": {
-                  "type": "group"
+                  "type": "string"
                 },
                 "name": {
                   "type": "string"
@@ -810,6 +818,129 @@
         ],
         "title": "StationList",
         "type": "object"
+      },
+      "UserSession": {
+        "description": "Login information",
+        "properties": {
+          "password": {
+            "type": "string"
+          },
+          "scopes": {
+            "properties": {
+              "api": {
+                "example": [
+                  "read",
+                  "write"
+                ],
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "fleet": {
+                "example": [
+                  "read",
+                  "write"
+                ],
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "hangar": {
+                "example": [
+                  "read",
+                  "write"
+                ],
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              }
+            },
+            "type": "object"
+          },
+          "totp": {
+            "format": "totp",
+            "type": "string"
+          },
+          "username": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "scopes"
+        ],
+        "title": "UserSession",
+        "type": "object"
+      },
+      "UserToken": {
+        "description": "User Token",
+        "properties": {
+          "context": {
+            "example": "api",
+            "type": "string"
+          },
+          "createdAt": {
+            "description": "Create timestamp",
+            "format": "date-time",
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "scopes": {
+            "properties": {
+              "api": {
+                "example": [
+                  "read",
+                  "write"
+                ],
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "fleet": {
+                "example": [
+                  "read",
+                  "write"
+                ],
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "hangar": {
+                "example": [
+                  "read",
+                  "write"
+                ],
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              }
+            },
+            "type": "object"
+          }
+        },
+        "required": [
+          "id",
+          "scopes",
+          "context"
+        ],
+        "title": "UserToken",
+        "type": "object"
+      },
+      "UserTokenList": {
+        "description": "User Token",
+        "items": {
+          "$ref": "#/components/schemas/UserToken"
+        },
+        "title": "UserTokenList",
+        "type": "array"
       },
       "VersionResponse": {
         "description": "server version",
@@ -2078,6 +2209,349 @@
         },
         "tags": [
           "roadmap"
+        ]
+      }
+    },
+    "/api/v2/session": {
+      "get": {
+        "callbacks": {},
+        "operationId": "ExFleetYardsApi.UserSessionController.get_self",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserToken"
+                }
+              }
+            },
+            "description": "UserToken"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "tags": [
+          "session"
+        ]
+      },
+      "post": {
+        "callbacks": {},
+        "operationId": "ExFleetYardsApi.UserSessionController.create",
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserSession"
+              }
+            }
+          },
+          "description": "User Params",
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "UserToken"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          }
+        },
+        "tags": [
+          "session"
+        ]
+      }
+    },
+    "/api/v2/session/logout": {
+      "delete": {
+        "callbacks": {},
+        "description": "Logout token",
+        "operationId": "ExFleetYardsApi.UserSessionController.delete",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserToken"
+                }
+              }
+            },
+            "description": "UserToken"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "tags": [
+          "session"
+        ]
+      }
+    },
+    "/api/v2/session/logout/all": {
+      "delete": {
+        "callbacks": {},
+        "operationId": "ExFleetYardsApi.UserSessionController.delete_all",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          }
+        },
+        "security": [
+          {
+            "authorization": [
+              "api:admin"
+            ]
+          }
+        ],
+        "tags": [
+          "session"
+        ]
+      }
+    },
+    "/api/v2/session/logout/{id}": {
+      "delete": {
+        "callbacks": {},
+        "operationId": "ExFleetYardsApi.UserSessionController.delete_other",
+        "parameters": [
+          {
+            "description": "",
+            "example": "all",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          }
+        },
+        "security": [
+          {
+            "authorization": [
+              "api:admin"
+            ]
+          }
+        ],
+        "tags": [
+          "session"
+        ]
+      }
+    },
+    "/api/v2/session/tokens": {
+      "get": {
+        "callbacks": {},
+        "operationId": "ExFleetYardsApi.UserSessionController.list",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserTokenList"
+                }
+              }
+            },
+            "description": "UserTokenList"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          }
+        },
+        "security": [
+          {
+            "authorization": [
+              "api:read"
+            ]
+          }
+        ],
+        "tags": [
+          "session"
+        ]
+      }
+    },
+    "/api/v2/session/tokens/{id}": {
+      "get": {
+        "callbacks": {},
+        "operationId": "ExFleetYardsApi.UserSessionController.get",
+        "parameters": [
+          {
+            "description": "",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserToken"
+                }
+              }
+            },
+            "description": "UserToken"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          }
+        },
+        "security": [
+          {
+            "authorization": [
+              "api:read"
+            ]
+          }
+        ],
+        "tags": [
+          "session"
         ]
       }
     },
