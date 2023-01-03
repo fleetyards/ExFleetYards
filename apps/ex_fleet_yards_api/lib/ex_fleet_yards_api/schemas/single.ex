@@ -211,7 +211,7 @@ defmodule ExFleetYardsApi.Schemas.Single do
             type: :object,
             properties: %{
               name: %Schema{type: :string},
-              group: %Schema{type: :group},
+              group: %Schema{type: :string},
               size: %Schema{type: :string, enum: ExFleetYards.Repo.Types.ShipSize.all()},
               sizeLabel: %Schema{type: :string},
               type: %Schema{type: :string, enum: ExFleetYards.Repo.Types.DockType.all()},

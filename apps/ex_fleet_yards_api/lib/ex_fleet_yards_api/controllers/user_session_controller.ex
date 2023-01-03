@@ -4,7 +4,6 @@ defmodule ExFleetYardsApi.UserSessionController do
   alias ExFleetYards.Repo.Account
 
   tags ["session"]
-  security [%{}, %{"authorization" => ["api:admin"]}]
 
   operation :create,
     request_body: {"User Params", "application/json", ExFleetYardsApi.Schemas.Single.UserSession},
@@ -54,7 +53,8 @@ defmodule ExFleetYardsApi.UserSessionController do
     responses: [
       ok: {"UserTokenList", "application/json", ExFleetYardsApi.Schemas.List.UserTokenList},
       unauthorized: {"Error", "application/json", Error}
-    ]
+    ],
+    security: [%{"authorization" => ["api:read"]}]
 
   def list(conn, %{}) do
     user = conn.assigns.current_token.user
@@ -68,13 +68,14 @@ defmodule ExFleetYardsApi.UserSessionController do
 
   operation :get,
     parameters: [
-      id: [in: :path, type: :string, required: false]
+      id: [in: :path, type: :string]
     ],
     responses: [
       ok: {"UserToken", "application/json", ExFleetYardsApi.Schemas.Single.UserToken},
       not_found: {"Error", "application/json", Error},
       unauthorized: {"Error", "application/json", Error}
-    ]
+    ],
+    security: [%{"authorization" => ["api:read"]}]
 
   def get(conn, %{"id" => id}) do
     token =
@@ -84,7 +85,15 @@ defmodule ExFleetYardsApi.UserSessionController do
     render(conn, "token.json", token: token)
   end
 
-  def get(conn, %{}) do
+  operation :get_self,
+    responses: [
+      ok: {"UserToken", "application/json", ExFleetYardsApi.Schemas.Single.UserToken},
+      not_found: {"Error", "application/json", Error},
+      unauthorized: {"Error", "application/json", Error}
+    ],
+    security: [%{"authorization" => []}]
+
+  def get_self(conn, %{}) do
     ExFleetYardsApi.Auth.required_api_scope(conn, %{})
     token = conn.assigns.current_token
 
@@ -97,7 +106,8 @@ defmodule ExFleetYardsApi.UserSessionController do
       ok: {"UserToken", "application/json", ExFleetYardsApi.Schemas.Single.UserToken},
       not_found: {"Error", "application/json", Error},
       unauthorized: {"Error", "application/json", Error}
-    ]
+    ],
+    security: [%{"authorization" => []}]
 
   def delete(conn, %{}) do
     ExFleetYardsApi.Auth.required_api_scope(conn, %{})
@@ -108,17 +118,15 @@ defmodule ExFleetYardsApi.UserSessionController do
     json(conn, %{code: "success", message: "Logged out"})
   end
 
-  operation :delete_other,
-    parameters: [
-      id: [in: :path, type: :string, example: "all", required: false]
-    ],
+  operation :delete_all,
     responses: [
       ok: {"Success", "application/json", Error},
       not_found: {"Error", "application/json", Error},
       unauthorized: {"Error", "application/json", Error}
-    ]
+    ],
+    security: [%{"authorization" => ["api:admin"]}]
 
-  def delete_other(conn, %{"id" => "all"}) do
+  def delete_all(conn, %{}) do
     ExFleetYardsApi.Auth.required_api_scope(conn, %{"api" => "admin"})
     token = conn.assigns.current_token
 
@@ -127,6 +135,17 @@ defmodule ExFleetYardsApi.UserSessionController do
 
     json(conn, %{code: "success", message: "Logged out all"})
   end
+
+  operation :delete_other,
+    parameters: [
+      id: [in: :path, type: :string, example: "all"]
+    ],
+    responses: [
+      ok: {"Success", "application/json", Error},
+      not_found: {"Error", "application/json", Error},
+      unauthorized: {"Error", "application/json", Error}
+    ],
+    security: [%{"authorization" => ["api:admin"]}]
 
   def delete_other(conn, %{"id" => id}) do
     ExFleetYardsApi.Auth.required_api_scope(conn, %{"api" => "admin"})
