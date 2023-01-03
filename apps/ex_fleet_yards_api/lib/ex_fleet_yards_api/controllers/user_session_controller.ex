@@ -41,7 +41,6 @@ defmodule ExFleetYardsApi.UserSessionController do
   end
 
   def create(conn, %{"scopes" => scopes}) do
-    IO.inspect(conn)
     ExFleetYardsApi.Auth.required_api_scope(conn, %{"api" => "admin"})
 
     user = conn.assigns.current_token.user
@@ -132,10 +131,10 @@ defmodule ExFleetYardsApi.UserSessionController do
   def delete_other(conn, %{"id" => id}) do
     ExFleetYardsApi.Auth.required_api_scope(conn, %{"api" => "admin"})
 
-    Account.UserToken.user_and_id_query(conn.assigns.current_token.user, id)
-    |> Repo.delete()
-    |> IO.inspect()
+    token =
+      Account.UserToken.user_and_id_query(conn.assigns.current_token.user, id)
+      |> Repo.delete()
 
-    json(conn, %{code: "success", message: "Logged out token #{id}"})
+    json(conn, %{code: "success", message: "Logged out token #{id}", scopes: token.scopes})
   end
 end
