@@ -5,6 +5,7 @@ defmodule ExFleetYards.Repo.Account do
 
   alias ExFleetYards.Repo
   alias ExFleetYards.Repo.Account.{User, UserToken}
+  import Ecto.Query
 
   ## Database getters
   @doc """
@@ -16,7 +17,13 @@ defmodule ExFleetYards.Repo.Account do
       nil
   """
   def get_user_by_email(email) when is_binary(email) do
-    Repo.get_by(User, email: email)
+    # Repo.get_by(User, email: email)
+    query =
+      from u in User,
+        where: u.email == ^email,
+        where: not is_nil(u.confirmed_at)
+
+    Repo.one(query)
   end
 
   @doc """
@@ -28,7 +35,13 @@ defmodule ExFleetYards.Repo.Account do
       nil
   """
   def get_user_by_username(username) when is_binary(username) do
-    Repo.get_by(User, username: username)
+    # Repo.get_by(User, username: username, confirmed: !is_nil)
+    query =
+      from u in User,
+        where: u.username == ^username,
+        where: not is_nil(u.confirmed_at)
+
+    Repo.one(query)
   end
 
   def get_user(id) when is_binary(id) do

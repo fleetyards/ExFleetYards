@@ -17,8 +17,7 @@ defmodule ExFleetYards.Repo.Seeds.User do
            Repo.Account.User.registration_changeset(Map.from_struct(user))
            |> Repo.Account.User.hash_password()
            |> Ecto.Changeset.apply_action!(:insert)
-
-         user |> Map.get(:encrypted_password) |> IO.inspect()
+           |> Map.put(:confirmed_at, NaiveDateTime.utc_now() |> NaiveDateTime.truncate(:second))
 
          user
        end

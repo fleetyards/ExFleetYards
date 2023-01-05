@@ -3,6 +3,7 @@ defmodule ExFleetYards.Repo.Account.User do
 
   use Ecto.Schema
   import Ecto.Changeset
+  import ExFleetYards.Repo.Changeset
 
   @primary_key {:id, Ecto.UUID, []}
 
@@ -48,6 +49,27 @@ defmodule ExFleetYards.Repo.Account.User do
     field :hangar_updated_at, :naive_datetime
 
     timestamps(inserted_at: :created_at, type: :utc_datetime)
+  end
+
+  def info_changeset(user, attrs) do
+    user
+    |> cast(attrs, [
+      :rsi_handle,
+      :twitch,
+      :youtube,
+      :discord,
+      :guilded,
+      :homepage,
+      :public_hangar_loaners
+    ])
+    |> IO.inspect()
+    |> validate_rsi_handle
+    |> validate_twitch
+    |> validate_youtube
+    |> validate_discord_server
+    |> IO.inspect()
+
+    # TODO: guilded
   end
 
   def registration_changeset(user \\ %__MODULE__{}, attrs) do
@@ -118,4 +140,10 @@ defmodule ExFleetYards.Repo.Account.User do
       add_error(changeset, :current_password, "is not valid")
     end
   end
+
+  # TODO: add discord handle to user
+  # def validate_discord_handle(changeset) do
+  #  changeset
+  #  |> validate_format(:discord_handle, ~r/^((.[^\@\#\:]{2,32})#\d{4})/, message: "Discord handle not in the correct format")
+  # end
 end
