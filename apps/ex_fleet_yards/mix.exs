@@ -11,7 +11,7 @@ defmodule ExFleetYards.MixProject do
       lockfile: "../../mix.lock",
       elixir: "~> 1.12",
       elixirc_paths: elixirc_paths(Mix.env()),
-      start_permanent: Mix.env() == :prod,
+      start_permanent: Enum.member?([:prod, :staging], Mix.env()),
       aliases: aliases(),
       deps: deps(),
       releases: releases()

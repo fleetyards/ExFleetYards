@@ -56,3 +56,43 @@ jobs:
       run: mix test
     - name: Check Format
       run: mix fmt --check-formatted
+  release:
+    name: "Build release: ${{ matrix.name }} (${{ matrix.env }})"
+    strategy:
+      matrix:
+        name: [ "api", "web_api" ]
+        env: [ "prod", "staging" ]
+        exclude:
+          - name: web_api
+            env: staging
+    runs-on: ubuntu-latest
+    env:
+      MIX_ENV: ${{ matrix.env }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Elixir
+        uses: erlef/setup-beam@v1
+        with:
+          elixir-version: 1.13.0
+          otp-version: 25.1
+      - name: Restore dependencies cache
+        uses: actions/cache@v3
+        with:
+          path: deps
+          key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
+          restore-keys: ${{ runner.os }}-mix-
+      - name: Install dependencies
+        run: mix deps.get --only ${{ matrix.env }}
+      - name: Compile and digest
+        run: |
+          mix compile
+          mix phx.digest
+      - name: Create release
+        run: mix release ${{ matrix.name }}
+      - name: Package release
+        run: tar czf "mix-${{ matrix.name }}-${{ matrix.env }}.tar.gz" --directory "_build/${{ matrix.env }}/rel/" .
+      - name: Archive code coverage results
+        uses: actions/upload-artifact@v3
+        with:
+          name: "mix-${{ matrix.name }}-${{ matrix.env }}.tar.gz"
+          path: "mix-${{ matrix.name }}-${{ matrix.env }}.tar.gz"
