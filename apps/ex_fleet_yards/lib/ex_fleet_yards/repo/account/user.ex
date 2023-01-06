@@ -79,6 +79,11 @@ defmodule ExFleetYards.Repo.Account.User do
     |> validate_password()
   end
 
+  def confirm_changeset(user, attrs) do
+    user
+    |> cast(attrs, [:confirmed_at])
+  end
+
   defp validate_username(changeset) do
     changeset
     |> validate_required([:username])
