@@ -49,6 +49,7 @@ defmodule ExFleetYards.Umbrella.MixProject do
       setup: ["cmd mix setup"],
       fmt: ["format"],
       "api.routes": ["phx.routes ExFleetYardsApi.Router"],
+      "api.spec": ["openapi.spec.json --spec ExFleetYardsApi.ApiSpec --pretty"],
       "ecto.setup": ["cmd --app ex_fleet_yards mix ecto.setup"],
       "ecto.reset": ["cmd --app ex_fleet_yards mix ecto.reset"],
       routes: ["phx.routes ExFleetYardsWeb.Router"],
