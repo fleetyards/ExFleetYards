@@ -380,16 +380,20 @@ defmodule ExFleetYardsApi.Schemas.Single do
       description: "User Schema",
       type: :object,
       properties: %{
-        username: %Schema{type: :string},
+        username: %Schema{type: :string, description: "Fleetyards username"},
         avatar: %Schema{type: :string, format: :url},
-        rsiHandle: %Schema{type: :string},
-        discordServer: %Schema{type: :string, format: :url},
-        discordHandle: %Schema{type: :string, format: :url},
-        youtube: %Schema{type: :string, format: :url},
-        twitch: %Schema{type: :string, format: :url},
-        guilded: %Schema{type: :string, format: :url},
-        homepage: %Schema{type: :string, format: :url},
-        publicHangarLoaners: %Schema{type: :boolean}
+        rsiHandle: %Schema{type: :string, description: "RSI username"},
+        discordServer: %Schema{type: :string, format: :url, description: "Discord server"},
+        discordHandle: %Schema{type: :string, format: :url, description: "Discord username"},
+        youtube: %Schema{type: :string, format: :url, description: "Youtube Channel"},
+        twitch: %Schema{type: :string, format: :url, description: "Twitch channel"},
+        guilded: %Schema{type: :string, format: :url, description: "Guilded server"},
+        homepage: %Schema{type: :string, format: :url, description: "User Homepage"},
+        publicHangarLoaners: %Schema{
+          type: :boolean,
+          description: "Show loaner hints in public hangar"
+        },
+        publicHangar: %Schema{type: :boolean, description: "Show public hangar"}
       },
       required: [:username]
     })

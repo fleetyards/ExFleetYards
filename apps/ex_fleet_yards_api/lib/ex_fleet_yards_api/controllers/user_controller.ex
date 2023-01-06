@@ -6,6 +6,7 @@ defmodule ExFleetYardsApi.UserController do
   tags ["user"]
 
   operation :get_current,
+    summary: "Get user info",
     responses: [
       ok: {"User", "application/json", ExFleetYardsApi.Schemas.Single.User},
       unauthorized: {"Error", "application/json", Error}
@@ -18,10 +19,11 @@ defmodule ExFleetYardsApi.UserController do
     user = conn.assigns.current_token.user
 
     conn
-    |> render("user.json", user: user)
+    |> render("user.json", user: user, public_hangar: true)
   end
 
   operation :get,
+    summary: "Get user info for a user",
     parameters: [
       username: [in: :path, type: :string]
     ],
@@ -39,11 +41,16 @@ defmodule ExFleetYardsApi.UserController do
         u -> u
       end
 
+    if !user.public_hangar do
+      raise(NotFoundException, message: "User `#{username}` not found")
+    end
+
     conn
-    |> render("user.json", user: user)
+    |> render("user.json", user: user, public_hangar: false)
   end
 
   operation :set,
+    summary: "Update user info",
     request_body: {"User", "application/json", ExFleetYardsApi.Schemas.Single.User},
     responses: [
       ok: {"User", "application/json", ExFleetYardsApi.Schemas.Single.User},
@@ -64,17 +71,17 @@ defmodule ExFleetYardsApi.UserController do
         {"rsiHandle", v} -> {"rsi_handle", v}
         {"discordServer", v} -> {"discord", v}
         {"discordHandle", v} -> {"discord_handle", v}
+        {"publicHangar", v} -> {"public_hangar", v}
         v -> v
       end)
       |> Enum.into(%{})
-      |> IO.inspect()
 
     Account.User.info_changeset(user, params)
     |> Repo.update()
     |> case do
       {:ok, user} ->
         conn
-        |> render("user.json", user: user)
+        |> render("user.json", user: user, public_hangar: true)
 
       {:error, changeset} ->
         conn
@@ -83,8 +90,3 @@ defmodule ExFleetYardsApi.UserController do
     end
   end
 end
-
-# {
-#  "rsiHandle": "kloenk",
-#  "twitch": "der_kloenk"
-# }

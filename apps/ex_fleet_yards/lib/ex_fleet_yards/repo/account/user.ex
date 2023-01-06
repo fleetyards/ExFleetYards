@@ -60,7 +60,8 @@ defmodule ExFleetYards.Repo.Account.User do
       :discord,
       :guilded,
       :homepage,
-      :public_hangar_loaners
+      :public_hangar_loaners,
+      :public_hangar
     ])
     |> IO.inspect()
     |> validate_rsi_handle
