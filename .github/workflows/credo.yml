@@ -40,3 +40,7 @@ jobs:
       with:
         sarif_file: credo.sarif
         wait-for-processing: true
+    - name: Upload analysis results to Qodana
+      uses: JetBrains/qodana-action@main
+      env:
+        QODANA_TOKEN: ${{ secrets.QODANA_TOKEN }}
