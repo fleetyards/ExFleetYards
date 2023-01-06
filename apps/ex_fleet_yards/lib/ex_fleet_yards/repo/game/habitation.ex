@@ -1,7 +1,6 @@
 defmodule ExFleetYards.Repo.Game.Habitation do
   @moduledoc "Habitation of a station"
   use Ecto.Schema
-  import Ecto.Changeset
   alias ExFleetYards.Repo.Game
   alias ExFleetYards.Repo.Types
 

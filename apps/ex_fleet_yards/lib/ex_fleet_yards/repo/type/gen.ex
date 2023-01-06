@@ -9,10 +9,9 @@ defmodule ExFleetYards.Repo.TypeGen do
   end
 
   defp humanize(atom) do
-    string =
-      Atom.to_string(atom)
-      |> String.split("_")
-      |> Enum.map_join(" ", &String.capitalize/1)
+    Atom.to_string(atom)
+    |> String.split("_")
+    |> Enum.map_join(" ", &String.capitalize/1)
   end
 
   defmacro enum(name, type, types) do

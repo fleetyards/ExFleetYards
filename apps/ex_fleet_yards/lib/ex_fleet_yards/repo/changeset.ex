@@ -78,8 +78,6 @@ defmodule ExFleetYards.Repo.Changeset do
       if String.starts_with?(url, "http") do
         URI.parse(url)
       else
-        [host | path] = String.split(url, "/", parts: 2)
-
         case String.split(url, "/", parts: 2) do
           [host, path] ->
             %URI{host: host, path: path}
@@ -110,7 +108,7 @@ defmodule ExFleetYards.Repo.Changeset do
     URI.to_string(struct(URI, url))
   end
 
-  defp valid_url_host(nil, host, opts), do: nil
+  defp valid_url_host(nil, _host, _opts), do: nil
 
   defp valid_url_host(url, host, opts) when is_binary(url) and is_binary(host),
     do: valid_url_host(url, [host], opts)

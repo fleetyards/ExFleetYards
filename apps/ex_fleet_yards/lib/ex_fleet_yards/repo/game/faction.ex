@@ -2,7 +2,6 @@ defmodule ExFleetYards.Repo.Game.Faction do
   @moduledoc "Faction"
 
   use Ecto.Schema
-  alias ExFleetYards.Repo.Game
 
   @primary_key {:id, Ecto.UUID, []}
 
