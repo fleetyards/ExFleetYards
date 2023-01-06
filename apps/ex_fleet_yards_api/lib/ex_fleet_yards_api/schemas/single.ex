@@ -372,6 +372,33 @@ defmodule ExFleetYardsApi.Schemas.Single do
     })
   end
 
+  defmodule User do
+    @moduledoc "User Schema"
+    require OpenApiSpex
+
+    OpenApiSpex.schema(%{
+      description: "User Schema",
+      type: :object,
+      properties: %{
+        username: %Schema{type: :string, description: "Fleetyards username"},
+        avatar: %Schema{type: :string, format: :url},
+        rsiHandle: %Schema{type: :string, description: "RSI username"},
+        discordServer: %Schema{type: :string, format: :url, description: "Discord server"},
+        discordHandle: %Schema{type: :string, format: :url, description: "Discord username"},
+        youtube: %Schema{type: :string, format: :url, description: "Youtube Channel"},
+        twitch: %Schema{type: :string, format: :url, description: "Twitch channel"},
+        guilded: %Schema{type: :string, format: :url, description: "Guilded server"},
+        homepage: %Schema{type: :string, format: :url, description: "User Homepage"},
+        publicHangarLoaners: %Schema{
+          type: :boolean,
+          description: "Show loaner hints in public hangar"
+        },
+        publicHangar: %Schema{type: :boolean, description: "Show public hangar"}
+      },
+      required: [:username]
+    })
+  end
+
   defmodule Error do
     require OpenApiSpex
 

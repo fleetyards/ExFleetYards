@@ -91,6 +91,9 @@ config :phoenix, :plug_init_mode, :runtime
 # in production as building large stacktraces may be expensive.
 config :phoenix, :stacktrace_depth, 20
 
+# Disable openapi cache for development
+config :open_api_spex, :cache_adapter, OpenApiSpex.Plug.NoneCache
+
 config :appsignal, :config,
   active: false,
   env: :dev

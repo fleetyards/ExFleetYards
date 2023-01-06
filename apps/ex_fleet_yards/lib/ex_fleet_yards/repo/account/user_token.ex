@@ -30,6 +30,7 @@ defmodule ExFleetYards.Repo.Account.UserToken do
 
   # Scopes
   @scopes %{
+    "user" => ["write"],
     "fleet" => ["read", "write", "admin"],
     "hangar" => ["read", "write", "admin"],
     "api" => ["read", "write", "admin"]

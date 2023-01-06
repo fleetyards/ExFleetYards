@@ -11,6 +11,10 @@ defmodule ExFleetYardsApi.Router do
     plug :fetch_api_token
   end
 
+  pipeline :authenticated do
+    plug :required_api_scope, %{}
+  end
+
   pipeline :scope_api_read do
     plug :required_api_scope, %{"api" => "read"}
   end
@@ -55,6 +59,12 @@ defmodule ExFleetYardsApi.Router do
 
           get "/tokens", UserSessionController, :list
         end
+      end
+
+      scope "/users" do
+        get "/", UserController, :get_current
+        get "/:username", UserController, :get
+        post "/", UserController, :set
       end
 
       scope "/version" do

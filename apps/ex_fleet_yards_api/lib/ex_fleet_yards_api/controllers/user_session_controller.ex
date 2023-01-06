@@ -3,7 +3,7 @@ defmodule ExFleetYardsApi.UserSessionController do
 
   alias ExFleetYards.Repo.Account
 
-  tags ["session"]
+  tags ["session", "user"]
 
   operation :create,
     request_body: {"User Params", "application/json", ExFleetYardsApi.Schemas.Single.UserSession},
