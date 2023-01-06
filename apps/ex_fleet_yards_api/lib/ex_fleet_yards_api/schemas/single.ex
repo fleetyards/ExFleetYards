@@ -401,6 +401,23 @@ defmodule ExFleetYardsApi.Schemas.Single do
     })
   end
 
+  defmodule Version do
+    require OpenApiSpex
+
+    OpenApiSpex.schema(%{
+      title: "VersionResponse",
+      description: "server version",
+      type: :object,
+      properties: %{
+        version: %Schema{type: :string},
+        codename: %Schema{type: :string, format: :version},
+        hash: %Schema{type: :string, format: :hash, description: "Git hash"}
+      },
+      required: [:version],
+      example: %{"codename" => "Elixir", "version" => "v0.1.0"}
+    })
+  end
+
   defmodule Error do
     @moduledoc false
     require OpenApiSpex

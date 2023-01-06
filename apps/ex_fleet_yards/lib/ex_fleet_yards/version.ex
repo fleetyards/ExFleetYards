@@ -2,36 +2,29 @@ defmodule ExFleetYards.Version do
   @moduledoc """
   Get server version
   """
-  alias OpenApiSpex.Schema
 
-  require OpenApiSpex
-
-  OpenApiSpex.schema(%{
-    title: "VersionResponse",
-    description: "server version",
-    type: :object,
-    properties: %{
-      version: %Schema{type: :string},
-      codename: %Schema{type: :string, format: :version}
-    },
-    required: [:version],
-    example: %{"codename" => "Elixir", "version" => "v0.1.0"},
-    "x-struct": __MODULE__
-  })
-
+  @doc """
+  Get Name of the version
+  """
+  @spec version_name() :: String.t()
   def version_name() do
     ExFleetYards.Config.fetch!(:version_name)
   end
 
-  def version_number() do
+  @doc """
+  Get App version
+  """
+  @spec version() :: String.t()
+  def version() do
     Application.spec(:ex_fleet_yards, :vsn)
     |> to_string()
   end
 
-  def version do
-    %__MODULE__{
-      version: version_number(),
-      codename: version_name()
-    }
+  @doc """
+  Get Git version
+  """
+  @spec git_version() :: String.t()
+  def git_version() do
+    ExFleetYards.Config.fetch!(:git_commit)
   end
 end

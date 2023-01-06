@@ -1,25 +1,31 @@
 defmodule ExFleetYardsApi.VersionController do
   use ExFleetYardsApi, :controller
+  alias ExFleetYards.Version
 
   tags ["version"]
 
   operation :index,
     summary: "Get server version",
     responses: [
-      ok: {"Version", "application/json", ExFleetYards.Version}
+      ok: {"Version", "application/json", ExFleetYardsApi.Schemas.Single.Version}
     ]
 
   def index(conn, _params) do
-    json(conn, ExFleetYards.Version.version())
+    conn
+    |> render("version.json",
+      version: Version.version(),
+      hash: Version.git_version(),
+      codename: Version.version_name()
+    )
   end
 
   operation :sc_data,
     summary: "Get Star Citizen data version",
     responses: [
-      ok: {"Version", "application/json", ExFleetYards.Version}
+      ok: {"Version", "application/json", ExFleetYardsApi.Schemas.Single.Version}
     ]
 
   def sc_data(conn, _params) do
-    json(conn, %{version: ExFleetYards.Repo.Import.current_version()})
+    render(conn, "version.json", version: ExFleetYards.Repo.Import.current_version())
   end
 end

@@ -9,11 +9,20 @@
 # move said applications out of the umbrella.
 import Config
 
+commit =
+  if is_nil(System.get_env("FLEETYARDS_GIT_COMMIT")) do
+    {hash, _} = System.cmd("git", ["rev-parse", "HEAD"])
+    hash |> String.trim()
+  else
+    System.get_env("FLEETYARDS_GIT_COMMIT")
+  end
+
 # Configure Mix tasks and generators
 config :ex_fleet_yards,
   ecto_repos: [ExFleetYards.Repo],
   version_name: "Elixir",
-  env: config_env()
+  env: config_env(),
+  git_commit: commit
 
 #  seeds_path = Application.app_dir(:ex_fleet_yards)
 #  |> IO.inspect
