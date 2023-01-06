@@ -1,4 +1,6 @@
 defmodule ExFleetYardsApi.Schemas.Gen do
+  @moduledoc false
+
   defmacro gen_pagination(inner, opts \\ []) do
     inner = inner |> Macro.expand_once(__CALLER__)
     name = inner |> Module.split() |> List.last()
@@ -16,19 +18,7 @@ defmodule ExFleetYardsApi.Schemas.Gen do
       |> Map.merge(extra_properties)
       |> Macro.escape()
 
-    content =
-      quote do
-        require OpenApiSpex
-
-        OpenApiSpex.schema(%{
-          description: unquote("#{name} List"),
-          type: :object,
-          properties: unquote(properties),
-          required: [:data, :metadata]
-        })
-
-        def inner(), do: unquote(inner)
-      end
+    content = gen_content(name, properties, inner)
 
     module_name = String.to_atom("#{name}List")
     module = Module.concat([ExFleetYardsApi, Schemas, List, module_name])
@@ -38,6 +28,21 @@ defmodule ExFleetYardsApi.Schemas.Gen do
       defmodule unquote(module) do
         unquote(content)
       end
+    end
+  end
+
+  defp gen_content(name, properties, inner) do
+    quote do
+      require OpenApiSpex
+
+      OpenApiSpex.schema(%{
+        description: unquote("#{name} List"),
+        type: :object,
+        properties: unquote(properties),
+        required: [:data, :metadata]
+      })
+
+      def inner(), do: unquote(inner)
     end
   end
 
@@ -60,17 +65,20 @@ defmodule ExFleetYardsApi.Schemas.Gen do
   #  end
   # end
 
+  @doc """
+  Get api specification for scopes
+  """
+  @spec scope_properties() :: map()
   def scope_properties do
-    keys =
-      Map.keys(ExFleetYards.Repo.Account.UserToken.scopes())
-      |> Enum.map(fn key ->
-        {key,
-         %OpenApiSpex.Schema{
-           type: :array,
-           example: ["read", "write"],
-           items: %OpenApiSpex.Schema{type: :string}
-         }}
-      end)
-      |> Enum.into(%{})
+    ExFleetYards.Repo.Account.UserToken.scopes()
+    |> Enum.map(fn {key, scopes} ->
+      {key,
+       %OpenApiSpex.Schema{
+         type: :array,
+         example: scopes,
+         items: %OpenApiSpex.Schema{type: :string}
+       }}
+    end)
+    |> Enum.into(%{})
   end
 end

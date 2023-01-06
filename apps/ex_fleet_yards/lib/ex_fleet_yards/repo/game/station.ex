@@ -2,7 +2,6 @@ defmodule ExFleetYards.Repo.Game.Station do
   @moduledoc "Station"
 
   use Ecto.Schema
-  import Ecto.Changeset
   alias ExFleetYards.Repo.Game
   alias ExFleetYards.Repo.Types
 

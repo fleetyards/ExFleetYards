@@ -3,7 +3,7 @@ defmodule ExFleetYardsApi.Telemetry.InstreamBufferedWritter do
   Buffered write adapter for an Instream connection
   """
   use GenServer
-  @behaviour TelemetryMetricsTelegraf.Writer
+  # @behaviour TelemetryMetricsTelegraf.Writer
 
   def start_link(opts) do
     GenServer.start_link(__MODULE__, opts, name: __MODULE__)
@@ -25,7 +25,7 @@ defmodule ExFleetYardsApi.Telemetry.InstreamBufferedWritter do
     {:ok, opts}
   end
 
-  @impl TelemetryMetricsTelegraf.Writer
+  # @impl TelemetryMetricsTelegraf.Writer
   def write(measurement_name, tags, fields, opts) do
     GenServer.cast(__MODULE__, {:write, measurement_name, tags, fields, opts})
   end

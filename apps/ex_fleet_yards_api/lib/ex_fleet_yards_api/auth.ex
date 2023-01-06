@@ -1,7 +1,7 @@
 defmodule ExFleetYardsApi.Auth do
   @moduledoc "Auth helpers"
   import Plug.Conn
-  import Phoenix.Controller
+  # import Phoenix.Controller
 
   alias ExFleetYardsApi.UnauthorizedException
 

@@ -9,16 +9,22 @@ defmodule ExFleetYards.Repo.Seeds.User do
          %{
            username: "testuser",
            email: "testuser@example.org",
-           password: "testuserpassword"
+           password: "testuserpassword",
+           confirmed_at: NaiveDateTime.utc_now() |> NaiveDateTime.truncate(:second)
+         },
+         %{
+           username: "unconfirmed",
+           email: "unconfirmed@example.org",
+           password: "unconfirmedpassword"
          }
        ],
        fn user ->
-         user =
+         new_user =
            Repo.Account.User.registration_changeset(Map.from_struct(user))
            |> Repo.Account.User.hash_password()
            |> Ecto.Changeset.apply_action!(:insert)
-           |> Map.put(:confirmed_at, NaiveDateTime.utc_now() |> NaiveDateTime.truncate(:second))
+           |> Map.put(:confirmed_at, Map.get(user, :confirmed_at))
 
-         user
+         new_user
        end
 end

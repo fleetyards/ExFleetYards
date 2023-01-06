@@ -1,4 +1,5 @@
 defmodule ExFleetYards.Repo.Game do
+  @moduledoc "Game objects helpers"
   alias ExFleetYards.Repo
   import Ecto.Query
 

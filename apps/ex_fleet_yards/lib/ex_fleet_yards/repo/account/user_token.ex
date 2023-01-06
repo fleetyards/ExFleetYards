@@ -4,7 +4,6 @@ defmodule ExFleetYards.Repo.Account.UserToken do
   use Ecto.Schema
   import Ecto.Query
   import Ecto.Changeset
-  alias ExFleetYards.Repo.Types
   alias ExFleetYards.Repo.Account
   alias ExFleetYards.Repo.Game
 

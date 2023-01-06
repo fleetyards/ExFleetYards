@@ -1,7 +1,6 @@
 defmodule ExFleetYards.Repo.Game.CelestialObject do
   @moduledoc "Celestial Object"
   use Ecto.Schema
-  import Ecto.Changeset
   alias ExFleetYards.Repo.Game
   alias ExFleetYards.Repo.Types
 

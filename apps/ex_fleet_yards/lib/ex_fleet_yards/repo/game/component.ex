@@ -1,6 +1,8 @@
 defmodule ExFleetYards.Repo.Game.Component do
+  @moduledoc """
+  Component for (usually) a ship in game
+  """
   use Ecto.Schema
-  import Ecto.Changeset
   alias ExFleetYards.Repo.Game
 
   @primary_key {:id, Ecto.UUID, []}

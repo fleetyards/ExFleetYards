@@ -4,7 +4,6 @@ defmodule ExFleetYards.Repo.Game.StarSystem do
   """
 
   use Ecto.Schema
-  import Ecto.Changeset
   alias ExFleetYards.Repo
   alias ExFleetYards.Repo.Game
 

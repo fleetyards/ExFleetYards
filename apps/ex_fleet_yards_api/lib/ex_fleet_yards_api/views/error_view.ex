@@ -40,7 +40,7 @@ defmodule ExFleetYardsApi.ErrorView do
     %{"code" => "not_found", "message" => "Not Found"}
   end
 
-  def render("500.json", %{reason: reason}) do
+  def render("500.json", %{reason: _reason}) do
     %{"code" => "internal_error"}
   end
 end
