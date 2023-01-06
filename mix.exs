@@ -6,11 +6,11 @@ defmodule ExFleetYards.Umbrella.MixProject do
       name: "Fleetyards",
       apps_path: "apps",
       version: "0.1.0",
-      start_permanent: Mix.env() == :prod,
+      start_permanent: Enum.member?([:prod, :staging], Mix.env()),
       deps: deps(),
       aliases: aliases(),
       releases: releases(),
-      default_release: :ex_fleet_yards_web
+      default_release: :api
     ]
   end
 
@@ -58,11 +58,20 @@ defmodule ExFleetYards.Umbrella.MixProject do
 
   defp releases do
     [
-      ex_fleet_yards_web: [
-        applications: [ex_fleet_yards_web: :permanent]
+      web_api: [
+        applications: [
+          ex_fleet_yards_web: :permanent,
+          ex_fleet_yards_api: :permanent
+        ],
+        config_providers: [{ExFleetYards.Config.ReleaseRuntimeProvider, []}]
       ],
-      ex_fleet_yards_api: [
-        applications: [ex_fleet_yards_api: :permanent]
+      web: [
+        applications: [ex_fleet_yards_web: :permanent],
+        config_providers: [{ExFleetYards.Config.ReleaseRuntimeProvider, []}]
+      ],
+      api: [
+        applications: [ex_fleet_yards_api: :permanent],
+        config_providers: [{ExFleetYards.Config.ReleaseRuntimeProvider, []}]
       ]
     ]
   end

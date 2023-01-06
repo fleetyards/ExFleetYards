@@ -9,7 +9,7 @@ defmodule ExFleetYardsApi.Application do
   @impl true
   def start(_type, _args) do
     merge_config(
-      ExFleetYards.Config.get(:ex_fleet_yards_api, [ExFleetYardsWeb.Api, :inline_endpoint], true)
+      ExFleetYards.Config.get(:ex_fleet_yards_api, [ExFleetYardsApi, :inline_endpoint], true)
     )
 
     children = [
@@ -50,26 +50,26 @@ defmodule ExFleetYardsApi.Application do
       Application.fetch_env!(:ex_fleet_yards_api, ExFleetYardsApi.Endpoint)
       |> Keyword.put(:server, true)
 
-    config =
-      case Config.fetch(:ex_fleet_yards_api, [ExFleetYardsApi, :port]) do
-        {:ok, port} ->
-          Keyword.put(config, :http, ip: get_conf([:http, :ip]), port: port)
+    # config =
+    #  case Config.fetch(:ex_fleet_yards_api, [ExFleetYardsApi, :port]) do
+    #    {:ok, port} ->
+    #      Keyword.put(config, :http, ip: get_conf([:http, :ip]), port: port)
 
-        :error ->
-          config
-      end
+    #    :error ->
+    #      config
+    #  end
 
-    config =
-      case Config.fetch(:ex_fleet_yards_api, [ExFleetYardsApi, :url]) do
-        {:ok, url} when is_list(url) ->
-          Keyword.put(config, :url, url)
+    # config =
+    #  case Config.fetch(:ex_fleet_yards_api, [ExFleetYardsApi, :url]) do
+    #    {:ok, url} when is_list(url) ->
+    #      Keyword.put(config, :url, url)
 
-        {:ok, url} when is_binary(url) ->
-          Keyword.put(config, :url, Keyword.put(get_conf(:url), :host, url))
+    #    {:ok, url} when is_binary(url) ->
+    #      Keyword.put(config, :url, Keyword.put(get_conf(:url), :host, url))
 
-        :error ->
-          Keyword.put(config, :url, get_conf(:url))
-      end
+    #    :error ->
+    #      Keyword.put(config, :url, get_conf(:url))
+    #  end
 
     Application.put_env(:ex_fleet_yards_api, ExFleetYardsApi.Endpoint, config)
   end
