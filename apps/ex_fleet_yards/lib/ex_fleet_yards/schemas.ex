@@ -1,8 +1,10 @@
 defmodule ExFleetYards.Schemas do
+  @moduledoc false
   alias OpenApiSpex.Schema
 
   # Pagination
   defmodule PaginationMetadata do
+    @moduledoc false
     require OpenApiSpex
 
     OpenApiSpex.schema(%{

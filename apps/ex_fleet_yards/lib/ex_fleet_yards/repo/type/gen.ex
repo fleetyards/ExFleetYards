@@ -29,15 +29,7 @@ defmodule ExFleetYards.Repo.TypeGen do
         def type, do: unquote(type)
 
         unquote do
-          for {atom, num} when is_atom(atom) <- types do
-            quote do
-              def load(unquote(num)), do: {:ok, unquote(atom)}
-              def cast(unquote(atom)), do: {:ok, unquote(num)}
-              def dump(unquote(atom)), do: {:ok, unquote(num)}
-
-              def humanize(unquote(atom)), do: unquote(humanize(atom))
-            end
-          end
+          gen_functions(types)
         end
 
         def dump(_), do: :error
@@ -61,5 +53,17 @@ defmodule ExFleetYards.Repo.TypeGen do
 
     Module.create(module, content, Macro.Env.location(__ENV__))
     |> Macro.escape()
+  end
+
+  defp gen_functions(types) do
+    for {atom, num} when is_atom(atom) <- types do
+      quote do
+        def load(unquote(num)), do: {:ok, unquote(atom)}
+        def cast(unquote(atom)), do: {:ok, unquote(num)}
+        def dump(unquote(atom)), do: {:ok, unquote(num)}
+
+        def humanize(unquote(atom)), do: unquote(humanize(atom))
+      end
+    end
   end
 end

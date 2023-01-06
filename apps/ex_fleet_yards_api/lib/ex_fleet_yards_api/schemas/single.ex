@@ -325,6 +325,7 @@ defmodule ExFleetYardsApi.Schemas.Single do
   end
 
   defmodule PaginationMetadata do
+    @moduledoc false
     require OpenApiSpex
 
     OpenApiSpex.schema(%{
@@ -341,6 +342,7 @@ defmodule ExFleetYardsApi.Schemas.Single do
   end
 
   defmodule UserSession do
+    @moduledoc false
     require OpenApiSpex
 
     OpenApiSpex.schema(%{
@@ -357,6 +359,7 @@ defmodule ExFleetYardsApi.Schemas.Single do
   end
 
   defmodule UserToken do
+    @moduledoc false
     require OpenApiSpex
 
     OpenApiSpex.schema(%{
@@ -400,6 +403,7 @@ defmodule ExFleetYardsApi.Schemas.Single do
   end
 
   defmodule Error do
+    @moduledoc false
     require OpenApiSpex
 
     OpenApiSpex.schema(%{

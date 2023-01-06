@@ -1,4 +1,7 @@
 defmodule Mix.Tasks.Nix.Appsignal do
+  @moduledoc """
+  Create a appsignal.json lock file read by the nix packaging
+  """
   @shortdoc "Generate Appsignal lock file"
 
   use Mix.Task

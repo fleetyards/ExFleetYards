@@ -1,4 +1,7 @@
 defmodule Mix.Tasks.Nix.Mix2nix do
+  @moduledoc """
+  Create a mix.nix lock file from the mix.lock file used by nix
+  """
   @shortdoc "Generate Appsignal lock file"
 
   use Mix.Task

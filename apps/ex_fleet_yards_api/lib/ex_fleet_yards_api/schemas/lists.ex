@@ -15,6 +15,7 @@ defmodule ExFleetYardsApi.Schemas.List do
   )
 
   defmodule UserTokenList do
+    @moduledoc false
     require OpenApiSpex
 
     OpenApiSpex.schema(%{

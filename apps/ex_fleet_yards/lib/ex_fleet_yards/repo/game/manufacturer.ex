@@ -1,4 +1,7 @@
 defmodule ExFleetYards.Repo.Game.Manufacturer do
+  @moduledoc """
+  In game manufacturer
+  """
   use Ecto.Schema
   import Ecto.Changeset
   alias ExFleetYards.Repo.Game
