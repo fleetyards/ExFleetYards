@@ -819,6 +819,66 @@
         "title": "StationList",
         "type": "object"
       },
+      "User": {
+        "description": "User Schema",
+        "properties": {
+          "avatar": {
+            "format": "url",
+            "type": "string"
+          },
+          "discordHandle": {
+            "description": "Discord username",
+            "format": "url",
+            "type": "string"
+          },
+          "discordServer": {
+            "description": "Discord server",
+            "format": "url",
+            "type": "string"
+          },
+          "guilded": {
+            "description": "Guilded server",
+            "format": "url",
+            "type": "string"
+          },
+          "homepage": {
+            "description": "User Homepage",
+            "format": "url",
+            "type": "string"
+          },
+          "publicHangar": {
+            "description": "Show public hangar",
+            "type": "boolean"
+          },
+          "publicHangarLoaners": {
+            "description": "Show loaner hints in public hangar",
+            "type": "boolean"
+          },
+          "rsiHandle": {
+            "description": "RSI username",
+            "type": "string"
+          },
+          "twitch": {
+            "description": "Twitch channel",
+            "format": "url",
+            "type": "string"
+          },
+          "username": {
+            "description": "Fleetyards username",
+            "type": "string"
+          },
+          "youtube": {
+            "description": "Youtube Channel",
+            "format": "url",
+            "type": "string"
+          }
+        },
+        "required": [
+          "username"
+        ],
+        "title": "User",
+        "type": "object"
+      },
       "UserSession": {
         "description": "Login information",
         "properties": {
@@ -848,6 +908,16 @@
                 "type": "array"
               },
               "hangar": {
+                "example": [
+                  "read",
+                  "write"
+                ],
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "user": {
                 "example": [
                   "read",
                   "write"
@@ -913,6 +983,16 @@
                 "type": "array"
               },
               "hangar": {
+                "example": [
+                  "read",
+                  "write"
+                ],
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "user": {
                 "example": [
                   "read",
                   "write"
@@ -2255,7 +2335,8 @@
           }
         ],
         "tags": [
-          "session"
+          "session",
+          "user"
         ]
       },
       "post": {
@@ -2296,7 +2377,8 @@
           }
         },
         "tags": [
-          "session"
+          "session",
+          "user"
         ]
       }
     },
@@ -2344,7 +2426,8 @@
           }
         ],
         "tags": [
-          "session"
+          "session",
+          "user"
         ]
       }
     },
@@ -2393,7 +2476,8 @@
           }
         ],
         "tags": [
-          "session"
+          "session",
+          "user"
         ]
       }
     },
@@ -2453,7 +2537,8 @@
           }
         ],
         "tags": [
-          "session"
+          "session",
+          "user"
         ]
       }
     },
@@ -2492,7 +2577,8 @@
           }
         ],
         "tags": [
-          "session"
+          "session",
+          "user"
         ]
       }
     },
@@ -2551,7 +2637,158 @@
           }
         ],
         "tags": [
-          "session"
+          "session",
+          "user"
+        ]
+      }
+    },
+    "/api/v2/users": {
+      "get": {
+        "callbacks": {},
+        "operationId": "ExFleetYardsApi.UserController.get_current",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            },
+            "description": "User"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Get user info",
+        "tags": [
+          "user"
+        ]
+      },
+      "post": {
+        "callbacks": {},
+        "operationId": "ExFleetYardsApi.UserController.set",
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          },
+          "description": "User",
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            },
+            "description": "User"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          }
+        },
+        "security": [
+          {
+            "authorization": [
+              "user:write"
+            ]
+          }
+        ],
+        "summary": "Update user info",
+        "tags": [
+          "user"
+        ]
+      }
+    },
+    "/api/v2/users/{username}": {
+      "get": {
+        "callbacks": {},
+        "operationId": "ExFleetYardsApi.UserController.get",
+        "parameters": [
+          {
+            "description": "",
+            "in": "path",
+            "name": "username",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            },
+            "description": "User"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          }
+        },
+        "summary": "Get user info for a user",
+        "tags": [
+          "user"
         ]
       }
     },
