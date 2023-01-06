@@ -12,7 +12,7 @@ defmodule ExFleetYardsApi.MixProject do
       elixir: "~> 1.13",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [] ++ Mix.compilers(),
-      start_permanent: Mix.env() == :prod,
+      start_permanent: Enum.member?([:prod, :staging], Mix.env()),
       aliases: aliases(),
       deps: deps()
     ]
