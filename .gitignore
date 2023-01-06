@@ -26,7 +26,7 @@ erl_crash.dump
 credo.sarif
 
 # Api spec
-fleetyards.json
+openapi.json
 
 /config/*.secrets.exs
 
