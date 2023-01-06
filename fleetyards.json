@@ -1037,6 +1037,11 @@
             "format": "version",
             "type": "string"
           },
+          "hash": {
+            "description": "Git hash",
+            "format": "hash",
+            "type": "string"
+          },
           "version": {
             "type": "string"
           }

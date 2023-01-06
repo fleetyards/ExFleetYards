@@ -71,6 +71,7 @@ ExFleetYardsApi.Schemas.Single.Component.html
 ExFleetYardsApi.Schemas.Single.Manufacturer.html
 ExFleetYardsApi.Schemas.Single.StarSystem.html
 ExFleetYardsApi.Schemas.Single.User.html
+ExFleetYardsApi.Schemas.Single.Version.html
 ExFleetYardsApi.StarSystemController.html
 ExFleetYardsApi.StarSystemView.html
 ExFleetYardsApi.StationController.html
@@ -83,6 +84,7 @@ ExFleetYardsApi.UserSessionController.html
 ExFleetYardsApi.UserSessionView.html
 ExFleetYardsApi.UserView.html
 ExFleetYardsApi.VersionController.html
+ExFleetYardsApi.VersionView.html
 ExFleetYardsApi.html
 ExFleetYardsWeb.Endpoint.html
 ExFleetYardsWeb.ErrorHelpers.html
@@ -123,7 +125,7 @@ dist/merriweather-latin-ext-300-normal-K6L27CZ5.woff2
 dist/merriweather-vietnamese-300-italic-EHHNZPUO.woff2
 dist/merriweather-vietnamese-300-normal-U376L4Z4.woff2
 dist/remixicon-NKANDIL5.woff2
-dist/search_items-3771B462.js
-dist/sidebar_items-EECB5E43.js
+dist/search_items-44EDC43A.js
+dist/sidebar_items-FFE757CC.js
 index.html
 search.html
