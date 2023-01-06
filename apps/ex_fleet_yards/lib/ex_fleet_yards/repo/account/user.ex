@@ -63,12 +63,10 @@ defmodule ExFleetYards.Repo.Account.User do
       :public_hangar_loaners,
       :public_hangar
     ])
-    |> IO.inspect()
     |> validate_rsi_handle
     |> validate_twitch
     |> validate_youtube
     |> validate_discord_server
-    |> IO.inspect()
 
     # TODO: guilded
   end
