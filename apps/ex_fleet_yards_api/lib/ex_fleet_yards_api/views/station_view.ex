@@ -3,7 +3,6 @@ defmodule ExFleetYardsApi.StationView do
   alias ExFleetYards.Repo.Game.Shop
   alias ExFleetYards.Repo.Game.ShopCommodity
   alias ExFleetYards.Repo.Game.Station
-  alias ExFleetYards.Repo.Types
 
   page_view()
 

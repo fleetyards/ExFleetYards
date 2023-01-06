@@ -12,11 +12,11 @@ defmodule ExFleetYardsApi.UserSessionController do
       unauthorized: {"Error", "application/json", Error}
     ]
 
-  def create(conn, %{
-        "username" => user,
-        "password" => password,
-        "totp" => totp,
-        "scopes" => scopes
+  def create(_conn, %{
+        "username" => _user,
+        "password" => _password,
+        "totp" => _totp,
+        "scopes" => _scopes
       }) do
     # TODO: implement actual totp stuff
     raise(UnauthorizedException, message: "OTP token required")

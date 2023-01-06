@@ -9,7 +9,7 @@ defmodule Mix.Tasks.Nix.Mix2nix do
   @impl Mix.Task
   def run([]) do
     lock =
-      run_mix2nix
+      run_mix2nix()
       |> nixfmt
 
     Mix.Generator.overwrite?("nix/mix.nix", lock)
@@ -23,7 +23,7 @@ defmodule Mix.Tasks.Nix.Mix2nix do
   def nixfmt(nixexpr) do
     file = write_tmp_file("mix.nix", nixexpr)
     {_, 0} = System.cmd("nixfmt", [file])
-    nixexpr = File.read!(file)
+    File.read!(file)
   end
 
   def write_tmp_file(name, content) do

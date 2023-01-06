@@ -65,17 +65,20 @@ defmodule ExFleetYardsApi.Schemas.Gen do
   #  end
   # end
 
+  @doc """
+  Get api specification for scopes
+  """
+  @spec scope_properties() :: map()
   def scope_properties do
-    keys =
-      Map.keys(ExFleetYards.Repo.Account.UserToken.scopes())
-      |> Enum.map(fn key ->
-        {key,
-         %OpenApiSpex.Schema{
-           type: :array,
-           example: ["read", "write"],
-           items: %OpenApiSpex.Schema{type: :string}
-         }}
-      end)
-      |> Enum.into(%{})
+    ExFleetYards.Repo.Account.UserToken.scopes()
+    |> Enum.map(fn {key, scopes} ->
+      {key,
+       %OpenApiSpex.Schema{
+         type: :array,
+         example: scopes,
+         items: %OpenApiSpex.Schema{type: :string}
+       }}
+    end)
+    |> Enum.into(%{})
   end
 end

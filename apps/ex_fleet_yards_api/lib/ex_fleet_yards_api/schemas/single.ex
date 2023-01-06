@@ -1,7 +1,6 @@
 defmodule ExFleetYardsApi.Schemas.Single do
   alias OpenApiSpex.Schema
   require ExFleetYardsApi.Schemas.Gen
-  import ExFleetYardsApi.Schemas.Gen
   @moduledoc false
 
   defmodule Manufacturer do

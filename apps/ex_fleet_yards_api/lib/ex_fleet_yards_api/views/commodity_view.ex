@@ -1,7 +1,7 @@
 defmodule ExFleetYardsApi.CommodityView do
   use ExFleetYardsApi, :view
 
-  def render("show.json", %{commodity: commodity}) do
+  def render("show.json", %{commodity: _commodity}) do
     %{
       # # TODO: images
       # subCategory: commodity.commodity.commodity_type,

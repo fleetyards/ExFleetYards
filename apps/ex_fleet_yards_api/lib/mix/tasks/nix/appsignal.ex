@@ -3,6 +3,7 @@ defmodule Mix.Tasks.Nix.Appsignal do
   Create a appsignal.json lock file read by the nix packaging
   """
   @shortdoc "Generate Appsignal lock file"
+  @compile {:no_warn_undefined, Appsignal.Agent}
 
   use Mix.Task
 
@@ -15,9 +16,6 @@ defmodule Mix.Tasks.Nix.Appsignal do
       |> Jason.encode_to_iodata!()
 
     File.write!("nix/appsignal.json", json)
-  end
-
-  defp get_appsignal_version() do
   end
 
   defp lock_file,
