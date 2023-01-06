@@ -6,45 +6,67 @@
         "description": "Celestial Object",
         "properties": {
           "danger": {
-            "type": "integer"
+            "type": "integer",
+            "x-struct": null,
+            "x-validate": null
           },
           "description": {
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           },
           "designation": {
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           },
           "economy": {
-            "type": "integer"
+            "type": "integer",
+            "x-struct": null,
+            "x-validate": null
           },
           "fairchanceact": {
             "nullable": true,
-            "type": "boolean"
+            "type": "boolean",
+            "x-struct": null,
+            "x-validate": null
           },
           "habitable": {
-            "type": "boolean"
+            "type": "boolean",
+            "x-struct": null,
+            "x-validate": null
           },
           "name": {
             "description": "Name of the object",
             "example": "microTech",
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           },
           "population": {
-            "type": "integer"
+            "type": "integer",
+            "x-struct": null,
+            "x-validate": null
           },
           "size": {
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           },
           "slug": {
             "example": "microtech",
             "format": "slug",
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           },
           "starsystem": {
             "$ref": "#/components/schemas/StarSystem"
           },
           "subType": {
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           },
           "type": {
             "enum": [
@@ -53,7 +75,9 @@
               "asteroid_belt",
               "asteroid_field"
             ],
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           }
         },
         "required": [
@@ -62,7 +86,9 @@
           "type"
         ],
         "title": "CelestialObject",
-        "type": "object"
+        "type": "object",
+        "x-struct": "Elixir.ExFleetYardsApi.Schemas.Single.CelestialObject",
+        "x-validate": null
       },
       "CelestialObjectList": {
         "description": "CelestialObject List",
@@ -71,7 +97,9 @@
             "items": {
               "$ref": "#/components/schemas/CelestialObject"
             },
-            "type": "array"
+            "type": "array",
+            "x-struct": null,
+            "x-validate": null
           },
           "metadata": {
             "$ref": "#/components/schemas/PaginationMetadata"
@@ -82,50 +110,70 @@
           "metadata"
         ],
         "title": "CelestialObjectList",
-        "type": "object"
+        "type": "object",
+        "x-struct": "Elixir.ExFleetYardsApi.Schemas.List.CelestialObjectList",
+        "x-validate": null
       },
       "Component": {
         "description": "Component",
         "properties": {
           "class": {
             "nullable": true,
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           },
           "createdAt": {
             "description": "Create timestamp",
             "format": "date-time",
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           },
           "grade": {
             "nullable": true,
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           },
           "id": {
             "format": "uuid",
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           },
           "manufacturer": {
             "$ref": "#/components/schemas/Manufacturer"
           },
           "name": {
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           },
           "size": {
             "nullable": true,
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           },
           "slug": {
             "format": "slug",
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           },
           "storeImageIsFallback": {
             "nullable": true,
-            "type": "boolean"
+            "type": "boolean",
+            "x-struct": null,
+            "x-validate": null
           },
           "updatedAt": {
             "description": "Update timestamp",
             "format": "date-time",
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           }
         },
         "required": [
@@ -135,7 +183,9 @@
           "createdAt"
         ],
         "title": "Component",
-        "type": "object"
+        "type": "object",
+        "x-struct": "Elixir.ExFleetYardsApi.Schemas.Single.Component",
+        "x-validate": null
       },
       "ComponentList": {
         "description": "Component List",
@@ -144,7 +194,9 @@
             "items": {
               "$ref": "#/components/schemas/Component"
             },
-            "type": "array"
+            "type": "array",
+            "x-struct": null,
+            "x-validate": null
           },
           "metadata": {
             "$ref": "#/components/schemas/PaginationMetadata"
@@ -155,18 +207,24 @@
           "metadata"
         ],
         "title": "ComponentList",
-        "type": "object"
+        "type": "object",
+        "x-struct": "Elixir.ExFleetYardsApi.Schemas.List.ComponentList",
+        "x-validate": null
       },
       "Error": {
         "description": "Generic error",
         "properties": {
           "code": {
             "example": "not_found",
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           },
           "message": {
             "example": "Not Found",
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           },
           "scopes": {
             "example": {
@@ -174,14 +232,18 @@
                 "read"
               ]
             },
-            "type": "object"
+            "type": "object",
+            "x-struct": null,
+            "x-validate": null
           }
         },
         "required": [
           "code"
         ],
         "title": "Error",
-        "type": "object"
+        "type": "object",
+        "x-struct": "Elixir.ExFleetYardsApi.Schemas.Single.Error",
+        "x-validate": null
       },
       "Manufacturer": {
         "description": "Manufacturer in the star citizen univers",
@@ -194,28 +256,40 @@
         "properties": {
           "code": {
             "nullable": true,
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           },
           "createdAt": {
             "description": "Create timestamp",
             "format": "date-time",
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           },
           "logo": {
             "nullable": true,
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           },
           "name": {
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           },
           "slug": {
             "format": "slug",
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           },
           "updatedAt": {
             "description": "Update timestamp",
             "format": "date-time",
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           }
         },
         "required": [
@@ -224,7 +298,9 @@
           "createdAt"
         ],
         "title": "Manufacturer",
-        "type": "object"
+        "type": "object",
+        "x-struct": "Elixir.ExFleetYardsApi.Schemas.Single.Manufacturer",
+        "x-validate": null
       },
       "ManufacturerList": {
         "description": "Manufacturer List",
@@ -233,7 +309,9 @@
             "items": {
               "$ref": "#/components/schemas/Manufacturer"
             },
-            "type": "array"
+            "type": "array",
+            "x-struct": null,
+            "x-validate": null
           },
           "metadata": {
             "$ref": "#/components/schemas/PaginationMetadata"
@@ -244,42 +322,58 @@
           "metadata"
         ],
         "title": "ManufacturerList",
-        "type": "object"
+        "type": "object",
+        "x-struct": "Elixir.ExFleetYardsApi.Schemas.List.ManufacturerList",
+        "x-validate": null
       },
       "Model": {
         "description": "Model",
         "properties": {
           "createdAt": {
             "format": "date-time",
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           },
           "manufacturer": {
             "$ref": "#/components/schemas/Manufacturer"
           },
           "updatedAt": {
             "format": "date-time",
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           }
         },
         "title": "Model",
-        "type": "object"
+        "type": "object",
+        "x-struct": "Elixir.ExFleetYardsApi.Schemas.Single.Model",
+        "x-validate": null
       },
       "PaginationMetadata": {
         "description": "Pagination metadata",
         "properties": {
           "limit": {
             "example": 25,
-            "type": "integer"
+            "type": "integer",
+            "x-struct": null,
+            "x-validate": null
           },
           "next": {
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           },
           "previous": {
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           },
           "strategy": {
             "example": "slug",
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           }
         },
         "required": [
@@ -287,56 +381,84 @@
           "strategy"
         ],
         "title": "PaginationMetadata",
-        "type": "object"
+        "type": "object",
+        "x-struct": "Elixir.ExFleetYardsApi.Schemas.Single.PaginationMetadata",
+        "x-validate": null
       },
       "RoadmapItem": {
         "description": "Roadmap item",
         "properties": {
           "active": {
-            "type": "boolean"
+            "type": "boolean",
+            "x-struct": null,
+            "x-validate": null
           },
           "body": {
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           },
           "commited": {
-            "type": "boolean"
+            "type": "boolean",
+            "x-struct": null,
+            "x-validate": null
           },
           "createdAt": {
             "format": "date-time",
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           },
           "description": {
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           },
           "id": {
             "format": "uuid",
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           },
           "model": {
             "$ref": "#/components/schemas/Model"
           },
           "name": {
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           },
           "release": {
             "format": "version",
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           },
           "releaseDescription": {
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           },
           "released": {
-            "type": "boolean"
+            "type": "boolean",
+            "x-struct": null,
+            "x-validate": null
           },
           "rsiCategoryId": {
-            "type": "integer"
+            "type": "integer",
+            "x-struct": null,
+            "x-validate": null
           },
           "rsiReleaseId": {
-            "type": "integer"
+            "type": "integer",
+            "x-struct": null,
+            "x-validate": null
           },
           "updatedAt": {
             "format": "date-time",
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           }
         },
         "required": [
@@ -344,7 +466,9 @@
           "name"
         ],
         "title": "RoadmapItem",
-        "type": "object"
+        "type": "object",
+        "x-struct": "Elixir.ExFleetYardsApi.Schemas.Single.RoadmapItem",
+        "x-validate": null
       },
       "RoadmapItemList": {
         "description": "RoadmapItem List",
@@ -353,7 +477,9 @@
             "items": {
               "$ref": "#/components/schemas/RoadmapItem"
             },
-            "type": "array"
+            "type": "array",
+            "x-struct": null,
+            "x-validate": null
           },
           "metadata": {
             "$ref": "#/components/schemas/PaginationMetadata"
@@ -364,60 +490,88 @@
           "metadata"
         ],
         "title": "RoadmapItemList",
-        "type": "object"
+        "type": "object",
+        "x-struct": "Elixir.ExFleetYardsApi.Schemas.List.RoadmapItemList",
+        "x-validate": null
       },
       "Shop": {
         "description": "in game shop",
         "properties": {
           "buying": {
-            "type": "boolean"
+            "type": "boolean",
+            "x-struct": null,
+            "x-validate": null
           },
           "celestialObject": {
             "$ref": "#/components/schemas/CelestialObject"
           },
           "id": {
             "format": "uuid",
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           },
           "location": {
             "example": "The Commons",
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           },
           "locationLabel": {
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           },
           "name": {
             "example": "Planetary Services",
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           },
           "refineryTerminal": {
-            "type": "boolean"
+            "type": "boolean",
+            "x-struct": null,
+            "x-validate": null
           },
           "rental": {
-            "type": "boolean"
+            "type": "boolean",
+            "x-struct": null,
+            "x-validate": null
           },
           "selling": {
-            "type": "boolean"
+            "type": "boolean",
+            "x-struct": null,
+            "x-validate": null
           },
           "slug": {
             "example": "planetary-services",
             "format": "slug",
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           },
           "station": {
             "properties": {
               "name": {
-                "type": "string"
+                "type": "string",
+                "x-struct": null,
+                "x-validate": null
               },
               "slug": {
                 "format": "slug",
-                "type": "string"
+                "type": "string",
+                "x-struct": null,
+                "x-validate": null
               }
             },
-            "type": "object"
+            "type": "object",
+            "x-struct": null,
+            "x-validate": null
           },
           "stationLabel": {
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           },
           "type": {
             "enum": [
@@ -446,25 +600,35 @@
               "kiosk",
               "ship_customizations"
             ],
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           },
           "typeLabel": {
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           }
         },
         "title": "Shop",
-        "type": "object"
+        "type": "object",
+        "x-struct": "Elixir.ExFleetYardsApi.Schemas.Single.Shop",
+        "x-validate": null
       },
       "ShopCommodity": {
         "description": "Shop Commodity",
         "properties": {
           "id": {
             "format": "uuid",
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           }
         },
         "title": "ShopCommodity",
-        "type": "object"
+        "type": "object",
+        "x-struct": "Elixir.ExFleetYardsApi.Schemas.Single.ShopCommodity",
+        "x-validate": null
       },
       "ShopCommodityList": {
         "description": "ShopCommodity List",
@@ -473,7 +637,9 @@
             "items": {
               "$ref": "#/components/schemas/ShopCommodity"
             },
-            "type": "array"
+            "type": "array",
+            "x-struct": null,
+            "x-validate": null
           },
           "metadata": {
             "$ref": "#/components/schemas/PaginationMetadata"
@@ -487,7 +653,9 @@
           "metadata"
         ],
         "title": "ShopCommodityList",
-        "type": "object"
+        "type": "object",
+        "x-struct": "Elixir.ExFleetYardsApi.Schemas.List.ShopCommodityList",
+        "x-validate": null
       },
       "StarSystem": {
         "description": "Star System",
@@ -496,62 +664,92 @@
             "items": {
               "$ref": "#/components/schemas/CelestialObject"
             },
-            "type": "array"
+            "type": "array",
+            "x-struct": null,
+            "x-validate": null
           },
           "createdAt": {
             "format": "date-time",
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           },
           "danger": {
-            "type": "integer"
+            "type": "integer",
+            "x-struct": null,
+            "x-validate": null
           },
           "description": {
             "description": "Description of the system",
             "nullable": true,
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           },
           "economy": {
             "example": 10,
-            "type": "integer"
+            "type": "integer",
+            "x-struct": null,
+            "x-validate": null
           },
           "locationLabel": {
             "example": "UEE",
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           },
           "mapX": {
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           },
           "mapY": {
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           },
           "name": {
             "description": "Name fo the system",
             "example": "Stanton",
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           },
           "population": {
             "example": 10,
-            "type": "integer"
+            "type": "integer",
+            "x-struct": null,
+            "x-validate": null
           },
           "size": {
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           },
           "slug": {
             "description": "Slug of the system",
             "example": "stanton",
             "format": "slug",
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           },
           "status": {
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           },
           "type": {
             "example": "Single star",
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           },
           "updatedAt": {
             "format": "date-time",
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           }
         },
         "required": [
@@ -560,7 +758,9 @@
           "createdAt"
         ],
         "title": "StarSystem",
-        "type": "object"
+        "type": "object",
+        "x-struct": "Elixir.ExFleetYardsApi.Schemas.Single.StarSystem",
+        "x-validate": null
       },
       "StarSystemList": {
         "description": "StarSystem List",
@@ -569,7 +769,9 @@
             "items": {
               "$ref": "#/components/schemas/StarSystem"
             },
-            "type": "array"
+            "type": "array",
+            "x-struct": null,
+            "x-validate": null
           },
           "metadata": {
             "$ref": "#/components/schemas/PaginationMetadata"
@@ -580,13 +782,17 @@
           "metadata"
         ],
         "title": "StarSystemList",
-        "type": "object"
+        "type": "object",
+        "x-struct": "Elixir.ExFleetYardsApi.Schemas.List.StarSystemList",
+        "x-validate": null
       },
       "Station": {
         "description": "Station",
         "properties": {
           "cargoHub": {
-            "type": "boolean"
+            "type": "boolean",
+            "x-struct": null,
+            "x-validate": null
           },
           "celestialObject": {
             "$ref": "#/components/schemas/CelestialObject"
@@ -605,23 +811,33 @@
               "town",
               "drug_lab"
             ],
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           },
           "classificationLabel": {
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           },
           "createdAt": {
             "format": "date-time",
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           },
           "description": {
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           },
           "dockCounts": {
             "items": {
               "properties": {
                 "count": {
-                  "type": "integer"
+                  "type": "integer",
+                  "x-struct": null,
+                  "x-validate": null
                 },
                 "size": {
                   "enum": [
@@ -633,10 +849,14 @@
                     "extra_large",
                     "capital"
                   ],
-                  "type": "string"
+                  "type": "string",
+                  "x-struct": null,
+                  "x-validate": null
                 },
                 "sizeLabel": {
-                  "type": "string"
+                  "type": "string",
+                  "x-struct": null,
+                  "x-validate": null
                 },
                 "type": {
                   "enum": [
@@ -646,24 +866,36 @@
                     "dockingport",
                     "hangar"
                   ],
-                  "type": "string"
+                  "type": "string",
+                  "x-struct": null,
+                  "x-validate": null
                 },
                 "typeLabel": {
-                  "type": "string"
+                  "type": "string",
+                  "x-struct": null,
+                  "x-validate": null
                 }
               },
-              "type": "object"
+              "type": "object",
+              "x-struct": null,
+              "x-validate": null
             },
-            "type": "array"
+            "type": "array",
+            "x-struct": null,
+            "x-validate": null
           },
           "docks": {
             "items": {
               "properties": {
                 "group": {
-                  "type": "string"
+                  "type": "string",
+                  "x-struct": null,
+                  "x-validate": null
                 },
                 "name": {
-                  "type": "string"
+                  "type": "string",
+                  "x-struct": null,
+                  "x-validate": null
                 },
                 "size": {
                   "enum": [
@@ -675,10 +907,14 @@
                     "extra_large",
                     "capital"
                   ],
-                  "type": "string"
+                  "type": "string",
+                  "x-struct": null,
+                  "x-validate": null
                 },
                 "sizeLabel": {
-                  "type": "string"
+                  "type": "string",
+                  "x-struct": null,
+                  "x-validate": null
                 },
                 "type": {
                   "enum": [
@@ -688,24 +924,36 @@
                     "dockingport",
                     "hangar"
                   ],
-                  "type": "string"
+                  "type": "string",
+                  "x-struct": null,
+                  "x-validate": null
                 },
                 "typeLabel": {
-                  "type": "string"
+                  "type": "string",
+                  "x-struct": null,
+                  "x-validate": null
                 }
               },
-              "type": "object"
+              "type": "object",
+              "x-struct": null,
+              "x-validate": null
             },
-            "type": "array"
+            "type": "array",
+            "x-struct": null,
+            "x-validate": null
           },
           "habitable": {
-            "type": "boolean"
+            "type": "boolean",
+            "x-struct": null,
+            "x-validate": null
           },
           "habitationCounts": {
             "items": {
               "properties": {
                 "count": {
-                  "type": "integer"
+                  "type": "integer",
+                  "x-struct": null,
+                  "x-validate": null
                 },
                 "type": {
                   "enum": [
@@ -715,24 +963,36 @@
                     "large_apartment",
                     "suite"
                   ],
-                  "type": "string"
+                  "type": "string",
+                  "x-struct": null,
+                  "x-validate": null
                 },
                 "typeLabel": {
-                  "type": "string"
+                  "type": "string",
+                  "x-struct": null,
+                  "x-validate": null
                 }
               },
-              "type": "object"
+              "type": "object",
+              "x-struct": null,
+              "x-validate": null
             },
-            "type": "array"
+            "type": "array",
+            "x-struct": null,
+            "x-validate": null
           },
           "habitations": {
             "items": {
               "properties": {
                 "habitationName": {
-                  "type": "string"
+                  "type": "string",
+                  "x-struct": null,
+                  "x-validate": null
                 },
                 "name": {
-                  "type": "string"
+                  "type": "string",
+                  "x-struct": null,
+                  "x-validate": null
                 },
                 "type": {
                   "enum": [
@@ -742,40 +1002,62 @@
                     "large_apartment",
                     "suite"
                   ],
-                  "type": "string"
+                  "type": "string",
+                  "x-struct": null,
+                  "x-validate": null
                 },
                 "typeLabel": {
-                  "type": "string"
+                  "type": "string",
+                  "x-struct": null,
+                  "x-validate": null
                 }
               },
-              "type": "object"
+              "type": "object",
+              "x-struct": null,
+              "x-validate": null
             },
-            "type": "array"
+            "type": "array",
+            "x-struct": null,
+            "x-validate": null
           },
           "location": {
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           },
           "locationLabel": {
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           },
           "name": {
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           },
           "refinery": {
-            "type": "boolean"
+            "type": "boolean",
+            "x-struct": null,
+            "x-validate": null
           },
           "shopListLabel": {
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           },
           "shops": {
             "items": {
               "$ref": "#/components/schemas/Shop"
             },
-            "type": "array"
+            "type": "array",
+            "x-struct": null,
+            "x-validate": null
           },
           "slug": {
             "format": "slug",
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           },
           "type": {
             "enum": [
@@ -786,18 +1068,26 @@
               "outpost",
               "aid_shelter"
             ],
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           },
           "typeLabel": {
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           },
           "updatedAt": {
             "format": "date-time",
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           }
         },
         "title": "Station",
-        "type": "object"
+        "type": "object",
+        "x-struct": "Elixir.ExFleetYardsApi.Schemas.Single.Station",
+        "x-validate": null
       },
       "StationList": {
         "description": "Station List",
@@ -806,7 +1096,9 @@
             "items": {
               "$ref": "#/components/schemas/Station"
             },
-            "type": "array"
+            "type": "array",
+            "x-struct": null,
+            "x-validate": null
           },
           "metadata": {
             "$ref": "#/components/schemas/PaginationMetadata"
@@ -817,73 +1109,101 @@
           "metadata"
         ],
         "title": "StationList",
-        "type": "object"
+        "type": "object",
+        "x-struct": "Elixir.ExFleetYardsApi.Schemas.List.StationList",
+        "x-validate": null
       },
       "User": {
         "description": "User Schema",
         "properties": {
           "avatar": {
             "format": "url",
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           },
           "discordHandle": {
             "description": "Discord username",
             "format": "url",
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           },
           "discordServer": {
             "description": "Discord server",
             "format": "url",
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           },
           "guilded": {
             "description": "Guilded server",
             "format": "url",
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           },
           "homepage": {
             "description": "User Homepage",
             "format": "url",
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           },
           "publicHangar": {
             "description": "Show public hangar",
-            "type": "boolean"
+            "type": "boolean",
+            "x-struct": null,
+            "x-validate": null
           },
           "publicHangarLoaners": {
             "description": "Show loaner hints in public hangar",
-            "type": "boolean"
+            "type": "boolean",
+            "x-struct": null,
+            "x-validate": null
           },
           "rsiHandle": {
             "description": "RSI username",
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           },
           "twitch": {
             "description": "Twitch channel",
             "format": "url",
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           },
           "username": {
             "description": "Fleetyards username",
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           },
           "youtube": {
             "description": "Youtube Channel",
             "format": "url",
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           }
         },
         "required": [
           "username"
         ],
         "title": "User",
-        "type": "object"
+        "type": "object",
+        "x-struct": "Elixir.ExFleetYardsApi.Schemas.Single.User",
+        "x-validate": null
       },
       "UserSession": {
         "description": "Login information",
         "properties": {
           "password": {
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           },
           "scopes": {
             "properties": {
@@ -894,9 +1214,13 @@
                   "admin"
                 ],
                 "items": {
-                  "type": "string"
+                  "type": "string",
+                  "x-struct": null,
+                  "x-validate": null
                 },
-                "type": "array"
+                "type": "array",
+                "x-struct": null,
+                "x-validate": null
               },
               "fleet": {
                 "example": [
@@ -905,9 +1229,13 @@
                   "admin"
                 ],
                 "items": {
-                  "type": "string"
+                  "type": "string",
+                  "x-struct": null,
+                  "x-validate": null
                 },
-                "type": "array"
+                "type": "array",
+                "x-struct": null,
+                "x-validate": null
               },
               "hangar": {
                 "example": [
@@ -916,51 +1244,73 @@
                   "admin"
                 ],
                 "items": {
-                  "type": "string"
+                  "type": "string",
+                  "x-struct": null,
+                  "x-validate": null
                 },
-                "type": "array"
+                "type": "array",
+                "x-struct": null,
+                "x-validate": null
               },
               "user": {
                 "example": [
                   "write"
                 ],
                 "items": {
-                  "type": "string"
+                  "type": "string",
+                  "x-struct": null,
+                  "x-validate": null
                 },
-                "type": "array"
+                "type": "array",
+                "x-struct": null,
+                "x-validate": null
               }
             },
-            "type": "object"
+            "type": "object",
+            "x-struct": null,
+            "x-validate": null
           },
           "totp": {
             "format": "totp",
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           },
           "username": {
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           }
         },
         "required": [
           "scopes"
         ],
         "title": "UserSession",
-        "type": "object"
+        "type": "object",
+        "x-struct": "Elixir.ExFleetYardsApi.Schemas.Single.UserSession",
+        "x-validate": null
       },
       "UserToken": {
         "description": "User Token",
         "properties": {
           "context": {
             "example": "api",
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           },
           "createdAt": {
             "description": "Create timestamp",
             "format": "date-time",
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           },
           "id": {
             "format": "uuid",
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           },
           "scopes": {
             "properties": {
@@ -971,9 +1321,13 @@
                   "admin"
                 ],
                 "items": {
-                  "type": "string"
+                  "type": "string",
+                  "x-struct": null,
+                  "x-validate": null
                 },
-                "type": "array"
+                "type": "array",
+                "x-struct": null,
+                "x-validate": null
               },
               "fleet": {
                 "example": [
@@ -982,9 +1336,13 @@
                   "admin"
                 ],
                 "items": {
-                  "type": "string"
+                  "type": "string",
+                  "x-struct": null,
+                  "x-validate": null
                 },
-                "type": "array"
+                "type": "array",
+                "x-struct": null,
+                "x-validate": null
               },
               "hangar": {
                 "example": [
@@ -993,21 +1351,31 @@
                   "admin"
                 ],
                 "items": {
-                  "type": "string"
+                  "type": "string",
+                  "x-struct": null,
+                  "x-validate": null
                 },
-                "type": "array"
+                "type": "array",
+                "x-struct": null,
+                "x-validate": null
               },
               "user": {
                 "example": [
                   "write"
                 ],
                 "items": {
-                  "type": "string"
+                  "type": "string",
+                  "x-struct": null,
+                  "x-validate": null
                 },
-                "type": "array"
+                "type": "array",
+                "x-struct": null,
+                "x-validate": null
               }
             },
-            "type": "object"
+            "type": "object",
+            "x-struct": null,
+            "x-validate": null
           }
         },
         "required": [
@@ -1016,7 +1384,9 @@
           "context"
         ],
         "title": "UserToken",
-        "type": "object"
+        "type": "object",
+        "x-struct": "Elixir.ExFleetYardsApi.Schemas.Single.UserToken",
+        "x-validate": null
       },
       "UserTokenList": {
         "description": "User Token",
@@ -1024,7 +1394,9 @@
           "$ref": "#/components/schemas/UserToken"
         },
         "title": "UserTokenList",
-        "type": "array"
+        "type": "array",
+        "x-struct": "Elixir.ExFleetYardsApi.Schemas.List.UserTokenList",
+        "x-validate": null
       },
       "VersionResponse": {
         "description": "server version",
@@ -1035,22 +1407,30 @@
         "properties": {
           "codename": {
             "format": "version",
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           },
           "hash": {
             "description": "Git hash",
             "format": "hash",
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           },
           "version": {
-            "type": "string"
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           }
         },
         "required": [
           "version"
         ],
         "title": "VersionResponse",
-        "type": "object"
+        "type": "object",
+        "x-struct": "Elixir.ExFleetYardsApi.Schemas.Single.Version",
+        "x-validate": null
       }
     },
     "securitySchemes": {
@@ -1062,7 +1442,7 @@
   },
   "info": {
     "title": "Fleetyards",
-    "version": ""
+    "version": "0.1.0"
   },
   "openapi": "3.0.0",
   "paths": {
@@ -1078,7 +1458,9 @@
             "name": "limit",
             "required": false,
             "schema": {
-              "type": "integer"
+              "type": "integer",
+              "x-struct": null,
+              "x-validate": null
             }
           },
           {
@@ -1087,7 +1469,9 @@
             "name": "after",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
             }
           },
           {
@@ -1096,7 +1480,9 @@
             "name": "before",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
             }
           }
         ],
@@ -1149,7 +1535,9 @@
             "name": "id",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
             }
           }
         ],
@@ -1202,7 +1590,9 @@
             "name": "limit",
             "required": false,
             "schema": {
-              "type": "integer"
+              "type": "integer",
+              "x-struct": null,
+              "x-validate": null
             }
           },
           {
@@ -1211,7 +1601,9 @@
             "name": "after",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
             }
           },
           {
@@ -1220,7 +1612,9 @@
             "name": "before",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
             }
           }
         ],
@@ -1273,7 +1667,9 @@
             "name": "id",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
             }
           }
         ],
@@ -1326,7 +1722,9 @@
             "name": "limit",
             "required": false,
             "schema": {
-              "type": "integer"
+              "type": "integer",
+              "x-struct": null,
+              "x-validate": null
             }
           },
           {
@@ -1335,7 +1733,9 @@
             "name": "after",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
             }
           },
           {
@@ -1344,7 +1744,9 @@
             "name": "before",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
             }
           }
         ],
@@ -1397,7 +1799,9 @@
             "name": "limit",
             "required": false,
             "schema": {
-              "type": "integer"
+              "type": "integer",
+              "x-struct": null,
+              "x-validate": null
             }
           },
           {
@@ -1406,7 +1810,9 @@
             "name": "after",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
             }
           },
           {
@@ -1415,7 +1821,9 @@
             "name": "before",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
             }
           }
         ],
@@ -1468,7 +1876,9 @@
             "name": "id",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
             }
           }
         ],
@@ -1521,7 +1931,9 @@
             "name": "limit",
             "required": false,
             "schema": {
-              "type": "integer"
+              "type": "integer",
+              "x-struct": null,
+              "x-validate": null
             }
           },
           {
@@ -1530,7 +1942,9 @@
             "name": "after",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
             }
           },
           {
@@ -1539,7 +1953,9 @@
             "name": "before",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
             }
           }
         ],
@@ -1592,7 +2008,9 @@
             "name": "id",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
             }
           }
         ],
@@ -1645,7 +2063,9 @@
             "name": "limit",
             "required": false,
             "schema": {
-              "type": "integer"
+              "type": "integer",
+              "x-struct": null,
+              "x-validate": null
             }
           },
           {
@@ -1654,7 +2074,9 @@
             "name": "after",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
             }
           },
           {
@@ -1663,7 +2085,9 @@
             "name": "before",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
             }
           },
           {
@@ -1672,7 +2096,9 @@
             "name": "docks",
             "required": false,
             "schema": {
-              "type": "boolean"
+              "type": "boolean",
+              "x-struct": null,
+              "x-validate": null
             }
           },
           {
@@ -1681,7 +2107,9 @@
             "name": "habitations",
             "required": false,
             "schema": {
-              "type": "boolean"
+              "type": "boolean",
+              "x-struct": null,
+              "x-validate": null
             }
           },
           {
@@ -1690,7 +2118,9 @@
             "name": "shops",
             "required": false,
             "schema": {
-              "type": "boolean"
+              "type": "boolean",
+              "x-struct": null,
+              "x-validate": null
             }
           }
         ],
@@ -1743,7 +2173,9 @@
             "name": "id",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
             }
           },
           {
@@ -1752,7 +2184,9 @@
             "name": "docks",
             "required": false,
             "schema": {
-              "type": "boolean"
+              "type": "boolean",
+              "x-struct": null,
+              "x-validate": null
             }
           },
           {
@@ -1761,7 +2195,9 @@
             "name": "habitations",
             "required": false,
             "schema": {
-              "type": "boolean"
+              "type": "boolean",
+              "x-struct": null,
+              "x-validate": null
             }
           },
           {
@@ -1770,7 +2206,9 @@
             "name": "shops",
             "required": false,
             "schema": {
-              "type": "boolean"
+              "type": "boolean",
+              "x-struct": null,
+              "x-validate": null
             }
           }
         ],
@@ -1823,7 +2261,9 @@
             "name": "id",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
             }
           },
           {
@@ -1833,7 +2273,9 @@
             "name": "shop",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
             }
           }
         ],
@@ -1886,7 +2328,9 @@
             "name": "id",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
             }
           },
           {
@@ -1896,7 +2340,9 @@
             "name": "shop",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
             }
           },
           {
@@ -1906,7 +2352,9 @@
             "name": "limit",
             "required": false,
             "schema": {
-              "type": "integer"
+              "type": "integer",
+              "x-struct": null,
+              "x-validate": null
             }
           },
           {
@@ -1915,7 +2363,9 @@
             "name": "after",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
             }
           },
           {
@@ -1924,7 +2374,9 @@
             "name": "before",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
             }
           }
         ],
@@ -1977,7 +2429,9 @@
             "name": "limit",
             "required": false,
             "schema": {
-              "type": "integer"
+              "type": "integer",
+              "x-struct": null,
+              "x-validate": null
             }
           },
           {
@@ -1986,7 +2440,9 @@
             "name": "after",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
             }
           },
           {
@@ -1995,7 +2451,9 @@
             "name": "before",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
             }
           }
         ],
@@ -2048,7 +2506,9 @@
             "name": "limit",
             "required": false,
             "schema": {
-              "type": "integer"
+              "type": "integer",
+              "x-struct": null,
+              "x-validate": null
             }
           },
           {
@@ -2057,7 +2517,9 @@
             "name": "after",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
             }
           },
           {
@@ -2066,7 +2528,9 @@
             "name": "before",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
             }
           }
         ],
@@ -2119,7 +2583,9 @@
             "name": "limit",
             "required": false,
             "schema": {
-              "type": "integer"
+              "type": "integer",
+              "x-struct": null,
+              "x-validate": null
             }
           },
           {
@@ -2128,7 +2594,9 @@
             "name": "after",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
             }
           },
           {
@@ -2137,7 +2605,9 @@
             "name": "before",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
             }
           }
         ],
@@ -2190,7 +2660,9 @@
             "name": "limit",
             "required": false,
             "schema": {
-              "type": "integer"
+              "type": "integer",
+              "x-struct": null,
+              "x-validate": null
             }
           },
           {
@@ -2199,7 +2671,9 @@
             "name": "after",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
             }
           },
           {
@@ -2208,7 +2682,9 @@
             "name": "before",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
             }
           }
         ],
@@ -2260,7 +2736,9 @@
             "name": "id",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
             }
           }
         ],
@@ -2502,7 +2980,9 @@
             "name": "id",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
             }
           }
         ],
@@ -2602,7 +3082,9 @@
             "name": "id",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
             }
           }
         ],
@@ -2759,7 +3241,9 @@
             "name": "username",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
             }
           }
         ],
@@ -2851,7 +3335,7 @@
   "security": [],
   "servers": [
     {
-      "url": "http://localhost",
+      "url": "http://localhost:4000",
       "variables": {}
     }
   ],
