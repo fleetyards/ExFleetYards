@@ -37,8 +37,6 @@ ExFleetYards.Repo.Types.StationType.html
 ExFleetYards.Repo.Types.TokenScope.html
 ExFleetYards.Repo.Types.html
 ExFleetYards.Repo.html
-ExFleetYards.Schemas.PaginationMetadata.html
-ExFleetYards.Schemas.html
 ExFleetYards.Version.html
 ExFleetYards.html
 ExFleetYardsApi.ApiSpec.html
@@ -60,7 +58,6 @@ ExFleetYardsApi.RoadmapController.html
 ExFleetYardsApi.RoadmapView.html
 ExFleetYardsApi.Router.Helpers.html
 ExFleetYardsApi.Router.html
-ExFleetYardsApi.Schemas.Gen.html
 ExFleetYardsApi.Schemas.List.CelestialObjectList.html
 ExFleetYardsApi.Schemas.List.ComponentList.html
 ExFleetYardsApi.Schemas.List.ManufacturerList.html
@@ -69,16 +66,11 @@ ExFleetYardsApi.Schemas.List.RoadmapItemList.html
 ExFleetYardsApi.Schemas.List.ShopCommodityList.html
 ExFleetYardsApi.Schemas.List.StarSystemList.html
 ExFleetYardsApi.Schemas.List.StationList.html
-ExFleetYardsApi.Schemas.List.UserTokenList.html
 ExFleetYardsApi.Schemas.List.html
 ExFleetYardsApi.Schemas.Single.Component.html
-ExFleetYardsApi.Schemas.Single.Error.html
 ExFleetYardsApi.Schemas.Single.Manufacturer.html
-ExFleetYardsApi.Schemas.Single.PaginationMetadata.html
 ExFleetYardsApi.Schemas.Single.StarSystem.html
 ExFleetYardsApi.Schemas.Single.User.html
-ExFleetYardsApi.Schemas.Single.UserSession.html
-ExFleetYardsApi.Schemas.Single.UserToken.html
 ExFleetYardsApi.StarSystemController.html
 ExFleetYardsApi.StarSystemView.html
 ExFleetYardsApi.StationController.html
@@ -131,7 +123,7 @@ dist/merriweather-latin-ext-300-normal-K6L27CZ5.woff2
 dist/merriweather-vietnamese-300-italic-EHHNZPUO.woff2
 dist/merriweather-vietnamese-300-normal-U376L4Z4.woff2
 dist/remixicon-NKANDIL5.woff2
-dist/search_items-D22A435E.js
-dist/sidebar_items-257E74ED.js
+dist/search_items-3771B462.js
+dist/sidebar_items-EECB5E43.js
 index.html
 search.html

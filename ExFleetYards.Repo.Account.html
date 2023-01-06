@@ -13,7 +13,7 @@
 
     <script src="dist/handlebars.runtime-NWIB6V2M.js"></script>
     <script src="dist/handlebars.templates-IV5W3OL2.js"></script>
-    <script src="dist/sidebar_items-257E74ED.js"></script>
+    <script src="dist/sidebar_items-EECB5E43.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -124,6 +124,14 @@ Fleetyards
 
     <div class="summary-row">
       <div class="summary-signature">
+        <a href="#confirm_user/2" translate="no">confirm_user(user, time \\ NaiveDateTime.utc_now())</a>
+
+      </div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
         <a href="#get_api_token/2" translate="no">get_api_token(user, scopes)</a>
 
       </div>
@@ -132,7 +140,7 @@ Fleetyards
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#get_user/1" translate="no">get_user(id)</a>
+        <a href="#get_user/2" translate="no">get_user(id, confirmed \\ true)</a>
 
       </div>
 
@@ -140,7 +148,7 @@ Fleetyards
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#get_user_by_email/1" translate="no">get_user_by_email(email)</a>
+        <a href="#get_user_by_email/2" translate="no">get_user_by_email(email, confirmed \\ true)</a>
 
       </div>
 
@@ -150,7 +158,7 @@ Fleetyards
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#get_user_by_password/2" translate="no">get_user_by_password(id, password)</a>
+        <a href="#get_user_by_password/3" translate="no">get_user_by_password(id, password, confirmed \\ true)</a>
 
       </div>
 
@@ -166,7 +174,7 @@ Fleetyards
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#get_user_by_username/1" translate="no">get_user_by_username(username)</a>
+        <a href="#get_user_by_username/2" translate="no">get_user_by_username(username, confirmed \\ true)</a>
 
       </div>
 
@@ -198,6 +206,25 @@ Fleetyards
 Functions
     </h1>
     <div class="functions-list">
+<section class="detail" id="confirm_user/2">
+
+    <span id="confirm_user/1"></span>
+
+  <div class="detail-header">
+    <a href="#confirm_user/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">confirm_user(user, time \\ NaiveDateTime.utc_now())</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
 <section class="detail" id="get_api_token/2">
 
   <div class="detail-header">
@@ -215,14 +242,16 @@ Functions
 
   </section>
 </section>
-<section class="detail" id="get_user/1">
+<section class="detail" id="get_user/2">
+
+    <span id="get_user/1"></span>
 
   <div class="detail-header">
-    <a href="#get_user/1" class="detail-link" title="Link to this function">
+    <a href="#get_user/2" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">get_user(id)</h1>
+    <h1 class="signature" translate="no">get_user(id, confirmed \\ true)</h1>
 
 
   </div>
@@ -232,40 +261,44 @@ Functions
 
   </section>
 </section>
-<section class="detail" id="get_user_by_email/1">
+<section class="detail" id="get_user_by_email/2">
+
+    <span id="get_user_by_email/1"></span>
 
   <div class="detail-header">
-    <a href="#get_user_by_email/1" class="detail-link" title="Link to this function">
+    <a href="#get_user_by_email/2" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">get_user_by_email(email)</h1>
+    <h1 class="signature" translate="no">get_user_by_email(email, confirmed \\ true)</h1>
 
 
   </div>
 
   <section class="docstring">
 
-<p>Gets a user by email.</p><h2 id="get_user_by_email/1-examples" class="section-heading">
-  <a href="#get_user_by_email/1-examples" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
+<p>Gets a user by email.</p><h2 id="get_user_by_email/2-examples" class="section-heading">
+  <a href="#get_user_by_email/2-examples" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
   <p class="sr-only">examples</p>
   </a>
   Examples
 </h2>
-<pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="n">get_user_by_email</span><span class="p" data-group-id="2227530293-1">(</span><span class="s">&quot;foo@example.com&quot;</span><span class="p" data-group-id="2227530293-1">)</span><span class="w">
-</span><span class="p" data-group-id="2227530293-2">%</span><span class="nc" data-group-id="2227530293-2">User</span><span class="p" data-group-id="2227530293-2">{</span><span class="p" data-group-id="2227530293-2">}</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="n">get_user_by_email</span><span class="p" data-group-id="2227530293-3">(</span><span class="s">&quot;unknown@example.com&quot;</span><span class="p" data-group-id="2227530293-3">)</span><span class="w">
+<pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="n">get_user_by_email</span><span class="p" data-group-id="2708313292-1">(</span><span class="s">&quot;foo@example.com&quot;</span><span class="p" data-group-id="2708313292-1">)</span><span class="w">
+</span><span class="p" data-group-id="2708313292-2">%</span><span class="nc" data-group-id="2708313292-2">User</span><span class="p" data-group-id="2708313292-2">{</span><span class="p" data-group-id="2708313292-2">}</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">get_user_by_email</span><span class="p" data-group-id="2708313292-3">(</span><span class="s">&quot;unknown@example.com&quot;</span><span class="p" data-group-id="2708313292-3">)</span><span class="w">
 </span><span class="no">nil</span></code></pre>
   </section>
 </section>
-<section class="detail" id="get_user_by_password/2">
+<section class="detail" id="get_user_by_password/3">
+
+    <span id="get_user_by_password/2"></span>
 
   <div class="detail-header">
-    <a href="#get_user_by_password/2" class="detail-link" title="Link to this function">
+    <a href="#get_user_by_password/3" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">get_user_by_password(id, password)</h1>
+    <h1 class="signature" translate="no">get_user_by_password(id, password, confirmed \\ true)</h1>
 
 
   </div>
@@ -294,29 +327,31 @@ Functions
 
   </section>
 </section>
-<section class="detail" id="get_user_by_username/1">
+<section class="detail" id="get_user_by_username/2">
+
+    <span id="get_user_by_username/1"></span>
 
   <div class="detail-header">
-    <a href="#get_user_by_username/1" class="detail-link" title="Link to this function">
+    <a href="#get_user_by_username/2" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">get_user_by_username(username)</h1>
+    <h1 class="signature" translate="no">get_user_by_username(username, confirmed \\ true)</h1>
 
 
   </div>
 
   <section class="docstring">
 
-<p>Gets a user by username.</p><h2 id="get_user_by_username/1-examples" class="section-heading">
-  <a href="#get_user_by_username/1-examples" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
+<p>Gets a user by username.</p><h2 id="get_user_by_username/2-examples" class="section-heading">
+  <a href="#get_user_by_username/2-examples" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
   <p class="sr-only">examples</p>
   </a>
   Examples
 </h2>
-<pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="n">get_user_by_username</span><span class="p" data-group-id="0362711374-1">(</span><span class="s">&quot;foo&quot;</span><span class="p" data-group-id="0362711374-1">)</span><span class="w">
-</span><span class="p" data-group-id="0362711374-2">%</span><span class="nc" data-group-id="0362711374-2">User</span><span class="p" data-group-id="0362711374-2">{</span><span class="p" data-group-id="0362711374-2">}</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="n">get_user_by_username</span><span class="p" data-group-id="0362711374-3">(</span><span class="s">&quot;unknown&quot;</span><span class="p" data-group-id="0362711374-3">)</span><span class="w">
+<pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="n">get_user_by_username</span><span class="p" data-group-id="9394491318-1">(</span><span class="s">&quot;foo&quot;</span><span class="p" data-group-id="9394491318-1">)</span><span class="w">
+</span><span class="p" data-group-id="9394491318-2">%</span><span class="nc" data-group-id="9394491318-2">User</span><span class="p" data-group-id="9394491318-2">{</span><span class="p" data-group-id="9394491318-2">}</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">get_user_by_username</span><span class="p" data-group-id="9394491318-3">(</span><span class="s">&quot;unknown&quot;</span><span class="p" data-group-id="9394491318-3">)</span><span class="w">
 </span><span class="no">nil</span></code></pre>
   </section>
 </section>
@@ -340,10 +375,10 @@ Functions
   </a>
   Examples
 </h2>
-<pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="n">register_user</span><span class="p" data-group-id="4572524021-1">(</span><span class="p" data-group-id="4572524021-2">%{</span><span class="ss">field</span><span class="p">:</span><span class="w"> </span><span class="n">value</span><span class="p" data-group-id="4572524021-2">}</span><span class="p" data-group-id="4572524021-1">)</span><span class="w">
-</span><span class="p" data-group-id="4572524021-3">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="4572524021-4">%</span><span class="nc" data-group-id="4572524021-4">User</span><span class="p" data-group-id="4572524021-4">{</span><span class="p" data-group-id="4572524021-4">}</span><span class="p" data-group-id="4572524021-3">}</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="n">register_user</span><span class="p" data-group-id="4572524021-5">(</span><span class="p" data-group-id="4572524021-6">%{</span><span class="ss">field</span><span class="p">:</span><span class="w"> </span><span class="n">bad_value</span><span class="p" data-group-id="4572524021-6">}</span><span class="p" data-group-id="4572524021-5">)</span><span class="w">
-</span><span class="p" data-group-id="4572524021-7">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="4572524021-8">%</span><span class="nc" data-group-id="4572524021-8">Ecto.Changeset</span><span class="p" data-group-id="4572524021-8">{</span><span class="p" data-group-id="4572524021-8">}</span><span class="p" data-group-id="4572524021-7">}</span></code></pre>
+<pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="n">register_user</span><span class="p" data-group-id="7362229950-1">(</span><span class="p" data-group-id="7362229950-2">%{</span><span class="ss">field</span><span class="p">:</span><span class="w"> </span><span class="n">value</span><span class="p" data-group-id="7362229950-2">}</span><span class="p" data-group-id="7362229950-1">)</span><span class="w">
+</span><span class="p" data-group-id="7362229950-3">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="7362229950-4">%</span><span class="nc" data-group-id="7362229950-4">User</span><span class="p" data-group-id="7362229950-4">{</span><span class="p" data-group-id="7362229950-4">}</span><span class="p" data-group-id="7362229950-3">}</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">register_user</span><span class="p" data-group-id="7362229950-5">(</span><span class="p" data-group-id="7362229950-6">%{</span><span class="ss">field</span><span class="p">:</span><span class="w"> </span><span class="n">bad_value</span><span class="p" data-group-id="7362229950-6">}</span><span class="p" data-group-id="7362229950-5">)</span><span class="w">
+</span><span class="p" data-group-id="7362229950-7">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="7362229950-8">%</span><span class="nc" data-group-id="7362229950-8">Ecto.Changeset</span><span class="p" data-group-id="7362229950-8">{</span><span class="p" data-group-id="7362229950-8">}</span><span class="p" data-group-id="7362229950-7">}</span></code></pre>
   </section>
 </section>
 
