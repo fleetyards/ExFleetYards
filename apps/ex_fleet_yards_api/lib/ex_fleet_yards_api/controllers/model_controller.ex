@@ -3,7 +3,7 @@ defmodule ExFleetYardsApi.ModelController do
 
   tags ["game"]
 
-  paged_index(Game.Manufacturer)
+  paged_index(Game.Model)
 
   show_slug(Game.Model, example: "ptv")
 
