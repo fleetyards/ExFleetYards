@@ -108,6 +108,7 @@ defmodule ExFleetYards.Repo.Game.Model do
     timestamps(inserted_at: :created_at, type: :utc_datetime)
 
     has_many :docks, Game.Dock
+    has_many :paints, Game.Model.Paint
 
     many_to_many :loaners, __MODULE__,
       join_through: "model_loaners",
