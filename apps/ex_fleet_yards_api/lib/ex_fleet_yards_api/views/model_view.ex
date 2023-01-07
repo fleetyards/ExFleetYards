@@ -56,7 +56,7 @@ defmodule ExFleetYardsApi.ModelView do
       # hasVideos: model.has_videos,
       # hasUpgrades: model.has_upgrades
       # hasPaints: model.has_upgrades
-      lastUpdatedAt: model.last_updated_at |> iso8601,
+      lastUpdatedAt: model.last_updated_at |> render_timestamp,
       # soldAt
       # boughtAt
       # listedAt
@@ -66,7 +66,6 @@ defmodule ExFleetYardsApi.ModelView do
         # TODO: frontend url
       }
     }
-    |> add_manufacturer(model.manufacturer)
     |> render_timestamps(model)
     |> render_loaded(
       :docks,
@@ -82,23 +81,15 @@ defmodule ExFleetYardsApi.ModelView do
       model.loaners,
       &render_many(&1, __MODULE__, "show.json", conn: conn)
     )
+    |> render_loaded(
+      :manufacturer,
+      model.manufacturer,
+      &ExFleetYardsApi.ManufacturerView.render("show.json", manufacturer: &1)
+    )
     |> filter_null(ExFleetYardsApi.Schemas.Single.Model)
   end
 
-  defp add_manufacturer(map, v) do
-    if Ecto.assoc_loaded?(v) do
-      Map.put(
-        map,
-        :manufacturer,
-        ExFleetYardsApi.ManufacturerView.render("show.json", %{
-          manufacturer: v
-        })
-      )
-    else
-      map
-    end
+  def render("loaners.json", %{loaners: loaners, conn: conn}) do
+    render_many(loaners, __MODULE__, "show.json", conn: conn)
   end
-
-  defp iso8601(nil), do: nil
-  defp iso8601(t), do: DateTime.to_iso8601(t)
 end

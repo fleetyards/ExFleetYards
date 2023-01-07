@@ -57,11 +57,18 @@ defmodule ExFleetYardsApi.ViewHelpers do
     end
   end
 
+  def render_timestamp(nil), do: nil
+  def render_timestamp(data), do: DateTime.to_iso8601(data)
+
+  def render_timestamp(map, key, data) when is_map(map) do
+    Map.merge(%{key => data |> render_timestamp}, map)
+  end
+
   def render_timestamps(map, data) do
     Map.merge(
       %{
-        createdAt: data.created_at |> DateTime.to_iso8601(),
-        updatedAt: data.updated_at |> DateTime.to_iso8601()
+        createdAt: data.created_at |> render_timestamp,
+        updatedAt: data.updated_at |> render_timestamp
       },
       map
     )
