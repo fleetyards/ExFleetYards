@@ -15,10 +15,14 @@ defmodule ExFleetYardsApi.ViewHelpers do
       )
 
     quote do
-      def render(unquote(name), %{page: page} = assigns) do
+      def render(unquote(name), %{page: page, conn: conn} = assigns) do
         params = Map.get(assigns, :params, %{})
 
-        render_page(page, __MODULE__, unquote(template), params: params, as: unquote(as))
+        render_page(page, __MODULE__, unquote(template),
+          params: params,
+          as: unquote(as),
+          conn: conn
+        )
       end
     end
   end

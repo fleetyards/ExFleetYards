@@ -253,12 +253,23 @@ defmodule ExFleetYardsApi.Schemas.Single do
               slug: %Schema{type: :string, format: :slug},
               name: %Schema{type: :string},
               createdAt: %Schema{type: :string, format: :"date-time"},
-              updatedAt: %Schema{type: :string, format: :"date-time"}
+              updatedAt: %Schema{type: :string, format: :"date-time"},
+              links: %Schema{
+                type: :object,
+                properties: %{
+                  self: %Schema{type: :string, format: :url}
+                }
+              }
             },
             required: [:id, :name, :slug]
           }
         },
-        # links
+        links: %Schema{
+          type: :object,
+          properties: %{
+            self: %Schema{type: :string, format: :url}
+          }
+        },
         manufacturer: ExFleetYardsApi.Schemas.Single.Manufacturer,
         createdAt: %Schema{type: :string, format: :"date-time"},
         updatedAt: %Schema{type: :string, format: :"date-time"}

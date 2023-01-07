@@ -3,7 +3,7 @@ defmodule ExFleetYardsApi.ModelView do
 
   page_view()
 
-  def render("show.json", %{model: model}) when not is_nil(model) do
+  def render("show.json", %{model: model, conn: conn}) when not is_nil(model) do
     %{
       id: model.id,
       slug: model.slug,
@@ -56,13 +56,15 @@ defmodule ExFleetYardsApi.ModelView do
       # hasVideos: model.has_videos,
       # hasUpgrades: model.has_upgrades
       # hasPaints: model.has_upgrades
-      lastUpdatedAt: model.last_updated_at |> iso8601
+      lastUpdatedAt: model.last_updated_at |> iso8601,
       # soldAt
       # boughtAt
       # listedAt
       # rentalAt
-      # loaners
-      # links
+      links: %{
+        self: Routes.model_url(conn, :show, model.slug)
+        # TODO: frontend url
+      }
     }
     |> add_manufacturer(model.manufacturer)
     |> render_timestamps(model)
@@ -78,7 +80,7 @@ defmodule ExFleetYardsApi.ModelView do
     |> render_loaded(
       :loaners,
       model.loaners,
-      &render_many(&1, __MODULE__, "show.json")
+      &render_many(&1, __MODULE__, "show.json", conn: conn)
     )
     |> filter_null(ExFleetYardsApi.Schemas.Single.Model)
   end
