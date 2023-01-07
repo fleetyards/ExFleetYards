@@ -106,5 +106,7 @@ defmodule ExFleetYards.Repo.Game.Model do
     field :side_view_width, :integer
 
     timestamps(inserted_at: :created_at, type: :utc_datetime)
+
+    has_many :docks, Game.Dock
   end
 end

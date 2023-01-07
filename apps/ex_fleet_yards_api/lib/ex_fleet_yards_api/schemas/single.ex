@@ -231,7 +231,19 @@ defmodule ExFleetYardsApi.Schemas.Single do
         # listedAt
         # rentalAt
         # loaners
-        # docks
+        docks: %Schema{
+          type: :array,
+          items: %Schema{
+            type: :object,
+            properties: %{
+              size: %Schema{type: :string, enum: ExFleetYards.Repo.Types.ShipSize.all()},
+              sizeLabel: %Schema{type: :string},
+              type: %Schema{type: :string, enum: ExFleetYards.Repo.Types.DockType.all()},
+              typeLabel: %Schema{type: :string},
+              count: %Schema{type: :integer}
+            }
+          }
+        },
         # links
         manufacturer: ExFleetYardsApi.Schemas.Single.Manufacturer,
         createdAt: %Schema{type: :string, format: :"date-time"},

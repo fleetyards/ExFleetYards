@@ -62,11 +62,19 @@ defmodule ExFleetYardsApi.ModelView do
       # listedAt
       # rentalAt
       # loaners
-      # docks
       # links
     }
     |> add_manufacturer(model.manufacturer)
     |> render_timestamps(model)
+    |> render_loaded(
+      :docks,
+      model.docks,
+      &render_many(
+        ExFleetYards.Repo.Game.Station.dock_count(&1),
+        ExFleetYardsApi.StationView,
+        "dock_count.json"
+      )
+    )
     |> filter_null(ExFleetYardsApi.Schemas.Single.Model)
   end
 

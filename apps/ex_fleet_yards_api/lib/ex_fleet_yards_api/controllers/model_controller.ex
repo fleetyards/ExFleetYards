@@ -8,7 +8,7 @@ defmodule ExFleetYardsApi.ModelController do
   show_slug(Game.Model, example: "ptv")
 
   defp query do
-    from(m in Game.Model, as: :data)
+    from(m in Game.Model, as: :data, preload: :docks)
   end
 
   defp query(slug) when is_binary(slug) do

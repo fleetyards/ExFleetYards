@@ -17,8 +17,7 @@ defmodule ExFleetYards.Repo.Game.Dock do
     field :max_ship_size, Types.ShipSize
     field :min_ship_size, Types.ShipSize
     field :ship_size, Types.ShipSize
-    # field :model_id, reference
-    # belongs_to :model, Game.Model, type: Ecto.UUID
+    belongs_to :model, Game.Model, type: Ecto.UUID
     field :height, :float
     field :length, :float
     field :group, :string
