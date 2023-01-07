@@ -244,6 +244,20 @@ defmodule ExFleetYardsApi.Schemas.Single do
             }
           }
         },
+        loaners: %Schema{
+          type: :array,
+          items: %Schema{
+            type: :object,
+            properties: %{
+              id: %Schema{type: :string, format: :uuid},
+              slug: %Schema{type: :string, format: :slug},
+              name: %Schema{type: :string},
+              createdAt: %Schema{type: :string, format: :"date-time"},
+              updatedAt: %Schema{type: :string, format: :"date-time"}
+            },
+            required: [:id, :name, :slug]
+          }
+        },
         # links
         manufacturer: ExFleetYardsApi.Schemas.Single.Manufacturer,
         createdAt: %Schema{type: :string, format: :"date-time"},

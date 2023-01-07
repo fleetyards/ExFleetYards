@@ -75,6 +75,11 @@ defmodule ExFleetYardsApi.ModelView do
         "dock_count.json"
       )
     )
+    |> render_loaded(
+      :loaners,
+      model.loaners,
+      &render_many(&1, __MODULE__, "show.json")
+    )
     |> filter_null(ExFleetYardsApi.Schemas.Single.Model)
   end
 
