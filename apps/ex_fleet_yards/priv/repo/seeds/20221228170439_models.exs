@@ -46,9 +46,9 @@ defmodule ExFleetYards.Repo.Seeds.Models do
            upgrade_kits_count: 0
          },
          %{
-           name: "PTV",
-           slug: "ptv",
-           rsi_name: "PTV",
+           name: "STV",
+           slug: "stv",
+           rsi_name: "STV",
            rsi_id: nil,
            images_count: 0,
            videos_count: 0,

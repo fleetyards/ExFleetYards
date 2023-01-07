@@ -5,7 +5,7 @@ defmodule ExFleetYardsApi.ModelController do
 
   paged_index(Game.Model)
 
-  show_slug(Game.Model, example: "ptv")
+  show_slug(Game.Model, example: "stv")
 
   operation :loaners,
     summary: "Get Loaners of a ship",
