@@ -162,10 +162,82 @@ defmodule ExFleetYardsApi.Schemas.Single do
       description: "Model",
       type: :object,
       properties: %{
+        id: %Schema{type: :string, format: :uuid},
+        slug: %Schema{type: :string, format: :slug},
+        name: %Schema{type: :string},
+        scIdentifier: %Schema{type: :string},
+        erkulIdentifier: %Schema{type: :string},
+        rsiName: %Schema{type: :string},
+        rsiSlug: %Schema{type: :string, format: :slug},
+        description: %Schema{type: :string},
+        length: %Schema{type: :string, format: :number, description: "Length in meters"},
+        beam: %Schema{type: :string, format: :number, description: "Beam in meters"},
+        height: %Schema{type: :string, format: :number, description: "Height in meters"},
+        mass: %Schema{type: :string, format: :number, description: "Mass in kg"},
+        cargo: %Schema{type: :string, format: :number, description: "Cargo in SCU"},
+        hydrogenFuelTankSize: %Schema{
+          type: :string,
+          format: :number,
+          description: "Tank Size in L"
+        },
+        quantumFuelTankSize: %Schema{
+          type: :string,
+          format: :number,
+          description: "Tank Size in L"
+        },
+        minCrew: %Schema{type: :integer},
+        maxCrew: %Schema{type: :integer},
+        scmSpeed: %Schema{type: :string, format: :number, description: "Speed in m/s"},
+        afterburnerSpeed: %Schema{type: :string, format: :number, description: "Speed in m/s"},
+        groundSpeed: %Schema{type: :string, format: :number, description: "Speed in m/s"},
+        afterburnerGroundSpeed: %Schema{
+          type: :string,
+          format: :number,
+          description: "Speed in m/s"
+        },
+        pitchMax: %Schema{type: :string, format: :number, description: "deg/s"},
+        yawMax: %Schema{type: :string, format: :number, description: "deg/s"},
+        rollMax: %Schema{type: :string, format: :number, description: "deg/s"},
+        xaxisAcceleration: %Schema{type: :string, format: :number, description: "Speed in m/s"},
+        yaxisAcceleration: %Schema{type: :string, format: :number, description: "Speed in m/s"},
+        zaxisAcceleration: %Schema{type: :string, format: :number, description: "Speed in m/s"},
+        size: %Schema{type: :string},
+        # TODO: images, brochure, holo
+        topViewWidth: %Schema{type: :integer},
+        topViewHeight: %Schema{type: :integer},
+        sideViewWidth: %Schema{type: :integer},
+        sideViewHeight: %Schema{type: :integer},
+        angledViewWidth: %Schema{type: :integer},
+        angledViewHeight: %Schema{type: :integer},
+        holoColored: %Schema{type: :boolean},
+        storeUrl: %Schema{type: :string, format: :url},
+        salesPageUrl: %Schema{type: :string, format: :url},
+        price: %Schema{type: :string, format: :number, description: "Price in aUEC"},
+        pledgePrice: %Schema{type: :string, format: :number},
+        lastPledgePrice: %Schema{type: :string, format: :number},
+        onSale: %Schema{type: :boolean},
+        productionStatus: %Schema{type: :string},
+        productionNote: %Schema{type: :string},
+        classification: %Schema{type: :string},
+        focus: %Schema{type: :string},
+        rsiId: %Schema{type: :integer},
+        # hasImages: model.has_images,
+        # hasVideos: model.has_videos,
+        # hasUpgrades: model.has_upgrades
+        # hasPaints: model.has_upgrades
+        lastUpdatedAt: %Schema{type: :string, format: :"date-time"},
+        # soldAt
+        # boughtAt
+        # listedAt
+        # rentalAt
+        # loaners
+        # docks
+        # links
         manufacturer: ExFleetYardsApi.Schemas.Single.Manufacturer,
         createdAt: %Schema{type: :string, format: :"date-time"},
         updatedAt: %Schema{type: :string, format: :"date-time"}
-      }
+      },
+      required: [:id, :name, :slug]
     })
   end
 
@@ -350,7 +422,7 @@ defmodule ExFleetYardsApi.Schemas.Single do
       properties: %{
         scopes: %Schema{type: :object, properties: ExFleetYardsApi.Schemas.Gen.scope_properties()},
         username: %Schema{type: :string},
-        password: %Schema{type: :string},
+        password: %Schema{type: :string, format: :password},
         totp: %Schema{type: :string, format: :totp}
       },
       required: [:scopes]
