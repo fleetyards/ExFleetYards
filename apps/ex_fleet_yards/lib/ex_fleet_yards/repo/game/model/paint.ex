@@ -41,6 +41,6 @@ defmodule ExFleetYards.Repo.Game.Model.Paint do
     field :side_view_height, :integer
     field :side_view_width, :integer
 
-    timestamps(inserted_at: :created_at)
+    timestamps(inserted_at: :created_at, type: :utc_datetime)
   end
 end

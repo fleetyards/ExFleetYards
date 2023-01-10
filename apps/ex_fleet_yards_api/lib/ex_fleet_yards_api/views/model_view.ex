@@ -92,4 +92,24 @@ defmodule ExFleetYardsApi.ModelView do
   def render("loaners.json", %{loaners: loaners, conn: conn}) do
     render_many(loaners, __MODULE__, "show.json", conn: conn)
   end
+
+  def render("paints.json", %{model_name: name, paints: paints}) do
+    render_many(paints, __MODULE__, "paint.json", as: :paint, model_name: name)
+  end
+
+  def render("paint.json", %{paint: paint, model_name: name}) do
+    %{
+      id: paint.id,
+      name: paint.name,
+      slug: paint.slug,
+      nameWithModel: [name, "-", paint.name] |> Enum.join(" "),
+      rsiName: paint.rsi_name,
+      rsiSlug: paint.rsi_slug,
+      rsiId: paint.rsi_id,
+      description: paint.description
+      # TODO: images, soldAt, boughtAt
+    }
+    |> render_timestamps(paint)
+    |> filter_null(ExFleetYardsApi.Schemas.Single.ModelPaint)
+  end
 end

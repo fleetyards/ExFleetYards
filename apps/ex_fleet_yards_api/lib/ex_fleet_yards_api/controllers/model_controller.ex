@@ -8,7 +8,7 @@ defmodule ExFleetYardsApi.ModelController do
   show_slug(Game.Model, example: "stv")
 
   operation :loaners,
-    summary: "Get Loaners of a ship",
+    summary: "Get Loaners of a Model",
     parameters: [
       id: [in: :path, type: :string]
     ],
@@ -28,6 +28,25 @@ defmodule ExFleetYardsApi.ModelController do
     render(conn, "loaners.json", loaners: loaners)
   end
 
+  operation :paints,
+    summary: "Get Paints of a Model",
+    parameters: [
+      id: [in: :path, type: :string, example: "stv"]
+    ],
+    responses: [
+      ok:
+        {"Loaners", "application/json",
+         %OpenApiSpex.Schema{type: :array, items: ExFleetYardsApi.Schemas.Single.ModelPaint}},
+      not_found: {"Error", "application/json", Error}
+    ]
+
+  def paints(conn, %{"id" => slug}) do
+    model_name = from(m in Game.Model, where: m.slug == ^slug, select: m.name) |> Repo.one!()
+    paints = query(slug, :paints) |> Repo.all()
+
+    render(conn, "paints.json", model_name: model_name, paints: paints)
+  end
+
   defp query do
     loaner_query = from(m in Game.Model, select: [:id, :slug, :name, :created_at, :updated_at])
     from(m in Game.Model, as: :data, preload: [:manufacturer, :docks, loaners: ^loaner_query])
@@ -40,5 +59,9 @@ defmodule ExFleetYardsApi.ModelController do
 
   def query(slug, :loaners) do
     from(m in Game.Model, where: m.slug == ^slug, left_join: l in assoc(m, :loaners), select: l)
+  end
+
+  def query(slug, :paints) do
+    from(m in Game.Model, where: m.slug == ^slug, left_join: p in assoc(m, :paints), select: p)
   end
 end

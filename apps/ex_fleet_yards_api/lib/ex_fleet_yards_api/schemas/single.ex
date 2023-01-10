@@ -278,6 +278,29 @@ defmodule ExFleetYardsApi.Schemas.Single do
     })
   end
 
+  defmodule ModelPaint do
+    @moduledoc false
+    require OpenApiSpex
+
+    OpenApiSpex.schema(%{
+      summary: "Model paint",
+      type: :object,
+      properties: %{
+        id: %Schema{type: :string, format: :uuid},
+        slug: %Schema{type: :string, format: :slug},
+        name: %Schema{type: :string},
+        nameWithModel: %Schema{type: :string},
+        rsiName: %Schema{type: :string},
+        rsiSlug: %Schema{type: :string, format: :slug},
+        rsiId: %Schema{type: :integer},
+        description: %Schema{type: :string},
+        createdAt: %Schema{type: :string, format: :"date-time"},
+        updatedAt: %Schema{type: :string, format: :"date-time"}
+      },
+      required: [:id, :name, :slug]
+    })
+  end
+
   defmodule Station do
     @moduledoc false
     require OpenApiSpex
