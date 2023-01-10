@@ -111,7 +111,11 @@ defmodule ExFleetYards.Repo.Game.Model do
     has_many :paints, Game.Model.Paint
 
     many_to_many :loaners, __MODULE__,
-      join_through: "model_loaners",
+      join_through: __MODULE__.Loaner,
       join_keys: [model_id: :id, loaner_model_id: :id]
+
+    many_to_many :loaned_by, __MODULE__,
+      join_through: __MODULE__.Loaner,
+      join_keys: [loaner_model_id: :id, model_id: :id]
   end
 end

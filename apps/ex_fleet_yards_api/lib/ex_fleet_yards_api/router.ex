@@ -80,6 +80,7 @@ defmodule ExFleetYardsApi.Router do
 
         get "/models/:id/paints", ModelController, :paints
         get "/models/:id/loaners", ModelController, :loaners
+        get "/models/:id/loaned-by", ModelController, :inv_loaners
         resources "/models", ModelController, only: [:index, :show]
         resources "/components", ComponentController, only: [:index, :show]
         resources "/starsystems", StarSystemController, only: [:index, :show]
