@@ -1,7 +1,7 @@
 defmodule ExFleetYardsApi.ModelController do
   use ExFleetYardsApi, :controller
 
-  tags ["game"]
+  tags ["game", "model"]
 
   paged_index(Game.Model)
 
