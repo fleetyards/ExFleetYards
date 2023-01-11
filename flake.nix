@@ -126,6 +126,8 @@
           };
         });
 
+      formatter = forAllSystems (system: nixpkgsFor.${system}.nixfmt);
+
       checks = forAllSystems (system: {
         devenv_ci = self.devShells.${system}.default.ci;
         ex_fleet_yards = self.packages.${system}.ex_fleet_yards;
