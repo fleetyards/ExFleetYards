@@ -15,6 +15,10 @@ ExFleetYards.Repo.Game.Faction.html
 ExFleetYards.Repo.Game.Fleet.html
 ExFleetYards.Repo.Game.Habitation.html
 ExFleetYards.Repo.Game.Manufacturer.html
+ExFleetYards.Repo.Game.Model.Hardpoint.Loadout.html
+ExFleetYards.Repo.Game.Model.Hardpoint.html
+ExFleetYards.Repo.Game.Model.Loaner.html
+ExFleetYards.Repo.Game.Model.Paint.html
 ExFleetYards.Repo.Game.Model.html
 ExFleetYards.Repo.Game.Shop.html
 ExFleetYards.Repo.Game.ShopCommodity.html
@@ -27,6 +31,12 @@ ExFleetYards.Repo.Types.CelestialObjectType.html
 ExFleetYards.Repo.Types.CommodityType.html
 ExFleetYards.Repo.Types.DockType.html
 ExFleetYards.Repo.Types.HabitationType.html
+ExFleetYards.Repo.Types.HardpointCategory.html
+ExFleetYards.Repo.Types.HardpointGroup.html
+ExFleetYards.Repo.Types.HardpointSize.html
+ExFleetYards.Repo.Types.HardpointSource.html
+ExFleetYards.Repo.Types.HardpointSubCategory.html
+ExFleetYards.Repo.Types.HardpointType.html
 ExFleetYards.Repo.Types.ImportState.html
 ExFleetYards.Repo.Types.ImportType.html
 ExFleetYards.Repo.Types.ShipSize.html
@@ -52,6 +62,7 @@ ExFleetYardsApi.ErrorView.html
 ExFleetYardsApi.InvalidPaginationException.html
 ExFleetYardsApi.ManufacturerController.html
 ExFleetYardsApi.ManufacturerView.html
+ExFleetYardsApi.ModelController.html
 ExFleetYardsApi.ModelView.html
 ExFleetYardsApi.NotFoundException.html
 ExFleetYardsApi.RoadmapController.html
@@ -69,6 +80,7 @@ ExFleetYardsApi.Schemas.List.StationList.html
 ExFleetYardsApi.Schemas.List.html
 ExFleetYardsApi.Schemas.Single.Component.html
 ExFleetYardsApi.Schemas.Single.Manufacturer.html
+ExFleetYardsApi.Schemas.Single.ModelHardpoint.html
 ExFleetYardsApi.Schemas.Single.StarSystem.html
 ExFleetYardsApi.Schemas.Single.User.html
 ExFleetYardsApi.Schemas.Single.Version.html
@@ -124,7 +136,7 @@ dist/merriweather-latin-ext-300-normal-K6L27CZ5.woff2
 dist/merriweather-vietnamese-300-italic-EHHNZPUO.woff2
 dist/merriweather-vietnamese-300-normal-U376L4Z4.woff2
 dist/remixicon-NKANDIL5.woff2
-dist/search_items-5EB5E28F.js
-dist/sidebar_items-A613E51A.js
+dist/search_items-D2533EF7.js
+dist/sidebar_items-C65A5D1C.js
 index.html
 search.html

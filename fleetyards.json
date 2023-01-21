@@ -329,14 +329,584 @@
       "Model": {
         "description": "Model",
         "properties": {
+          "rollMax": {
+            "description": "deg/s",
+            "format": "number",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "angledViewWidth": {
+            "type": "integer",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "scIdentifier": {
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "zaxisAcceleration": {
+            "description": "Speed in m/s",
+            "format": "number",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "yawMax": {
+            "description": "deg/s",
+            "format": "number",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "scmSpeed": {
+            "description": "Speed in m/s",
+            "format": "number",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "productionNote": {
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "sideViewWidth": {
+            "type": "integer",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "classification": {
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "angledViewHeight": {
+            "type": "integer",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "rsiId": {
+            "type": "integer",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "loaners": {
+            "items": {
+              "properties": {
+                "createdAt": {
+                  "format": "date-time",
+                  "type": "string",
+                  "x-struct": null,
+                  "x-validate": null
+                },
+                "id": {
+                  "format": "uuid",
+                  "type": "string",
+                  "x-struct": null,
+                  "x-validate": null
+                },
+                "links": {
+                  "properties": {
+                    "self": {
+                      "format": "url",
+                      "type": "string",
+                      "x-struct": null,
+                      "x-validate": null
+                    }
+                  },
+                  "type": "object",
+                  "x-struct": null,
+                  "x-validate": null
+                },
+                "name": {
+                  "type": "string",
+                  "x-struct": null,
+                  "x-validate": null
+                },
+                "slug": {
+                  "format": "slug",
+                  "type": "string",
+                  "x-struct": null,
+                  "x-validate": null
+                },
+                "updatedAt": {
+                  "format": "date-time",
+                  "type": "string",
+                  "x-struct": null,
+                  "x-validate": null
+                }
+              },
+              "required": [
+                "id",
+                "name",
+                "slug"
+              ],
+              "type": "object",
+              "x-struct": null,
+              "x-validate": null
+            },
+            "type": "array",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "storeUrl": {
+            "format": "url",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "afterburnerGroundSpeed": {
+            "description": "Speed in m/s",
+            "format": "number",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "cargo": {
+            "description": "Cargo in SCU",
+            "format": "number",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "pledgePrice": {
+            "format": "number",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "docks": {
+            "items": {
+              "properties": {
+                "count": {
+                  "type": "integer",
+                  "x-struct": null,
+                  "x-validate": null
+                },
+                "size": {
+                  "enum": [
+                    "extra_extra_small",
+                    "extra_small",
+                    "small",
+                    "medium",
+                    "large",
+                    "extra_large",
+                    "capital"
+                  ],
+                  "type": "string",
+                  "x-struct": null,
+                  "x-validate": null
+                },
+                "sizeLabel": {
+                  "type": "string",
+                  "x-struct": null,
+                  "x-validate": null
+                },
+                "type": {
+                  "enum": [
+                    "vehiclepad",
+                    "garage",
+                    "landingpad",
+                    "dockingport",
+                    "hangar"
+                  ],
+                  "type": "string",
+                  "x-struct": null,
+                  "x-validate": null
+                },
+                "typeLabel": {
+                  "type": "string",
+                  "x-struct": null,
+                  "x-validate": null
+                }
+              },
+              "type": "object",
+              "x-struct": null,
+              "x-validate": null
+            },
+            "type": "array",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "maxCrew": {
+            "type": "integer",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "pitchMax": {
+            "description": "deg/s",
+            "format": "number",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "groundSpeed": {
+            "description": "Speed in m/s",
+            "format": "number",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "productionStatus": {
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "hydrogenFuelTankSize": {
+            "description": "Tank Size in L",
+            "format": "number",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "links": {
+            "properties": {
+              "self": {
+                "format": "url",
+                "type": "string",
+                "x-struct": null,
+                "x-validate": null
+              }
+            },
+            "type": "object",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "rsiName": {
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "xaxisAcceleration": {
+            "description": "Speed in m/s",
+            "format": "number",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "lastUpdatedAt": {
+            "format": "date-time",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "onSale": {
+            "type": "boolean",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "yaxisAcceleration": {
+            "description": "Speed in m/s",
+            "format": "number",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "price": {
+            "description": "Price in aUEC",
+            "format": "number",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "size": {
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "topViewHeight": {
+            "type": "integer",
+            "x-struct": null,
+            "x-validate": null
+          },
           "createdAt": {
             "format": "date-time",
             "type": "string",
             "x-struct": null,
             "x-validate": null
           },
+          "focus": {
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
           "manufacturer": {
             "$ref": "#/components/schemas/Manufacturer"
+          },
+          "afterburnerSpeed": {
+            "description": "Speed in m/s",
+            "format": "number",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "rsiSlug": {
+            "format": "slug",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "holoColored": {
+            "type": "boolean",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "lastPledgePrice": {
+            "format": "number",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "topViewWidth": {
+            "type": "integer",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "length": {
+            "description": "Length in meters",
+            "format": "number",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "description": {
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "height": {
+            "description": "Height in meters",
+            "format": "number",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "mass": {
+            "description": "Mass in kg",
+            "format": "number",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "quantumFuelTankSize": {
+            "description": "Tank Size in L",
+            "format": "number",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "salesPageUrl": {
+            "format": "url",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "erkulIdentifier": {
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "slug": {
+            "format": "slug",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "sideViewHeight": {
+            "type": "integer",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "name": {
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "beam": {
+            "description": "Beam in meters",
+            "format": "number",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "minCrew": {
+            "type": "integer",
+            "x-struct": null,
+            "x-validate": null
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "slug"
+        ],
+        "title": "Model",
+        "type": "object",
+        "x-struct": "Elixir.ExFleetYardsApi.Schemas.Single.Model",
+        "x-validate": null
+      },
+      "ModelHardpoint": {
+        "properties": {
+          "category": {
+            "enum": [
+              "main",
+              "retro",
+              "vtol",
+              "fixed",
+              "gimbal",
+              "joint",
+              "manned_turret",
+              "remote_turret",
+              "missile_turret",
+              "missile_rack"
+            ],
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "component": {
+            "$ref": "#/components/schemas/Component"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "details": {
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "group": {
+            "enum": [
+              "avionic",
+              "system",
+              "propulsion",
+              "thruster",
+              "weapon"
+            ],
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "key": {
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "loadoutIdentifier": {
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "loadouts": {
+            "items": {
+              "properties": {
+                "createdAt": {
+                  "format": "date-time",
+                  "type": "string",
+                  "x-struct": null,
+                  "x-validate": null
+                },
+                "updatedAt": {
+                  "format": "date-time",
+                  "type": "string",
+                  "x-struct": null,
+                  "x-validate": null
+                }
+              },
+              "required": [
+                "id",
+                "name",
+                "slug"
+              ],
+              "type": "object",
+              "x-struct": null,
+              "x-validate": null
+            },
+            "type": "array",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "mount": {
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "name": {
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "size": {
+            "enum": [
+              "vehicle",
+              "one",
+              "two",
+              "three",
+              "four",
+              "five",
+              "six",
+              "seven",
+              "eight",
+              "nine",
+              "ten",
+              "eleven",
+              "twelve",
+              "snub",
+              "small",
+              "medium",
+              "large",
+              "capital",
+              "tbd"
+            ],
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "type": {
+            "enum": [
+              "power_plants",
+              "coolers",
+              "shield_generators",
+              "quantum_drives",
+              "main_thrusters",
+              "maneuvering_thrusters",
+              "weapons",
+              "turrets",
+              "missiles",
+              "radar",
+              "computers",
+              "fuel_intakes",
+              "fuel_tanks",
+              "jump_modules",
+              "quantum_fuel_tanks",
+              "utility_items"
+            ],
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
           },
           "updatedAt": {
             "format": "date-time",
@@ -345,9 +915,109 @@
             "x-validate": null
           }
         },
-        "title": "Model",
+        "required": [
+          "id",
+          "name",
+          "type",
+          "group",
+          "size",
+          "key"
+        ],
+        "title": "ModelHardpoint",
         "type": "object",
-        "x-struct": "Elixir.ExFleetYardsApi.Schemas.Single.Model",
+        "x-struct": "Elixir.ExFleetYardsApi.Schemas.Single.ModelHardpoint",
+        "x-validate": null
+      },
+      "ModelList": {
+        "description": "Model List",
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/Model"
+            },
+            "type": "array",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/PaginationMetadata"
+          }
+        },
+        "required": [
+          "data",
+          "metadata"
+        ],
+        "title": "ModelList",
+        "type": "object",
+        "x-struct": "Elixir.ExFleetYardsApi.Schemas.List.ModelList",
+        "x-validate": null
+      },
+      "ModelPaint": {
+        "properties": {
+          "createdAt": {
+            "format": "date-time",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "description": {
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "name": {
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "nameWithModel": {
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "rsiId": {
+            "type": "integer",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "rsiName": {
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "rsiSlug": {
+            "format": "slug",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "slug": {
+            "format": "slug",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "slug"
+        ],
+        "title": "ModelPaint",
+        "type": "object",
+        "x-struct": "Elixir.ExFleetYardsApi.Schemas.Single.ModelPaint",
         "x-validate": null
       },
       "PaginationMetadata": {
@@ -1201,6 +1871,7 @@
         "description": "Login information",
         "properties": {
           "password": {
+            "format": "password",
             "type": "string",
             "x-struct": null,
             "x-validate": null
@@ -1446,91 +2117,14 @@
   },
   "openapi": "3.0.0",
   "paths": {
-    "/api/v2/game/celestial-objects": {
-      "get": {
+    "/api/v2/session/logout/{id}": {
+      "delete": {
         "callbacks": {},
-        "operationId": "ExFleetYardsApi.CelestialObjectController.index",
+        "operationId": "ExFleetYardsApi.UserSessionController.delete_other",
         "parameters": [
           {
             "description": "",
-            "example": 25,
-            "in": "query",
-            "name": "limit",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "x-struct": null,
-              "x-validate": null
-            }
-          },
-          {
-            "description": "",
-            "in": "query",
-            "name": "after",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "x-struct": null,
-              "x-validate": null
-            }
-          },
-          {
-            "description": "",
-            "in": "query",
-            "name": "before",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "x-struct": null,
-              "x-validate": null
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CelestialObjectList"
-                }
-              }
-            },
-            "description": "CelestialObjectList"
-          },
-          "400": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            },
-            "description": "Error"
-          },
-          "500": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            },
-            "description": "Error"
-          }
-        },
-        "tags": [
-          "game"
-        ]
-      }
-    },
-    "/api/v2/game/celestial-objects/{id}": {
-      "get": {
-        "callbacks": {},
-        "operationId": "ExFleetYardsApi.CelestialObjectController.show",
-        "parameters": [
-          {
-            "description": "",
-            "example": "microtech",
+            "example": "all",
             "in": "path",
             "name": "id",
             "required": true,
@@ -1546,11 +2140,21 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CelestialObject"
+                  "$ref": "#/components/schemas/Error"
                 }
               }
             },
-            "description": "CelestialObject"
+            "description": "Success"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
           },
           "404": {
             "content": {
@@ -1561,110 +2165,30 @@
               }
             },
             "description": "Error"
-          },
-          "500": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            },
-            "description": "Error"
           }
         },
-        "tags": [
-          "game"
-        ]
-      }
-    },
-    "/api/v2/game/components": {
-      "get": {
-        "callbacks": {},
-        "operationId": "ExFleetYardsApi.ComponentController.index",
-        "parameters": [
+        "security": [
           {
-            "description": "",
-            "example": 25,
-            "in": "query",
-            "name": "limit",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "x-struct": null,
-              "x-validate": null
-            }
-          },
-          {
-            "description": "",
-            "in": "query",
-            "name": "after",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "x-struct": null,
-              "x-validate": null
-            }
-          },
-          {
-            "description": "",
-            "in": "query",
-            "name": "before",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "x-struct": null,
-              "x-validate": null
-            }
+            "authorization": [
+              "api:admin"
+            ]
           }
         ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ComponentList"
-                }
-              }
-            },
-            "description": "ComponentList"
-          },
-          "400": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            },
-            "description": "Error"
-          },
-          "500": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            },
-            "description": "Error"
-          }
-        },
         "tags": [
-          "game"
+          "session",
+          "user"
         ]
       }
     },
-    "/api/v2/game/components/{id}": {
+    "/api/v2/users/{username}": {
       "get": {
         "callbacks": {},
-        "operationId": "ExFleetYardsApi.ComponentController.show",
+        "operationId": "ExFleetYardsApi.UserController.get",
         "parameters": [
           {
             "description": "",
-            "example": "5ca-akura",
             "in": "path",
-            "name": "id",
+            "name": "username",
             "required": true,
             "schema": {
               "type": "string",
@@ -1678,11 +2202,21 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Component"
+                  "$ref": "#/components/schemas/User"
                 }
               }
             },
-            "description": "Component"
+            "description": "User"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
           },
           "404": {
             "content": {
@@ -1693,85 +2227,31 @@
               }
             },
             "description": "Error"
-          },
-          "500": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            },
-            "description": "Error"
           }
         },
+        "summary": "Get user info for a user",
         "tags": [
-          "game"
+          "user"
         ]
       }
     },
-    "/api/v2/game/manufacturers": {
+    "/api/v2/session/tokens": {
       "get": {
         "callbacks": {},
-        "operationId": "ExFleetYardsApi.ManufacturerController.index",
-        "parameters": [
-          {
-            "description": "",
-            "example": 25,
-            "in": "query",
-            "name": "limit",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "x-struct": null,
-              "x-validate": null
-            }
-          },
-          {
-            "description": "",
-            "in": "query",
-            "name": "after",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "x-struct": null,
-              "x-validate": null
-            }
-          },
-          {
-            "description": "",
-            "in": "query",
-            "name": "before",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "x-struct": null,
-              "x-validate": null
-            }
-          }
-        ],
+        "operationId": "ExFleetYardsApi.UserSessionController.list",
+        "parameters": [],
         "responses": {
           "200": {
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ManufacturerList"
+                  "$ref": "#/components/schemas/UserTokenList"
                 }
               }
             },
-            "description": "ManufacturerList"
+            "description": "UserTokenList"
           },
-          "400": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            },
-            "description": "Error"
-          },
-          "500": {
+          "401": {
             "content": {
               "application/json": {
                 "schema": {
@@ -1782,217 +2262,16 @@
             "description": "Error"
           }
         },
-        "tags": [
-          "game"
-        ]
-      }
-    },
-    "/api/v2/game/manufacturers/with-models": {
-      "get": {
-        "callbacks": {},
-        "operationId": "ExFleetYardsApi.ManufacturerController.with_models",
-        "parameters": [
+        "security": [
           {
-            "description": "",
-            "example": 25,
-            "in": "query",
-            "name": "limit",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "x-struct": null,
-              "x-validate": null
-            }
-          },
-          {
-            "description": "",
-            "in": "query",
-            "name": "after",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "x-struct": null,
-              "x-validate": null
-            }
-          },
-          {
-            "description": "",
-            "in": "query",
-            "name": "before",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "x-struct": null,
-              "x-validate": null
-            }
+            "authorization": [
+              "api:read"
+            ]
           }
         ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ManufacturerList"
-                }
-              }
-            },
-            "description": "Elixir.ManufacturerList"
-          },
-          "400": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            },
-            "description": "Error"
-          },
-          "500": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            },
-            "description": "Error"
-          }
-        },
         "tags": [
-          "game"
-        ]
-      }
-    },
-    "/api/v2/game/manufacturers/{id}": {
-      "get": {
-        "callbacks": {},
-        "operationId": "ExFleetYardsApi.ManufacturerController.show",
-        "parameters": [
-          {
-            "description": "",
-            "example": "argo-astronautics",
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "x-struct": null,
-              "x-validate": null
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Manufacturer"
-                }
-              }
-            },
-            "description": "Manufacturer"
-          },
-          "404": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            },
-            "description": "Error"
-          },
-          "500": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            },
-            "description": "Error"
-          }
-        },
-        "tags": [
-          "game"
-        ]
-      }
-    },
-    "/api/v2/game/starsystems": {
-      "get": {
-        "callbacks": {},
-        "operationId": "ExFleetYardsApi.StarSystemController.index",
-        "parameters": [
-          {
-            "description": "",
-            "example": 25,
-            "in": "query",
-            "name": "limit",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "x-struct": null,
-              "x-validate": null
-            }
-          },
-          {
-            "description": "",
-            "in": "query",
-            "name": "after",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "x-struct": null,
-              "x-validate": null
-            }
-          },
-          {
-            "description": "",
-            "in": "query",
-            "name": "before",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "x-struct": null,
-              "x-validate": null
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/StarSystemList"
-                }
-              }
-            },
-            "description": "StarSystemList"
-          },
-          "400": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            },
-            "description": "Error"
-          },
-          "500": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            },
-            "description": "Error"
-          }
-        },
-        "tags": [
-          "game"
+          "session",
+          "user"
         ]
       }
     },
@@ -2048,6 +2327,133 @@
         },
         "tags": [
           "game"
+        ]
+      }
+    },
+    "/api/v2/game/models": {
+      "get": {
+        "callbacks": {},
+        "operationId": "ExFleetYardsApi.ModelController.index",
+        "parameters": [
+          {
+            "description": "",
+            "example": 25,
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "x-struct": null,
+              "x-validate": null
+            }
+          },
+          {
+            "description": "",
+            "in": "query",
+            "name": "after",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            }
+          },
+          {
+            "description": "",
+            "in": "query",
+            "name": "before",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ModelList"
+                }
+              }
+            },
+            "description": "ModelList"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          }
+        },
+        "tags": [
+          "game",
+          "model"
+        ]
+      }
+    },
+    "/api/v2/session/logout": {
+      "delete": {
+        "callbacks": {},
+        "description": "Logout token",
+        "operationId": "ExFleetYardsApi.UserSessionController.delete",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserToken"
+                }
+              }
+            },
+            "description": "UserToken"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "tags": [
+          "session",
+          "user"
         ]
       }
     },
@@ -2161,6 +2567,629 @@
         ]
       }
     },
+    "/api/v2/game/manufacturers": {
+      "get": {
+        "callbacks": {},
+        "operationId": "ExFleetYardsApi.ManufacturerController.index",
+        "parameters": [
+          {
+            "description": "",
+            "example": 25,
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "x-struct": null,
+              "x-validate": null
+            }
+          },
+          {
+            "description": "",
+            "in": "query",
+            "name": "after",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            }
+          },
+          {
+            "description": "",
+            "in": "query",
+            "name": "before",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ManufacturerList"
+                }
+              }
+            },
+            "description": "ManufacturerList"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          }
+        },
+        "tags": [
+          "game"
+        ]
+      }
+    },
+    "/api/v2/game/models/{id}": {
+      "get": {
+        "callbacks": {},
+        "operationId": "ExFleetYardsApi.ModelController.show",
+        "parameters": [
+          {
+            "description": "",
+            "example": "stv",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Model"
+                }
+              }
+            },
+            "description": "Model"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          }
+        },
+        "tags": [
+          "game",
+          "model"
+        ]
+      }
+    },
+    "/api/v2/game/manufacturers/{id}": {
+      "get": {
+        "callbacks": {},
+        "operationId": "ExFleetYardsApi.ManufacturerController.show",
+        "parameters": [
+          {
+            "description": "",
+            "example": "argo-astronautics",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Manufacturer"
+                }
+              }
+            },
+            "description": "Manufacturer"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          }
+        },
+        "tags": [
+          "game"
+        ]
+      }
+    },
+    "/api/v2/game/components": {
+      "get": {
+        "callbacks": {},
+        "operationId": "ExFleetYardsApi.ComponentController.index",
+        "parameters": [
+          {
+            "description": "",
+            "example": 25,
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "x-struct": null,
+              "x-validate": null
+            }
+          },
+          {
+            "description": "",
+            "in": "query",
+            "name": "after",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            }
+          },
+          {
+            "description": "",
+            "in": "query",
+            "name": "before",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ComponentList"
+                }
+              }
+            },
+            "description": "ComponentList"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          }
+        },
+        "tags": [
+          "game"
+        ]
+      }
+    },
+    "/api/v2/game/celestial-objects": {
+      "get": {
+        "callbacks": {},
+        "operationId": "ExFleetYardsApi.CelestialObjectController.index",
+        "parameters": [
+          {
+            "description": "",
+            "example": 25,
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "x-struct": null,
+              "x-validate": null
+            }
+          },
+          {
+            "description": "",
+            "in": "query",
+            "name": "after",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            }
+          },
+          {
+            "description": "",
+            "in": "query",
+            "name": "before",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CelestialObjectList"
+                }
+              }
+            },
+            "description": "CelestialObjectList"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          }
+        },
+        "tags": [
+          "game"
+        ]
+      }
+    },
+    "/api/v2/roadmap/{id}": {
+      "get": {
+        "callbacks": {},
+        "operationId": "ExFleetYardsApi.RoadmapController.show",
+        "parameters": [
+          {
+            "description": "",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RoadmapItem"
+                }
+              }
+            },
+            "description": "RoadmapItem"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          }
+        },
+        "tags": [
+          "roadmap"
+        ]
+      }
+    },
+    "/api/v2/session/logout/all": {
+      "delete": {
+        "callbacks": {},
+        "operationId": "ExFleetYardsApi.UserSessionController.delete_all",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          }
+        },
+        "security": [
+          {
+            "authorization": [
+              "api:admin"
+            ]
+          }
+        ],
+        "tags": [
+          "session",
+          "user"
+        ]
+      }
+    },
+    "/api/v2/roadmap/released": {
+      "get": {
+        "callbacks": {},
+        "operationId": "ExFleetYardsApi.RoadmapController.released",
+        "parameters": [
+          {
+            "description": "",
+            "example": 25,
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "x-struct": null,
+              "x-validate": null
+            }
+          },
+          {
+            "description": "",
+            "in": "query",
+            "name": "after",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            }
+          },
+          {
+            "description": "",
+            "in": "query",
+            "name": "before",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RoadmapItemList"
+                }
+              }
+            },
+            "description": "RoadmapItemList"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          }
+        },
+        "tags": [
+          "roadmap"
+        ]
+      }
+    },
+    "/api/v2/game/manufacturers/with-models": {
+      "get": {
+        "callbacks": {},
+        "operationId": "ExFleetYardsApi.ManufacturerController.with_models",
+        "parameters": [
+          {
+            "description": "",
+            "example": 25,
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "x-struct": null,
+              "x-validate": null
+            }
+          },
+          {
+            "description": "",
+            "in": "query",
+            "name": "after",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            }
+          },
+          {
+            "description": "",
+            "in": "query",
+            "name": "before",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ManufacturerList"
+                }
+              }
+            },
+            "description": "Elixir.ManufacturerList"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          }
+        },
+        "tags": [
+          "game"
+        ]
+      }
+    },
+    "/api/v2/version": {
+      "get": {
+        "callbacks": {},
+        "operationId": "ExFleetYardsApi.VersionController.index",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VersionResponse"
+                }
+              }
+            },
+            "description": "Version"
+          }
+        },
+        "summary": "Get server version",
+        "tags": [
+          "version"
+        ]
+      }
+    },
     "/api/v2/game/stations/{id}": {
       "get": {
         "callbacks": {},
@@ -2249,17 +3278,28 @@
         ]
       }
     },
-    "/api/v2/game/stations/{id}/shops/{shop}": {
+    "/api/v2/game/starsystems": {
       "get": {
         "callbacks": {},
-        "operationId": "ExFleetYardsApi.StationController.shop",
+        "operationId": "ExFleetYardsApi.StarSystemController.index",
         "parameters": [
           {
             "description": "",
-            "example": "new-babbage",
-            "in": "path",
-            "name": "id",
-            "required": true,
+            "example": 25,
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "x-struct": null,
+              "x-validate": null
+            }
+          },
+          {
+            "description": "",
+            "in": "query",
+            "name": "after",
+            "required": false,
             "schema": {
               "type": "string",
               "x-struct": null,
@@ -2268,10 +3308,9 @@
           },
           {
             "description": "",
-            "example": "trade-development-division",
-            "in": "path",
-            "name": "shop",
-            "required": true,
+            "in": "query",
+            "name": "before",
+            "required": false,
             "schema": {
               "type": "string",
               "x-struct": null,
@@ -2284,13 +3323,13 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Shop"
+                  "$ref": "#/components/schemas/StarSystemList"
                 }
               }
             },
-            "description": "Shop"
+            "description": "StarSystemList"
           },
-          "404": {
+          "400": {
             "content": {
               "application/json": {
                 "schema": {
@@ -2313,6 +3352,148 @@
         },
         "tags": [
           "game"
+        ]
+      }
+    },
+    "/api/v2/session": {
+      "get": {
+        "callbacks": {},
+        "operationId": "ExFleetYardsApi.UserSessionController.get_self",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserToken"
+                }
+              }
+            },
+            "description": "UserToken"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "tags": [
+          "session",
+          "user"
+        ]
+      },
+      "post": {
+        "callbacks": {},
+        "operationId": "ExFleetYardsApi.UserSessionController.create",
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserSession"
+              }
+            }
+          },
+          "description": "User Params",
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "UserToken"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          }
+        },
+        "tags": [
+          "session",
+          "user"
+        ]
+      }
+    },
+    "/api/v2/game/models/{id}/hardpoints": {
+      "get": {
+        "callbacks": {},
+        "operationId": "ExFleetYardsApi.ModelController.hardpoints",
+        "parameters": [
+          {
+            "description": "",
+            "example": "600i-touring",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/ModelHardpoint"
+                  },
+                  "type": "array",
+                  "x-struct": null,
+                  "x-validate": null
+                }
+              }
+            },
+            "description": "Loaners"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          }
+        },
+        "summary": "Get Hardpoints of a Model",
+        "tags": [
+          "game",
+          "model"
         ]
       }
     },
@@ -2417,39 +3598,16 @@
         ]
       }
     },
-    "/api/v2/roadmap": {
+    "/api/v2/game/models/{id}/loaners": {
       "get": {
         "callbacks": {},
-        "operationId": "ExFleetYardsApi.RoadmapController.index",
+        "operationId": "ExFleetYardsApi.ModelController.loaners",
         "parameters": [
           {
             "description": "",
-            "example": 25,
-            "in": "query",
-            "name": "limit",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "x-struct": null,
-              "x-validate": null
-            }
-          },
-          {
-            "description": "",
-            "in": "query",
-            "name": "after",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "x-struct": null,
-              "x-validate": null
-            }
-          },
-          {
-            "description": "",
-            "in": "query",
-            "name": "before",
-            "required": false,
+            "in": "path",
+            "name": "id",
+            "required": true,
             "schema": {
               "type": "string",
               "x-struct": null,
@@ -2462,100 +3620,18 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/RoadmapItemList"
+                  "items": {
+                    "$ref": "#/components/schemas/Model"
+                  },
+                  "type": "array",
+                  "x-struct": null,
+                  "x-validate": null
                 }
               }
             },
-            "description": "RoadmapItemList"
+            "description": "Loaners"
           },
-          "400": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            },
-            "description": "Error"
-          },
-          "500": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            },
-            "description": "Error"
-          }
-        },
-        "tags": [
-          "roadmap"
-        ]
-      }
-    },
-    "/api/v2/roadmap/active": {
-      "get": {
-        "callbacks": {},
-        "operationId": "ExFleetYardsApi.RoadmapController.active",
-        "parameters": [
-          {
-            "description": "",
-            "example": 25,
-            "in": "query",
-            "name": "limit",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "x-struct": null,
-              "x-validate": null
-            }
-          },
-          {
-            "description": "",
-            "in": "query",
-            "name": "after",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "x-struct": null,
-              "x-validate": null
-            }
-          },
-          {
-            "description": "",
-            "in": "query",
-            "name": "before",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "x-struct": null,
-              "x-validate": null
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/RoadmapItemList"
-                }
-              }
-            },
-            "description": "RoadmapItemList"
-          },
-          "400": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            },
-            "description": "Error"
-          },
-          "500": {
+          "404": {
             "content": {
               "application/json": {
                 "schema": {
@@ -2566,85 +3642,10 @@
             "description": "Error"
           }
         },
+        "summary": "Get Loaners of a Model",
         "tags": [
-          "roadmap"
-        ]
-      }
-    },
-    "/api/v2/roadmap/released": {
-      "get": {
-        "callbacks": {},
-        "operationId": "ExFleetYardsApi.RoadmapController.released",
-        "parameters": [
-          {
-            "description": "",
-            "example": 25,
-            "in": "query",
-            "name": "limit",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "x-struct": null,
-              "x-validate": null
-            }
-          },
-          {
-            "description": "",
-            "in": "query",
-            "name": "after",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "x-struct": null,
-              "x-validate": null
-            }
-          },
-          {
-            "description": "",
-            "in": "query",
-            "name": "before",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "x-struct": null,
-              "x-validate": null
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/RoadmapItemList"
-                }
-              }
-            },
-            "description": "RoadmapItemList"
-          },
-          "400": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            },
-            "description": "Error"
-          },
-          "500": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            },
-            "description": "Error"
-          }
-        },
-        "tags": [
-          "roadmap"
+          "game",
+          "model"
         ]
       }
     },
@@ -2725,15 +3726,28 @@
         ]
       }
     },
-    "/api/v2/roadmap/{id}": {
+    "/api/v2/game/stations/{id}/shops/{shop}": {
       "get": {
         "callbacks": {},
-        "operationId": "ExFleetYardsApi.RoadmapController.show",
+        "operationId": "ExFleetYardsApi.StationController.shop",
         "parameters": [
           {
             "description": "",
+            "example": "new-babbage",
             "in": "path",
             "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            }
+          },
+          {
+            "description": "",
+            "example": "trade-development-division",
+            "in": "path",
+            "name": "shop",
             "required": true,
             "schema": {
               "type": "string",
@@ -2747,13 +3761,90 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/RoadmapItem"
+                  "$ref": "#/components/schemas/Shop"
                 }
               }
             },
-            "description": "RoadmapItem"
+            "description": "Shop"
           },
           "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          }
+        },
+        "tags": [
+          "game"
+        ]
+      }
+    },
+    "/api/v2/roadmap": {
+      "get": {
+        "callbacks": {},
+        "operationId": "ExFleetYardsApi.RoadmapController.index",
+        "parameters": [
+          {
+            "description": "",
+            "example": 25,
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "x-struct": null,
+              "x-validate": null
+            }
+          },
+          {
+            "description": "",
+            "in": "query",
+            "name": "after",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            }
+          },
+          {
+            "description": "",
+            "in": "query",
+            "name": "before",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RoadmapItemList"
+                }
+              }
+            },
+            "description": "RoadmapItemList"
+          },
+          "400": {
             "content": {
               "application/json": {
                 "schema": {
@@ -2779,203 +3870,37 @@
         ]
       }
     },
-    "/api/v2/session": {
+    "/api/v2/version/sc-data": {
       "get": {
         "callbacks": {},
-        "operationId": "ExFleetYardsApi.UserSessionController.get_self",
+        "operationId": "ExFleetYardsApi.VersionController.sc_data",
         "parameters": [],
         "responses": {
           "200": {
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UserToken"
+                  "$ref": "#/components/schemas/VersionResponse"
                 }
               }
             },
-            "description": "UserToken"
-          },
-          "401": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            },
-            "description": "Error"
-          },
-          "404": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            },
-            "description": "Error"
+            "description": "Version"
           }
         },
-        "security": [
-          {
-            "authorization": []
-          }
-        ],
+        "summary": "Get Star Citizen data version",
         "tags": [
-          "session",
-          "user"
-        ]
-      },
-      "post": {
-        "callbacks": {},
-        "operationId": "ExFleetYardsApi.UserSessionController.create",
-        "parameters": [],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UserSession"
-              }
-            }
-          },
-          "description": "User Params",
-          "required": false
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            },
-            "description": "UserToken"
-          },
-          "401": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            },
-            "description": "Error"
-          }
-        },
-        "tags": [
-          "session",
-          "user"
+          "version"
         ]
       }
     },
-    "/api/v2/session/logout": {
-      "delete": {
+    "/api/v2/game/celestial-objects/{id}": {
+      "get": {
         "callbacks": {},
-        "description": "Logout token",
-        "operationId": "ExFleetYardsApi.UserSessionController.delete",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/UserToken"
-                }
-              }
-            },
-            "description": "UserToken"
-          },
-          "401": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            },
-            "description": "Error"
-          },
-          "404": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            },
-            "description": "Error"
-          }
-        },
-        "security": [
-          {
-            "authorization": []
-          }
-        ],
-        "tags": [
-          "session",
-          "user"
-        ]
-      }
-    },
-    "/api/v2/session/logout/all": {
-      "delete": {
-        "callbacks": {},
-        "operationId": "ExFleetYardsApi.UserSessionController.delete_all",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            },
-            "description": "Success"
-          },
-          "401": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            },
-            "description": "Error"
-          },
-          "404": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            },
-            "description": "Error"
-          }
-        },
-        "security": [
-          {
-            "authorization": [
-              "api:admin"
-            ]
-          }
-        ],
-        "tags": [
-          "session",
-          "user"
-        ]
-      }
-    },
-    "/api/v2/session/logout/{id}": {
-      "delete": {
-        "callbacks": {},
-        "operationId": "ExFleetYardsApi.UserSessionController.delete_other",
+        "operationId": "ExFleetYardsApi.CelestialObjectController.show",
         "parameters": [
           {
             "description": "",
-            "example": "all",
+            "example": "microtech",
             "in": "path",
             "name": "id",
             "required": true,
@@ -2991,13 +3916,13 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/CelestialObject"
                 }
               }
             },
-            "description": "Success"
+            "description": "CelestialObject"
           },
-          "401": {
+          "404": {
             "content": {
               "application/json": {
                 "schema": {
@@ -3006,6 +3931,110 @@
               }
             },
             "description": "Error"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          }
+        },
+        "tags": [
+          "game"
+        ]
+      }
+    },
+    "/api/v2/game/components/{id}": {
+      "get": {
+        "callbacks": {},
+        "operationId": "ExFleetYardsApi.ComponentController.show",
+        "parameters": [
+          {
+            "description": "",
+            "example": "5ca-akura",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Component"
+                }
+              }
+            },
+            "description": "Component"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          }
+        },
+        "tags": [
+          "game"
+        ]
+      }
+    },
+    "/api/v2/game/models/{id}/loaned-by": {
+      "get": {
+        "callbacks": {},
+        "operationId": "ExFleetYardsApi.ModelController.inv_loaners",
+        "parameters": [
+          {
+            "description": "",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/Model"
+                  },
+                  "type": "array",
+                  "x-struct": null,
+                  "x-validate": null
+                }
+              }
+            },
+            "description": "Loaners"
           },
           "404": {
             "content": {
@@ -3018,36 +4047,75 @@
             "description": "Error"
           }
         },
-        "security": [
-          {
-            "authorization": [
-              "api:admin"
-            ]
-          }
-        ],
+        "summary": "Get Model that loans this Model",
         "tags": [
-          "session",
-          "user"
+          "game",
+          "model"
         ]
       }
     },
-    "/api/v2/session/tokens": {
+    "/api/v2/roadmap/active": {
       "get": {
         "callbacks": {},
-        "operationId": "ExFleetYardsApi.UserSessionController.list",
-        "parameters": [],
+        "operationId": "ExFleetYardsApi.RoadmapController.active",
+        "parameters": [
+          {
+            "description": "",
+            "example": 25,
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "x-struct": null,
+              "x-validate": null
+            }
+          },
+          {
+            "description": "",
+            "in": "query",
+            "name": "after",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            }
+          },
+          {
+            "description": "",
+            "in": "query",
+            "name": "before",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            }
+          }
+        ],
         "responses": {
           "200": {
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UserTokenList"
+                  "$ref": "#/components/schemas/RoadmapItemList"
                 }
               }
             },
-            "description": "UserTokenList"
+            "description": "RoadmapItemList"
           },
-          "401": {
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          },
+          "500": {
             "content": {
               "application/json": {
                 "schema": {
@@ -3058,16 +4126,8 @@
             "description": "Error"
           }
         },
-        "security": [
-          {
-            "authorization": [
-              "api:read"
-            ]
-          }
-        ],
         "tags": [
-          "session",
-          "user"
+          "roadmap"
         ]
       }
     },
@@ -3130,6 +4190,58 @@
         "tags": [
           "session",
           "user"
+        ]
+      }
+    },
+    "/api/v2/game/models/{id}/paints": {
+      "get": {
+        "callbacks": {},
+        "operationId": "ExFleetYardsApi.ModelController.paints",
+        "parameters": [
+          {
+            "description": "",
+            "example": "stv",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/ModelPaint"
+                  },
+                  "type": "array",
+                  "x-struct": null,
+                  "x-validate": null
+                }
+              }
+            },
+            "description": "Loaners"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          }
+        },
+        "summary": "Get Paints of a Model",
+        "tags": [
+          "game",
+          "model"
         ]
       }
     },
@@ -3227,107 +4339,6 @@
         "summary": "Update user info",
         "tags": [
           "user"
-        ]
-      }
-    },
-    "/api/v2/users/{username}": {
-      "get": {
-        "callbacks": {},
-        "operationId": "ExFleetYardsApi.UserController.get",
-        "parameters": [
-          {
-            "description": "",
-            "in": "path",
-            "name": "username",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "x-struct": null,
-              "x-validate": null
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/User"
-                }
-              }
-            },
-            "description": "User"
-          },
-          "401": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            },
-            "description": "Error"
-          },
-          "404": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            },
-            "description": "Error"
-          }
-        },
-        "summary": "Get user info for a user",
-        "tags": [
-          "user"
-        ]
-      }
-    },
-    "/api/v2/version": {
-      "get": {
-        "callbacks": {},
-        "operationId": "ExFleetYardsApi.VersionController.index",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/VersionResponse"
-                }
-              }
-            },
-            "description": "Version"
-          }
-        },
-        "summary": "Get server version",
-        "tags": [
-          "version"
-        ]
-      }
-    },
-    "/api/v2/version/sc-data": {
-      "get": {
-        "callbacks": {},
-        "operationId": "ExFleetYardsApi.VersionController.sc_data",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/VersionResponse"
-                }
-              }
-            },
-            "description": "Version"
-          }
-        },
-        "summary": "Get Star Citizen data version",
-        "tags": [
-          "version"
         ]
       }
     }
