@@ -3,7 +3,7 @@ defmodule ExFleetYardsApi.RoadmapView do
 
   page_view()
 
-  def render("show.json", %{roadmap: item}) when not is_nil(item) do
+  def render("show.json", %{roadmap: item, conn: conn}) when not is_nil(item) do
     %{
       id: item.id,
       name: item.name,
@@ -22,7 +22,7 @@ defmodule ExFleetYardsApi.RoadmapView do
     |> render_loaded(
       :model,
       item.model,
-      &ExFleetYardsApi.ModelView.render("show.json", model: &1)
+      &ExFleetYardsApi.ModelView.render("show.json", model: &1, conn: conn)
     )
     |> render_timestamps(item)
     |> filter_null(ExFleetYardsApi.Schemas.Single.RoadmapItem)

@@ -112,6 +112,7 @@
                 env.FLEETYARDS_IN_DEVENV = 1;
                 env.FLEETYARDS_GIT_COMMIT = "devenv-version-dirty";
                 services.postgres.enable = true;
+                services.postgres.listen_addresses = "127.0.0.1";
                 services.postgres.initialDatabases =
                   [{ name = "fleet_yards_dev"; }];
               }

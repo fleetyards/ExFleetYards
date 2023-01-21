@@ -21,6 +21,13 @@ defmodule ExFleetYards.Repo.Seeds.Components do
            size: "3",
            component_class: "RSIModular",
            manufacturer: "knightbridge-arms"
+         },
+         %{
+           slug: "stronghold",
+           name: "Stronghold",
+           grade: "3",
+           size: "3",
+           manufacturer: "roberts-space-industries"
          }
        ],
        fn component ->

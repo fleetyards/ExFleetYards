@@ -29,7 +29,7 @@ defmodule ExFleetYards.Repo.Seeds.Models do
          },
          %{
            name: "600i",
-           slug: "600i",
+           slug: "600i-touring",
            rsi_id: 14101,
            manufacturer_id: "origin-jumpworks",
            classification: "explorer",
@@ -46,15 +46,16 @@ defmodule ExFleetYards.Repo.Seeds.Models do
            upgrade_kits_count: 0
          },
          %{
-           name: "PTV",
-           slug: "ptv",
-           rsi_name: "PTV",
+           name: "STV",
+           slug: "stv",
+           rsi_name: "STV",
            rsi_id: nil,
            images_count: 0,
            videos_count: 0,
            model_paints_count: 0,
            module_hardpoints_count: 0,
-           upgrade_kits_count: 0
+           upgrade_kits_count: 0,
+           manufacturer_id: "origin-jumpworks"
          },
          %{
            name: "600i Executive Edition",

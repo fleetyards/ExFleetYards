@@ -15,10 +15,14 @@ defmodule ExFleetYardsApi.ViewHelpers do
       )
 
     quote do
-      def render(unquote(name), %{page: page} = assigns) do
+      def render(unquote(name), %{page: page, conn: conn} = assigns) do
         params = Map.get(assigns, :params, %{})
 
-        render_page(page, __MODULE__, unquote(template), params: params, as: unquote(as))
+        render_page(page, __MODULE__, unquote(template),
+          params: params,
+          as: unquote(as),
+          conn: conn
+        )
       end
     end
   end
@@ -53,11 +57,18 @@ defmodule ExFleetYardsApi.ViewHelpers do
     end
   end
 
+  def render_timestamp(nil), do: nil
+  def render_timestamp(data), do: DateTime.to_iso8601(data)
+
+  def render_timestamp(map, key, data) when is_map(map) do
+    Map.merge(%{key => data |> render_timestamp}, map)
+  end
+
   def render_timestamps(map, data) do
     Map.merge(
       %{
-        createdAt: data.created_at |> DateTime.to_iso8601(),
-        updatedAt: data.updated_at |> DateTime.to_iso8601()
+        createdAt: data.created_at |> render_timestamp,
+        updatedAt: data.updated_at |> render_timestamp
       },
       map
     )

@@ -118,4 +118,69 @@ defmodule ExFleetYards.Repo.Types do
     write: "write",
     admin: "admin"
   )
+
+  enum(HardpointType, :integer,
+    power_plants: 10,
+    coolers: 11,
+    shield_generators: 12,
+    quantum_drives: 22,
+    main_thrusters: 30,
+    maneuvering_thrusters: 31,
+    weapons: 40,
+    turrets: 41,
+    missiles: 42,
+    radar: 0,
+    computers: 1,
+    fuel_intakes: 20,
+    fuel_tanks: 21,
+    jump_modules: 23,
+    quantum_fuel_tanks: 24,
+    utility_items: 43
+  )
+
+  enum(HardpointSource, :integer, ship_matrix: 0, game_files: 1)
+  enum(HardpointGroup, :integer, avionic: 0, system: 1, propulsion: 2, thruster: 3, weapon: 4)
+
+  enum(HardpointCategory, :integer,
+    main: 0,
+    retro: 1,
+    vtol: 2,
+    fixed: 3,
+    gimbal: 4,
+    joint: 5,
+    manned_turret: 20,
+    remote_turret: 21,
+    missile_turret: 22,
+    missile_rack: 30
+  )
+
+  enum(HardpointSubCategory, :integer,
+    retro_thrusters: 0,
+    vtol_thrusters: 1,
+    manned_turrets: 10,
+    remote_turrets: 11,
+    missile_turret: 12
+  )
+
+  enum(HardpointSize, :integer,
+    vehicle: 0,
+    one: 1,
+    two: 2,
+    three: 3,
+    four: 4,
+    five: 5,
+    six: 6,
+    seven: 7,
+    eight: 8,
+    nine: 9,
+    ten: 10,
+    eleven: 11,
+    twelve: 12,
+    snub: 100,
+    small: 101,
+    medium: 102,
+    large: 103,
+    capital: 104,
+    tbd: 999
+  )
 end

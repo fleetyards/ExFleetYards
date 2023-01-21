@@ -11,6 +11,7 @@ defmodule ExFleetYardsApi.ComponentView do
       grade: component.grade,
       class: component.component_class,
       size: component.size
+      # TODO: typeData
     }
     |> render_loaded(
       :manufacturer,
