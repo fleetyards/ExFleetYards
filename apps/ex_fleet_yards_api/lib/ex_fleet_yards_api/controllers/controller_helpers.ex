@@ -55,15 +55,34 @@ defmodule ExFleetYardsApi.ControllerHelpers do
       |> Keyword.merge(extra_parameters)
       |> Macro.escape()
 
+    extra_responses =
+      Keyword.get(opts, :extra_responses, Macro.escape([]))
+      |> Macro.expand(__CALLER__)
+
+    extra_responses =
+      if Keyword.get(opts, :has_not_found, false) do
+        extra_responses
+        |> Keyword.put(
+          :not_found,
+          {"Not Found", "application/json", ExFleetYardsApi.Schemas.Single.Error}
+        )
+      else
+        extra_responses
+      end
+
+    responses =
+      [
+        ok: {list_name, "application/json", list_type},
+        bad_request: {"Error", "application/json", ExFleetYardsApi.Schemas.Single.Error},
+        internal_server_error: {"Error", "application/json", ExFleetYardsApi.Schemas.Single.Error}
+      ]
+      |> Keyword.merge(extra_responses)
+      |> Macro.escape()
+
     quote do
       operation unquote(operation),
         parameters: unquote(parameters),
-        responses: [
-          ok: {unquote(list_name), "application/json", unquote(list_type)},
-          bad_request: {"Error", "application/json", ExFleetYardsApi.Schemas.Single.Error},
-          internal_server_error:
-            {"Error", "application/json", ExFleetYardsApi.Schemas.Single.Error}
-        ]
+        responses: unquote(responses)
     end
   end
 

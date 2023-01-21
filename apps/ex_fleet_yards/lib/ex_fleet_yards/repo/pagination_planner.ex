@@ -7,6 +7,10 @@ defmodule ExFleetYards.Repo.PaginationPlanner do
     sort(:asc, as(:data).slug)
   end
 
+  paginate_by :name do
+    sort(:asc, as(:data).name)
+  end
+
   paginate_by :id_roadmap do
     sort(:asc, as(:data).release)
     sort(:asc, as(:data).rsi_id)

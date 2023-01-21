@@ -48,6 +48,8 @@ defmodule ExFleetYards.Repo.Account.User do
     field :normalized_email, :string
     field :hangar_updated_at, :naive_datetime
 
+    has_many :vehicles, ExFleetYards.Repo.Account.Vehicle
+
     timestamps(inserted_at: :created_at, type: :utc_datetime)
   end
 
@@ -73,7 +75,7 @@ defmodule ExFleetYards.Repo.Account.User do
 
   def registration_changeset(user \\ %__MODULE__{}, attrs) do
     user
-    |> cast(attrs, [:locale, :username, :email, :password])
+    |> cast(attrs, [:locale, :username, :email, :password, :public_hangar])
     |> validate_username()
     |> validate_email()
     |> validate_password()
