@@ -6,7 +6,7 @@ defmodule ExFleetYardsApi.ModelControllerTest do
     test "spec compliance (:show)", %{conn: conn, api_spec: api_spec} do
       json =
         conn
-        |> get(Routes.model_path(conn, :show, "600i"))
+        |> get(Routes.model_path(conn, :show, "600i-touring"))
         |> json_response(200)
 
       assert_schema json, "Model", api_spec
@@ -49,6 +49,16 @@ defmodule ExFleetYardsApi.ModelControllerTest do
         |> json_response(200)
 
       assert_schema hd(json), "ModelPaint", api_spec
+      assert json |> Enum.count() > 0
+    end
+
+    test "spec compliance (:hardpoints)", %{conn: conn, api_spec: api_spec} do
+      json =
+        conn
+        |> get(Routes.model_path(conn, :hardpoints, "600i-touring"))
+        |> json_response(200)
+
+      assert_schema hd(json), "ModelHardpoint", api_spec
       assert json |> Enum.count() > 0
     end
   end

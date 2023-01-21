@@ -109,6 +109,7 @@ defmodule ExFleetYards.Repo.Game.Model do
 
     has_many :docks, Game.Dock
     has_many :paints, Game.Model.Paint
+    has_many :hardpoints, Game.Model.Hardpoint
 
     many_to_many :loaners, __MODULE__,
       join_through: __MODULE__.Loaner,

@@ -68,6 +68,28 @@ defmodule ExFleetYardsApi.ModelController do
     render(conn, "paints.json", model_name: model_name, paints: paints)
   end
 
+  operation :hardpoints,
+    summary: "Get Hardpoints of a Model",
+    parameters: [
+      id: [in: :path, type: :string, example: "600i-touring"]
+    ],
+    responses: [
+      ok:
+        {"Loaners", "application/json",
+         %OpenApiSpex.Schema{type: :array, items: ExFleetYardsApi.Schemas.Single.ModelHardpoint}},
+      not_found: {"Error", "application/json", Error}
+    ]
+
+  def hardpoints(conn, %{"id" => slug}) do
+    {model_name, id} =
+      from(m in Game.Model, where: m.slug == ^slug, select: {m.name, m.id})
+      |> Repo.one!()
+
+    hardpoints = query(id, :hardpoints) |> Repo.all()
+
+    render(conn, "hardpoints.json", model_name: model_name, hardpoints: hardpoints)
+  end
+
   defp query do
     loaner_query = from(m in Game.Model, select: [:id, :slug, :name, :created_at, :updated_at])
     from(m in Game.Model, as: :data, preload: [:manufacturer, :docks, loaners: ^loaner_query])
@@ -88,5 +110,12 @@ defmodule ExFleetYardsApi.ModelController do
 
   def query(slug, :paints) do
     from(m in Game.Model, where: m.slug == ^slug, join: p in assoc(m, :paints), select: p)
+  end
+
+  def query(id, :hardpoints) do
+    from(h in Game.Model.Hardpoint,
+      where: h.model_id == ^id,
+      preload: [:component, :loadouts, component: :manufacturer]
+    )
   end
 end

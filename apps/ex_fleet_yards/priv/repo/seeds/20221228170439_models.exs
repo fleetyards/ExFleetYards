@@ -29,7 +29,7 @@ defmodule ExFleetYards.Repo.Seeds.Models do
          },
          %{
            name: "600i",
-           slug: "600i",
+           slug: "600i-touring",
            rsi_id: 14101,
            manufacturer_id: "origin-jumpworks",
            classification: "explorer",

@@ -301,6 +301,46 @@ defmodule ExFleetYardsApi.Schemas.Single do
     })
   end
 
+  defmodule ModelHardpoint do
+    @moduledoc """
+    Hardpoint
+    """
+    require OpenApiSpex
+
+    OpenApiSpex.schema(%{
+      summary: "Model hardpoint",
+      type: :object,
+      properties: %{
+        id: %Schema{type: :string, format: :uuid},
+        name: %Schema{type: :string},
+        type: %Schema{type: :string, enum: ExFleetYards.Repo.Types.HardpointType.all()},
+        group: %Schema{type: :string, enum: ExFleetYards.Repo.Types.HardpointGroup.all()},
+        category: %Schema{type: :string, enum: ExFleetYards.Repo.Types.HardpointCategory.all()},
+        size: %Schema{type: :string, enum: ExFleetYards.Repo.Types.HardpointSize.all()},
+        loadoutIdentifier: %Schema{type: :string},
+        key: %Schema{type: :string},
+        details: %Schema{type: :string},
+        mount: %Schema{type: :string},
+        component: Component,
+        loadouts: %Schema{
+          type: :array,
+          items: %Schema{
+            type: :object,
+            properties: %{
+              # TODO
+              createdAt: %Schema{type: :string, format: :"date-time"},
+              updatedAt: %Schema{type: :string, format: :"date-time"}
+            },
+            required: [:id, :name, :slug]
+          }
+        },
+        createdAt: %Schema{type: :string, format: :"date-time"},
+        updatedAt: %Schema{type: :string, format: :"date-time"}
+      },
+      required: [:id, :name, :type, :group, :size, :key]
+    })
+  end
+
   defmodule Station do
     @moduledoc false
     require OpenApiSpex

@@ -112,4 +112,28 @@ defmodule ExFleetYardsApi.ModelView do
     |> render_timestamps(paint)
     |> filter_null(ExFleetYardsApi.Schemas.Single.ModelPaint)
   end
+
+  def render("hardpoints.json", %{model_name: name, hardpoints: hardpoints}) do
+    render_many(hardpoints, __MODULE__, "hardpoint.json", as: :hardpoint, model_name: name)
+  end
+
+  def render("hardpoint.json", %{model_name: name, hardpoint: hardpoint}) do
+    %{
+      id: hardpoint.id,
+      name: hardpoint.name,
+      type: hardpoint.hardpoint_type,
+      group: hardpoint.group,
+      category: hardpoint.category,
+      size: hardpoint.size,
+      loadoutIdentifier: hardpoint.loadout_identifier,
+      key: hardpoint.key,
+      details: hardpoint.details,
+      mount: hardpoint.mount,
+      itemSlots: hardpoint.item_slots,
+      component: ExFleetYardsApi.ComponentView.render("show.json", component: hardpoint.component)
+      # TODO: loadouts
+    }
+    |> render_timestamps(hardpoint)
+    |> filter_null(ExFleetYardsApi.Schemas.Single.ModelHardpoint)
+  end
 end
