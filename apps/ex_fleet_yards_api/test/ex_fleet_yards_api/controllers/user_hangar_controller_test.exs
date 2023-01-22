@@ -86,6 +86,7 @@ defmodule ExFleetYardsApi.UserHangarControllerTest do
         |> json_response(400)
 
       assert json["errors"]["paint"] == ["Not found or not available for this model"]
+      assert json["message"] == "paint: Not found or not available for this model\n"
       assert_schema json, "Error", spec
 
       json =
@@ -96,6 +97,7 @@ defmodule ExFleetYardsApi.UserHangarControllerTest do
         |> json_response(400)
 
       assert json["errors"]["paint"] == ["Not found or not available for this model"]
+      assert json["message"] == "paint: Not found or not available for this model\n"
       assert_schema json, "Error", spec
 
       json =
