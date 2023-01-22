@@ -240,6 +240,32 @@ defmodule ExFleetYardsApi.UserHangarControllerTest do
       assert json["data"] |> Enum.count() == 4
       assert_schema json, "UserHangarList", spec
     end
+
+    test "delete", %{auth_conn: conn, api_spec: spec} do
+      id = "985909d2-ba8a-43f7-aa83-637c01ea5557"
+
+      json =
+        conn
+        |> get(Routes.user_hangar_path(conn, :get, id))
+        |> json_response(200)
+
+      assert_schema json, "UserHangar", spec
+      assert json["id"] == id
+
+      json =
+        conn
+        |> delete(Routes.user_hangar_path(conn, :delete, id))
+        |> json_response(200)
+
+      assert_schema json, "UserHangar", spec
+      assert json["id"] == id
+
+      assert_error_sent 404, fn ->
+        conn
+        |> get(Routes.user_hangar_path(conn, :get, id))
+        |> json_response(404)
+      end
+    end
   end
 
   defp get_vehicle(json, id) do

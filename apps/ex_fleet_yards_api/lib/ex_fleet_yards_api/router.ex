@@ -107,8 +107,9 @@ defmodule ExFleetYardsApi.Router do
           pipe_through :scope_hangar_read
           get "/", UserHangarController, :index
           get "/:id", UserHangarController, :get
-          patch "/:id", UserHangarController, :update
           post "/:model", UserHangarController, :create
+          patch "/:id", UserHangarController, :update
+          delete "/:id", UserHangarController, :delete
         end
       end
 

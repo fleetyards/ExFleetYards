@@ -180,4 +180,41 @@ defmodule ExFleetYardsApi.UserHangarController do
         |> render("error.json", changeset: changeset)
     end
   end
+
+  operation :delete,
+    summary: "Delete a vehicle from the user's hangar",
+    parameters: [
+      id: [in: :path, type: :string]
+    ],
+    responses: [
+      ok: {"UserHangar", "application/json", ExFleetYardsApi.Schemas.Single.UserHangar},
+      not_found: {"Error", "application/json", Error}
+    ],
+    security: [%{"authorization" => ["hangar:write"]}]
+
+  def delete(conn, %{"id" => id}) do
+    ExFleetYardsApi.Auth.required_api_scope(conn, %{"hangar" => "write"})
+    user_id = conn.assigns.current_token.user_id
+
+    vehicle =
+      Account.Vehicle.hangar_userid_query(user_id)
+      |> Ecto.Query.where([v], v.id == ^id)
+      |> Ecto.Query.preload([:model, :model_paint])
+      |> Repo.one!()
+
+    case Repo.delete(vehicle) do
+      {:ok, _vehicle} ->
+        conn
+        |> render("show.json",
+          vehicle: vehicle,
+          username: conn.assigns.current_token.user.username,
+          public: true
+        )
+
+      {:error, changeset} ->
+        conn
+        |> put_status(:bad_request)
+        |> render("error.json", changeset: changeset)
+    end
+  end
 end
