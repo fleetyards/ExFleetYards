@@ -516,6 +516,28 @@ defmodule ExFleetYardsApi.Schemas.Single do
     })
   end
 
+  defmodule UserHangarQuickStats do
+    @moduledoc false
+    require OpenApiSpex
+
+    OpenApiSpex.schema(%{
+      description: "User Hangar",
+      type: :object,
+      properties: %{
+        username: %Schema{type: :string},
+        total: %Schema{type: :integer},
+        classifications: %Schema{
+          type: :array,
+          items: %Schema{
+            type: :object,
+            properties: %{classification: %Schema{type: :string}, count: %Schema{type: :integer}}
+          }
+        }
+      },
+      required: [:username, :total]
+    })
+  end
+
   defmodule PaginationMetadata do
     @moduledoc false
     require OpenApiSpex

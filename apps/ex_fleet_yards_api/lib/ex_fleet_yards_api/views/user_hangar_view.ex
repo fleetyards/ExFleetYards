@@ -34,6 +34,22 @@ defmodule ExFleetYardsApi.UserHangarView do
       |> filter_null(ExFleetYardsApi.Schemas.Single.UserHangar)
   end
 
+  def render("quick_stats.json", %{stats: {total, classifications}, username: username}) do
+    %{
+      username: username,
+      total: total,
+      classifications:
+        classifications
+        |> Enum.map(fn {classification, count} ->
+          %{
+            classification: classification,
+            count: count
+          }
+        end)
+    }
+    |> filter_null(ExFleetYardsApi.Schemas.Single.UserHangarQuickStats)
+  end
+
   defp add_name(map, %{name_visible: true, name: name}) do
     Map.put(map, :name, name)
   end

@@ -95,6 +95,7 @@ defmodule ExFleetYardsApi.Router do
 
       scope "/hangar" do
         get "/:username", UserHangarController, :public
+        get "/:username/quick-stats", UserHangarController, :public_quick_stats
       end
 
       scope "/roadmap" do

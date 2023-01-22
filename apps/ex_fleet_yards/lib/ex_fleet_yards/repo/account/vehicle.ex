@@ -10,6 +10,7 @@ defmodule ExFleetYards.Repo.Account.Vehicle do
   alias ExFleetYards.Repo
   alias ExFleetYards.Repo.Account
   alias ExFleetYards.Repo.Game
+  alias __MODULE__.NotFoundException
 
   @primary_key {:id, Ecto.UUID, []}
 
@@ -37,34 +38,73 @@ defmodule ExFleetYards.Repo.Account.Vehicle do
     |> Repo.one()
     |> case do
       {id, true} ->
-        {:ok, public_hangar_userid_query(id)}
+        public_hangar_userid_query(id)
 
-      {_, false} ->
-        {:error, "User #{username} has not enabled public hangar"}
+      {_id, false} ->
+        raise(NotFoundException, [username, true])
 
       nil ->
-        {:error, "User #{username} not found"}
+        raise(NotFoundException, username)
     end
   end
 
   def public_hangar(username) when is_binary(username) do
     public_hangar_query(username)
-    |> case do
-      {:ok, query} ->
-        Repo.all(query)
-
-      {:error, reason} ->
-        {:error, reason}
-    end
+    |> Repo.all()
   end
 
   def public_hangar_userid_query(userid) when is_binary(userid) do
     from(v in __MODULE__,
       as: :data,
-      where: v.user_id == ^userid and v.public == true,
-      preload: [:model, :model_paint]
+      where: v.user_id == ^userid and v.public == true
     )
   end
 
   Repo.query_all_wrapper(:public_hangar_userid)
+
+  def public_hangar_count_query(username) when is_binary(username) do
+    public_hangar_query(username)
+    |> select([v], count(v))
+  end
+
+  def public_hangar_count(username) when is_binary(username) do
+    public_hangar_count_query(username)
+    |> Repo.one()
+  end
+
+  def classification_count_query(query) do
+    query
+    |> join(:inner, [v], m in assoc(v, :model))
+    |> group_by([v, m], m.classification)
+    |> select([v, m], {m.classification, count(v)})
+  end
+
+  def public_hangar_group_count_query(username) when is_binary(username) do
+    public_hangar_query(username)
+    |> classification_count_query()
+  end
+
+  def public_hangar_quick_stats(username) when is_binary(username) do
+    count =
+      public_hangar_count_query(username)
+      |> Repo.one()
+
+    classification =
+      public_hangar_group_count_query(username)
+      |> Repo.all()
+
+    {count, classification}
+  end
+
+  defmodule NotFoundException do
+    defexception [:username, :public]
+
+    def exception(username) when is_binary(username) do
+      %__MODULE__{username: username, public: false}
+    end
+
+    def exception([username, public]) when is_binary(username) do
+      %__MODULE__{username: username, public: public}
+    end
+  end
 end

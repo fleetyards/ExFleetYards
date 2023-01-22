@@ -13,12 +13,27 @@ defmodule ExFleetYardsApi.UserHangarController do
   def public(conn, %{"username" => username} = params) do
     page =
       Account.Vehicle.public_hangar_query(username)
-      |> case do
-        {:ok, query} -> query
-        {:error, error} -> raise(NotFoundException, message: "User `#{username}` not found")
-      end
+      |> Ecto.Query.preload([:model, :model_paint])
       |> Repo.paginate!(:name, :asc, get_pagination_args(params))
 
     render(conn, "index.json", page: page, username: username)
+  end
+
+  operation :public_quick_stats,
+    summary: "Quick Staistics for a User's Public Hangar",
+    parameters: [
+      username: [in: :path, type: :string, required: true]
+    ],
+    responses: [
+      ok:
+        {"UserHangarQuickStats", "application/json",
+         ExFleetYardsApi.Schemas.Single.UserHangarQuickStats},
+      not_found: {"Error", "application/json", Error}
+    ]
+
+  def public_quick_stats(conn, %{"username" => username}) do
+    stats = Account.Vehicle.public_hangar_quick_stats(username)
+
+    render(conn, "quick_stats.json", stats: stats, username: username)
   end
 end

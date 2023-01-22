@@ -30,7 +30,7 @@ defmodule ExFleetYards.Repo.Seeds.UserVehicles do
          },
          %{
            id: "90ebc63f-b679-4bf8-b94f-e3909048cdbb",
-           name: "Hidden F8C",
+           name: "Nameless F8C",
            purchased: true,
            sale_notify: false,
            flagship: false,
