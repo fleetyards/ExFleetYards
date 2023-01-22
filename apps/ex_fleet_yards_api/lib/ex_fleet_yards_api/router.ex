@@ -108,6 +108,7 @@ defmodule ExFleetYardsApi.Router do
           get "/", UserHangarController, :index
           get "/:id", UserHangarController, :get
           patch "/:id", UserHangarController, :update
+          post "/:model", UserHangarController, :create
         end
       end
 

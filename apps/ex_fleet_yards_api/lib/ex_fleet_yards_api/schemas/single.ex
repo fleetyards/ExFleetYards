@@ -536,7 +536,7 @@ defmodule ExFleetYardsApi.Schemas.Single do
         hidden: %Schema{type: :boolean},
         serial: %Schema{type: :string},
         alternative_name: %Schema{type: :string},
-        paint: %Schema{type: :string, format: :slug}
+        paint: %Schema{type: :string, format: :slug, nullable: true}
       }
     })
   end

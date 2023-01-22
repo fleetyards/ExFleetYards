@@ -103,21 +103,31 @@ defmodule ExFleetYards.Repo.Account.Vehicle do
   end
 
   # Changeset
+  @cast_fields ~w(
+    name
+    name_visible
+    purchased
+    sale_notify
+    flagship
+    public
+    loaner
+    hidden
+    serial
+    alternative_name
+  )a
   def update_changeset(vehicle, params) do
     vehicle
-    |> cast(params, [
-      :name,
-      :name_visible,
-      :purchased,
-      :sale_notify,
-      :flagship,
-      :public,
-      :loaner,
-      :hidden,
-      :serial,
-      :alternative_name
-    ])
+    |> cast(params, @cast_fields)
     |> cast_paint(params)
+  end
+
+  def create_changeset(vehicle \\ %__MODULE__{}, params, user_id) do
+    vehicle
+    |> cast(params, @cast_fields)
+    |> cast_model(params)
+    |> cast_paint(params)
+    |> validate_required([:model_id])
+    |> put_change(:user_id, user_id)
   end
 
   defp cast_paint(changeset, %{"paint" => paint}), do: cast_paint(changeset, paint)
@@ -126,7 +136,19 @@ defmodule ExFleetYards.Repo.Account.Vehicle do
   defp cast_paint(changeset, nil), do: put_assoc(changeset, :model_paint, nil)
 
   defp cast_paint(changeset, paint) when is_binary(paint) do
-    Game.Model.Paint.by_model_slug(changeset.data.model.id, paint)
+    get_field(changeset, :model_id)
+    |> case do
+      nil ->
+        changeset
+        |> add_error(:paint, "Model not found")
+
+      model ->
+        cast_paint(changeset, paint, model)
+    end
+  end
+
+  defp cast_paint(changeset, paint, model) do
+    Game.Model.Paint.by_model_slug(model, paint)
     |> Repo.one()
     |> case do
       nil ->
@@ -136,6 +158,25 @@ defmodule ExFleetYards.Repo.Account.Vehicle do
       paint ->
         changeset
         |> put_assoc(:model_paint, paint)
+    end
+  end
+
+  defp cast_model(changeset, %{"model" => model}), do: cast_model(changeset, model)
+  defp cast_model(changeset, %{model: model}), do: cast_model(changeset, model)
+  defp cast_model(changeset, %{}), do: changeset
+  defp cast_model(changeset, nil), do: changeset
+
+  defp cast_model(changeset, model) when is_binary(model) do
+    Game.Model.by_slug(model)
+    |> Repo.one()
+    |> case do
+      nil ->
+        changeset
+        |> add_error(:model, "Not found")
+
+      model ->
+        changeset
+        |> put_change(:model_id, model.id)
     end
   end
 

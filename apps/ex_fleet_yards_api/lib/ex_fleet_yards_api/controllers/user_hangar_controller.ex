@@ -108,6 +108,7 @@ defmodule ExFleetYardsApi.UserHangarController do
   end
 
   operation :update,
+    summary: "Update a Vehicle in a User's Hangar",
     parameters: [
       id: [in: :path, type: :string]
     ],
@@ -132,6 +133,40 @@ defmodule ExFleetYardsApi.UserHangarController do
     changeset = Account.Vehicle.update_changeset(vehicle, params)
 
     case Repo.update(changeset) do
+      {:ok, vehicle} ->
+        render(conn, "show.json",
+          vehicle: vehicle,
+          username: conn.assigns.current_token.user.username,
+          public: true
+        )
+
+      {:error, changeset} ->
+        conn
+        |> put_status(:bad_request)
+        |> render("error.json", changeset: changeset)
+    end
+  end
+
+  operation :create,
+    summary: "Create a new vehicle in the user's hangar",
+    parameters: [
+      model: [in: :path, type: :string]
+    ],
+    request_body:
+      {"User Hangar", "application/json", ExFleetYardsApi.Schemas.Single.UserHangarChange},
+    responses: [
+      ok: {"UserHangar", "application/json", ExFleetYardsApi.Schemas.Single.UserHangar},
+      not_found: {"Error", "application/json", Error}
+    ],
+    security: [%{"authorization" => ["hangar:write"]}]
+
+  def create(conn, %{} = params) do
+    ExFleetYardsApi.Auth.required_api_scope(conn, %{"hangar" => "write"})
+    user_id = conn.assigns.current_token.user_id
+
+    changeset = Account.Vehicle.create_changeset(params, user_id)
+
+    case Repo.insert(changeset, returning: [:id]) do
       {:ok, vehicle} ->
         render(conn, "show.json",
           vehicle: vehicle,
