@@ -9,8 +9,8 @@ defmodule ExFleetYardsApi.UserSessionControllerTest do
       json =
         conn
         |> post(Routes.user_session_path(conn, :create), %{
-          "username" => "testuser",
-          "password" => "testuserpassword",
+          "username" => "testuserlogin",
+          "password" => "testuserloginpassword",
           "scopes" => scopes
         })
         |> json_response(201)
@@ -52,8 +52,8 @@ defmodule ExFleetYardsApi.UserSessionControllerTest do
       json =
         conn
         |> post(Routes.user_session_path(conn, :create), %{
-          "username" => "testuser",
-          "password" => "testuserpassword",
+          "username" => "testuserlogin",
+          "password" => "testuserloginpassword",
           "scopes" => scopes
         })
         |> json_response(201)
@@ -70,8 +70,8 @@ defmodule ExFleetYardsApi.UserSessionControllerTest do
       json =
         conn
         |> post(Routes.user_session_path(conn, :create), %{
-          "username" => "testuser",
-          "password" => "testuserpassword",
+          "username" => "testuserlogin",
+          "password" => "testuserloginpassword",
           "scopes" => %{}
         })
         |> json_response(201)
