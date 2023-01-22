@@ -93,8 +93,6 @@ defmodule ExFleetYardsApi.UserHangarController do
 
   def get(conn, %{"id" => id}) do
     user_id = conn.assigns.current_token.user_id
-    IO.inspect(id)
-    IO.inspect(user_id)
 
     vehicle =
       Account.Vehicle.hangar_userid_query(user_id)
