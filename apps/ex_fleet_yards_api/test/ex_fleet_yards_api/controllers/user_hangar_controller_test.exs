@@ -38,5 +38,34 @@ defmodule ExFleetYardsApi.UserHangarControllerTest do
       assert json["total"] == 3
       assert json["classifications"] |> Enum.count() == 2
     end
+
+    test "spec compliance (:index)", %{conn: conn, api_spec: api_spec} do
+      json =
+        conn
+        |> post(Routes.user_session_path(conn, :create), %{
+          "username" => "testuser",
+          "password" => "testuserpassword",
+          "scopes" => %{"hangar" => "read"}
+        })
+        |> json_response(201)
+
+      assert json["code"] == "success"
+      assert json["token"] != ""
+
+      token = json["token"]
+
+      conn =
+        conn
+        |> put_req_header("authorization", "Bearer #{token}")
+
+      json =
+        conn
+        |> get(Routes.user_hangar_path(conn, :index))
+        |> json_response(200)
+
+      assert_schema json, "UserHangarList", api_spec
+      assert json["data"] |> Enum.count() == 4
+      assert json["username"] == "testuser"
+    end
   end
 end

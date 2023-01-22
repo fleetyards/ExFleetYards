@@ -53,11 +53,13 @@ defmodule ExFleetYards.Repo.Account.Vehicle do
     |> Repo.all()
   end
 
+  def hangar_userid_query(userid) when is_binary(userid) do
+    from(v in __MODULE__, as: :data, where: v.user_id == ^userid)
+  end
+
   def public_hangar_userid_query(userid) when is_binary(userid) do
-    from(v in __MODULE__,
-      as: :data,
-      where: v.user_id == ^userid and v.public == true
-    )
+    hangar_userid_query(userid)
+    |> where([v], v.public == true)
   end
 
   Repo.query_all_wrapper(:public_hangar_userid)
