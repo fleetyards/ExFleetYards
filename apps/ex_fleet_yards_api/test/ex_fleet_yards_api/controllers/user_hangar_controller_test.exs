@@ -107,6 +107,7 @@ defmodule ExFleetYardsApi.UserHangarControllerTest do
         |> json_response(200)
 
       assert get_vehicle(json, id) == nil
+      assert json["data"] |> Enum.count() == 3
 
       json =
         auth_conn
@@ -123,6 +124,7 @@ defmodule ExFleetYardsApi.UserHangarControllerTest do
         |> json_response(200)
 
       assert get_vehicle(json, id) != nil
+      assert json["data"] |> Enum.count() == 4
 
       json =
         auth_conn
@@ -139,6 +141,7 @@ defmodule ExFleetYardsApi.UserHangarControllerTest do
         |> json_response(200)
 
       assert get_vehicle(json, id) == nil
+      assert json["data"] |> Enum.count() == 3
     end
   end
 
