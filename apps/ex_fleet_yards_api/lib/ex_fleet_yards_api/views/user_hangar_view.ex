@@ -14,6 +14,9 @@ defmodule ExFleetYardsApi.UserHangarView do
   def render("show.json", %{vehicle: vehicle, conn: conn, public: true}) do
     render("show.json", %{vehicle: vehicle, conn: conn})
     |> Map.put(:public, vehicle.public)
+    |> Map.put(:name, vehicle.name)
+    |> Map.put(:name_visible, vehicle.name_visible)
+    |> filter_null(ExFleetYardsApi.Schemas.Single.UserHangar)
   end
 
   def render("show.json", %{vehicle: vehicle, conn: conn}) do

@@ -505,6 +505,7 @@ defmodule ExFleetYardsApi.Schemas.Single do
       properties: %{
         id: %Schema{type: :string, format: :uuid},
         name: %Schema{type: :string},
+        name_visible: %Schema{type: :boolean},
         serial: %Schema{type: :string},
         model: ExFleetYardsApi.Schemas.Single.Model,
         paint: ExFleetYardsApi.Schemas.Single.ModelPaint,

@@ -98,12 +98,16 @@ defmodule ExFleetYardsApi.Router do
       end
 
       scope "/hangar" do
-        get "/:username", UserHangarController, :public
-        get "/:username/quick-stats", UserHangarController, :public_quick_stats
+        scope "/public" do
+          get "/:username", UserHangarController, :public
+          get "/:username/quick-stats", UserHangarController, :public_quick_stats
+        end
 
         scope "/" do
           pipe_through :scope_hangar_read
           get "/", UserHangarController, :index
+          get "/:id", UserHangarController, :get
+          patch "/:id", UserHangarController, :update
         end
       end
 

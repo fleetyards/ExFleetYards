@@ -48,7 +48,7 @@ defmodule ExFleetYardsApi.UserHangarController do
       bad_request: {"Error", "application/json", Error},
       internal_server_error: {"Error", "application/json", Error}
     ],
-    security: [%{"authorization" => ["api:read"]}]
+    security: [%{"authorization" => ["hangar:read"]}]
 
   def index(conn, params) do
     user_id = conn.assigns.current_token.user_id
@@ -65,5 +65,82 @@ defmodule ExFleetYardsApi.UserHangarController do
       username: conn.assigns.current_token.user.username,
       public: true
     )
+  end
+
+  operation :quick_stats,
+    summary: "Quick Staistics for a User's Hangar",
+    responses: [
+      ok:
+        {"UserHangarQuickStats", "application/json",
+         ExFleetYardsApi.Schemas.Single.UserHangarQuickStats},
+      not_found: {"Error", "application/json", Error}
+    ],
+    security: [%{"authorization" => ["hangar:read"]}]
+
+  def quick_stats(conn, _params) do
+    # TODO
+  end
+
+  operation :get,
+    parameters: [
+      id: [in: :path, type: :string]
+    ],
+    responses: [
+      ok: {"UserHangar", "application/json", ExFleetYardsApi.Schemas.Single.UserHangar},
+      not_found: {"Error", "application/json", Error}
+    ],
+    security: [%{"authorization" => ["hangar:read"]}]
+
+  def get(conn, %{"id" => id}) do
+    user_id = conn.assigns.current_token.user_id
+    IO.inspect(id)
+    IO.inspect(user_id)
+
+    vehicle =
+      Account.Vehicle.hangar_userid_query(user_id)
+      |> Ecto.Query.where([v], v.id == ^id)
+      |> Ecto.Query.preload([:model, :model_paint])
+      |> Repo.one!()
+
+    render(conn, "show.json",
+      vehicle: vehicle,
+      username: conn.assigns.current_token.user.username,
+      public: true
+    )
+  end
+
+  operation :update,
+    parameters: [
+      id: [in: :path, type: :string]
+    ],
+    request_body: {"User Hangar", "application/json", ExFleetYardsApi.Schemas.Single.UserHangar},
+    responses: [
+      ok: {"UserHangar", "application/json", ExFleetYardsApi.Schemas.Single.UserHangar},
+      not_found: {"Error", "application/json", Error}
+    ],
+    security: [%{"authorization" => ["hangar:write"]}]
+
+  def update(conn, %{"id" => id} = params) do
+    ExFleetYardsApi.Auth.required_api_scope(conn, %{"hangar" => "write"})
+    user_id = conn.assigns.current_token.user_id
+
+    vehicle =
+      Account.Vehicle.hangar_userid_query(user_id)
+      |> Ecto.Query.where([v], v.id == ^id)
+      |> Repo.one!()
+
+    changeset = Account.Vehicle.update_changeset(vehicle, params)
+
+    case Repo.update(changeset) do
+      {:ok, vehicle} ->
+        render(conn, "show.json",
+          vehicle: vehicle,
+          username: conn.assigns.current_token.user.username,
+          public: true
+        )
+
+      {:error, changeset} ->
+        render(conn, "error.json", changeset: changeset)
+    end
   end
 end

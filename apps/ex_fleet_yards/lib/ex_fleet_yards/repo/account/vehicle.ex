@@ -98,6 +98,24 @@ defmodule ExFleetYards.Repo.Account.Vehicle do
     {count, classification}
   end
 
+  # Changeset
+  def update_changeset(vehicle, params) do
+    # TODO: paint_id
+    vehicle
+    |> cast(params, [
+      :name,
+      :purchased,
+      :sale_notify,
+      :flagship,
+      :name_visible,
+      :public,
+      :loaner,
+      :hidden,
+      :serial,
+      :alternative_name
+    ])
+  end
+
   defmodule NotFoundException do
     defexception [:username, :public]
 
