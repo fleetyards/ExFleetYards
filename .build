@@ -4,6 +4,8 @@ ExFleetYards.Release.Ecto.html
 ExFleetYards.Release.Tasks.html
 ExFleetYards.Repo.Account.User.html
 ExFleetYards.Repo.Account.UserToken.html
+ExFleetYards.Repo.Account.Vehicle.NotFoundException.html
+ExFleetYards.Repo.Account.Vehicle.html
 ExFleetYards.Repo.Account.html
 ExFleetYards.Repo.Changeset.html
 ExFleetYards.Repo.Game.Affiliation.html
@@ -77,6 +79,7 @@ ExFleetYardsApi.Schemas.List.RoadmapItemList.html
 ExFleetYardsApi.Schemas.List.ShopCommodityList.html
 ExFleetYardsApi.Schemas.List.StarSystemList.html
 ExFleetYardsApi.Schemas.List.StationList.html
+ExFleetYardsApi.Schemas.List.UserHangarList.html
 ExFleetYardsApi.Schemas.List.html
 ExFleetYardsApi.Schemas.Single.Component.html
 ExFleetYardsApi.Schemas.Single.Manufacturer.html
@@ -92,6 +95,8 @@ ExFleetYardsApi.Telemetry.InstreamBufferedWritter.html
 ExFleetYardsApi.Telemetry.InstreamConnection.html
 ExFleetYardsApi.UnauthorizedException.html
 ExFleetYardsApi.UserController.html
+ExFleetYardsApi.UserHangarController.html
+ExFleetYardsApi.UserHangarView.html
 ExFleetYardsApi.UserSessionController.html
 ExFleetYardsApi.UserSessionView.html
 ExFleetYardsApi.UserView.html
@@ -136,7 +141,7 @@ dist/merriweather-latin-ext-300-normal-K6L27CZ5.woff2
 dist/merriweather-vietnamese-300-italic-EHHNZPUO.woff2
 dist/merriweather-vietnamese-300-normal-U376L4Z4.woff2
 dist/remixicon-NKANDIL5.woff2
-dist/search_items-D2533EF7.js
-dist/sidebar_items-C65A5D1C.js
+dist/search_items-40919A26.js
+dist/sidebar_items-24638734.js
 index.html
 search.html

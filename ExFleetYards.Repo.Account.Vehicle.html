@@ -7,7 +7,7 @@
     <meta name="generator" content="ExDoc v0.29.1">
     <meta name="project" content="Fleetyards v0.1.0">
 
-    <title>ExFleetYardsApi.CelestialObjectController — Fleetyards v0.1.0</title>
+    <title>ExFleetYards.Repo.Account.Vehicle — Fleetyards v0.1.0</title>
     <link rel="stylesheet" href="dist/html-elixir-V2ETBPMB.css" />
 
 
@@ -98,14 +98,14 @@ Fleetyards
 </button>
 
 
-  <span translate="no">ExFleetYardsApi.CelestialObjectController</span> 
+  <span translate="no">ExFleetYards.Repo.Account.Vehicle</span> 
   <small class="app-vsn" translate="no">(Fleetyards v0.1.0)</small>
 
 </h1>
 
 
   <section id="moduledoc">
-<p>Controller used for Api</p>
+<p>User Vehicle</p>
   </section>
 
 
@@ -124,7 +124,7 @@ Fleetyards
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#index/2" translate="no">index(conn, params)</a>
+        <a href="#classification_count_query/1" translate="no">classification_count_query(query)</a>
 
       </div>
 
@@ -132,7 +132,7 @@ Fleetyards
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#open_api_operation/1" translate="no">open_api_operation(action)</a>
+        <a href="#public_hangar/1" translate="no">public_hangar(username)</a>
 
       </div>
 
@@ -140,7 +140,7 @@ Fleetyards
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#shared_security/0" translate="no">shared_security()</a>
+        <a href="#public_hangar_count/1" translate="no">public_hangar_count(username)</a>
 
       </div>
 
@@ -148,7 +148,7 @@ Fleetyards
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#shared_tags/0" translate="no">shared_tags()</a>
+        <a href="#public_hangar_count_query/1" translate="no">public_hangar_count_query(username)</a>
 
       </div>
 
@@ -156,7 +156,39 @@ Fleetyards
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#show/2" translate="no">show(conn, params)</a>
+        <a href="#public_hangar_group_count_query/1" translate="no">public_hangar_group_count_query(username)</a>
+
+      </div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#public_hangar_query/1" translate="no">public_hangar_query(username)</a>
+
+      </div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#public_hangar_quick_stats/1" translate="no">public_hangar_quick_stats(username)</a>
+
+      </div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#public_hangar_userid/1" translate="no">public_hangar_userid(opts)</a>
+
+      </div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#public_hangar_userid_query/1" translate="no">public_hangar_userid_query(userid)</a>
 
       </div>
 
@@ -176,14 +208,14 @@ Fleetyards
 Functions
     </h1>
     <div class="functions-list">
-<section class="detail" id="index/2">
+<section class="detail" id="classification_count_query/1">
 
   <div class="detail-header">
-    <a href="#index/2" class="detail-link" title="Link to this function">
+    <a href="#classification_count_query/1" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">index(conn, params)</h1>
+    <h1 class="signature" translate="no">classification_count_query(query)</h1>
 
 
   </div>
@@ -193,37 +225,14 @@ Functions
 
   </section>
 </section>
-<section class="detail" id="open_api_operation/1">
+<section class="detail" id="public_hangar/1">
 
   <div class="detail-header">
-    <a href="#open_api_operation/1" class="detail-link" title="Link to this function">
+    <a href="#public_hangar/1" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">open_api_operation(action)</h1>
-
-
-  </div>
-
-  <section class="docstring">
-
-      <div class="specs">
-
-          <pre translate="no"><span class="attribute">@spec</span> open_api_operation(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>()) :: <a href="https://hexdocs.pm/open_api_spex/3.16.0/OpenApiSpex.Operation.html#t:t/0">OpenApiSpex.Operation.t</a>()</pre>
-
-      </div>
-
-
-  </section>
-</section>
-<section class="detail" id="shared_security/0">
-
-  <div class="detail-header">
-    <a href="#shared_security/0" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">shared_security()</h1>
+    <h1 class="signature" translate="no">public_hangar(username)</h1>
 
 
   </div>
@@ -233,14 +242,14 @@ Functions
 
   </section>
 </section>
-<section class="detail" id="shared_tags/0">
+<section class="detail" id="public_hangar_count/1">
 
   <div class="detail-header">
-    <a href="#shared_tags/0" class="detail-link" title="Link to this function">
+    <a href="#public_hangar_count/1" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">shared_tags()</h1>
+    <h1 class="signature" translate="no">public_hangar_count(username)</h1>
 
 
   </div>
@@ -250,14 +259,99 @@ Functions
 
   </section>
 </section>
-<section class="detail" id="show/2">
+<section class="detail" id="public_hangar_count_query/1">
 
   <div class="detail-header">
-    <a href="#show/2" class="detail-link" title="Link to this function">
+    <a href="#public_hangar_count_query/1" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">show(conn, params)</h1>
+    <h1 class="signature" translate="no">public_hangar_count_query(username)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="public_hangar_group_count_query/1">
+
+  <div class="detail-header">
+    <a href="#public_hangar_group_count_query/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">public_hangar_group_count_query(username)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="public_hangar_query/1">
+
+  <div class="detail-header">
+    <a href="#public_hangar_query/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">public_hangar_query(username)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="public_hangar_quick_stats/1">
+
+  <div class="detail-header">
+    <a href="#public_hangar_quick_stats/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">public_hangar_quick_stats(username)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="public_hangar_userid/1">
+
+  <div class="detail-header">
+    <a href="#public_hangar_userid/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">public_hangar_userid(opts)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="public_hangar_userid_query/1">
+
+  <div class="detail-header">
+    <a href="#public_hangar_userid_query/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">public_hangar_userid_query(userid)</h1>
 
 
   </div>

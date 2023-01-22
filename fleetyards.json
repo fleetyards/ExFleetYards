@@ -1867,6 +1867,126 @@
         "x-struct": "Elixir.ExFleetYardsApi.Schemas.Single.User",
         "x-validate": null
       },
+      "UserHangar": {
+        "description": "User Hangar",
+        "properties": {
+          "createdAt": {
+            "format": "date-time",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "loaner": {
+            "type": "boolean",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "model": {
+            "$ref": "#/components/schemas/Model"
+          },
+          "name": {
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "paint": {
+            "$ref": "#/components/schemas/ModelPaint"
+          },
+          "serial": {
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "title": "UserHangar",
+        "type": "object",
+        "x-struct": "Elixir.ExFleetYardsApi.Schemas.Single.UserHangar",
+        "x-validate": null
+      },
+      "UserHangarList": {
+        "description": "UserHangar List",
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/UserHangar"
+            },
+            "type": "array",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/PaginationMetadata"
+          }
+        },
+        "required": [
+          "data",
+          "metadata"
+        ],
+        "title": "UserHangarList",
+        "type": "object",
+        "x-struct": "Elixir.ExFleetYardsApi.Schemas.List.UserHangarList",
+        "x-validate": null
+      },
+      "UserHangarQuickStats": {
+        "description": "User Hangar",
+        "properties": {
+          "classifications": {
+            "items": {
+              "properties": {
+                "classification": {
+                  "type": "string",
+                  "x-struct": null,
+                  "x-validate": null
+                },
+                "count": {
+                  "type": "integer",
+                  "x-struct": null,
+                  "x-validate": null
+                }
+              },
+              "type": "object",
+              "x-struct": null,
+              "x-validate": null
+            },
+            "type": "array",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "total": {
+            "type": "integer",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "username": {
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          }
+        },
+        "required": [
+          "username",
+          "total"
+        ],
+        "title": "UserHangarQuickStats",
+        "type": "object",
+        "x-struct": "Elixir.ExFleetYardsApi.Schemas.Single.UserHangarQuickStats",
+        "x-validate": null
+      },
       "UserSession": {
         "description": "Login information",
         "properties": {
@@ -2906,6 +3026,151 @@
         },
         "tags": [
           "game"
+        ]
+      }
+    },
+    "/api/v2/hangar/{username}/quick-stats": {
+      "get": {
+        "callbacks": {},
+        "operationId": "ExFleetYardsApi.UserHangarController.public_quick_stats",
+        "parameters": [
+          {
+            "description": "",
+            "in": "path",
+            "name": "username",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserHangarQuickStats"
+                }
+              }
+            },
+            "description": "UserHangarQuickStats"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          }
+        },
+        "summary": "Quick Staistics for a User's Public Hangar",
+        "tags": [
+          "user",
+          "hangar"
+        ]
+      }
+    },
+    "/api/v2/hangar/{username}": {
+      "get": {
+        "callbacks": {},
+        "operationId": "ExFleetYardsApi.UserHangarController.public",
+        "parameters": [
+          {
+            "description": "",
+            "example": 25,
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "x-struct": null,
+              "x-validate": null
+            }
+          },
+          {
+            "description": "",
+            "in": "query",
+            "name": "after",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            }
+          },
+          {
+            "description": "",
+            "in": "query",
+            "name": "before",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            }
+          },
+          {
+            "description": "",
+            "in": "path",
+            "name": "username",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserHangarList"
+                }
+              }
+            },
+            "description": "Elixir.UserHangarList"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          }
+        },
+        "tags": [
+          "user",
+          "hangar"
         ]
       }
     },
