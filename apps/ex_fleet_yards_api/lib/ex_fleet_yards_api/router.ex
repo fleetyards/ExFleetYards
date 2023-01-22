@@ -49,8 +49,8 @@ defmodule ExFleetYardsApi.Router do
         post "/", UserSessionController, :create
         get "/", UserSessionController, :get_self
         delete "/logout", UserSessionController, :delete
-        delete "/logout/:id", UserSessionController, :delete_other
         delete "/logout/all", UserSessionController, :delete_all
+        delete "/logout/:id", UserSessionController, :delete_other
 
         scope "/" do
           pipe_through :scope_api_read

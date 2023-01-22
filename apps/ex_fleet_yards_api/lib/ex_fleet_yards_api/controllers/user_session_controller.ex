@@ -123,6 +123,7 @@ defmodule ExFleetYardsApi.UserSessionController do
   end
 
   operation :delete_all,
+    description: "Logout all tokens",
     responses: [
       ok: {"Success", "application/json", Error},
       not_found: {"Error", "application/json", Error},
