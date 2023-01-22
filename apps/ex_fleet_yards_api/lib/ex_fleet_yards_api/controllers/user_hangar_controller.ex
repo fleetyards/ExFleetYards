@@ -60,6 +60,10 @@ defmodule ExFleetYardsApi.UserHangarController do
       |> Ecto.Query.preload([:model, :model_paint])
       |> Repo.paginate!(:hangar_name_id, :asc, get_pagination_args(params))
 
-    render(conn, "index.json", page: page, username: conn.assigns.current_token.user.username)
+    render(conn, "index.json",
+      page: page,
+      username: conn.assigns.current_token.user.username,
+      public: true
+    )
   end
 end

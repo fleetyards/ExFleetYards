@@ -509,6 +509,7 @@ defmodule ExFleetYardsApi.Schemas.Single do
         model: ExFleetYardsApi.Schemas.Single.Model,
         paint: ExFleetYardsApi.Schemas.Single.ModelPaint,
         loaner: %Schema{type: :boolean},
+        public: %Schema{type: :boolean},
         createdAt: %Schema{type: :string, format: :"date-time"},
         updatedAt: %Schema{type: :string, format: :"date-time"}
       },
