@@ -495,6 +495,49 @@ defmodule ExFleetYardsApi.Schemas.Single do
     })
   end
 
+  defmodule UserHangar do
+    @moduledoc false
+    require OpenApiSpex
+
+    OpenApiSpex.schema(%{
+      description: "User Hangar",
+      type: :object,
+      properties: %{
+        id: %Schema{type: :string, format: :uuid},
+        name: %Schema{type: :string},
+        serial: %Schema{type: :string},
+        model: ExFleetYardsApi.Schemas.Single.Model,
+        paint: ExFleetYardsApi.Schemas.Single.ModelPaint,
+        loaner: %Schema{type: :boolean},
+        createdAt: %Schema{type: :string, format: :"date-time"},
+        updatedAt: %Schema{type: :string, format: :"date-time"}
+      },
+      required: [:id]
+    })
+  end
+
+  defmodule UserHangarQuickStats do
+    @moduledoc false
+    require OpenApiSpex
+
+    OpenApiSpex.schema(%{
+      description: "User Hangar",
+      type: :object,
+      properties: %{
+        username: %Schema{type: :string},
+        total: %Schema{type: :integer},
+        classifications: %Schema{
+          type: :array,
+          items: %Schema{
+            type: :object,
+            properties: %{classification: %Schema{type: :string}, count: %Schema{type: :integer}}
+          }
+        }
+      },
+      required: [:username, :total]
+    })
+  end
+
   defmodule PaginationMetadata do
     @moduledoc false
     require OpenApiSpex

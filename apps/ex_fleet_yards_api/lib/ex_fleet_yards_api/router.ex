@@ -93,6 +93,11 @@ defmodule ExFleetYardsApi.Router do
         resources "/stations", StationController, only: [:index, :show]
       end
 
+      scope "/hangar" do
+        get "/:username", UserHangarController, :public
+        get "/:username/quick-stats", UserHangarController, :public_quick_stats
+      end
+
       scope "/roadmap" do
         get "/active", RoadmapController, :active
         get "/released", RoadmapController, :released

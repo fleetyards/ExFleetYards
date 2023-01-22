@@ -151,4 +151,9 @@ defmodule ExFleetYardsApi do
     def status(_), do: 401
     def actions(_), do: []
   end
+
+  defimpl Plug.Exception, for: ExFleetYards.Repo.Account.Vehicle.NotFoundException do
+    def status(_), do: 404
+    def actions(_), do: []
+  end
 end
