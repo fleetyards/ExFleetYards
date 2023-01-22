@@ -2966,6 +2966,7 @@
     "/api/v2/session/logout/all": {
       "delete": {
         "callbacks": {},
+        "description": "Logout all tokens",
         "operationId": "ExFleetYardsApi.UserSessionController.delete_all",
         "parameters": [],
         "responses": {
