@@ -161,6 +161,85 @@ defmodule ExFleetYardsApi.UserHangarControllerTest do
       assert json["data"] |> Enum.count() == 3
       assert_schema json, "UserHangarList", spec
     end
+
+    test "create", %{conn: conn, auth_conn: auth_conn, api_spec: spec} do
+      json =
+        conn
+        |> get(Routes.user_hangar_path(conn, :public, "testuser"))
+        |> json_response(200)
+
+      assert json["data"] |> Enum.count() == 3
+      assert_schema json, "UserHangarList", spec
+
+      json =
+        auth_conn
+        |> post(
+          Routes.user_hangar_path(auth_conn, :create, "stv"),
+          %{
+            "paint" => "blue-steel",
+            "name" => "test create stv"
+          }
+        )
+        |> json_response(200)
+
+      assert_schema json, "UserHangar", spec
+      assert json["paint"]["slug"] == "blue-steel"
+      assert json["name"] == "test create stv"
+
+      id = json["id"]
+
+      json =
+        auth_conn
+        |> get(Routes.user_hangar_path(auth_conn, :get, id))
+        |> json_response(200)
+
+      assert_schema json, "UserHangar", spec
+      assert json["paint"]["slug"] == "blue-steel"
+      assert json["name"] == "test create stv"
+
+      json =
+        conn
+        |> get(Routes.user_hangar_path(conn, :public, "testuser"))
+        |> json_response(200)
+
+      assert json["data"] |> Enum.count() == 3
+      assert_schema json, "UserHangarList", spec
+
+      json =
+        auth_conn
+        |> post(
+          Routes.user_hangar_path(auth_conn, :create, "stv"),
+          %{
+            "paint" => "blue-steel",
+            "name" => "test create stv",
+            "public" => true
+          }
+        )
+        |> json_response(200)
+
+      assert_schema json, "UserHangar", spec
+      assert json["paint"]["slug"] == "blue-steel"
+      assert json["name"] == "test create stv"
+
+      id = json["id"]
+
+      json =
+        auth_conn
+        |> get(Routes.user_hangar_path(auth_conn, :get, id))
+        |> json_response(200)
+
+      assert_schema json, "UserHangar", spec
+      assert json["paint"]["slug"] == "blue-steel"
+      assert json["name"] == "test create stv"
+
+      json =
+        conn
+        |> get(Routes.user_hangar_path(conn, :public, "testuser"))
+        |> json_response(200)
+
+      assert json["data"] |> Enum.count() == 4
+      assert_schema json, "UserHangarList", spec
+    end
   end
 
   defp get_vehicle(json, id) do

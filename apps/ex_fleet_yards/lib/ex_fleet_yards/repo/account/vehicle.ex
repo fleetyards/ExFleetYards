@@ -27,7 +27,7 @@ defmodule ExFleetYards.Repo.Account.Vehicle do
     field :alternative_name, :string
 
     belongs_to :user, Account.User, type: Ecto.UUID, foreign_key: :user_id
-    belongs_to :model, Game.Model, type: Ecto.UUID, foreign_key: :model_id
+    belongs_to :model, Game.Model, type: Ecto.UUID, foreign_key: :model_id, on_replace: :nilify
 
     belongs_to :model_paint, Game.Model.Paint,
       type: Ecto.UUID,
@@ -126,7 +126,7 @@ defmodule ExFleetYards.Repo.Account.Vehicle do
     |> cast(params, @cast_fields)
     |> cast_model(params)
     |> cast_paint(params)
-    |> validate_required([:model_id])
+    |> validate_required([:model])
     |> put_change(:user_id, user_id)
   end
 
@@ -139,8 +139,15 @@ defmodule ExFleetYards.Repo.Account.Vehicle do
     get_field(changeset, :model_id)
     |> case do
       nil ->
-        changeset
-        |> add_error(:paint, "Model not found")
+        get_field(changeset, :model)
+        |> case do
+          nil ->
+            changeset
+            |> add_error(:paint, "Model not found")
+
+          model ->
+            cast_paint(changeset, paint, model.id)
+        end
 
       model ->
         cast_paint(changeset, paint, model)
@@ -176,7 +183,7 @@ defmodule ExFleetYards.Repo.Account.Vehicle do
 
       model ->
         changeset
-        |> put_change(:model_id, model.id)
+        |> put_assoc(:model, model)
     end
   end
 
