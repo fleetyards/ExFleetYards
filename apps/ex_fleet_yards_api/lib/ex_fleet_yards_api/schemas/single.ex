@@ -518,6 +518,29 @@ defmodule ExFleetYardsApi.Schemas.Single do
     })
   end
 
+  defmodule UserHangarChange do
+    @moduledoc false
+    require OpenApiSpex
+
+    OpenApiSpex.schema(%{
+      description: "User Hangar Change",
+      type: :object,
+      properties: %{
+        name: %Schema{type: :string},
+        name_visible: %Schema{type: :boolean},
+        purchased: %Schema{type: :boolean},
+        sale_notify: %Schema{type: :boolean},
+        flagship: %Schema{type: :boolean},
+        public: %Schema{type: :boolean},
+        loaner: %Schema{type: :boolean},
+        hidden: %Schema{type: :boolean},
+        serial: %Schema{type: :string},
+        alternative_name: %Schema{type: :string},
+        paint: %Schema{type: :string, format: :slug}
+      }
+    })
+  end
+
   defmodule UserHangarQuickStats do
     @moduledoc false
     require OpenApiSpex

@@ -113,7 +113,8 @@ defmodule ExFleetYardsApi.UserHangarController do
     parameters: [
       id: [in: :path, type: :string]
     ],
-    request_body: {"User Hangar", "application/json", ExFleetYardsApi.Schemas.Single.UserHangar},
+    request_body:
+      {"User Hangar", "application/json", ExFleetYardsApi.Schemas.Single.UserHangarChange},
     responses: [
       ok: {"UserHangar", "application/json", ExFleetYardsApi.Schemas.Single.UserHangar},
       not_found: {"Error", "application/json", Error}
@@ -127,6 +128,7 @@ defmodule ExFleetYardsApi.UserHangarController do
     vehicle =
       Account.Vehicle.hangar_userid_query(user_id)
       |> Ecto.Query.where([v], v.id == ^id)
+      |> Ecto.Query.preload([:model, :model_paint])
       |> Repo.one!()
 
     changeset = Account.Vehicle.update_changeset(vehicle, params)
@@ -140,7 +142,9 @@ defmodule ExFleetYardsApi.UserHangarController do
         )
 
       {:error, changeset} ->
-        render(conn, "error.json", changeset: changeset)
+        conn
+        |> put_status(:bad_request)
+        |> render("error.json", changeset: changeset)
     end
   end
 end

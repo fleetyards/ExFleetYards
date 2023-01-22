@@ -28,7 +28,11 @@ defmodule ExFleetYards.Repo.Account.Vehicle do
 
     belongs_to :user, Account.User, type: Ecto.UUID, foreign_key: :user_id
     belongs_to :model, Game.Model, type: Ecto.UUID, foreign_key: :model_id
-    belongs_to :model_paint, Game.ModelPaint, type: Ecto.UUID, foreign_key: :model_paint_id
+
+    belongs_to :model_paint, Game.Model.Paint,
+      type: Ecto.UUID,
+      foreign_key: :model_paint_id,
+      on_replace: :nilify
 
     timestamps(inserted_at: :created_at, type: :utc_datetime)
   end
@@ -100,20 +104,39 @@ defmodule ExFleetYards.Repo.Account.Vehicle do
 
   # Changeset
   def update_changeset(vehicle, params) do
-    # TODO: paint_id
     vehicle
     |> cast(params, [
       :name,
+      :name_visible,
       :purchased,
       :sale_notify,
       :flagship,
-      :name_visible,
       :public,
       :loaner,
       :hidden,
       :serial,
       :alternative_name
     ])
+    |> cast_paint(params)
+  end
+
+  defp cast_paint(changeset, %{"paint" => paint}), do: cast_paint(changeset, paint)
+  defp cast_paint(changeset, %{paint: paint}), do: cast_paint(changeset, paint)
+  defp cast_paint(changeset, %{}), do: changeset
+  defp cast_paint(changeset, nil), do: put_assoc(changeset, :model_paint, nil)
+
+  defp cast_paint(changeset, paint) when is_binary(paint) do
+    Game.Model.Paint.by_model_slug(changeset.data.model.id, paint)
+    |> Repo.one()
+    |> case do
+      nil ->
+        changeset
+        |> add_error(:paint, "Not found or not available for this model")
+
+      paint ->
+        changeset
+        |> put_assoc(:model_paint, paint)
+    end
   end
 
   defmodule NotFoundException do
