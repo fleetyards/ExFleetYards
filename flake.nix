@@ -107,6 +107,7 @@
                   language = "system";
                   pass_filenames = false;
                 };
+                pre-commit.excludes = [ "nix/mix.nix" ];
               }
               {
                 env.FLEETYARDS_IN_DEVENV = 1;
