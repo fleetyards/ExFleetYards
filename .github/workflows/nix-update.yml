@@ -1,0 +1,31 @@
+name: "Update nix"
+on:
+  pull_request:
+    branches: [ "main" ]
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    name: "Update nix"
+    steps:
+      - uses: actions/checkout@v3
+      - uses: cachix/install-nix-action@v18
+        with:
+          extra_nix_config: |
+            access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
+      - uses: cachix/cachix-action@v11
+        with:
+          name: fleetbot
+          signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
+      - run: |
+          echo "${{ github.actor }}"
+          if [ "${{ github.actor }}" != "Depfu" ]; then
+            echo "Not a depfu PR"
+            exit 0
+          fi
+          nix run .#update
+          
+          git config --global user.name "Depfu"
+          git config --global user.email "depfu@fleetyards.net"
+          git add nix
+          git commit -m "Update nix/mix.nix"
+          git push

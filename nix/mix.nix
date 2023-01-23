@@ -49,12 +49,12 @@ let
 
     castore = buildMix rec {
       name = "castore";
-      version = "0.1.20";
+      version = "0.1.22";
 
       src = fetchHex {
         pkg = "${name}";
         version = "${version}";
-        sha256 = "12n9bb4v9b9sx9xk11k98s4f4a532dmmn0x4ak28dj990mjvf850";
+        sha256 = "1b1cl89fzkykimxwgm8mwb9wmxcrd8qk8hfc83pa2npb8zgpcxf1";
       };
 
       beamDeps = [];
@@ -257,12 +257,12 @@ let
 
     esbuild = buildMix rec {
       name = "esbuild";
-      version = "0.5.0";
+      version = "0.6.0";
 
       src = fetchHex {
         pkg = "${name}";
         version = "${version}";
-        sha256 = "1rgzjjb0j3m0xz8gs112dydfz7m5brlpfm2qmz7w8qyr6ars10zi";
+        sha256 = "0h6hiwqp9m06kla0kjl1l3hiwkl6h0pk33rr6wz0vasv99fs1y9h";
       };
 
       beamDeps = [ castore ];

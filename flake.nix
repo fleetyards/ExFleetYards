@@ -39,6 +39,15 @@
     in {
       overlays.fleet = final: prev: {
         appsignal_nif = final.callPackage ./nix/appsignal-nif.nix { };
+        ex_fleet_yards_update = final.callPackage ({ lib, writeScriptBin
+          , substituteAll, mix2nix, elixir, gitMinimal, nix, gnumake, gcc }:
+          writeScriptBin "update" (builtins.readFile (substituteAll {
+            src = ./nix/update-nix.sh;
+            mix2nix = "${mix2nix}/bin/mix2nix";
+            mix = "${elixir}/bin/mix";
+            path =
+              lib.makeBinPath [ elixir mix2nix gitMinimal nix gnumake gcc ];
+          }))) { };
         ex_fleet_yards = final.callPackage
           ({ lib, beam, rebar3, beamPackages, appsignal_nif }:
             let
@@ -78,11 +87,20 @@
       overlays.default = self.overlays.fleet;
 
       packages = forAllSystems (system: {
-        inherit (nixpkgsFor.${system}) ex_fleet_yards appsignal_nif;
+        inherit (nixpkgsFor.${system})
+          ex_fleet_yards ex_fleet_yards_update appsignal_nif;
         default = self.packages.${system}.ex_fleet_yards;
       });
 
       legacyPackages = forAllSystems (system: nixpkgsFor.${system});
+
+      apps = forAllSystems (system: {
+        update = {
+          type = "app";
+          program =
+            "${self.packages.${system}.ex_fleet_yards_update}/bin/update";
+        };
+      });
 
       devShells = forAllSystems (system:
         let pkgs = nixpkgsFor.${system};
