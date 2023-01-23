@@ -1895,8 +1895,18 @@
             "x-struct": null,
             "x-validate": null
           },
+          "name_visible": {
+            "type": "boolean",
+            "x-struct": null,
+            "x-validate": null
+          },
           "paint": {
             "$ref": "#/components/schemas/ModelPaint"
+          },
+          "public": {
+            "type": "boolean",
+            "x-struct": null,
+            "x-validate": null
           },
           "serial": {
             "type": "string",
@@ -1916,6 +1926,72 @@
         "title": "UserHangar",
         "type": "object",
         "x-struct": "Elixir.ExFleetYardsApi.Schemas.Single.UserHangar",
+        "x-validate": null
+      },
+      "UserHangarChange": {
+        "description": "User Hangar Change",
+        "properties": {
+          "alternative_name": {
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "flagship": {
+            "type": "boolean",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "hidden": {
+            "type": "boolean",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "loaner": {
+            "type": "boolean",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "name": {
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "name_visible": {
+            "type": "boolean",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "paint": {
+            "format": "slug",
+            "nullable": true,
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "public": {
+            "type": "boolean",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "purchased": {
+            "type": "boolean",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "sale_notify": {
+            "type": "boolean",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "serial": {
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          }
+        },
+        "title": "UserHangarChange",
+        "type": "object",
+        "x-struct": "Elixir.ExFleetYardsApi.Schemas.Single.UserHangarChange",
         "x-validate": null
       },
       "UserHangarList": {
@@ -2352,6 +2428,91 @@
         "summary": "Get user info for a user",
         "tags": [
           "user"
+        ]
+      }
+    },
+    "/api/v2/hangar": {
+      "get": {
+        "callbacks": {},
+        "operationId": "ExFleetYardsApi.UserHangarController.index",
+        "parameters": [
+          {
+            "description": "",
+            "example": 25,
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "x-struct": null,
+              "x-validate": null
+            }
+          },
+          {
+            "description": "",
+            "in": "query",
+            "name": "after",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            }
+          },
+          {
+            "description": "",
+            "in": "query",
+            "name": "before",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserHangarList"
+                }
+              }
+            },
+            "description": "UserHangarList"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          }
+        },
+        "security": [
+          {
+            "authorization": [
+              "hangar:read"
+            ]
+          }
+        ],
+        "tags": [
+          "user",
+          "hangar"
         ]
       }
     },
@@ -3029,53 +3190,7 @@
         ]
       }
     },
-    "/api/v2/hangar/{username}/quick-stats": {
-      "get": {
-        "callbacks": {},
-        "operationId": "ExFleetYardsApi.UserHangarController.public_quick_stats",
-        "parameters": [
-          {
-            "description": "",
-            "in": "path",
-            "name": "username",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "x-struct": null,
-              "x-validate": null
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/UserHangarQuickStats"
-                }
-              }
-            },
-            "description": "UserHangarQuickStats"
-          },
-          "404": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            },
-            "description": "Error"
-          }
-        },
-        "summary": "Quick Staistics for a User's Public Hangar",
-        "tags": [
-          "user",
-          "hangar"
-        ]
-      }
-    },
-    "/api/v2/hangar/{username}": {
+    "/api/v2/hangar/public/{username}": {
       "get": {
         "callbacks": {},
         "operationId": "ExFleetYardsApi.UserHangarController.public",
@@ -3168,6 +3283,70 @@
             "description": "Error"
           }
         },
+        "tags": [
+          "user",
+          "hangar"
+        ]
+      }
+    },
+    "/api/v2/hangar/{model}": {
+      "post": {
+        "callbacks": {},
+        "operationId": "ExFleetYardsApi.UserHangarController.create",
+        "parameters": [
+          {
+            "description": "",
+            "in": "path",
+            "name": "model",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserHangarChange"
+              }
+            }
+          },
+          "description": "User Hangar",
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserHangar"
+                }
+              }
+            },
+            "description": "UserHangar"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          }
+        },
+        "security": [
+          {
+            "authorization": [
+              "hangar:write"
+            ]
+          }
+        ],
+        "summary": "Create a new vehicle in the user's hangar",
         "tags": [
           "user",
           "hangar"
@@ -3708,6 +3887,217 @@
         "tags": [
           "session",
           "user"
+        ]
+      }
+    },
+    "/api/v2/hangar/{id}": {
+      "delete": {
+        "callbacks": {},
+        "operationId": "ExFleetYardsApi.UserHangarController.delete",
+        "parameters": [
+          {
+            "description": "",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserHangar"
+                }
+              }
+            },
+            "description": "UserHangar"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          }
+        },
+        "security": [
+          {
+            "authorization": [
+              "hangar:write"
+            ]
+          }
+        ],
+        "summary": "Delete a vehicle from the user's hangar",
+        "tags": [
+          "user",
+          "hangar"
+        ]
+      },
+      "get": {
+        "callbacks": {},
+        "operationId": "ExFleetYardsApi.UserHangarController.get",
+        "parameters": [
+          {
+            "description": "",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserHangar"
+                }
+              }
+            },
+            "description": "UserHangar"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          }
+        },
+        "security": [
+          {
+            "authorization": [
+              "hangar:read"
+            ]
+          }
+        ],
+        "tags": [
+          "user",
+          "hangar"
+        ]
+      },
+      "patch": {
+        "callbacks": {},
+        "operationId": "ExFleetYardsApi.UserHangarController.update",
+        "parameters": [
+          {
+            "description": "",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserHangarChange"
+              }
+            }
+          },
+          "description": "User Hangar",
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserHangar"
+                }
+              }
+            },
+            "description": "UserHangar"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          }
+        },
+        "security": [
+          {
+            "authorization": [
+              "hangar:write"
+            ]
+          }
+        ],
+        "summary": "Update a Vehicle in a User's Hangar",
+        "tags": [
+          "user",
+          "hangar"
+        ]
+      }
+    },
+    "/api/v2/hangar/public/{username}/quick-stats": {
+      "get": {
+        "callbacks": {},
+        "operationId": "ExFleetYardsApi.UserHangarController.public_quick_stats",
+        "parameters": [
+          {
+            "description": "",
+            "in": "path",
+            "name": "username",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserHangarQuickStats"
+                }
+              }
+            },
+            "description": "UserHangarQuickStats"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          }
+        },
+        "summary": "Quick Staistics for a User's Public Hangar",
+        "tags": [
+          "user",
+          "hangar"
         ]
       }
     },
