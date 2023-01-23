@@ -505,14 +505,39 @@ defmodule ExFleetYardsApi.Schemas.Single do
       properties: %{
         id: %Schema{type: :string, format: :uuid},
         name: %Schema{type: :string},
+        name_visible: %Schema{type: :boolean},
         serial: %Schema{type: :string},
         model: ExFleetYardsApi.Schemas.Single.Model,
         paint: ExFleetYardsApi.Schemas.Single.ModelPaint,
         loaner: %Schema{type: :boolean},
+        public: %Schema{type: :boolean},
         createdAt: %Schema{type: :string, format: :"date-time"},
         updatedAt: %Schema{type: :string, format: :"date-time"}
       },
       required: [:id]
+    })
+  end
+
+  defmodule UserHangarChange do
+    @moduledoc false
+    require OpenApiSpex
+
+    OpenApiSpex.schema(%{
+      description: "User Hangar Change",
+      type: :object,
+      properties: %{
+        name: %Schema{type: :string},
+        name_visible: %Schema{type: :boolean},
+        purchased: %Schema{type: :boolean},
+        sale_notify: %Schema{type: :boolean},
+        flagship: %Schema{type: :boolean},
+        public: %Schema{type: :boolean},
+        loaner: %Schema{type: :boolean},
+        hidden: %Schema{type: :boolean},
+        serial: %Schema{type: :string},
+        alternative_name: %Schema{type: :string},
+        paint: %Schema{type: :string, format: :slug, nullable: true}
+      }
     })
   end
 

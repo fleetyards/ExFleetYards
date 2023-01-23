@@ -2,6 +2,7 @@ defmodule ExFleetYards.Repo.Game.Model do
   @moduledoc "Model"
 
   use Ecto.Schema
+  import Ecto.Query
   alias ExFleetYards.Repo.Game
 
   @primary_key {:id, Ecto.UUID, []}
@@ -118,5 +119,10 @@ defmodule ExFleetYards.Repo.Game.Model do
     many_to_many :loaned_by, __MODULE__,
       join_through: __MODULE__.Loaner,
       join_keys: [loaner_model_id: :id, model_id: :id]
+  end
+
+  def by_slug(slug) do
+    from m in __MODULE__,
+      where: m.slug == ^slug
   end
 end

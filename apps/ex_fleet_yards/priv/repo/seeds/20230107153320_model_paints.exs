@@ -15,6 +15,11 @@ defmodule ExFleetYards.Repo.Seeds.ModelPaints do
            name: "Cobalt Grey",
            slug: "cobalt-grey",
            model_id: "stv"
+         },
+         %{
+           name: "Crimson",
+           slug: "crimson",
+           model_id: "600i-touring"
          }
        ],
        fn paint ->

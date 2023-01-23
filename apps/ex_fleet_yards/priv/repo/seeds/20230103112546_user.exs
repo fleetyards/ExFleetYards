@@ -20,6 +20,12 @@ defmodule ExFleetYards.Repo.Seeds.User do
            confirmed_at: NaiveDateTime.utc_now() |> NaiveDateTime.truncate(:second)
          },
          %{
+           username: "testuserlogin",
+           email: "testuserlogin@example.org",
+           password: "testuserloginpassword",
+           confirmed_at: NaiveDateTime.utc_now() |> NaiveDateTime.truncate(:second)
+         },
+         %{
            username: "unconfirmed",
            email: "unconfirmed@example.org",
            password: "unconfirmedpassword"

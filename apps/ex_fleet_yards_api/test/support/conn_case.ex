@@ -35,6 +35,24 @@ defmodule ExFleetYardsApi.ConnCase do
   setup tags do
     ExFleetYards.DataCase.setup_sandbox(tags)
 
-    {:ok, conn: Phoenix.ConnTest.build_conn(), api_spec: ExFleetYardsApi.ApiSpec.spec()}
+    token = create_user_token()
+
+    conn = Phoenix.ConnTest.build_conn()
+
+    auth_conn =
+      conn
+      |> Plug.Conn.put_req_header("authorization", "Bearer #{token}")
+
+    {:ok, conn: conn, auth_conn: auth_conn, api_spec: ExFleetYardsApi.ApiSpec.spec()}
+  end
+
+  defp create_user_token() do
+    user = ExFleetYards.Repo.Account.get_user_by_username("testuser")
+    ExFleetYards.Repo.Account.get_api_token(user, ExFleetYards.Repo.Account.UserToken.scopes())
+  end
+
+  defp delete_user_token(token) do
+    ExFleetYards.Repo.Account.get_user_by_token(token)
+    |> ExFleetYards.Repo.delete!()
   end
 end

@@ -5,6 +5,8 @@ defmodule ExFleetYardsApi.ControllerHelpers do
   import Ecto.Query
   alias ExFleetYardsApi.InvalidPaginationException
 
+  @filter_keys ~w(list_type extra_parameters extra_responses has_not_found)a
+
   defmacro __using__(_) do
     quote do
       import Ecto.Query

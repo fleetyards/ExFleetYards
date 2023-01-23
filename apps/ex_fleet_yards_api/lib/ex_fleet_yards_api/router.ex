@@ -19,6 +19,10 @@ defmodule ExFleetYardsApi.Router do
     plug :required_api_scope, %{"api" => "read"}
   end
 
+  pipeline :scope_hangar_read do
+    plug :required_api_scope, %{"hangar" => "read"}
+  end
+
   pipeline :ui do
     plug :accepts, ["html"]
     plug :fetch_session
@@ -94,8 +98,19 @@ defmodule ExFleetYardsApi.Router do
       end
 
       scope "/hangar" do
-        get "/:username", UserHangarController, :public
-        get "/:username/quick-stats", UserHangarController, :public_quick_stats
+        scope "/public" do
+          get "/:username", UserHangarController, :public
+          get "/:username/quick-stats", UserHangarController, :public_quick_stats
+        end
+
+        scope "/" do
+          pipe_through :scope_hangar_read
+          get "/", UserHangarController, :index
+          get "/:id", UserHangarController, :get
+          post "/:model", UserHangarController, :create
+          patch "/:id", UserHangarController, :update
+          delete "/:id", UserHangarController, :delete
+        end
       end
 
       scope "/roadmap" do
