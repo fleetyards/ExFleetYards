@@ -23,7 +23,7 @@ defmodule ExFleetYardsImport do
   @doc """
   Execute the import.
   """
-  @callback import(opts :: Keyword.t()) :: {:ok, any()} | {:error, any()}
+  @callback import_data(opts :: Keyword.t()) :: {:ok, any()} | {:error, any()}
 
   defmacro __using__(opts \\ []) do
     quote do
@@ -36,6 +36,8 @@ defmodule ExFleetYardsImport do
       def data_source, do: @data_source
       @impl unquote(__MODULE__)
       def data_name, do: @data_name
+
+      def import_data(), do: import_data([])
     end
   end
 end
