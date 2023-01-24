@@ -13,29 +13,75 @@ defmodule ExFleetYardsImport do
   @doc """
   Data source the importet data is from.
   """
-  @callback data_source() :: atom()
+  @callback data_source() :: String.t()
 
   @doc """
   Name of the data the importer imports
   """
-  @callback data_name() :: atom() | String.t()
+  @callback data_name() :: String.t()
+
+  @doc """
+  Name for this import, used for logging.
+  """
+  @callback name() :: String.t()
+
+  @doc """
+  Time in milliseconds to rerun the Import task.
+  """
+  @callback timer() :: non_neg_integer()
 
   @doc """
   Execute the import.
   """
   @callback import_data(opts :: Keyword.t()) :: {:ok, any()} | {:error, any()}
 
+  @optional_callbacks timer: 0
+
+  def timer(importer) do
+    if Kernel.function_exported?(importer, :timer, 0) do
+      importer.timer()
+    else
+      ExFleetYards.Config.get(
+        :ex_fleet_yards_import,
+        [importer, :timer],
+        ExFleetYards.Config.get(:ex_fleet_yards_import, :default_timer, 24 * 60 * 60 * 1000)
+      )
+    end
+  end
+
   defmacro __using__(opts \\ []) do
+    data_source =
+      Keyword.get(opts, :data_source)
+      |> to_string
+
+    data_name =
+      Keyword.get(opts, :data_name)
+      |> to_string
+
+    name =
+      Keyword.get(opts, :name)
+      |> case do
+        nil ->
+          Module.split(__CALLER__.module)
+          |> List.last()
+          |> to_string
+
+        v ->
+          v
+      end
+
     quote do
       @behaviour ExFleetYardsImport
 
-      @data_source unquote(opts[:data_source] || nil)
-      @data_name unquote(opts[:data_name] || nil)
+      @data_source unquote(data_source)
+      @data_name unquote(data_name)
 
       @impl unquote(__MODULE__)
       def data_source, do: @data_source
       @impl unquote(__MODULE__)
       def data_name, do: @data_name
+      @impl unquote(__MODULE__)
+      def name(), do: unquote(name)
 
       def import_data(), do: import_data([])
     end

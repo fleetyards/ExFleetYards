@@ -1,36 +1,85 @@
 defmodule ExFleetYards.Repo.Import do
   @moduledoc """
-  SC data import state
+  Data import state
   """
+
   use Ecto.Schema
   import Ecto.Query
+  import Ecto.Changeset
   alias ExFleetYards.Repo
 
   @primary_key {:id, Ecto.UUID, []}
 
-  schema "imports" do
-    field :aasm_state, Repo.Types.ImportState
+  schema "ex_imports" do
+    field :started_at, :utc_datetime
     field :failed_at, :utc_datetime
     field :finished_at, :utc_datetime
+
     field :info, :string
-    field :started_at, :utc_datetime
-    field :type, Repo.Types.ImportType
+
     field :version, :string
-
-    timestamps(inserted_at: :created_at, null: false, type: :utc_datetime)
+    field :source, :string
+    field :name, :string
   end
 
-  def current do
-    from(i in __MODULE__,
-      where: i.aasm_state == :finished,
-      where: i.type == :sc_data_import,
-      order_by: [desc: i.finished_at],
-      limit: 1
-    )
-    |> Repo.one()
+  @spec create(String.t(), String.t(), String.t() | nil) ::
+          {:ok, %__MODULE__{}} | {:error, Ecto.Changeset.t()}
+  def create(source, name, version \\ nil) do
+    params = %{
+      source: source,
+      name: name
+    }
+
+    if version do
+      Map.put(params, :version, version)
+    else
+      params
+    end
+    |> create
   end
 
-  def current_version do
-    current().version
+  @spec create(map()) :: {:ok, %__MODULE__{}} | {:error, Ecto.Changeset.t()}
+  def create(params) when is_map(params) do
+    create_changeset(params)
+    |> Repo.insert(returning: [:id])
+  end
+
+  @spec update(%__MODULE__{}, boolean(), map()) ::
+          {:ok, %__MODULE__{}} | {:error, Ecto.Changeset.t()}
+  def update(import, failed, params) do
+    update_changeset(import, failed, params)
+    |> Repo.update()
+  end
+
+  # Changesets
+  def create_changeset(%__MODULE__{} = import \\ %__MODULE__{}, attrs) do
+    import
+    |> cast(attrs, [:started_at, :version, :source, :name])
+    |> ensure_timestamp(:started_at)
+    |> validate_required([:started_at, :source, :name])
+  end
+
+  def update_changeset(%__MODULE__{} = import, failed, attrs) do
+    changeset =
+      import
+      |> cast(attrs, [:failed_at, :finished_at, :info, :version])
+
+    if failed do
+      changeset
+      |> ensure_timestamp(:failed_at)
+      |> validate_required([:failed_at])
+    else
+      changeset
+      |> ensure_timestamp(:finished_at)
+      |> validate_required([:finished_at, :version])
+    end
+  end
+
+  defp ensure_timestamp(changeset, key) do
+    if get_field(changeset, key) do
+      changeset
+    else
+      put_change(changeset, key, DateTime.utc_now() |> DateTime.truncate(:second))
+    end
   end
 end

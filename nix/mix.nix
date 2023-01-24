@@ -281,6 +281,19 @@ let
       beamDeps = [ earmark_parser makeup_elixir makeup_erlang ];
     };
 
+    expo = buildMix rec {
+      name = "expo";
+      version = "0.3.0";
+
+      src = fetchHex {
+        pkg = "${name}";
+        version = "${version}";
+        sha256 = "08qqi0mxgi4hz9x3qqzsy034ls7zwbd9fm4i10bbqxra06zx8g7v";
+      };
+
+      beamDeps = [];
+    };
+
     file_system = buildMix rec {
       name = "file_system";
       version = "0.2.10";
@@ -309,15 +322,15 @@ let
 
     gettext = buildMix rec {
       name = "gettext";
-      version = "0.20.0";
+      version = "0.22.0";
 
       src = fetchHex {
         pkg = "${name}";
         version = "${version}";
-        sha256 = "0ggb458h60ch3inndqp9xhbailhb0jkq3xnp85sa94sy8dvv20qw";
+        sha256 = "1khaqywbmbnl4hkj0662v069zipjsc7lz6z4r0h3gxvn2la7a1nb";
       };
 
-      beamDeps = [];
+      beamDeps = [ expo ];
     };
 
     hackney = buildRebar3 rec {

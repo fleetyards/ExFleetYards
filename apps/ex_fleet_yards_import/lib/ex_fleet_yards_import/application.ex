@@ -10,6 +10,8 @@ defmodule ExFleetYardsImport.Application do
     children = [
       # Starts a worker by calling: ExFleetYardsImport.Worker.start_link(arg)
       # {ExFleetYardsImport.Worker, arg}
+      {Task.Supervisor, name: ExFleetYardsImport.ImportTaskSupervisor},
+      ExFleetYardsImport.Scheduler
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

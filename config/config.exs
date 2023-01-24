@@ -90,6 +90,12 @@ config :ex_fleet_yards_api, ExFleetYardsWeb.Telemetry.InstreamConnection,
   auth: [method: :token],
   log: false
 
+# Importer
+config :ex_fleet_yards_import,
+  importers: [
+    ExFleetYardsImport.Importer.Paint
+  ]
+
 # Appsignal
 config :appsignal, :config,
   otp_app: :ex_fleet_yards,

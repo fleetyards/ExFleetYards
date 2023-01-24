@@ -26,6 +26,6 @@ defmodule ExFleetYardsApi.VersionController do
     ]
 
   def sc_data(conn, _params) do
-    render(conn, "version.json", version: ExFleetYards.Repo.Import.current_version())
+    render(conn, "version.json", version: ExFleetYards.Repo.RubyImport.current_version())
   end
 end
