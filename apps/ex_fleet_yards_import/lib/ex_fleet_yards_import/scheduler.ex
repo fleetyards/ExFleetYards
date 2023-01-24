@@ -26,6 +26,18 @@ defmodule ExFleetYardsImport.Scheduler do
     GenServer.cast(__MODULE__, {:start, importer, force})
   end
 
+  def restart_timer(importer, force \\ false) do
+    GenServer.cast(__MODULE__, {:timer, importer, force})
+  end
+
+  def imports_state() do
+    GenServer.call(__MODULE__, :imports_state)
+  end
+
+  def imports_state(importer) do
+    GenServer.call(__MODULE__, {:imports_state, importer})
+  end
+
   def start_link(_opts) do
     GenServer.start_link(__MODULE__, nil, name: __MODULE__)
   end
@@ -34,7 +46,10 @@ defmodule ExFleetYardsImport.Scheduler do
   def init(_opts) do
     importers = importers()
 
-    imports = %{}
+    imports =
+      importers
+      |> Enum.map(&default_import_state_map(&1, enabled?()))
+      |> Enum.into(%{})
 
     {:ok,
      %{
@@ -44,13 +59,23 @@ defmodule ExFleetYardsImport.Scheduler do
   end
 
   @impl GenServer
-  def handle_call(_msg, _from, state) do
-    {:reply, :ok, state}
+  def handle_call(:imports_state, _from, state) do
+    {:reply, state.imports, state}
+  end
+
+  @impl GenServer
+  def handle_call({:imports_state, importer}, _from, state) do
+    {:reply, Map.get(state.imports, importer, default_import_state(importer)), state}
   end
 
   @impl GenServer
   def handle_cast({:start, importer, force}, state) do
     {:noreply, state, {:continue, {:start, importer, force}}}
+  end
+
+  @impl GenServer
+  def handle_cast({:timer, importer, force}, state) do
+    {:noreply, state, {:continue, {:timer, importer, force}}}
   end
 
   @impl GenServer
@@ -70,6 +95,35 @@ defmodule ExFleetYardsImport.Scheduler do
   end
 
   @impl GenServer
+  def handle_continue({:timer, importer, force}, %{imports: imports} = state) do
+    importer_state =
+      imports
+      |> Map.get(importer, default_import_state(importer))
+
+    :timer.cancel(importer_state.timer)
+
+    importer_state =
+      if importer_state.enable or force do
+        Map.put(importer_state, :timer, start_timer(importer))
+      else
+        importer_state
+      end
+
+    imports = Map.put(imports, importer, importer_state)
+
+    state =
+      state
+      |> Map.put(:imports, imports)
+
+    {:noreply, state}
+  end
+
+  @impl GenServer
+  def handle_info({:start, importer, force}, state) do
+    {:noreply, state, {:continue, {:start, importer, force}}}
+  end
+
+  @impl GenServer
   def handle_info({ref, result}, %{imports: imports} = state) do
     find_importer(imports, ref)
     |> finish_importer(result)
@@ -83,7 +137,7 @@ defmodule ExFleetYardsImport.Scheduler do
           state
           |> Map.put(:imports, Map.put(imports, importer, importer_state))
 
-        {:noreply, state}
+        {:noreply, state, {:continue, {:timer, importer, false}}}
     end
   end
 
@@ -112,28 +166,39 @@ defmodule ExFleetYardsImport.Scheduler do
           state
           |> Map.put(:imports, Map.put(imports, importer, importer_state))
 
-        {:noreply, state}
+        {:noreply, state, {:continue, {:timer, importer, false}}}
     end
   end
 
-  # TODO: remove
   @impl GenServer
   def handle_info(msg, state) do
-    IO.inspect(msg)
+    Logger.warn("Unknown message #{inspect(msg)}")
     {:noreply, state}
   end
 
   # Private helpers
-  defp default_import_state_map(importer) when is_atom(importer),
-    do: default_import_state_map({importer, []})
+  defp default_import_state_map(importer, enable \\ false)
 
-  defp default_import_state_map({importer, opts}) do
-    {importer,
-     %{
-       running: false,
-       opts: opts,
-       task: nil
-     }}
+  defp default_import_state_map(importer, enable) when is_atom(importer),
+    do: default_import_state_map({importer, []}, enable)
+
+  defp default_import_state_map({importer, opts}, enable) do
+    state = %{
+      running: false,
+      opts: opts,
+      task: nil,
+      timer: nil,
+      enable: enable
+    }
+
+    state =
+      if enable do
+        Map.put(state, :timer, start_timer(importer))
+      else
+        state
+      end
+
+    {importer, state}
   end
 
   defp default_import_state(importer) when is_atom(importer) do
@@ -147,6 +212,8 @@ defmodule ExFleetYardsImport.Scheduler do
     if import_state.task do
       Task.shutdown(import_state.task, 200)
     end
+
+    :timer.cancel(import_state.timer)
 
     import_info =
       create_import_info(import)
@@ -165,6 +232,7 @@ defmodule ExFleetYardsImport.Scheduler do
     |> Map.put(:running, true)
     |> Map.put(:task, task)
     |> Map.put(:import_info, import_info)
+    |> Map.put(:timer, nil)
   end
 
   defp start_importer_int(import_state, importer, false) do
@@ -177,7 +245,7 @@ defmodule ExFleetYardsImport.Scheduler do
 
   @spec start_import_task(atom(), Keyword.t()) :: Task.t()
   defp start_import_task(importer, opts) do
-    Task.Supervisor.async_nolink(@task_sup, importer, :import_data, opts)
+    Task.Supervisor.async_nolink(@task_sup, importer, :import_data, [opts])
   end
 
   defp find_importer(importers, ref) when is_reference(ref) do
@@ -217,11 +285,17 @@ defmodule ExFleetYardsImport.Scheduler do
       DBImport.update(import_state.import_info, failed, params)
     end
 
-    import_state
-    |> Map.put(:running, false)
-    |> Map.put(:task, nil)
-    |> Map.put(:import_info, nil)
+    import_state =
+      import_state
+      |> Map.put(:running, false)
+      |> Map.put(:task, nil)
+      |> Map.put(:import_info, nil)
 
     {importer, import_state}
+  end
+
+  defp start_timer(importer) do
+    timer = ExFleetYardsImport.timer(importer)
+    Process.send_after(self(), {:start, importer, false}, timer)
   end
 end

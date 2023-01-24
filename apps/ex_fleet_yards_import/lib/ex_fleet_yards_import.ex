@@ -23,9 +23,28 @@ defmodule ExFleetYardsImport do
   @callback name() :: String.t()
 
   @doc """
+  Time in milliseconds to rerun the Import task.
+  """
+  @callback timer() :: non_neg_integer()
+
+  @doc """
   Execute the import.
   """
   @callback import_data(opts :: Keyword.t()) :: {:ok, any()} | {:error, any()}
+
+  @optional_callbacks timer: 0
+
+  def timer(importer) do
+    if Kernel.function_exported?(importer, :timer, 0) do
+      importer.timer()
+    else
+      ExFleetYards.Config.get(
+        :ex_fleet_yards_import,
+        [importer, :timer],
+        ExFleetYards.Config.get(:ex_fleet_yards_import, :default_timer, 24 * 60 * 60 * 1000)
+      )
+    end
+  end
 
   defmacro __using__(opts \\ []) do
     data_source =

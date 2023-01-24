@@ -93,7 +93,7 @@ config :ex_fleet_yards_api, ExFleetYardsWeb.Telemetry.InstreamConnection,
 # Importer
 config :ex_fleet_yards_import,
   importers: [
-    ExFleetYardsImport.Importers.Paint
+    ExFleetYardsImport.Importer.Paint
   ]
 
 # Appsignal
