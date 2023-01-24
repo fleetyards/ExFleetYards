@@ -62,28 +62,6 @@ defmodule ExFleetYardsApi.UserHangarView do
     |> filter_null(ExFleetYardsApi.Schemas.Single.UserHangarQuickStats)
   end
 
-  def render("error.json", %{changeset: changeset}) do
-    errors =
-      Ecto.Changeset.traverse_errors(changeset, fn {msg, opts} ->
-        Enum.reduce(opts, msg, fn {key, value}, acc ->
-          String.replace(acc, "%{#{key}}", to_string(value))
-        end)
-      end)
-
-    error_message =
-      errors
-      |> Enum.reduce("", fn {k, v}, acc ->
-        joined_errors = Enum.join(v, "; ")
-        "#{acc}#{k}: #{joined_errors}\n"
-      end)
-
-    %{
-      code: "bad_request",
-      message: error_message,
-      errors: errors
-    }
-  end
-
   defp add_name(map, %{name_visible: true, name: name}) do
     Map.put(map, :name, name)
   end

@@ -10,6 +10,28 @@ defmodule ExFleetYardsApi.ErrorView do
     %{"code" => "invalid_pagination", "message" => message}
   end
 
+  def render("400.json", %{changeset: changeset}) do
+    errors =
+      Ecto.Changeset.traverse_errors(changeset, fn {msg, opts} ->
+        Enum.reduce(opts, msg, fn {key, value}, acc ->
+          String.replace(acc, "%{#{key}}", error_to_string(value))
+        end)
+      end)
+
+    error_message =
+      errors
+      |> Enum.reduce("", fn {k, v}, acc ->
+        joined_errors = Enum.join(v, "; ")
+        "#{acc}#{k}: #{joined_errors}\n"
+      end)
+
+    %{
+      code: "bad_request",
+      message: error_message,
+      errors: errors
+    }
+  end
+
   def render("400.json", %{}) do
     %{"code" => "invalid_argument"}
   end
@@ -48,5 +70,13 @@ defmodule ExFleetYardsApi.ErrorView do
 
   def render("500.json", %{reason: _reason}) do
     %{"code" => "internal_error"}
+  end
+
+  defp error_to_string(list) when is_list(list) do
+    Enum.map_join(list, ",", &to_string/1)
+  end
+
+  defp error_to_string(error) do
+    to_string(error)
   end
 end

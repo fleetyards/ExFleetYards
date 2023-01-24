@@ -69,6 +69,9 @@ defmodule ExFleetYardsApi.Router do
         get "/", UserController, :get_current
         get "/:username", UserController, :get
         post "/", UserController, :set
+        post "/register", UserController, :register
+        get "/register/confirm/:token", UserController, :confirm
+        delete "/delete-account", UserController, :delete
       end
 
       scope "/version" do

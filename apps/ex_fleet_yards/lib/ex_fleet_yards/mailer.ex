@@ -1,5 +1,7 @@
 defmodule ExFleetYards.Mailer do
   use Swoosh.Mailer, otp_app: :ex_fleet_yards
 
-  @moduledoc false
+  @moduledoc """
+  The Mailer context.
+  """
 end

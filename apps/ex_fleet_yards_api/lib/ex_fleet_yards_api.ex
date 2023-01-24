@@ -32,6 +32,7 @@ defmodule ExFleetYardsApi do
 
       use OpenApiSpex.ControllerSpecs
       alias ExFleetYardsApi.Schemas.Single.Error
+      alias ExFleetYardsApi.ErrorView
 
       use ExFleetYardsApi.ControllerHelpers
     end
