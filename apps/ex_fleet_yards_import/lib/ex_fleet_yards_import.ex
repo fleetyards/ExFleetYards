@@ -13,12 +13,14 @@ defmodule ExFleetYardsImport do
   @doc """
   Data source the importet data is from.
   """
-  @callback data_source() :: atom()
+  @callback data_source() :: String.t()
 
   @doc """
   Name of the data the importer imports
   """
-  @callback data_name() :: atom()
+  @callback data_name() :: String.t()
+
+  @callback name() :: String.t()
 
   @doc """
   Execute the import.
@@ -26,16 +28,38 @@ defmodule ExFleetYardsImport do
   @callback import_data(opts :: Keyword.t()) :: {:ok, any()} | {:error, any()}
 
   defmacro __using__(opts \\ []) do
+    data_source =
+      Keyword.get(opts, :data_source)
+      |> to_string
+
+    data_name =
+      Keyword.get(opts, :data_name)
+      |> to_string
+
+    name =
+      Keyword.get(opts, :name)
+      |> case do
+        nil ->
+          Module.split(__CALLER__.module)
+          |> List.last()
+          |> to_string
+
+        v ->
+          v
+      end
+
     quote do
       @behaviour ExFleetYardsImport
 
-      @data_source unquote(opts[:data_source] || nil)
-      @data_name unquote(opts[:data_name] || nil)
+      @data_source unquote(data_source)
+      @data_name unquote(data_name)
 
       @impl unquote(__MODULE__)
       def data_source, do: @data_source
       @impl unquote(__MODULE__)
       def data_name, do: @data_name
+      @impl unquote(__MODULE__)
+      def name(), do: unquote(name)
 
       def import_data(), do: import_data([])
     end

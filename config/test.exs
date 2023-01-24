@@ -42,6 +42,9 @@ config :ex_fleet_yards_web, ExFleetYardsWeb.Endpoint,
   secret_key_base: "MWnMFg79YoPGiD41M5xSRapqHYo9TIQ46u+XEfb8GeSGJ7LE77sHfuAgSfqDHr67",
   server: false
 
+config :ex_fleet_yards_import,
+  enable: false
+
 # Print only warnings and errors during test
 config :logger, level: :warn
 

@@ -71,16 +71,15 @@ defmodule ExFleetYards.Repo.Import do
     else
       changeset
       |> ensure_timestamp(:finished_at)
-      |> validate_required([:finished_at])
+      |> validate_required([:finished_at, :version])
     end
-    |> validate_required([:version])
   end
 
   defp ensure_timestamp(changeset, key) do
     if get_field(changeset, key) do
       changeset
     else
-      put_change(changeset, key, DateTime.utc_now())
+      put_change(changeset, key, DateTime.utc_now() |> DateTime.truncate(:second))
     end
   end
 end

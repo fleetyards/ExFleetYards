@@ -6,5 +6,6 @@ defmodule ExFleetYardsImport.Importer.Paint do
   @impl ExFleetYardsImport
   def import_data(_opts) do
     {:error, :not_implemented}
+    {:ok, "foo"}
   end
 end
