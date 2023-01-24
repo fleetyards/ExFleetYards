@@ -1,5 +1,7 @@
 404.html
 ExFleetYards.Config.html
+ExFleetYards.Mailer.User.html
+ExFleetYards.Mailer.html
 ExFleetYards.Release.Ecto.html
 ExFleetYards.Release.Tasks.html
 ExFleetYards.Repo.Account.User.html
@@ -144,7 +146,7 @@ dist/merriweather-latin-ext-300-normal-K6L27CZ5.woff2
 dist/merriweather-vietnamese-300-italic-EHHNZPUO.woff2
 dist/merriweather-vietnamese-300-normal-U376L4Z4.woff2
 dist/remixicon-NKANDIL5.woff2
-dist/search_items-D4740DA3.js
-dist/sidebar_items-6BFB8407.js
+dist/search_items-B2281A85.js
+dist/sidebar_items-486F042A.js
 index.html
 search.html

@@ -1806,6 +1806,12 @@
             "x-struct": null,
             "x-validate": null
           },
+          "email": {
+            "format": "email",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
           "guilded": {
             "description": "Guilded server",
             "format": "url",
@@ -1816,6 +1822,12 @@
           "homepage": {
             "description": "User Homepage",
             "format": "url",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "password": {
+            "format": "password",
             "type": "string",
             "x-struct": null,
             "x-validate": null
@@ -2246,8 +2258,6 @@
           }
         },
         "required": [
-          "id",
-          "scopes",
           "context"
         ],
         "title": "UserToken",
@@ -3407,6 +3417,39 @@
         ]
       }
     },
+    "/api/v2/users/delete-account": {
+      "delete": {
+        "callbacks": {},
+        "operationId": "ExFleetYardsApi.UserController.delete",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Status"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          }
+        },
+        "summary": "Delete a user",
+        "tags": [
+          "user"
+        ]
+      }
+    },
     "/api/v2/session/logout/all": {
       "delete": {
         "callbacks": {},
@@ -3797,6 +3840,50 @@
         },
         "tags": [
           "game"
+        ]
+      }
+    },
+    "/api/v2/users/register": {
+      "post": {
+        "callbacks": {},
+        "operationId": "ExFleetYardsApi.UserController.register",
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          },
+          "description": "User",
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            },
+            "description": "User"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          }
+        },
+        "summary": "Create a new user",
+        "tags": [
+          "user"
         ]
       }
     },
@@ -4251,6 +4338,61 @@
         },
         "tags": [
           "game"
+        ]
+      }
+    },
+    "/api/v2/users/register/confirm/{token}": {
+      "get": {
+        "callbacks": {},
+        "operationId": "ExFleetYardsApi.UserController.confirm",
+        "parameters": [
+          {
+            "description": "",
+            "in": "path",
+            "name": "token",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            },
+            "description": "User"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          }
+        },
+        "summary": "Confirm a user",
+        "tags": [
+          "user"
         ]
       }
     },

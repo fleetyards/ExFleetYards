@@ -7,7 +7,7 @@
     <meta name="generator" content="ExDoc v0.29.1">
     <meta name="project" content="Fleetyards v0.1.0">
 
-    <title>ExFleetYards.Repo.Types.ShopType — Fleetyards v0.1.0</title>
+    <title>ExFleetYards.Mailer — Fleetyards v0.1.0</title>
     <link rel="stylesheet" href="dist/html-elixir-V2ETBPMB.css" />
 
 
@@ -98,14 +98,14 @@ Fleetyards
 </button>
 
 
-  <span translate="no">ExFleetYards.Repo.Types.ShopType</span> 
+  <span translate="no">ExFleetYards.Mailer</span> 
   <small class="app-vsn" translate="no">(Fleetyards v0.1.0)</small>
 
 </h1>
 
 
   <section id="moduledoc">
-<p>Elixir.ShopType Database enum type</p>
+<p>The Mailer context.</p>
   </section>
 
 
@@ -124,7 +124,7 @@ Fleetyards
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#all/0" translate="no">all()</a>
+        <a href="#deliver/2" translate="no">deliver(email, config \\ [])</a>
 
       </div>
 
@@ -132,47 +132,7 @@ Fleetyards
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#cast/1" translate="no">cast(arg1)</a>
-
-      </div>
-
-        <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/ecto/3.9.4/Ecto.Type.html#c:cast/1"><code class="inline">Ecto.Type.cast/1</code></a>.</p></div>
-
-    </div>
-
-    <div class="summary-row">
-      <div class="summary-signature">
-        <a href="#dump/1" translate="no">dump(arg1)</a>
-
-      </div>
-
-        <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/ecto/3.9.4/Ecto.Type.html#c:dump/1"><code class="inline">Ecto.Type.dump/1</code></a>.</p></div>
-
-    </div>
-
-    <div class="summary-row">
-      <div class="summary-signature">
-        <a href="#embed_as/1" translate="no">embed_as(_)</a>
-
-      </div>
-
-        <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/ecto/3.9.4/Ecto.Type.html#c:embed_as/1"><code class="inline">Ecto.Type.embed_as/1</code></a>.</p></div>
-
-    </div>
-
-    <div class="summary-row">
-      <div class="summary-signature">
-        <a href="#equal?/2" translate="no">equal?(term1, term2)</a>
-
-      </div>
-
-        <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/ecto/3.9.4/Ecto.Type.html#c:equal?/2"><code class="inline">Ecto.Type.equal?/2</code></a>.</p></div>
-
-    </div>
-
-    <div class="summary-row">
-      <div class="summary-signature">
-        <a href="#humanize/1" translate="no">humanize(atom)</a>
+        <a href="#deliver!/2" translate="no">deliver!(email, config \\ [])</a>
 
       </div>
 
@@ -180,21 +140,9 @@ Fleetyards
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#load/1" translate="no">load(arg1)</a>
+        <a href="#deliver_many/2" translate="no">deliver_many(emails, config \\ [])</a>
 
       </div>
-
-        <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/ecto/3.9.4/Ecto.Type.html#c:load/1"><code class="inline">Ecto.Type.load/1</code></a>.</p></div>
-
-    </div>
-
-    <div class="summary-row">
-      <div class="summary-signature">
-        <a href="#type/0" translate="no">type()</a>
-
-      </div>
-
-        <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/ecto/3.9.4/Ecto.Type.html#c:type/0"><code class="inline">Ecto.Type.type/0</code></a>.</p></div>
 
     </div>
 
@@ -212,140 +160,98 @@ Fleetyards
 Functions
     </h1>
     <div class="functions-list">
-<section class="detail" id="all/0">
+<section class="detail" id="deliver/2">
+
+    <span id="deliver/1"></span>
 
   <div class="detail-header">
-    <a href="#all/0" class="detail-link" title="Link to this function">
+    <a href="#deliver/2" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">all()</h1>
+    <h1 class="signature" translate="no">deliver(email, config \\ [])</h1>
 
 
   </div>
 
   <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> deliver(<a href="https://hexdocs.pm/swoosh/1.9.1/Swoosh.Email.html#t:t/0">Swoosh.Email.t</a>(), <a href="https://hexdocs.pm/elixir/Keyword.html#t:t/0">Keyword.t</a>()) :: {:ok, <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>()} | {:error, <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>()}</pre>
+
+      </div>
 
 
   </section>
 </section>
-<section class="detail" id="cast/1">
+<section class="detail" id="deliver!/2">
+
+    <span id="deliver!/1"></span>
 
   <div class="detail-header">
-    <a href="#cast/1" class="detail-link" title="Link to this function">
+    <a href="#deliver!/2" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">cast(arg1)</h1>
+    <h1 class="signature" translate="no">deliver!(email, config \\ [])</h1>
 
 
   </div>
 
   <section class="docstring">
 
-<p>Callback implementation for <a href="https://hexdocs.pm/ecto/3.9.4/Ecto.Type.html#c:cast/1"><code class="inline">Ecto.Type.cast/1</code></a>.</p>
-  </section>
-</section>
-<section class="detail" id="dump/1">
+      <div class="specs">
 
-  <div class="detail-header">
-    <a href="#dump/1" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">dump(arg1)</h1>
+          <pre translate="no"><span class="attribute">@spec</span> deliver!(<a href="https://hexdocs.pm/swoosh/1.9.1/Swoosh.Email.html#t:t/0">Swoosh.Email.t</a>(), <a href="https://hexdocs.pm/elixir/Keyword.html#t:t/0">Keyword.t</a>()) :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>() | <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">no_return</a>()</pre>
 
-
-  </div>
-
-  <section class="docstring">
-
-<p>Callback implementation for <a href="https://hexdocs.pm/ecto/3.9.4/Ecto.Type.html#c:dump/1"><code class="inline">Ecto.Type.dump/1</code></a>.</p>
-  </section>
-</section>
-<section class="detail" id="embed_as/1">
-
-  <div class="detail-header">
-    <a href="#embed_as/1" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">embed_as(_)</h1>
-
-
-  </div>
-
-  <section class="docstring">
-
-<p>Callback implementation for <a href="https://hexdocs.pm/ecto/3.9.4/Ecto.Type.html#c:embed_as/1"><code class="inline">Ecto.Type.embed_as/1</code></a>.</p>
-  </section>
-</section>
-<section class="detail" id="equal?/2">
-
-  <div class="detail-header">
-    <a href="#equal?/2" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">equal?(term1, term2)</h1>
-
-
-  </div>
-
-  <section class="docstring">
-
-<p>Callback implementation for <a href="https://hexdocs.pm/ecto/3.9.4/Ecto.Type.html#c:equal?/2"><code class="inline">Ecto.Type.equal?/2</code></a>.</p>
-  </section>
-</section>
-<section class="detail" id="humanize/1">
-
-  <div class="detail-header">
-    <a href="#humanize/1" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">humanize(atom)</h1>
-
-
-  </div>
-
-  <section class="docstring">
+      </div>
 
 
   </section>
 </section>
-<section class="detail" id="load/1">
+<section class="detail" id="deliver_many/2">
+
+    <span id="deliver_many/1"></span>
 
   <div class="detail-header">
-    <a href="#load/1" class="detail-link" title="Link to this function">
+    <a href="#deliver_many/2" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">load(arg1)</h1>
+    <h1 class="signature" translate="no">deliver_many(emails, config \\ [])</h1>
 
 
   </div>
 
   <section class="docstring">
 
-<p>Callback implementation for <a href="https://hexdocs.pm/ecto/3.9.4/Ecto.Type.html#c:load/1"><code class="inline">Ecto.Type.load/1</code></a>.</p>
-  </section>
-</section>
-<section class="detail" id="type/0">
+      <div class="specs">
 
-  <div class="detail-header">
-    <a href="#type/0" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">type()</h1>
+          <pre translate="no"><span class="attribute">@spec</span> deliver_many(
+  [
+    %Swoosh.Email{
+      assigns: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+      attachments: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+      bcc: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+      cc: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+      from: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+      headers: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+      html_body: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+      private: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+      provider_options: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+      reply_to: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+      subject: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+      text_body: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+      to: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>()
+    }
+  ],
+  <a href="https://hexdocs.pm/elixir/Keyword.html#t:t/0">Keyword.t</a>()
+) :: {:ok, <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>()} | {:error, <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>()}</pre>
+
+      </div>
 
 
-  </div>
-
-  <section class="docstring">
-
-<p>Callback implementation for <a href="https://hexdocs.pm/ecto/3.9.4/Ecto.Type.html#c:type/0"><code class="inline">Ecto.Type.type/0</code></a>.</p>
   </section>
 </section>
 
