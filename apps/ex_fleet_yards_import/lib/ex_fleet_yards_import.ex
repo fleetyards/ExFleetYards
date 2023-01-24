@@ -18,7 +18,7 @@ defmodule ExFleetYardsImport do
   @doc """
   Name of the data the importer imports
   """
-  @callback data_name() :: atom() | String.t()
+  @callback data_name() :: atom()
 
   @doc """
   Execute the import.
