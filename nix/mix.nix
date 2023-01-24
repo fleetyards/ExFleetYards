@@ -738,12 +738,12 @@ let
 
     swoosh = buildMix rec {
       name = "swoosh";
-      version = "1.8.3";
+      version = "1.9.1";
 
       src = fetchHex {
         pkg = "${name}";
         version = "${version}";
-        sha256 = "1isvh6cyiacr4qwy5g883zm204r6sp2h2xas0l2w55m2qyxap6f6";
+        sha256 = "07ipsrp34s18c9zd5kglqsdc8z7gxa9aadsrklj0zf6azzrzzpvn";
       };
 
       beamDeps = [ cowboy hackney jason mime plug_cowboy telemetry ];
@@ -751,12 +751,12 @@ let
 
     telemetry = buildRebar3 rec {
       name = "telemetry";
-      version = "1.1.0";
+      version = "1.2.1";
 
       src = fetchHex {
         pkg = "${name}";
         version = "${version}";
-        sha256 = "0j6zq3y7xz768djz25x55gampyhd9nv6ax9dzx67f52nyyhv49xp";
+        sha256 = "1mgyx9zw92g6w8fp9pblm3b0bghwxwwcbslrixq23ipzisfwxnfs";
       };
 
       beamDeps = [];
