@@ -20,6 +20,9 @@ defmodule ExFleetYardsImport do
   """
   @callback data_name() :: String.t()
 
+  @doc """
+  Name for this import, used for logging.
+  """
   @callback name() :: String.t()
 
   @doc """

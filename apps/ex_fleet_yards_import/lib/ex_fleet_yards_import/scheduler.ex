@@ -236,10 +236,10 @@ defmodule ExFleetYardsImport.Scheduler do
   end
 
   defp start_importer_int(import_state, importer, false) do
-    if !import_state[:running] do
-      start_importer_int(import_state, importer, true)
-    else
+    if import_state[:running] do
       import_state
+    else
+      start_importer_int(import_state, importer, true)
     end
   end
 
@@ -251,7 +251,7 @@ defmodule ExFleetYardsImport.Scheduler do
   defp find_importer(importers, ref) when is_reference(ref) do
     importers
     |> Enum.find(fn
-      {_importer, %{task: %{ref: ref}}} -> ref == ref
+      {_importer, %{task: %{ref: task_ref}}} -> task_ref == ref
       _ -> false
     end)
   end

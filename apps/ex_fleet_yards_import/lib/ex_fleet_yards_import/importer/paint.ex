@@ -4,8 +4,7 @@ defmodule ExFleetYardsImport.Importer.Paint do
   use ExFleetYardsImport, data_source: :web_rsi, data_name: :paints
 
   @impl ExFleetYardsImport
-  def import_data(opts) do
-    IO.inspect(opts)
+  def import_data(_opts) do
     {:error, :not_implemented}
   end
 end
