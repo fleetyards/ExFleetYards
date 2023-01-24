@@ -29,6 +29,7 @@ ExFleetYards.Repo.Game.Station.html
 ExFleetYards.Repo.Game.html
 ExFleetYards.Repo.Import.html
 ExFleetYards.Repo.RoadmapItem.html
+ExFleetYards.Repo.RubyImport.html
 ExFleetYards.Repo.Types.CelestialObjectType.html
 ExFleetYards.Repo.Types.CommodityType.html
 ExFleetYards.Repo.Types.DockType.html
@@ -39,8 +40,8 @@ ExFleetYards.Repo.Types.HardpointSize.html
 ExFleetYards.Repo.Types.HardpointSource.html
 ExFleetYards.Repo.Types.HardpointSubCategory.html
 ExFleetYards.Repo.Types.HardpointType.html
-ExFleetYards.Repo.Types.ImportState.html
-ExFleetYards.Repo.Types.ImportType.html
+ExFleetYards.Repo.Types.RubyImportState.html
+ExFleetYards.Repo.Types.RubyImportType.html
 ExFleetYards.Repo.Types.ShipSize.html
 ExFleetYards.Repo.Types.ShopCommodityItemType.html
 ExFleetYards.Repo.Types.ShopType.html
@@ -143,7 +144,7 @@ dist/merriweather-latin-ext-300-normal-K6L27CZ5.woff2
 dist/merriweather-vietnamese-300-italic-EHHNZPUO.woff2
 dist/merriweather-vietnamese-300-normal-U376L4Z4.woff2
 dist/remixicon-NKANDIL5.woff2
-dist/search_items-38468387.js
-dist/sidebar_items-DE94C4F7.js
+dist/search_items-D4740DA3.js
+dist/sidebar_items-6BFB8407.js
 index.html
 search.html
