@@ -143,7 +143,8 @@ defmodule ExFleetYardsApi.UserHangarController do
       {:error, changeset} ->
         conn
         |> put_status(:bad_request)
-        |> render("error.json", changeset: changeset)
+        |> put_view(ErrorView)
+        |> render("400.json", changeset: changeset)
     end
   end
 
@@ -177,7 +178,8 @@ defmodule ExFleetYardsApi.UserHangarController do
       {:error, changeset} ->
         conn
         |> put_status(:bad_request)
-        |> render("error.json", changeset: changeset)
+        |> put_view(ErrorView)
+        |> render("400.json", changeset: changeset)
     end
   end
 
@@ -214,7 +216,8 @@ defmodule ExFleetYardsApi.UserHangarController do
       {:error, changeset} ->
         conn
         |> put_status(:bad_request)
-        |> render("error.json", changeset: changeset)
+        |> put_view(ErrorView)
+        |> render("400.json", changeset: changeset)
     end
   end
 end

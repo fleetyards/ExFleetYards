@@ -610,7 +610,7 @@ defmodule ExFleetYardsApi.Schemas.Single do
         createdAt: %Schema{type: :string, description: "Create timestamp", format: :"date-time"},
         context: %Schema{type: :string, example: "api"}
       },
-      required: [:id, :scopes, :context]
+      required: [:context]
     })
   end
 
@@ -623,6 +623,8 @@ defmodule ExFleetYardsApi.Schemas.Single do
       type: :object,
       properties: %{
         username: %Schema{type: :string, description: "Fleetyards username"},
+        email: %Schema{type: :string, format: :email},
+        password: %Schema{type: :string, format: :password},
         avatar: %Schema{type: :string, format: :url},
         rsiHandle: %Schema{type: :string, description: "RSI username"},
         discordServer: %Schema{type: :string, format: :url, description: "Discord server"},

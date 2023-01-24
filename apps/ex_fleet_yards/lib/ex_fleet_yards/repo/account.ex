@@ -71,7 +71,29 @@ defmodule ExFleetYards.Repo.Account do
   def register_user(attrs) do
     %User{}
     |> User.registration_changeset(attrs)
-    |> Repo.insert()
+    |> Repo.insert(returning: [:id])
+  end
+
+  @spec delete_user(User.t()) :: {:ok, User.t()} | {:error, Ecto.Changeset.t()}
+  def delete_user(user) do
+    Repo.delete(user)
+  end
+
+  @spec confirm_user_by_token(String.t()) ::
+          {:ok, User.t()}
+          | {:error, Ecto.Changeset.t() | :not_found}
+  def confirm_user_by_token(token) do
+    with %UserToken{} = token <- get_user_by_token(token, "confirm"),
+         {:ok, user} <- confirm_user(token.user),
+         {:ok, _} <- Repo.delete(token) do
+      {:ok, user}
+    else
+      nil ->
+        {:error, :not_found}
+
+      {:error, _} = error ->
+        error
+    end
   end
 
   def confirm_user(user, time \\ NaiveDateTime.utc_now())
@@ -91,6 +113,20 @@ defmodule ExFleetYards.Repo.Account do
     {token, user_token} = UserToken.build_api_token(user, scopes)
     Repo.insert!(user_token)
     token
+  end
+
+  def create_confirm_token(user) do
+    {token, user_token} = UserToken.create_confirm_token(user)
+    Repo.insert!(user_token)
+    token
+  end
+
+  def send_confirm_token(user) do
+    token = create_confirm_token(user)
+    send_confirm_token(user, token)
+  end
+
+  def send_confirm_token(user, token) do
   end
 
   def get_user_by_token(token, context \\ "api") do

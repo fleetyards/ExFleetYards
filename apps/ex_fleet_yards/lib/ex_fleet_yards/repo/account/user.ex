@@ -75,10 +75,29 @@ defmodule ExFleetYards.Repo.Account.User do
 
   def registration_changeset(user \\ %__MODULE__{}, attrs) do
     user
-    |> cast(attrs, [:locale, :username, :email, :password, :public_hangar])
+    |> cast(attrs, [
+      :locale,
+      :username,
+      :email,
+      :password,
+      :public_hangar,
+      :rsi_handle,
+      :twitch,
+      :youtube,
+      :discord,
+      :guilded,
+      :public_hangar_loaners,
+      :public_hangar
+    ])
     |> validate_username()
     |> validate_email()
     |> validate_password()
+    |> validate_rsi_handle()
+    |> validate_twitch()
+    |> validate_youtube()
+    |> validate_discord_server()
+
+    # TODO: guilded
   end
 
   def confirm_changeset(user, attrs) do
@@ -90,6 +109,7 @@ defmodule ExFleetYards.Repo.Account.User do
     changeset
     |> validate_required([:username])
     |> validate_length(:username, max: 160, min: 3)
+    |> unsafe_validate_unique(:username, ExFleetYards.Repo, message: "has already been taken")
     |> unique_constraint(:username)
   end
 
@@ -98,7 +118,7 @@ defmodule ExFleetYards.Repo.Account.User do
     |> validate_required([:email])
     # |> validate_format(:email, ~r/^[^\s]+@[^\s]+$/, message: "must have the @ sign and no spaces")
     |> validate_length(:email, max: 160)
-    # |> unsafe_validate_unique(:email, ExFleetYards.Repo)
+    |> unsafe_validate_unique(:email, ExFleetYards.Repo, message: "email has already been taken")
     |> unique_constraint(:email)
   end
 

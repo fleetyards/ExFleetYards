@@ -55,6 +55,11 @@ defmodule ExFleetYards.Repo.Account.UserToken do
     {Base.url_encode64(token, padding: false), put_change(db, :scopes, scopes)}
   end
 
+  def create_confirm_token(user) do
+    {token, db} = build_hashed_token(user, "confirm")
+    {Base.url_encode64(token, padding: false), db}
+  end
+
   def verify_hashed_token(token, context \\ "api") do
     case Base.url_decode64(token, padding: false) do
       {:ok, decoded_token} ->

@@ -4,7 +4,7 @@ defmodule ExFleetYards.Repo.Seeds.User do
   alias ExFleetYards.Repo
 
   seed Repo.Account.User,
-       [:username],
+       [:username, :email],
        [
          %{
            username: "testuser",
@@ -32,12 +32,15 @@ defmodule ExFleetYards.Repo.Seeds.User do
          }
        ],
        fn user ->
-         new_user =
-           Repo.Account.User.registration_changeset(Map.from_struct(user))
-           |> Repo.Account.User.hash_password()
-           |> Ecto.Changeset.apply_action!(:insert)
-           |> Map.put(:confirmed_at, Map.get(user, :confirmed_at))
+         # new_user =
+         # Repo.Account.User.registration_changeset(Map.from_struct(user))
+         # |> Repo.Account.User.hash_password()
+         # |> Ecto.Changeset.apply_action!(:insert)
+         # |> Map.put(:confirmed_at, Map.get(user, :confirmed_at))
 
-         new_user
+         password = user |> Map.get(:password) |> Bcrypt.hash_pwd_salt()
+
+         user
+         |> Map.put(:encrypted_password, password)
        end
 end
