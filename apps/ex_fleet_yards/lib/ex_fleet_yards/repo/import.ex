@@ -1,4 +1,4 @@
-defmodule ExFleetYards.Repo.Import do
+defmodule ExFleetYards.Repo.RubyImport do
   @moduledoc """
   SC data import state
   """
@@ -9,12 +9,12 @@ defmodule ExFleetYards.Repo.Import do
   @primary_key {:id, Ecto.UUID, []}
 
   schema "imports" do
-    field :aasm_state, Repo.Types.ImportState
+    field :aasm_state, Repo.Types.RubyImportState
     field :failed_at, :utc_datetime
     field :finished_at, :utc_datetime
     field :info, :string
     field :started_at, :utc_datetime
-    field :type, Repo.Types.ImportType
+    field :type, Repo.Types.RubyImportType
     field :version, :string
 
     timestamps(inserted_at: :created_at, null: false, type: :utc_datetime)

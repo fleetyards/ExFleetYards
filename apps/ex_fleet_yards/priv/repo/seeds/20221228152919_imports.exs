@@ -3,7 +3,7 @@ defmodule ExFleetYards.Repo.Seeds.Imports do
 
   alias ExFleetYards.Repo
 
-  seed Repo.Import, [:version], [
+  seed Repo.RubyImport, [:version], [
     %{
       aasm_state: :finished,
       finished_at: ~U[2022-11-18 21:35:48Z],

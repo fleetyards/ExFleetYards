@@ -44,14 +44,14 @@ defmodule ExFleetYards.Repo.Types do
     asteroid_field: "ASTEROID_FIELD"
   )
 
-  enum(ImportState, :string,
+  enum(RubyImportState, :string,
     created: "created",
     started: "started",
     finished: "finished",
     failed: "failed"
   )
 
-  enum(ImportType, :string, sc_data_import: "Imports::ScDataImport")
+  enum(RubyImportType, :string, sc_data_import: "Imports::ScDataImport")
 
   enum(HabitationType, :integer,
     container: 0,
