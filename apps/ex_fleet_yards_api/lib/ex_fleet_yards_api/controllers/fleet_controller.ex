@@ -17,7 +17,7 @@ defmodule ExFleetYardsApi.FleetController do
 
   def get(conn, %{"slug" => slug} = params) do
     fleet = Fleet.get!(slug)
-    render(conn, "fleet.json", fleet: fleet)
+    render(conn, "public.json", fleet: fleet)
   end
 
   operation :create,

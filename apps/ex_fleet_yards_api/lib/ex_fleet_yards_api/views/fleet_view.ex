@@ -31,4 +31,10 @@ defmodule ExFleetYardsApi.FleetView do
     |> render_timestamps(fleet)
     |> filter_null(ExFleetYardsApi.Schemas.Single.Fleet)
   end
+
+  def render("public.json", %{fleet: fleet}) do
+    public(fleet)
+    |> render_timestamps(fleet)
+    |> filter_null(ExFleetYardsApi.Schemas.Single.Fleet)
+  end
 end
