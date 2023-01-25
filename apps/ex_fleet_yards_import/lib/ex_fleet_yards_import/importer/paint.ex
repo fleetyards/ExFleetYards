@@ -4,6 +4,7 @@ defmodule ExFleetYardsImport.Importer.Paint do
   require Logger
 
   alias ExFleetYards.Repo.Game
+
   import Ecto.Query
 
   use ExFleetYardsImport, data_source: :web_rsi, data_name: :paints
@@ -14,8 +15,7 @@ defmodule ExFleetYardsImport.Importer.Paint do
     items =
       load_items()
       |> Enum.map(&resolve_model/1)
-      |> Enum.filter(&filter_packs/1)
-      |> Enum.filter(&filter_without_models/1)
+      |> Enum.filter(fn item -> filter_packs(item) && filter_without_models(item) end)
 
     {:ok, items}
   end
@@ -145,7 +145,7 @@ defmodule ExFleetYardsImport.Importer.Paint do
   end
 
   defp graphql_endpoint do
-    "https://robertsspaceindustries.com/graphql"
+    ExFleetYards.Config.get(:ex_fleet_yards_import, :rsi_graphql_url, nil)
   end
 
   defp query do
