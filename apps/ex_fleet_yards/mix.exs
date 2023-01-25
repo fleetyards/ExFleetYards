@@ -39,6 +39,7 @@ defmodule ExFleetYards.MixProject do
     [
       {:phoenix_pubsub, "~> 2.0"},
       {:ecto_sql, "~> 3.6"},
+      {:ecto_autoslug_field, "~> 3.0"},
       {:postgrex, ">= 0.0.0"},
       {:jason, "~> 1.2"},
       {:swoosh, "~> 1.3"},

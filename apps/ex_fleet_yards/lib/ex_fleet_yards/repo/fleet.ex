@@ -1,4 +1,4 @@
-defmodule ExFleetYards.Repo.Game.Fleet do
+defmodule ExFleetYards.Repo.Fleet do
   @moduledoc "Game Fleet"
   use Ecto.Schema
   import Ecto.Changeset
@@ -27,26 +27,34 @@ defmodule ExFleetYards.Repo.Game.Fleet do
     timestamps(inserted_at: :created_at)
   end
 
-  def changeset(struct, params \\ %{}) do
-    struct
-    |> cast(params, [
-      :fid,
-      :slug,
-      :sid,
-      :logo,
-      :background_image,
-      :created_by,
-      :name,
-      :discord,
-      :rsi_sid,
-      :twitch,
-      :youtube,
-      :ts,
-      :homepage,
-      :guilded,
-      :public_fleet,
-      :description
-    ])
-    |> validate_required([:fid, :slug, :sid, :created_at, :updated_at])
+  def create(user, params) do
+    create_changeset(user, params)
+    |> Repo.insert(returning: [:id])
+  end
+
+  @changeset_fields ~w(
+      fid
+      slug
+      sid
+      logo
+      background_image
+      name
+      discord
+      rsi_sid
+      twitch
+      youtube
+      ts
+      homepage
+      guilded
+      public_fleet
+      description
+  )a
+
+  # Changesets
+  def create_changeset(fleet \\ %__MODULE__{}, user, params \\ %{}) do
+    fleet
+    |> cast(params, @changeset_fields)
+    |> put_assoc(:created_by_user, user)
+    |> validate_required([:fid, :slug, :created_by, :name])
   end
 end

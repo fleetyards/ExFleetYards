@@ -4,6 +4,7 @@ defmodule ExFleetYards.Repo.Account.UserToken do
   use Ecto.Schema
   import Ecto.Query
   import Ecto.Changeset
+  alias ExFleetYards.Repo
   alias ExFleetYards.Repo.Account
   alias ExFleetYards.Repo.Game
 
@@ -14,7 +15,7 @@ defmodule ExFleetYards.Repo.Account.UserToken do
     field :token, :string, redact: true
     field :context, :string
     field :scopes, {:map, {:array, :string}}
-    belongs_to :fleet, Game.Fleet, type: Ecto.UUID
+    belongs_to :fleet, Repo.Fleet, type: Ecto.UUID
 
     timestamps(inserted_at: :created_at, updated_at: false, type: :utc_datetime)
   end
