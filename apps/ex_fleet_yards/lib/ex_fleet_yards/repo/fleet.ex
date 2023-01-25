@@ -34,6 +34,8 @@ defmodule ExFleetYards.Repo.Fleet do
   def create(user, params) do
     create_changeset(user, params)
     |> ExFleetYards.Repo.insert(returning: [:id])
+
+    # TODO: create user as admin user in fleet membership
   end
 
   @spec slug_query(String.t(), boolean() | nil) :: Ecto.Query.t()

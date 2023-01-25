@@ -16,7 +16,6 @@ defmodule ExFleetYardsApi.FleetController do
     ]
 
   def get(conn, %{"slug" => slug} = params) do
-    IO.inspect(params)
     fleet = Fleet.get!(slug)
     render(conn, "fleet.json", fleet: fleet)
   end
