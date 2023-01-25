@@ -2,6 +2,8 @@ defmodule ExFleetYards.Repo.Fleet do
   @moduledoc "Game Fleet"
   use TypedEctoSchema
   import Ecto.Changeset
+  import Ecto.Query
+  import ExFleetYards.Repo.Changeset
   alias ExFleetYards.Repo.Account
 
   @primary_key {:id, Ecto.UUID, []}
@@ -24,21 +26,40 @@ defmodule ExFleetYards.Repo.Fleet do
     field :public_fleet, :boolean, default: false
     field :description, :string
 
-    timestamps(inserted_at: :created_at)
+    timestamps(inserted_at: :created_at, type: :utc_datetime)
   end
 
+  @doc "Create a new fleet"
   @spec create(Account.User.t(), map()) :: {:ok, t()} | {:error, Ecto.Changeset.t()}
   def create(user, params) do
     create_changeset(user, params)
-    |> Repo.insert(returning: [:id])
+    |> ExFleetYards.Repo.insert(returning: [:id])
+  end
+
+  @spec slug_query(String.t(), boolean() | nil) :: Ecto.Query.t()
+  def slug_query(slug, public \\ true) do
+    query = from f in __MODULE__, where: f.slug == ^slug
+
+    if public != nil, do: query |> where([f], f.public_fleet == ^public), else: query
+  end
+
+  @doc "Get fleet by slug"
+  @spec get(String.t(), boolean() | nil) :: t() | nil
+  def get(slug, public \\ true) do
+    slug_query(slug, public)
+    |> ExFleetYards.Repo.one()
+  end
+
+  @doc "Get fleet by slug"
+  @spec get!(String.t(), boolean() | nil) :: t()
+  def get!(slug, public \\ true) do
+    slug_query(slug, public)
+    |> ExFleetYards.Repo.one!()
   end
 
   @changeset_fields ~w(
       fid
-      slug
       sid
-      logo
-      background_image
       name
       discord
       rsi_sid
@@ -52,13 +73,23 @@ defmodule ExFleetYards.Repo.Fleet do
   )a
 
   # Changesets
-  def create_changeset(fleet \\ %__MODULE__{}, user, params \\ %{}) do
+  @doc "Changeset to create a new fleet"
+  @spec create_changeset(t(), Account.User.t(), map()) :: Ecto.Changeset.t()
+  def create_changeset(fleet \\ %__MODULE__{}, user, params) do
     fleet
     |> cast(params, @changeset_fields)
+    |> validate_slug
+    |> validate_discord_server
+    |> validate_youtube
+    |> validate_twitch
     |> put_assoc(:created_by_user, user)
+    |> validate_required([:fid, :slug, :name])
+  end
+
+  def validate_slug(changeset) do
+    changeset
     |> __MODULE__.Slug.maybe_generate_slug()
-    |> unsafe_validate_unique(:slug, Repo)
+    |> unsafe_validate_unique(:slug, ExFleetYards.Repo)
     |> unique_constraint(:slug)
-    |> validate_required([:fid, :slug, :created_by, :name])
   end
 end

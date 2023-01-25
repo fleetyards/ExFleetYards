@@ -116,6 +116,11 @@ defmodule ExFleetYardsApi.Router do
         end
       end
 
+      scope "/fleet" do
+        get "/:slug", FleetController, :get
+        post "/", FleetController, :create
+      end
+
       scope "/roadmap" do
         get "/active", RoadmapController, :active
         get "/released", RoadmapController, :released
