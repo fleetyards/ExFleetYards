@@ -32,6 +32,13 @@ defmodule ExFleetYardsApi.ErrorView do
     }
   end
 
+  def render("400.json", %{reason: %Plug.Parsers.ParseError{} = error}) do
+    %{
+      code: "invalid_argument",
+      message: "Invalid JSON: #{inspect(error)}"
+    }
+  end
+
   def render("400.json", %{}) do
     %{"code" => "invalid_argument"}
   end
@@ -50,6 +57,10 @@ defmodule ExFleetYardsApi.ErrorView do
     end
   end
 
+  def render("401.json", %{message: message}) do
+    %{"code" => "unauthorized", "message" => message}
+  end
+
   def render("404.json", %{
         reason: %ExFleetYardsApi.NotFoundException{
           message: message
@@ -62,6 +73,10 @@ defmodule ExFleetYardsApi.ErrorView do
         reason: %ExFleetYards.Repo.Account.Vehicle.NotFoundException{username: username}
       }) do
     %{"code" => "not_found", "message" => "Could not find user `#{username}`"}
+  end
+
+  def render("404.json", %{message: message}) do
+    %{"code" => "not_found", "message" => message}
   end
 
   def render("404.json", _assigns) do

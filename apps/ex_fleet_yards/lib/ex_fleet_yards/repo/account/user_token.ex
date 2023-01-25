@@ -79,7 +79,7 @@ defmodule ExFleetYards.Repo.Account.UserToken do
   end
 
   def verify_token(token, context, nil) do
-    query = from t in token_and_context_query(token, context), preload: :user
+    query = from t in token_and_context_query(token, context), preload: [:user, :fleet]
 
     {:ok, query}
   end

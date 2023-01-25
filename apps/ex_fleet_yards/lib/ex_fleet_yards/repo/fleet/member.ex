@@ -45,5 +45,24 @@ defmodule ExFleetYards.Repo.Fleet.Member do
     |> put_assoc(:fleet, fleet)
     |> put_assoc(:user, user)
     |> put_assoc(:invited_by_user, user)
+    |> validate_required([:role, :aasm_state, :accepted_at, :invited_at])
+    |> unsafe_validate_unique([:fleet_id, :user_id], "already a member of this fleet")
+    |> unique_constraint([:fleet_id, :user_id])
+  end
+
+  def invite_changeset(fleet, invited_by, user, role \\ :member) do
+    mow = DateTime.utc_now() |> DateTime.truncate(:second)
+
+    %__MODULE__{}
+    |> cast(%{}, [])
+    |> put_change(:role, role)
+    |> put_change(:aasm_state, "invited")
+    |> put_change(:invited_at, mow)
+    |> put_assoc(:fleet, fleet)
+    |> put_assoc(:user, user)
+    |> put_assoc(:invited_by_user, invited_by)
+    |> validate_required([:role, :aasm_state, :invited_at])
+    |> unsafe_validate_unique([:fleet_id, :user_id], "already a member of this fleet")
+    |> unique_constraint([:fleet_id, :user_id])
   end
 end

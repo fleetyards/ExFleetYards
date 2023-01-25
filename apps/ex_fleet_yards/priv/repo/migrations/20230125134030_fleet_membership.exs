@@ -21,5 +21,7 @@ defmodule ExFleetYards.Repo.Migrations.FleetMembership do
 
       timestamps(inserted_at: :created_at)
     end
+
+    create_if_not_exists unique_index(:fleet_memberships, [:fleet_id, :user_id])
   end
 end

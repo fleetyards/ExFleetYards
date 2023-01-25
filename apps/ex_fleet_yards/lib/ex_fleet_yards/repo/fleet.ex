@@ -36,6 +36,7 @@ defmodule ExFleetYards.Repo.Fleet do
     fleet =
       create_changeset(user, params)
       |> ExFleetYards.Repo.insert(returning: [:id])
+
     with {:ok, fleet} <- fleet,
          {:ok, _} <- create_admin_membership(fleet, user) do
       {:ok, fleet}
@@ -73,15 +74,60 @@ defmodule ExFleetYards.Repo.Fleet do
 
   def user_membership_query(user, opts \\ [])
   def user_membership_query(%Account.User{id: id}, opts), do: user_membership_query(id, opts)
-  def user_membership_query(user, []) when is_binary(user), do: from m in Member, where: m.user_id == ^user
-  def user_membership_query(user, [{:state, state} | opts]), do: user_membership_query(user, opts) |> where([m], m.aasm_state == ^state)
-  def user_membership_query(user, [{:primary, primary} | opts]), do: user_membership_query(user, opts) |> where([m], m.primary == ^primary)
-  def user_membership_query(user, [{:fleet, %__MODULE__{id: id}} | opts]), do: user_membership_query(user, [{:fleet, id} | opts])
-  def user_membership_query(user, [{:fleet, fleet_id} | opts]) when is_binary(fleet_id), do: user_membership_query(user, opts) |> where([m], m.fleet_id == ^fleet_id)
-  def user_membership_query(user, [{:role, :admin} | opts]), do: user_membership_query(user, opts) |> where([m], m.role == :admin)
-  def user_membership_query(user, [{:role, :officer} | opts]), do: user_membership_query(user, opts) |> where([m], m.role in [:officer, :admin])
-  def user_membership_query(user, [{:role, :member} | opts]), do: user_membership_query(user, opts) |> where([m], m.role in [:admin, :officer, :member])
 
+  def user_membership_query(user, []) when is_binary(user),
+    do: from(m in Member, where: m.user_id == ^user)
+
+  def user_membership_query(user, [{:state, state} | opts]),
+    do: user_membership_query(user, opts) |> where([m], m.aasm_state == ^state)
+
+  def user_membership_query(user, [{:primary, primary} | opts]),
+    do: user_membership_query(user, opts) |> where([m], m.primary == ^primary)
+
+  def user_membership_query(user, [{:fleet, %__MODULE__{id: id}} | opts]),
+    do: user_membership_query(user, [{:fleet, id} | opts])
+
+  def user_membership_query(user, [{:fleet, fleet_id} | opts]) when is_binary(fleet_id),
+    do: user_membership_query(user, opts) |> where([m], m.fleet_id == ^fleet_id)
+
+  def user_membership_query(user, [{:role, :admin} | opts]),
+    do: user_membership_query(user, opts) |> where([m], m.role == :admin)
+
+  def user_membership_query(user, [{:role, :officer} | opts]),
+    do: user_membership_query(user, opts) |> where([m], m.role in [:officer, :admin])
+
+  def user_membership_query(user, [{:role, :member} | opts]),
+    do: user_membership_query(user, opts) |> where([m], m.role in [:admin, :officer, :member])
+
+  def get_user_role(user, fleet) do
+    IO.inspect(user.username, label: "username")
+
+    user_membership_query(user, fleet: fleet)
+    |> select([m], m.role)
+    |> ExFleetYards.Repo.one()
+  end
+
+  def invite_user(fleet, inviting_user, user_name, role) when is_binary(user_name) do
+    user =
+      Account.get_user_by_username(user_name)
+      |> case do
+        nil -> {:error, :user_not_found}
+        user -> invite_user(fleet, inviting_user, user, role)
+      end
+  end
+
+  def invite_user(
+        %__MODULE__{} = fleet,
+        %Account.User{} = inviting_user,
+        %Account.User{} = user,
+        role
+      )
+      when is_atom(role) do
+    role = inviting_user |> get_user_role(fleet) |> IO.inspect() |> ensure_role(role)
+
+    Member.invite_changeset(fleet, inviting_user, user, role)
+    |> ExFleetYards.Repo.insert()
+  end
 
   # Changesets
   @changeset_fields ~w(
@@ -129,4 +175,12 @@ defmodule ExFleetYards.Repo.Fleet do
     Member.owner_changeset(fleet, user)
     |> ExFleetYards.Repo.insert(returning: [:id])
   end
+
+  @doc "Ensure that the desired role for the invite is not higher than the user's role"
+  @spec ensure_role(atom(), atom()) :: atom()
+  def ensure_role(has, desired)
+  def ensure_role(:admin, desired), do: desired
+
+  def ensure_role(:officer, desired),
+    do: if(Enum.member?([:officer, :member], desired), do: desired, else: :officer)
 end
