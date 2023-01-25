@@ -827,6 +827,19 @@ let
       beamDeps = [ telemetry ];
     };
 
+    typed_ecto_schema = buildMix rec {
+      name = "typed_ecto_schema";
+      version = "0.4.1";
+
+      src = fetchHex {
+        pkg = "${name}";
+        version = "${version}";
+        sha256 = "0fybixpflcr9rk92avycra029za0qfnwcnanvm1zanykg4prdil5";
+      };
+
+      beamDeps = [ ecto ];
+    };
+
     unicode_util_compat = buildRebar3 rec {
       name = "unicode_util_compat";
       version = "0.7.0";

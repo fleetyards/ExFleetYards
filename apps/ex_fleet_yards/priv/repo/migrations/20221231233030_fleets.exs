@@ -5,7 +5,7 @@ defmodule ExFleetYards.Repo.Migrations.Fleets do
     create_if_not_exists table(:fleets, primary_key: false) do
       add :id, :uuid, primary_key: true, null: false, default: fragment("gen_random_uuid()")
       add :fid, :varchar
-      add :slug, :varchar
+      add :slug, :varchar, null: false
       add :sid, :varchar
       add :logo, :varchar
       add :background_image, :varchar

@@ -1,16 +1,14 @@
 defmodule ExFleetYards.Repo.Fleet do
   @moduledoc "Game Fleet"
-  use Ecto.Schema
+  use TypedEctoSchema
   import Ecto.Changeset
   alias ExFleetYards.Repo.Account
 
-  @type t() :: %__MODULE__{}
-
   @primary_key {:id, Ecto.UUID, []}
 
-  schema "fleets" do
+  typed_schema "fleets" do
     field :fid, :string
-    field :slug, :string
+    field :slug, :string, null: false
     field :sid, :string
     field :logo, :string
     field :background_image, :string

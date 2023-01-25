@@ -1,12 +1,12 @@
 defmodule ExFleetYards.Repo.Game.CelestialObject do
   @moduledoc "Celestial Object"
-  use Ecto.Schema
+  use TypedEctoSchema
   alias ExFleetYards.Repo.Game
   alias ExFleetYards.Repo.Types
 
   @primary_key {:id, Ecto.UUID, []}
 
-  schema "celestial_objects" do
+  typed_schema "celestial_objects" do
     field :name, :string
     field :slug, :string
 

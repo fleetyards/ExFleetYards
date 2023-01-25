@@ -1,13 +1,13 @@
 defmodule ExFleetYards.Repo.Game.Model.Paint do
   @moduledoc "Model paint"
 
-  use Ecto.Schema
+  use TypedEctoSchema
   import Ecto.Query
   alias ExFleetYards.Repo.Game
 
   @primary_key {:id, Ecto.UUID, []}
 
-  schema "model_paints" do
+  typed_schema "model_paints" do
     field :name, :string
     belongs_to :model, Game.Model, type: Ecto.UUID
     field :slug, :string

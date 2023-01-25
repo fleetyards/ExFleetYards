@@ -2,14 +2,14 @@ defmodule ExFleetYards.Repo.Game.Dock do
   @moduledoc """
   Dockingport on a station
   """
-  use Ecto.Schema
+  use TypedEctoSchema
   import Ecto.Changeset
   alias ExFleetYards.Repo.Game
   alias ExFleetYards.Repo.Types
 
   @primary_key {:id, Ecto.UUID, []}
 
-  schema "docks" do
+  typed_schema "docks" do
     field :dock_type, Types.DockType
 
     belongs_to :station, Game.Station, type: Ecto.UUID

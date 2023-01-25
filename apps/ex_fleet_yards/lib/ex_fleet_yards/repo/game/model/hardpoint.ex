@@ -1,14 +1,14 @@
 defmodule ExFleetYards.Repo.Game.Model.Hardpoint do
   @moduledoc "Model Hardpoint"
 
-  use Ecto.Schema
+  use TypedEctoSchema
   alias ExFleetYards.Repo.Game
   alias ExFleetYards.Repo.Game.Model
   alias ExFleetYards.Repo.Types
 
   @primary_key {:id, Ecto.UUID, []}
 
-  schema "model_hardpoints" do
+  typed_schema "model_hardpoints" do
     field :size, Types.HardpointSize
     field :source, Types.HardpointSource
     field :key, :string
