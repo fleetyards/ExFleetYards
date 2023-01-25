@@ -129,6 +129,15 @@ defmodule ExFleetYards.Repo.Fleet do
     |> ExFleetYards.Repo.insert()
   end
 
+  def accept_invite(user, fleet) do
+    user_membership_query(user, fleet: fleet, state: :invited)
+    |> ExFleetYards.Repo.one()
+    |> case do
+      nil -> {:error, :not_invited}
+      member -> member |> Member.accept_changeset() |> ExFleetYards.Repo.update()
+    end
+  end
+
   # Changesets
   @changeset_fields ~w(
       fid
@@ -150,6 +159,9 @@ defmodule ExFleetYards.Repo.Fleet do
   def create_changeset(fleet \\ %__MODULE__{}, user, params) do
     fleet
     |> cast(params, @changeset_fields)
+    |> validate_fid
+    |> validate_name
+    |> validate_description
     |> validate_slug
     |> validate_discord_server
     |> validate_youtube
@@ -165,9 +177,24 @@ defmodule ExFleetYards.Repo.Fleet do
     |> unique_constraint(:slug)
   end
 
+  def validate_fid(changeset) do
+    changeset
+    |> validate_format(:fid, ~r/\A[a-zA-Z0-9\-_]{3,}\Z/)
+    |> validate_length(:fid, min: 3, max: 255)
+  end
+
+  def validate_name(changeset) do
+    changeset
+    |> validate_format(:name, ~r/\A[a-zA-Z0-9\-_. ]{3,}\Z/)
+    |> validate_length(:name, min: 3)
+  end
+
   def validate_description(changeset) do
     changeset
-    |> validate_format(:description, ~r/^(.{0,500})$/)
+    |> validate_format(
+      :description,
+      ~r/^[\d\w\bÀÂÆÇÉÈÊËÏÎÔŒÙÛÜŸÄÖßÁÍÑÓÚàâæçéèêëïîôœùûüÿäöáíñóú\[\]()\-_'".,?!:;\s]*$/
+    )
   end
 
   # Helpers

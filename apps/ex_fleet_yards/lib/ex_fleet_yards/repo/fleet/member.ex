@@ -65,4 +65,14 @@ defmodule ExFleetYards.Repo.Fleet.Member do
     |> unsafe_validate_unique([:fleet_id, :user_id], "already a member of this fleet")
     |> unique_constraint([:fleet_id, :user_id])
   end
+
+  def accept_changeset(member) do
+    mow = DateTime.utc_now() |> DateTime.truncate(:second)
+
+    member
+    |> cast(%{}, [])
+    |> put_change(:aasm_state, "accepted")
+    |> put_change(:accepted_at, mow)
+    |> validate_required([:aasm_state, :accepted_at])
+  end
 end
