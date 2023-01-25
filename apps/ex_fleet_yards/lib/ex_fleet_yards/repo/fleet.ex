@@ -4,6 +4,8 @@ defmodule ExFleetYards.Repo.Fleet do
   import Ecto.Changeset
   alias ExFleetYards.Repo.Account
 
+  @type t() :: %__MODULE__{}
+
   @primary_key {:id, Ecto.UUID, []}
 
   schema "fleets" do
@@ -27,6 +29,7 @@ defmodule ExFleetYards.Repo.Fleet do
     timestamps(inserted_at: :created_at)
   end
 
+  @spec create(Account.User.t(), map()) :: {:ok, t()} | {:error, Ecto.Changeset.t()}
   def create(user, params) do
     create_changeset(user, params)
     |> Repo.insert(returning: [:id])
@@ -55,6 +58,9 @@ defmodule ExFleetYards.Repo.Fleet do
     fleet
     |> cast(params, @changeset_fields)
     |> put_assoc(:created_by_user, user)
+    |> __MODULE__.Slug.maybe_generate_slug()
+    |> unsafe_validate_unique(:slug, Repo)
+    |> unique_constraint(:slug)
     |> validate_required([:fid, :slug, :created_by, :name])
   end
 end

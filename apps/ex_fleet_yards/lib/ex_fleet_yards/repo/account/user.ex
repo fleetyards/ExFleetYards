@@ -5,6 +5,8 @@ defmodule ExFleetYards.Repo.Account.User do
   import Ecto.Changeset
   import ExFleetYards.Repo.Changeset
 
+  @type t() :: %__MODULE__{}
+
   @primary_key {:id, Ecto.UUID, []}
 
   schema "users" do
