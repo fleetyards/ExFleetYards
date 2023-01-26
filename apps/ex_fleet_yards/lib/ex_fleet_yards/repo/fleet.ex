@@ -6,6 +6,7 @@ defmodule ExFleetYards.Repo.Fleet do
   import ExFleetYards.Repo.Changeset
   alias ExFleetYards.Repo.Account
   alias __MODULE__.Member
+  alias __MODULE__.Invite
 
   @primary_key {:id, Ecto.UUID, []}
 
@@ -26,6 +27,8 @@ defmodule ExFleetYards.Repo.Fleet do
     field :guilded, :string
     field :public_fleet, :boolean, default: false
     field :description, :string
+
+    has_many :invites, Invite, on_delete: :delete_all
 
     timestamps(inserted_at: :created_at, type: :utc_datetime)
   end
@@ -135,6 +138,19 @@ defmodule ExFleetYards.Repo.Fleet do
     role = inviting_user |> get_user_role(fleet) |> ensure_role(role)
 
     Member.invite_changeset(fleet, inviting_user, user, role)
+    |> ExFleetYards.Repo.insert()
+  end
+
+  def create_invite(fleet, inviting_user, params \\ %{}) do
+    Invite.create_changeset(fleet, inviting_user, params)
+    |> ExFleetYards.Repo.insert()
+  end
+
+  def use_invite(user, token) do
+    invite = Invite.use_invite(token)
+
+    Member.invite_changeset(invite.fleet, invite.user, user)
+    |> Member.accept_changeset(%{used_invite_token: invite.token})
     |> ExFleetYards.Repo.insert()
   end
 
