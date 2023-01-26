@@ -137,8 +137,9 @@
     };
 
   nixConfig = {
-    extra-substituters = [ "https://fleetbot.cachix.org" ];
-    extra-trusted-public-keys =
-      [ "fleetbot.cachix.org-1:LCc89Bys++LoaCDgLuO47dcIoSFlRlPvXchGkr5LJLc=" ];
+    extra-substituters = [ "https://fleetyards.cachix.org" ];
+    extra-trusted-public-keys = [
+      "fleetyards.cachix.org-1:forDt7WbrGA2J1Vv8qCdTDPeqORfKX5KiHdZ0daRwm8="
+    ];
   };
 }
