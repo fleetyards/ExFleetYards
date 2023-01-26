@@ -111,8 +111,6 @@ defmodule ExFleetYards.Repo.Fleet do
     do: user_membership_query(user, opts) |> where([m], m.role in [:admin, :officer, :member])
 
   def get_user_role(user, fleet) do
-    IO.inspect(user.username, label: "username")
-
     user_membership_query(user, fleet: fleet)
     |> select([m], m.role)
     |> ExFleetYards.Repo.one()
@@ -134,7 +132,7 @@ defmodule ExFleetYards.Repo.Fleet do
         role
       )
       when is_atom(role) do
-    role = inviting_user |> get_user_role(fleet) |> IO.inspect() |> ensure_role(role)
+    role = inviting_user |> get_user_role(fleet) |> ensure_role(role)
 
     Member.invite_changeset(fleet, inviting_user, user, role)
     |> ExFleetYards.Repo.insert()
