@@ -13,11 +13,13 @@ defmodule ExFleetYardsApi.FleetController do
     responses: [
       ok: {"Fleet", "application/json", ExFleetYardsApi.Schemas.Single.Fleet},
       not_found: {"Error", "application/json", Error}
-    ]
+    ],
+    security: [%{"authorization" => ["fleet:read"]}]
 
   def get(conn, %{"slug" => slug} = params) do
-    fleet = Fleet.get!(slug)
-    render(conn, "public.json", fleet: fleet)
+    {public, fleet} = ExFleetYardsApi.Auth.check_fleet_scope_or_public(conn, slug, "read")
+    template = if public, do: "public.json", else: "fleet.json"
+    render(conn, template, fleet: fleet)
   end
 
   operation :create,
