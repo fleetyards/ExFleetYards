@@ -124,6 +124,8 @@ defmodule ExFleetYardsApi.Router do
           post "/invite/accept", FleetInviteController, :accept_user_invite
 
           get "/", FleetController, :get
+          patch "/", FleetController, :update
+          delete "/", FleetController, :delete
         end
       end
 

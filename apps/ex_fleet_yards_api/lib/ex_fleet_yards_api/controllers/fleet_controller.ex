@@ -16,7 +16,7 @@ defmodule ExFleetYardsApi.FleetController do
     ],
     security: [%{"authorization" => ["fleet:read"]}]
 
-  def get(conn, %{"slug" => slug} = params) do
+  def get(conn, %{"slug" => slug}) do
     {public, fleet} = ExFleetYardsApi.Auth.check_fleet_scope_or_public(conn, slug, "read")
     template = if public, do: "public.json", else: "fleet.json"
     render(conn, template, fleet: fleet)
@@ -54,6 +54,59 @@ defmodule ExFleetYardsApi.FleetController do
         |> put_view(ErrorView)
         |> render("400.json", changeset: changeset)
     end
+  end
+
+  operation :update,
+    summary: "Update a Fleet",
+    request_body: {"Fleet", "application/json", ExFleetYardsApi.Schemas.Single.Fleet},
+    parameters: [
+      slug: [in: :path, type: :string, required: true]
+    ],
+    responses: [
+      ok: {"Fleet", "application/json", ExFleetYardsApi.Schemas.Single.Fleet},
+      bad_request: {"Error", "application/json", Error},
+      unauthorized: {"Error", "application/json", Error}
+    ],
+    security: [%{"authorization" => ["fleet:admin"]}]
+
+  def update(conn, %{"slug" => slug} = params) do
+    fleet = ExFleetYardsApi.Auth.check_fleet_scope(conn, slug, "admin", :admin)
+
+    params =
+      params
+      |> transform_attrs
+
+    Fleet.update(fleet, params)
+    |> case do
+      {:ok, fleet} ->
+        conn
+        |> render("fleet.json", fleet: fleet)
+
+      {:error, changeset} ->
+        conn
+        |> put_status(:bad_request)
+        |> put_view(ErrorView)
+        |> render("400.json", changeset: changeset)
+    end
+  end
+
+  operation :delete,
+    summary: "delete a Fleet",
+    parameters: [
+      slug: [in: :path, type: :string, required: true]
+    ],
+    responses: [
+      ok: {"Result", "application/json", Error},
+      bad_request: {"Error", "application/json", Error},
+      unauthorized: {"Error", "application/json", Error}
+    ],
+    security: [%{"authorization" => ["fleet:admin"]}]
+
+  def delete(conn, %{"slug" => slug}) do
+    fleet = ExFleetYardsApi.Auth.check_fleet_scope(conn, slug, "admin", :admin)
+
+    Fleet.delete(fleet)
+    json(conn, %{code: "success", message: "Fleet deleted"})
   end
 
   defp transform_attrs(attrs) do

@@ -28,6 +28,7 @@ defmodule ExFleetYardsApi.FleetView do
 
   def render("fleet.json", %{fleet: fleet}) do
     public(fleet)
+    |> Map.put("publicFleet", fleet.public_fleet)
     |> render_timestamps(fleet)
     |> filter_null(ExFleetYardsApi.Schemas.Single.Fleet)
   end

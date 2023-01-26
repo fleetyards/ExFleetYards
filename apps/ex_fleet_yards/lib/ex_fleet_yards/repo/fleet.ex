@@ -45,6 +45,17 @@ defmodule ExFleetYards.Repo.Fleet do
     end
   end
 
+  def update(fleet, params) do
+    fleet
+    |> update_changeset(params)
+    |> ExFleetYards.Repo.update()
+  end
+
+  def delete(fleet) do
+    fleet
+    |> ExFleetYards.Repo.delete()
+  end
+
   @spec slug_query(String.t(), boolean() | nil) :: Ecto.Query.t()
   def slug_query(slug, public \\ true) do
     query = from f in __MODULE__, where: f.slug == ^slug
@@ -167,6 +178,19 @@ defmodule ExFleetYards.Repo.Fleet do
     |> validate_youtube
     |> validate_twitch
     |> put_assoc(:created_by_user, user)
+    |> validate_required([:fid, :slug, :name])
+  end
+
+  def update_changeset(fleet, params) do
+    fleet
+    |> cast(params, @changeset_fields)
+    |> validate_fid
+    |> validate_name
+    |> validate_description
+    |> validate_slug
+    |> validate_discord_server
+    |> validate_youtube
+    |> validate_twitch
     |> validate_required([:fid, :slug, :name])
   end
 

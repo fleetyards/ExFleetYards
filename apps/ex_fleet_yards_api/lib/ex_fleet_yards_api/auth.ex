@@ -49,9 +49,7 @@ defmodule ExFleetYardsApi.Auth do
   end
 
   def check_fleet_scope_or_public(token, fleet, scopes) when is_binary(fleet) do
-    fleet =
-      Fleet.get(fleet, nil)
-      |> IO.inspect()
+    fleet = Fleet.get(fleet, nil)
 
     check_fleet_scope_or_public(token, fleet, scopes)
   end
