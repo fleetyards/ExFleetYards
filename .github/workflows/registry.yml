@@ -1,0 +1,41 @@
+
+name: "Docker Registry Push"
+on:
+  push:
+    tags: ['*']
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    
+    steps:
+    - uses: actions/checkout@v3
+    - uses: cachix/install-nix-action@v18
+      with:
+        extra_nix_config: |
+          access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
+    - uses: cachix/cachix-action@v11
+      with:
+        name: fleetbot
+        signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
+    - name: Log in to the Container registry
+      uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
+      with:
+        registry: ${{ env.REGISTRY }}
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+    - run: nix build -L .#ex_fleet_yards_docker
+    - name: "Import and Push image"
+      run: |
+        docker load < result
+        docker tag exfleetyards:latest ghcr.io/fleetyards/exfleetyards:latest
+        docker tag exfleetyards:latest ghcr.io/fleetyards/exfleetyards:${{ github.ref_name }}
+        docker push ghcr.io/fleetyards/exfleetyards:latest
+        docker push ghcr.io/fleetyards/exfleetyards:${{ github.ref_name }}
