@@ -10,13 +10,16 @@ ExFleetYards.Repo.Account.Vehicle.NotFoundException.html
 ExFleetYards.Repo.Account.Vehicle.html
 ExFleetYards.Repo.Account.html
 ExFleetYards.Repo.Changeset.html
+ExFleetYards.Repo.Fleet.Member.html
+ExFleetYards.Repo.Fleet.Slug.Type.html
+ExFleetYards.Repo.Fleet.Slug.html
+ExFleetYards.Repo.Fleet.html
 ExFleetYards.Repo.Game.Affiliation.html
 ExFleetYards.Repo.Game.CelestialObject.html
 ExFleetYards.Repo.Game.Commodity.html
 ExFleetYards.Repo.Game.Component.html
 ExFleetYards.Repo.Game.Dock.html
 ExFleetYards.Repo.Game.Faction.html
-ExFleetYards.Repo.Game.Fleet.html
 ExFleetYards.Repo.Game.Habitation.html
 ExFleetYards.Repo.Game.Manufacturer.html
 ExFleetYards.Repo.Game.Model.Hardpoint.Loadout.html
@@ -42,6 +45,7 @@ ExFleetYards.Repo.Types.HardpointSize.html
 ExFleetYards.Repo.Types.HardpointSource.html
 ExFleetYards.Repo.Types.HardpointSubCategory.html
 ExFleetYards.Repo.Types.HardpointType.html
+ExFleetYards.Repo.Types.MemberRole.html
 ExFleetYards.Repo.Types.RubyImportState.html
 ExFleetYards.Repo.Types.RubyImportType.html
 ExFleetYards.Repo.Types.ShipSize.html
@@ -64,6 +68,9 @@ ExFleetYardsApi.ComponentView.html
 ExFleetYardsApi.ControllerHelpers.html
 ExFleetYardsApi.Endpoint.html
 ExFleetYardsApi.ErrorView.html
+ExFleetYardsApi.FleetController.html
+ExFleetYardsApi.FleetInviteController.html
+ExFleetYardsApi.FleetView.html
 ExFleetYardsApi.InvalidPaginationException.html
 ExFleetYardsApi.ManufacturerController.html
 ExFleetYardsApi.ManufacturerView.html
@@ -85,6 +92,7 @@ ExFleetYardsApi.Schemas.List.StationList.html
 ExFleetYardsApi.Schemas.List.UserHangarList.html
 ExFleetYardsApi.Schemas.List.html
 ExFleetYardsApi.Schemas.Single.Component.html
+ExFleetYardsApi.Schemas.Single.Fleet.html
 ExFleetYardsApi.Schemas.Single.Manufacturer.html
 ExFleetYardsApi.Schemas.Single.ModelHardpoint.html
 ExFleetYardsApi.Schemas.Single.StarSystem.html
@@ -146,7 +154,7 @@ dist/merriweather-latin-ext-300-normal-K6L27CZ5.woff2
 dist/merriweather-vietnamese-300-italic-EHHNZPUO.woff2
 dist/merriweather-vietnamese-300-normal-U376L4Z4.woff2
 dist/remixicon-NKANDIL5.woff2
-dist/search_items-B2281A85.js
-dist/sidebar_items-486F042A.js
+dist/search_items-261D1E33.js
+dist/sidebar_items-E8F7E202.js
 index.html
 search.html

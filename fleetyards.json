@@ -245,6 +245,116 @@
         "x-struct": "Elixir.ExFleetYardsApi.Schemas.Single.Error",
         "x-validate": null
       },
+      "Fleet": {
+        "description": "Fleet",
+        "properties": {
+          "backgroundImage": {
+            "format": "uri",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "description": {
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "discordServer": {
+            "format": "uri",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "fid": {
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "guilded": {
+            "format": "uri",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "homepage": {
+            "format": "uri",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "logo": {
+            "format": "uri",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "name": {
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "publicFleet": {
+            "type": "boolean",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "rsiSid": {
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "slug": {
+            "format": "slug",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "ts": {
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "twitch": {
+            "format": "uri",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "youtube": {
+            "format": "uri",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          }
+        },
+        "required": [
+          "id",
+          "fid",
+          "slug"
+        ],
+        "title": "Fleet",
+        "type": "object",
+        "x-struct": "Elixir.ExFleetYardsApi.Schemas.Single.Fleet",
+        "x-validate": null
+      },
       "Manufacturer": {
         "description": "Manufacturer in the star citizen univers",
         "example": {
@@ -2105,7 +2215,8 @@
                 "example": [
                   "read",
                   "write",
-                  "admin"
+                  "admin",
+                  "create"
                 ],
                 "items": {
                   "type": "string",
@@ -2212,7 +2323,8 @@
                 "example": [
                   "read",
                   "write",
-                  "admin"
+                  "admin",
+                  "create"
                 ],
                 "items": {
                   "type": "string",
@@ -3501,6 +3613,67 @@
         ]
       }
     },
+    "/api/v2/fleet": {
+      "post": {
+        "callbacks": {},
+        "operationId": "ExFleetYardsApi.FleetController.create",
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Fleet"
+              }
+            }
+          },
+          "description": "Fleet",
+          "required": false
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Fleet"
+                }
+              }
+            },
+            "description": "Fleet"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          }
+        },
+        "security": [
+          {
+            "authorization": [
+              "fleet:create"
+            ]
+          }
+        ],
+        "summary": "Create a Fleet",
+        "tags": [
+          "fleet"
+        ]
+      }
+    },
     "/api/v2/roadmap/released": {
       "get": {
         "callbacks": {},
@@ -3652,6 +3825,105 @@
         },
         "tags": [
           "game"
+        ]
+      }
+    },
+    "/api/v2/fleet/{slug}/invite/{user}": {
+      "post": {
+        "callbacks": {},
+        "operationId": "ExFleetYardsApi.FleetInviteController.invite_user",
+        "parameters": [
+          {
+            "description": "",
+            "in": "path",
+            "name": "slug",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            }
+          },
+          {
+            "description": "",
+            "in": "path",
+            "name": "user",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            }
+          },
+          {
+            "description": "",
+            "in": "query",
+            "name": "role",
+            "required": false,
+            "schema": {
+              "enum": [
+                "admin",
+                "officer",
+                "member"
+              ],
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Result"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          }
+        },
+        "security": [
+          {
+            "authorization": [
+              "fleet:admin"
+            ]
+          }
+        ],
+        "summary": "Invite a user to a fleet",
+        "tags": [
+          "fleet"
         ]
       }
     },
@@ -4188,6 +4460,78 @@
         ]
       }
     },
+    "/api/v2/fleet/{slug}/invite/accept": {
+      "post": {
+        "callbacks": {},
+        "operationId": "ExFleetYardsApi.FleetInviteController.accept_user_invite",
+        "parameters": [
+          {
+            "description": "",
+            "in": "path",
+            "name": "slug",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Result"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          }
+        },
+        "security": [
+          {
+            "authorization": [
+              "fleet:write"
+            ]
+          }
+        ],
+        "summary": "Accept direct fleet invite",
+        "tags": [
+          "fleet"
+        ]
+      }
+    },
     "/api/v2/game/models/{id}/hardpoints": {
       "get": {
         "callbacks": {},
@@ -4338,6 +4682,189 @@
         },
         "tags": [
           "game"
+        ]
+      }
+    },
+    "/api/v2/fleet/{slug}": {
+      "delete": {
+        "callbacks": {},
+        "operationId": "ExFleetYardsApi.FleetController.delete",
+        "parameters": [
+          {
+            "description": "",
+            "in": "path",
+            "name": "slug",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Result"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          }
+        },
+        "security": [
+          {
+            "authorization": [
+              "fleet:admin"
+            ]
+          }
+        ],
+        "summary": "delete a Fleet",
+        "tags": [
+          "fleet"
+        ]
+      },
+      "get": {
+        "callbacks": {},
+        "operationId": "ExFleetYardsApi.FleetController.get",
+        "parameters": [
+          {
+            "description": "",
+            "in": "path",
+            "name": "slug",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Fleet"
+                }
+              }
+            },
+            "description": "Fleet"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          }
+        },
+        "security": [
+          {
+            "authorization": [
+              "fleet:read"
+            ]
+          }
+        ],
+        "summary": "Get a Fleet",
+        "tags": [
+          "fleet"
+        ]
+      },
+      "patch": {
+        "callbacks": {},
+        "operationId": "ExFleetYardsApi.FleetController.update",
+        "parameters": [
+          {
+            "description": "",
+            "in": "path",
+            "name": "slug",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Fleet"
+              }
+            }
+          },
+          "description": "Fleet",
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Fleet"
+                }
+              }
+            },
+            "description": "Fleet"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          }
+        },
+        "security": [
+          {
+            "authorization": [
+              "fleet:admin"
+            ]
+          }
+        ],
+        "summary": "Update a Fleet",
+        "tags": [
+          "fleet"
         ]
       }
     },
