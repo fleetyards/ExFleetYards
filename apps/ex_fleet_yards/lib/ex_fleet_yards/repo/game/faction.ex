@@ -1,11 +1,11 @@
 defmodule ExFleetYards.Repo.Game.Faction do
   @moduledoc "Faction"
 
-  use Ecto.Schema
+  use TypedEctoSchema
 
   @primary_key {:id, Ecto.UUID, []}
 
-  schema "factions" do
+  typed_schema "factions" do
     field :code, :string
     field :color, :string
     field :name, :string

@@ -1,13 +1,13 @@
 defmodule ExFleetYards.Repo.Game.ShopCommodity do
   @moduledoc "Shop Commodities"
 
-  use Ecto.Schema
+  use TypedEctoSchema
   alias ExFleetYards.Repo.Game
   alias ExFleetYards.Repo.Types
 
   @primary_key {:id, Ecto.UUID, []}
 
-  schema "shop_commodities" do
+  typed_schema "shop_commodities" do
     belongs_to :shop, Game.Shop, type: Ecto.UUID
     field :buy_price, :decimal
     field :sell_price, :decimal

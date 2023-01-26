@@ -78,7 +78,8 @@ defmodule ExFleetYardsApi.UserController do
       {:error, changeset} ->
         conn
         |> put_status(:bad_request)
-        |> json(%{code: "error", errors: changeset.errors})
+        |> put_view(ErrorView)
+        |> render("400.json", changeset: changeset)
     end
   end
 
@@ -114,19 +115,6 @@ defmodule ExFleetYardsApi.UserController do
         |> put_view(ErrorView)
         |> render("400.json", changeset: changeset)
     end
-  end
-
-  defp transform_attrs(attrs) do
-    attrs
-    |> Enum.map(fn
-      {"publicHangarLoaners", v} -> {"public_hangar_loaners", v}
-      {"rsiHandle", v} -> {"rsi_handle", v}
-      {"discordServer", v} -> {"discord", v}
-      {"discordHandle", v} -> {"discord_handle", v}
-      {"publicHangar", v} -> {"public_hangar", v}
-      v -> v
-    end)
-    |> Enum.into(%{})
   end
 
   operation :confirm,
@@ -172,5 +160,18 @@ defmodule ExFleetYardsApi.UserController do
       {:ok, user} ->
         json(conn, %{code: "success", message: "Deleted user `#{user.username}`"})
     end
+  end
+
+  defp transform_attrs(attrs) do
+    attrs
+    |> Enum.map(fn
+      {"publicHangarLoaners", v} -> {"public_hangar_loaners", v}
+      {"rsiHandle", v} -> {"rsi_handle", v}
+      {"discordServer", v} -> {"discord", v}
+      {"discordHandle", v} -> {"discord_handle", v}
+      {"publicHangar", v} -> {"public_hangar", v}
+      v -> v
+    end)
+    |> Enum.into(%{})
   end
 end

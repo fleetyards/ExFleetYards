@@ -1,11 +1,11 @@
 defmodule ExFleetYards.Repo.Game.Commodity do
   @moduledoc "In game Commodity"
 
-  use Ecto.Schema
+  use TypedEctoSchema
 
   @primary_key {:id, Ecto.UUID, []}
 
-  schema "commodities" do
+  typed_schema "commodities" do
     field :name, :string
     field :slug, :string
     field :description, :string

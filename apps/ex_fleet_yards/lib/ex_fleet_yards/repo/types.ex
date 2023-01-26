@@ -183,4 +183,10 @@ defmodule ExFleetYards.Repo.Types do
     capital: 104,
     tbd: 999
   )
+
+  enum(MemberRole, :integer,
+    admin: 0,
+    officer: 1,
+    member: 2
+  )
 end

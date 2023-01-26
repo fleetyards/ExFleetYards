@@ -116,6 +116,19 @@ defmodule ExFleetYardsApi.Router do
         end
       end
 
+      scope "/fleet" do
+        post "/", FleetController, :create
+
+        scope "/:slug" do
+          post "/invite/:user", FleetInviteController, :invite_user
+          post "/invite/accept", FleetInviteController, :accept_user_invite
+
+          get "/", FleetController, :get
+          patch "/", FleetController, :update
+          delete "/", FleetController, :delete
+        end
+      end
+
       scope "/roadmap" do
         get "/active", RoadmapController, :active
         get "/released", RoadmapController, :released

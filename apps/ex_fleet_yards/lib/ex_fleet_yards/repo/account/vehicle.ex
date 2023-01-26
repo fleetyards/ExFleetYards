@@ -2,7 +2,7 @@ defmodule ExFleetYards.Repo.Account.Vehicle do
   @moduledoc """
   User Vehicle
   """
-  use Ecto.Schema
+  use TypedEctoSchema
   import Ecto.Query
   import Ecto.Changeset
 
@@ -14,7 +14,7 @@ defmodule ExFleetYards.Repo.Account.Vehicle do
 
   @primary_key {:id, Ecto.UUID, []}
 
-  schema "vehicles" do
+  typed_schema "vehicles" do
     field :name, :string
     field :purchased, :boolean, default: false
     field :sale_notify, :boolean, default: false

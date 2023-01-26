@@ -518,6 +518,38 @@ defmodule ExFleetYardsApi.Schemas.Single do
     })
   end
 
+  defmodule Fleet do
+    @moduledoc """
+    Fleet
+    """
+    require OpenApiSpex
+
+    OpenApiSpex.schema(%{
+      description: "Fleet",
+      type: :object,
+      properties: %{
+        id: %Schema{type: :string, format: :uuid},
+        fid: %Schema{type: :string},
+        slug: %Schema{type: :string, format: :slug},
+        rsiSid: %Schema{type: :string},
+        description: %Schema{type: :string},
+        ts: %Schema{type: :string},
+        discordServer: %Schema{type: :string, format: :uri},
+        youtube: %Schema{type: :string, format: :uri},
+        twitch: %Schema{type: :string, format: :uri},
+        guilded: %Schema{type: :string, format: :uri},
+        homepage: %Schema{type: :string, format: :uri},
+        name: %Schema{type: :string},
+        logo: %Schema{type: :string, format: :uri},
+        backgroundImage: %Schema{type: :string, format: :uri},
+        publicFleet: %Schema{type: :boolean},
+        createdAt: %Schema{type: :string, format: :"date-time"},
+        updatedAt: %Schema{type: :string, format: :"date-time"}
+      },
+      required: [:id, :fid, :slug]
+    })
+  end
+
   defmodule UserHangarChange do
     @moduledoc false
     require OpenApiSpex

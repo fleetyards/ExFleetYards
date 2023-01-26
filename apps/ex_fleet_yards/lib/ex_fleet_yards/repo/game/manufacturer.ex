@@ -2,13 +2,13 @@ defmodule ExFleetYards.Repo.Game.Manufacturer do
   @moduledoc """
   In game manufacturer
   """
-  use Ecto.Schema
+  use TypedEctoSchema
   import Ecto.Changeset
   alias ExFleetYards.Repo.Game
 
   @primary_key {:id, Ecto.UUID, []}
 
-  schema "manufacturers" do
+  typed_schema "manufacturers" do
     field :name, :string
     field :slug, :string
     field :known_for, :string

@@ -4,6 +4,7 @@ defmodule ExFleetYards.Repo.Account.UserToken do
   use Ecto.Schema
   import Ecto.Query
   import Ecto.Changeset
+  alias ExFleetYards.Repo
   alias ExFleetYards.Repo.Account
   alias ExFleetYards.Repo.Game
 
@@ -14,7 +15,7 @@ defmodule ExFleetYards.Repo.Account.UserToken do
     field :token, :string, redact: true
     field :context, :string
     field :scopes, {:map, {:array, :string}}
-    belongs_to :fleet, Game.Fleet, type: Ecto.UUID
+    belongs_to :fleet, Repo.Fleet, type: Ecto.UUID
 
     timestamps(inserted_at: :created_at, updated_at: false, type: :utc_datetime)
   end
@@ -30,7 +31,7 @@ defmodule ExFleetYards.Repo.Account.UserToken do
   # Scopes
   @scopes %{
     "user" => ["write"],
-    "fleet" => ["read", "write", "admin"],
+    "fleet" => ["read", "write", "admin", "create"],
     "hangar" => ["read", "write", "admin"],
     "api" => ["read", "write", "admin"]
   }
@@ -78,7 +79,7 @@ defmodule ExFleetYards.Repo.Account.UserToken do
   end
 
   def verify_token(token, context, nil) do
-    query = from t in token_and_context_query(token, context), preload: :user
+    query = from t in token_and_context_query(token, context), preload: [:user, :fleet]
 
     {:ok, query}
   end

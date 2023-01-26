@@ -1,13 +1,13 @@
 defmodule ExFleetYards.Repo.Account.User do
   @moduledoc "User"
 
-  use Ecto.Schema
+  use TypedEctoSchema
   import Ecto.Changeset
   import ExFleetYards.Repo.Changeset
 
   @primary_key {:id, Ecto.UUID, []}
 
-  schema "users" do
+  typed_schema "users" do
     field :locale, :string
     field :username, :string
     field :email, :string, redact: true

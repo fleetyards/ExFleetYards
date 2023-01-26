@@ -1,13 +1,13 @@
 defmodule ExFleetYards.Repo.Game.Model.Hardpoint.Loadout do
   @moduledoc "Model Hardpoint"
 
-  use Ecto.Schema
+  use TypedEctoSchema
   alias ExFleetYards.Repo.Game
   alias ExFleetYards.Repo.Game.Model
 
   @primary_key {:id, Ecto.UUID, []}
 
-  schema "model_hardpoint_loadouts" do
+  typed_schema "model_hardpoint_loadouts" do
     belongs_to :component, Game.Component, type: Ecto.UUID
     belongs_to :model_hardpoint, Model.Hardpoint, type: Ecto.UUID
     field :name, :string

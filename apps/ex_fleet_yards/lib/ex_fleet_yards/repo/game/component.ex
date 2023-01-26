@@ -2,12 +2,12 @@ defmodule ExFleetYards.Repo.Game.Component do
   @moduledoc """
   Component for (usually) a ship in game
   """
-  use Ecto.Schema
+  use TypedEctoSchema
   alias ExFleetYards.Repo.Game
 
   @primary_key {:id, Ecto.UUID, []}
 
-  schema "components" do
+  typed_schema "components" do
     field :name, :string
     field :size, :string
     field :component_class, :string

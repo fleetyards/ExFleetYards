@@ -229,6 +229,19 @@ let
       beamDeps = [ decimal jason telemetry ];
     };
 
+    ecto_autoslug_field = buildMix rec {
+      name = "ecto_autoslug_field";
+      version = "3.0.0";
+
+      src = fetchHex {
+        pkg = "${name}";
+        version = "${version}";
+        sha256 = "03ycq3c6sm79sx5cxsbv3yc1zvx0ss2a8mig0qr33wc5rz3m5hlf";
+      };
+
+      beamDeps = [ ecto slugger ];
+    };
+
     ecto_sql = buildMix rec {
       name = "ecto_sql";
       version = "3.9.2";
@@ -723,6 +736,19 @@ let
       beamDeps = [];
     };
 
+    slugger = buildMix rec {
+      name = "slugger";
+      version = "0.3.0";
+
+      src = fetchHex {
+        pkg = "${name}";
+        version = "${version}";
+        sha256 = "1fmgnl4ydq4ivbfk1a934vcn0d0wb24lhnvcmqg5sq0jwz8dxl10";
+      };
+
+      beamDeps = [];
+    };
+
     ssl_verify_fun = buildRebar3 rec {
       name = "ssl_verify_fun";
       version = "1.1.6";
@@ -799,6 +825,19 @@ let
       };
 
       beamDeps = [ telemetry ];
+    };
+
+    typed_ecto_schema = buildMix rec {
+      name = "typed_ecto_schema";
+      version = "0.4.1";
+
+      src = fetchHex {
+        pkg = "${name}";
+        version = "${version}";
+        sha256 = "0fybixpflcr9rk92avycra029za0qfnwcnanvm1zanykg4prdil5";
+      };
+
+      beamDeps = [ ecto ];
     };
 
     unicode_util_compat = buildRebar3 rec {

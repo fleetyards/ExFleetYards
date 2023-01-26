@@ -3,13 +3,13 @@ defmodule ExFleetYards.Repo.Game.StarSystem do
   Star system
   """
 
-  use Ecto.Schema
+  use TypedEctoSchema
   alias ExFleetYards.Repo
   alias ExFleetYards.Repo.Game
 
   @primary_key {:id, Ecto.UUID, []}
 
-  schema "starsystems" do
+  typed_schema "starsystems" do
     field :name, :string
     field :slug, :string
     field :map, :string

@@ -1,14 +1,14 @@
 defmodule ExFleetYards.Repo.Game.Affiliation do
   @moduledoc "Affilation between object and Faction"
 
-  use Ecto.Schema
+  use TypedEctoSchema
   import Ecto.Changeset
   alias ExFleetYards.Repo
   alias ExFleetYards.Repo.Game
 
   @primary_key {:id, Ecto.UUID, []}
 
-  schema "affiliations" do
+  typed_schema "affiliations" do
     field :affiliationable_type, :string
     field :affiliationable_id, Ecto.UUID
     belongs_to :faction, Game.Faction, type: Ecto.UUID
