@@ -550,6 +550,27 @@ defmodule ExFleetYardsApi.Schemas.Single do
     })
   end
 
+  defmodule FleetInvite do
+    @moduledoc """
+    Fleet invite
+    """
+    require OpenApiSpex
+
+    OpenApiSpex.schema(%{
+      description: "Fleet invite",
+      type: :object,
+      properties: %{
+        token: %Schema{type: :string, example: ExFleetYards.Repo.Fleet.Invite.generate_token()},
+        fleet: %Schema{type: :string, format: :slug},
+        limit: %Schema{type: :integer},
+        expiresAt: %Schema{type: :string, format: :"date-time"},
+        createdAt: %Schema{type: :string, format: :"date-time"},
+        updatedAt: %Schema{type: :string, format: :"date-time"}
+      },
+      required: [:code, :fleet]
+    })
+  end
+
   defmodule UserHangarChange do
     @moduledoc false
     require OpenApiSpex
