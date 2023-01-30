@@ -588,7 +588,7 @@ defmodule ExFleetYardsApi.Schemas.Single do
         loaner: %Schema{type: :boolean},
         hidden: %Schema{type: :boolean},
         serial: %Schema{type: :string},
-        alternative_name: %Schema{type: :string},
+        alternative_names: %Schema{type: :string},
         paint: %Schema{type: :string, format: :slug, nullable: true}
       }
     })

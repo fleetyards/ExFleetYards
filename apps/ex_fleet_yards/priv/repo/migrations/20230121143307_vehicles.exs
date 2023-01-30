@@ -17,7 +17,7 @@ defmodule ExFleetYards.Repo.Migrations.Vehicles do
       add :hidden, :boolean, default: false
       add :model_paint_id, references(:model_paints, type: :uuid, on_delete: :nilify_all)
       add :serial, :string
-      add :alternative_name, :string
+      add :alternative_names, :string
       # TODO: model_package_id
 
       timestamps(inserted_at: :created_at)

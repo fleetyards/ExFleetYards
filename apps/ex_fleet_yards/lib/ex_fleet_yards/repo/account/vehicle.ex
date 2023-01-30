@@ -24,7 +24,7 @@ defmodule ExFleetYards.Repo.Account.Vehicle do
     field :loaner, :boolean, default: false
     field :hidden, :boolean, default: false
     field :serial, :string
-    field :alternative_name, :string
+    field :alternative_names, :string
 
     belongs_to :user, Account.User, type: Ecto.UUID, foreign_key: :user_id
     belongs_to :model, Game.Model, type: Ecto.UUID, foreign_key: :model_id, on_replace: :nilify
@@ -113,7 +113,7 @@ defmodule ExFleetYards.Repo.Account.Vehicle do
     loaner
     hidden
     serial
-    alternative_name
+    alternative_names
   )a
   def update_changeset(vehicle, params) do
     vehicle
