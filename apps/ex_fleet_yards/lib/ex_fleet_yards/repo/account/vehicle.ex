@@ -38,7 +38,10 @@ defmodule ExFleetYards.Repo.Account.Vehicle do
   end
 
   def public_hangar_query(username) when is_binary(username) do
-    from(u in Account.User, where: u.username == ^username, select: {u.id, u.public_hangar})
+    from(u in Account.User,
+      where: fragment("LOWER(?)", u.username) == ^String.downcase(username),
+      select: {u.id, u.public_hangar}
+    )
     |> Repo.one()
     |> case do
       {id, true} ->
