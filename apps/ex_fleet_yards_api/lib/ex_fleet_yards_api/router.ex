@@ -120,13 +120,16 @@ defmodule ExFleetYardsApi.Router do
         post "/", FleetController, :create
 
         scope "/:slug" do
-          post "/invite/:user", FleetInviteController, :invite_user
           post "/invite/accept", FleetInviteController, :accept_user_invite
+          post "/invite/user/:user", FleetInviteController, :invite_user
+          post "/invite", FleetInviteController, :create
 
           get "/", FleetController, :get
           patch "/", FleetController, :update
           delete "/", FleetController, :delete
         end
+
+        post "/invite/:token", FleetInviteController, :accept_token
       end
 
       scope "/roadmap" do

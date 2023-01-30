@@ -28,7 +28,7 @@ defmodule ExFleetYards.Repo.Fleet.Member do
     field :aasm_state, :string
     field :invited_at, :utc_datetime
     field :requested_at, :utc_datetime
-    # field :used_invite_token, :
+    field :used_invite_token, :string
 
     timestamps(inserted_at: :created_at, type: :utc_datetime)
   end
@@ -66,11 +66,11 @@ defmodule ExFleetYards.Repo.Fleet.Member do
     |> unique_constraint([:fleet_id, :user_id])
   end
 
-  def accept_changeset(member) do
+  def accept_changeset(member, params \\ %{}) do
     mow = DateTime.utc_now() |> DateTime.truncate(:second)
 
     member
-    |> cast(%{}, [])
+    |> cast(params, [:used_invite_token])
     |> put_change(:aasm_state, "accepted")
     |> put_change(:accepted_at, mow)
     |> validate_required([:aasm_state, :accepted_at])

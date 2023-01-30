@@ -5,6 +5,94 @@ defmodule ExFleetYardsApi.FleetInviteController do
 
   tags ["fleet"]
 
+  operation :create,
+    summary: "Create invite code",
+    parameters: [
+      slug: [in: :path, type: :string, required: true],
+      limit: [in: :query, type: :integer, required: false],
+      expires_after: [
+        in: :query,
+        schema: %OpenApiSpex.Schema{type: :string, format: :"date-time"},
+        required: false
+      ]
+    ],
+    responses: [
+      ok: {"Fleet Invite", "application/json", ExFleetYardsApi.Schemas.Single.FleetInvite},
+      bad_request: {"Error", "application/json", Error},
+      not_found: {"Error", "application/json", Error},
+      unauthorized: {"Error", "application/json", Error}
+    ],
+    security: [%{"authorization" => ["fleet:admin"]}]
+
+  def create(conn, %{"slug" => slug} = params) do
+    fleet = ExFleetYardsApi.Auth.check_fleet_scope(conn, slug, "admin", :officer)
+
+    params =
+      params
+      |> transform_invite_attrs
+
+    Fleet.create_invite(fleet, conn.assigns.current_token.user, params)
+    |> case do
+      {:ok, invite} ->
+        render(conn, "invite.json", invite: invite)
+
+      {:error, changeset} ->
+        conn
+        |> put_status(:bad_request)
+        |> put_view(ErrorView)
+        |> render("400.json", changeset: changeset)
+    end
+  end
+
+  operation :accept_token,
+    summary: "Accept invite code",
+    parameters: [
+      token: [in: :path, type: :string, required: true]
+    ],
+    responses: [
+      ok: {"Fleet", "application/json", ExFleetYardsApi.Schemas.Single.Fleet},
+      bad_request: {"Error", "application/json", Error},
+      not_found: {"Error", "application/json", Error},
+      unauthorized: {"Error", "application/json", Error}
+    ],
+    security: [%{"authorization" => ["fleet:write"]}]
+
+  def accept_token(conn, %{"token" => token}) do
+    conn = ExFleetYardsApi.Auth.required_api_scope(conn, %{"fleet" => "write"})
+
+    user = conn.assigns.current_token.user
+
+    Fleet.accept_invite(user, token)
+    |> case do
+      {:ok, fleet} ->
+        render(conn, "fleet.json", fleet: fleet)
+
+      {:error, :not_invited} ->
+        conn
+        |> put_status(:not_found)
+        |> put_view(ErrorView)
+        |> render("404.json", message: "Invite not found")
+
+      {:error, :expired} ->
+        conn
+        |> put_status(:not_found)
+        |> put_view(ErrorView)
+        |> render("404.json", message: "Invite not found")
+
+      {:error, :limit} ->
+        conn
+        |> put_status(:not_found)
+        |> put_view(ErrorView)
+        |> render("404.json", message: "Invite limit reached")
+
+      {:error, changeset} ->
+        conn
+        |> put_status(:bad_request)
+        |> put_view(ErrorView)
+        |> render("400.json", changeset: changeset)
+    end
+  end
+
   operation :invite_user,
     summary: "Invite a user to a fleet",
     parameters: [
@@ -114,4 +202,13 @@ defmodule ExFleetYardsApi.FleetInviteController do
   defp transform_role("admin"), do: :admin
   defp transform_role("officer"), do: :officer
   defp transform_role("member"), do: :member
+
+  defp transform_invite_attrs(attrs) do
+    attrs
+    |> Enum.map(fn
+      {"expiresAt", v} -> {"expires_after", v}
+      v -> v
+    end)
+    |> Enum.into(%{})
+  end
 end
