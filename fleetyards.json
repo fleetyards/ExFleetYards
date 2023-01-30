@@ -382,7 +382,7 @@
             "x-validate": null
           },
           "token": {
-            "example": "IvwON7yceQ",
+            "example": "0rj5Yv1ELw",
             "type": "string",
             "x-struct": null,
             "x-validate": null
@@ -2101,7 +2101,7 @@
       "UserHangarChange": {
         "description": "User Hangar Change",
         "properties": {
-          "alternative_name": {
+          "alternative_names": {
             "type": "string",
             "x-struct": null,
             "x-validate": null
