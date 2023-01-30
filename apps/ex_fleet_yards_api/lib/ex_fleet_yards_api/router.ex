@@ -41,12 +41,15 @@ defmodule ExFleetYardsApi.Router do
   scope root do
     pipe_through :api
 
-    get "/v2.json", OpenApiSpex.Plug.RenderSpec, []
-
-    scope "/ui" do
+    scope "/v2/docs" do
       pipe_through :ui
-      get "/", OpenApiSpex.Plug.SwaggerUI, path: root <> "/v2.json", persist_authorization: true
+
+      get "/", OpenApiSpex.Plug.SwaggerUI,
+        path: root <> "/v2/openapi.json",
+        persist_authorization: true
     end
+
+    get "/v2/openapi.json", OpenApiSpex.Plug.RenderSpec, []
 
     scope "/v2", ExFleetYardsApi do
       scope "/session" do
