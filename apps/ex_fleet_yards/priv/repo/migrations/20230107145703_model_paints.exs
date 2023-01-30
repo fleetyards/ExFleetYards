@@ -29,7 +29,7 @@ defmodule ExFleetYards.Repo.Migrations.ModelPaints do
       add :top_view, :string
       add :side_view, :string
       add :angled_view, :string
-      add :fleetchart_image_heigth, :integer
+      add :fleetchart_image_height, :integer
       add :fleetchart_image_width, :integer
       add :angled_view_height, :integer
       add :angled_view_width, :integer
