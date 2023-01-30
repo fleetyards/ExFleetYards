@@ -355,6 +355,54 @@
         "x-struct": "Elixir.ExFleetYardsApi.Schemas.Single.Fleet",
         "x-validate": null
       },
+      "FleetInvite": {
+        "description": "Fleet invite",
+        "properties": {
+          "createdAt": {
+            "format": "date-time",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "expiresAt": {
+            "format": "date-time",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "fleet": {
+            "format": "slug",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "limit": {
+            "type": "integer",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "token": {
+            "example": "JLyR88xiTA",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          }
+        },
+        "required": [
+          "code",
+          "fleet"
+        ],
+        "title": "FleetInvite",
+        "type": "object",
+        "x-struct": "Elixir.ExFleetYardsApi.Schemas.Single.FleetInvite",
+        "x-validate": null
+      },
       "Manufacturer": {
         "description": "Manufacturer in the star citizen univers",
         "example": {
@@ -3411,6 +3459,105 @@
         ]
       }
     },
+    "/api/v2/fleet/{slug}/invite/user/{user}": {
+      "post": {
+        "callbacks": {},
+        "operationId": "ExFleetYardsApi.FleetInviteController.invite_user",
+        "parameters": [
+          {
+            "description": "",
+            "in": "path",
+            "name": "slug",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            }
+          },
+          {
+            "description": "",
+            "in": "path",
+            "name": "user",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            }
+          },
+          {
+            "description": "",
+            "in": "query",
+            "name": "role",
+            "required": false,
+            "schema": {
+              "enum": [
+                "admin",
+                "officer",
+                "member"
+              ],
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Result"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          }
+        },
+        "security": [
+          {
+            "authorization": [
+              "fleet:admin"
+            ]
+          }
+        ],
+        "summary": "Invite a user to a fleet",
+        "tags": [
+          "fleet"
+        ]
+      }
+    },
     "/api/v2/hangar/{model}": {
       "post": {
         "callbacks": {},
@@ -3472,6 +3619,78 @@
         "tags": [
           "user",
           "hangar"
+        ]
+      }
+    },
+    "/api/v2/fleet/invite/{token}": {
+      "post": {
+        "callbacks": {},
+        "operationId": "ExFleetYardsApi.FleetInviteController.accept_token",
+        "parameters": [
+          {
+            "description": "",
+            "in": "path",
+            "name": "token",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Fleet"
+                }
+              }
+            },
+            "description": "Fleet"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          }
+        },
+        "security": [
+          {
+            "authorization": [
+              "fleet:write"
+            ]
+          }
+        ],
+        "summary": "Accept invite code",
+        "tags": [
+          "fleet"
         ]
       }
     },
@@ -3825,105 +4044,6 @@
         },
         "tags": [
           "game"
-        ]
-      }
-    },
-    "/api/v2/fleet/{slug}/invite/{user}": {
-      "post": {
-        "callbacks": {},
-        "operationId": "ExFleetYardsApi.FleetInviteController.invite_user",
-        "parameters": [
-          {
-            "description": "",
-            "in": "path",
-            "name": "slug",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "x-struct": null,
-              "x-validate": null
-            }
-          },
-          {
-            "description": "",
-            "in": "path",
-            "name": "user",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "x-struct": null,
-              "x-validate": null
-            }
-          },
-          {
-            "description": "",
-            "in": "query",
-            "name": "role",
-            "required": false,
-            "schema": {
-              "enum": [
-                "admin",
-                "officer",
-                "member"
-              ],
-              "type": "string",
-              "x-struct": null,
-              "x-validate": null
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            },
-            "description": "Result"
-          },
-          "400": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            },
-            "description": "Error"
-          },
-          "401": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            },
-            "description": "Error"
-          },
-          "404": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            },
-            "description": "Error"
-          }
-        },
-        "security": [
-          {
-            "authorization": [
-              "fleet:admin"
-            ]
-          }
-        ],
-        "summary": "Invite a user to a fleet",
-        "tags": [
-          "fleet"
         ]
       }
     },
@@ -4920,6 +5040,101 @@
         "summary": "Confirm a user",
         "tags": [
           "user"
+        ]
+      }
+    },
+    "/api/v2/fleet/{slug}/invite": {
+      "post": {
+        "callbacks": {},
+        "operationId": "ExFleetYardsApi.FleetInviteController.create",
+        "parameters": [
+          {
+            "description": "",
+            "in": "path",
+            "name": "slug",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            }
+          },
+          {
+            "description": "",
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "x-struct": null,
+              "x-validate": null
+            }
+          },
+          {
+            "description": "",
+            "in": "query",
+            "name": "expires_after",
+            "required": false,
+            "schema": {
+              "format": "date-time",
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FleetInvite"
+                }
+              }
+            },
+            "description": "Fleet Invite"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          }
+        },
+        "security": [
+          {
+            "authorization": [
+              "fleet:admin"
+            ]
+          }
+        ],
+        "summary": "Create invite code",
+        "tags": [
+          "fleet"
         ]
       }
     },

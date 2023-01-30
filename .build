@@ -10,6 +10,7 @@ ExFleetYards.Repo.Account.Vehicle.NotFoundException.html
 ExFleetYards.Repo.Account.Vehicle.html
 ExFleetYards.Repo.Account.html
 ExFleetYards.Repo.Changeset.html
+ExFleetYards.Repo.Fleet.Invite.html
 ExFleetYards.Repo.Fleet.Member.html
 ExFleetYards.Repo.Fleet.Slug.Type.html
 ExFleetYards.Repo.Fleet.Slug.html
@@ -70,6 +71,7 @@ ExFleetYardsApi.Endpoint.html
 ExFleetYardsApi.ErrorView.html
 ExFleetYardsApi.FleetController.html
 ExFleetYardsApi.FleetInviteController.html
+ExFleetYardsApi.FleetInviteView.html
 ExFleetYardsApi.FleetView.html
 ExFleetYardsApi.InvalidPaginationException.html
 ExFleetYardsApi.ManufacturerController.html
@@ -93,6 +95,7 @@ ExFleetYardsApi.Schemas.List.UserHangarList.html
 ExFleetYardsApi.Schemas.List.html
 ExFleetYardsApi.Schemas.Single.Component.html
 ExFleetYardsApi.Schemas.Single.Fleet.html
+ExFleetYardsApi.Schemas.Single.FleetInvite.html
 ExFleetYardsApi.Schemas.Single.Manufacturer.html
 ExFleetYardsApi.Schemas.Single.ModelHardpoint.html
 ExFleetYardsApi.Schemas.Single.StarSystem.html
@@ -154,7 +157,7 @@ dist/merriweather-latin-ext-300-normal-K6L27CZ5.woff2
 dist/merriweather-vietnamese-300-italic-EHHNZPUO.woff2
 dist/merriweather-vietnamese-300-normal-U376L4Z4.woff2
 dist/remixicon-NKANDIL5.woff2
-dist/search_items-261D1E33.js
-dist/sidebar_items-E8F7E202.js
+dist/search_items-1ABC31CA.js
+dist/sidebar_items-BAC9762E.js
 index.html
 search.html
