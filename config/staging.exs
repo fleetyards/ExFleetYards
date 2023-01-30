@@ -5,7 +5,7 @@ config :ex_fleet_yards, ExFleetYards.Repo,
   hostname: "localhost",
   pool_size: 10
 
-config :ex_fleet_yards_api, ExFleetYardsApi, inline_endpoint: false, port: 4000
+config :ex_fleet_yards_api, ExFleetYardsApi, inline_endpoint: true, port: 4000
 
 config :ex_fleet_yards_api, ExFleetYardsApi.Endpoint,
   http: [
