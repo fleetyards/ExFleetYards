@@ -5,13 +5,13 @@ set -euE
 BRANCH_NAME="${DEPLOY_BRANCH:=main}"
 REPO_URL="${DEPLOY_REPO:=https://github.com/fleetyards/ExFleetYards}"
 USER="${DEPLOY_USER:=fleetyards-api}"
-RELESES_TO_KEEP="${RELEASES_TO_KEEP:=5}"
+RELEASES_TO_KEEP="${RELEASES_TO_KEEP:=5}"
 ENVIRONMENT="${DEPLOY_ENV:=staging}"
 
 HOME=/home/$USER
-RELESES_DIR=$HOME/releases
+RELEASES_DIR=$HOME/releases
 DEPLOYMENT_TIME=$(date +"%Y%m%d%H%M%S")
-DEPLOY_TO=$RELESES_DIR/$DEPLOYMENT_TIME
+DEPLOY_TO=$RELEASES_DIR/$DEPLOYMENT_TIME
 CONFIG_PATH=$HOME/config.exs
 
 function prepare() {
@@ -33,11 +33,11 @@ function run() {
 
   echo "--> Get deps"
 
-  MIX_ENV=$ENVIRONMENT FLEETYARDS_CONFIG_PATH=$CONFIG_PATH mix deps.get --only prod
+  mix deps.get --only prod
 
   echo "--> Creating new Release"
 
-  MIX_ENV=$ENVIRONMENT FLEETYARDS_CONFIG_PATH=$CONFIG_PATH mix release
+  MIX_ENV=$ENVIRONMENT mix release
 
   echo "--> Running pending migrations"
 
@@ -51,9 +51,9 @@ function run() {
 
   echo "--> Clean up old releases"
 
-  pushd $RELESES_DIR > /dev/null
+  pushd $RELEASES_DIR > /dev/null
 
-  ls -t $RELESES_DIR | tail -n +$(($RELESES_TO_KEEP + 1)) | xargs rm -rf
+  ls -t $RELEASES_DIR | tail -n +$(($RELEASES_TO_KEEP + 1)) | xargs rm -rf
 
   popd > /dev/null
 
