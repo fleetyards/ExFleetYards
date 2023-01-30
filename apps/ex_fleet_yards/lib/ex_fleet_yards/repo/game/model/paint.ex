@@ -33,7 +33,7 @@ defmodule ExFleetYards.Repo.Game.Model.Paint do
     field :top_view, :string
     field :side_view, :string
     field :angled_view, :string
-    field :fleetchart_image_heigth, :integer
+    field :fleetchart_image_height, :integer
     field :fleetchart_image_width, :integer
     field :angled_view_height, :integer
     field :angled_view_width, :integer
