@@ -17,23 +17,23 @@ CONFIG_PATH=$HOME/config.exs
 function prepare() {
   echo "-> Prepare Deployment"
   if [ -f "$HOME/CURRENT_RELEASE" ]; then
-    mv $HOME/CURRENT_RELEASE $HOME/PREVIOUS_RELEASE
+    mv "$HOME/CURRENT_RELEASE" "$HOME/PREVIOUS_RELEASE"
   fi
 
-  echo $DEPLOYMENT_TIME >> $HOME/CURRENT_RELEASE
+  echo "$DEPLOYMENT_TIME" >> "$HOME/CURRENT_RELEASE"
 }
 
 function run() {
   echo "-> Start Deployment"
   echo "--> Checkout Source into $DEPLOY_TO"
 
-  git clone --branch $BRANCH_NAME $REPO_URL $DEPLOY_TO
+  git clone --branch "$BRANCH_NAME" "$REPO_URL" "$DEPLOY_TO"
 
-  pushd $DEPLOY_TO > /dev/null
+  pushd "$DEPLOY_TO" > /dev/null
 
   echo "--> Get deps"
 
-  mix deps.get --only prod
+  MIX_ENV=$ENVIRONMENT mix deps.get --only "$ENVIRONMENT"
 
   echo "--> Creating new Release"
 
@@ -41,19 +41,19 @@ function run() {
 
   echo "--> Running pending migrations"
 
-  MIX_ENV=$ENVIRONMENT FLEETYARDS_CONFIG_PATH=$CONFIG_PATH $DEPLOY_TO/_build/$ENVIRONMENT/rel/api/bin/api eval "ExFleetYards.Release.Tasks.run(\"migrate\")"
+  MIX_ENV=$ENVIRONMENT FLEETYARDS_CONFIG_PATH=$CONFIG_PATH "$DEPLOY_TO/_build/$ENVIRONMENT/rel/api/bin/api" eval "ExFleetYards.Release.Tasks.run(\"migrate\")"
 
   popd > /dev/null
 
   echo "--> Symlink release to current"
 
-  ln -sfT $DEPLOY_TO $HOME/current
+  ln -sfT "$DEPLOY_TO" "$HOME/current"
 
   echo "--> Clean up old releases"
 
-  pushd $RELEASES_DIR > /dev/null
+  pushd "$RELEASES_DIR" > /dev/null
 
-  ls -t $RELEASES_DIR | tail -n +$(($RELEASES_TO_KEEP + 1)) | xargs rm -rf
+  ls -t "$RELEASES_DIR" | tail -n +$(("$RELEASES_TO_KEEP" + 1)) | xargs rm -rf
 
   popd > /dev/null
 
@@ -66,13 +66,13 @@ function cleanup() {
   if [ -f "$HOME/PREVIOUS_RELEASE" ]; then
     echo "--> Reverting deployment"
 
-    ln -sfT $HOME/$(cat $HOME/PREVIOUS_RELEASE) $HOME/current
+    ln -sfT "$HOME/$(cat "$HOME/PREVIOUS_RELEASE")" "$HOME/current"
 
-    mv $HOME/PREVIOUS_RELEASE $HOME/CURRENT_RELEASE
+    mv "$HOME/PREVIOUS_RELEASE" "$HOME/CURRENT_RELEASE"
   fi
 
   if [ -f "$DEPLOY_TO" ]; then
-    rm -rf $DEPLOY_TO
+    rm -rf "$DEPLOY_TO"
   fi
 
   echo "-> Deployment failed"
