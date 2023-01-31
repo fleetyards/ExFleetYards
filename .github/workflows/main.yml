@@ -1,0 +1,16 @@
+name: Main
+
+on:
+  push:
+    branches: ["main"]
+    tags-ignore:
+      - "*.*"
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    uses: ./.github/workflows/deploy.workflow.yml
+    with:
+      user: fleetyards-api
+      host: stage.fleetyards.net
+    secrets: inherit
