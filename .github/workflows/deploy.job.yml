@@ -9,6 +9,9 @@ on:
       host:
         required: true
         type: string
+      branch:
+        required: true
+        type: string
     secrets:
       deploy_key:
         required: true
@@ -27,4 +30,4 @@ jobs:
           known_hosts: ${{ secrets.KNOWN_HOSTS }}
           if_key_exists: ignore
       - name: Deploy
-        run: ssh ${{ inputs.user }}@${{ inputs.host }} 'DEPLOY_USER=${{ inputs.user }} BRANCH=${GITHUB_REF##*/} bash -ls' < ./scripts/deploy.sh
+        run: ssh ${{ inputs.user }}@${{ inputs.host }} 'DEPLOY_USER=${{ inputs.user }} BRANCH=${{ inputs.branch}} bash -ls' < ./scripts/deploy.sh
