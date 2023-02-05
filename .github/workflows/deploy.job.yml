@@ -1,0 +1,33 @@
+name: Deploy Job
+
+on:
+  workflow_call:
+    inputs:
+      user:
+        required: true
+        type: string
+      host:
+        required: true
+        type: string
+      branch:
+        required: true
+        type: string
+    secrets:
+      deploy_key:
+        required: true
+      known_hosts:
+        required: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install SSH key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.DEPLOY_KEY }}
+          known_hosts: ${{ secrets.KNOWN_HOSTS }}
+          if_key_exists: ignore
+      - name: Deploy
+        run: ssh ${{ inputs.user }}@${{ inputs.host }} 'DEPLOY_USER=${{ inputs.user }} BRANCH=${{ inputs.branch}} bash -ls' < ./scripts/deploy.sh
