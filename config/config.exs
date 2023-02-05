@@ -67,6 +67,8 @@ config :ex_fleet_yards_api, ExFleetYardsApi.Endpoint,
   server: false,
   render_errors: [view: ExFleetYardsApi.ErrorView, accepts: ~w(json), layout: false]
 
+config :ex_fleet_yards_import, rsi_graphql_url: "https://robertsspaceindustries.com/graphql"
+
 # Configure esbuild (the version is required)
 config :esbuild,
   version: "0.14.29",

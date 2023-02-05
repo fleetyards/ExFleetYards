@@ -73,6 +73,8 @@ defmodule ExFleetYardsImport do
     quote do
       @behaviour ExFleetYardsImport
 
+      alias ExFleetYards.Repo
+
       @data_source unquote(data_source)
       @data_name unquote(data_name)
 
