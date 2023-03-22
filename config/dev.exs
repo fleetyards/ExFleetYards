@@ -46,6 +46,18 @@ config :ex_fleet_yards_web, ExFleetYardsWeb.Endpoint,
     esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]}
   ]
 
+config :ex_fleet_yards_auth, ExFleetYardsAuth.Endpoint,
+  http: [
+    ip: {127, 0, 0, 1},
+    port: 4002
+  ],
+  secret_key_base: "zMnmcNSJebHEPCJqrtztxeTVMEWfciC0cxNuEFZWRZFx2/QA4Ull5nkkLwqQBRQ6",
+  live_view: [signing_salt: "F07EFQKnybYwDgCO"],
+  watchers: [
+    # Start the esbuild watcher by calling Esbuild.install_and_run(:auth, args)
+    esbuild: {Esbuild, :install_and_run, [:auth, ~w(--sourcemap=inline --watch)]}
+  ]
+
 # ## SSL Support
 #
 # In order to use HTTPS in development, a self-signed

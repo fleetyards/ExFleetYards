@@ -91,7 +91,9 @@
             inherit inputs pkgs;
             modules = [
               {
-                packages = with pkgs; [ mix2nix git ];
+                packages = with pkgs;
+                  [ mix2nix git gnumake gcc ]
+                  ++ lib.optional pkgs.stdenv.isLinux pkgs.inotify-tools;
                 languages.elixir.enable = true;
 
                 enterShell = "";

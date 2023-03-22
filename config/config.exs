@@ -67,6 +67,10 @@ config :ex_fleet_yards_api, ExFleetYardsApi.Endpoint,
   server: false,
   render_errors: [view: ExFleetYardsApi.ErrorView, accepts: ~w(json), layout: false]
 
+config :ex_fleet_yards_auth, ExFleetYardsAuth.Endpoint,
+  url: [host: "localhost"],
+  render_errors: [view: ExFleetYardsAuth.ErrorView, accepts: ~w(json), layout: false]
+
 # Configure esbuild (the version is required)
 config :esbuild,
   version: "0.14.29",
@@ -74,6 +78,12 @@ config :esbuild,
     args:
       ~w(js/app.js --bundle --target=es2017 --outdir=../priv/static/assets --external:/fonts/* --external:/images/*),
     cd: Path.expand("../apps/ex_fleet_yards_web/assets", __DIR__),
+    env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
+  ],
+  auth: [
+    args:
+      ~w(js/app.js --bundle --target=es2017 --outdir=../priv/static/assets --external:/fonts/* --external:/images/*),
+    cd: Path.expand("../apps/ex_fleet_yards_auth/assets", __DIR__),
     env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
   ]
 
@@ -103,6 +113,13 @@ config :appsignal, :config,
 
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
+
+config :boruta, Boruta.Oauth,
+  repo: ExFleetYards.Repo,
+  contexts: [
+    resource_owners: ExFleetYards.Oauth.ResourceOwners
+  ],
+  issuer: "https://auth.fleetyards.net"
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

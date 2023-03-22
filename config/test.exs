@@ -53,3 +53,7 @@ config :ex_fleet_yards, ExFleetYards.Mailer, adapter: Swoosh.Adapters.Test
 
 # Initialize plugs at runtime for faster test compilation
 config :phoenix, :plug_init_mode, :runtime
+
+# Mok boruta
+config :ex_fleet_yards_auth, :oauth_module, Boruta.OauthMock
+config :ex_fleet_yards_auth, :openid_module, Boruta.OpenidMock
