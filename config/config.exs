@@ -69,7 +69,7 @@ config :ex_fleet_yards_api, ExFleetYardsApi.Endpoint,
 
 config :ex_fleet_yards_auth, ExFleetYardsAuth.Endpoint,
   url: [host: "localhost"],
-  render_errors: [view: ExFleetYardsAuth.ErrorView, accepts: ~w(json), layout: false]
+  render_errors: [view: ExFleetYardsAuth.ErrorView, accepts: ~w(html json), layout: false]
 
 # Configure esbuild (the version is required)
 config :esbuild,
@@ -85,6 +85,17 @@ config :esbuild,
       ~w(js/app.js --bundle --target=es2017 --outdir=../priv/static/assets --external:/fonts/* --external:/images/*),
     cd: Path.expand("../apps/ex_fleet_yards_auth/assets", __DIR__),
     env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
+  ]
+
+config :tailwind,
+  version: "3.2.7",
+  auth: [
+    args: ~w(
+      --config=tailwind.config.js
+      --input=css/app.css
+      --output=../priv/static/assets/css/app.css
+    ),
+    cd: Path.expand("../apps/ex_fleet_yards_auth/assets", __DIR__)
   ]
 
 # Configures Elixir's Logger

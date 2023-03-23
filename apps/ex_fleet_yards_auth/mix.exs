@@ -13,6 +13,7 @@ defmodule ExFleetYardsAuth.MixProject do
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
+      aliases: aliases(),
       deps: deps()
     ]
   end
@@ -39,10 +40,17 @@ defmodule ExFleetYardsAuth.MixProject do
       {:telemetry_poller, "~> 1.0"},
       {:ex_fleet_yards, in_umbrella: true},
       {:esbuild, "~> 0.4", runtime: Mix.env() == :dev},
+      {:tailwind, "~> 0.1", runtime: Mix.env() == :dev},
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
       {:appsignal, "~> 2.0"},
       {:mox, "~> 0.5", only: :test}
+    ]
+  end
+
+  def aliases do
+    [
+      "assets.deploy": ["tailwind auth --minify", "esbuild auth --minify", "phx.digest"]
     ]
   end
 end

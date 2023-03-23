@@ -55,7 +55,8 @@ config :ex_fleet_yards_auth, ExFleetYardsAuth.Endpoint,
   live_view: [signing_salt: "F07EFQKnybYwDgCO"],
   watchers: [
     # Start the esbuild watcher by calling Esbuild.install_and_run(:auth, args)
-    esbuild: {Esbuild, :install_and_run, [:auth, ~w(--sourcemap=inline --watch)]}
+    esbuild: {Esbuild, :install_and_run, [:auth, ~w(--sourcemap=inline --watch)]},
+    tailwind: {Tailwind, :install_and_run, [:auth, ~w(--watch)]}
   ]
 
 # ## SSL Support

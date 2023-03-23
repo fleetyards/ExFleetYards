@@ -82,7 +82,6 @@ defmodule ExFleetYardsAuth.Oauth.AuthorizeController do
   end
 
   defp redirect_to_login(conn) do
-    # redirect(conn, to: Routes.session_path(conn, :new))
-    raise "Todo: redirect_to_login"
+    redirect(conn, to: Routes.session_path(conn, :new))
   end
 end
