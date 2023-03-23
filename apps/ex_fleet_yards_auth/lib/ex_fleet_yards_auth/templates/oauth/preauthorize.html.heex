@@ -44,7 +44,7 @@
           Cancel
         </a>
 
-        <%= form_for @conn, Routes.authorize_path(@conn, :create_oauth), [method: :get], fn f -> %>
+        <%= form_for @conn, Routes.authorize_path(@conn, :authorize), [method: :get], fn f -> %>
           <%= hidden_input f, :client_id, value: @response.client.id %>
           <%= hidden_input f, :redirect_uri, value: @response.redirect_uri %>
           <%= hidden_input f, :response_type, value: Enum.join(@response.response_types, " ") %>
