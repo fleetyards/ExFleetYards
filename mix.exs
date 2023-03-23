@@ -29,7 +29,7 @@ defmodule ExFleetYards.Umbrella.MixProject do
   defp deps do
     [
       # Dev
-      {:credo, "~> 1.7.0-rc.1", only: [:dev, :test], runtime: false},
+      {:credo, "~> 1.7", only: [:dev, :test], runtime: false},
       {:ex_doc, "~> 0.27", only: :dev, runtime: false}
     ]
   end
