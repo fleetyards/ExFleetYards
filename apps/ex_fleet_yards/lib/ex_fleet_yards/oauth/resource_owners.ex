@@ -35,4 +35,10 @@ defmodule ExFleetYards.Oauth.ResourceOwners do
       {:error, "Invalid email or password."}
     end
   end
+
+  @impl Boruta.Oauth.ResourceOwners
+  def authorized_scopes(%ResourceOwner{}), do: []
+
+  @impl Boruta.Oauth.ResourceOwners
+  def claims(_resource_owner, _scope), do: %{}
 end

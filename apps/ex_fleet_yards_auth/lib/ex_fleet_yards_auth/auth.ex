@@ -51,12 +51,16 @@ defmodule ExFleetYardsAuth.Auth do
   end
 
   def fetch_current_user(conn, _opts) do
-    {user_token, conn} =
-      ensure_user_token(conn)
-      |> IO.inspect()
+    {user_token, conn} = ensure_user_token(conn)
 
     user = user_token && Account.get_user_by_token(user_token, "auth")
-    assign(conn, :current_user, user)
+
+    with %{user: user} <- user do
+      assign(conn, :current_user, user)
+    else
+      _ ->
+        conn
+    end
   end
 
   defp ensure_user_token(conn) do

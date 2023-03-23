@@ -9,14 +9,9 @@ defmodule ExFleetYardsAuth.SessionController do
   end
 
   def create(conn, %{"login" => user_params}) do
-    %{"email" => email, "password" => password} =
-      user_params
-      |> IO.inspect(label: "user_params")
+    %{"email" => email, "password" => password} = user_params
 
-    %Account.User{} =
-      user =
-      Account.get_user_by_password(email, password)
-      |> IO.inspect(label: "user")
+    %Account.User{} = user = Account.get_user_by_password(email, password)
 
     with %Account.User{} <- user do
       if user.otp_required_for_login do
@@ -28,7 +23,6 @@ defmodule ExFleetYardsAuth.SessionController do
     else
       nil ->
         render(conn, "new.html", error: "Invalid email or password")
-        |> IO.inspect(label: "nil")
     end
   end
 

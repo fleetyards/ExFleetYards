@@ -22,14 +22,24 @@ defmodule ExFleetYardsAuth.Oauth.AuthorizeController do
 
   defp authorize_response(conn, %_{} = current_user) do
     conn
-    |> oauth_module().authorize(
-      %ResourceOwner{sub: to_string(current_user.id), username: current_user.email},
+    |> oauth_module().preauthorize(
+      %ResourceOwner{sub: current_user.id, username: current_user.email},
       __MODULE__
     )
   end
 
   defp authorize_response(conn, _params) do
     redirect_to_login(conn)
+  end
+
+  def create_oauth(conn, _params) do
+    current_user = conn.assigns[:current_user]
+
+    conn
+    |> oauth_module().authorize(
+      %ResourceOwner{sub: current_user.id, username: current_user.email},
+      __MODULE__
+    )
   end
 
   @impl Boruta.Oauth.AuthorizeApplication
@@ -68,10 +78,24 @@ defmodule ExFleetYardsAuth.Oauth.AuthorizeController do
   end
 
   @impl Boruta.Oauth.AuthorizeApplication
-  def preauthorize_success(_conn, _response), do: :ok
+  def preauthorize_success(conn, response) do
+    scopes = get_scopes(response.scope)
+
+    conn
+    |> put_view(OauthView)
+    |> render("preauthorize.html", response: response, scopes: scopes)
+  end
 
   @impl Boruta.Oauth.AuthorizeApplication
-  def preauthorize_error(_conn, _response), do: :ok
+  def preauthorize_error(conn, response) do
+    conn
+    |> put_view(OauthView)
+    |> render("error.html",
+      error: response.error,
+      error_description: response.error_description,
+      redirect_uri: response.redirect_uri
+    )
+  end
 
   defp store_user_return_to(conn) do
     conn
@@ -83,5 +107,11 @@ defmodule ExFleetYardsAuth.Oauth.AuthorizeController do
 
   defp redirect_to_login(conn) do
     redirect(conn, to: Routes.session_path(conn, :new))
+  end
+
+  defp get_scopes(scopes) do
+    scopes
+    |> String.split(" ")
+    |> Enum.map(&Repo.get_by(Boruta.Ecto.Scope, name: &1))
   end
 end

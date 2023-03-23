@@ -4,6 +4,8 @@ defmodule ExFleetYardsAuth.OauthView do
   alias Boruta.Oauth.IntrospectResponse
   alias Boruta.Oauth.TokenResponse
 
+  import Phoenix.HTML.Form
+
   def render("token.json", %{
         response: %TokenResponse{
           token_type: token_type,
