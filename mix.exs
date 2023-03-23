@@ -74,6 +74,10 @@ defmodule ExFleetYards.Umbrella.MixProject do
       api: [
         applications: [ex_fleet_yards_api: :permanent],
         config_providers: [{ExFleetYards.Config.ReleaseRuntimeProvider, []}]
+      ],
+      auth: [
+        applications: [ex_fleet_yards_auth: :permanent],
+        config_providers: [{ExFleetYards.Config.ReleaseRuntimeProvider, []}]
       ]
     ]
   end
