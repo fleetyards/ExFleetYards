@@ -10,17 +10,17 @@ defmodule ExFleetYardsAuth.Oauth.AuthorizeController do
 
   def oauth_module, do: Application.get_env(:ex_fleet_yards_auth, :oauth_module, Boruta.Oauth)
 
-  def authorize(%Plug.Conn{} = conn, _params) do
+  def preauthorize(%Plug.Conn{} = conn, _params) do
     current_user = conn.assigns[:current_user]
     conn = store_user_return_to(conn)
 
-    authorize_response(
+    preauthorize_response(
       conn,
       current_user
     )
   end
 
-  defp authorize_response(conn, %_{} = current_user) do
+  defp preauthorize_response(conn, %_{} = current_user) do
     conn
     |> oauth_module().preauthorize(
       %ResourceOwner{sub: current_user.id, username: current_user.email},
@@ -28,11 +28,11 @@ defmodule ExFleetYardsAuth.Oauth.AuthorizeController do
     )
   end
 
-  defp authorize_response(conn, _params) do
+  defp preauthorize_response(conn, _params) do
     redirect_to_login(conn)
   end
 
-  def create_oauth(conn, _params) do
+  def authorize(conn, _params) do
     current_user = conn.assigns[:current_user]
 
     conn

@@ -46,11 +46,10 @@ defmodule ExFleetYardsAuth.Router do
     scope "/oauth", ExFleetYardsAuth.Oauth do
       pipe_through :browser
 
-      get "/authorize", AuthorizeController, :authorize
+      get "/authorize", AuthorizeController, :preauthorize
 
       scope "/create" do
-        post "/", AuthorizeController, :create_oauth
-        get "/", AuthorizeController, :create_oauth
+        get "/", AuthorizeController, :authorize
       end
     end
 
