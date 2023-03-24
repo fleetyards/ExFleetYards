@@ -16,7 +16,7 @@ defmodule ExFleetYardsApi.UserController do
   def get_current(conn, %{}) do
     conn = ExFleetYardsApi.Auth.required_api_scope(conn, %{})
 
-    user = conn.assigns.current_token.user
+    user = conn.assigns.current_user
 
     conn
     |> render("user.json", user: user, public_hangar: true)
@@ -62,7 +62,7 @@ defmodule ExFleetYardsApi.UserController do
   def set(conn, params) do
     conn = ExFleetYardsApi.Auth.required_api_scope(conn, %{"user" => "write"})
 
-    user = conn.assigns.current_token.user
+    user = conn.assigns.current_user
 
     params =
       params
@@ -153,7 +153,7 @@ defmodule ExFleetYardsApi.UserController do
   def delete(conn, %{}) do
     conn = ExFleetYardsApi.Auth.required_api_scope(conn, %{"api" => "admin", "user" => "write"})
 
-    user = conn.assigns.current_token.user
+    user = conn.assigns.current_user
 
     Account.delete_user(user)
     |> case do

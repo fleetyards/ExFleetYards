@@ -35,7 +35,7 @@ defmodule ExFleetYardsApi.FleetController do
   def create(conn, %{} = params) do
     conn = ExFleetYardsApi.Auth.required_api_scope(conn, %{"fleet" => "create"})
 
-    user = conn.assigns.current_token.user
+    user = conn.assigns.current_user
 
     params =
       params

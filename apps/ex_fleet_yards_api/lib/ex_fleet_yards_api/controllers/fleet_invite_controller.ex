@@ -31,7 +31,7 @@ defmodule ExFleetYardsApi.FleetInviteController do
       params
       |> transform_invite_attrs
 
-    Fleet.create_invite(fleet, conn.assigns.current_token.user, params)
+    Fleet.create_invite(fleet, conn.assigns.current_user, params)
     |> case do
       {:ok, invite} ->
         render(conn, "invite.json", invite: invite)
@@ -60,7 +60,7 @@ defmodule ExFleetYardsApi.FleetInviteController do
   def accept_token(conn, %{"token" => token}) do
     conn = ExFleetYardsApi.Auth.required_api_scope(conn, %{"fleet" => "write"})
 
-    user = conn.assigns.current_token.user
+    user = conn.assigns.current_user
 
     Fleet.accept_invite(user, token)
     |> case do
@@ -114,25 +114,13 @@ defmodule ExFleetYardsApi.FleetInviteController do
   def invite_user(conn, %{"slug" => slug, "user" => user_inv, "role" => role}) do
     conn = ExFleetYardsApi.Auth.required_api_scope(conn, %{"fleet" => "admin"})
 
-    token = conn.assigns.current_token
-    user = token.user
-    # token_fleet_slug = Map.get(token, :fleet, %{}) |> Map.get(:slug)
-    token_fleet_slug =
-      token.fleet
-      |> case do
-        nil -> nil
-        fleet -> fleet.slug
-      end
+    user = conn.assigns.current_user
 
     role = transform_role(role)
 
-    if token_fleet_slug == slug do
-      Fleet.invite_user(token.fleet, user, user_inv, role)
-    else
-      fleet = Fleet.get!(slug, nil)
+    fleet = Fleet.get!(slug, nil)
 
-      Fleet.invite_user(fleet, user, user_inv, role)
-    end
+    Fleet.invite_user(fleet, user, user_inv, role)
     |> case do
       {:ok, _member} ->
         json(conn, %{"status" => "success", "message" => "User invited"})
@@ -178,7 +166,7 @@ defmodule ExFleetYardsApi.FleetInviteController do
     conn = ExFleetYardsApi.Auth.required_api_scope(conn, %{"fleet" => "write"})
     fleet = Fleet.get!(slug, nil)
 
-    user = conn.assigns.current_token.user
+    user = conn.assigns.current_user
 
     Fleet.accept_invite(fleet, user)
     |> case do
