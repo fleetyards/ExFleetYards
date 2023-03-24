@@ -44,15 +44,15 @@
           Cancel
         </a>
 
-        <%= form_for @conn, Routes.authorize_path(@conn, :authorize), [method: :get], fn f -> %>
+        <%= form_for @conn, Routes.authorize_path(@conn, :authorize), [method: :post], fn f -> %>
           <%= hidden_input f, :client_id, value: @response.client.id %>
           <%= hidden_input f, :redirect_uri, value: @response.redirect_uri %>
           <%= hidden_input f, :response_type, value: @response_type %>
           <%= hidden_input f, :response_mode, value: @response_mode %>
           <%= hidden_input f, :state, value: @response.state %>
           <%= hidden_input f, :nonce, value: @response.nonce %>
-          <%= hidden_input f, :code_challenge_method, value: @response.code_challenge_method %>
-          <%= hidden_input f, :code_challenge, value: @response.code_challenge %>
+          <%= optional_hidden_input f, :code_challenge_method, @response.code_challenge_method %>
+          <%= optional_hidden_input f, :code_challenge, @response.code_challenge %>
           <%= hidden_input f, :scope, value: @response.scope %>
           <%= submit "Authorize", class: "inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest bg-indigo-500 hover:bg-indigo-400 active:bg-indigo-600 focus:outline-none focus:border-indigo-500 focus:ring ring-indigo-300 disabled:opacity-25 transition ease-in-out duration-150" %>
         <% end %>

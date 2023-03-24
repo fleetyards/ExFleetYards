@@ -49,7 +49,9 @@ defmodule ExFleetYardsAuth.Router do
       get "/authorize", AuthorizeController, :preauthorize
 
       scope "/create" do
-        get "/", AuthorizeController, :authorize
+        pipe_through [:require_authenticated_user]
+
+        post "/", AuthorizeController, :authorize
       end
     end
 

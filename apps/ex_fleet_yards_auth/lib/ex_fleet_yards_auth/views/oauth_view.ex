@@ -67,4 +67,12 @@ defmodule ExFleetYardsAuth.OauthView do
       error_description: error_description
     }
   end
+
+  def optional_hidden_input(form, field, value) do
+    if value do
+      hidden_input(form, field, value: value)
+    else
+      ""
+    end
+  end
 end

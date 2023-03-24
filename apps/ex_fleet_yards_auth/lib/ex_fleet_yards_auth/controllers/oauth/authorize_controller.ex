@@ -34,6 +34,8 @@ defmodule ExFleetYardsAuth.Oauth.AuthorizeController do
 
   def authorize(conn, _params) do
     current_user = conn.assigns[:current_user]
+    conn = Map.put(conn, :query_params, conn.params)
+    # IO.inspect(conn.query_params)
 
     conn
     |> oauth_module().authorize(
