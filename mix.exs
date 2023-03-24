@@ -54,7 +54,8 @@ defmodule ExFleetYards.Umbrella.MixProject do
       "ecto.setup": ["cmd --app ex_fleet_yards mix ecto.setup"],
       "ecto.reset": ["cmd --app ex_fleet_yards mix ecto.reset"],
       routes: ["phx.routes ExFleetYardsWeb.Router"],
-      nix: ["nix.mix2nix", "nix.appsignal"]
+      nix: ["nix.mix2nix", "nix.appsignal"],
+      "assets.deploy": ["cmd --app ex_fleet_yards_auth mix assets.deploy"]
     ]
   end
 
@@ -77,6 +78,10 @@ defmodule ExFleetYards.Umbrella.MixProject do
       ],
       auth: [
         applications: [ex_fleet_yards_auth: :permanent],
+        config_providers: [{ExFleetYards.Config.ReleaseRuntimeProvider, []}]
+      ],
+      api_auth: [
+        applications: [ex_fleet_yards_auth: :permanent, ex_fleet_yards_api: :permanent],
         config_providers: [{ExFleetYards.Config.ReleaseRuntimeProvider, []}]
       ]
     ]

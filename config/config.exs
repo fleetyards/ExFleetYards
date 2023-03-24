@@ -54,21 +54,26 @@ config :ex_fleet_yards_api,
   generators: [context_app: :ex_fleet_yards]
 
 # if inline_endpoint is false, `port` and `url` become availabe.
-config :ex_fleet_yards_api, ExFleetYardsApi, inline_endpoint: true, port: 4001
+config :ex_fleet_yards_api, ExFleetYardsApi, inline_endpoint: false, port: 4001
 
 # Configures the endpoint
 config :ex_fleet_yards_web, ExFleetYardsWeb.Endpoint,
   url: [host: "localhost"],
+  http: [ip: {127, 0, 0, 1}, port: 4000],
   render_errors: [view: ExFleetYardsWeb.ErrorView, accepts: ~w(html json), layout: false],
   pubsub_server: ExFleetYards.PubSub,
   live_view: [signing_salt: "D5yRC+hm"]
 
 config :ex_fleet_yards_api, ExFleetYardsApi.Endpoint,
-  server: false,
+  server: true,
+  url: [host: "localhost"],
+  http: [ip: {127, 0, 0, 1}, port: 4001],
   render_errors: [view: ExFleetYardsApi.ErrorView, accepts: ~w(json), layout: false]
 
 config :ex_fleet_yards_auth, ExFleetYardsAuth.Endpoint,
+  server: true,
   url: [host: "localhost"],
+  http: [ip: {127, 0, 0, 1}, port: 4002],
   render_errors: [view: ExFleetYardsAuth.ErrorView, accepts: ~w(html json), layout: false]
 
 # Configure esbuild (the version is required)
