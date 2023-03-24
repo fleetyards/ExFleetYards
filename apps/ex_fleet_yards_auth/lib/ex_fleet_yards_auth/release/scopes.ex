@@ -19,7 +19,6 @@ defmodule ExFleetYardsAuth.Release.Scopes do
     user: "Allows reading and writing user data"
   ]
 
-
   def create do
     create_scopes(@hangar_scopes)
     create_scopes(@fleet_scopes)

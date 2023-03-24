@@ -28,16 +28,23 @@ config :ex_fleet_yards, ExFleetYards.Repo,
 config :ex_fleet_yards_web, ExFleetYardsWeb.Endpoint,
   http: [
     ip: {127, 0, 0, 1},
-    port: 4002,
-    dispatch: [
-      {
-        :_,
-        [
-          {"/api/[...]", Phoenix.Endpoint.Cowboy2Handler, {ExFleetYardsWeb.Api.Endpoint, []}},
-          {:_, Phoenix.Endpoint.Cowboy2Handler, {ExFleetYardsWeb.Endpoint, []}}
-        ]
-      }
-    ]
+    port: 4000
+  ],
+  secret_key_base: "MWnMFg79YoPGiD41M5xSRapqHYo9TIQ46u+XEfb8GeSGJ7LE77sHfuAgSfqDHr67",
+  server: false
+
+config :ex_fleet_yards_api, ExFleetYardsApi.Endpoint,
+  http: [
+    ip: {127, 0, 0, 1},
+    port: 4001
+  ],
+  secret_key_base: "MWnMFg79YoPGiD41M5xSRapqHYo9TIQ46u+XEfb8GeSGJ7LE77sHfuAgSfqDHr67",
+  server: false
+
+config :ex_fleet_yards_auth, ExFleetYardsAuth.Endpoint,
+  http: [
+    ip: {127, 0, 0, 1},
+    port: 4002
   ],
   secret_key_base: "MWnMFg79YoPGiD41M5xSRapqHYo9TIQ46u+XEfb8GeSGJ7LE77sHfuAgSfqDHr67",
   server: false
