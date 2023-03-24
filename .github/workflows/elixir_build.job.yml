@@ -2,6 +2,7 @@ name: Elixir Build Job
 
 on:
   workflow_call:
+  merge_group:
 
 permissions:
   contents: read
