@@ -1,11 +1,7 @@
-name: credo
+name: Credo Job
 
 on:
-  push:
-    branches: [ "main", "staging", "trying" ]
-    tags: ['v*']
-  pull_request:
-    branches: [ "main" ]
+  workflow_call:
 
 permissions:
   contents: read

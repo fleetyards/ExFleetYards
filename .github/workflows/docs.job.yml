@@ -1,15 +1,13 @@
-name: Publish doc
+name: Publish Docs Job
 
 on:
-  push:
-    branches: [ "main" ]
-    tags: ['v*']
+  workflow_call:
 
 permissions:
   contents: write
 
 jobs:
-  build-and-deploy:
+  publish-docs:
     concurrency: ci-${{ github.ref }} # Recommended if you intend to make multiple deployments in quick succession.
     runs-on: ubuntu-latest
     steps:

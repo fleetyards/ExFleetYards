@@ -1,0 +1,26 @@
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+
+jobs:
+  credo:
+    uses: ./.github/workflows/credo.job.yml
+  elixir-build:
+    uses: ./.github/workflows/elixir_build.job.yml
+  elixir-release:
+    uses: ./.github/workflows/elixir_build.job.yml
+  nix-build:
+    uses: ./.github/workflows/nix.job.yml
+  publish-docs:
+    uses: ./.github/workflows/docs.job.yml
+    needs: [elixir-build, elixir-release, nix-build]
+  # deploy-to-live:
+  #   needs: [elixir-build, elixir-release]
+  #   uses: ./.github/workflows/deploy.job.yml
+  #   with:
+  #     user: fleetyards-api
+  #     host: fleetyards.net
+  #     branch: ${GITHUB_REF##*/}
+  #   secrets: inherit

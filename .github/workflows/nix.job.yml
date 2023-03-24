@@ -1,10 +1,8 @@
-name: "Nix build"
+name: Nix build Job
+
 on:
-  push:
-    branches: [ "main", "staging", "trying" ]
-    tags: ['v*']
-  pull_request:
-    branches: [ "main" ]
+  workflow_call:
+
 jobs:
   nix-build:
     strategy:
