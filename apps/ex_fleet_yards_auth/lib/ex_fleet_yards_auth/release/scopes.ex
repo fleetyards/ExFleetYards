@@ -1,23 +1,24 @@
 defmodule ExFleetYardsAuth.Release.Scopes do
   @hangar_scopes [
-    "hangar:read": "Read your hangar",
-    "hangar:write": "Write to your hangar",
-    hangar: "Read and write to your hangar"
+    "hangar:read": "Allows reading from your hangar",
+    "hangar:write": "Allows writing to your hangar",
+    hangar: "Allows reading and writing to your hangar"
   ]
 
   @fleet_scopes [
-    "fleet:read": "Read your fleet",
-    "fleet:write": "Write to your fleet",
-    "fleet:admin": "Change fleet, except deleting",
-    "fleet:delete": "Delete your fleet"
+    "fleet:read": "Allows reading from your fleet",
+    "fleet:write": "Allows writing to your fleet",
+    "fleet:admin": "Allows managing your fleet, except deleting",
+    "fleet:delete": "Allows deleting your fleet"
   ]
 
   @user_scopes [
-    "user:read": "Reads users profile data",
-    "user:email": "Reads user email address",
-    # "user:follow": "Follows other users",
-    user: "Reads and write user data"
+    "user:read": "Allows reading user profile data",
+    "user:email": "Allows reading user email address",
+    # "user:follow": "Allows following other users",
+    user: "Allows reading and writing user data"
   ]
+
 
   def create do
     create_scopes(@hangar_scopes)
