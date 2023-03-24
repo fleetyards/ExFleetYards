@@ -115,10 +115,24 @@ defmodule ExFleetYards.Repo.Account do
     token
   end
 
+  def get_auth_token(user) do
+    {token, user_token} = UserToken.build_auth_token(user)
+    Repo.insert!(user_token)
+    token
+  end
+
   def create_confirm_token(user) do
     {token, user_token} = UserToken.create_confirm_token(user)
     Repo.insert!(user_token)
     token
+  end
+
+  def delete_token(token, context \\ "api") do
+    Repo.delete_all(
+      from(t in UserToken,
+        where: t.token == ^token and t.context == ^context
+      )
+    )
   end
 
   def send_confirm_token(user) do

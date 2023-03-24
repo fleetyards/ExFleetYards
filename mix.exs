@@ -29,7 +29,7 @@ defmodule ExFleetYards.Umbrella.MixProject do
   defp deps do
     [
       # Dev
-      {:credo, "~> 1.7.0-rc.1", only: [:dev, :test], runtime: false},
+      {:credo, "~> 1.7", only: [:dev, :test], runtime: false},
       {:ex_doc, "~> 0.27", only: :dev, runtime: false}
     ]
   end
@@ -49,11 +49,13 @@ defmodule ExFleetYards.Umbrella.MixProject do
       setup: ["cmd mix setup"],
       fmt: ["format"],
       "api.routes": ["phx.routes ExFleetYardsApi.Router"],
+      "auth.routes": ["phx.routes ExFleetYardsAuth.Router"],
       "api.spec": ["openapi.spec.json --spec ExFleetYardsApi.ApiSpec --pretty"],
       "ecto.setup": ["cmd --app ex_fleet_yards mix ecto.setup"],
       "ecto.reset": ["cmd --app ex_fleet_yards mix ecto.reset"],
       routes: ["phx.routes ExFleetYardsWeb.Router"],
-      nix: ["nix.mix2nix", "nix.appsignal"]
+      nix: ["nix.mix2nix", "nix.appsignal"],
+      "assets.deploy": ["cmd --app ex_fleet_yards_auth mix assets.deploy"]
     ]
   end
 
@@ -72,6 +74,14 @@ defmodule ExFleetYards.Umbrella.MixProject do
       ],
       api: [
         applications: [ex_fleet_yards_api: :permanent],
+        config_providers: [{ExFleetYards.Config.ReleaseRuntimeProvider, []}]
+      ],
+      auth: [
+        applications: [ex_fleet_yards_auth: :permanent],
+        config_providers: [{ExFleetYards.Config.ReleaseRuntimeProvider, []}]
+      ],
+      api_auth: [
+        applications: [ex_fleet_yards_auth: :permanent, ex_fleet_yards_api: :permanent],
         config_providers: [{ExFleetYards.Config.ReleaseRuntimeProvider, []}]
       ]
     ]

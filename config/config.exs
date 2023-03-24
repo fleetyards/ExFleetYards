@@ -54,18 +54,28 @@ config :ex_fleet_yards_api,
   generators: [context_app: :ex_fleet_yards]
 
 # if inline_endpoint is false, `port` and `url` become availabe.
-config :ex_fleet_yards_api, ExFleetYardsApi, inline_endpoint: true, port: 4001
+config :ex_fleet_yards_api, ExFleetYardsApi, inline_endpoint: false, port: 4001
 
 # Configures the endpoint
 config :ex_fleet_yards_web, ExFleetYardsWeb.Endpoint,
   url: [host: "localhost"],
+  http: [ip: {127, 0, 0, 1}, port: 4000],
   render_errors: [view: ExFleetYardsWeb.ErrorView, accepts: ~w(html json), layout: false],
   pubsub_server: ExFleetYards.PubSub,
   live_view: [signing_salt: "D5yRC+hm"]
 
 config :ex_fleet_yards_api, ExFleetYardsApi.Endpoint,
-  server: false,
+  server: true,
+  url: [host: "localhost"],
+  http: [ip: {127, 0, 0, 1}, port: 4001],
   render_errors: [view: ExFleetYardsApi.ErrorView, accepts: ~w(json), layout: false]
+
+config :ex_fleet_yards_auth, ExFleetYardsAuth.Endpoint,
+  server: true,
+  url: [host: "localhost"],
+  http: [ip: {127, 0, 0, 1}, port: 4002],
+  pubsub_server: ExFleetYards.PubSub,
+  render_errors: [view: ExFleetYardsAuth.ErrorView, accepts: ~w(html json), layout: false]
 
 # Configure esbuild (the version is required)
 config :esbuild,
@@ -75,6 +85,23 @@ config :esbuild,
       ~w(js/app.js --bundle --target=es2017 --outdir=../priv/static/assets --external:/fonts/* --external:/images/*),
     cd: Path.expand("../apps/ex_fleet_yards_web/assets", __DIR__),
     env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
+  ],
+  auth: [
+    args:
+      ~w(js/app.js --bundle --target=es2017 --outdir=../priv/static/assets --external:/fonts/* --external:/images/*),
+    cd: Path.expand("../apps/ex_fleet_yards_auth/assets", __DIR__),
+    env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
+  ]
+
+config :tailwind,
+  version: "3.2.7",
+  auth: [
+    args: ~w(
+      --config=tailwind.config.js
+      --input=css/app.css
+      --output=../priv/static/assets/css/app.css
+    ),
+    cd: Path.expand("../apps/ex_fleet_yards_auth/assets", __DIR__)
   ]
 
 # Configures Elixir's Logger
@@ -103,6 +130,13 @@ config :appsignal, :config,
 
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
+
+config :boruta, Boruta.Oauth,
+  repo: ExFleetYards.Repo,
+  contexts: [
+    resource_owners: ExFleetYards.Oauth.ResourceOwners
+  ],
+  issuer: "https://auth.fleetyards.net"
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

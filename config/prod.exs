@@ -13,6 +13,12 @@ config :ex_fleet_yards_web, ExFleetYardsWeb.Endpoint,
   url: [host: "example.com", port: 80],
   cache_static_manifest: "priv/static/cache_manifest.json"
 
+config :ex_fleet_yards_api, ExFleetYardsApi.Endpoint, url: [host: "example.com", port: 80]
+
+config :ex_fleet_yards_auth, ExFleetYardsAuth.Endpoint,
+  url: [host: "example.com", port: 80],
+  cache_static_manifest: "priv/static/cache_manifest.json"
+
 # ## SSL Support
 #
 # To get SSL working, you will need to add the `https` key

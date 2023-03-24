@@ -14,7 +14,7 @@ jobs:
     name: "Build release: ${{ matrix.name }} (${{ matrix.env }})"
     strategy:
       matrix:
-        name: [ "api", "web_api" ]
+        name: [ "api", "web_api", "auth" ]
         env: [ "prod", "staging" ]
         exclude:
           - name: web_api

@@ -47,6 +47,7 @@ defmodule ExFleetYards.MixProject do
       {:open_api_spex, "~> 3.16"},
       {:chunkr, "~> 0.2.1"},
       {:bcrypt_elixir, "~> 3.0"},
+      {:boruta, "~> 2.2"},
       {:seedex, "~> 0.3.0",
        only: [:dev, :test], github: "fleetyards/seedex", branch: "seeds_path"}
     ]

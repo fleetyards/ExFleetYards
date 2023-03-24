@@ -14,6 +14,8 @@ DEPLOYMENT_TIME=$(date +"%Y%m%d%H%M%S")
 DEPLOY_TO=$RELEASES_DIR/$DEPLOYMENT_TIME
 CONFIG_PATH=$HOME/config.exs
 
+RELEASE_NAME="api_auth"
+
 function prepare() {
   echo "-> Prepare Deployment"
   if [ -f "$HOME/CURRENT_RELEASE" ]; then
@@ -35,13 +37,17 @@ function run() {
 
   MIX_ENV=$ENVIRONMENT mix deps.get --only "$ENVIRONMENT"
 
+  echo "--> Compile assets"
+
+  MIX_ENV=$ENVIRONMENT mix assets.deploy
+
   echo "--> Creating new Release"
 
-  MIX_ENV=$ENVIRONMENT mix release
+  MIX_ENV=$ENVIRONMENT mix release $RELEASE_NAME
 
   echo "--> Running pending migrations"
 
-  MIX_ENV=$ENVIRONMENT FLEETYARDS_CONFIG_PATH=$CONFIG_PATH "$DEPLOY_TO/_build/$ENVIRONMENT/rel/api/bin/api" eval "ExFleetYards.Release.Tasks.run(\"migrate\")"
+  MIX_ENV=$ENVIRONMENT FLEETYARDS_CONFIG_PATH=$CONFIG_PATH "$DEPLOY_TO/_build/$ENVIRONMENT/rel/$RELEASE_NAME/bin/$RELEASE_NAME" eval "ExFleetYards.Release.Tasks.run(\"migrate\")"
 
   popd > /dev/null
 

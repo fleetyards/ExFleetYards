@@ -1,0 +1,13 @@
+<div class="flex items-center justify-center min-h-screen bg-gray-900 text-white">
+  <div class="p-10 max-w-lg text-center">
+    <img class="mx-auto h-12 w-auto" src={Routes.static_path(@conn, "/images/logo-dark.png")}  alt="Logo">
+
+    <h1 class="text-4xl font-bold mb-6">Oops! Something went wrong.</h1>
+    <p class="text-lg mb-6"><%= @error_description %></p>
+    <%= if @redirect_uri do %>
+        <a href={"#{@redirect_uri}?error=#{@error || "error"}&error_description=#{@error_description}"} class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Return to App</a>
+    <% else %>
+        <a href="/" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Return to Home</a>
+    <% end %>
+  </div>
+</div>
