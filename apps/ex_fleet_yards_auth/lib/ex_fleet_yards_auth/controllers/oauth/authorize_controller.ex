@@ -69,12 +69,21 @@ defmodule ExFleetYardsAuth.Oauth.AuthorizeController do
 
   def authorize_error(
         conn,
-        %Error{status: status, error: error, error_description: error_description}
+        %Error{
+          status: status,
+          error: error,
+          error_description: error_description,
+          redirect_uri: redirect_uri
+        }
       ) do
     conn
     |> put_status(status)
     |> put_view(OauthView)
-    |> render("error.html", error: error, error_description: error_description)
+    |> render("error.html",
+      error: error,
+      error_description: error_description,
+      redirect_uri: redirect_uri
+    )
   end
 
   @impl Boruta.Oauth.AuthorizeApplication
@@ -83,7 +92,12 @@ defmodule ExFleetYardsAuth.Oauth.AuthorizeController do
 
     conn
     |> put_view(OauthView)
-    |> render("preauthorize.html", response: response, scopes: scopes)
+    |> render("preauthorize.html",
+      response: response,
+      scopes: scopes,
+      response_mode: conn.params["response_mode"],
+      response_type: conn.params["response_type"]
+    )
   end
 
   @impl Boruta.Oauth.AuthorizeApplication
