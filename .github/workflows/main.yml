@@ -2,11 +2,11 @@ name: Main
 
 on:
   push:
-    branches: [ "main", "staging", "trying" ]
+    branches: ["main", "staging", "trying"]
     tags-ignore:
       - "*.*"
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
   workflow_dispatch:
 
 jobs:
@@ -16,18 +16,16 @@ jobs:
     uses: ./.github/workflows/elixir_build.job.yml
   elixir-release:
     uses: ./.github/workflows/elixir_build.job.yml
-  nix-build:
-    uses: ./.github/workflows/nix.job.yml
   publish-docs:
     uses: ./.github/workflows/docs.job.yml
     if: github.ref == 'refs/heads/main'
-    needs: [credo, elixir-build, elixir-release, nix-build]
+    needs: [credo, elixir-build, elixir-release]
   deploy-to-stage:
     if: github.ref == 'refs/heads/main'
-    needs: [credo, elixir-build, elixir-release, nix-build]
+    needs: [credo, elixir-build, elixir-release]
     uses: ./.github/workflows/deploy.job.yml
     with:
       user: fleetyards-api
-      host: stage.fleetyards.net
+      host: fleetyards.dev
       branch: main
     secrets: inherit
