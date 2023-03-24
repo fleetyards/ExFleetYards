@@ -1,4 +1,7 @@
 defmodule ExFleetYards.Scopes do
+  @moduledoc """
+  Holds the list of available OAuth2 scopes.
+  """
   @hangar_scopes [
     "hangar:read": "Allows reading from your hangar",
     "hangar:write": "Allows writing to your hangar",
