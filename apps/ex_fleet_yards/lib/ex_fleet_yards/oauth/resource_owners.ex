@@ -7,21 +7,26 @@ defmodule ExFleetYards.Oauth.ResourceOwners do
 
   @impl Borta.Oauth.ResourceOwners
   def get_by(username: username) do
-    with %Account.User{} = user <- Account.get_user(username) do
-      {:ok,
-       %ResourceOwner{sub: user.id, username: user.email, last_login_at: user.last_sign_in_at}}
-    else
-      nil -> {:error, "User not found."}
+    case Account.get_user(username) do
+      %Account.User{} = user ->
+        {:ok,
+         %ResourceOwner{sub: user.id, username: user.email, last_login_at: user.last_sign_in_at}}
+
+      _ ->
+        {:error, "User not found."}
     end
   end
 
   @impl Borta.Oauth.ResourceOwners
   def get_by(sub: uuid) do
-    with %Account.User{} = user <- Repo.get(Account.User, uuid) do
-      {:ok,
-       %ResourceOwner{sub: user.id, username: user.email, last_login_at: user.last_sign_in_at}}
-    else
-      nil -> {:error, "User not found."}
+    Repo.get(Account.User, uuid)
+    |> case do
+      %Account.User{} = user ->
+        {:ok,
+         %ResourceOwner{sub: user.id, username: user.email, last_login_at: user.last_sign_in_at}}
+
+      _ ->
+        {:error, "User not found."}
     end
   end
 

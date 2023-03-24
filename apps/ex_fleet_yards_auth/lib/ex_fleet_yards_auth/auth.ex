@@ -55,9 +55,11 @@ defmodule ExFleetYardsAuth.Auth do
 
     user = user_token && Account.get_user_by_token(user_token, "auth")
 
-    with %{user: user} <- user do
-      assign(conn, :current_user, user)
-    else
+    user
+    |> case do
+      %{user: user} ->
+        assign(conn, :current_user, user)
+
       _ ->
         conn
     end
