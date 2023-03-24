@@ -6,7 +6,7 @@ BRANCH_NAME="${DEPLOY_BRANCH:=main}"
 REPO_URL="${DEPLOY_REPO:=https://github.com/fleetyards/ExFleetYards}"
 USER="${DEPLOY_USER:=fleetyards-api}"
 RELEASES_TO_KEEP="${RELEASES_TO_KEEP:=5}"
-ENVIRONMENT="${DEPLOY_ENV:=staging}"
+ENVIRONMENT="${DEPLOY_ENV:=prod}"
 
 HOME=/home/$USER
 RELEASES_DIR=$HOME/releases

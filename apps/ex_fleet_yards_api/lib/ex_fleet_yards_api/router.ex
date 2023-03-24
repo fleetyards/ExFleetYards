@@ -31,21 +31,14 @@ defmodule ExFleetYardsApi.Router do
     plug :put_secure_browser_headers
   end
 
-  root =
-    if ExFleetYards.Config.get(:ex_fleet_yards_api, [ExFleetYardsApi, :inline_endpoint], false) do
-      "/api"
-    else
-      "/"
-    end
-
-  scope root do
+  scope "/" do
     pipe_through :api
 
     scope "/v2/docs" do
       pipe_through :ui
 
       get "/", OpenApiSpex.Plug.SwaggerUI,
-        path: root <> "/v2/openapi.json",
+        path: "/v2/openapi.json",
         persist_authorization: true
     end
 

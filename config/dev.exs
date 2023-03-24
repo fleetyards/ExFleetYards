@@ -26,16 +26,7 @@ config :ex_fleet_yards_web, ExFleetYardsWeb.Endpoint,
   # Change to `ip: {0, 0, 0, 0}` to allow access from other machines.
   http: [
     ip: {127, 0, 0, 1},
-    port: 4000,
-    dispatch: [
-      {
-        :_,
-        [
-          {"/api/[...]", Phoenix.Endpoint.Cowboy2Handler, {ExFleetYardsApi.Endpoint, []}},
-          {:_, Phoenix.Endpoint.Cowboy2Handler, {ExFleetYardsWeb.Endpoint, []}}
-        ]
-      }
-    ]
+    port: 4000
   ],
   check_origin: false,
   code_reloader: true,
