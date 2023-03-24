@@ -11,7 +11,7 @@ defmodule ExFleetYardsApi.UserController do
       ok: {"User", "application/json", ExFleetYardsApi.Schemas.Single.User},
       unauthorized: {"Error", "application/json", Error}
     ],
-    security: [%{"authorization" => []}]
+    security: [%{"authorization" => ["user:read"]}]
 
   def get_current(conn, %{}) do
     conn = ExFleetYardsApi.Auth.required_api_scope(conn, %{})

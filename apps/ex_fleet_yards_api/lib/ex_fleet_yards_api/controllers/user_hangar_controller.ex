@@ -3,6 +3,9 @@ defmodule ExFleetYardsApi.UserHangarController do
 
   alias ExFleetYards.Repo.Account
 
+  plug(:authorize, ["hangar:read"] when action in [:index, :get])
+  plug(:authorize, ["hangar:write"] when action in [:create, :update, :delete])
+
   tags ["user", "hangar"]
 
   list_operation(:public, UserHangarList,
@@ -51,7 +54,7 @@ defmodule ExFleetYardsApi.UserHangarController do
     security: [%{"authorization" => ["hangar:read"]}]
 
   def index(conn, params) do
-    user_id = conn.assigns.current_token.user_id
+    user_id = conn.assigns.current_user.id
 
     query = Account.Vehicle.hangar_userid_query(user_id)
 
@@ -62,7 +65,7 @@ defmodule ExFleetYardsApi.UserHangarController do
 
     render(conn, "index.json",
       page: page,
-      username: conn.assigns.current_token.user.username,
+      username: conn.assigns.current_user.username,
       public: true
     )
   end
@@ -92,7 +95,7 @@ defmodule ExFleetYardsApi.UserHangarController do
     security: [%{"authorization" => ["hangar:read"]}]
 
   def get(conn, %{"id" => id}) do
-    user_id = conn.assigns.current_token.user_id
+    user_id = conn.assigns.current_user.id
 
     vehicle =
       Account.Vehicle.hangar_userid_query(user_id)
@@ -102,7 +105,7 @@ defmodule ExFleetYardsApi.UserHangarController do
 
     render(conn, "show.json",
       vehicle: vehicle,
-      username: conn.assigns.current_token.user.username,
+      username: conn.assigns.current_user.username,
       public: true
     )
   end
@@ -122,7 +125,7 @@ defmodule ExFleetYardsApi.UserHangarController do
 
   def update(conn, %{"id" => id} = params) do
     ExFleetYardsApi.Auth.required_api_scope(conn, %{"hangar" => "write"})
-    user_id = conn.assigns.current_token.user_id
+    user_id = conn.assigns.current_user.id
 
     vehicle =
       Account.Vehicle.hangar_userid_query(user_id)
@@ -136,7 +139,7 @@ defmodule ExFleetYardsApi.UserHangarController do
       {:ok, vehicle} ->
         render(conn, "show.json",
           vehicle: vehicle,
-          username: conn.assigns.current_token.user.username,
+          username: conn.assigns.current_user.username,
           public: true
         )
 
@@ -163,7 +166,7 @@ defmodule ExFleetYardsApi.UserHangarController do
 
   def create(conn, %{} = params) do
     ExFleetYardsApi.Auth.required_api_scope(conn, %{"hangar" => "write"})
-    user_id = conn.assigns.current_token.user_id
+    user_id = conn.assigns.current_user.id
 
     changeset = Account.Vehicle.create_changeset(params, user_id)
 
@@ -171,7 +174,7 @@ defmodule ExFleetYardsApi.UserHangarController do
       {:ok, vehicle} ->
         render(conn, "show.json",
           vehicle: vehicle,
-          username: conn.assigns.current_token.user.username,
+          username: conn.assigns.current_user.username,
           public: true
         )
 
@@ -196,7 +199,7 @@ defmodule ExFleetYardsApi.UserHangarController do
 
   def delete(conn, %{"id" => id}) do
     ExFleetYardsApi.Auth.required_api_scope(conn, %{"hangar" => "write"})
-    user_id = conn.assigns.current_token.user_id
+    user_id = conn.assigns.current_user.id
 
     vehicle =
       Account.Vehicle.hangar_userid_query(user_id)
@@ -209,7 +212,7 @@ defmodule ExFleetYardsApi.UserHangarController do
         conn
         |> render("show.json",
           vehicle: vehicle,
-          username: conn.assigns.current_token.user.username,
+          username: conn.assigns.current_user.username,
           public: true
         )
 

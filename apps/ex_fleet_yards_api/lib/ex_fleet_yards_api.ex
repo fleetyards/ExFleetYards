@@ -35,6 +35,9 @@ defmodule ExFleetYardsApi do
       alias ExFleetYardsApi.ErrorView
 
       use ExFleetYardsApi.ControllerHelpers
+
+      import ExFleetYardsApi.Plugs.Authorization,
+        only: [authorize: 2]
     end
   end
 

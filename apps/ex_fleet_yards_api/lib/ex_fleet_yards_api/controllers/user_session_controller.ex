@@ -3,6 +3,8 @@ defmodule ExFleetYardsApi.UserSessionController do
 
   alias ExFleetYards.Repo.Account
 
+  plug(:authorize, ["user:read"] when action in [:get, :read])
+
   tags ["session", "user"]
 
   operation :create,
