@@ -3,6 +3,9 @@ defmodule ExFleetYardsApi.UserController do
 
   alias ExFleetYards.Repo.Account
 
+  plug(:authorize, ["user:read"] when action in [:get_current])
+  plug(:authorize, ["user:write"] when action in [:set])
+
   tags ["user"]
 
   operation :get_current,
@@ -148,12 +151,13 @@ defmodule ExFleetYardsApi.UserController do
     responses: [
       ok: {"Status", "application/json", Error},
       not_found: {"Error", "application/json", Error}
-    ]
+    ],
+    security: [%{"authorization" => ["user:delete"]}]
 
   def delete(conn, %{}) do
-    conn = ExFleetYardsApi.Auth.required_api_scope(conn, %{"api" => "admin", "user" => "write"})
-
     user = conn.assigns.current_user
+
+    # TODO: Delete all user data and tokens
 
     Account.delete_user(user)
     |> case do

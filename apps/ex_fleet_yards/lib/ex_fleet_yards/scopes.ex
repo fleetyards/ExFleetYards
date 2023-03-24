@@ -9,6 +9,7 @@ defmodule ExFleetYards.Scopes do
   ]
 
   @fleet_scopes [
+    "fleet:create": "Allows to create a new fleet",
     "fleet:read": "Allows reading from your fleet",
     "fleet:write": "Allows writing to your fleet",
     "fleet:admin": "Allows managing your fleet, except deleting",
@@ -18,6 +19,7 @@ defmodule ExFleetYards.Scopes do
   @user_scopes [
     "user:read": "Allows reading user profile data",
     "user:email": "Allows reading user email address",
+    "user:delete": "Allows deleting your account",
     # "user:follow": "Allows following other users",
     user: "Allows reading and writing user data"
   ]
