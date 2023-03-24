@@ -39,7 +39,7 @@
           <%= submit "Log in", class: "inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest bg-indigo-400 hover:bg-indigo-500 active:bg-indigo-600 focus:outline-none focus:border-indigo-500 focus:ring ring-indigo-300 disabled:opacity-25 transition ease-in-out duration-150" %>
         </div>
 
-        <% if @error do %>
+        <%= if @error do %>
           <p class="text-red-400 text-sm mb-4"><%= @error %></p>
         <% end %>
       <% end %>

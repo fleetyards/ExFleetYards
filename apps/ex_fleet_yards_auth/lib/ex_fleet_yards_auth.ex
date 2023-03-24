@@ -26,8 +26,6 @@ defmodule ExFleetYardsAuth do
 
       alias ExFleetYards.Repo
 
-      use ExFleetYardsApi.ControllerHelpers
-
       alias ExFleetYardsAuth.Router.Helpers, as: Routes
     end
   end
