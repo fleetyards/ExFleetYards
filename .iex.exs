@@ -1,3 +1,7 @@
+if File.exists?("~/.iex.exs") do
+  import_file("~/.iex.exs")
+end
+
 alias ExFleetYards.Repo
 alias ExFleetYards.Repo.Game
 
