@@ -41,7 +41,7 @@ defmodule ExFleetYardsAuth.Auth do
     user_token = Account.delete_token(user_token, "auth")
 
     if live_socket_id = get_session(conn, :live_socket_id) do
-      ExFleetYardsWeb.Endpoint.broadcast(live_socket_id, "disconnect", %{})
+      ExFleetYardsAuth.Endpoint.broadcast(live_socket_id, "disconnect", %{})
     end
 
     conn

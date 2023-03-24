@@ -74,6 +74,7 @@ config :ex_fleet_yards_auth, ExFleetYardsAuth.Endpoint,
   server: true,
   url: [host: "localhost"],
   http: [ip: {127, 0, 0, 1}, port: 4002],
+  pubsub_server: ExFleetYards.PubSub,
   render_errors: [view: ExFleetYardsAuth.ErrorView, accepts: ~w(html json), layout: false]
 
 # Configure esbuild (the version is required)
