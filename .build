@@ -58,10 +58,10 @@ ExFleetYards.Repo.Types.StationType.html
 ExFleetYards.Repo.Types.TokenScope.html
 ExFleetYards.Repo.Types.html
 ExFleetYards.Repo.html
+ExFleetYards.Scopes.html
 ExFleetYards.Version.html
 ExFleetYards.html
 ExFleetYardsApi.ApiSpec.html
-ExFleetYardsApi.Auth.html
 ExFleetYardsApi.CelestialObjectController.html
 ExFleetYardsApi.CelestialObjectView.html
 ExFleetYardsApi.CommodityView.html
@@ -80,6 +80,7 @@ ExFleetYardsApi.ManufacturerView.html
 ExFleetYardsApi.ModelController.html
 ExFleetYardsApi.ModelView.html
 ExFleetYardsApi.NotFoundException.html
+ExFleetYardsApi.Plugs.Authorization.html
 ExFleetYardsApi.RoadmapController.html
 ExFleetYardsApi.RoadmapView.html
 ExFleetYardsApi.Router.Helpers.html
@@ -179,7 +180,7 @@ dist/merriweather-latin-ext-300-normal-K6L27CZ5.woff2
 dist/merriweather-vietnamese-300-italic-EHHNZPUO.woff2
 dist/merriweather-vietnamese-300-normal-U376L4Z4.woff2
 dist/remixicon-NKANDIL5.woff2
-dist/search_items-A6AEE877.js
-dist/sidebar_items-B87638DF.js
+dist/search_items-709DB08C.js
+dist/sidebar_items-98DEBACC.js
 index.html
 search.html

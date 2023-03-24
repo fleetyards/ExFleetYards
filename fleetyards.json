@@ -382,7 +382,7 @@
             "x-validate": null
           },
           "token": {
-            "example": "FvjG3Xhh-g",
+            "example": "LmUc0u8q3w",
             "type": "string",
             "x-struct": null,
             "x-validate": null
@@ -2472,8 +2472,46 @@
     },
     "securitySchemes": {
       "authorization": {
+        "flows": {
+          "authorizationCode": {
+            "authorizationUrl": "http://localhost:4002/oauth/authorize",
+            "scopes": {
+              "fleet:admin": "Allows managing your fleet, except deleting",
+              "fleet:create": "Allows to create a new fleet",
+              "fleet:delete": "Allows deleting your fleet",
+              "fleet:read": "Allows reading from your fleet",
+              "fleet:write": "Allows writing to your fleet",
+              "hangar": "Allows reading and writing to your hangar",
+              "hangar:read": "Allows reading from your hangar",
+              "hangar:write": "Allows writing to your hangar",
+              "user": "Allows reading and writing user data",
+              "user:delete": "Allows deleting your account",
+              "user:email": "Allows reading user email address",
+              "user:read": "Allows reading user profile data"
+            },
+            "tokenUrl": "http://localhost:4002/oauth/token"
+          },
+          "implicit": {
+            "authorizationUrl": "http://localhost:4002/oauth/authorize",
+            "scopes": {
+              "fleet:admin": "Allows managing your fleet, except deleting",
+              "fleet:create": "Allows to create a new fleet",
+              "fleet:delete": "Allows deleting your fleet",
+              "fleet:read": "Allows reading from your fleet",
+              "fleet:write": "Allows writing to your fleet",
+              "hangar": "Allows reading and writing to your hangar",
+              "hangar:read": "Allows reading from your hangar",
+              "hangar:write": "Allows writing to your hangar",
+              "user": "Allows reading and writing user data",
+              "user:delete": "Allows deleting your account",
+              "user:email": "Allows reading user email address",
+              "user:read": "Allows reading user profile data"
+            }
+          }
+        },
+        "in": "header",
         "scheme": "bearer",
-        "type": "http"
+        "type": "oauth2"
       }
     }
   },
@@ -2611,6 +2649,13 @@
             "description": "Error"
           }
         },
+        "security": [
+          {
+            "authorization": [
+              "user:delete"
+            ]
+          }
+        ],
         "summary": "Delete a user",
         "tags": [
           "user"
@@ -4332,7 +4377,9 @@
         },
         "security": [
           {
-            "authorization": []
+            "authorization": [
+              "user:read"
+            ]
           }
         ],
         "summary": "Get user info",
@@ -4807,7 +4854,7 @@
         "security": [
           {
             "authorization": [
-              "fleet:admin"
+              "fleet:delete"
             ]
           }
         ],

@@ -7,7 +7,7 @@
     <meta name="generator" content="ExDoc v0.29.3">
     <meta name="project" content="Fleetyards v0.1.0">
 
-    <title>ExFleetYardsApi.Schemas.List.RoadmapItemList — Fleetyards v0.1.0</title>
+    <title>ExFleetYardsApi.Plugs.Authorization — Fleetyards v0.1.0</title>
     <link rel="stylesheet" href="dist/html-elixir-MB5C7R66.css" />
 
 
@@ -98,11 +98,34 @@ Fleetyards
 </button>
 
 
-  <span translate="no">ExFleetYardsApi.Schemas.List.RoadmapItemList</span> 
+  <span translate="no">ExFleetYardsApi.Plugs.Authorization</span> 
   <small class="app-vsn" translate="no">(Fleetyards v0.1.0)</small>
 
 </h1>
 
+
+  <section id="moduledoc">
+<p>This module provides plugs for authorization and authentication.</p><h2 id="module-plugs" class="section-heading">
+  <a href="#module-plugs" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
+  <p class="sr-only">plugs</p>
+  </a>
+  Plugs
+</h2>
+<h3 id="module-require_authenticated-2" class="section-heading">
+  <a href="#module-require_authenticated-2" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
+  <p class="sr-only">require_authenticated-2</p>
+  </a>
+  <a href="#require_authenticated/2"><code class="inline">require_authenticated/2</code></a>
+</h3>
+<p>Ensures that the user is authenticated by checking for a valid bearer token in
+the <code class="inline">authorization</code> header.</p><p>It assigns the current token and user to the connection.</p><h3 id="module-authorize-2" class="section-heading">
+  <a href="#module-authorize-2" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
+  <p class="sr-only">authorize-2</p>
+  </a>
+  <a href="#authorize/2"><code class="inline">authorize/2</code></a>
+</h3>
+<p>Ensures that the user has the required OAuth2 scopes.</p><p>Takes a list of required scopes as a parameter.</p>
+  </section>
 
 
   <section id="summary" class="details-list">
@@ -113,20 +136,6 @@ Fleetyards
       </a>
       Summary
     </h1>
-<div class="summary-types summary">
-  <h2>
-    <a href="#types">Types</a>
-  </h2>
-
-    <div class="summary-row">
-      <div class="summary-signature">
-        <a href="#t:t/0" translate="no">t()</a>
-
-      </div>
-
-    </div>
-
-</div>
 <div class="summary-functions summary">
   <h2>
     <a href="#functions">Functions</a>
@@ -134,19 +143,22 @@ Fleetyards
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#inner/0" translate="no">inner()</a>
+        <a href="#authorize/2" translate="no">authorize(conn, required_scopes)</a>
 
       </div>
+
+        <div class="summary-synopsis"><p>Ensures that the user has the required OAuth2 scopes.</p></div>
 
     </div>
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#schema/0" translate="no">schema()</a>
+        <a href="#require_authenticated/2" translate="no">require_authenticated(conn, opts)</a>
 
       </div>
 
-        <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/open_api_spex/3.16.1/OpenApiSpex.Schema.html#c:schema/0"><code class="inline">OpenApiSpex.Schema.schema/0</code></a>.</p></div>
+        <div class="summary-synopsis"><p>Ensures that the user is authenticated by checking for a valid bearer token in
+the <code class="inline">authorization</code> header.</p></div>
 
     </div>
 
@@ -154,45 +166,6 @@ Fleetyards
 
   </section>
 
-
-  <section id="types" class="details-list">
-    <h1 class="section-heading">
-      <a class="hover-link" href="#types">
-        <i class="ri-link-m" aria-hidden="true"></i>
-        <span class="sr-only">Link to this section</span>
-      </a>
-Types
-    </h1>
-    <div class="types-list">
-<section class="detail" id="t:t/0">
-
-  <div class="detail-header">
-    <a href="#t:t/0" class="detail-link" title="Link to this type">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this type</span>
-    </a>
-    <h1 class="signature" translate="no">t()</h1>
-
-
-  </div>
-
-  <section class="docstring">
-
-      <div class="specs">
-
-          <pre translate="no"><span class="attribute">@type</span> t() :: %ExFleetYardsApi.Schemas.List.RoadmapItemList{
-  data: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
-  metadata: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>()
-}</pre>
-
-      </div>
-
-
-  </section>
-</section>
-
-    </div>
-  </section>
 
   <section id="functions" class="details-list">
     <h1 class="section-heading">
@@ -203,38 +176,51 @@ Types
 Functions
     </h1>
     <div class="functions-list">
-<section class="detail" id="inner/0">
+<section class="detail" id="authorize/2">
 
   <div class="detail-header">
-    <a href="#inner/0" class="detail-link" title="Link to this function">
+    <a href="#authorize/2" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">inner()</h1>
+    <h1 class="signature" translate="no">authorize(conn, required_scopes)</h1>
 
 
   </div>
 
   <section class="docstring">
 
+      <div class="specs">
 
+          <pre translate="no"><span class="attribute">@spec</span> authorize(<a href="https://hexdocs.pm/plug/1.14.2/Plug.Conn.html#t:t/0">Plug.Conn.t</a>(), <a href="https://hexdocs.pm/elixir/Keyword.html#t:t/0">Keyword.t</a>()) :: <a href="https://hexdocs.pm/plug/1.14.2/Plug.Conn.html#t:t/0">Plug.Conn.t</a>()</pre>
+
+      </div>
+
+<p>Ensures that the user has the required OAuth2 scopes.</p><p>Takes a list of required scopes as a parameter.</p>
   </section>
 </section>
-<section class="detail" id="schema/0">
+<section class="detail" id="require_authenticated/2">
 
   <div class="detail-header">
-    <a href="#schema/0" class="detail-link" title="Link to this function">
+    <a href="#require_authenticated/2" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">schema()</h1>
+    <h1 class="signature" translate="no">require_authenticated(conn, opts)</h1>
 
 
   </div>
 
   <section class="docstring">
 
-<p>Callback implementation for <a href="https://hexdocs.pm/open_api_spex/3.16.1/OpenApiSpex.Schema.html#c:schema/0"><code class="inline">OpenApiSpex.Schema.schema/0</code></a>.</p>
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> require_authenticated(<a href="https://hexdocs.pm/plug/1.14.2/Plug.Conn.html#t:t/0">Plug.Conn.t</a>(), <a href="https://hexdocs.pm/elixir/Keyword.html#t:t/0">Keyword.t</a>()) :: <a href="https://hexdocs.pm/plug/1.14.2/Plug.Conn.html#t:t/0">Plug.Conn.t</a>()</pre>
+
+      </div>
+
+<p>Ensures that the user is authenticated by checking for a valid bearer token in
+the <code class="inline">authorization</code> header.</p><p>It assigns the current token and user to the connection.</p>
   </section>
 </section>
 
