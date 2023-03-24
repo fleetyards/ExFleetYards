@@ -61,6 +61,14 @@ defmodule ExFleetYardsApi.ErrorView do
     %{"code" => "unauthorized", "message" => message}
   end
 
+  def render("401.json", %{}) do
+    render("401.json", %{message: "Unauthorized"})
+  end
+
+  def render("403.json", %{message: message}) do
+    %{"code" => "forbidden", "message" => message}
+  end
+
   def render("404.json", %{
         reason: %ExFleetYardsApi.NotFoundException{
           message: message

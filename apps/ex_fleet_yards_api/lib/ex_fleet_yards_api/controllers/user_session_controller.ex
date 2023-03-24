@@ -3,6 +3,8 @@ defmodule ExFleetYardsApi.UserSessionController do
 
   alias ExFleetYards.Repo.Account
 
+  plug(:authorize, ["user:read"] when action in [:get, :read])
+
   tags ["session", "user"]
 
   operation :create,
@@ -44,7 +46,7 @@ defmodule ExFleetYardsApi.UserSessionController do
   def create(conn, %{"scopes" => scopes}) do
     ExFleetYardsApi.Auth.required_api_scope(conn, %{"api" => "admin"})
 
-    user = conn.assigns.current_token.user
+    user = conn.assigns.current_user
 
     token = Account.get_api_token(user, scopes)
 
@@ -61,7 +63,7 @@ defmodule ExFleetYardsApi.UserSessionController do
     security: [%{"authorization" => ["api:read"]}]
 
   def list(conn, %{}) do
-    user = conn.assigns.current_token.user
+    user = conn.assigns.current_user
 
     tokens =
       Account.UserToken.user_and_contexts_query(user, "api")
@@ -83,7 +85,7 @@ defmodule ExFleetYardsApi.UserSessionController do
 
   def get(conn, %{"id" => id}) do
     token =
-      Account.UserToken.user_and_id_query(conn.assigns.current_token.user, id)
+      Account.UserToken.user_and_id_query(conn.assigns.current_user, id)
       |> Repo.one()
 
     render(conn, "token.json", token: token)

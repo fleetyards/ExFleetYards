@@ -60,6 +60,14 @@ defmodule ExFleetYards.Repo.Account do
     if User.valid_password?(user, password), do: user
   end
 
+  def get_user_by_sub(id, confirmed \\ true) when is_binary(id) do
+    query =
+      from(u in User, where: u.id == ^id)
+      |> user_query_set_confirmed(confirmed)
+
+    Repo.one(query)
+  end
+
   @doc """
   Registers a user.
   ## Examples

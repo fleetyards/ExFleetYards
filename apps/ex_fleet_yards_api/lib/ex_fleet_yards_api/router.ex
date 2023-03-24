@@ -3,24 +3,11 @@ defmodule ExFleetYardsApi.Router do
 
   import Plug.Conn
   import Phoenix.Controller
-  import ExFleetYardsApi.Auth
+  import ExFleetYardsApi.Plugs.Authorization, only: [require_authenticated: 2]
 
   pipeline :api do
     plug :accepts, ["json"]
     plug OpenApiSpex.Plug.PutApiSpec, module: ExFleetYardsApi.ApiSpec
-    plug :fetch_api_token
-  end
-
-  pipeline :authenticated do
-    plug :required_api_scope, %{}
-  end
-
-  pipeline :scope_api_read do
-    plug :required_api_scope, %{"api" => "read"}
-  end
-
-  pipeline :scope_hangar_read do
-    plug :required_api_scope, %{"hangar" => "read"}
   end
 
   pipeline :ui do
@@ -34,12 +21,15 @@ defmodule ExFleetYardsApi.Router do
   scope "/" do
     pipe_through :api
 
-    scope "/v2/docs" do
+    scope "/v2" do
       pipe_through :ui
 
-      get "/", OpenApiSpex.Plug.SwaggerUI,
+      get "/oauth2-redirect.html", OpenApiSpex.Plug.SwaggerUIOAuth2Redirect, []
+
+      get "/docs", OpenApiSpex.Plug.SwaggerUI,
         path: "/v2/openapi.json",
-        persist_authorization: true
+        persist_authorization: true,
+        oauth: [appName: "Fleetyards API"]
     end
 
     get "/v2/openapi.json", OpenApiSpex.Plug.RenderSpec, []
@@ -53,7 +43,7 @@ defmodule ExFleetYardsApi.Router do
         delete "/logout/:id", UserSessionController, :delete_other
 
         scope "/" do
-          pipe_through :scope_api_read
+          pipe_through :require_authenticated
 
           get "/tokens/:id", UserSessionController, :get
 
@@ -103,7 +93,8 @@ defmodule ExFleetYardsApi.Router do
         end
 
         scope "/" do
-          pipe_through :scope_hangar_read
+          pipe_through :require_authenticated
+
           get "/", UserHangarController, :index
           get "/:id", UserHangarController, :get
           post "/:model", UserHangarController, :create

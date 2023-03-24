@@ -12,6 +12,7 @@ defmodule ExFleetYardsApi.MixProject do
       elixir: "~> 1.13",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [] ++ Mix.compilers(),
+      xref: xref(),
       start_permanent: Enum.member?([:prod, :staging], Mix.env()),
       aliases: aliases(),
       deps: deps()
@@ -43,7 +44,14 @@ defmodule ExFleetYardsApi.MixProject do
       {:open_api_spex, "~> 3.16"},
       {:instream, "~> 2.0"},
       {:telemetry_metrics_telegraf, "~> 0.3.0"},
-      {:appsignal, "~> 2.0"}
+      {:appsignal, "~> 2.0"},
+      {:boruta, "~> 2.2"}
+    ]
+  end
+
+  defp xref do
+    [
+      exclude: [ExFleetYardsAuth.Router.Helpers]
     ]
   end
 

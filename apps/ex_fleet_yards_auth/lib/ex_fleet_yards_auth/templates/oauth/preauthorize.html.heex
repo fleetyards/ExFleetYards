@@ -48,7 +48,7 @@
           <%= hidden_input f, :client_id, value: @response.client.id %>
           <%= hidden_input f, :redirect_uri, value: @response.redirect_uri %>
           <%= hidden_input f, :response_type, value: @response_type %>
-          <%= hidden_input f, :response_mode, value: @response_mode %>
+          <%= optional_hidden_input f, :response_mode, @response_mode %>
           <%= hidden_input f, :state, value: @response.state %>
           <%= hidden_input f, :nonce, value: @response.nonce %>
           <%= optional_hidden_input f, :code_challenge_method, @response.code_challenge_method %>

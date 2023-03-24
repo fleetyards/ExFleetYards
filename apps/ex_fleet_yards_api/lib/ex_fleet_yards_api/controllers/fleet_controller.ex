@@ -3,6 +3,10 @@ defmodule ExFleetYardsApi.FleetController do
 
   alias Repo.Fleet
 
+  plug(:authorize, ["fleet:read"] when action in [:get])
+  plug(:authorize, ["fleet:write"] when action in [:create, :update])
+  plug(:authorize, ["fleet:delete"] when action in [:delete])
+
   tags ["fleet"]
 
   operation :get,
@@ -17,7 +21,8 @@ defmodule ExFleetYardsApi.FleetController do
     security: [%{"authorization" => ["fleet:read"]}]
 
   def get(conn, %{"slug" => slug}) do
-    {public, fleet} = ExFleetYardsApi.Auth.check_fleet_scope_or_public(conn, slug, "read")
+    # TODO: get fleet
+    {public, fleet} = nil
     template = if public, do: "public.json", else: "fleet.json"
     render(conn, template, fleet: fleet)
   end
@@ -33,9 +38,7 @@ defmodule ExFleetYardsApi.FleetController do
     security: [%{"authorization" => ["fleet:create"]}]
 
   def create(conn, %{} = params) do
-    conn = ExFleetYardsApi.Auth.required_api_scope(conn, %{"fleet" => "create"})
-
-    user = conn.assigns.current_token.user
+    user = conn.assigns.current_user
 
     params =
       params
@@ -70,7 +73,8 @@ defmodule ExFleetYardsApi.FleetController do
     security: [%{"authorization" => ["fleet:admin"]}]
 
   def update(conn, %{"slug" => slug} = params) do
-    fleet = ExFleetYardsApi.Auth.check_fleet_scope(conn, slug, "admin", :admin)
+    raise "TODO: get fleet"
+    fleet = nil
 
     params =
       params
@@ -100,11 +104,11 @@ defmodule ExFleetYardsApi.FleetController do
       bad_request: {"Error", "application/json", Error},
       unauthorized: {"Error", "application/json", Error}
     ],
-    security: [%{"authorization" => ["fleet:admin"]}]
+    security: [%{"authorization" => ["fleet:delete"]}]
 
   def delete(conn, %{"slug" => slug}) do
-    fleet = ExFleetYardsApi.Auth.check_fleet_scope(conn, slug, "admin", :admin)
-
+    raise "TODO: get slug"
+    fleet = nil
     Fleet.delete(fleet)
     json(conn, %{code: "success", message: "Fleet deleted"})
   end
