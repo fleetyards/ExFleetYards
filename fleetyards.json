@@ -382,7 +382,7 @@
             "x-validate": null
           },
           "token": {
-            "example": "ACLtq3P_sw",
+            "example": "N_CqaPTYJw",
             "type": "string",
             "x-struct": null,
             "x-validate": null
