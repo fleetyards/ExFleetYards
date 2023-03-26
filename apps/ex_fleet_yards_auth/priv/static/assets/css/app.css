@@ -834,6 +834,11 @@ select {
   border-color: transparent;
 }
 
+.bg-black {
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
+}
+
 .bg-blue-500 {
   --tw-bg-opacity: 1;
   background-color: rgb(59 130 246 / var(--tw-bg-opacity));
@@ -1039,6 +1044,40 @@ select {
 
 .ease-in-out {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.background-image {
+  position: fixed;
+  z-index: -1;
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+  background-image: url("/images/bg-6.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  opacity: 0.4;
+  transition: background-image ease 0.5s;
+}
+
+.background-image.webp {
+  background-image: url("/images/bg-6.webp");
+}
+
+.page-admin .background-image {
+  background-image: url("/images/bg-0.jpg");
+}
+
+.page-admin .background-image.webp {
+  background-image: url("/images/bg-0.webp");
+}
+
+.page-error .background-image {
+  background-image: url("/images/bg-404.jpg");
+}
+
+.page-error .background-image.webp {
+  background-image: url("/images/bg-404.webp");
 }
 
 .hover\:bg-blue-700:hover {

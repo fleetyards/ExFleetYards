@@ -55,12 +55,23 @@ config :ex_fleet_yards_auth, ExFleetYardsAuth.Endpoint,
     ip: {127, 0, 0, 1},
     port: 4002
   ],
+  check_origin: false,
+  code_reloader: true,
   secret_key_base: "zMnmcNSJebHEPCJqrtztxeTVMEWfciC0cxNuEFZWRZFx2/QA4Ull5nkkLwqQBRQ6",
   live_view: [signing_salt: "F07EFQKnybYwDgCO"],
   watchers: [
     # Start the esbuild watcher by calling Esbuild.install_and_run(:auth, args)
     esbuild: {Esbuild, :install_and_run, [:auth, ~w(--sourcemap=inline --watch)]},
     tailwind: {Tailwind, :install_and_run, [:auth, ~w(--watch)]}
+  ],
+  live_reload: [
+    patterns: [
+      ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",
+      ~r"priv/gettext/.*(po)$",
+      ~r"lib/ex_fleet_yards_auth/.*(js|css|png|jpeg|jpg|gif|svg)$",
+      ~r"lib/ex_fleet_yards_auth/(live|views)/.*(ex)$",
+      ~r"lib/ex_fleet_yards_auth/templates/.*(eex)$"
+    ]
   ]
 
 # ## SSL Support
