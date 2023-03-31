@@ -3,6 +3,8 @@ defmodule ExFleetYardsAuth.Openid.AuthorizeController do
 
   use ExFleetYardsAuth, :controller
 
+  alias ExFleetYardsAuth.Auth
+
   alias Boruta.Oauth.AuthorizeResponse
   alias Boruta.Oauth.Error
   alias Boruta.Oauth.ResourceOwner
@@ -61,11 +63,20 @@ defmodule ExFleetYardsAuth.Openid.AuthorizeController do
 
   def authorize_error(
         conn,
-        %Error{status: status, error: error, error_description: error_description}
+        %Error{
+          status: status,
+          error: error,
+          error_description: error_description,
+          redirect_uri: redirect_uri
+        }
       ) do
     conn
     |> put_status(status)
-    |> render("error.html", error: error, error_description: error_description)
+    |> render("error.html",
+      error: error,
+      error_description: error_description,
+      redirect_uri: redirect_uri
+    )
   end
 
   defp put_unsigned_request(%Plug.Conn{query_params: query_params} = conn) do
@@ -147,22 +158,17 @@ defmodule ExFleetYardsAuth.Openid.AuthorizeController do
         %ResourceOwner{
           sub: to_string(current_user.id),
           username: current_user.email,
-          last_login_at: current_user.last_login_at
+          last_login_at: current_user.last_sign_in_at
         }
     end
   end
 
-  defp redirect_to_login(_conn) do
-    raise """
-    Here occurs the login process. After login, user may be redirected to
-    get_session(conn, :user_return_to)
-    """
+  defp redirect_to_login(conn) do
+    conn
+    |> redirect(to: Routes.session_path(conn, :new))
   end
 
-  defp log_out_user(_conn) do
-    raise """
-    Here user shall be logged out then redirected to login. After login, user may be redirected to
-    get_session(conn, :user_return_to)
-    """
+  defp log_out_user(conn) do
+    Auth.log_out_user(conn)
   end
 end

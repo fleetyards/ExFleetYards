@@ -172,4 +172,9 @@ defmodule ExFleetYards.Repo.Account.User do
   #  changeset
   #  |> validate_format(:discord_handle, ~r/^((.[^\@\#\:]{2,32})#\d{4})/, message: "Discord handle not in the correct format")
   # end
+
+  def login_changeset(user) do
+    user
+    |> change(last_sign_in_at: NaiveDateTime.utc_now())
+  end
 end

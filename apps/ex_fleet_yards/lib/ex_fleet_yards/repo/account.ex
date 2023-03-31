@@ -126,6 +126,10 @@ defmodule ExFleetYards.Repo.Account do
   def get_auth_token(user) do
     {token, user_token} = UserToken.build_auth_token(user)
     Repo.insert!(user_token)
+
+    User.login_changeset(user)
+    |> Repo.update()
+
     token
   end
 
