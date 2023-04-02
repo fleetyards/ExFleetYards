@@ -673,12 +673,12 @@ let
 
     phoenix_live_dashboard = buildMix rec {
       name = "phoenix_live_dashboard";
-      version = "0.6.5";
+      version = "0.7.2";
 
       src = fetchHex {
         pkg = "${name}";
         version = "${version}";
-        sha256 = "0lmq1m7k465i9mzw35l7bx69n85mibwzd76976840r43sw6sakzg";
+        sha256 = "1dq5vj1a6fzclr3fwj7y8rg2xq3yigvgqc3aaq664fvs7h3dypqf";
       };
 
       beamDeps = [ ecto mime phoenix_live_view telemetry_metrics ];
@@ -699,15 +699,15 @@ let
 
     phoenix_live_view = buildMix rec {
       name = "phoenix_live_view";
-      version = "0.17.14";
+      version = "0.18.18";
 
       src = fetchHex {
         pkg = "${name}";
         version = "${version}";
-        sha256 = "1lzbzbv956j0gyxzw9gh8m9rjf9hdpycv6hwzkvscag37jj6psxg";
+        sha256 = "052jv2kbc2nb4qs4ly4idcai6q8wyfkvv59adpg9w67kf820v0d5";
       };
 
-      beamDeps = [ jason phoenix phoenix_html telemetry ];
+      beamDeps = [ jason phoenix phoenix_html phoenix_template phoenix_view telemetry ];
     };
 
     phoenix_pubsub = buildMix rec {

@@ -102,13 +102,10 @@ defmodule ExFleetYardsAuth do
   defp view_helpers() do
     quote do
       # Import basic rendering functionality (render, render_layout, etc)
-      import Phoenix.View
       import Phoenix.HTML.Tag
 
-      # import ExFleetYardsApi.ErrorHelpers
-
       alias ExFleetYardsAuth.Router.Helpers, as: Routes
-      # import ExFleetYardsAuth.ViewHelpers
+
       unquote(verified_routes())
     end
   end
