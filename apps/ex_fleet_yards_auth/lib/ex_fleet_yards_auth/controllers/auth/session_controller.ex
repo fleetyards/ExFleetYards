@@ -4,8 +4,8 @@ defmodule ExFleetYardsAuth.SessionController do
   alias ExFleetYards.Repo.Account
   alias ExFleetYardsAuth.Auth
 
-  def new(conn, _param) do
-    render(conn, "new.html", error: nil, email: nil)
+  def new(conn, params) do
+    render(conn, "new.html", error: nil, email: params["login_hint"])
   end
 
   def create(conn, %{"login" => user_params}) do
