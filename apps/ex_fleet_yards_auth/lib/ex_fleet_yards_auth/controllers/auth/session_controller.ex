@@ -8,7 +8,7 @@ defmodule ExFleetYardsAuth.SessionController do
     render(conn, "new.html", error: nil, email: params["login_hint"])
   end
 
-  def create(conn, %{"login" => user_params}) do
+  def create(conn, user_params) do
     %{"email" => email, "password" => password} = user_params
 
     Account.get_user_by_password(email, password)

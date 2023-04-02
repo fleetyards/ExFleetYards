@@ -3,7 +3,7 @@ defmodule ExFleetYardsAuth.Openid.UserinfoController do
 
   use ExFleetYardsAuth, :controller
 
-  alias ExFleetYardsAuth.OpenidView
+  plug :put_view, json: ExFleetYardsAuth.Openid.Json
 
   def openid_module, do: Application.get_env(:ex_fleet_yards_auth, :openid_module, Boruta.Openid)
 
@@ -14,8 +14,7 @@ defmodule ExFleetYardsAuth.Openid.UserinfoController do
   @impl Boruta.Openid.UserinfoApplication
   def userinfo_fetched(conn, userinfo) do
     conn
-    |> put_view(OpenidView)
-    |> render("userinfo.json", userinfo: userinfo)
+    |> render(:userinfo, userinfo: userinfo)
   end
 
   @impl Boruta.Openid.UserinfoApplication

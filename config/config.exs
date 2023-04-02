@@ -77,8 +77,8 @@ config :ex_fleet_yards_auth, ExFleetYardsAuth.Endpoint,
   pubsub_server: ExFleetYards.PubSub,
   render_errors: [
     view: ExFleetYardsAuth.ErrorView,
-    accepts: ~w(html json),
-    layout: {ExFleetYardsAuth.LayoutView, :root}
+    formats: [html: ExFleetYardsAuth.ErrorHTML],
+    layout: [html: {ExFleetYardsAuth.Layouts, :root}]
   ]
 
 # Configure esbuild (the version is required)

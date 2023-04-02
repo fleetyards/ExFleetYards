@@ -206,7 +206,7 @@ defmodule ExFleetYardsApi.ControllerHelpers do
   end
 
   defp resource_name(module) do
-    view = Phoenix.Controller.__view__(module)
+    view = Phoenix.Controller.__view__(module, [])
 
     view.__resource__
   end

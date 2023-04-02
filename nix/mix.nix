@@ -634,15 +634,15 @@ let
 
     phoenix = buildMix rec {
       name = "phoenix";
-      version = "1.6.16";
+      version = "1.7.2";
 
       src = fetchHex {
         pkg = "${name}";
         version = "${version}";
-        sha256 = "0fdca3h6k9plv1qvch6zyl6wbnfhp8jisvggjmmsjw7n6kzqjng1";
+        sha256 = "0n91g6s7jbkb9rg3c5xdmihk7zyq5rsaji14mfby1l5l695skg0y";
       };
 
-      beamDeps = [ castore jason phoenix_pubsub phoenix_view plug plug_cowboy plug_crypto telemetry ];
+      beamDeps = [ castore jason phoenix_pubsub phoenix_template phoenix_view plug plug_cowboy plug_crypto telemetry websock_adapter ];
     };
 
     phoenix_ecto = buildMix rec {
@@ -673,12 +673,12 @@ let
 
     phoenix_live_dashboard = buildMix rec {
       name = "phoenix_live_dashboard";
-      version = "0.6.5";
+      version = "0.7.2";
 
       src = fetchHex {
         pkg = "${name}";
         version = "${version}";
-        sha256 = "0lmq1m7k465i9mzw35l7bx69n85mibwzd76976840r43sw6sakzg";
+        sha256 = "1dq5vj1a6fzclr3fwj7y8rg2xq3yigvgqc3aaq664fvs7h3dypqf";
       };
 
       beamDeps = [ ecto mime phoenix_live_view telemetry_metrics ];
@@ -699,15 +699,15 @@ let
 
     phoenix_live_view = buildMix rec {
       name = "phoenix_live_view";
-      version = "0.17.14";
+      version = "0.18.18";
 
       src = fetchHex {
         pkg = "${name}";
         version = "${version}";
-        sha256 = "1lzbzbv956j0gyxzw9gh8m9rjf9hdpycv6hwzkvscag37jj6psxg";
+        sha256 = "052jv2kbc2nb4qs4ly4idcai6q8wyfkvv59adpg9w67kf820v0d5";
       };
 
-      beamDeps = [ jason phoenix phoenix_html telemetry ];
+      beamDeps = [ jason phoenix phoenix_html phoenix_template phoenix_view telemetry ];
     };
 
     phoenix_pubsub = buildMix rec {
@@ -994,6 +994,32 @@ let
       };
 
       beamDeps = [];
+    };
+
+    websock = buildMix rec {
+      name = "websock";
+      version = "0.5.0";
+
+      src = fetchHex {
+        pkg = "${name}";
+        version = "${version}";
+        sha256 = "1f2zxc3y4fnp16lzz6468508rgk8kp805vi2qsi4hylavw3cf6mm";
+      };
+
+      beamDeps = [];
+    };
+
+    websock_adapter = buildMix rec {
+      name = "websock_adapter";
+      version = "0.5.0";
+
+      src = fetchHex {
+        pkg = "${name}";
+        version = "${version}";
+        sha256 = "10xvlp787h09mmw846jir4yn4krp6v30cygbn44q5azz9q98nc8n";
+      };
+
+      beamDeps = [ plug plug_cowboy websock ];
     };
   };
 in self

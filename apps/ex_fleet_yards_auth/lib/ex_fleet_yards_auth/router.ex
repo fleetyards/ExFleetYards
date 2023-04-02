@@ -1,18 +1,13 @@
 defmodule ExFleetYardsAuth.Router do
-  use Phoenix.Router
-
-  import Plug.Conn
-  import Phoenix.Controller
-  import Phoenix.LiveView.Router
+  use ExFleetYardsAuth, :router
 
   import ExFleetYardsAuth.Auth
 
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
-    # plug :fetch_live_flash
     plug :fetch_current_user
-    plug :put_root_layout, {ExFleetYardsAuth.LayoutView, :root}
+    plug :put_root_layout, {ExFleetYardsAuth.Layouts, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
   end
@@ -60,5 +55,11 @@ defmodule ExFleetYardsAuth.Router do
 
       get "/authorize", AuthorizeController, :authorize
     end
+  end
+
+  scope "/", ExFleetYardsAuth do
+    pipe_through [:api]
+
+    get "/openid/certs", Openid.JwksController, :jwks_index
   end
 end

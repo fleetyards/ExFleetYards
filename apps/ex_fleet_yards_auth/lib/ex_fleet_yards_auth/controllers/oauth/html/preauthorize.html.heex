@@ -1,0 +1,67 @@
+<!-- authorize.html.eex -->
+<div class="min-h-screen bg-gray-900 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+  <div class="sm:mx-auto sm:w-full sm:max-w-md">
+    <img class="mx-auto h-12 w-auto" src={~p"/images/logo-dark.png"} alt="Logo" />
+
+    <h2 class="mt-6 text-center text-3xl font-extrabold text-white">
+      Connect with Your Fleetyards Account
+    </h2>
+  </div>
+
+  <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+    <div class="bg-gray-800 py-8 px-4 shadow sm:rounded-lg sm:px-10">
+      <p class="text-center text-white">
+        A third-party application would like to connect with your Fleetyards account.
+      </p>
+      <div class="mt-6">
+        <div class="border-t border-gray-700"></div>
+        <dl>
+          <div class="mt-4">
+            <dt class="text-lg leading-5 font-medium text-gray-300">
+              Application Name
+            </dt>
+            <dd class="mt-2 text-base leading-6 text-gray-400">
+              <%= @response.client.name %>
+            </dd>
+          </div>
+
+          <div class="mt-4">
+            <dt class="text-lg leading-5 font-medium text-gray-300">
+              Permissions Requested
+            </dt>
+            <dd class="mt-2 text-base leading-6 text-gray-400">
+              <%= for scope <- @scopes do %>
+                <.scope name={scope.name} label={scope.label} />
+              <% end %>
+            </dd>
+          </div>
+        </dl>
+        <div class="border-t border-gray-700"></div>
+      </div>
+
+      <div class="mt-6 flex justify-between">
+        <a
+          href={
+            "#{@response.redirect_uri}?error=access_denied&error_description=User denied access"
+          }
+          class="text-red-500 hover:text-red-400 font-medium"
+        >
+          Cancel
+        </a>
+
+        <.form for={@conn} action={~p"/oauth/create"} method="post">
+          <.hidden_input name={:client_id} value={@response.client.id} />
+          <.hidden_input name={:redirect_uri} value={@response.redirect_uri} />
+          <.hidden_input name={:response_type} value={@response_type} />
+          <.optional_hidden name={:response_mode} value={@response_mode} />
+          <.hidden_input name={:state} value={@response.state} />
+          <.hidden_input name={:nonce} value={@response.nonce} />
+          <.optional_hidden name={:code_challenge_method} value={@response.code_challenge_method} />
+          <.optional_hidden name={:code_challenge} value={@response.code_challenge} />
+          <.hidden_input name={:scope} value={@response.scope} />
+          <.button type="submit">Authorize</.button>
+        </.form>
+      </div>
+    </div>
+  </div>
+</div>

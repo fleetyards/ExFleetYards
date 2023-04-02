@@ -6,7 +6,8 @@ defmodule ExFleetYardsAuth.Openid.AuthorizeController do
   alias Boruta.Oauth.AuthorizeResponse
   alias Boruta.Oauth.Error
   alias Boruta.Oauth.ResourceOwner
-  alias ExFleetYardsAuth.OauthView
+
+  plug :put_view, html: ExFleetYardsAuth.Oauth.HTML
 
   def oauth_module, do: Application.get_env(:ex_fleet_yards_auth, :oauth_module, Boruta.Oauth)
 
@@ -64,7 +65,6 @@ defmodule ExFleetYardsAuth.Openid.AuthorizeController do
       ) do
     conn
     |> put_status(status)
-    |> put_view(OauthView)
     |> render("error.html", error: error, error_description: error_description)
   end
 

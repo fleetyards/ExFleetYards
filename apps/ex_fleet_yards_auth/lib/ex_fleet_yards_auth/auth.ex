@@ -1,4 +1,7 @@
 defmodule ExFleetYardsAuth.Auth do
+  @moduledoc """
+  Auth helpers
+  """
   import Plug.Conn
   import Phoenix.Controller
 
@@ -38,7 +41,7 @@ defmodule ExFleetYardsAuth.Auth do
 
   def log_out_user(conn) do
     user_token = get_session(conn, :user_token)
-    user_token = Account.delete_token(user_token, "auth")
+    _user_token = Account.delete_token(user_token, "auth")
 
     if live_socket_id = get_session(conn, :live_socket_id) do
       ExFleetYardsAuth.Endpoint.broadcast(live_socket_id, "disconnect", %{})

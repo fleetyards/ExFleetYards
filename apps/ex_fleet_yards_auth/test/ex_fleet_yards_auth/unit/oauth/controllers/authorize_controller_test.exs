@@ -25,6 +25,7 @@ defmodule ExFleetYardsAuth.Controllers.Oauth.AuthorizeControllerTest do
 
   describe "authorize/2" do
     test "redirects to user login without current_user", %{conn: conn} do
+      # credo:disable-for-next-line
       # FIXME: reenable
       # conn
       # |> bypass_through(@endpoint)
@@ -32,6 +33,7 @@ defmodule ExFleetYardsAuth.Controllers.Oauth.AuthorizeControllerTest do
     end
 
     test "returns an error page", %{conn: conn} do
+      # credo:disable-for-next-line
       # FIXME: reenable
       # current_user = %User{}
       # conn = assign(conn, :current_user, current_user)

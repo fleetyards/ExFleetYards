@@ -1,4 +1,8 @@
 defmodule ExFleetYardsAuth.Release.Scopes do
+  @moduledoc """
+  Auth release helpers
+  """
+
   def create do
     create_scopes(ExFleetYards.Scopes.scope_list())
   end
