@@ -28,4 +28,5 @@ jobs:
       user: fleetyards-api
       host: fleetyards.dev
       branch: main
+      environment: staging
     secrets: inherit

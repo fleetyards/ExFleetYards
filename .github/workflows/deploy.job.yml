@@ -12,6 +12,9 @@ on:
       branch:
         required: true
         type: string
+      environment:
+        required: true
+        type: string
     secrets:
       deploy_key:
         required: true
@@ -21,6 +24,9 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: ${{ inputs.environment }}
+      url: https://${{ inputs.host }}
     steps:
       - uses: actions/checkout@v3
       - name: Install SSH key
