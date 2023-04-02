@@ -20,7 +20,7 @@ defmodule ExFleetYardsAuth.Endpoint do
     at: "/",
     from: :ex_fleet_yards_auth,
     gzip: false,
-    only: ~w(assets fonts images favicon.ico favicon.png robots.txt)
+    only: ExFleetYardsAuth.static_paths()
   )
 
   # Code reloading can be explicitly enabled under the

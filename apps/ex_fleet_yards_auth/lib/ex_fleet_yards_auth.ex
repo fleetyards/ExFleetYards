@@ -27,12 +27,30 @@ defmodule ExFleetYardsAuth do
       alias ExFleetYards.Repo
 
       alias ExFleetYardsAuth.Router.Helpers, as: Routes
+
+      unquote(verified_routes())
     end
   end
 
   def view do
     quote do
       use Phoenix.View,
+        root: "lib/ex_fleet_yards_auth/templates",
+        namespace: ExFleetYardsAuth
+
+      # Import convenience functions from controllers
+      import Phoenix.Controller,
+        only: [view_module: 1, view_template: 1]
+
+      # Include shared imports and aliases for views
+      unquote(view_helpers())
+      @moduledoc "View module used for api"
+    end
+  end
+
+  def html do
+    quote do
+      use Phoenix.Component,
         root: "lib/ex_fleet_yards_auth/templates",
         namespace: ExFleetYardsAuth
 
@@ -91,6 +109,18 @@ defmodule ExFleetYardsAuth do
 
       alias ExFleetYardsAuth.Router.Helpers, as: Routes
       # import ExFleetYardsAuth.ViewHelpers
+      unquote(verified_routes())
+    end
+  end
+
+  def static_paths, do: ~w(assets fonts images favicon.ico favicon.png robots.txt)
+
+  def verified_routes do
+    quote do
+      use Phoenix.VerifiedRoutes,
+        endpoint: ExFleetYardsAuth.Endpoint,
+        router: ExFleetYardsAuth.Router,
+        statics: ExFleetYardsAuth.static_paths()
     end
   end
 

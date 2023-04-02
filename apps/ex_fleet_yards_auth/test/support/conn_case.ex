@@ -26,6 +26,8 @@ defmodule ExFleetYardsAuth.ConnCase do
 
       alias ExFleetYardsAuth.Router.Helpers, as: Routes
 
+      use ExFleetYardsAuth, :verified_routes
+
       # The default endpoint for testing
       @endpoint ExFleetYardsApi.Endpoint
       @moduledoc false
