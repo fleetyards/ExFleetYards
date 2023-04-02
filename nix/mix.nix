@@ -99,6 +99,32 @@ let
       beamDeps = [ ecto_sql ];
     };
 
+    cloak = buildMix rec {
+      name = "cloak";
+      version = "1.1.2";
+
+      src = fetchHex {
+        pkg = "${name}";
+        version = "${version}";
+        sha256 = "11cmkdsncmm8c35g68mp82snmbm5kqqjw4gx60lja6ymzk25l3cl";
+      };
+
+      beamDeps = [ jason ];
+    };
+
+    cloak_ecto = buildMix rec {
+      name = "cloak_ecto";
+      version = "1.2.0";
+
+      src = fetchHex {
+        pkg = "${name}";
+        version = "${version}";
+        sha256 = "0by6l0apnm9l12pclnnrbjrhf5wvd3b8nqc6nxjgw4y8hmqngk4b";
+      };
+
+      beamDeps = [ cloak ecto ];
+    };
+
     comeonin = buildMix rec {
       name = "comeonin";
       version = "5.3.3";
@@ -601,6 +627,19 @@ let
         pkg = "${name}";
         version = "${version}";
         sha256 = "1c3hnppmjkwnqrc9vvm72kpliav0mqyyk4cjp7vsqccikgiqkmy8";
+      };
+
+      beamDeps = [];
+    };
+
+    nimble_totp = buildMix rec {
+      name = "nimble_totp";
+      version = "1.0.0";
+
+      src = fetchHex {
+        pkg = "${name}";
+        version = "${version}";
+        sha256 = "1agd92zavq9fw0ix3fp64cam8rkgz0vq5cc55rwdpv7yd30f9rbc";
       };
 
       beamDeps = [];

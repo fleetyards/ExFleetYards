@@ -9,6 +9,7 @@ defmodule ExFleetYards.Application do
   def start(_type, _args) do
     children = [
       # Start the Ecto repository
+      ExFleetYards.Vault,
       ExFleetYards.Repo,
       # Start the PubSub system
       {Phoenix.PubSub, name: ExFleetYards.PubSub}
