@@ -44,7 +44,7 @@ defmodule ExFleetYardsAuth.MixProject do
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
       {:appsignal, "~> 2.0"},
-      {:mox, "~> 0.5", only: :test}
+      {:mox, "~> 1.0", only: :test}
     ]
   end
 
