@@ -7,7 +7,7 @@
     <meta name="generator" content="ExDoc v0.29.4">
     <meta name="project" content="Fleetyards v0.1.0">
 
-    <title>ExFleetYardsApi.Schemas.List.StationList — Fleetyards v0.1.0</title>
+    <title>ExFleetYardsAuth.Openid.Json — Fleetyards v0.1.0</title>
     <link rel="stylesheet" href="dist/html-elixir-HHVY3JYD.css" />
 
 
@@ -98,11 +98,15 @@ Fleetyards
 </button>
 
 
-  <span translate="no">ExFleetYardsApi.Schemas.List.StationList</span> 
+  <span translate="no">ExFleetYardsAuth.Openid.Json</span> 
   <small class="app-vsn" translate="no">(Fleetyards v0.1.0)</small>
 
 </h1>
 
+
+  <section id="moduledoc">
+<p>JSON component renderer</p>
+  </section>
 
 
   <section id="summary" class="details-list">
@@ -113,20 +117,6 @@ Fleetyards
       </a>
       Summary
     </h1>
-<div class="summary-types summary">
-  <h2>
-    <a href="#types">Types</a>
-  </h2>
-
-    <div class="summary-row">
-      <div class="summary-signature">
-        <a href="#t:t/0" translate="no">t()</a>
-
-      </div>
-
-    </div>
-
-</div>
 <div class="summary-functions summary">
   <h2>
     <a href="#functions">Functions</a>
@@ -134,7 +124,7 @@ Fleetyards
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#inner/0" translate="no">inner()</a>
+        <a href="#jwks/1" translate="no">jwks(map)</a>
 
       </div>
 
@@ -142,11 +132,9 @@ Fleetyards
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#schema/0" translate="no">schema()</a>
+        <a href="#userinfo/1" translate="no">userinfo(map)</a>
 
       </div>
-
-        <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/open_api_spex/3.16.1/OpenApiSpex.Schema.html#c:schema/0"><code class="inline">OpenApiSpex.Schema.schema/0</code></a>.</p></div>
 
     </div>
 
@@ -154,42 +142,6 @@ Fleetyards
 
   </section>
 
-
-  <section id="types" class="details-list">
-    <h1 class="section-heading">
-      <a class="hover-link" href="#types">
-        <i class="ri-link-m" aria-hidden="true"></i>
-        <span class="sr-only">Link to this section</span>
-      </a>
-Types
-    </h1>
-    <div class="types-list">
-<section class="detail" id="t:t/0">
-
-  <div class="detail-header">
-    <a href="#t:t/0" class="detail-link" title="Link to this type">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this type</span>
-    </a>
-    <h1 class="signature" translate="no">t()</h1>
-
-
-  </div>
-
-  <section class="docstring">
-
-      <div class="specs">
-
-          <pre translate="no"><span class="attribute">@type</span> t() :: %ExFleetYardsApi.Schemas.List.StationList{data: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(), metadata: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>()}</pre>
-
-      </div>
-
-
-  </section>
-</section>
-
-    </div>
-  </section>
 
   <section id="functions" class="details-list">
     <h1 class="section-heading">
@@ -200,14 +152,14 @@ Types
 Functions
     </h1>
     <div class="functions-list">
-<section class="detail" id="inner/0">
+<section class="detail" id="jwks/1">
 
   <div class="detail-header">
-    <a href="#inner/0" class="detail-link" title="Link to this function">
+    <a href="#jwks/1" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">inner()</h1>
+    <h1 class="signature" translate="no">jwks(map)</h1>
 
 
   </div>
@@ -217,21 +169,21 @@ Functions
 
   </section>
 </section>
-<section class="detail" id="schema/0">
+<section class="detail" id="userinfo/1">
 
   <div class="detail-header">
-    <a href="#schema/0" class="detail-link" title="Link to this function">
+    <a href="#userinfo/1" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">schema()</h1>
+    <h1 class="signature" translate="no">userinfo(map)</h1>
 
 
   </div>
 
   <section class="docstring">
 
-<p>Callback implementation for <a href="https://hexdocs.pm/open_api_spex/3.16.1/OpenApiSpex.Schema.html#c:schema/0"><code class="inline">OpenApiSpex.Schema.schema/0</code></a>.</p>
+
   </section>
 </section>
 

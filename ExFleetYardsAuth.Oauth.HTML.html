@@ -7,13 +7,13 @@
     <meta name="generator" content="ExDoc v0.29.4">
     <meta name="project" content="Fleetyards v0.1.0">
 
-    <title>ExFleetYardsAuth.ErrorView — Fleetyards v0.1.0</title>
+    <title>ExFleetYardsAuth.Oauth.HTML — Fleetyards v0.1.0</title>
     <link rel="stylesheet" href="dist/html-elixir-HHVY3JYD.css" />
 
 
     <script src="dist/handlebars.runtime-NWIB6V2M.js"></script>
     <script src="dist/handlebars.templates-XWGFFSCD.js"></script>
-    <script src="dist/sidebar_items-A598E309.js"></script>
+    <script src="dist/sidebar_items-263EAE89.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -98,7 +98,7 @@ Fleetyards
 </button>
 
 
-  <span translate="no">ExFleetYardsAuth.ErrorView</span> 
+  <span translate="no">ExFleetYardsAuth.Oauth.HTML</span> 
   <small class="app-vsn" translate="no">(Fleetyards v0.1.0)</small>
 
 </h1>
@@ -124,7 +124,7 @@ Fleetyards
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#400.html/1" translate="no">400.html(arg)</a>
+        <a href="#error/1" translate="no">error(assigns)</a>
 
       </div>
 
@@ -132,7 +132,17 @@ Fleetyards
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#404.html/1" translate="no">404.html(arg)</a>
+        <a href="#optional_hidden/1" translate="no">optional_hidden(assigns)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><h2>Attributes</h2><ul><li><code class="inline">id</code> (<code class="inline">:any</code>) - Defaults to <code class="inline">nil</code>.</li><li><code class="inline">name</code> (<code class="inline">:any</code>)</li><li><code class="inline">value</code> (<code class="inline">:any</code>)</li></ul></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#preauthorize/1" translate="no">preauthorize(assigns)</a>
 
       </div>
 
@@ -140,33 +150,11 @@ Fleetyards
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#__resource__/0" translate="no">__resource__()</a>
+        <a href="#scope/1" translate="no">scope(assigns)</a>
 
       </div>
 
-        <div class="summary-synopsis"><p>The resource name, as an atom, for this view</p></div>
-
-    </div>
-
-    <div class="summary-row">
-      <div class="summary-signature">
-        <a href="#render/2" translate="no">render(template, assigns \\ %{})</a>
-
-      </div>
-
-        <div class="summary-synopsis"><p>Renders the given template locally.</p></div>
-
-    </div>
-
-    <div class="summary-row">
-      <div class="summary-signature">
-        <a href="#template_not_found/2" translate="no">template_not_found(template, assigns)</a>
-
-      </div>
-
-        <div class="summary-synopsis"><p>Callback invoked when no template is found.
-By default it raises but can be customized
-to render a particular template.</p></div>
+        <div class="summary-synopsis"><h2>Attributes</h2><ul><li><code class="inline">name</code> (<code class="inline">:string</code>) (required)</li><li><code class="inline">label</code> (<code class="inline">:string</code>) (required)</li></ul></div>
 
     </div>
 
@@ -184,14 +172,14 @@ to render a particular template.</p></div>
 Functions
     </h1>
     <div class="functions-list">
-<section class="detail" id="400.html/1">
+<section class="detail" id="error/1">
 
   <div class="detail-header">
-    <a href="#400.html/1" class="detail-link" title="Link to this function">
+    <a href="#error/1" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">400.html(arg)</h1>
+    <h1 class="signature" translate="no">error(assigns)</h1>
 
 
   </div>
@@ -201,14 +189,37 @@ Functions
 
   </section>
 </section>
-<section class="detail" id="404.html/1">
+<section class="detail" id="optional_hidden/1">
 
   <div class="detail-header">
-    <a href="#404.html/1" class="detail-link" title="Link to this function">
+    <a href="#optional_hidden/1" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">404.html(arg)</h1>
+    <h1 class="signature" translate="no">optional_hidden(assigns)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+<h2 id="optional_hidden/1-attributes" class="section-heading">
+  <a href="#optional_hidden/1-attributes" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
+  <p class="sr-only">attributes</p>
+  </a>
+  Attributes
+</h2>
+<ul><li><code class="inline">id</code> (<code class="inline">:any</code>) - Defaults to <code class="inline">nil</code>.</li><li><code class="inline">name</code> (<code class="inline">:any</code>)</li><li><code class="inline">value</code> (<code class="inline">:any</code>)</li></ul>
+  </section>
+</section>
+<section class="detail" id="preauthorize/1">
+
+  <div class="detail-header">
+    <a href="#preauthorize/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">preauthorize(assigns)</h1>
 
 
   </div>
@@ -218,65 +229,27 @@ Functions
 
   </section>
 </section>
-<section class="detail" id="__resource__/0">
+<section class="detail" id="scope/1">
 
   <div class="detail-header">
-    <a href="#__resource__/0" class="detail-link" title="Link to this function">
+    <a href="#scope/1" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">__resource__()</h1>
+    <h1 class="signature" translate="no">scope(assigns)</h1>
 
 
   </div>
 
   <section class="docstring">
 
-<p>The resource name, as an atom, for this view</p>
-  </section>
-</section>
-<section class="detail" id="render/2">
-
-    <span id="render/1"></span>
-
-  <div class="detail-header">
-    <a href="#render/2" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">render(template, assigns \\ %{})</h1>
-
-
-  </div>
-
-  <section class="docstring">
-
-<p>Renders the given template locally.</p>
-  </section>
-</section>
-<section class="detail" id="template_not_found/2">
-
-  <div class="detail-header">
-    <a href="#template_not_found/2" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">template_not_found(template, assigns)</h1>
-
-
-  </div>
-
-  <section class="docstring">
-
-      <div class="specs">
-
-          <pre translate="no"><span class="attribute">@spec</span> template_not_found(<a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">binary</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>()) :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">no_return</a>()</pre>
-
-      </div>
-
-<p>Callback invoked when no template is found.
-By default it raises but can be customized
-to render a particular template.</p>
+<h2 id="scope/1-attributes" class="section-heading">
+  <a href="#scope/1-attributes" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
+  <p class="sr-only">attributes</p>
+  </a>
+  Attributes
+</h2>
+<ul><li><code class="inline">name</code> (<code class="inline">:string</code>) (required)</li><li><code class="inline">label</code> (<code class="inline">:string</code>) (required)</li></ul>
   </section>
 </section>
 
