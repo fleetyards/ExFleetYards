@@ -382,7 +382,7 @@
             "x-validate": null
           },
           "token": {
-            "example": "bo0MmXqnmA",
+            "example": "lkgvLXe0nw",
             "type": "string",
             "x-struct": null,
             "x-validate": null
@@ -2512,6 +2512,10 @@
         "in": "header",
         "scheme": "bearer",
         "type": "oauth2"
+      },
+      "openId": {
+        "openIdConnectUrl": "/.well-known/openid-configuration",
+        "type": "openIdConnect"
       }
     }
   },

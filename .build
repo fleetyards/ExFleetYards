@@ -130,6 +130,7 @@ ExFleetYardsAuth.Oauth.Json.html
 ExFleetYardsAuth.Oauth.RevokeController.html
 ExFleetYardsAuth.Oauth.TokenController.html
 ExFleetYardsAuth.Openid.AuthorizeController.html
+ExFleetYardsAuth.Openid.ConfigurationController.html
 ExFleetYardsAuth.Openid.Json.html
 ExFleetYardsAuth.Openid.JwksController.html
 ExFleetYardsAuth.Openid.UserinfoController.html
@@ -180,7 +181,7 @@ dist/merriweather-latin-ext-300-normal-K6L27CZ5.woff2
 dist/merriweather-vietnamese-300-italic-EHHNZPUO.woff2
 dist/merriweather-vietnamese-300-normal-U376L4Z4.woff2
 dist/remixicon-NKANDIL5.woff2
-dist/search_items-AF450BD4.js
-dist/sidebar_items-263EAE89.js
+dist/search_items-D45BFC02.js
+dist/sidebar_items-804E84E9.js
 index.html
 search.html
