@@ -45,6 +45,10 @@ defmodule ExFleetYardsApi.ApiSpec do
                 scopes: scope_list()
               }
             }
+          },
+          "openId" => %SecurityScheme{
+            type: "openIdConnect",
+            openIdConnectUrl: get_oid_conf_url()
           }
         }
       }
@@ -69,6 +73,19 @@ defmodule ExFleetYardsApi.ApiSpec do
 
       {:error, _} ->
         "https://#{Application.get_env(:ex_fleet_yards_api, :auth_domain)}/oauth/token"
+    end
+  end
+
+  defp get_oid_conf_url do
+    case Code.ensure_compiled(ExFleetYardsAuth.Router.Helpers) do
+      {:module, _} ->
+        ExFleetYardsAuth.Router.Helpers.configuration_path(
+          ExFleetYardsAuth.Endpoint,
+          :configuration
+        )
+
+      {:error, _} ->
+        "https://#{Application.get_env(:ex_fleet_yards_api, :auth_domain)}/.well-known/openid-configuration"
     end
   end
 
