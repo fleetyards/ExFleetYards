@@ -26,6 +26,6 @@ jobs:
     uses: ./.github/workflows/deploy.job.yml
     with:
       user: fleetyards-api
-      host: fleetyards.dev
+      host: ${{ vars.STAGE_HOST }}
       branch: main
     secrets: inherit

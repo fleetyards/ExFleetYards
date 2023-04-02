@@ -1,5 +1,5 @@
 <!-- login.html.eex -->
-<div class="min-h-screen bg-gray-900 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+<div class="min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8">
   <div class="sm:mx-auto sm:w-full sm:max-w-md">
     <img class="mx-auto h-12 w-auto" src={Routes.static_path(@conn, "/images/logo-dark.png")} alt="Logo">
 
@@ -15,7 +15,6 @@
   </div>
 
   <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-    <div class="bg-gray-800 py-8 px-4 shadow sm:rounded-lg sm:px-10">
       <%= form_for :login, Routes.session_path(@conn, :create), [method: :post], fn f -> %>
         <div>
           <%= label f, :email, class: "block text-sm font-medium text-white", value: @email %>
@@ -43,6 +42,5 @@
           <p class="text-red-400 text-sm mb-4"><%= @error %></p>
         <% end %>
       <% end %>
-    </div>
   </div>
 </div>
