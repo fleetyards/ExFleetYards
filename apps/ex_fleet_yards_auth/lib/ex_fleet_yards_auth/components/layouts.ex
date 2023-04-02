@@ -1,4 +1,7 @@
 defmodule ExFleetYardsAuth.Layouts do
+  @moduledoc """
+  Root layout component renderer
+  """
   use ExFleetYardsAuth, :html
 
   # Phoenix LiveDashboard is available only in development by default,

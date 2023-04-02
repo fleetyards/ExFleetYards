@@ -104,6 +104,7 @@ defmodule ExFleetYardsAuth.Controllers.Openid.AuthorizeControllerTest do
       assert_authorize_redirected_to_login(conn)
     end
 
+    # credo:disable-for-next-line
     # FIXME: reenable when error page is implemented
     # test "returns an error page", %{conn: conn} do
     #   current_user = %User{}

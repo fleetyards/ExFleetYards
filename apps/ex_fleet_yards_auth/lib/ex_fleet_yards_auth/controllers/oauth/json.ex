@@ -1,4 +1,7 @@
 defmodule ExFleetYardsAuth.Oauth.Json do
+  @moduledoc """
+  JSON component renderer
+  """
   alias Boruta.Oauth.IntrospectResponse
   alias Boruta.Oauth.TokenResponse
 

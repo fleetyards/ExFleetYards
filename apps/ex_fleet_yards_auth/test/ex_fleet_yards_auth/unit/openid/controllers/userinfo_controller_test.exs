@@ -1,4 +1,5 @@
 defmodule ExFleetYardsAuth.Controllers.Openid.UserinfoControllerTest do
+  # credo:disable-for-next-line
   # FIXME: reneable as part of #67
   # use ExUnit.Case, async: true
   # import Phoenix.ConnTest

@@ -1,4 +1,7 @@
 defmodule ExFleetYardsAuth.Auth do
+  @moduledoc """
+  Auth helpers
+  """
   import Plug.Conn
   import Phoenix.Controller
 

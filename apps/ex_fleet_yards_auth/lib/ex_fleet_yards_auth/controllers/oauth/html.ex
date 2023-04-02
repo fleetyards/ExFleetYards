@@ -1,4 +1,7 @@
 defmodule ExFleetYardsAuth.Oauth.HTML do
+  @moduledoc """
+  HTML component renderer
+  """
   use ExFleetYardsAuth, :html
 
   embed_templates "html/*"
