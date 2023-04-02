@@ -18,8 +18,8 @@
     <div class="bg-gray-800 py-8 px-4 shadow sm:rounded-lg sm:px-10">
       <%= form_for :login, Routes.session_path(@conn, :create), [method: :post], fn f -> %>
         <div>
-          <%= label f, :email, class: "block text-sm font-medium text-white", value: @email %>
-          <%= text_input f, :email, class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-700 rounded-md bg-gray-700 text-white" %>
+          <%= label f, :email, class: "block text-sm font-medium text-white" %>
+          <%= text_input f, :email, class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-700 rounded-md bg-gray-700 text-white", value: @email %>
         </div>
 
         <div class="mt-6">

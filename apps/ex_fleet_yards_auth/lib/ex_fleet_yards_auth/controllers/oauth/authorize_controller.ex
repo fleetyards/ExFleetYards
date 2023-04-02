@@ -122,7 +122,11 @@ defmodule ExFleetYardsAuth.Oauth.AuthorizeController do
   end
 
   defp redirect_to_login(conn) do
-    redirect(conn, to: Routes.session_path(conn, :new))
+    login_hint = conn.query_params["login_hint"]
+
+    query = if login_hint, do: %{"login_hint" => login_hint}, else: %{}
+
+    redirect(conn, to: Routes.session_path(conn, :new, query))
   end
 
   defp get_scopes(scopes) do
