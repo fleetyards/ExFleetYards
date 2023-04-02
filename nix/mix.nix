@@ -556,12 +556,12 @@ let
 
     mox = buildMix rec {
       name = "mox";
-      version = "0.5.2";
+      version = "1.0.2";
 
       src = fetchHex {
         pkg = "${name}";
         version = "${version}";
-        sha256 = "0aq9wvghpwxdd8xjs8rhrig3xgh7zpfm0gzr3lcfwa6niii10hyz";
+        sha256 = "1wpyh6wp76lyx0q2cys23rpmci4gj1pqwnqvfk467xxanchlk1pr";
       };
 
       beamDeps = [];
