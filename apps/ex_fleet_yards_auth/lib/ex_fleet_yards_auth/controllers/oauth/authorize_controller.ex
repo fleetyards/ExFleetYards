@@ -6,7 +6,7 @@ defmodule ExFleetYardsAuth.Oauth.AuthorizeController do
   alias Boruta.Oauth.AuthorizeResponse
   alias Boruta.Oauth.Error
   alias Boruta.Oauth.ResourceOwner
-  alias ExFleetYardsAuth.OauthView
+  alias ExFleetYardsAuth.OauthHTML
 
   def oauth_module, do: Application.get_env(:ex_fleet_yards_auth, :oauth_module, Boruta.Oauth)
 
@@ -80,7 +80,7 @@ defmodule ExFleetYardsAuth.Oauth.AuthorizeController do
       ) do
     conn
     |> put_status(status)
-    |> put_view(OauthView)
+    |> put_view(OauthHTML)
     |> render("error.html",
       error: error,
       error_description: error_description,
@@ -93,7 +93,7 @@ defmodule ExFleetYardsAuth.Oauth.AuthorizeController do
     scopes = get_scopes(response.scope)
 
     conn
-    |> put_view(OauthView)
+    |> put_view(OauthHTML)
     |> render("preauthorize.html",
       response: response,
       scopes: scopes,
@@ -105,7 +105,7 @@ defmodule ExFleetYardsAuth.Oauth.AuthorizeController do
   @impl Boruta.Oauth.AuthorizeApplication
   def preauthorize_error(conn, response) do
     conn
-    |> put_view(OauthView)
+    |> put_view(OauthHTML)
     |> render("error.html",
       error: response.error,
       error_description: response.error_description,

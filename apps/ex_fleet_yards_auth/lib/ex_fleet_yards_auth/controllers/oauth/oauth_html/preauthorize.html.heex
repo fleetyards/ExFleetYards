@@ -1,11 +1,7 @@
 <!-- authorize.html.eex -->
 <div class="min-h-screen bg-gray-900 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
   <div class="sm:mx-auto sm:w-full sm:max-w-md">
-    <img
-      class="mx-auto h-12 w-auto"
-      src={Routes.static_path(@conn, "/images/logo-dark.png")}
-      alt="Logo"
-    />
+    <img class="mx-auto h-12 w-auto" src={~p"/images/logo-dark.png"} alt="Logo" />
 
     <h2 class="mt-6 text-center text-3xl font-extrabold text-white">
       Connect with Your Fleetyards Account
@@ -35,7 +31,7 @@
             </dt>
             <dd class="mt-2 text-base leading-6 text-gray-400">
               <%= for scope <- @scopes do %>
-                <%= render("scope_component.html", scope: scope) %>
+                <.scope name={scope.name} label={scope.label} />
               <% end %>
             </dd>
           </div>
@@ -53,21 +49,18 @@
           Cancel
         </a>
 
-        <%= form_for @conn, Routes.authorize_path(@conn, :authorize), [method: :post], fn f -> %>
-          <%= hidden_input(f, :client_id, value: @response.client.id) %>
-          <%= hidden_input(f, :redirect_uri, value: @response.redirect_uri) %>
-          <%= hidden_input(f, :response_type, value: @response_type) %>
-          <%= optional_hidden_input(f, :response_mode, @response_mode) %>
-          <%= hidden_input(f, :state, value: @response.state) %>
-          <%= hidden_input(f, :nonce, value: @response.nonce) %>
-          <%= optional_hidden_input(f, :code_challenge_method, @response.code_challenge_method) %>
-          <%= optional_hidden_input(f, :code_challenge, @response.code_challenge) %>
-          <%= hidden_input(f, :scope, value: @response.scope) %>
-          <%= submit("Authorize",
-            class:
-              "inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest bg-indigo-500 hover:bg-indigo-400 active:bg-indigo-600 focus:outline-none focus:border-indigo-500 focus:ring ring-indigo-300 disabled:opacity-25 transition ease-in-out duration-150"
-          ) %>
-        <% end %>
+        <.form for={@conn} action={~p"/oauth/create"} method="post">
+          <.hidden_input name={:client_id} value={@response.client.id} />
+          <.hidden_input name={:redirect_uri} value={@response.redirect_uri} />
+          <.hidden_input name={:response_type} value={@response_type} />
+          <.optional_hidden name={:response_mode} value={@response_mode} />
+          <.hidden_input name={:state} value={@response.state} />
+          <.hidden_input name={:nonce} value={@response.nonce} />
+          <.optional_hidden name={:code_challenge_method} value={@response.code_challenge_method} />
+          <.optional_hidden name={:code_challenge} value={@response.code_challenge} />
+          <.hidden_input name={:scope} value={@response.scope} />
+          <.button type="submit">Authorize</.button>
+        </.form>
       </div>
     </div>
   </div>

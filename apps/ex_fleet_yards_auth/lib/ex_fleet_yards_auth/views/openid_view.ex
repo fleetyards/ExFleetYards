@@ -1,5 +1,5 @@
 defmodule ExFleetYardsAuth.OpenidView do
-  use ExFleetYardsAuth, :view
+  use ExFleetYardsAuth, :html
 
   def render("jwks.json", %{jwk_keys: jwk_keys}) do
     %{keys: jwk_keys}

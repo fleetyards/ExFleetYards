@@ -19,8 +19,10 @@ defmodule ExFleetYardsAuth do
 
   def controller do
     quote do
-      @moduledoc "Controller used for Api"
-      use Phoenix.Controller, namespace: ExFleetYardsAuth
+      @moduledoc "Controller used for Auth"
+      use Phoenix.Controller,
+        formats: [:html, :json],
+        layouts: [html: ExFleetYardsAuth.Layouts]
 
       import Plug.Conn
 
@@ -32,44 +34,12 @@ defmodule ExFleetYardsAuth do
     end
   end
 
-  def view do
-    quote do
-      use Phoenix.View,
-        root: "lib/ex_fleet_yards_auth/templates",
-        namespace: ExFleetYardsAuth
-
-      # Import convenience functions from controllers
-      import Phoenix.Controller,
-        only: [view_module: 1, view_template: 1]
-
-      # Include shared imports and aliases for views
-      unquote(view_helpers())
-      @moduledoc "View module used for api"
-    end
-  end
-
-  def html do
-    quote do
-      use Phoenix.Component,
-        root: "lib/ex_fleet_yards_auth/templates",
-        namespace: ExFleetYardsAuth
-
-      # Import convenience functions from controllers
-      import Phoenix.Controller,
-        only: [view_module: 1, view_template: 1]
-
-      # Include shared imports and aliases for views
-      unquote(view_helpers())
-      @moduledoc "View module used for api"
-    end
-  end
-
   def live_view do
     quote do
       use Phoenix.LiveView,
-        layout: {ExFleetYardsWeb.LayoutView, "live.html"}
+        layout: {ExFleetYardsAuth.Layout, :app}
 
-      unquote(view_helpers())
+      unquote(html_helpers())
     end
   end
 
@@ -77,25 +47,47 @@ defmodule ExFleetYardsAuth do
     quote do
       use Phoenix.LiveComponent
 
-      unquote(view_helpers())
+      unquote(html_helpers())
     end
   end
 
-  def component do
+  def html do
     quote do
       use Phoenix.Component
 
-      unquote(view_helpers())
+      # Import convenience functions from controllers
+      import Phoenix.Controller,
+        only: [get_csrf_token: 0, view_module: 1, view_template: 1]
+
+      # Include shared imports and aliases for views
+      unquote(html_helpers())
+      @moduledoc "View module used for api"
     end
   end
 
   def router do
     quote do
-      use Phoenix.Router
+      use Phoenix.Router, helpers: true
 
+      # Import common connection and controller functions to use in pipelines
       import Plug.Conn
       import Phoenix.Controller
       import Phoenix.LiveView.Router
+    end
+  end
+
+  defp html_helpers() do
+    quote do
+      # HTML escaping functionality
+      import Phoenix.HTML
+      # Core UI components and translation
+      import ExFleetYardsAuth.CoreComponents
+
+      # Shortcut for generating JS commands
+      alias Phoenix.LiveView.JS
+
+      # Routes generation with the ~p sigil
+      unquote(verified_routes())
     end
   end
 

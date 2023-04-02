@@ -30,7 +30,8 @@ defmodule ExFleetYards.Umbrella.MixProject do
     [
       # Dev
       {:credo, "~> 1.7", only: [:dev, :test], runtime: false},
-      {:ex_doc, "~> 0.27", only: :dev, runtime: false}
+      {:ex_doc, "~> 0.27", only: :dev, runtime: false},
+      {:phoenix_live_view, "~> 0.18.18"}
     ]
   end
 
