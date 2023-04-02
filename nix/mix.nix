@@ -10,12 +10,12 @@ let
   packages = with beamPackages; with self; {
     appsignal = buildMix rec {
       name = "appsignal";
-      version = "2.5.3";
+      version = "2.6.0";
 
       src = fetchHex {
         pkg = "${name}";
         version = "${version}";
-        sha256 = "0bzmpr968rdkgc0n7rarxzpyr9h0yzhqb9bl9ds8y7zk7hddzy9y";
+        sha256 = "1czynsavq8p37sndns4xsd78msgjxak28an153yh0bzzrw7m5afl";
       };
 
       beamDeps = [ decorator hackney jason telemetry ];
@@ -309,12 +309,12 @@ let
 
     ex_doc = buildMix rec {
       name = "ex_doc";
-      version = "0.29.3";
+      version = "0.29.4";
 
       src = fetchHex {
         pkg = "${name}";
         version = "${version}";
-        sha256 = "1qdzflf1lbi5phg2vs8p3aznz0p8wmmx56qynp1ix008gdypiiix";
+        sha256 = "1xf49d0ni08a83iankdj8fb6jyxm67wjl0gdwihwnimf6ykrjric";
       };
 
       beamDeps = [ earmark_parser makeup_elixir makeup_erlang ];
@@ -335,12 +335,12 @@ let
 
     expo = buildMix rec {
       name = "expo";
-      version = "0.4.0";
+      version = "0.4.1";
 
       src = fetchHex {
         pkg = "${name}";
         version = "${version}";
-        sha256 = "1wmbycv8mdfngxnn3c3bi8b3kx9md4n1p96p7yjpyz4bxj1idvd8";
+        sha256 = "0iyfl4vppfhmimfqaracjza9a6y8rgia03sm28y5934cg5xbmxrg";
       };
 
       beamDeps = [];
