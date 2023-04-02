@@ -3,7 +3,7 @@ defmodule ExFleetYardsAuth.Openid.JwksController do
 
   use ExFleetYardsAuth, :controller
 
-  alias ExFleetYardsAuth.OpenidView
+  plug :put_view, json: ExFleetYardsAuth.Openid.OpenidJson
 
   def openid_module, do: Application.get_env(:ex_fleet_yards_auth, :openid_module, Boruta.Openid)
 
@@ -14,7 +14,6 @@ defmodule ExFleetYardsAuth.Openid.JwksController do
   @impl Boruta.Openid.JwksApplication
   def jwk_list(conn, jwk_keys) do
     conn
-    |> put_view(OpenidView)
-    |> render("jwks.json", jwk_keys: jwk_keys)
+    |> render(:jwks, jwk_keys: jwk_keys)
   end
 end

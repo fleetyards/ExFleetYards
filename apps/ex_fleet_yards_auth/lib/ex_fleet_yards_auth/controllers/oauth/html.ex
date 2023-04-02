@@ -1,7 +1,7 @@
-defmodule ExFleetYardsAuth.OauthHTML do
+defmodule ExFleetYardsAuth.Oauth.HTML do
   use ExFleetYardsAuth, :html
 
-  embed_templates "oauth_html/*"
+  embed_templates "html/*"
 
   attr :id, :any, default: nil
   attr :name, :any

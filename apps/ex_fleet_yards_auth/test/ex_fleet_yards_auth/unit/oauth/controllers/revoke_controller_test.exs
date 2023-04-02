@@ -1,17 +1,11 @@
 defmodule ExFleetYardsAuth.Controllers.Oauth.RevokeControllerTest do
-  use ExUnit.Case, async: true
-  import Phoenix.ConnTest
+  use ExFleetYardsAuth.ConnCase, async: true
 
   import Mox
 
   alias Boruta.Oauth.Error
-  alias ExFleetYardsAuth.Oauth.RevokeController
 
   setup :verify_on_exit!
-
-  setup do
-    {:ok, conn: build_conn()}
-  end
 
   describe "revoke/2" do
     test "returns an oauth error", %{conn: conn} do
@@ -26,7 +20,9 @@ defmodule ExFleetYardsAuth.Controllers.Oauth.RevokeControllerTest do
         module.revoke_error(conn, error)
       end)
 
-      conn = RevokeController.revoke(conn, %{})
+      conn =
+        conn
+        |> post(~p"/oauth/revoke", %{})
 
       assert json_response(conn, 400) == %{
                "error" => "unknown_error",
@@ -40,7 +36,9 @@ defmodule ExFleetYardsAuth.Controllers.Oauth.RevokeControllerTest do
         module.revoke_success(conn)
       end)
 
-      conn = RevokeController.revoke(conn, %{})
+      conn =
+        conn
+        |> post(~p"/oauth/revoke", %{})
 
       assert response(conn, 200)
     end

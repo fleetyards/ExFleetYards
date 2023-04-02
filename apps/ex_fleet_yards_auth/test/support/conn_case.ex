@@ -29,7 +29,7 @@ defmodule ExFleetYardsAuth.ConnCase do
       use ExFleetYardsAuth, :verified_routes
 
       # The default endpoint for testing
-      @endpoint ExFleetYardsApi.Endpoint
+      @endpoint ExFleetYardsAuth.Endpoint
       @moduledoc false
     end
   end

@@ -4,7 +4,8 @@ defmodule ExFleetYardsAuth.Oauth.RevokeController do
   use ExFleetYardsAuth, :controller
 
   alias Boruta.Oauth.Error
-  alias ExFleetYardsAuth.OauthView
+
+  plug :put_view, json: ExFleetYardsAuth.Oauth.Json
 
   def oauth_module, do: Application.get_env(:ex_fleet_yards_auth, :oauth_module, Boruta.Oauth)
 
@@ -25,7 +26,6 @@ defmodule ExFleetYardsAuth.Oauth.RevokeController do
       }) do
     conn
     |> put_status(status)
-    |> put_view(OauthView)
-    |> render("error.json", error: error, error_description: error_description)
+    |> render(:error, error: error, error_description: error_description)
   end
 end

@@ -56,4 +56,10 @@ defmodule ExFleetYardsAuth.Router do
       get "/authorize", AuthorizeController, :authorize
     end
   end
+
+  scope "/", ExFleetYardsAuth do
+    pipe_through [:api]
+
+    get "/openid/certs", Openid.JwksController, :jwks_index
+  end
 end

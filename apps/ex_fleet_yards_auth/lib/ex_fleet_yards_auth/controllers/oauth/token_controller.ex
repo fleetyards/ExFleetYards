@@ -5,7 +5,8 @@ defmodule ExFleetYardsAuth.Oauth.TokenController do
 
   alias Boruta.Oauth.Error
   alias Boruta.Oauth.TokenResponse
-  alias ExFleetYardsAuth.OauthView
+
+  plug :put_view, json: ExFleetYardsAuth.Oauth.Json
 
   def oauth_module, do: Application.get_env(:ex_fleet_yards_auth, :oauth_module, Boruta.Oauth)
 
@@ -18,15 +19,13 @@ defmodule ExFleetYardsAuth.Oauth.TokenController do
     conn
     |> put_resp_header("pragma", "no-cache")
     |> put_resp_header("cache-control", "no-store")
-    |> put_view(OauthView)
-    |> render("token.json", response: response)
+    |> render(:token, response: response)
   end
 
   @impl Boruta.Oauth.TokenApplication
   def token_error(conn, %Error{status: status, error: error, error_description: error_description}) do
     conn
     |> put_status(status)
-    |> put_view(OauthView)
-    |> render("error.json", error: error, error_description: error_description)
+    |> render(:error, error: error, error_description: error_description)
   end
 end

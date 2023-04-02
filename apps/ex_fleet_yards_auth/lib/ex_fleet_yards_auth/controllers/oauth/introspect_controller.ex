@@ -5,7 +5,8 @@ defmodule ExFleetYardsAuth.Oauth.IntrospectController do
 
   alias Boruta.Oauth.Error
   alias Boruta.Oauth.IntrospectResponse
-  alias ExFleetYardsAuth.OauthView
+
+  plug :put_view, json: ExFleetYardsAuth.Oauth.Json
 
   def oauth_module, do: Application.get_env(:ex_fleet_yards_auth, :oauth_module, Boruta.Oauth)
 
@@ -16,8 +17,7 @@ defmodule ExFleetYardsAuth.Oauth.IntrospectController do
   @impl Boruta.Oauth.IntrospectApplication
   def introspect_success(conn, %IntrospectResponse{} = response) do
     conn
-    |> put_view(OauthView)
-    |> render("introspect.json", response: response)
+    |> render(:introspect, response: response)
   end
 
   @impl Boruta.Oauth.IntrospectApplication
@@ -28,7 +28,6 @@ defmodule ExFleetYardsAuth.Oauth.IntrospectController do
       }) do
     conn
     |> put_status(status)
-    |> put_view(OauthView)
-    |> render("error.json", error: error, error_description: error_description)
+    |> render(:error, error: error, error_description: error_description)
   end
 end

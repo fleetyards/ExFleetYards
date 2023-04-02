@@ -1,16 +1,9 @@
 defmodule ExFleetYardsAuth.Controllers.Openid.JwksControllerTest do
-  use ExUnit.Case, async: true
-  import Phoenix.ConnTest
+  use ExFleetYardsAuth.ConnCase, async: true
 
   import Mox
 
-  alias ExFleetYardsAuth.Openid.JwksController
-
   setup :verify_on_exit!
-
-  setup do
-    {:ok, conn: build_conn()}
-  end
 
   describe "jwks_index/2" do
     test "returns jwks response", %{conn: conn} do
@@ -21,7 +14,9 @@ defmodule ExFleetYardsAuth.Controllers.Openid.JwksControllerTest do
         module.jwk_list(conn, jwk_keys)
       end)
 
-      conn = JwksController.jwks_index(conn, %{})
+      conn =
+        conn
+        |> get(~p"/openid/certs")
 
       assert json_response(conn, 200) == %{
                "keys" => jwk_keys

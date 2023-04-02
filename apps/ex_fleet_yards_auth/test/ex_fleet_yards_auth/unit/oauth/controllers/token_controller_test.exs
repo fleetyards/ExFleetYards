@@ -1,18 +1,13 @@
 defmodule ExFleetYardsAuth.Controllers.Oauth.TokenControllerTest do
-  use ExUnit.Case, async: true
-  import Phoenix.ConnTest
+  use ExFleetYardsAuth.ConnCase, async: true
 
   import Mox
 
   alias Boruta.Oauth.Error
   alias Boruta.Oauth.TokenResponse
-  alias ExFleetYardsAuth.Oauth.TokenController
+  # alias ExFleetYardsAuth.Oauth.TokenController
 
   setup :verify_on_exit!
-
-  setup do
-    {:ok, conn: build_conn()}
-  end
 
   describe "token/2" do
     test "returns an oauth error", %{conn: conn} do
@@ -27,7 +22,9 @@ defmodule ExFleetYardsAuth.Controllers.Oauth.TokenControllerTest do
         module.token_error(conn, error)
       end)
 
-      conn = TokenController.token(conn, %{})
+      conn =
+        conn
+        |> post(~p"/oauth/token", %{})
 
       assert json_response(conn, 400) == %{
                "error" => "unknown_error",
@@ -48,7 +45,9 @@ defmodule ExFleetYardsAuth.Controllers.Oauth.TokenControllerTest do
         module.token_success(conn, response)
       end)
 
-      conn = TokenController.token(conn, %{"grant_type" => "password"})
+      conn =
+        conn
+        |> post(~p"/oauth/token", %{"grant_type" => "password"})
 
       assert json_response(conn, 200) == %{
                "access_token" => "access_token",

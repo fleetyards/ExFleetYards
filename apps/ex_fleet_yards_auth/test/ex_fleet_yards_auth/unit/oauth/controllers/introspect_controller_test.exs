@@ -1,12 +1,11 @@
 defmodule ExFleetYardsAuth.Controllers.Oauth.IntrospectControllerTest do
-  use ExUnit.Case, async: true
+  use ExFleetYardsAuth.ConnCase, async: true
   import Phoenix.ConnTest
 
   import Mox
 
   alias Boruta.Oauth.Error
   alias Boruta.Oauth.IntrospectResponse
-  alias ExFleetYardsAuth.Oauth.IntrospectController
 
   setup :verify_on_exit!
 
@@ -27,7 +26,9 @@ defmodule ExFleetYardsAuth.Controllers.Oauth.IntrospectControllerTest do
         module.introspect_error(conn, error)
       end)
 
-      conn = IntrospectController.introspect(conn, %{})
+      conn =
+        conn
+        |> post(~p"/oauth/introspect", %{})
 
       assert json_response(conn, 400) == %{
                "error" => "unknown_error",
@@ -52,7 +53,9 @@ defmodule ExFleetYardsAuth.Controllers.Oauth.IntrospectControllerTest do
         module.introspect_success(conn, response)
       end)
 
-      conn = IntrospectController.introspect(conn, %{})
+      conn =
+        conn
+        |> post(~p"/oauth/introspect", %{})
 
       assert json_response(conn, 200) == %{
                "active" => false
@@ -76,7 +79,9 @@ defmodule ExFleetYardsAuth.Controllers.Oauth.IntrospectControllerTest do
         module.introspect_success(conn, response)
       end)
 
-      conn = IntrospectController.introspect(conn, %{})
+      conn =
+        conn
+        |> post(~p"/oauth/introspect", %{})
 
       assert json_response(conn, 200) == %{
                "active" => true,
