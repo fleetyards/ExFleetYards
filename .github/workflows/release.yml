@@ -23,4 +23,5 @@ jobs:
   #     user: fleetyards-api
   #     host: fleetyards.net
   #     branch: ${GITHUB_REF##*/}
+  #     environment: production
   #   secrets: inherit
