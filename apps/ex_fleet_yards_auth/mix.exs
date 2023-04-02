@@ -33,7 +33,7 @@ defmodule ExFleetYardsAuth.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:phoenix, "~> 1.6.11"},
+      {:phoenix, "~> 1.7.2"},
       {:phoenix_ecto, "~> 4.4"},
       {:phoenix_live_view, "~> 0.17.5"},
       {:telemetry_metrics, "~> 0.6"},
