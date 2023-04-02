@@ -1,4 +1,4 @@
-defmodule ExFleetYardsAuth.Openid.OpenidJson do
+defmodule ExFleetYardsAuth.Openid.Json do
   def jwks(%{jwk_keys: jwk_keys}) do
     %{keys: jwk_keys}
   end

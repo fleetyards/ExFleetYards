@@ -3,7 +3,7 @@ defmodule ExFleetYardsAuth.Openid.UserinfoController do
 
   use ExFleetYardsAuth, :controller
 
-  plug :put_view, json: ExFleetYardsAuth.Openid.OpenidJson
+  plug :put_view, json: ExFleetYardsAuth.Openid.Json
 
   def openid_module, do: Application.get_env(:ex_fleet_yards_auth, :openid_module, Boruta.Openid)
 
