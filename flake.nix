@@ -5,6 +5,8 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.11";
     devenv.url = "github:cachix/devenv";
   };
+  inputs.devenv.inputs.nixpkgs.follows = "/nixpkgs";
+  inputs.devenv.inputs.flake-compat.follows = "/flake-compat";
 
   inputs.flake-compat = {
     url = "github:edolstra/flake-compat";
