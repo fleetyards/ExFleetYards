@@ -61,5 +61,6 @@ defmodule ExFleetYardsAuth.Router do
     pipe_through [:api]
 
     get "/openid/certs", Openid.JwksController, :jwks_index
+    get "/.well-known/openid-configuration", Openid.ConfigurationController, :configuration
   end
 end

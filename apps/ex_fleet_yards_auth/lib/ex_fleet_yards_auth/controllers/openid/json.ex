@@ -9,4 +9,8 @@ defmodule ExFleetYardsAuth.Openid.Json do
   def userinfo(%{userinfo: userinfo}) do
     userinfo
   end
+
+  def configuration(%{config: config}) do
+    config
+  end
 end
