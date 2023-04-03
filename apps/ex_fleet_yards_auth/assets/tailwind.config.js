@@ -27,7 +27,7 @@ module.exports = {
 
     // Embeds Hero Icons (https://heroicons.com) into your app.css bundle
     plugin(function({matchComponents, theme}) {
-      let iconsDir = path.join(__dirname, "./vendor/heroicons/optimized")
+      let iconsDir = path.join(__dirname, "../../../assets/vendor/heroicons/optimized")
       let values = {}
       let icons = [
         ["", "/24/outline"],
