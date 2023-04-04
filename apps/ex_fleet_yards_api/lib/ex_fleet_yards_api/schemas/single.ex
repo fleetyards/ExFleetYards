@@ -667,6 +667,27 @@ defmodule ExFleetYardsApi.Schemas.Single do
     })
   end
 
+  defmodule UserTotp do
+    @moduledoc "User TOTP info"
+    require OpenApiSpex
+
+    OpenApiSpex.schema(%{
+      description: "User TOTP info",
+      type: :object,
+      properties: %{
+        id: %Schema{type: :string, format: :uuid},
+        active: %Schema{type: :boolean},
+        secret: %Schema{type: :string},
+        totp_uri: %Schema{type: :string, format: :uri},
+        recovery_codes: %Schema{type: :array, items: %Schema{type: :string}},
+        last_used: %Schema{type: :string, format: :"date-time"},
+        createdAt: %Schema{type: :string, format: :"date-time"},
+        updatedAt: %Schema{type: :string, format: :"date-time"}
+      },
+      required: [:id, :active, :createdAt, :updatedAt]
+    })
+  end
+
   defmodule User do
     @moduledoc "User Schema"
     require OpenApiSpex

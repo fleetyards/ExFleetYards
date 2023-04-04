@@ -89,6 +89,16 @@ defmodule ExFleetYardsApi.ApiSpec do
     end
   end
 
+  def get_issuer do
+    case Code.ensure_compiled(ExFleetYardsAuth.Endpoint) do
+      {:module, _} ->
+        ExFleetYardsAuth.Endpoint.host()
+
+      {:error, _} ->
+        Application.get_env(:ex_fleet_yards_api, :auth_issuer)
+    end
+  end
+
   defp scope_list do
     ExFleetYards.Scopes.scope_list()
     |> Enum.map(fn

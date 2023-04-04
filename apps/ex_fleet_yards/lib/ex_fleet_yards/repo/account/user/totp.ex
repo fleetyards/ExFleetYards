@@ -28,8 +28,13 @@ defmodule ExFleetYards.Repo.Account.User.Totp do
     |> Repo.insert(returning: [:id])
   end
 
-  def user_query(user_id, active \\ true) when is_binary(user_id) do
-    from(t in __MODULE__, where: t.user_id == ^user_id, where: t.active == ^active)
+  def user_query(user_id, nil) when is_binary(user_id) do
+    from(t in __MODULE__, where: t.user_id == ^user_id)
+  end
+
+  def user_query(user_id, active \\ true) when is_binary(user_id) and is_boolean(active) do
+    user_query(user_id, nil)
+    |> where(active: ^active)
   end
 
   def get_for_user(user_id, active \\ true) do
@@ -42,7 +47,6 @@ defmodule ExFleetYards.Repo.Account.User.Totp do
   def set_active(%__MODULE__{} = totp, active) do
     totp
     |> cast(%{active: active}, [:active])
-    |> IO.inspect()
     |> Repo.update()
   end
 
@@ -51,6 +55,26 @@ defmodule ExFleetYards.Repo.Account.User.Totp do
     |> case do
       nil -> {:error, :not_found}
       totp -> set_active(totp)
+    end
+  end
+
+  def confirm(%__MODULE__{} = totp, code) do
+    use_code(totp, code)
+    |> case do
+      :ok ->
+        set_active(totp, true)
+
+      :error ->
+        {:error, :invalid_code}
+    end
+  end
+
+  def confirm(user, code) do
+    get_for_user(user, nil)
+    |> case do
+      nil -> {:error, :not_found}
+      totp when totp.active -> {:error, :active}
+      totp -> confirm(totp, code)
     end
   end
 
