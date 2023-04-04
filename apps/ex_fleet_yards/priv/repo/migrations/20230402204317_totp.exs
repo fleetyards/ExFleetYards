@@ -8,6 +8,7 @@ defmodule ExFleetYards.Repo.Migrations.Totp do
       add :totp_secret, :binary
       add :last_used, :naive_datetime
       add :recovery_codes, :binary
+      add :active, :boolean, default: false
 
       timestamps(inserted_at: :created_at)
     end

@@ -16,6 +16,7 @@ defmodule ExFleetYards.Repo.Account.User.Totp do
     field :totp_secret, ExFleetYards.Vault.Binary
     field :last_used, :utc_datetime
     field :recovery_codes, ExFleetYards.Vault.StringList
+    field :active, :boolean, default: false
 
     belongs_to :user, User, type: Ecto.UUID
 
@@ -27,13 +28,30 @@ defmodule ExFleetYards.Repo.Account.User.Totp do
     |> Repo.insert(returning: [:id])
   end
 
-  def user_query(user_id) when is_binary(user_id) do
-    from(t in __MODULE__, where: t.user_id == ^user_id)
+  def user_query(user_id, active \\ true) when is_binary(user_id) do
+    from(t in __MODULE__, where: t.user_id == ^user_id, where: t.active == ^active)
   end
 
-  def get_for_user(user_id) do
-    user_query(user_id)
+  def get_for_user(user_id, active \\ true) do
+    user_query(user_id, active)
     |> Repo.one()
+  end
+
+  def set_active(totp, active \\ true)
+
+  def set_active(%__MODULE__{} = totp, active) do
+    totp
+    |> cast(%{active: active}, [:active])
+    |> IO.inspect()
+    |> Repo.update()
+  end
+
+  def set_active(user, active) do
+    get_for_user(user, !active)
+    |> case do
+      nil -> {:error, :not_found}
+      totp -> set_active(totp)
+    end
   end
 
   def exists?(user) do
@@ -85,7 +103,7 @@ defmodule ExFleetYards.Repo.Account.User.Totp do
         use_recovery_code(user, code)
         |> case do
           :error -> false
-          :ok -> true
+          {:ok, _} -> true
         end
     end
   end
