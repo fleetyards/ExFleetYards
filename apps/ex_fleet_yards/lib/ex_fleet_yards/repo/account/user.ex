@@ -49,6 +49,7 @@ defmodule ExFleetYards.Repo.Account.User do
     field :hangar_updated_at, :naive_datetime
 
     has_many :vehicles, ExFleetYards.Repo.Account.Vehicle
+    has_many :sso_connections, ExFleetYards.Repo.Account.User.SSOConnection
 
     timestamps(inserted_at: :created_at, type: :utc_datetime)
   end
@@ -82,6 +83,7 @@ defmodule ExFleetYards.Repo.Account.User do
       :password,
       :public_hangar,
       :rsi_handle,
+      :homepage,
       :twitch,
       :youtube,
       :discord,
@@ -98,6 +100,31 @@ defmodule ExFleetYards.Repo.Account.User do
     |> validate_discord_server()
 
     # TODO: guilded
+  end
+
+  def sso_create_changeset(user \\ %__MODULE__{}, attrs) do
+    user
+    |> cast(attrs, [
+      :locale,
+      :username,
+      :email,
+      :public_hangar,
+      :rsi_handle,
+      :homepage,
+      :twitch,
+      :youtube,
+      :discord,
+      :guilded,
+      :public_hangar_loaners,
+      :public_hangar
+    ])
+    |> put_change(:confirmed_at, NaiveDateTime.utc_now() |> NaiveDateTime.truncate(:second))
+    |> validate_username()
+    |> validate_email()
+    |> validate_rsi_handle()
+    |> validate_twitch()
+    |> validate_youtube()
+    |> validate_discord_server()
   end
 
   def confirm_changeset(user, attrs) do

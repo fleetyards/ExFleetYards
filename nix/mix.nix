@@ -606,6 +606,19 @@ let
       beamDeps = [];
     };
 
+    oauth2 = buildMix rec {
+      name = "oauth2";
+      version = "2.1.0";
+
+      src = fetchHex {
+        pkg = "${name}";
+        version = "${version}";
+        sha256 = "0h9bps7gq7bac5gc3q0cgpsj46qnchpqbv5hzsnd2z9hnf2pzh4a";
+      };
+
+      beamDeps = [ tesla ];
+    };
+
     open_api_spex = buildMix rec {
       name = "open_api_spex";
       version = "3.16.1";
@@ -970,6 +983,19 @@ let
       beamDeps = [ telemetry ];
     };
 
+    tesla = buildMix rec {
+      name = "tesla";
+      version = "1.6.0";
+
+      src = fetchHex {
+        pkg = "${name}";
+        version = "${version}";
+        sha256 = "08bgk84xqs5yf4fbzwvwklqpx1ji41x085k1hx82ifxf5hrsr4rm";
+      };
+
+      beamDeps = [ castore hackney jason mime telemetry ];
+    };
+
     typed_ecto_schema = buildMix rec {
       name = "typed_ecto_schema";
       version = "0.4.1";
@@ -981,6 +1007,32 @@ let
       };
 
       beamDeps = [ ecto ];
+    };
+
+    ueberauth = buildMix rec {
+      name = "ueberauth";
+      version = "0.10.5";
+
+      src = fetchHex {
+        pkg = "${name}";
+        version = "${version}";
+        sha256 = "1qf97azn8064ymawfm58p2bqpmrigipr4fs5xp3jb8chshqizz9y";
+      };
+
+      beamDeps = [ plug ];
+    };
+
+    ueberauth_github = buildMix rec {
+      name = "ueberauth_github";
+      version = "0.8.2";
+
+      src = fetchHex {
+        pkg = "${name}";
+        version = "${version}";
+        sha256 = "1qnladhwwz2501l55j0i3mlwaqv8y7l8k5mb6m0pbg8kwd743vcq";
+      };
+
+      beamDeps = [ oauth2 ueberauth ];
     };
 
     unicode_util_compat = buildRebar3 rec {
