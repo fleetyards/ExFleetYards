@@ -36,6 +36,7 @@ defmodule ExFleetYardsAuth.MixProject do
       {:phoenix, "~> 1.7.2"},
       {:phoenix_ecto, "~> 4.4"},
       {:phoenix_live_view, "~> 0.18.18"},
+      {:phoenix_live_reload, "~> 1.2", only: :dev},
 
       # Auth
       {:ueberauth, "~> 0.10"},

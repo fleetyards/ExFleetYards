@@ -43,12 +43,7 @@ config :ex_fleet_yards_api, ExFleetYardsApi.Endpoint,
     port: 4001
   ],
   secret_key_base: "zMnmcNSJebHEPCJqrtztxeTVMEWfciC0cxNuEFZWRZFx2/QA4Ull5nkkLwqQBRQ6",
-  live_view: [signing_salt: "F07EFQKnybYwDgCO"],
-  watchers: [
-    # Start the esbuild watcher by calling Esbuild.install_and_run(:auth, args)
-    esbuild: {Esbuild, :install_and_run, [:auth, ~w(--sourcemap=inline --watch)]},
-    tailwind: {Tailwind, :install_and_run, [:auth, ~w(--watch)]}
-  ]
+  live_view: [signing_salt: "F07EFQKnybYwDgCO"]
 
 config :ex_fleet_yards_auth, ExFleetYardsAuth.Endpoint,
   http: [
@@ -57,6 +52,8 @@ config :ex_fleet_yards_auth, ExFleetYardsAuth.Endpoint,
   ],
   secret_key_base: "zMnmcNSJebHEPCJqrtztxeTVMEWfciC0cxNuEFZWRZFx2/QA4Ull5nkkLwqQBRQ6",
   live_view: [signing_salt: "F07EFQKnybYwDgCO"],
+  check_origin: false,
+  code_reloader: true,
   watchers: [
     # Start the esbuild watcher by calling Esbuild.install_and_run(:auth, args)
     esbuild: {Esbuild, :install_and_run, [:auth, ~w(--sourcemap=inline --watch)]},
@@ -97,6 +94,18 @@ config :ex_fleet_yards_web, ExFleetYardsWeb.Endpoint,
       ~r"lib/ex_fleet_yards_web/templates/.*(eex)$"
     ]
   ]
+
+config :ex_fleet_yards_auth, ExFleetYardsAuth.Endpoint,
+  live_reload: [
+    patterns: [
+      ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",
+      ~r"priv/gettext/.*(po)$",
+      ~r"lib/ex_fleet_yards_auth/(live|views)/.*(ex)$",
+      ~r"lib/ex_fleet_yards_auth/controllers/.*_html/.*(heex)$",
+      ~r"lib/ex_fleet_yards_auth/components/.*(ex)$"
+    ]
+  ],
+  reloadable_apps: [:ex_fleet_yards_auth, :ex_fleet_yards]
 
 # Do not include metadata nor timestamps in development logs
 config :logger, :console, format: "[$level] $message\n"
