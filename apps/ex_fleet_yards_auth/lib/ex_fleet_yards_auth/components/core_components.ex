@@ -157,7 +157,7 @@ defmodule ExFleetYardsAuth.CoreComponents do
         id={@id}
         value={Phoenix.HTML.Form.normalize_value(@type, @value)}
         class={[
-          "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-700 rounded-md bg-gray-700 text-white",
+          "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm dark:border-gray-700 rounded-md dark:bg-gray-700 dark:text-white",
           @errors != [] && "border-rose-400 focus:border-rose-400"
         ]}
         {@rest}
@@ -185,7 +185,7 @@ defmodule ExFleetYardsAuth.CoreComponents do
 
   def label(assigns) do
     ~H"""
-    <label for={@for} class="block text-sm font-medium text-white">
+    <label for={@for} class="block text-sm font-medium dark:text-white">
       <%= render_slot(@inner_block) %>
     </label>
     """
