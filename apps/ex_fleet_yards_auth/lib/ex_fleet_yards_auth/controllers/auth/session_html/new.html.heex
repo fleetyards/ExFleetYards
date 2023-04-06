@@ -25,12 +25,23 @@
           <.button type="submit">
             Log in
           </.button>
+          <div></div>
         </div>
 
         <%= if @error do %>
           <p class="text-red-400 text-sm mb-4"><%= @error %></p>
         <% end %>
       </.form>
+      <%= if Application.get_env(:ueberauth, Ueberauth)[:providers] do %>
+        <div class="mt-6 flex justify-center items-center">
+          <hr class="border-gray-600 flex-grow" />
+          <div class="mx-4 text-gray-400 text-sm">or sign in with</div>
+          <hr class="border-gray-600 flex-grow" />
+        </div>
+        <%= for {provider, _} <- Application.get_env(:ueberauth, Ueberauth)[:providers] do %>
+          <.sign_in_with id={provider} />
+        <% end %>
+      <% end %>
     </div>
   </div>
 </div>

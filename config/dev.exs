@@ -114,7 +114,3 @@ config :open_api_spex, :cache_adapter, OpenApiSpex.Plug.NoneCache
 config :appsignal, :config,
   active: false,
   env: :dev
-
-if File.exists?("./config/dev.secrets.exs") do
-  import_config "dev.secrets.exs"
-end

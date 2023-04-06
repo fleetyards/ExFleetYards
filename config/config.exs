@@ -142,6 +142,21 @@ config :boruta, Boruta.Oauth,
   ],
   issuer: "https://auth.fleetyards.net"
 
+config :ueberauth, Ueberauth, providers: []
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
-import_config "#{config_env()}.exs"
+env =
+  if Kernel.macro_exported?(Config, :config_env, 0) do
+    Config.config_env()
+  else
+    Mix.env()
+  end
+
+import_config "#{env}.exs"
+
+if File.exists?("./config/#{env}.secrets.exs") do
+  import_config("#{env}.secrets.exs")
+end
+
+config :ex_fleet_yards, env: env

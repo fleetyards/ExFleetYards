@@ -36,6 +36,12 @@ defmodule ExFleetYardsAuth.MixProject do
       {:phoenix, "~> 1.7.2"},
       {:phoenix_ecto, "~> 4.4"},
       {:phoenix_live_view, "~> 0.18.18"},
+
+      # Auth
+      {:ueberauth, "~> 0.10"},
+      {:ueberauth_github, "~> 0.8"},
+
+      # Telemetry
       {:telemetry_metrics, "~> 0.6"},
       {:telemetry_poller, "~> 1.0"},
       {:ex_fleet_yards, in_umbrella: true},

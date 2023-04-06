@@ -57,6 +57,13 @@ defmodule ExFleetYardsAuth.Router do
     end
   end
 
+  scope "/auth", ExFleetYardsAuth.Auth do
+    pipe_through :browser
+
+    get "/:provider", SSOController, :request
+    get "/:provider/callback", SSOController, :callback
+  end
+
   scope "/", ExFleetYardsAuth do
     pipe_through [:api]
 
