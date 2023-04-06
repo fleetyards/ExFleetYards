@@ -142,6 +142,8 @@ config :boruta, Boruta.Oauth,
   ],
   issuer: "https://auth.fleetyards.net"
 
+config :ueberauth, Ueberauth, providers: []
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 env =
