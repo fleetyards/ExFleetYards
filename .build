@@ -5,6 +5,7 @@ ExFleetYards.Mailer.html
 ExFleetYards.Oauth.ResourceOwners.html
 ExFleetYards.Release.Ecto.html
 ExFleetYards.Release.Tasks.html
+ExFleetYards.Repo.Account.User.SSOConnection.html
 ExFleetYards.Repo.Account.User.html
 ExFleetYards.Repo.Account.UserToken.html
 ExFleetYards.Repo.Account.Vehicle.NotFoundException.html
@@ -118,6 +119,7 @@ ExFleetYardsApi.UserView.html
 ExFleetYardsApi.VersionController.html
 ExFleetYardsApi.VersionView.html
 ExFleetYardsApi.html
+ExFleetYardsAuth.Auth.SSOController.html
 ExFleetYardsAuth.Auth.html
 ExFleetYardsAuth.CoreComponents.html
 ExFleetYardsAuth.Endpoint.html
@@ -181,7 +183,7 @@ dist/merriweather-latin-ext-300-normal-K6L27CZ5.woff2
 dist/merriweather-vietnamese-300-italic-EHHNZPUO.woff2
 dist/merriweather-vietnamese-300-normal-U376L4Z4.woff2
 dist/remixicon-NKANDIL5.woff2
-dist/search_items-D45BFC02.js
-dist/sidebar_items-804E84E9.js
+dist/search_items-FDD4D7F1.js
+dist/sidebar_items-201A0E18.js
 index.html
 search.html
