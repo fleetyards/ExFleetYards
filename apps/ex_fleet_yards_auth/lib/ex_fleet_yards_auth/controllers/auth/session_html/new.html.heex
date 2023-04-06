@@ -17,8 +17,8 @@
   <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
     <div class="bg-white dark:bg-gray-800 py-8 px-4 shadow sm:rounded-lg sm:px-10">
       <.form :let={f} for={%{}} as={:login} action={~p"/login"} method="post">
-        <.input type="text" name="email" label="email" value={@email} />
-        <.input type="password" name="password" label="password" />
+        <.input type="text" name="email" label="email" value={@email} autocomplete="username" />
+        <.input type="password" name="password" label="password" autocomplete="current-password" />
         <.input type="checkbox" id="remember_me" label="Remember Me" />
 
         <div class="mt-6 flex items-center justify-between">
