@@ -1,4 +1,4 @@
-<div class="flex items-center justify-center min-h-screen bg-gray-900 text-white">
+<div class="flex items-center justify-center min-h-screen dark:bg-gray-900 dark:text-white">
   <div class="p-10 max-w-lg text-center">
     <img class="mx-auto h-12 w-auto" src={~p"/images/logo-dark.png"} alt="Logo" />
 
@@ -9,14 +9,14 @@
         href={
           "#{@redirect_uri}?error=#{@error || "error"}&error_description=#{@error_description}"
         }
-        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+        class="bg-blue-500 hover:bg-blue-700 dark:text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
       >
         Return to App
       </a>
     <% else %>
       <a
         href="/"
-        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+        class="bg-blue-500 hover:bg-blue-700 dark:text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
       >
         Return to Home
       </a>
