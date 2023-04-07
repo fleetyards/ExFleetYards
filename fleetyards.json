@@ -29,7 +29,7 @@
             "x-validate": null
           },
           "token": {
-            "example": "B-neIAmWQg",
+            "example": "kaEEoUL7qw",
             "type": "string",
             "x-struct": null,
             "x-validate": null
