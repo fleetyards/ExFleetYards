@@ -3,6 +3,9 @@ defmodule ExFleetYardsAuth.Openid.AuthorizeController do
 
   use ExFleetYardsAuth, :controller
 
+  alias ExFleetYardsAuth.Auth
+  import ExFleetYardsAuth.Oauth.AuthorizeController, only: [get_scopes: 1]
+
   alias Boruta.Oauth.AuthorizeResponse
   alias Boruta.Oauth.Error
   alias Boruta.Oauth.ResourceOwner
@@ -11,7 +14,7 @@ defmodule ExFleetYardsAuth.Openid.AuthorizeController do
 
   def oauth_module, do: Application.get_env(:ex_fleet_yards_auth, :oauth_module, Boruta.Oauth)
 
-  def authorize(%Plug.Conn{} = conn, _params) do
+  def preauthorize(%Plug.Conn{} = conn, _params) do
     conn =
       conn
       |> store_user_return_to()
@@ -22,34 +25,34 @@ defmodule ExFleetYardsAuth.Openid.AuthorizeController do
     with {:unchanged, conn} <- prompt_redirection(conn),
          {:unchanged, conn} <- max_age_redirection(conn, resource_owner),
          {:unchanged, conn} <- login_redirection(conn) do
-      oauth_module().authorize(conn, resource_owner, __MODULE__)
+      oauth_module().preauthorize(conn, resource_owner, __MODULE__)
     end
   end
 
   @impl Boruta.Oauth.AuthorizeApplication
-  def authorize_success(
-        conn,
-        %AuthorizeResponse{} = response
-      ) do
-    redirect(conn, external: AuthorizeResponse.redirect_to_url(response))
+  def preauthorize_success(conn, response) do
+    scopes = get_scopes(response.scope)
+
+    conn
+    |> put_view(OauthView)
+    |> render("preauthorize.html",
+      response: response,
+      scopes: scopes,
+      response_mode: conn.params["response_mode"],
+      response_type: conn.params["response_type"]
+    )
   end
 
   @impl Boruta.Oauth.AuthorizeApplication
-  def authorize_error(
-        %Plug.Conn{} = conn,
-        %Error{status: :unauthorized, error: :login_required} = error
-      ) do
-    redirect(conn, external: Error.redirect_to_url(error))
-  end
-
-  def authorize_error(
+  def preauthorize_error(
         %Plug.Conn{} = conn,
         %Error{status: :unauthorized, error: :invalid_resource_owner}
       ) do
     redirect_to_login(conn)
   end
 
-  def authorize_error(
+  @impl Boruta.Oauth.AuthorizeApplication
+  def preauthorize_error(
         conn,
         %Error{
           format: format
@@ -59,13 +62,15 @@ defmodule ExFleetYardsAuth.Openid.AuthorizeController do
     redirect(conn, external: Error.redirect_to_url(error))
   end
 
-  def authorize_error(
-        conn,
-        %Error{status: status, error: error, error_description: error_description}
-      ) do
+  @impl Boruta.Oauth.AuthorizeApplication
+  def preauthorize_error(conn, response) do
     conn
-    |> put_status(status)
-    |> render("error.html", error: error, error_description: error_description)
+    |> put_status(:bad_request)
+    |> render("error.html",
+      error: response.error,
+      error_description: response.error_description,
+      redirect_uri: response.redirect_uri
+    )
   end
 
   defp put_unsigned_request(%Plug.Conn{query_params: query_params} = conn) do
@@ -147,22 +152,20 @@ defmodule ExFleetYardsAuth.Openid.AuthorizeController do
         %ResourceOwner{
           sub: to_string(current_user.id),
           username: current_user.email,
-          last_login_at: current_user.last_login_at
+          last_login_at: current_user.last_sign_in_at
         }
     end
   end
 
-  defp redirect_to_login(_conn) do
-    raise """
-    Here occurs the login process. After login, user may be redirected to
-    get_session(conn, :user_return_to)
-    """
+  defp redirect_to_login(conn) do
+    login_hint = conn.query_params["login_hint"]
+
+    query = if login_hint, do: %{"login_hint" => login_hint}, else: %{}
+
+    redirect(conn, to: Routes.session_path(conn, :new, query))
   end
 
-  defp log_out_user(_conn) do
-    raise """
-    Here user shall be logged out then redirected to login. After login, user may be redirected to
-    get_session(conn, :user_return_to)
-    """
+  defp log_out_user(conn) do
+    Auth.log_out_user(conn)
   end
 end

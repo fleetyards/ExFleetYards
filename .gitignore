@@ -35,5 +35,6 @@ result
 result-*
 .devenv/
 .devenv.*
+.direnv/
 .pre-commit-config.yaml
 

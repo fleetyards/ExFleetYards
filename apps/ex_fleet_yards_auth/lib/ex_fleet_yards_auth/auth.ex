@@ -50,7 +50,7 @@ defmodule ExFleetYardsAuth.Auth do
     conn
     |> renew_session()
     |> delete_resp_cookie(@remember_me_cookie)
-    |> redirect(to: "/")
+    |> redirect(to: Routes.session_path(conn, :new))
   end
 
   def fetch_current_user(conn, _opts) do

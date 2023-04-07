@@ -81,6 +81,7 @@ defmodule ExFleetYardsAuth.Oauth.AuthorizeController do
       ) do
     conn
     |> put_status(status)
+    |> put_status(:bad_request)
     |> render("error.html",
       error: error,
       error_description: error_description,
@@ -127,7 +128,7 @@ defmodule ExFleetYardsAuth.Oauth.AuthorizeController do
     redirect(conn, to: Routes.session_path(conn, :new, query))
   end
 
-  defp get_scopes(scopes) do
+  def get_scopes(scopes) do
     scopes
     |> String.split(" ")
     |> Enum.map(&Repo.get_by(Boruta.Ecto.Scope, name: &1))

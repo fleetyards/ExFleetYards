@@ -24,7 +24,13 @@ defmodule ExFleetYards.Scopes do
     user: "Allows reading and writing user data"
   ]
 
+  @openid_scopes [
+    openid: "Allows authentication with OpenID Connect",
+    profile: "Allows reading user profile data",
+    email: "Allows reading user email address"
+  ]
+
   def scope_list do
-    @hangar_scopes ++ @fleet_scopes ++ @user_scopes
+    @hangar_scopes ++ @fleet_scopes ++ @user_scopes ++ @openid_scopes
   end
 end
