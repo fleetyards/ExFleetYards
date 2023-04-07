@@ -382,7 +382,7 @@
             "x-validate": null
           },
           "token": {
-            "example": "aOg0CeUNQw",
+            "example": "gwlDzLCp8w",
             "type": "string",
             "x-struct": null,
             "x-validate": null
@@ -2476,6 +2476,7 @@
           "authorizationCode": {
             "authorizationUrl": "http://localhost:4002/oauth/authorize",
             "scopes": {
+              "email": "Allows reading user email address",
               "fleet:admin": "Allows managing your fleet, except deleting",
               "fleet:create": "Allows to create a new fleet",
               "fleet:delete": "Allows deleting your fleet",
@@ -2484,6 +2485,8 @@
               "hangar": "Allows reading and writing to your hangar",
               "hangar:read": "Allows reading from your hangar",
               "hangar:write": "Allows writing to your hangar",
+              "openid": "Allows authentication with OpenID Connect",
+              "profile": "Allows reading user profile data",
               "user": "Allows reading and writing user data",
               "user:delete": "Allows deleting your account",
               "user:email": "Allows reading user email address",
@@ -2494,6 +2497,7 @@
           "implicit": {
             "authorizationUrl": "http://localhost:4002/oauth/authorize",
             "scopes": {
+              "email": "Allows reading user email address",
               "fleet:admin": "Allows managing your fleet, except deleting",
               "fleet:create": "Allows to create a new fleet",
               "fleet:delete": "Allows deleting your fleet",
@@ -2502,6 +2506,8 @@
               "hangar": "Allows reading and writing to your hangar",
               "hangar:read": "Allows reading from your hangar",
               "hangar:write": "Allows writing to your hangar",
+              "openid": "Allows authentication with OpenID Connect",
+              "profile": "Allows reading user profile data",
               "user": "Allows reading and writing user data",
               "user:delete": "Allows deleting your account",
               "user:email": "Allows reading user email address",
