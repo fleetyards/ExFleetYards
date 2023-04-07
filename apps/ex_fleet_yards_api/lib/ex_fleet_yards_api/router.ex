@@ -49,6 +49,8 @@ defmodule ExFleetYardsApi.Router do
 
       get "/celestial-objects", CelestialObjectController, :index
       get "/celestial-objects/:slug", CelestialObjectController, :show
+      get "/starsystems", StarsystemController, :index
+      get "/starsystems/:slug", StarsystemController, :show
     end
 
     scope "/roadmap" do
@@ -151,8 +153,6 @@ defmodule ExFleetYardsApi.Router do
   #      resources "/models", ModelController, only: [:index, :show]
 
   #      resources "/components", ComponentController, only: [:index, :show]
-  #      resources "/starsystems", StarSystemController, only: [:index, :show]
-  #      resources "/celestial-objects", CelestialObjectController, only: [:index, :show]
 
   #      get "/stations/:id/shops/:shop", StationController, :shop
   #      get "/stations/:id/shops/:shop/commodities", StationController, :commodities

@@ -15,6 +15,13 @@ defmodule ExFleetYardsApi.Routes.Game.CelestialObjectJson do
         nil
       end
 
+    system =
+      if Ecto.assoc_loaded?(data.starsystem) do
+        ExFleetYardsApi.Routes.Game.StarsystemJson.show(%{data: data.starsystem})
+      else
+        nil
+      end
+
     %{
       name: data.name,
       slug: data.slug,
@@ -30,9 +37,9 @@ defmodule ExFleetYardsApi.Routes.Game.CelestialObjectJson do
       economy: data.sensor_economy,
       population: data.sensor_population,
       locationLabel: data.location_label,
-      moons: moons
+      moons: moons,
+      starsystem: system
     }
-    # |> add_system(data.starsystem)
     |> filter_null(ExFleetYardsApi.Schemas.Single.CelestialObject)
   end
 end
