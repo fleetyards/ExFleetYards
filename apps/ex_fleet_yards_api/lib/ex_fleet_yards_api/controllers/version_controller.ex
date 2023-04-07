@@ -2,6 +2,8 @@ defmodule ExFleetYardsApi.VersionController do
   use ExFleetYardsApi, :controller
   alias ExFleetYards.Version
 
+  plug :put_view, ExFleetYardsApi.VersionJson
+
   tags ["version"]
 
   operation :index,
@@ -12,7 +14,7 @@ defmodule ExFleetYardsApi.VersionController do
 
   def index(conn, _params) do
     conn
-    |> render("version.json",
+    |> render(:version,
       version: Version.version(),
       hash: Version.git_version(),
       codename: Version.version_name()
@@ -26,6 +28,6 @@ defmodule ExFleetYardsApi.VersionController do
     ]
 
   def sc_data(conn, _params) do
-    render(conn, "version.json", version: ExFleetYards.Repo.RubyImport.current_version())
+    render(conn, :version, version: ExFleetYards.Repo.RubyImport.current_version())
   end
 end

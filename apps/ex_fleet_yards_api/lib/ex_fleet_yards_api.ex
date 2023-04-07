@@ -22,6 +22,8 @@ defmodule ExFleetYardsApi do
       @moduledoc "Controller used for Api"
       use Phoenix.Controller, namespace: ExFleetYardsApi
 
+      unquote(verified_routes())
+
       import Plug.Conn
       alias ExFleetYardsApi.NotFoundException
       alias ExFleetYardsApi.InvalidPaginationException
@@ -59,6 +61,7 @@ defmodule ExFleetYardsApi do
 
   def json do
     quote do
+      @moduledoc false
       import ExFleetYardsApi.ViewHelpers
     end
   end
@@ -75,13 +78,20 @@ defmodule ExFleetYardsApi do
 
   defp view_helpers() do
     quote do
-      # Import basic rendering functionality (render, render_layout, etc)
-      import Phoenix.View
+      unquote(verified_routes())
 
       # import ExFleetYardsApi.ErrorHelpers
 
       alias ExFleetYardsApi.Router.Helpers, as: Routes
       import ExFleetYardsApi.ViewHelpers
+    end
+  end
+
+  def verified_routes do
+    quote do
+      use Phoenix.VerifiedRoutes,
+        endpoint: ExFleetYardsApi.Endpoint,
+        router: ExFleetYardsApi.Router
     end
   end
 
