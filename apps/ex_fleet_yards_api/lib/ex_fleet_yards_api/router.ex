@@ -43,13 +43,17 @@ defmodule ExFleetYardsApi.Router do
     end
 
     scope "/user", User do
-      scope "/totp" do
+      get "/:username", InfoController, :get
+
+      scope "/" do
         pipe_through :require_authenticated
 
-        get "/", TotpController, :index
-        delete "/", TotpController, :delete
-        post "/", TotpController, :create
-        post "/confirm/:code", TotpController, :confirm
+        get "/", InfoController, :get_current
+        post "/", InfoController, :set
+        get "/totp", TotpController, :index
+        delete "/totp", TotpController, :delete
+        post "/totp", TotpController, :create
+        post "/totp/confirm/:code", TotpController, :confirm
       end
     end
   end

@@ -46,6 +46,7 @@ defmodule ExFleetYardsApi do
     quote do
       @moduledoc false
       import ExFleetYardsApi.JsonHelpers
+      alias ExFleetYardsApi.ErrorJson
     end
   end
 
