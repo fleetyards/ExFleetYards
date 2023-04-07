@@ -54,6 +54,11 @@ defmodule ExFleetYardsApi.Router do
 
       get "/components", ComponentController, :index
       get "/components/:slug", ComponentController, :show
+
+      get "/stations", StationController, :index
+      get "/stations/:slug", StationController, :show
+      get "/stations/:slug/shops/:shop", StationController, :shops
+      get "/stations/:slug/shops/:shop/commodities", StationController, :commodities
     end
 
     scope "/roadmap" do
