@@ -120,6 +120,13 @@ config :phoenix, :stacktrace_depth, 20
 # Disable openapi cache for development
 config :open_api_spex, :cache_adapter, OpenApiSpex.Plug.NoneCache
 
+config :ex_fleet_yards, ExFleetYards.Vault,
+  ciphers: [
+    default:
+      {Cloak.Ciphers.AES.GCM,
+       tag: "AES.GCM.V1", key: Base.decode64!("fGG2AWVqsTc53CpCBmChtOk+G9LyPCmvApiGtPQW9wI=")}
+  ]
+
 config :appsignal, :config,
   active: false,
   env: :dev

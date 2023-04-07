@@ -37,9 +37,6 @@ defmodule ExFleetYards.Repo.Account.User do
     field :youtube, :string
     field :homepage, :string
     field :guilded, :string
-    field :encrypted_otp_secret, :string, redact: true
-    field :encrypted_otp_secret_iv, :string, redact: true
-    field :encrypted_otp_secret_salt, :string, redact: true
     field :consumed_timestep, :integer
     field :otp_required_for_login, :boolean
     field :otp_backup_codes, {:array, :string}
@@ -50,6 +47,7 @@ defmodule ExFleetYards.Repo.Account.User do
 
     has_many :vehicles, ExFleetYards.Repo.Account.Vehicle
     has_many :sso_connections, ExFleetYards.Repo.Account.User.SSOConnection
+    has_one :totp, ExFleetYards.Repo.Account.User.Totp
 
     timestamps(inserted_at: :created_at, type: :utc_datetime)
   end

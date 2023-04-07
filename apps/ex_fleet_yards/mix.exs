@@ -41,6 +41,8 @@ defmodule ExFleetYards.MixProject do
       {:ecto_sql, "~> 3.6"},
       {:typed_ecto_schema, "~> 0.4.1", runtime: false},
       {:ecto_autoslug_field, "~> 3.0"},
+      {:cloak_ecto, "~> 1.2.0"},
+      {:nimble_totp, "~> 1.0.0"},
       {:postgrex, ">= 0.0.0"},
       {:jason, "~> 1.2"},
       {:swoosh, "~> 1.3"},

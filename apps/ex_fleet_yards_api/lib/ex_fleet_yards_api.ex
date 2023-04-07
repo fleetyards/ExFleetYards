@@ -57,6 +57,12 @@ defmodule ExFleetYardsApi do
     end
   end
 
+  def json do
+    quote do
+      import ExFleetYardsApi.ViewHelpers
+    end
+  end
+
   def router do
     quote do
       use Phoenix.Router

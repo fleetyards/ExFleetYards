@@ -20,6 +20,7 @@ defmodule ExFleetYards.Scopes do
     "user:read": "Allows reading user profile data",
     "user:email": "Allows reading user email address",
     "user:delete": "Allows deleting your account",
+    "user:security": "Allows managing the security details of a user",
     # "user:follow": "Allows following other users",
     user: "Allows reading and writing user data"
   ]
