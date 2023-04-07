@@ -57,8 +57,15 @@ defmodule ExFleetYardsApi.Router do
 
       get "/stations", StationController, :index
       get "/stations/:slug", StationController, :show
-      get "/stations/:slug/shops/:shop", StationController, :shops
+      get "/stations/:slug/shops/:shop", StationController, :shop
       get "/stations/:slug/shops/:shop/commodities", StationController, :commodities
+
+      get "/models", ModelController, :index
+      get "/models/:slug/paints", ModelController, :paints
+      get "/models/:slug/loaners", ModelController, :loaners
+      get "/models/:slug/loaned-by", ModelController, :inv_loaners
+      get "/models/:slug/hardpoints", ModelController, :hardpoints
+      get "/models/:slug", ModelController, :show
     end
 
     scope "/roadmap" do
@@ -90,89 +97,19 @@ defmodule ExFleetYardsApi.Router do
     end
   end
 
-  # scope "/" do
-  #  pipe_through :api
-
-  #  scope "/v2" do
-  #    pipe_through :ui
-
-  #    get "/oauth2-redirect.html", OpenApiSpex.Plug.SwaggerUIOAuth2Redirect, []
-
-  #    get "/docs", OpenApiSpex.Plug.SwaggerUI,
-  #      path: "/v2/openapi.json",
-  #      persist_authorization: true,
-  #      oauth: [appName: "Fleetyards API"]
-  #  end
-
-  #  get "/v2/openapi.json", OpenApiSpex.Plug.RenderSpec, []
-
   #  scope "/v2", ExFleetYardsApi do
-  #    scope "/session" do
-  #      post "/", UserSessionController, :create
-  #      get "/", UserSessionController, :get_self
-  #      delete "/logout", UserSessionController, :delete
-  #      delete "/logout/all", UserSessionController, :delete_all
-  #      delete "/logout/:id", UserSessionController, :delete_other
-
-  #      scope "/" do
-  #        pipe_through :require_authenticated
-
-  #        get "/tokens/:id", UserSessionController, :get
-
-  #        get "/tokens", UserSessionController, :list
-  #      end
-  #    end
-
-  #    scope "/users" do
-  #      get "/:username", UserController, :get
-  #    end
-
-  #    scope "/user", Controllers.User do
-  #      get "/", UserController, :get_current
-  #      post "/", UserController, :set
-  #      post "/register", UserController, :register
-  #      get "/register/confirm/:token", UserController, :confirm
-  #      delete "/delete-account", UserController, :delete
-
-  #      scope "/totp" do
-  #        pipe_through :require_authenticated
-  #        get "/", Totp, :index
-  #        delete "/", Totp, :delete
-  #        post "/", Totp, :create
-  #        post "/confirm/:code", Totp, :confirm
-  #      end
-  #    end
-
-  #    scope "/version" do
-  #      get "/", VersionController, :index
-  #      get "/sc-data", VersionController, :sc_data
-  #    end
-
   #    scope "/game" do
-  #      # get "/manufacturers", ManufacturerController, :index
-  #      # get "/manufacturer/:slug", ManufacturerController, :show
-  #      get "/manufacturers/with-models", ManufacturerController, :with_models
-  #      resources "/manufacturers", ManufacturerController, only: [:index, :show]
-
   #      get "/models/:id/paints", ModelController, :paints
   #      get "/models/:id/loaners", ModelController, :loaners
   #      get "/models/:id/loaned-by", ModelController, :inv_loaners
   #      get "/models/:id/hardpoints", ModelController, :hardpoints
   #      resources "/models", ModelController, only: [:index, :show]
-
-  #      resources "/components", ComponentController, only: [:index, :show]
-
-  #      get "/stations/:id/shops/:shop", StationController, :shop
-  #      get "/stations/:id/shops/:shop/commodities", StationController, :commodities
-  #      resources "/stations", StationController, only: [:index, :show]
   #    end
-
   #    scope "/hangar" do
   #      scope "/public" do
   #        get "/:username", UserHangarController, :public
   #        get "/:username/quick-stats", UserHangarController, :public_quick_stats
   #      end
-
   #      scope "/" do
   #        pipe_through :require_authenticated
 
@@ -198,13 +135,6 @@ defmodule ExFleetYardsApi.Router do
   #      end
 
   #      post "/invite/:token", FleetInviteController, :accept_token
-  #    end
-
-  #    scope "/roadmap" do
-  #      get "/active", RoadmapController, :active
-  #      get "/released", RoadmapController, :released
-  #      get "/unreleased", RoadmapController, :unreleased
-  #      resources "/", RoadmapController, only: [:index, :show]
   #    end
   #  end
   # end
