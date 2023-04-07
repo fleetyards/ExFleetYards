@@ -48,6 +48,14 @@ defmodule ExFleetYardsApi.Router do
       get "/manufacturers/:slug", ManufacturerController, :show
     end
 
+    scope "/roadmap" do
+      get "/active", RoadmapController, :active
+      get "/released", RoadmapController, :released
+      get "/unreleased", RoadmapController, :unreleased
+      get "/:id", RoadmapController, :show
+      get "/", RoadmapController, :index
+    end
+
     scope "/user", User do
       get "/:username", InfoController, :get
       post "/register", RegisterController, :register

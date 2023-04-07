@@ -17,7 +17,7 @@ defmodule ExFleetYardsApi.ControllerGenerators do
   """
   defmacro paged_index(type, opts \\ []) do
     quote do
-      paged_list(:index, unquote(type), unquote_splicing(opts))
+      paged_list(:index, unquote(type), unquote(opts))
     end
   end
 
