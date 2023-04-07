@@ -6,6 +6,7 @@ ExFleetYards.Oauth.ResourceOwners.html
 ExFleetYards.Release.Ecto.html
 ExFleetYards.Release.Tasks.html
 ExFleetYards.Repo.Account.User.SSOConnection.html
+ExFleetYards.Repo.Account.User.Totp.html
 ExFleetYards.Repo.Account.User.html
 ExFleetYards.Repo.Account.UserToken.html
 ExFleetYards.Repo.Account.Vehicle.NotFoundException.html
@@ -60,6 +61,9 @@ ExFleetYards.Repo.Types.TokenScope.html
 ExFleetYards.Repo.Types.html
 ExFleetYards.Repo.html
 ExFleetYards.Scopes.html
+ExFleetYards.Vault.Binary.html
+ExFleetYards.Vault.StringList.html
+ExFleetYards.Vault.html
 ExFleetYards.Version.html
 ExFleetYards.html
 ExFleetYardsApi.ApiSpec.html
@@ -69,6 +73,7 @@ ExFleetYardsApi.CommodityView.html
 ExFleetYardsApi.ComponentController.html
 ExFleetYardsApi.ComponentView.html
 ExFleetYardsApi.ControllerHelpers.html
+ExFleetYardsApi.Controllers.User.Totp.html
 ExFleetYardsApi.Endpoint.html
 ExFleetYardsApi.ErrorView.html
 ExFleetYardsApi.FleetController.html
@@ -102,6 +107,7 @@ ExFleetYardsApi.Schemas.Single.Manufacturer.html
 ExFleetYardsApi.Schemas.Single.ModelHardpoint.html
 ExFleetYardsApi.Schemas.Single.StarSystem.html
 ExFleetYardsApi.Schemas.Single.User.html
+ExFleetYardsApi.Schemas.Single.UserTotp.html
 ExFleetYardsApi.Schemas.Single.Version.html
 ExFleetYardsApi.StarSystemController.html
 ExFleetYardsApi.StarSystemView.html
@@ -183,7 +189,7 @@ dist/merriweather-latin-ext-300-normal-K6L27CZ5.woff2
 dist/merriweather-vietnamese-300-italic-EHHNZPUO.woff2
 dist/merriweather-vietnamese-300-normal-U376L4Z4.woff2
 dist/remixicon-NKANDIL5.woff2
-dist/search_items-079A93BF.js
-dist/sidebar_items-FA0BC483.js
+dist/search_items-68DEBF26.js
+dist/sidebar_items-6A1600D2.js
 index.html
 search.html

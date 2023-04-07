@@ -2,6 +2,518 @@
   "components": {
     "responses": {},
     "schemas": {
+      "FleetInvite": {
+        "description": "Fleet invite",
+        "properties": {
+          "createdAt": {
+            "format": "date-time",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "expiresAt": {
+            "format": "date-time",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "fleet": {
+            "format": "slug",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "limit": {
+            "type": "integer",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "token": {
+            "example": "B-neIAmWQg",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          }
+        },
+        "required": [
+          "code",
+          "fleet"
+        ],
+        "title": "FleetInvite",
+        "type": "object",
+        "x-struct": "Elixir.ExFleetYardsApi.Schemas.Single.FleetInvite",
+        "x-validate": null
+      },
+      "StationList": {
+        "description": "Station List",
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/Station"
+            },
+            "type": "array",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/PaginationMetadata"
+          }
+        },
+        "required": [
+          "data",
+          "metadata"
+        ],
+        "title": "StationList",
+        "type": "object",
+        "x-struct": "Elixir.ExFleetYardsApi.Schemas.List.StationList",
+        "x-validate": null
+      },
+      "UserTokenList": {
+        "description": "User Token",
+        "items": {
+          "$ref": "#/components/schemas/UserToken"
+        },
+        "title": "UserTokenList",
+        "type": "array",
+        "x-struct": "Elixir.ExFleetYardsApi.Schemas.List.UserTokenList",
+        "x-validate": null
+      },
+      "Component": {
+        "description": "Component",
+        "properties": {
+          "class": {
+            "nullable": true,
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "createdAt": {
+            "description": "Create timestamp",
+            "format": "date-time",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "grade": {
+            "nullable": true,
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "manufacturer": {
+            "$ref": "#/components/schemas/Manufacturer"
+          },
+          "name": {
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "size": {
+            "nullable": true,
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "slug": {
+            "format": "slug",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "storeImageIsFallback": {
+            "nullable": true,
+            "type": "boolean",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "updatedAt": {
+            "description": "Update timestamp",
+            "format": "date-time",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          }
+        },
+        "required": [
+          "id",
+          "slug",
+          "name",
+          "createdAt"
+        ],
+        "title": "Component",
+        "type": "object",
+        "x-struct": "Elixir.ExFleetYardsApi.Schemas.Single.Component",
+        "x-validate": null
+      },
+      "StarSystemList": {
+        "description": "StarSystem List",
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/StarSystem"
+            },
+            "type": "array",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/PaginationMetadata"
+          }
+        },
+        "required": [
+          "data",
+          "metadata"
+        ],
+        "title": "StarSystemList",
+        "type": "object",
+        "x-struct": "Elixir.ExFleetYardsApi.Schemas.List.StarSystemList",
+        "x-validate": null
+      },
+      "UserHangarQuickStats": {
+        "description": "User Hangar",
+        "properties": {
+          "classifications": {
+            "items": {
+              "properties": {
+                "classification": {
+                  "type": "string",
+                  "x-struct": null,
+                  "x-validate": null
+                },
+                "count": {
+                  "type": "integer",
+                  "x-struct": null,
+                  "x-validate": null
+                }
+              },
+              "type": "object",
+              "x-struct": null,
+              "x-validate": null
+            },
+            "type": "array",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "total": {
+            "type": "integer",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "username": {
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          }
+        },
+        "required": [
+          "username",
+          "total"
+        ],
+        "title": "UserHangarQuickStats",
+        "type": "object",
+        "x-struct": "Elixir.ExFleetYardsApi.Schemas.Single.UserHangarQuickStats",
+        "x-validate": null
+      },
+      "UserSession": {
+        "description": "Login information",
+        "properties": {
+          "password": {
+            "format": "password",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "scopes": {
+            "properties": {
+              "api": {
+                "example": [
+                  "read",
+                  "write",
+                  "admin"
+                ],
+                "items": {
+                  "type": "string",
+                  "x-struct": null,
+                  "x-validate": null
+                },
+                "type": "array",
+                "x-struct": null,
+                "x-validate": null
+              },
+              "fleet": {
+                "example": [
+                  "read",
+                  "write",
+                  "admin",
+                  "create"
+                ],
+                "items": {
+                  "type": "string",
+                  "x-struct": null,
+                  "x-validate": null
+                },
+                "type": "array",
+                "x-struct": null,
+                "x-validate": null
+              },
+              "hangar": {
+                "example": [
+                  "read",
+                  "write",
+                  "admin"
+                ],
+                "items": {
+                  "type": "string",
+                  "x-struct": null,
+                  "x-validate": null
+                },
+                "type": "array",
+                "x-struct": null,
+                "x-validate": null
+              },
+              "user": {
+                "example": [
+                  "write"
+                ],
+                "items": {
+                  "type": "string",
+                  "x-struct": null,
+                  "x-validate": null
+                },
+                "type": "array",
+                "x-struct": null,
+                "x-validate": null
+              }
+            },
+            "type": "object",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "totp": {
+            "format": "totp",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "username": {
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          }
+        },
+        "required": [
+          "scopes"
+        ],
+        "title": "UserSession",
+        "type": "object",
+        "x-struct": "Elixir.ExFleetYardsApi.Schemas.Single.UserSession",
+        "x-validate": null
+      },
+      "ModelHardpoint": {
+        "properties": {
+          "category": {
+            "enum": [
+              "main",
+              "retro",
+              "vtol",
+              "fixed",
+              "gimbal",
+              "joint",
+              "manned_turret",
+              "remote_turret",
+              "missile_turret",
+              "missile_rack"
+            ],
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "component": {
+            "$ref": "#/components/schemas/Component"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "details": {
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "group": {
+            "enum": [
+              "avionic",
+              "system",
+              "propulsion",
+              "thruster",
+              "weapon"
+            ],
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "key": {
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "loadoutIdentifier": {
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "loadouts": {
+            "items": {
+              "properties": {
+                "createdAt": {
+                  "format": "date-time",
+                  "type": "string",
+                  "x-struct": null,
+                  "x-validate": null
+                },
+                "updatedAt": {
+                  "format": "date-time",
+                  "type": "string",
+                  "x-struct": null,
+                  "x-validate": null
+                }
+              },
+              "required": [
+                "id",
+                "name",
+                "slug"
+              ],
+              "type": "object",
+              "x-struct": null,
+              "x-validate": null
+            },
+            "type": "array",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "mount": {
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "name": {
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "size": {
+            "enum": [
+              "vehicle",
+              "one",
+              "two",
+              "three",
+              "four",
+              "five",
+              "six",
+              "seven",
+              "eight",
+              "nine",
+              "ten",
+              "eleven",
+              "twelve",
+              "snub",
+              "small",
+              "medium",
+              "large",
+              "capital",
+              "tbd"
+            ],
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "type": {
+            "enum": [
+              "power_plants",
+              "coolers",
+              "shield_generators",
+              "quantum_drives",
+              "main_thrusters",
+              "maneuvering_thrusters",
+              "weapons",
+              "turrets",
+              "missiles",
+              "radar",
+              "computers",
+              "fuel_intakes",
+              "fuel_tanks",
+              "jump_modules",
+              "quantum_fuel_tanks",
+              "utility_items"
+            ],
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "type",
+          "group",
+          "size",
+          "key"
+        ],
+        "title": "ModelHardpoint",
+        "type": "object",
+        "x-struct": "Elixir.ExFleetYardsApi.Schemas.Single.ModelHardpoint",
+        "x-validate": null
+      },
+      "UserHangarList": {
+        "description": "UserHangar List",
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/UserHangar"
+            },
+            "type": "array",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/PaginationMetadata"
+          }
+        },
+        "required": [
+          "data",
+          "metadata"
+        ],
+        "title": "UserHangarList",
+        "type": "object",
+        "x-struct": "Elixir.ExFleetYardsApi.Schemas.List.UserHangarList",
+        "x-validate": null
+      },
       "CelestialObject": {
         "description": "Celestial Object",
         "properties": {
@@ -90,12 +602,93 @@
         "x-struct": "Elixir.ExFleetYardsApi.Schemas.Single.CelestialObject",
         "x-validate": null
       },
-      "CelestialObjectList": {
-        "description": "CelestialObject List",
+      "UserHangarChange": {
+        "description": "User Hangar Change",
+        "properties": {
+          "alternative_names": {
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "flagship": {
+            "type": "boolean",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "hidden": {
+            "type": "boolean",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "loaner": {
+            "type": "boolean",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "name": {
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "name_visible": {
+            "type": "boolean",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "paint": {
+            "format": "slug",
+            "nullable": true,
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "public": {
+            "type": "boolean",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "purchased": {
+            "type": "boolean",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "sale_notify": {
+            "type": "boolean",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "serial": {
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          }
+        },
+        "title": "UserHangarChange",
+        "type": "object",
+        "x-struct": "Elixir.ExFleetYardsApi.Schemas.Single.UserHangarChange",
+        "x-validate": null
+      },
+      "ShopCommodity": {
+        "description": "Shop Commodity",
+        "properties": {
+          "id": {
+            "format": "uuid",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          }
+        },
+        "title": "ShopCommodity",
+        "type": "object",
+        "x-struct": "Elixir.ExFleetYardsApi.Schemas.Single.ShopCommodity",
+        "x-validate": null
+      },
+      "RoadmapItemList": {
+        "description": "RoadmapItem List",
         "properties": {
           "data": {
             "items": {
-              "$ref": "#/components/schemas/CelestialObject"
+              "$ref": "#/components/schemas/RoadmapItem"
             },
             "type": "array",
             "x-struct": null,
@@ -109,15 +702,21 @@
           "data",
           "metadata"
         ],
-        "title": "CelestialObjectList",
+        "title": "RoadmapItemList",
         "type": "object",
-        "x-struct": "Elixir.ExFleetYardsApi.Schemas.List.CelestialObjectList",
+        "x-struct": "Elixir.ExFleetYardsApi.Schemas.List.RoadmapItemList",
         "x-validate": null
       },
-      "Component": {
-        "description": "Component",
+      "Manufacturer": {
+        "description": "Manufacturer in the star citizen univers",
+        "example": {
+          "createdAt": "2022-12-11T19:53:24",
+          "name": "Argo Astronautics",
+          "slug": "argo-astronautics",
+          "updatedAt": "2022-12-11T19:53:24"
+        },
         "properties": {
-          "class": {
+          "code": {
             "nullable": true,
             "type": "string",
             "x-struct": null,
@@ -130,28 +729,13 @@
             "x-struct": null,
             "x-validate": null
           },
-          "grade": {
+          "logo": {
             "nullable": true,
             "type": "string",
             "x-struct": null,
             "x-validate": null
-          },
-          "id": {
-            "format": "uuid",
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "manufacturer": {
-            "$ref": "#/components/schemas/Manufacturer"
           },
           "name": {
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "size": {
-            "nullable": true,
             "type": "string",
             "x-struct": null,
             "x-validate": null
@@ -159,12 +743,6 @@
           "slug": {
             "format": "slug",
             "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "storeImageIsFallback": {
-            "nullable": true,
-            "type": "boolean",
             "x-struct": null,
             "x-validate": null
           },
@@ -177,14 +755,13 @@
           }
         },
         "required": [
-          "id",
           "slug",
           "name",
           "createdAt"
         ],
-        "title": "Component",
+        "title": "Manufacturer",
         "type": "object",
-        "x-struct": "Elixir.ExFleetYardsApi.Schemas.Single.Component",
+        "x-struct": "Elixir.ExFleetYardsApi.Schemas.Single.Manufacturer",
         "x-validate": null
       },
       "ComponentList": {
@@ -211,26 +788,530 @@
         "x-struct": "Elixir.ExFleetYardsApi.Schemas.List.ComponentList",
         "x-validate": null
       },
-      "Error": {
-        "description": "Generic error",
+      "Shop": {
+        "description": "in game shop",
         "properties": {
-          "code": {
-            "example": "not_found",
+          "buying": {
+            "type": "boolean",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "celestialObject": {
+            "$ref": "#/components/schemas/CelestialObject"
+          },
+          "id": {
+            "format": "uuid",
             "type": "string",
             "x-struct": null,
             "x-validate": null
           },
-          "message": {
-            "example": "Not Found",
+          "location": {
+            "example": "The Commons",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "locationLabel": {
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "name": {
+            "example": "Planetary Services",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "refineryTerminal": {
+            "type": "boolean",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "rental": {
+            "type": "boolean",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "selling": {
+            "type": "boolean",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "slug": {
+            "example": "planetary-services",
+            "format": "slug",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "station": {
+            "properties": {
+              "name": {
+                "type": "string",
+                "x-struct": null,
+                "x-validate": null
+              },
+              "slug": {
+                "format": "slug",
+                "type": "string",
+                "x-struct": null,
+                "x-validate": null
+              }
+            },
+            "type": "object",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "stationLabel": {
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "type": {
+            "enum": [
+              "clothing",
+              "armor",
+              "weapons",
+              "components",
+              "armor_and_weapons",
+              "superstore",
+              "ships",
+              "admin",
+              "bar",
+              "hospital",
+              "salvage",
+              "resources",
+              "rental",
+              "computers",
+              "blackmarket",
+              "mining_equipment",
+              "equipment",
+              "courier",
+              "refinery",
+              "pharmacy",
+              "cargo",
+              "souvenirs",
+              "kiosk",
+              "ship_customizations"
+            ],
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "typeLabel": {
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          }
+        },
+        "title": "Shop",
+        "type": "object",
+        "x-struct": "Elixir.ExFleetYardsApi.Schemas.Single.Shop",
+        "x-validate": null
+      },
+      "RoadmapItem": {
+        "description": "Roadmap item",
+        "properties": {
+          "active": {
+            "type": "boolean",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "body": {
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "commited": {
+            "type": "boolean",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "description": {
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "id": {
+            "format": "uuid",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "model": {
+            "$ref": "#/components/schemas/Model"
+          },
+          "name": {
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "release": {
+            "format": "version",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "releaseDescription": {
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "released": {
+            "type": "boolean",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "rsiCategoryId": {
+            "type": "integer",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "rsiReleaseId": {
+            "type": "integer",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          }
+        },
+        "required": [
+          "id",
+          "name"
+        ],
+        "title": "RoadmapItem",
+        "type": "object",
+        "x-struct": "Elixir.ExFleetYardsApi.Schemas.Single.RoadmapItem",
+        "x-validate": null
+      },
+      "VersionResponse": {
+        "description": "server version",
+        "example": {
+          "codename": "Elixir",
+          "version": "v0.1.0"
+        },
+        "properties": {
+          "codename": {
+            "format": "version",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "hash": {
+            "description": "Git hash",
+            "format": "hash",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "version": {
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          }
+        },
+        "required": [
+          "version"
+        ],
+        "title": "VersionResponse",
+        "type": "object",
+        "x-struct": "Elixir.ExFleetYardsApi.Schemas.Single.Version",
+        "x-validate": null
+      },
+      "User": {
+        "description": "User Schema",
+        "properties": {
+          "avatar": {
+            "format": "url",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "discordHandle": {
+            "description": "Discord username",
+            "format": "url",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "discordServer": {
+            "description": "Discord server",
+            "format": "url",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "email": {
+            "format": "email",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "guilded": {
+            "description": "Guilded server",
+            "format": "url",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "homepage": {
+            "description": "User Homepage",
+            "format": "url",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "password": {
+            "format": "password",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "publicHangar": {
+            "description": "Show public hangar",
+            "type": "boolean",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "publicHangarLoaners": {
+            "description": "Show loaner hints in public hangar",
+            "type": "boolean",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "rsiHandle": {
+            "description": "RSI username",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "twitch": {
+            "description": "Twitch channel",
+            "format": "url",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "username": {
+            "description": "Fleetyards username",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "youtube": {
+            "description": "Youtube Channel",
+            "format": "url",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          }
+        },
+        "required": [
+          "username"
+        ],
+        "title": "User",
+        "type": "object",
+        "x-struct": "Elixir.ExFleetYardsApi.Schemas.Single.User",
+        "x-validate": null
+      },
+      "StarSystem": {
+        "description": "Star System",
+        "properties": {
+          "celestialObjects": {
+            "items": {
+              "$ref": "#/components/schemas/CelestialObject"
+            },
+            "type": "array",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "danger": {
+            "type": "integer",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "description": {
+            "description": "Description of the system",
+            "nullable": true,
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "economy": {
+            "example": 10,
+            "type": "integer",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "locationLabel": {
+            "example": "UEE",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "mapX": {
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "mapY": {
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "name": {
+            "description": "Name fo the system",
+            "example": "Stanton",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "population": {
+            "example": 10,
+            "type": "integer",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "size": {
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "slug": {
+            "description": "Slug of the system",
+            "example": "stanton",
+            "format": "slug",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "status": {
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "type": {
+            "example": "Single star",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          }
+        },
+        "required": [
+          "name",
+          "slug",
+          "createdAt"
+        ],
+        "title": "StarSystem",
+        "type": "object",
+        "x-struct": "Elixir.ExFleetYardsApi.Schemas.Single.StarSystem",
+        "x-validate": null
+      },
+      "UserToken": {
+        "description": "User Token",
+        "properties": {
+          "context": {
+            "example": "api",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "createdAt": {
+            "description": "Create timestamp",
+            "format": "date-time",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "id": {
+            "format": "uuid",
             "type": "string",
             "x-struct": null,
             "x-validate": null
           },
           "scopes": {
-            "example": {
-              "hangar": [
-                "read"
-              ]
+            "properties": {
+              "api": {
+                "example": [
+                  "read",
+                  "write",
+                  "admin"
+                ],
+                "items": {
+                  "type": "string",
+                  "x-struct": null,
+                  "x-validate": null
+                },
+                "type": "array",
+                "x-struct": null,
+                "x-validate": null
+              },
+              "fleet": {
+                "example": [
+                  "read",
+                  "write",
+                  "admin",
+                  "create"
+                ],
+                "items": {
+                  "type": "string",
+                  "x-struct": null,
+                  "x-validate": null
+                },
+                "type": "array",
+                "x-struct": null,
+                "x-validate": null
+              },
+              "hangar": {
+                "example": [
+                  "read",
+                  "write",
+                  "admin"
+                ],
+                "items": {
+                  "type": "string",
+                  "x-struct": null,
+                  "x-validate": null
+                },
+                "type": "array",
+                "x-struct": null,
+                "x-validate": null
+              },
+              "user": {
+                "example": [
+                  "write"
+                ],
+                "items": {
+                  "type": "string",
+                  "x-struct": null,
+                  "x-validate": null
+                },
+                "type": "array",
+                "x-struct": null,
+                "x-validate": null
+              }
             },
             "type": "object",
             "x-struct": null,
@@ -238,11 +1319,365 @@
           }
         },
         "required": [
-          "code"
+          "context"
         ],
-        "title": "Error",
+        "title": "UserToken",
         "type": "object",
-        "x-struct": "Elixir.ExFleetYardsApi.Schemas.Single.Error",
+        "x-struct": "Elixir.ExFleetYardsApi.Schemas.Single.UserToken",
+        "x-validate": null
+      },
+      "ShopCommodityList": {
+        "description": "ShopCommodity List",
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/ShopCommodity"
+            },
+            "type": "array",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/PaginationMetadata"
+          },
+          "shop": {
+            "$ref": "#/components/schemas/Shop"
+          }
+        },
+        "required": [
+          "data",
+          "metadata"
+        ],
+        "title": "ShopCommodityList",
+        "type": "object",
+        "x-struct": "Elixir.ExFleetYardsApi.Schemas.List.ShopCommodityList",
+        "x-validate": null
+      },
+      "Station": {
+        "description": "Station",
+        "properties": {
+          "cargoHub": {
+            "type": "boolean",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "celestialObject": {
+            "$ref": "#/components/schemas/CelestialObject"
+          },
+          "classification": {
+            "enum": [
+              "city",
+              "trading",
+              "mining",
+              "salvaging",
+              "farming",
+              "science",
+              "security",
+              "rest_stop",
+              "settlement",
+              "town",
+              "drug_lab"
+            ],
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "classificationLabel": {
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "description": {
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "dockCounts": {
+            "items": {
+              "properties": {
+                "count": {
+                  "type": "integer",
+                  "x-struct": null,
+                  "x-validate": null
+                },
+                "size": {
+                  "enum": [
+                    "extra_extra_small",
+                    "extra_small",
+                    "small",
+                    "medium",
+                    "large",
+                    "extra_large",
+                    "capital"
+                  ],
+                  "type": "string",
+                  "x-struct": null,
+                  "x-validate": null
+                },
+                "sizeLabel": {
+                  "type": "string",
+                  "x-struct": null,
+                  "x-validate": null
+                },
+                "type": {
+                  "enum": [
+                    "vehiclepad",
+                    "garage",
+                    "landingpad",
+                    "dockingport",
+                    "hangar"
+                  ],
+                  "type": "string",
+                  "x-struct": null,
+                  "x-validate": null
+                },
+                "typeLabel": {
+                  "type": "string",
+                  "x-struct": null,
+                  "x-validate": null
+                }
+              },
+              "type": "object",
+              "x-struct": null,
+              "x-validate": null
+            },
+            "type": "array",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "docks": {
+            "items": {
+              "properties": {
+                "group": {
+                  "type": "string",
+                  "x-struct": null,
+                  "x-validate": null
+                },
+                "name": {
+                  "type": "string",
+                  "x-struct": null,
+                  "x-validate": null
+                },
+                "size": {
+                  "enum": [
+                    "extra_extra_small",
+                    "extra_small",
+                    "small",
+                    "medium",
+                    "large",
+                    "extra_large",
+                    "capital"
+                  ],
+                  "type": "string",
+                  "x-struct": null,
+                  "x-validate": null
+                },
+                "sizeLabel": {
+                  "type": "string",
+                  "x-struct": null,
+                  "x-validate": null
+                },
+                "type": {
+                  "enum": [
+                    "vehiclepad",
+                    "garage",
+                    "landingpad",
+                    "dockingport",
+                    "hangar"
+                  ],
+                  "type": "string",
+                  "x-struct": null,
+                  "x-validate": null
+                },
+                "typeLabel": {
+                  "type": "string",
+                  "x-struct": null,
+                  "x-validate": null
+                }
+              },
+              "type": "object",
+              "x-struct": null,
+              "x-validate": null
+            },
+            "type": "array",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "habitable": {
+            "type": "boolean",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "habitationCounts": {
+            "items": {
+              "properties": {
+                "count": {
+                  "type": "integer",
+                  "x-struct": null,
+                  "x-validate": null
+                },
+                "type": {
+                  "enum": [
+                    "container",
+                    "small_apartment",
+                    "medium_apartment",
+                    "large_apartment",
+                    "suite"
+                  ],
+                  "type": "string",
+                  "x-struct": null,
+                  "x-validate": null
+                },
+                "typeLabel": {
+                  "type": "string",
+                  "x-struct": null,
+                  "x-validate": null
+                }
+              },
+              "type": "object",
+              "x-struct": null,
+              "x-validate": null
+            },
+            "type": "array",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "habitations": {
+            "items": {
+              "properties": {
+                "habitationName": {
+                  "type": "string",
+                  "x-struct": null,
+                  "x-validate": null
+                },
+                "name": {
+                  "type": "string",
+                  "x-struct": null,
+                  "x-validate": null
+                },
+                "type": {
+                  "enum": [
+                    "container",
+                    "small_apartment",
+                    "medium_apartment",
+                    "large_apartment",
+                    "suite"
+                  ],
+                  "type": "string",
+                  "x-struct": null,
+                  "x-validate": null
+                },
+                "typeLabel": {
+                  "type": "string",
+                  "x-struct": null,
+                  "x-validate": null
+                }
+              },
+              "type": "object",
+              "x-struct": null,
+              "x-validate": null
+            },
+            "type": "array",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "location": {
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "locationLabel": {
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "name": {
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "refinery": {
+            "type": "boolean",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "shopListLabel": {
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "shops": {
+            "items": {
+              "$ref": "#/components/schemas/Shop"
+            },
+            "type": "array",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "slug": {
+            "format": "slug",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "type": {
+            "enum": [
+              "landing_zone",
+              "station",
+              "asteroid_station",
+              "district",
+              "outpost",
+              "aid_shelter"
+            ],
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "typeLabel": {
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          }
+        },
+        "title": "Station",
+        "type": "object",
+        "x-struct": "Elixir.ExFleetYardsApi.Schemas.Single.Station",
+        "x-validate": null
+      },
+      "ModelList": {
+        "description": "Model List",
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/Model"
+            },
+            "type": "array",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/PaginationMetadata"
+          }
+        },
+        "required": [
+          "data",
+          "metadata"
+        ],
+        "title": "ModelList",
+        "type": "object",
+        "x-struct": "Elixir.ExFleetYardsApi.Schemas.List.ModelList",
         "x-validate": null
       },
       "Fleet": {
@@ -355,117 +1790,12 @@
         "x-struct": "Elixir.ExFleetYardsApi.Schemas.Single.Fleet",
         "x-validate": null
       },
-      "FleetInvite": {
-        "description": "Fleet invite",
-        "properties": {
-          "createdAt": {
-            "format": "date-time",
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "expiresAt": {
-            "format": "date-time",
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "fleet": {
-            "format": "slug",
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "limit": {
-            "type": "integer",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "token": {
-            "example": "gwlDzLCp8w",
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "updatedAt": {
-            "format": "date-time",
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          }
-        },
-        "required": [
-          "code",
-          "fleet"
-        ],
-        "title": "FleetInvite",
-        "type": "object",
-        "x-struct": "Elixir.ExFleetYardsApi.Schemas.Single.FleetInvite",
-        "x-validate": null
-      },
-      "Manufacturer": {
-        "description": "Manufacturer in the star citizen univers",
-        "example": {
-          "createdAt": "2022-12-11T19:53:24",
-          "name": "Argo Astronautics",
-          "slug": "argo-astronautics",
-          "updatedAt": "2022-12-11T19:53:24"
-        },
-        "properties": {
-          "code": {
-            "nullable": true,
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "createdAt": {
-            "description": "Create timestamp",
-            "format": "date-time",
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "logo": {
-            "nullable": true,
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "name": {
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "slug": {
-            "format": "slug",
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "updatedAt": {
-            "description": "Update timestamp",
-            "format": "date-time",
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          }
-        },
-        "required": [
-          "slug",
-          "name",
-          "createdAt"
-        ],
-        "title": "Manufacturer",
-        "type": "object",
-        "x-struct": "Elixir.ExFleetYardsApi.Schemas.Single.Manufacturer",
-        "x-validate": null
-      },
-      "ManufacturerList": {
-        "description": "Manufacturer List",
+      "CelestialObjectList": {
+        "description": "CelestialObject List",
         "properties": {
           "data": {
             "items": {
-              "$ref": "#/components/schemas/Manufacturer"
+              "$ref": "#/components/schemas/CelestialObject"
             },
             "type": "array",
             "x-struct": null,
@@ -479,9 +1809,44 @@
           "data",
           "metadata"
         ],
-        "title": "ManufacturerList",
+        "title": "CelestialObjectList",
         "type": "object",
-        "x-struct": "Elixir.ExFleetYardsApi.Schemas.List.ManufacturerList",
+        "x-struct": "Elixir.ExFleetYardsApi.Schemas.List.CelestialObjectList",
+        "x-validate": null
+      },
+      "PaginationMetadata": {
+        "description": "Pagination metadata",
+        "properties": {
+          "limit": {
+            "example": 25,
+            "type": "integer",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "next": {
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "previous": {
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "strategy": {
+            "example": "slug",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          }
+        },
+        "required": [
+          "limit",
+          "strategy"
+        ],
+        "title": "PaginationMetadata",
+        "type": "object",
+        "x-struct": "Elixir.ExFleetYardsApi.Schemas.Single.PaginationMetadata",
         "x-validate": null
       },
       "Model": {
@@ -917,181 +2282,12 @@
         "x-struct": "Elixir.ExFleetYardsApi.Schemas.Single.Model",
         "x-validate": null
       },
-      "ModelHardpoint": {
-        "properties": {
-          "category": {
-            "enum": [
-              "main",
-              "retro",
-              "vtol",
-              "fixed",
-              "gimbal",
-              "joint",
-              "manned_turret",
-              "remote_turret",
-              "missile_turret",
-              "missile_rack"
-            ],
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "component": {
-            "$ref": "#/components/schemas/Component"
-          },
-          "createdAt": {
-            "format": "date-time",
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "details": {
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "group": {
-            "enum": [
-              "avionic",
-              "system",
-              "propulsion",
-              "thruster",
-              "weapon"
-            ],
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "id": {
-            "format": "uuid",
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "key": {
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "loadoutIdentifier": {
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "loadouts": {
-            "items": {
-              "properties": {
-                "createdAt": {
-                  "format": "date-time",
-                  "type": "string",
-                  "x-struct": null,
-                  "x-validate": null
-                },
-                "updatedAt": {
-                  "format": "date-time",
-                  "type": "string",
-                  "x-struct": null,
-                  "x-validate": null
-                }
-              },
-              "required": [
-                "id",
-                "name",
-                "slug"
-              ],
-              "type": "object",
-              "x-struct": null,
-              "x-validate": null
-            },
-            "type": "array",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "mount": {
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "name": {
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "size": {
-            "enum": [
-              "vehicle",
-              "one",
-              "two",
-              "three",
-              "four",
-              "five",
-              "six",
-              "seven",
-              "eight",
-              "nine",
-              "ten",
-              "eleven",
-              "twelve",
-              "snub",
-              "small",
-              "medium",
-              "large",
-              "capital",
-              "tbd"
-            ],
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "type": {
-            "enum": [
-              "power_plants",
-              "coolers",
-              "shield_generators",
-              "quantum_drives",
-              "main_thrusters",
-              "maneuvering_thrusters",
-              "weapons",
-              "turrets",
-              "missiles",
-              "radar",
-              "computers",
-              "fuel_intakes",
-              "fuel_tanks",
-              "jump_modules",
-              "quantum_fuel_tanks",
-              "utility_items"
-            ],
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "updatedAt": {
-            "format": "date-time",
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          }
-        },
-        "required": [
-          "id",
-          "name",
-          "type",
-          "group",
-          "size",
-          "key"
-        ],
-        "title": "ModelHardpoint",
-        "type": "object",
-        "x-struct": "Elixir.ExFleetYardsApi.Schemas.Single.ModelHardpoint",
-        "x-validate": null
-      },
-      "ModelList": {
-        "description": "Model List",
+      "ManufacturerList": {
+        "description": "Manufacturer List",
         "properties": {
           "data": {
             "items": {
-              "$ref": "#/components/schemas/Model"
+              "$ref": "#/components/schemas/Manufacturer"
             },
             "type": "array",
             "x-struct": null,
@@ -1105,9 +2301,9 @@
           "data",
           "metadata"
         ],
-        "title": "ModelList",
+        "title": "ManufacturerList",
         "type": "object",
-        "x-struct": "Elixir.ExFleetYardsApi.Schemas.List.ModelList",
+        "x-struct": "Elixir.ExFleetYardsApi.Schemas.List.ManufacturerList",
         "x-validate": null
       },
       "ModelPaint": {
@@ -1178,55 +2374,10 @@
         "x-struct": "Elixir.ExFleetYardsApi.Schemas.Single.ModelPaint",
         "x-validate": null
       },
-      "PaginationMetadata": {
-        "description": "Pagination metadata",
-        "properties": {
-          "limit": {
-            "example": 25,
-            "type": "integer",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "next": {
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "previous": {
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "strategy": {
-            "example": "slug",
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          }
-        },
-        "required": [
-          "limit",
-          "strategy"
-        ],
-        "title": "PaginationMetadata",
-        "type": "object",
-        "x-struct": "Elixir.ExFleetYardsApi.Schemas.Single.PaginationMetadata",
-        "x-validate": null
-      },
-      "RoadmapItem": {
-        "description": "Roadmap item",
+      "UserTotp": {
+        "description": "User TOTP info",
         "properties": {
           "active": {
-            "type": "boolean",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "body": {
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "commited": {
             "type": "boolean",
             "x-struct": null,
             "x-validate": null
@@ -1237,48 +2388,36 @@
             "x-struct": null,
             "x-validate": null
           },
-          "description": {
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          },
           "id": {
             "format": "uuid",
             "type": "string",
             "x-struct": null,
             "x-validate": null
           },
-          "model": {
-            "$ref": "#/components/schemas/Model"
-          },
-          "name": {
+          "last_used": {
+            "format": "date-time",
             "type": "string",
             "x-struct": null,
             "x-validate": null
           },
-          "release": {
-            "format": "version",
+          "recovery_codes": {
+            "items": {
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            },
+            "type": "array",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "secret": {
             "type": "string",
             "x-struct": null,
             "x-validate": null
           },
-          "releaseDescription": {
+          "totp_uri": {
+            "format": "uri",
             "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "released": {
-            "type": "boolean",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "rsiCategoryId": {
-            "type": "integer",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "rsiReleaseId": {
-            "type": "integer",
             "x-struct": null,
             "x-validate": null
           },
@@ -1291,750 +2430,47 @@
         },
         "required": [
           "id",
-          "name"
+          "active",
+          "createdAt",
+          "updatedAt"
         ],
-        "title": "RoadmapItem",
+        "title": "UserTotp",
         "type": "object",
-        "x-struct": "Elixir.ExFleetYardsApi.Schemas.Single.RoadmapItem",
+        "x-struct": "Elixir.ExFleetYardsApi.Schemas.Single.UserTotp",
         "x-validate": null
       },
-      "RoadmapItemList": {
-        "description": "RoadmapItem List",
+      "Error": {
+        "description": "Generic error",
         "properties": {
-          "data": {
-            "items": {
-              "$ref": "#/components/schemas/RoadmapItem"
-            },
-            "type": "array",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "metadata": {
-            "$ref": "#/components/schemas/PaginationMetadata"
-          }
-        },
-        "required": [
-          "data",
-          "metadata"
-        ],
-        "title": "RoadmapItemList",
-        "type": "object",
-        "x-struct": "Elixir.ExFleetYardsApi.Schemas.List.RoadmapItemList",
-        "x-validate": null
-      },
-      "Shop": {
-        "description": "in game shop",
-        "properties": {
-          "buying": {
-            "type": "boolean",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "celestialObject": {
-            "$ref": "#/components/schemas/CelestialObject"
-          },
-          "id": {
-            "format": "uuid",
+          "code": {
+            "example": "not_found",
             "type": "string",
             "x-struct": null,
             "x-validate": null
           },
-          "location": {
-            "example": "The Commons",
+          "message": {
+            "example": "Not Found",
             "type": "string",
             "x-struct": null,
             "x-validate": null
           },
-          "locationLabel": {
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "name": {
-            "example": "Planetary Services",
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "refineryTerminal": {
-            "type": "boolean",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "rental": {
-            "type": "boolean",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "selling": {
-            "type": "boolean",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "slug": {
-            "example": "planetary-services",
-            "format": "slug",
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "station": {
-            "properties": {
-              "name": {
-                "type": "string",
-                "x-struct": null,
-                "x-validate": null
-              },
-              "slug": {
-                "format": "slug",
-                "type": "string",
-                "x-struct": null,
-                "x-validate": null
-              }
+          "scopes": {
+            "example": {
+              "hangar": [
+                "read"
+              ]
             },
             "type": "object",
             "x-struct": null,
             "x-validate": null
-          },
-          "stationLabel": {
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "type": {
-            "enum": [
-              "clothing",
-              "armor",
-              "weapons",
-              "components",
-              "armor_and_weapons",
-              "superstore",
-              "ships",
-              "admin",
-              "bar",
-              "hospital",
-              "salvage",
-              "resources",
-              "rental",
-              "computers",
-              "blackmarket",
-              "mining_equipment",
-              "equipment",
-              "courier",
-              "refinery",
-              "pharmacy",
-              "cargo",
-              "souvenirs",
-              "kiosk",
-              "ship_customizations"
-            ],
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "typeLabel": {
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          }
-        },
-        "title": "Shop",
-        "type": "object",
-        "x-struct": "Elixir.ExFleetYardsApi.Schemas.Single.Shop",
-        "x-validate": null
-      },
-      "ShopCommodity": {
-        "description": "Shop Commodity",
-        "properties": {
-          "id": {
-            "format": "uuid",
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          }
-        },
-        "title": "ShopCommodity",
-        "type": "object",
-        "x-struct": "Elixir.ExFleetYardsApi.Schemas.Single.ShopCommodity",
-        "x-validate": null
-      },
-      "ShopCommodityList": {
-        "description": "ShopCommodity List",
-        "properties": {
-          "data": {
-            "items": {
-              "$ref": "#/components/schemas/ShopCommodity"
-            },
-            "type": "array",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "metadata": {
-            "$ref": "#/components/schemas/PaginationMetadata"
-          },
-          "shop": {
-            "$ref": "#/components/schemas/Shop"
           }
         },
         "required": [
-          "data",
-          "metadata"
+          "code"
         ],
-        "title": "ShopCommodityList",
+        "title": "Error",
         "type": "object",
-        "x-struct": "Elixir.ExFleetYardsApi.Schemas.List.ShopCommodityList",
-        "x-validate": null
-      },
-      "StarSystem": {
-        "description": "Star System",
-        "properties": {
-          "celestialObjects": {
-            "items": {
-              "$ref": "#/components/schemas/CelestialObject"
-            },
-            "type": "array",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "createdAt": {
-            "format": "date-time",
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "danger": {
-            "type": "integer",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "description": {
-            "description": "Description of the system",
-            "nullable": true,
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "economy": {
-            "example": 10,
-            "type": "integer",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "locationLabel": {
-            "example": "UEE",
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "mapX": {
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "mapY": {
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "name": {
-            "description": "Name fo the system",
-            "example": "Stanton",
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "population": {
-            "example": 10,
-            "type": "integer",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "size": {
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "slug": {
-            "description": "Slug of the system",
-            "example": "stanton",
-            "format": "slug",
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "status": {
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "type": {
-            "example": "Single star",
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "updatedAt": {
-            "format": "date-time",
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          }
-        },
-        "required": [
-          "name",
-          "slug",
-          "createdAt"
-        ],
-        "title": "StarSystem",
-        "type": "object",
-        "x-struct": "Elixir.ExFleetYardsApi.Schemas.Single.StarSystem",
-        "x-validate": null
-      },
-      "StarSystemList": {
-        "description": "StarSystem List",
-        "properties": {
-          "data": {
-            "items": {
-              "$ref": "#/components/schemas/StarSystem"
-            },
-            "type": "array",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "metadata": {
-            "$ref": "#/components/schemas/PaginationMetadata"
-          }
-        },
-        "required": [
-          "data",
-          "metadata"
-        ],
-        "title": "StarSystemList",
-        "type": "object",
-        "x-struct": "Elixir.ExFleetYardsApi.Schemas.List.StarSystemList",
-        "x-validate": null
-      },
-      "Station": {
-        "description": "Station",
-        "properties": {
-          "cargoHub": {
-            "type": "boolean",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "celestialObject": {
-            "$ref": "#/components/schemas/CelestialObject"
-          },
-          "classification": {
-            "enum": [
-              "city",
-              "trading",
-              "mining",
-              "salvaging",
-              "farming",
-              "science",
-              "security",
-              "rest_stop",
-              "settlement",
-              "town",
-              "drug_lab"
-            ],
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "classificationLabel": {
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "createdAt": {
-            "format": "date-time",
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "description": {
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "dockCounts": {
-            "items": {
-              "properties": {
-                "count": {
-                  "type": "integer",
-                  "x-struct": null,
-                  "x-validate": null
-                },
-                "size": {
-                  "enum": [
-                    "extra_extra_small",
-                    "extra_small",
-                    "small",
-                    "medium",
-                    "large",
-                    "extra_large",
-                    "capital"
-                  ],
-                  "type": "string",
-                  "x-struct": null,
-                  "x-validate": null
-                },
-                "sizeLabel": {
-                  "type": "string",
-                  "x-struct": null,
-                  "x-validate": null
-                },
-                "type": {
-                  "enum": [
-                    "vehiclepad",
-                    "garage",
-                    "landingpad",
-                    "dockingport",
-                    "hangar"
-                  ],
-                  "type": "string",
-                  "x-struct": null,
-                  "x-validate": null
-                },
-                "typeLabel": {
-                  "type": "string",
-                  "x-struct": null,
-                  "x-validate": null
-                }
-              },
-              "type": "object",
-              "x-struct": null,
-              "x-validate": null
-            },
-            "type": "array",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "docks": {
-            "items": {
-              "properties": {
-                "group": {
-                  "type": "string",
-                  "x-struct": null,
-                  "x-validate": null
-                },
-                "name": {
-                  "type": "string",
-                  "x-struct": null,
-                  "x-validate": null
-                },
-                "size": {
-                  "enum": [
-                    "extra_extra_small",
-                    "extra_small",
-                    "small",
-                    "medium",
-                    "large",
-                    "extra_large",
-                    "capital"
-                  ],
-                  "type": "string",
-                  "x-struct": null,
-                  "x-validate": null
-                },
-                "sizeLabel": {
-                  "type": "string",
-                  "x-struct": null,
-                  "x-validate": null
-                },
-                "type": {
-                  "enum": [
-                    "vehiclepad",
-                    "garage",
-                    "landingpad",
-                    "dockingport",
-                    "hangar"
-                  ],
-                  "type": "string",
-                  "x-struct": null,
-                  "x-validate": null
-                },
-                "typeLabel": {
-                  "type": "string",
-                  "x-struct": null,
-                  "x-validate": null
-                }
-              },
-              "type": "object",
-              "x-struct": null,
-              "x-validate": null
-            },
-            "type": "array",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "habitable": {
-            "type": "boolean",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "habitationCounts": {
-            "items": {
-              "properties": {
-                "count": {
-                  "type": "integer",
-                  "x-struct": null,
-                  "x-validate": null
-                },
-                "type": {
-                  "enum": [
-                    "container",
-                    "small_apartment",
-                    "medium_apartment",
-                    "large_apartment",
-                    "suite"
-                  ],
-                  "type": "string",
-                  "x-struct": null,
-                  "x-validate": null
-                },
-                "typeLabel": {
-                  "type": "string",
-                  "x-struct": null,
-                  "x-validate": null
-                }
-              },
-              "type": "object",
-              "x-struct": null,
-              "x-validate": null
-            },
-            "type": "array",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "habitations": {
-            "items": {
-              "properties": {
-                "habitationName": {
-                  "type": "string",
-                  "x-struct": null,
-                  "x-validate": null
-                },
-                "name": {
-                  "type": "string",
-                  "x-struct": null,
-                  "x-validate": null
-                },
-                "type": {
-                  "enum": [
-                    "container",
-                    "small_apartment",
-                    "medium_apartment",
-                    "large_apartment",
-                    "suite"
-                  ],
-                  "type": "string",
-                  "x-struct": null,
-                  "x-validate": null
-                },
-                "typeLabel": {
-                  "type": "string",
-                  "x-struct": null,
-                  "x-validate": null
-                }
-              },
-              "type": "object",
-              "x-struct": null,
-              "x-validate": null
-            },
-            "type": "array",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "location": {
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "locationLabel": {
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "name": {
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "refinery": {
-            "type": "boolean",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "shopListLabel": {
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "shops": {
-            "items": {
-              "$ref": "#/components/schemas/Shop"
-            },
-            "type": "array",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "slug": {
-            "format": "slug",
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "type": {
-            "enum": [
-              "landing_zone",
-              "station",
-              "asteroid_station",
-              "district",
-              "outpost",
-              "aid_shelter"
-            ],
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "typeLabel": {
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "updatedAt": {
-            "format": "date-time",
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          }
-        },
-        "title": "Station",
-        "type": "object",
-        "x-struct": "Elixir.ExFleetYardsApi.Schemas.Single.Station",
-        "x-validate": null
-      },
-      "StationList": {
-        "description": "Station List",
-        "properties": {
-          "data": {
-            "items": {
-              "$ref": "#/components/schemas/Station"
-            },
-            "type": "array",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "metadata": {
-            "$ref": "#/components/schemas/PaginationMetadata"
-          }
-        },
-        "required": [
-          "data",
-          "metadata"
-        ],
-        "title": "StationList",
-        "type": "object",
-        "x-struct": "Elixir.ExFleetYardsApi.Schemas.List.StationList",
-        "x-validate": null
-      },
-      "User": {
-        "description": "User Schema",
-        "properties": {
-          "avatar": {
-            "format": "url",
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "discordHandle": {
-            "description": "Discord username",
-            "format": "url",
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "discordServer": {
-            "description": "Discord server",
-            "format": "url",
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "email": {
-            "format": "email",
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "guilded": {
-            "description": "Guilded server",
-            "format": "url",
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "homepage": {
-            "description": "User Homepage",
-            "format": "url",
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "password": {
-            "format": "password",
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "publicHangar": {
-            "description": "Show public hangar",
-            "type": "boolean",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "publicHangarLoaners": {
-            "description": "Show loaner hints in public hangar",
-            "type": "boolean",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "rsiHandle": {
-            "description": "RSI username",
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "twitch": {
-            "description": "Twitch channel",
-            "format": "url",
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "username": {
-            "description": "Fleetyards username",
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "youtube": {
-            "description": "Youtube Channel",
-            "format": "url",
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          }
-        },
-        "required": [
-          "username"
-        ],
-        "title": "User",
-        "type": "object",
-        "x-struct": "Elixir.ExFleetYardsApi.Schemas.Single.User",
+        "x-struct": "Elixir.ExFleetYardsApi.Schemas.Single.Error",
         "x-validate": null
       },
       "UserHangar": {
@@ -2097,377 +2533,6 @@
         "type": "object",
         "x-struct": "Elixir.ExFleetYardsApi.Schemas.Single.UserHangar",
         "x-validate": null
-      },
-      "UserHangarChange": {
-        "description": "User Hangar Change",
-        "properties": {
-          "alternative_names": {
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "flagship": {
-            "type": "boolean",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "hidden": {
-            "type": "boolean",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "loaner": {
-            "type": "boolean",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "name": {
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "name_visible": {
-            "type": "boolean",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "paint": {
-            "format": "slug",
-            "nullable": true,
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "public": {
-            "type": "boolean",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "purchased": {
-            "type": "boolean",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "sale_notify": {
-            "type": "boolean",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "serial": {
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          }
-        },
-        "title": "UserHangarChange",
-        "type": "object",
-        "x-struct": "Elixir.ExFleetYardsApi.Schemas.Single.UserHangarChange",
-        "x-validate": null
-      },
-      "UserHangarList": {
-        "description": "UserHangar List",
-        "properties": {
-          "data": {
-            "items": {
-              "$ref": "#/components/schemas/UserHangar"
-            },
-            "type": "array",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "metadata": {
-            "$ref": "#/components/schemas/PaginationMetadata"
-          }
-        },
-        "required": [
-          "data",
-          "metadata"
-        ],
-        "title": "UserHangarList",
-        "type": "object",
-        "x-struct": "Elixir.ExFleetYardsApi.Schemas.List.UserHangarList",
-        "x-validate": null
-      },
-      "UserHangarQuickStats": {
-        "description": "User Hangar",
-        "properties": {
-          "classifications": {
-            "items": {
-              "properties": {
-                "classification": {
-                  "type": "string",
-                  "x-struct": null,
-                  "x-validate": null
-                },
-                "count": {
-                  "type": "integer",
-                  "x-struct": null,
-                  "x-validate": null
-                }
-              },
-              "type": "object",
-              "x-struct": null,
-              "x-validate": null
-            },
-            "type": "array",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "total": {
-            "type": "integer",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "username": {
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          }
-        },
-        "required": [
-          "username",
-          "total"
-        ],
-        "title": "UserHangarQuickStats",
-        "type": "object",
-        "x-struct": "Elixir.ExFleetYardsApi.Schemas.Single.UserHangarQuickStats",
-        "x-validate": null
-      },
-      "UserSession": {
-        "description": "Login information",
-        "properties": {
-          "password": {
-            "format": "password",
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "scopes": {
-            "properties": {
-              "api": {
-                "example": [
-                  "read",
-                  "write",
-                  "admin"
-                ],
-                "items": {
-                  "type": "string",
-                  "x-struct": null,
-                  "x-validate": null
-                },
-                "type": "array",
-                "x-struct": null,
-                "x-validate": null
-              },
-              "fleet": {
-                "example": [
-                  "read",
-                  "write",
-                  "admin",
-                  "create"
-                ],
-                "items": {
-                  "type": "string",
-                  "x-struct": null,
-                  "x-validate": null
-                },
-                "type": "array",
-                "x-struct": null,
-                "x-validate": null
-              },
-              "hangar": {
-                "example": [
-                  "read",
-                  "write",
-                  "admin"
-                ],
-                "items": {
-                  "type": "string",
-                  "x-struct": null,
-                  "x-validate": null
-                },
-                "type": "array",
-                "x-struct": null,
-                "x-validate": null
-              },
-              "user": {
-                "example": [
-                  "write"
-                ],
-                "items": {
-                  "type": "string",
-                  "x-struct": null,
-                  "x-validate": null
-                },
-                "type": "array",
-                "x-struct": null,
-                "x-validate": null
-              }
-            },
-            "type": "object",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "totp": {
-            "format": "totp",
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "username": {
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          }
-        },
-        "required": [
-          "scopes"
-        ],
-        "title": "UserSession",
-        "type": "object",
-        "x-struct": "Elixir.ExFleetYardsApi.Schemas.Single.UserSession",
-        "x-validate": null
-      },
-      "UserToken": {
-        "description": "User Token",
-        "properties": {
-          "context": {
-            "example": "api",
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "createdAt": {
-            "description": "Create timestamp",
-            "format": "date-time",
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "id": {
-            "format": "uuid",
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "scopes": {
-            "properties": {
-              "api": {
-                "example": [
-                  "read",
-                  "write",
-                  "admin"
-                ],
-                "items": {
-                  "type": "string",
-                  "x-struct": null,
-                  "x-validate": null
-                },
-                "type": "array",
-                "x-struct": null,
-                "x-validate": null
-              },
-              "fleet": {
-                "example": [
-                  "read",
-                  "write",
-                  "admin",
-                  "create"
-                ],
-                "items": {
-                  "type": "string",
-                  "x-struct": null,
-                  "x-validate": null
-                },
-                "type": "array",
-                "x-struct": null,
-                "x-validate": null
-              },
-              "hangar": {
-                "example": [
-                  "read",
-                  "write",
-                  "admin"
-                ],
-                "items": {
-                  "type": "string",
-                  "x-struct": null,
-                  "x-validate": null
-                },
-                "type": "array",
-                "x-struct": null,
-                "x-validate": null
-              },
-              "user": {
-                "example": [
-                  "write"
-                ],
-                "items": {
-                  "type": "string",
-                  "x-struct": null,
-                  "x-validate": null
-                },
-                "type": "array",
-                "x-struct": null,
-                "x-validate": null
-              }
-            },
-            "type": "object",
-            "x-struct": null,
-            "x-validate": null
-          }
-        },
-        "required": [
-          "context"
-        ],
-        "title": "UserToken",
-        "type": "object",
-        "x-struct": "Elixir.ExFleetYardsApi.Schemas.Single.UserToken",
-        "x-validate": null
-      },
-      "UserTokenList": {
-        "description": "User Token",
-        "items": {
-          "$ref": "#/components/schemas/UserToken"
-        },
-        "title": "UserTokenList",
-        "type": "array",
-        "x-struct": "Elixir.ExFleetYardsApi.Schemas.List.UserTokenList",
-        "x-validate": null
-      },
-      "VersionResponse": {
-        "description": "server version",
-        "example": {
-          "codename": "Elixir",
-          "version": "v0.1.0"
-        },
-        "properties": {
-          "codename": {
-            "format": "version",
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "hash": {
-            "description": "Git hash",
-            "format": "hash",
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          },
-          "version": {
-            "type": "string",
-            "x-struct": null,
-            "x-validate": null
-          }
-        },
-        "required": [
-          "version"
-        ],
-        "title": "VersionResponse",
-        "type": "object",
-        "x-struct": "Elixir.ExFleetYardsApi.Schemas.Single.Version",
-        "x-validate": null
       }
     },
     "securitySchemes": {
@@ -2490,7 +2555,8 @@
               "user": "Allows reading and writing user data",
               "user:delete": "Allows deleting your account",
               "user:email": "Allows reading user email address",
-              "user:read": "Allows reading user profile data"
+              "user:read": "Allows reading user profile data",
+              "user:security": "Allows managing the security details of a user"
             },
             "tokenUrl": "http://localhost:4002/oauth/token"
           },
@@ -2511,7 +2577,8 @@
               "user": "Allows reading and writing user data",
               "user:delete": "Allows deleting your account",
               "user:email": "Allows reading user email address",
-              "user:read": "Allows reading user profile data"
+              "user:read": "Allows reading user profile data",
+              "user:security": "Allows managing the security details of a user"
             }
           }
         },
@@ -2629,46 +2696,6 @@
         "tags": [
           "user",
           "hangar"
-        ]
-      }
-    },
-    "/v2/users/delete-account": {
-      "delete": {
-        "callbacks": {},
-        "operationId": "ExFleetYardsApi.UserController.delete",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            },
-            "description": "Status"
-          },
-          "404": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            },
-            "description": "Error"
-          }
-        },
-        "security": [
-          {
-            "authorization": [
-              "user:delete"
-            ]
-          }
-        ],
-        "summary": "Delete a user",
-        "tags": [
-          "user"
         ]
       }
     },
@@ -2875,61 +2902,6 @@
         },
         "tags": [
           "game"
-        ]
-      }
-    },
-    "/v2/users/register/confirm/{token}": {
-      "get": {
-        "callbacks": {},
-        "operationId": "ExFleetYardsApi.UserController.confirm",
-        "parameters": [
-          {
-            "description": "",
-            "in": "path",
-            "name": "token",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "x-struct": null,
-              "x-validate": null
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/User"
-                }
-              }
-            },
-            "description": "User"
-          },
-          "400": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            },
-            "description": "Error"
-          },
-          "404": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            },
-            "description": "Error"
-          }
-        },
-        "summary": "Confirm a user",
-        "tags": [
-          "user"
         ]
       }
     },
@@ -3372,50 +3344,6 @@
         "tags": [
           "game",
           "model"
-        ]
-      }
-    },
-    "/v2/users/register": {
-      "post": {
-        "callbacks": {},
-        "operationId": "ExFleetYardsApi.UserController.register",
-        "parameters": [],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/User"
-              }
-            }
-          },
-          "description": "User",
-          "required": false
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/User"
-                }
-              }
-            },
-            "description": "User"
-          },
-          "400": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            },
-            "description": "Error"
-          }
-        },
-        "summary": "Create a new user",
-        "tags": [
-          "user"
         ]
       }
     },
@@ -4358,105 +4286,6 @@
         ]
       }
     },
-    "/v2/users": {
-      "get": {
-        "callbacks": {},
-        "operationId": "ExFleetYardsApi.UserController.get_current",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/User"
-                }
-              }
-            },
-            "description": "User"
-          },
-          "401": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            },
-            "description": "Error"
-          }
-        },
-        "security": [
-          {
-            "authorization": [
-              "user:read"
-            ]
-          }
-        ],
-        "summary": "Get user info",
-        "tags": [
-          "user"
-        ]
-      },
-      "post": {
-        "callbacks": {},
-        "operationId": "ExFleetYardsApi.UserController.set",
-        "parameters": [],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/User"
-              }
-            }
-          },
-          "description": "User",
-          "required": false
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/User"
-                }
-              }
-            },
-            "description": "User"
-          },
-          "400": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            },
-            "description": "Error"
-          },
-          "401": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            },
-            "description": "Error"
-          }
-        },
-        "security": [
-          {
-            "authorization": [
-              "user:write"
-            ]
-          }
-        ],
-        "summary": "Update user info",
-        "tags": [
-          "user"
-        ]
-      }
-    },
     "/v2/roadmap/{id}": {
       "get": {
         "callbacks": {},
@@ -4789,6 +4618,167 @@
         ]
       }
     },
+    "/v2/user/totp": {
+      "delete": {
+        "callbacks": {},
+        "operationId": "ExFleetYardsApi.Controllers.User.Totp.delete",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserTotp"
+                }
+              }
+            },
+            "description": "UserTotp"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          }
+        },
+        "security": [
+          {
+            "authorization": [
+              "user:security"
+            ]
+          }
+        ],
+        "summary": "Delete TOTP config",
+        "tags": [
+          "user",
+          "auth"
+        ]
+      },
+      "get": {
+        "callbacks": {},
+        "operationId": "ExFleetYardsApi.Controllers.User.Totp.index",
+        "parameters": [
+          {
+            "description": "",
+            "in": "query",
+            "name": "active",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "x-struct": null,
+              "x-validate": null
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserTotp"
+                }
+              }
+            },
+            "description": "UserTotp"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          }
+        },
+        "security": [
+          {
+            "authorization": [
+              "user:security"
+            ]
+          }
+        ],
+        "summary": "List TOTP config",
+        "tags": [
+          "user",
+          "auth"
+        ]
+      },
+      "post": {
+        "callbacks": {},
+        "operationId": "ExFleetYardsApi.Controllers.User.Totp.create",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserTotp"
+                }
+              }
+            },
+            "description": "UserTotp"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          }
+        },
+        "security": [
+          {
+            "authorization": [
+              "user:security"
+            ]
+          }
+        ],
+        "summary": "Create a new TOTP config",
+        "tags": [
+          "user",
+          "auth"
+        ]
+      }
+    },
     "/v2/version/sc-data": {
       "get": {
         "callbacks": {},
@@ -4992,6 +4982,79 @@
         "summary": "Update a Fleet",
         "tags": [
           "fleet"
+        ]
+      }
+    },
+    "/v2/user/totp/confirm/{code}": {
+      "post": {
+        "callbacks": {},
+        "operationId": "ExFleetYardsApi.Controllers.User.Totp.confirm",
+        "parameters": [
+          {
+            "description": "",
+            "in": "path",
+            "name": "code",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserTotp"
+                }
+              }
+            },
+            "description": "UserTotp"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          }
+        },
+        "security": [
+          {
+            "authorization": [
+              "user:security"
+            ]
+          }
+        ],
+        "summary": "Create a new TOTP config",
+        "tags": [
+          "user",
+          "auth"
         ]
       }
     },
