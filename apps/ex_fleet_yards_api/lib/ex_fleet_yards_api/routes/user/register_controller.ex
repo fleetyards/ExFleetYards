@@ -4,7 +4,7 @@ defmodule ExFleetYardsApi.Routes.User.RegisterController do
   alias ExFleetYards.Repo.Account
   import ExFleetYardsApi.Routes.User.InfoController, only: [transform_attrs: 1]
 
-  plug :put_view, ExFleetYardsApi.Routes.User.InfoJson
+  plug :put_view, ExFleetYardsApi.Routes.User.UserJson
 
   plug(:authorize, ["user:delete"] when action in [:delete])
 

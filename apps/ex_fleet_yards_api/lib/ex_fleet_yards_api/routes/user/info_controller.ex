@@ -6,7 +6,7 @@ defmodule ExFleetYardsApi.Routes.User.InfoController do
   plug(:authorize, ["user:read"] when action in [:get_current])
   plug(:authorize, ["user:write"] when action in [:set])
 
-  plug :put_view, ExFleetYardsApi.Routes.User.InfoJson
+  plug :put_view, ExFleetYardsApi.Routes.User.UserJson
 
   tags ["user"]
 

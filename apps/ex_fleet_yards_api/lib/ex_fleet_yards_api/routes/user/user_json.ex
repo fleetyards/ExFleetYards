@@ -1,4 +1,4 @@
-defmodule ExFleetYardsApi.Routes.User.InfoJson do
+defmodule ExFleetYardsApi.Routes.User.UserJson do
   use ExFleetYardsApi, :json
 
   def self(%{user: user}) do
