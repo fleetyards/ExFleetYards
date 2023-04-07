@@ -1,4 +1,4 @@
-defmodule ExFleetYardsApi.VersionControllerTest do
+defmodule ExFleetYardsApi.Routes.VersionTest do
   use ExFleetYardsApi.ConnCase, async: true
   import OpenApiSpex.TestAssertions
 
