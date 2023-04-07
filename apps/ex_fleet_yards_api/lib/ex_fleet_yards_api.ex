@@ -34,35 +34,18 @@ defmodule ExFleetYardsApi do
 
       use OpenApiSpex.ControllerSpecs
       alias ExFleetYardsApi.Schemas.Single.Error
-      alias ExFleetYardsApi.ErrorView
 
-      use ExFleetYardsApi.ControllerHelpers
+      # use ExFleetYardsApi.ControllerHelpers
 
       import ExFleetYardsApi.Plugs.Authorization,
         only: [authorize: 2]
     end
   end
 
-  def view do
-    quote do
-      use Phoenix.View,
-        root: "lib/ex_fleet_yards_api/templates",
-        namespace: ExFleetYardsApi
-
-      # Import convenience functions from controllers
-      import Phoenix.Controller,
-        only: [view_module: 1, view_template: 1]
-
-      # Include shared imports and aliases for views
-      unquote(view_helpers())
-      @moduledoc "View module used for api"
-    end
-  end
-
   def json do
     quote do
       @moduledoc false
-      import ExFleetYardsApi.ViewHelpers
+      import ExFleetYardsApi.JsonHelpers
     end
   end
 

@@ -1,6 +1,5 @@
 #
-defmodule ExFleetYardsApi.Controllers.User.TotpJson do
-  @moduledoc false
+defmodule ExFleetYardsApi.Routes.User.TotpJson do
   use ExFleetYardsApi, :json
 
   def index(%{totp: totp}) do

@@ -1,9 +1,4 @@
-defmodule ExFleetYardsApi.ErrorView do
-  @moduledoc """
-  Error renderer for api.
-  """
-  use ExFleetYardsApi, :view
-
+defmodule ExFleetYardsApi.ErrorJson do
   def render("400.json", %{
         reason: %ExFleetYardsApi.InvalidPaginationException{message: message}
       }) do
@@ -92,7 +87,10 @@ defmodule ExFleetYardsApi.ErrorView do
   end
 
   def render("500.json", %{reason: _reason}) do
-    %{"code" => "internal_error"}
+    %{
+      code: "internal_error",
+      message: "Internal Server Error"
+    }
   end
 
   defp error_to_string(list) when is_list(list) do

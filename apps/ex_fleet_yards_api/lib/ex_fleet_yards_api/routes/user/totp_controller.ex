@@ -1,4 +1,4 @@
-defmodule ExFleetYardsApi.Controllers.User.Totp do
+defmodule ExFleetYardsApi.Routes.User.TotpController do
   @moduledoc false
   use ExFleetYardsApi, :controller
 
@@ -6,7 +6,7 @@ defmodule ExFleetYardsApi.Controllers.User.Totp do
 
   plug :authorize, ["user:security"]
 
-  plug :put_view, ExFleetYardsApi.Controllers.User.TotpJson
+  plug :put_view, ExFleetYardsApi.Routes.User.TotpJson
 
   tags ["user", "auth"]
 
@@ -44,7 +44,7 @@ defmodule ExFleetYardsApi.Controllers.User.Totp do
     end
   end
 
-  def index(conn, %{}) do
+  def index(conn, _) do
     index(conn, %{"active" => true})
   end
 

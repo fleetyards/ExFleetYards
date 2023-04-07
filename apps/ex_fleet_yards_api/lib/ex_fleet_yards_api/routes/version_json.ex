@@ -1,4 +1,4 @@
-defmodule ExFleetYardsApi.VersionJson do
+defmodule ExFleetYardsApi.Routes.VersionJson do
   use ExFleetYardsApi, :json
 
   def version(%{version: version, hash: hash, codename: name}) do

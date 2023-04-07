@@ -1,8 +1,8 @@
-defmodule ExFleetYardsApi.VersionController do
+defmodule ExFleetYardsApi.Routes.VersionController do
   use ExFleetYardsApi, :controller
   alias ExFleetYards.Version
 
-  plug :put_view, ExFleetYardsApi.VersionJson
+  plug :put_view, ExFleetYardsApi.Routes.VersionJson
 
   tags ["version"]
 

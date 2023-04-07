@@ -18,7 +18,6 @@ defmodule ExFleetYardsApi.Plugs.Authorization do
   Takes a list of required scopes as a parameter.
   """
 
-  import Plug
   import Plug.Conn
 
   alias ExFleetYards.Repo.Account
@@ -44,7 +43,7 @@ defmodule ExFleetYardsApi.Plugs.Authorization do
       _ ->
         conn
         |> put_status(:unauthorized)
-        |> Phoenix.Controller.put_view(ExFleetYardsApi.ErrorView)
+        |> Phoenix.Controller.put_view(ExFleetYardsApi.ErrorJson)
         |> Phoenix.Controller.render("401.json")
         |> halt()
     end
