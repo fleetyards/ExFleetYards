@@ -46,6 +46,9 @@ defmodule ExFleetYardsApi.Router do
       get "/manufacturers", ManufacturerController, :index
       get "/manufacturers/with-models", ManufacturerController, :with_models
       get "/manufacturers/:slug", ManufacturerController, :show
+
+      get "/celestial-objects", CelestialObjectController, :index
+      get "/celestial-objects/:slug", CelestialObjectController, :show
     end
 
     scope "/roadmap" do

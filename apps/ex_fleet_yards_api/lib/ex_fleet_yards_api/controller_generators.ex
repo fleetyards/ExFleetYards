@@ -208,4 +208,14 @@ defmodule ExFleetYardsApi.ControllerGenerators do
 
   def get_limit(limit, _) when is_integer(limit) and limit <= 100, do: limit
   def get_limit(_, default), do: default
+
+  # def type_query(type) do: from d in ^type, as: data
+  # defmacro type_query(type, extra), do: from d in ^type, as: data, extra
+  defmacro type_query(type, extra \\ []) do
+    args = Keyword.merge([as: :data], Macro.expand_once(extra, __ENV__)) |> Macro.escape()
+
+    quote do
+      from(d in unquote(type), unquote(args))
+    end
+  end
 end

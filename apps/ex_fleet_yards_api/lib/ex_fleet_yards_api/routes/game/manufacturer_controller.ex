@@ -2,6 +2,8 @@ defmodule ExFleetYardsApi.Routes.Game.ManufacturerController do
   use ExFleetYardsApi, :controller
   use ExFleetYardsApi.ControllerGenerators
 
+  tags ["game"]
+
   plug :put_view, ExFleetYardsApi.Routes.Game.ManufacturerJson
 
   paged_index(Game.Manufacturer)
