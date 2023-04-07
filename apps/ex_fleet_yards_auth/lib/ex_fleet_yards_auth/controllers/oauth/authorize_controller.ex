@@ -3,6 +3,8 @@ defmodule ExFleetYardsAuth.Oauth.AuthorizeController do
 
   use ExFleetYardsAuth, :controller
 
+  import Ecto.Query
+
   alias Boruta.Oauth.AuthorizeResponse
   alias Boruta.Oauth.Error
   alias Boruta.Oauth.ResourceOwner
@@ -91,15 +93,33 @@ defmodule ExFleetYardsAuth.Oauth.AuthorizeController do
 
   @impl Boruta.Oauth.AuthorizeApplication
   def preauthorize_success(conn, response) do
-    scopes = get_scopes(response.scope)
+    client_id = response.client.id
+    sub = response.sub
+    scope = response.scope
 
-    conn
-    |> render("preauthorize.html",
-      response: response,
-      scopes: scopes,
-      response_mode: conn.params["response_mode"],
-      response_type: conn.params["response_type"]
-    )
+    has_accepted? =
+      from(t in Boruta.Ecto.Token, where: [client_id: ^client_id, sub: ^sub, scope: ^scope])
+      |> ExFleetYards.Repo.exists?()
+
+    if has_accepted? do
+      current_user = conn.assigns[:current_user]
+
+      conn
+      |> oauth_module().authorize(
+        %ResourceOwner{sub: current_user.id, username: current_user.email},
+        __MODULE__
+      )
+    else
+      scopes = get_scopes(response.scope)
+
+      conn
+      |> render("preauthorize.html",
+        response: response,
+        scopes: scopes,
+        response_mode: conn.params["response_mode"],
+        response_type: conn.params["response_type"]
+      )
+    end
   end
 
   @impl Boruta.Oauth.AuthorizeApplication

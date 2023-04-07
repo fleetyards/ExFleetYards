@@ -11,46 +11,36 @@ defmodule ExFleetYardsAuth.Controllers.Oauth.AuthorizeControllerTest do
 
   setup :verify_on_exit!
 
-  # setup do
-  #  conn =
-  #    %{build_conn() | query_params: %{}}
-  #    |> init_test_session(%{})
-
-  #  {:ok, conn: conn}
-  # end
-
   defmodule User do
     defstruct id: 1, email: "test@test.test"
   end
 
   describe "authorize/2" do
     test "redirects to user login without current_user", %{conn: conn} do
-      # credo:disable-for-next-line
-      # FIXME: reenable
-      # conn
-      # |> bypass_through(@endpoint)
-      # |> assert_authorize_redirected_to_login()
+      conn =
+        conn
+        |> get(Routes.authorize_path(conn, :preauthorize))
+
+      assert redirected_to(conn, 302) == "/login"
     end
 
     test "returns an error page", %{conn: conn} do
-      # credo:disable-for-next-line
-      # FIXME: reenable
-      # current_user = %User{}
-      # conn = assign(conn, :current_user, current_user)
-      # |> bypass_through(@endpoint)
+      current_user = %User{}
 
-      # error = %Error{
-      #   status: :bad_request,
-      #   error: :unknown_error,
-      #   error_description: "Error description"
-      # }
+      error = %Error{
+        status: :bad_request,
+        error: :unknown_error,
+        error_description: "Error description"
+      }
 
       # Boruta.OauthMock
-      # |> expect(:authorize, fn conn, _resource_owner, module ->
-      #   module.authorize_error(conn, error)
+      # |> expect(:preauthorize, fn conn, _resource_owner, module ->
+      #  module.authorize_error(conn, error)
       # end)
 
-      # conn = AuthorizeController.authorize(conn, %{})
+      # conn =
+      #  conn
+      #  |> get(Routes.authorize_path(conn, :preauthorize))
 
       # assert html_response(conn, 400) =~ ~r/Error description/
     end
@@ -188,16 +178,5 @@ defmodule ExFleetYardsAuth.Controllers.Oauth.AuthorizeControllerTest do
       assert redirected_to(conn) ==
                "http://redirect.uri?code=code&state=state"
     end
-  end
-
-  defp assert_authorize_redirected_to_login(conn) do
-    assert_raise RuntimeError,
-                 """
-                 Here occurs the login process. After login, user may be redirected to
-                 get_session(conn, :user_return_to)
-                 """,
-                 fn ->
-                   AuthorizeController.preauthorize(conn, %{})
-                 end
   end
 end
