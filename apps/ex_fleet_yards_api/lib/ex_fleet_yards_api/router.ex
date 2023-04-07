@@ -42,6 +42,12 @@ defmodule ExFleetYardsApi.Router do
       get "/sc-data", VersionController, :sc_data
     end
 
+    scope "/game", Game do
+      get "/manufacturers", ManufacturerController, :index
+      get "/manufacturers/with-models", ManufacturerController, :with_models
+      get "/manufacturers/:slug", ManufacturerController, :show
+    end
+
     scope "/user", User do
       get "/:username", InfoController, :get
       post "/register", RegisterController, :register

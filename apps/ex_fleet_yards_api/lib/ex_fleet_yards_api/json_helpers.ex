@@ -50,4 +50,44 @@ defmodule ExFleetYardsApi.JsonHelpers do
     end)
     |> Enum.into(%{})
   end
+
+  @doc """
+  Render a page of data using a module and function.
+  The function has to take in the argument `data` and return a map.
+  """
+  def render_page(page, module, render_one, params \\ %{}) do
+    data =
+      Enum.map(Chunkr.Page.records(page), fn record ->
+        params = Map.merge(params, %{data: record})
+        apply(module, render_one, [params])
+      end)
+
+    %{
+      data: data,
+      metadata: render_meta(page)
+    }
+  end
+
+  @doc """
+  Render a cursor-based pagination meta object.
+  """
+  @spec render_meta(Chunkr.Page.t()) :: map()
+  def render_meta(page) do
+    %{
+      strategy: page.opts.strategy,
+      limit: page.opts.limit
+    }
+    |> add_if(:next, page.end_cursor, page.has_next_page)
+    |> add_if(:previous, page.start_cursor, page.has_previous_page)
+  end
+
+  @doc "Add if condition is true"
+  @spec add_if(map(), atom(), any(), boolean()) :: map()
+  def add_if(map, key, data, cond) do
+    if cond do
+      Map.put(map, key, data)
+    else
+      map
+    end
+  end
 end
