@@ -46,7 +46,8 @@ defmodule ExFleetYardsApi.MixProject do
       {:instream, "~> 2.0"},
       {:telemetry_metrics_telegraf, "~> 0.3.0"},
       {:appsignal, "~> 2.0"},
-      {:boruta, "~> 2.2"}
+      {:boruta, "~> 2.2"},
+      {:mox, "~> 1.0", only: :test}
     ]
   end
 

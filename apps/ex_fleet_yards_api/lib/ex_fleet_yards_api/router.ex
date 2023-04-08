@@ -18,124 +18,134 @@ defmodule ExFleetYardsApi.Router do
     plug :put_secure_browser_headers
   end
 
-  scope "/" do
+  scope "/v2" do
+    pipe_through :ui
+
+    get "/oauth2-redirect.html", OpenApiSpex.Plug.SwaggerUIOAuth2Redirect, []
+
+    get "/docs", OpenApiSpex.Plug.SwaggerUI,
+      path: "/v2/openapi.json",
+      persist_authorization: true,
+      oauth: [appName: "Fleetyards API"]
+  end
+
+  scope "/v2" do
+    pipe_through :api
+    get "/openapi.json", OpenApiSpex.Plug.RenderSpec, []
+  end
+
+  scope "/v2", ExFleetYardsApi.Routes do
     pipe_through :api
 
-    scope "/v2" do
-      pipe_through :ui
-
-      get "/oauth2-redirect.html", OpenApiSpex.Plug.SwaggerUIOAuth2Redirect, []
-
-      get "/docs", OpenApiSpex.Plug.SwaggerUI,
-        path: "/v2/openapi.json",
-        persist_authorization: true,
-        oauth: [appName: "Fleetyards API"]
+    scope "/version" do
+      get "/", VersionController, :index
+      get "/sc-data", VersionController, :sc_data
     end
 
-    get "/v2/openapi.json", OpenApiSpex.Plug.RenderSpec, []
+    scope "/game", Game do
+      get "/manufacturers", ManufacturerController, :index
+      get "/manufacturers/with-models", ManufacturerController, :with_models
+      get "/manufacturers/:slug", ManufacturerController, :show
 
-    scope "/v2", ExFleetYardsApi do
-      scope "/session" do
-        post "/", UserSessionController, :create
-        get "/", UserSessionController, :get_self
-        delete "/logout", UserSessionController, :delete
-        delete "/logout/all", UserSessionController, :delete_all
-        delete "/logout/:id", UserSessionController, :delete_other
+      get "/celestial-objects", CelestialObjectController, :index
+      get "/celestial-objects/:slug", CelestialObjectController, :show
+      get "/starsystems", StarsystemController, :index
+      get "/starsystems/:slug", StarsystemController, :show
 
-        scope "/" do
-          pipe_through :require_authenticated
+      get "/components", ComponentController, :index
+      get "/components/:slug", ComponentController, :show
 
-          get "/tokens/:id", UserSessionController, :get
+      get "/stations", StationController, :index
+      get "/stations/:slug", StationController, :show
+      get "/stations/:slug/shops/:shop", StationController, :shop
+      get "/stations/:slug/shops/:shop/commodities", StationController, :commodities
 
-          get "/tokens", UserSessionController, :list
-        end
-      end
+      get "/models", ModelController, :index
+      get "/models/:slug/paints", ModelController, :paints
+      get "/models/:slug/loaners", ModelController, :loaners
+      get "/models/:slug/loaned-by", ModelController, :inv_loaners
+      get "/models/:slug/hardpoints", ModelController, :hardpoints
+      get "/models/:slug", ModelController, :show
+    end
 
-      scope "/users" do
-        get "/:username", UserController, :get
-      end
+    scope "/roadmap" do
+      get "/active", RoadmapController, :active
+      get "/released", RoadmapController, :released
+      get "/unreleased", RoadmapController, :unreleased
+      get "/:id", RoadmapController, :show
+      get "/", RoadmapController, :index
+    end
 
-      scope "/user", Controllers.User do
-        get "/", UserController, :get_current
-        post "/", UserController, :set
-        post "/register", UserController, :register
-        get "/register/confirm/:token", UserController, :confirm
-        delete "/delete-account", UserController, :delete
+    scope "/hangar" do
+      pipe_through :require_authenticated
 
-        scope "/totp" do
-          pipe_through :require_authenticated
-          get "/", Totp, :index
-          delete "/", Totp, :delete
-          post "/", Totp, :create
-          post "/confirm/:code", Totp, :confirm
-        end
-      end
+      get "/", HangarController, :index
+      get "/:slug", HangarController, :get
+      post "/:model", HangarController, :create
+      patch "/:slug", HangarController, :update
+      delete "/:slug", HangarController, :delete
+    end
 
-      scope "/version" do
-        get "/", VersionController, :index
-        get "/sc-data", VersionController, :sc_data
-      end
+    scope "/user", User do
+      get "/:username", InfoController, :get
+      post "/register", RegisterController, :register
+      get "/register/confirm/:token", RegisterController, :confirm
 
-      scope "/game" do
-        # get "/manufacturers", ManufacturerController, :index
-        # get "/manufacturer/:slug", ManufacturerController, :show
-        get "/manufacturers/with-models", ManufacturerController, :with_models
-        resources "/manufacturers", ManufacturerController, only: [:index, :show]
+      scope "/" do
+        pipe_through :require_authenticated
 
-        get "/models/:id/paints", ModelController, :paints
-        get "/models/:id/loaners", ModelController, :loaners
-        get "/models/:id/loaned-by", ModelController, :inv_loaners
-        get "/models/:id/hardpoints", ModelController, :hardpoints
-        resources "/models", ModelController, only: [:index, :show]
+        get "/", InfoController, :get_current
+        post "/", InfoController, :set
 
-        resources "/components", ComponentController, only: [:index, :show]
-        resources "/starsystems", StarSystemController, only: [:index, :show]
-        resources "/celestial-objects", CelestialObjectController, only: [:index, :show]
+        get "/totp", TotpController, :index
+        delete "/totp", TotpController, :delete
+        post "/totp", TotpController, :create
+        post "/totp/confirm/:code", TotpController, :confirm
 
-        get "/stations/:id/shops/:shop", StationController, :shop
-        get "/stations/:id/shops/:shop/commodities", StationController, :commodities
-        resources "/stations", StationController, only: [:index, :show]
-      end
-
-      scope "/hangar" do
-        scope "/public" do
-          get "/:username", UserHangarController, :public
-          get "/:username/quick-stats", UserHangarController, :public_quick_stats
-        end
-
-        scope "/" do
-          pipe_through :require_authenticated
-
-          get "/", UserHangarController, :index
-          get "/:id", UserHangarController, :get
-          post "/:model", UserHangarController, :create
-          patch "/:id", UserHangarController, :update
-          delete "/:id", UserHangarController, :delete
-        end
-      end
-
-      scope "/fleet" do
-        post "/", FleetController, :create
-
-        scope "/:slug" do
-          post "/invite/accept", FleetInviteController, :accept_user_invite
-          post "/invite/user/:user", FleetInviteController, :invite_user
-          post "/invite", FleetInviteController, :create
-
-          get "/", FleetController, :get
-          patch "/", FleetController, :update
-          delete "/", FleetController, :delete
-        end
-
-        post "/invite/:token", FleetInviteController, :accept_token
-      end
-
-      scope "/roadmap" do
-        get "/active", RoadmapController, :active
-        get "/released", RoadmapController, :released
-        get "/unreleased", RoadmapController, :unreleased
-        resources "/", RoadmapController, only: [:index, :show]
+        delete "/delete-account", RegisterController, :delete
       end
     end
   end
+
+  #  scope "/v2", ExFleetYardsApi do
+  #    scope "/game" do
+  #      get "/models/:id/paints", ModelController, :paints
+  #      get "/models/:id/loaners", ModelController, :loaners
+  #      get "/models/:id/loaned-by", ModelController, :inv_loaners
+  #      get "/models/:id/hardpoints", ModelController, :hardpoints
+  #      resources "/models", ModelController, only: [:index, :show]
+  #    end
+  #    scope "/hangar" do
+  #      scope "/public" do
+  #        get "/:username", UserHangarController, :public
+  #        get "/:username/quick-stats", UserHangarController, :public_quick_stats
+  #      end
+  #      scope "/" do
+  #        pipe_through :require_authenticated
+
+  #        get "/", UserHangarController, :index
+  #        get "/:id", UserHangarController, :get
+  #        post "/:model", UserHangarController, :create
+  #        patch "/:id", UserHangarController, :update
+  #        delete "/:id", UserHangarController, :delete
+  #      end
+  #    end
+
+  #    scope "/fleet" do
+  #      post "/", FleetController, :create
+
+  #      scope "/:slug" do
+  #        post "/invite/accept", FleetInviteController, :accept_user_invite
+  #        post "/invite/user/:user", FleetInviteController, :invite_user
+  #        post "/invite", FleetInviteController, :create
+
+  #        get "/", FleetController, :get
+  #        patch "/", FleetController, :update
+  #        delete "/", FleetController, :delete
+  #      end
+
+  #      post "/invite/:token", FleetInviteController, :accept_token
+  #    end
+  #  end
+  # end
 end

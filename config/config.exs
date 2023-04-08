@@ -68,7 +68,10 @@ config :ex_fleet_yards_api, ExFleetYardsApi.Endpoint,
   server: true,
   url: [host: "localhost"],
   http: [ip: {127, 0, 0, 1}, port: 4001],
-  render_errors: [view: ExFleetYardsApi.ErrorView, accepts: ~w(json), layout: false]
+  render_errors: [
+    formats: [json: ExFleetYardsApi.ErrorJson],
+    layout: false
+  ]
 
 config :ex_fleet_yards_auth, ExFleetYardsAuth.Endpoint,
   server: true,

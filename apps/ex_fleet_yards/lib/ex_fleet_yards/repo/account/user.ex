@@ -200,6 +200,6 @@ defmodule ExFleetYards.Repo.Account.User do
 
   def login_changeset(user) do
     user
-    |> change(last_sign_in_at: NaiveDateTime.utc_now())
+    |> change(last_sign_in_at: NaiveDateTime.utc_now() |> NaiveDateTime.truncate(:second))
   end
 end
