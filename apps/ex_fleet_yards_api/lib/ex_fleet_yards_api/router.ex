@@ -76,6 +76,16 @@ defmodule ExFleetYardsApi.Router do
       get "/", RoadmapController, :index
     end
 
+    scope "/hangar" do
+      pipe_through :require_authenticated
+
+      get "/", HangarController, :index
+      get "/:slug", HangarController, :get
+      post "/:model", HangarController, :create
+      patch "/:slug", HangarController, :update
+      delete "/:slug", HangarController, :delete
+    end
+
     scope "/user", User do
       get "/:username", InfoController, :get
       post "/register", RegisterController, :register
