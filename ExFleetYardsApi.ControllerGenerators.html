@@ -7,13 +7,13 @@
     <meta name="generator" content="ExDoc v0.29.4">
     <meta name="project" content="Fleetyards v0.1.0">
 
-    <title>ExFleetYardsApi.VersionController — Fleetyards v0.1.0</title>
+    <title>ExFleetYardsApi.ControllerGenerators — Fleetyards v0.1.0</title>
     <link rel="stylesheet" href="dist/html-elixir-HHVY3JYD.css" />
 
 
     <script src="dist/handlebars.runtime-NWIB6V2M.js"></script>
     <script src="dist/handlebars.templates-XWGFFSCD.js"></script>
-    <script src="dist/sidebar_items-6A1600D2.js"></script>
+    <script src="dist/sidebar_items-AAA20137.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -98,15 +98,11 @@ Fleetyards
 </button>
 
 
-  <span translate="no">ExFleetYardsApi.VersionController</span> 
+  <span translate="no">ExFleetYardsApi.ControllerGenerators</span> 
   <small class="app-vsn" translate="no">(Fleetyards v0.1.0)</small>
 
 </h1>
 
-
-  <section id="moduledoc">
-<p>Controller used for Api</p>
-  </section>
 
 
   <section id="summary" class="details-list">
@@ -124,7 +120,7 @@ Fleetyards
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#index/2" translate="no">index(conn, params)</a>
+        <a href="#get_limit/2" translate="no">get_limit(params, default \\ 25)</a>
 
       </div>
 
@@ -132,7 +128,7 @@ Fleetyards
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#open_api_operation/1" translate="no">open_api_operation(action)</a>
+        <a href="#get_pagination_args/1" translate="no">get_pagination_args(args)</a>
 
       </div>
 
@@ -140,7 +136,7 @@ Fleetyards
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#sc_data/2" translate="no">sc_data(conn, params)</a>
+        <a href="#list_operation/3" translate="no">list_operation(operation, list_name, opts \\ [])</a>
 
       </div>
 
@@ -148,7 +144,17 @@ Fleetyards
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#shared_security/0" translate="no">shared_security()</a>
+        <a href="#paged_index/2" translate="no">paged_index(type, opts \\ [])</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Generates a controller action that returns a list of items, as page</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#paged_list/3" translate="no">paged_list(name, type, opts \\ [])</a>
 
       </div>
 
@@ -156,7 +162,15 @@ Fleetyards
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#shared_tags/0" translate="no">shared_tags()</a>
+        <a href="#show_slug/2" translate="no">show_slug(type, opts \\ [])</a>
+
+      </div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#type_query/2" translate="no">type_query(type, extra \\ [])</a>
 
       </div>
 
@@ -176,14 +190,16 @@ Fleetyards
 Functions
     </h1>
     <div class="functions-list">
-<section class="detail" id="index/2">
+<section class="detail" id="get_limit/2">
+
+    <span id="get_limit/1"></span>
 
   <div class="detail-header">
-    <a href="#index/2" class="detail-link" title="Link to this function">
+    <a href="#get_limit/2" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">index(conn, params)</h1>
+    <h1 class="signature" translate="no">get_limit(params, default \\ 25)</h1>
 
 
   </div>
@@ -193,37 +209,14 @@ Functions
 
   </section>
 </section>
-<section class="detail" id="open_api_operation/1">
+<section class="detail" id="get_pagination_args/1">
 
   <div class="detail-header">
-    <a href="#open_api_operation/1" class="detail-link" title="Link to this function">
+    <a href="#get_pagination_args/1" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">open_api_operation(action)</h1>
-
-
-  </div>
-
-  <section class="docstring">
-
-      <div class="specs">
-
-          <pre translate="no"><span class="attribute">@spec</span> open_api_operation(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>()) :: <a href="https://hexdocs.pm/open_api_spex/3.16.1/OpenApiSpex.Operation.html#t:t/0">OpenApiSpex.Operation.t</a>()</pre>
-
-      </div>
-
-
-  </section>
-</section>
-<section class="detail" id="sc_data/2">
-
-  <div class="detail-header">
-    <a href="#sc_data/2" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">sc_data(conn, params)</h1>
+    <h1 class="signature" translate="no">get_pagination_args(args)</h1>
 
 
   </div>
@@ -233,15 +226,19 @@ Functions
 
   </section>
 </section>
-<section class="detail" id="shared_security/0">
+<section class="detail" id="list_operation/3">
+
+    <span id="list_operation/2"></span>
 
   <div class="detail-header">
-    <a href="#shared_security/0" class="detail-link" title="Link to this function">
+    <a href="#list_operation/3" class="detail-link" title="Link to this macro">
       <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
+      <span class="sr-only">Link to this macro</span>
     </a>
-    <h1 class="signature" translate="no">shared_security()</h1>
+    <h1 class="signature" translate="no">list_operation(operation, list_name, opts \\ [])</h1>
 
+
+      <span class="note">(macro)</span>
 
   </div>
 
@@ -250,15 +247,82 @@ Functions
 
   </section>
 </section>
-<section class="detail" id="shared_tags/0">
+<section class="detail" id="paged_index/2">
+
+    <span id="paged_index/1"></span>
 
   <div class="detail-header">
-    <a href="#shared_tags/0" class="detail-link" title="Link to this function">
+    <a href="#paged_index/2" class="detail-link" title="Link to this macro">
       <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
+      <span class="sr-only">Link to this macro</span>
     </a>
-    <h1 class="signature" translate="no">shared_tags()</h1>
+    <h1 class="signature" translate="no">paged_index(type, opts \\ [])</h1>
 
+
+      <span class="note">(macro)</span>
+
+  </div>
+
+  <section class="docstring">
+
+<p>Generates a controller action that returns a list of items, as page</p>
+  </section>
+</section>
+<section class="detail" id="paged_list/3">
+
+    <span id="paged_list/2"></span>
+
+  <div class="detail-header">
+    <a href="#paged_list/3" class="detail-link" title="Link to this macro">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this macro</span>
+    </a>
+    <h1 class="signature" translate="no">paged_list(name, type, opts \\ [])</h1>
+
+
+      <span class="note">(macro)</span>
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="show_slug/2">
+
+    <span id="show_slug/1"></span>
+
+  <div class="detail-header">
+    <a href="#show_slug/2" class="detail-link" title="Link to this macro">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this macro</span>
+    </a>
+    <h1 class="signature" translate="no">show_slug(type, opts \\ [])</h1>
+
+
+      <span class="note">(macro)</span>
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="type_query/2">
+
+    <span id="type_query/1"></span>
+
+  <div class="detail-header">
+    <a href="#type_query/2" class="detail-link" title="Link to this macro">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this macro</span>
+    </a>
+    <h1 class="signature" translate="no">type_query(type, extra \\ [])</h1>
+
+
+      <span class="note">(macro)</span>
 
   </div>
 

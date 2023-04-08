@@ -7,13 +7,13 @@
     <meta name="generator" content="ExDoc v0.29.4">
     <meta name="project" content="Fleetyards v0.1.0">
 
-    <title>ExFleetYardsApi.UserHangarView — Fleetyards v0.1.0</title>
+    <title>ExFleetYardsApi.Plugs.AuthorizationBoruta — Fleetyards v0.1.0</title>
     <link rel="stylesheet" href="dist/html-elixir-HHVY3JYD.css" />
 
 
     <script src="dist/handlebars.runtime-NWIB6V2M.js"></script>
     <script src="dist/handlebars.templates-XWGFFSCD.js"></script>
-    <script src="dist/sidebar_items-6A1600D2.js"></script>
+    <script src="dist/sidebar_items-AAA20137.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -98,14 +98,33 @@ Fleetyards
 </button>
 
 
-  <span translate="no">ExFleetYardsApi.UserHangarView</span> 
+  <span translate="no">ExFleetYardsApi.Plugs.AuthorizationBoruta</span> 
   <small class="app-vsn" translate="no">(Fleetyards v0.1.0)</small>
 
 </h1>
 
 
   <section id="moduledoc">
-<p>View module used for api</p>
+<p>This module provides plugs for authorization and authentication.</p><h2 id="module-plugs" class="section-heading">
+  <a href="#module-plugs" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
+  <p class="sr-only">plugs</p>
+  </a>
+  Plugs
+</h2>
+<h3 id="module-require_authenticated-2" class="section-heading">
+  <a href="#module-require_authenticated-2" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
+  <p class="sr-only">require_authenticated-2</p>
+  </a>
+  <a href="#require_authenticated/2"><code class="inline">require_authenticated/2</code></a>
+</h3>
+<p>Ensures that the user is authenticated by checking for a valid bearer token in
+the <code class="inline">authorization</code> header.</p><p>It assigns the current token and user to the connection.</p><h3 id="module-authorize-2" class="section-heading">
+  <a href="#module-authorize-2" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
+  <p class="sr-only">authorize-2</p>
+  </a>
+  <a href="#authorize/2"><code class="inline">authorize/2</code></a>
+</h3>
+<p>Ensures that the user has the required OAuth2 scopes.</p><p>Takes a list of required scopes as a parameter.</p>
   </section>
 
 
@@ -124,33 +143,22 @@ Fleetyards
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#__resource__/0" translate="no">__resource__()</a>
+        <a href="#authorize/2" translate="no">authorize(conn, required_scopes)</a>
 
       </div>
 
-        <div class="summary-synopsis"><p>The resource name, as an atom, for this view</p></div>
+        <div class="summary-synopsis"><p>Ensures that the user has the required OAuth2 scopes.</p></div>
 
     </div>
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#render/2" translate="no">render(template, assigns \\ %{})</a>
+        <a href="#require_authenticated/2" translate="no">require_authenticated(conn, opts)</a>
 
       </div>
 
-        <div class="summary-synopsis"><p>Renders the given template locally.</p></div>
-
-    </div>
-
-    <div class="summary-row">
-      <div class="summary-signature">
-        <a href="#template_not_found/2" translate="no">template_not_found(template, assigns)</a>
-
-      </div>
-
-        <div class="summary-synopsis"><p>Callback invoked when no template is found.
-By default it raises but can be customized
-to render a particular template.</p></div>
+        <div class="summary-synopsis"><p>Ensures that the user is authenticated by checking for a valid bearer token in
+the <code class="inline">authorization</code> header.</p></div>
 
     </div>
 
@@ -168,50 +176,14 @@ to render a particular template.</p></div>
 Functions
     </h1>
     <div class="functions-list">
-<section class="detail" id="__resource__/0">
+<section class="detail" id="authorize/2">
 
   <div class="detail-header">
-    <a href="#__resource__/0" class="detail-link" title="Link to this function">
+    <a href="#authorize/2" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">__resource__()</h1>
-
-
-  </div>
-
-  <section class="docstring">
-
-<p>The resource name, as an atom, for this view</p>
-  </section>
-</section>
-<section class="detail" id="render/2">
-
-    <span id="render/1"></span>
-
-  <div class="detail-header">
-    <a href="#render/2" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">render(template, assigns \\ %{})</h1>
-
-
-  </div>
-
-  <section class="docstring">
-
-<p>Renders the given template locally.</p>
-  </section>
-</section>
-<section class="detail" id="template_not_found/2">
-
-  <div class="detail-header">
-    <a href="#template_not_found/2" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">template_not_found(template, assigns)</h1>
+    <h1 class="signature" translate="no">authorize(conn, required_scopes)</h1>
 
 
   </div>
@@ -220,13 +192,35 @@ Functions
 
       <div class="specs">
 
-          <pre translate="no"><span class="attribute">@spec</span> template_not_found(<a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">binary</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>()) :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">no_return</a>()</pre>
+          <pre translate="no"><span class="attribute">@spec</span> authorize(<a href="https://hexdocs.pm/plug/1.14.2/Plug.Conn.html#t:t/0">Plug.Conn.t</a>(), <a href="https://hexdocs.pm/elixir/Keyword.html#t:t/0">Keyword.t</a>()) :: <a href="https://hexdocs.pm/plug/1.14.2/Plug.Conn.html#t:t/0">Plug.Conn.t</a>()</pre>
 
       </div>
 
-<p>Callback invoked when no template is found.
-By default it raises but can be customized
-to render a particular template.</p>
+<p>Ensures that the user has the required OAuth2 scopes.</p><p>Takes a list of required scopes as a parameter.</p>
+  </section>
+</section>
+<section class="detail" id="require_authenticated/2">
+
+  <div class="detail-header">
+    <a href="#require_authenticated/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">require_authenticated(conn, opts)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> require_authenticated(<a href="https://hexdocs.pm/plug/1.14.2/Plug.Conn.html#t:t/0">Plug.Conn.t</a>(), <a href="https://hexdocs.pm/elixir/Keyword.html#t:t/0">Keyword.t</a>()) :: <a href="https://hexdocs.pm/plug/1.14.2/Plug.Conn.html#t:t/0">Plug.Conn.t</a>()</pre>
+
+      </div>
+
+<p>Ensures that the user is authenticated by checking for a valid bearer token in
+the <code class="inline">authorization</code> header.</p><p>It assigns the current token and user to the connection.</p>
   </section>
 </section>
 

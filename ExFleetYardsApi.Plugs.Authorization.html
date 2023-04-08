@@ -13,7 +13,7 @@
 
     <script src="dist/handlebars.runtime-NWIB6V2M.js"></script>
     <script src="dist/handlebars.templates-XWGFFSCD.js"></script>
-    <script src="dist/sidebar_items-6A1600D2.js"></script>
+    <script src="dist/sidebar_items-AAA20137.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -21,7 +21,7 @@
 
 
   </head>
-  <body data-type="modules" class="page-module">
+  <body data-type="modules" class="page-behaviour">
     <script>
 
       try {
@@ -98,7 +98,7 @@ Fleetyards
 </button>
 
 
-  <span translate="no">ExFleetYardsApi.Plugs.Authorization</span> 
+  <span translate="no">ExFleetYardsApi.Plugs.Authorization</span> <small>behaviour</small>
   <small class="app-vsn" translate="no">(Fleetyards v0.1.0)</small>
 
 </h1>
@@ -136,14 +136,14 @@ the <code class="inline">authorization</code> header.</p><p>It assigns the curre
       </a>
       Summary
     </h1>
-<div class="summary-functions summary">
+<div class="summary-callbacks summary">
   <h2>
-    <a href="#functions">Functions</a>
+    <a href="#callbacks">Callbacks</a>
   </h2>
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#authorize/2" translate="no">authorize(conn, required_scopes)</a>
+        <a href="#c:authorize/2" translate="no">authorize(t, t)</a>
 
       </div>
 
@@ -153,7 +153,34 @@ the <code class="inline">authorization</code> header.</p><p>It assigns the curre
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#require_authenticated/2" translate="no">require_authenticated(conn, opts)</a>
+        <a href="#c:require_authenticated/2" translate="no">require_authenticated(t, t)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Ensures that the user is authenticated by checking for a valid bearer token in
+the <code class="inline">authorization</code> header.</p></div>
+
+    </div>
+
+</div>
+<div class="summary-functions summary">
+  <h2>
+    <a href="#functions">Functions</a>
+  </h2>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#authorize/2" translate="no">authorize(conn, scopes)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Ensures that the user has the required OAuth2 scopes.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#require_authenticated/2" translate="no">require_authenticated(conn, scopes)</a>
 
       </div>
 
@@ -166,6 +193,66 @@ the <code class="inline">authorization</code> header.</p></div>
 
   </section>
 
+
+  <section id="callbacks" class="details-list">
+    <h1 class="section-heading">
+      <a class="hover-link" href="#callbacks">
+        <i class="ri-link-m" aria-hidden="true"></i>
+        <span class="sr-only">Link to this section</span>
+      </a>
+Callbacks
+    </h1>
+    <div class="callbacks-list">
+<section class="detail" id="c:authorize/2">
+
+  <div class="detail-header">
+    <a href="#c:authorize/2" class="detail-link" title="Link to this callback">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this callback</span>
+    </a>
+    <h1 class="signature" translate="no">authorize(t, t)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@callback</span> authorize(<a href="https://hexdocs.pm/plug/1.14.2/Plug.Conn.html#t:t/0">Plug.Conn.t</a>(), <a href="https://hexdocs.pm/elixir/Keyword.html#t:t/0">Keyword.t</a>()) :: <a href="https://hexdocs.pm/plug/1.14.2/Plug.Conn.html#t:t/0">Plug.Conn.t</a>()</pre>
+
+      </div>
+
+<p>Ensures that the user has the required OAuth2 scopes.</p><p>Takes a list of required scopes as a parameter.</p>
+  </section>
+</section>
+<section class="detail" id="c:require_authenticated/2">
+
+  <div class="detail-header">
+    <a href="#c:require_authenticated/2" class="detail-link" title="Link to this callback">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this callback</span>
+    </a>
+    <h1 class="signature" translate="no">require_authenticated(t, t)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@callback</span> require_authenticated(<a href="https://hexdocs.pm/plug/1.14.2/Plug.Conn.html#t:t/0">Plug.Conn.t</a>(), <a href="https://hexdocs.pm/elixir/Keyword.html#t:t/0">Keyword.t</a>()) :: <a href="https://hexdocs.pm/plug/1.14.2/Plug.Conn.html#t:t/0">Plug.Conn.t</a>()</pre>
+
+      </div>
+
+<p>Ensures that the user is authenticated by checking for a valid bearer token in
+the <code class="inline">authorization</code> header.</p><p>It assigns the current token and user to the connection.</p>
+  </section>
+</section>
+
+    </div>
+  </section>
 
   <section id="functions" class="details-list">
     <h1 class="section-heading">
@@ -183,18 +270,12 @@ Functions
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">authorize(conn, required_scopes)</h1>
+    <h1 class="signature" translate="no">authorize(conn, scopes)</h1>
 
 
   </div>
 
   <section class="docstring">
-
-      <div class="specs">
-
-          <pre translate="no"><span class="attribute">@spec</span> authorize(<a href="https://hexdocs.pm/plug/1.14.2/Plug.Conn.html#t:t/0">Plug.Conn.t</a>(), <a href="https://hexdocs.pm/elixir/Keyword.html#t:t/0">Keyword.t</a>()) :: <a href="https://hexdocs.pm/plug/1.14.2/Plug.Conn.html#t:t/0">Plug.Conn.t</a>()</pre>
-
-      </div>
 
 <p>Ensures that the user has the required OAuth2 scopes.</p><p>Takes a list of required scopes as a parameter.</p>
   </section>
@@ -206,18 +287,12 @@ Functions
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">require_authenticated(conn, opts)</h1>
+    <h1 class="signature" translate="no">require_authenticated(conn, scopes)</h1>
 
 
   </div>
 
   <section class="docstring">
-
-      <div class="specs">
-
-          <pre translate="no"><span class="attribute">@spec</span> require_authenticated(<a href="https://hexdocs.pm/plug/1.14.2/Plug.Conn.html#t:t/0">Plug.Conn.t</a>(), <a href="https://hexdocs.pm/elixir/Keyword.html#t:t/0">Keyword.t</a>()) :: <a href="https://hexdocs.pm/plug/1.14.2/Plug.Conn.html#t:t/0">Plug.Conn.t</a>()</pre>
-
-      </div>
 
 <p>Ensures that the user is authenticated by checking for a valid bearer token in
 the <code class="inline">authorization</code> header.</p><p>It assigns the current token and user to the connection.</p>

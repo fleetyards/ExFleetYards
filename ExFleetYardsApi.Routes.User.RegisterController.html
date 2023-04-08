@@ -7,13 +7,13 @@
     <meta name="generator" content="ExDoc v0.29.4">
     <meta name="project" content="Fleetyards v0.1.0">
 
-    <title>ExFleetYardsApi.FleetView — Fleetyards v0.1.0</title>
+    <title>ExFleetYardsApi.Routes.User.RegisterController — Fleetyards v0.1.0</title>
     <link rel="stylesheet" href="dist/html-elixir-HHVY3JYD.css" />
 
 
     <script src="dist/handlebars.runtime-NWIB6V2M.js"></script>
     <script src="dist/handlebars.templates-XWGFFSCD.js"></script>
-    <script src="dist/sidebar_items-6A1600D2.js"></script>
+    <script src="dist/sidebar_items-AAA20137.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -98,14 +98,14 @@ Fleetyards
 </button>
 
 
-  <span translate="no">ExFleetYardsApi.FleetView</span> 
+  <span translate="no">ExFleetYardsApi.Routes.User.RegisterController</span> 
   <small class="app-vsn" translate="no">(Fleetyards v0.1.0)</small>
 
 </h1>
 
 
   <section id="moduledoc">
-<p>View module used for api</p>
+<p>Controller used for Api</p>
   </section>
 
 
@@ -124,17 +124,7 @@ Fleetyards
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#__resource__/0" translate="no">__resource__()</a>
-
-      </div>
-
-        <div class="summary-synopsis"><p>The resource name, as an atom, for this view</p></div>
-
-    </div>
-
-    <div class="summary-row">
-      <div class="summary-signature">
-        <a href="#private/1" translate="no">private(fleet)</a>
+        <a href="#confirm/2" translate="no">confirm(conn, map)</a>
 
       </div>
 
@@ -142,7 +132,7 @@ Fleetyards
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#public/1" translate="no">public(fleet)</a>
+        <a href="#delete/2" translate="no">delete(conn, map)</a>
 
       </div>
 
@@ -150,23 +140,33 @@ Fleetyards
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#render/2" translate="no">render(template, assigns \\ %{})</a>
+        <a href="#open_api_operation/1" translate="no">open_api_operation(action)</a>
 
       </div>
-
-        <div class="summary-synopsis"><p>Renders the given template locally.</p></div>
 
     </div>
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#template_not_found/2" translate="no">template_not_found(template, assigns)</a>
+        <a href="#register/2" translate="no">register(conn, params)</a>
 
       </div>
 
-        <div class="summary-synopsis"><p>Callback invoked when no template is found.
-By default it raises but can be customized
-to render a particular template.</p></div>
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#shared_security/0" translate="no">shared_security()</a>
+
+      </div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#shared_tags/0" translate="no">shared_tags()</a>
+
+      </div>
 
     </div>
 
@@ -184,31 +184,14 @@ to render a particular template.</p></div>
 Functions
     </h1>
     <div class="functions-list">
-<section class="detail" id="__resource__/0">
+<section class="detail" id="confirm/2">
 
   <div class="detail-header">
-    <a href="#__resource__/0" class="detail-link" title="Link to this function">
+    <a href="#confirm/2" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">__resource__()</h1>
-
-
-  </div>
-
-  <section class="docstring">
-
-<p>The resource name, as an atom, for this view</p>
-  </section>
-</section>
-<section class="detail" id="private/1">
-
-  <div class="detail-header">
-    <a href="#private/1" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">private(fleet)</h1>
+    <h1 class="signature" translate="no">confirm(conn, map)</h1>
 
 
   </div>
@@ -218,14 +201,14 @@ Functions
 
   </section>
 </section>
-<section class="detail" id="public/1">
+<section class="detail" id="delete/2">
 
   <div class="detail-header">
-    <a href="#public/1" class="detail-link" title="Link to this function">
+    <a href="#delete/2" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">public(fleet)</h1>
+    <h1 class="signature" translate="no">delete(conn, map)</h1>
 
 
   </div>
@@ -235,33 +218,14 @@ Functions
 
   </section>
 </section>
-<section class="detail" id="render/2">
-
-    <span id="render/1"></span>
+<section class="detail" id="open_api_operation/1">
 
   <div class="detail-header">
-    <a href="#render/2" class="detail-link" title="Link to this function">
+    <a href="#open_api_operation/1" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">render(template, assigns \\ %{})</h1>
-
-
-  </div>
-
-  <section class="docstring">
-
-<p>Renders the given template locally.</p>
-  </section>
-</section>
-<section class="detail" id="template_not_found/2">
-
-  <div class="detail-header">
-    <a href="#template_not_found/2" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">template_not_found(template, assigns)</h1>
+    <h1 class="signature" translate="no">open_api_operation(action)</h1>
 
 
   </div>
@@ -270,13 +234,62 @@ Functions
 
       <div class="specs">
 
-          <pre translate="no"><span class="attribute">@spec</span> template_not_found(<a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">binary</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>()) :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">no_return</a>()</pre>
+          <pre translate="no"><span class="attribute">@spec</span> open_api_operation(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>()) :: <a href="https://hexdocs.pm/open_api_spex/3.16.1/OpenApiSpex.Operation.html#t:t/0">OpenApiSpex.Operation.t</a>()</pre>
 
       </div>
 
-<p>Callback invoked when no template is found.
-By default it raises but can be customized
-to render a particular template.</p>
+
+  </section>
+</section>
+<section class="detail" id="register/2">
+
+  <div class="detail-header">
+    <a href="#register/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">register(conn, params)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="shared_security/0">
+
+  <div class="detail-header">
+    <a href="#shared_security/0" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">shared_security()</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="shared_tags/0">
+
+  <div class="detail-header">
+    <a href="#shared_tags/0" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">shared_tags()</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+
   </section>
 </section>
 

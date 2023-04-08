@@ -7,13 +7,13 @@
     <meta name="generator" content="ExDoc v0.29.4">
     <meta name="project" content="Fleetyards v0.1.0">
 
-    <title>ExFleetYardsApi.FleetInviteController — Fleetyards v0.1.0</title>
+    <title>ExFleetYardsApi.JsonHelpers — Fleetyards v0.1.0</title>
     <link rel="stylesheet" href="dist/html-elixir-HHVY3JYD.css" />
 
 
     <script src="dist/handlebars.runtime-NWIB6V2M.js"></script>
     <script src="dist/handlebars.templates-XWGFFSCD.js"></script>
-    <script src="dist/sidebar_items-6A1600D2.js"></script>
+    <script src="dist/sidebar_items-AAA20137.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -98,14 +98,14 @@ Fleetyards
 </button>
 
 
-  <span translate="no">ExFleetYardsApi.FleetInviteController</span> 
+  <span translate="no">ExFleetYardsApi.JsonHelpers</span> 
   <small class="app-vsn" translate="no">(Fleetyards v0.1.0)</small>
 
 </h1>
 
 
   <section id="moduledoc">
-<p>Controller used for Api</p>
+<p>Helper functions for rendering JSON.</p>
   </section>
 
 
@@ -124,7 +124,58 @@ Fleetyards
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#accept_token/2" translate="no">accept_token(conn, map)</a>
+        <a href="#add_if/4" translate="no">add_if(map, key, data, cond)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Add if condition is true</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#filter_null/2" translate="no">filter_null(map, required \\ [])</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Filter out <code class="inline">nil</code> values from a map, unless they are required.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#render_meta/1" translate="no">render_meta(page)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Render a cursor-based pagination meta object.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#render_page/4" translate="no">render_page(page, module, render_one, params \\ %{})</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Render a page of data using a module and function.
+The function has to take in the argument <code class="inline">data</code> and return a map.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#render_timestamp/1" translate="no">render_timestamp(data)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Render a timestamp as an ISO8601 string.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#render_timestamp/3" translate="no">render_timestamp(map, key, data)</a>
 
       </div>
 
@@ -132,49 +183,11 @@ Fleetyards
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#accept_user_invite/2" translate="no">accept_user_invite(conn, map)</a>
+        <a href="#render_timestamps/2" translate="no">render_timestamps(map, data)</a>
 
       </div>
 
-    </div>
-
-    <div class="summary-row">
-      <div class="summary-signature">
-        <a href="#create/2" translate="no">create(conn, params)</a>
-
-      </div>
-
-    </div>
-
-    <div class="summary-row">
-      <div class="summary-signature">
-        <a href="#invite_user/2" translate="no">invite_user(conn, params)</a>
-
-      </div>
-
-    </div>
-
-    <div class="summary-row">
-      <div class="summary-signature">
-        <a href="#open_api_operation/1" translate="no">open_api_operation(action)</a>
-
-      </div>
-
-    </div>
-
-    <div class="summary-row">
-      <div class="summary-signature">
-        <a href="#shared_security/0" translate="no">shared_security()</a>
-
-      </div>
-
-    </div>
-
-    <div class="summary-row">
-      <div class="summary-signature">
-        <a href="#shared_tags/0" translate="no">shared_tags()</a>
-
-      </div>
+        <div class="summary-synopsis"><p>Renders <code class="inline">created_at</code> and <code class="inline">updated_at</code> timestamps as ISO8601 strings.</p></div>
 
     </div>
 
@@ -192,82 +205,14 @@ Fleetyards
 Functions
     </h1>
     <div class="functions-list">
-<section class="detail" id="accept_token/2">
+<section class="detail" id="add_if/4">
 
   <div class="detail-header">
-    <a href="#accept_token/2" class="detail-link" title="Link to this function">
+    <a href="#add_if/4" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">accept_token(conn, map)</h1>
-
-
-  </div>
-
-  <section class="docstring">
-
-
-  </section>
-</section>
-<section class="detail" id="accept_user_invite/2">
-
-  <div class="detail-header">
-    <a href="#accept_user_invite/2" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">accept_user_invite(conn, map)</h1>
-
-
-  </div>
-
-  <section class="docstring">
-
-
-  </section>
-</section>
-<section class="detail" id="create/2">
-
-  <div class="detail-header">
-    <a href="#create/2" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">create(conn, params)</h1>
-
-
-  </div>
-
-  <section class="docstring">
-
-
-  </section>
-</section>
-<section class="detail" id="invite_user/2">
-
-  <div class="detail-header">
-    <a href="#invite_user/2" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">invite_user(conn, params)</h1>
-
-
-  </div>
-
-  <section class="docstring">
-
-
-  </section>
-</section>
-<section class="detail" id="open_api_operation/1">
-
-  <div class="detail-header">
-    <a href="#open_api_operation/1" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">open_api_operation(action)</h1>
+    <h1 class="signature" translate="no">add_if(map, key, data, cond)</h1>
 
 
   </div>
@@ -276,21 +221,112 @@ Functions
 
       <div class="specs">
 
-          <pre translate="no"><span class="attribute">@spec</span> open_api_operation(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>()) :: <a href="https://hexdocs.pm/open_api_spex/3.16.1/OpenApiSpex.Operation.html#t:t/0">OpenApiSpex.Operation.t</a>()</pre>
+          <pre translate="no"><span class="attribute">@spec</span> add_if(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">boolean</a>()) :: <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>()</pre>
 
       </div>
 
-
+<p>Add if condition is true</p>
   </section>
 </section>
-<section class="detail" id="shared_security/0">
+<section class="detail" id="filter_null/2">
+
+    <span id="filter_null/1"></span>
 
   <div class="detail-header">
-    <a href="#shared_security/0" class="detail-link" title="Link to this function">
+    <a href="#filter_null/2" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">shared_security()</h1>
+    <h1 class="signature" translate="no">filter_null(map, required \\ [])</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> filter_null(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>(), [<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>()] | <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>()) :: <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>()</pre>
+
+      </div>
+
+<p>Filter out <code class="inline">nil</code> values from a map, unless they are required.</p><p>Required fields are specified by a list of atoms, or a schema module.</p>
+  </section>
+</section>
+<section class="detail" id="render_meta/1">
+
+  <div class="detail-header">
+    <a href="#render_meta/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">render_meta(page)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> render_meta(<a href="https://hexdocs.pm/chunkr/0.2.1/Chunkr.Page.html#t:t/0">Chunkr.Page.t</a>()) :: <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>()</pre>
+
+      </div>
+
+<p>Render a cursor-based pagination meta object.</p>
+  </section>
+</section>
+<section class="detail" id="render_page/4">
+
+    <span id="render_page/3"></span>
+
+  <div class="detail-header">
+    <a href="#render_page/4" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">render_page(page, module, render_one, params \\ %{})</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Render a page of data using a module and function.
+The function has to take in the argument <code class="inline">data</code> and return a map.</p>
+  </section>
+</section>
+<section class="detail" id="render_timestamp/1">
+
+  <div class="detail-header">
+    <a href="#render_timestamp/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">render_timestamp(data)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> render_timestamp(<a href="https://hexdocs.pm/elixir/DateTime.html#t:t/0">DateTime.t</a>() | nil) :: <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>() | nil</pre>
+
+      </div>
+
+<p>Render a timestamp as an ISO8601 string.</p>
+  </section>
+</section>
+<section class="detail" id="render_timestamp/3">
+
+  <div class="detail-header">
+    <a href="#render_timestamp/3" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">render_timestamp(map, key, data)</h1>
 
 
   </div>
@@ -300,21 +336,31 @@ Functions
 
   </section>
 </section>
-<section class="detail" id="shared_tags/0">
+<section class="detail" id="render_timestamps/2">
 
   <div class="detail-header">
-    <a href="#shared_tags/0" class="detail-link" title="Link to this function">
+    <a href="#render_timestamps/2" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">shared_tags()</h1>
+    <h1 class="signature" translate="no">render_timestamps(map, data)</h1>
 
 
   </div>
 
   <section class="docstring">
 
+      <div class="specs">
 
+          <pre translate="no"><span class="attribute">@spec</span> render_timestamps(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>(), %{
+  created_at: <a href="https://hexdocs.pm/elixir/DateTime.html#t:t/0">DateTime.t</a>() | nil,
+  updated_at: <a href="https://hexdocs.pm/elixir/DateTime.html#t:t/0">DateTime.t</a>() | nil
+}) ::
+  <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>()</pre>
+
+      </div>
+
+<p>Renders <code class="inline">created_at</code> and <code class="inline">updated_at</code> timestamps as ISO8601 strings.</p>
   </section>
 </section>
 
