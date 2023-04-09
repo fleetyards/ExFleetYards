@@ -2095,6 +2095,46 @@
         "x-struct": "Elixir.ExFleetYardsApi.Schemas.Single.UserTotp",
         "x-validate": null
       },
+      "Userinfo": {
+        "description": "Userinfo Schema",
+        "properties": {
+          "email": {
+            "format": "email",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "hangar_updated_at": {
+            "format": "date-time",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "nickname": {
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "publicHangar": {
+            "type": "boolean",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "sub": {
+            "format": "uuid",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          }
+        },
+        "required": [
+          "sub"
+        ],
+        "title": "Userinfo",
+        "type": "object",
+        "x-struct": "Elixir.ExFleetYardsApi.Schemas.Single.Userinfo",
+        "x-validate": null
+      },
       "VersionResponse": {
         "description": "server version",
         "example": {
@@ -3562,6 +3602,46 @@
         "tags": [
           "game",
           "model"
+        ]
+      }
+    },
+    "/v2/openid/userinfo": {
+      "get": {
+        "callbacks": {},
+        "operationId": "ExFleetYardsApi.Routes.UserinfoController.userinfo",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Userinfo"
+                }
+              }
+            },
+            "description": "Userinfo"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          }
+        },
+        "security": [
+          {
+            "authorization": [
+              "openid"
+            ]
+          }
+        ],
+        "summary": "Get user info",
+        "tags": [
+          "user"
         ]
       }
     },
