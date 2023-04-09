@@ -1,5 +1,5 @@
-defmodule ExFleetYardsWeb.ErrorView do
-  use ExFleetYardsWeb, :view
+defmodule ExFleetYardsWeb.ErrorHtml do
+  use ExFleetYardsWeb, :html
 
   # If you want to customize a particular status code
   # for a certain format, you may uncomment below.

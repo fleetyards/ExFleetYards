@@ -59,7 +59,7 @@ defmodule ExFleetYardsWeb.MixProject do
     [
       setup: ["deps.get"],
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
-      "assets.deploy": ["esbuild default --minify", "phx.digest"]
+      "assets.deploy": ["tailwind default --minify", "esbuild default --minify", "phx.digest"]
     ]
   end
 end

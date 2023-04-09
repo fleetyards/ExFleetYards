@@ -34,7 +34,8 @@ config :ex_fleet_yards_web, ExFleetYardsWeb.Endpoint,
   secret_key_base: "zMnmcNSJebHEPCJqrtztxeTVMEWfciC0cxNuEFZWRZFx2/QA4Ull5nkkLwqQBRQ6",
   watchers: [
     # Start the esbuild watcher by calling Esbuild.install_and_run(:default, args)
-    esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]}
+    esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]},
+    tailwind: {Tailwind, :install_and_run, [:default, ~w(--watch)]}
   ]
 
 config :ex_fleet_yards_api, ExFleetYardsApi.Endpoint,

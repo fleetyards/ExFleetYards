@@ -101,6 +101,14 @@ config :esbuild,
 
 config :tailwind,
   version: "3.2.7",
+  default: [
+    args: ~w(
+      --config=tailwind.config.js
+      --input=css/app.css
+      --output=../priv/static/assets/css/app.css
+    ),
+    cd: Path.expand("../apps/ex_fleet_yards_web/assets", __DIR__)
+  ],
   auth: [
     args: ~w(
       --config=tailwind.config.js
