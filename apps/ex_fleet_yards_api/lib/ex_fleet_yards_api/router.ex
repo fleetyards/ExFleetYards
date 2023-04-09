@@ -105,6 +105,12 @@ defmodule ExFleetYardsApi.Router do
         delete "/delete-account", RegisterController, :delete
       end
     end
+
+    scope "/openid/userinfo" do
+      pipe_through :require_authenticated
+
+      get "/", UserinfoController, :userinfo
+    end
   end
 
   #  scope "/v2", ExFleetYardsApi do

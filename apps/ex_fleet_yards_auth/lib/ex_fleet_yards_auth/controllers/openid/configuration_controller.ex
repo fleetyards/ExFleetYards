@@ -12,6 +12,7 @@ defmodule ExFleetYardsAuth.Openid.ConfigurationController do
       issuer: issuer,
       auth_endpoint: base_url <> ~p"/oauth/authorize",
       token_endpoint: base_url <> ~p"/oauth/token",
+      userinfo_endpoint: userinfo_endpoint(),
       jwks_url: base_url <> ~p"/openid/certs",
       scopes_supported: scope_list(),
       response_types_supported: ["id_token", "code id_token", "id_token token"],
@@ -27,5 +28,19 @@ defmodule ExFleetYardsAuth.Openid.ConfigurationController do
   defp scope_list do
     ExFleetYards.Scopes.scope_list()
     |> Enum.map(fn {scope, _} -> scope end)
+  end
+
+  defp api_host do
+    case Code.ensure_compiled(ExFleetYardsApi.Endpoint) do
+      {:module, _} ->
+        ExFleetYardsApi.Endpoint.host()
+
+      {:error, _} ->
+        "https://" <> Application.get_env(:ex_fleet_yards_auth, :api_domain)
+    end
+  end
+
+  defp userinfo_endpoint do
+    api_host() <> "/v2/openid/userinfo"
   end
 end

@@ -717,6 +717,24 @@ defmodule ExFleetYardsApi.Schemas.Single do
     })
   end
 
+  defmodule Userinfo do
+    @moduledoc "Userinfo Schema"
+    require OpenApiSpex
+
+    OpenApiSpex.schema(%{
+      description: "Userinfo Schema",
+      type: :object,
+      properties: %{
+        sub: %Schema{type: :string, format: :uuid},
+        email: %Schema{type: :string, format: :email},
+        hangar_updated_at: %Schema{type: :string, format: :"date-time"},
+        nickname: %Schema{type: :string},
+        publicHangar: %Schema{type: :boolean}
+      },
+      required: [:sub]
+    })
+  end
+
   defmodule Version do
     require OpenApiSpex
 
