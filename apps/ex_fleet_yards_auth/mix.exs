@@ -14,7 +14,8 @@ defmodule ExFleetYardsAuth.MixProject do
       compilers: [] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      xref: xref()
     ]
   end
 
@@ -53,6 +54,10 @@ defmodule ExFleetYardsAuth.MixProject do
       {:appsignal, "~> 2.0"},
       {:mox, "~> 1.0", only: :test}
     ]
+  end
+
+  defp xref do
+    [exclude: [ExFleetYardsApi.Endpoint]]
   end
 
   def aliases do

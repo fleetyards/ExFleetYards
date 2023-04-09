@@ -61,7 +61,7 @@ defmodule ExFleetYards.Oauth.ResourceOwners do
     [
       {"nickname", user.username},
       {"hangar_updated_at", user.hangar_updated_at},
-      {"public_hangar", user.public_hangar}
+      {"publicHangar", user.public_hangar}
       | add_claims(resource_owner, user, scopes)
     ]
   end

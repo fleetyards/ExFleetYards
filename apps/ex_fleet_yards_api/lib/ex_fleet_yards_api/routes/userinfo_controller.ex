@@ -13,7 +13,7 @@ defmodule ExFleetYardsApi.Routes.UserinfoController do
   operation :userinfo,
     summary: "Get user info",
     responses: [
-      ok: {"User", "application/json", ExFleetYardsApi.Schemas.Single.User},
+      ok: {"Userinfo", "application/json", ExFleetYardsApi.Schemas.Single.Userinfo},
       unauthorized: {"Error", "application/json", Error}
     ],
     security: [%{"authorization" => ["openid"]}]
