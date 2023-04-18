@@ -13,9 +13,20 @@ defmodule ExFleetYardsAuth.Auth do
   @remember_me_cookie "_ex_fleet_yards_auth_user_remember_me"
   @remember_me_options [sign: true, max_age: @max_age, same_site: "Lax"]
 
-  def log_in_user(conn, user, params \\ %{}) do
-    token = Account.get_auth_token(user)
+  def log_in_user(conn, user, params \\ %{}, opts \\ []) do
+    ExFleetYards.Account.User.update_last_sign_in_at!(user, %{
+      last_sign_in_ip: conn.remote_ip |> :inet.ntoa() |> to_string
+    })
+
+    context = Keyword.get(opts, :context, "web")
+
+    token =
+      ExFleetYards.Account.Token.create!(user.id, context, actor: user)
+      |> Ash.Resource.get_metadata(:string_token)
+
     return_to = get_session(conn, :user_return_to)
+
+    IO.inspect(params)
 
     conn
     |> renew_session()
@@ -39,9 +50,12 @@ defmodule ExFleetYardsAuth.Auth do
     |> clear_session()
   end
 
-  def log_out_user(conn) do
+  def log_out_user(conn, opts \\ []) do
     user_token = get_session(conn, :user_token)
-    _user_token = Account.delete_token(user_token, "auth")
+    context = Keyword.get(opts, :context, "web")
+
+    ExFleetYards.Account.Token.for_token!(user_token, context)
+    |> ExFleetYards.Account.destroy()
 
     if live_socket_id = get_session(conn, :live_socket_id) do
       ExFleetYardsAuth.Endpoint.broadcast(live_socket_id, "disconnect", %{})
@@ -53,14 +67,15 @@ defmodule ExFleetYardsAuth.Auth do
     |> redirect(to: Routes.session_path(conn, :new))
   end
 
-  def fetch_current_user(conn, _opts) do
+  def fetch_current_user(conn, opts \\ []) do
     {user_token, conn} = ensure_user_token(conn)
 
-    user = user_token && Account.get_user_by_token(user_token, "auth")
+    context = Keyword.get(opts, :context, "web")
+    user = user_token && ExFleetYards.Account.Token.for_token(user_token, context)
 
     user
     |> case do
-      %{user: user} ->
+      {:ok, user} ->
         assign(conn, :current_user, user)
 
       _ ->

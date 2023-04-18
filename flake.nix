@@ -13,12 +13,7 @@
     flake = false;
   };
 
-  inputs.seedex = {
-    url = "github:fleetyards/seedex/seeds_path";
-    flake = false;
-  };
-
-  outputs = { self, nixpkgs, devenv, seedex, ... }@inputs:
+  outputs = { self, nixpkgs, devenv, ... }@inputs:
     let
       systems =
         [ "x86_64-linux" "x86_64-darwin" "aarch64-linux" "aarch64-darwin" ];
@@ -42,7 +37,7 @@
       overlays.fleet = final: prev: {
         appsignal_nif = final.callPackage ./nix/appsignal-nif.nix { };
         ex_fleet_yards = final.callPackage
-          ({ lib, beam, rebar3, beamPackages, appsignal_nif }:
+          ({ lib, beam, rebar3, beamPackages, appsignal_nif, writeText }:
             let
               packages = beam.packagesWith beam.interpreters.erlang;
               pname = "ex_fleet_yards";
@@ -60,11 +55,18 @@
                     cp ${appsignal_nif}/* c_src
                   '';
                 };
-                seedex = beamPackages.buildMix {
-                  name = "seedex";
-                  version = "gen_seed";
-                  beamDeps = with self; [ ecto ecto_sql ];
-                  src = seedex;
+                mime = super.mime.override {
+                  patchPhase = let
+                    cfgFile = writeText "config.exs" ''
+                      use Mix.Config
+                      config :mime, :types, %{
+                        "application/vnd.api+json" => ["json"]
+                      }
+                    '';
+                  in ''
+                    mkdir config
+                    cp ${cfgFile} config/config.exs
+                  '';
                 };
               });
             in packages.mixRelease {

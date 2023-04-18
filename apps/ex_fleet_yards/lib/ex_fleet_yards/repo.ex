@@ -1,7 +1,14 @@
 defmodule ExFleetYards.Repo do
-  use Ecto.Repo,
-    otp_app: :ex_fleet_yards,
-    adapter: Ecto.Adapters.Postgres
+  use AshPostgres.Repo,
+    otp_app: :ex_fleet_yards
+
+  # use Ecto.Repo,
+  #  otp_app: :ex_fleet_yards,
+  #  adapter: Ecto.Adapters.Postgres
+
+  def installed_extensions do
+    ["uuid-ossp", "citext"]
+  end
 
   use Chunkr, planner: ExFleetYards.Repo.PaginationPlanner
 

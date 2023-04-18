@@ -24,12 +24,7 @@ config :ex_fleet_yards,
   env: config_env(),
   git_commit: commit
 
-#  seeds_path = Application.app_dir(:ex_fleet_yards)
-#  |> IO.inspect
-config :seedex,
-  repo: ExFleetYards.Repo
-
-#  seeds_path: "apps/ex_fleet_yards/priv/repo/seeds"
+config :ex_fleet_yards, :ash_apis, [ExFleetYards.Account]
 
 config :ex_fleet_yards, ExFleetYards.Repo, migration_source: "ecto_schema_migrations"
 
@@ -128,6 +123,10 @@ config :ex_fleet_yards_import,
   importers: [
     ExFleetYardsImport.Importer.Paint
   ]
+
+config :mime, :types, %{
+  "application/vnd.api+json" => ["json"]
+}
 
 # Appsignal
 config :appsignal, :config,

@@ -40,6 +40,9 @@ defmodule ExFleetYards.MixProject do
       {:phoenix_pubsub, "~> 2.0"},
       {:ecto_sql, "~> 3.6"},
       {:typed_ecto_schema, "~> 0.4.1", runtime: false},
+      {:ash, "~> 2.6.31"},
+      {:ash_postgres, "~> 1.3.6"},
+      {:ash_json_api, "~> 0.31.1"},
       {:ecto_autoslug_field, "~> 3.0"},
       {:cloak_ecto, "~> 1.2.0"},
       {:nimble_totp, "~> 1.0.0"},
@@ -49,9 +52,7 @@ defmodule ExFleetYards.MixProject do
       {:open_api_spex, "~> 3.16"},
       {:chunkr, "~> 0.2.1"},
       {:bcrypt_elixir, "~> 3.0"},
-      {:boruta, "~> 2.2"},
-      {:seedex, "~> 0.3.0",
-       only: [:dev, :test], github: "fleetyards/seedex", branch: "seeds_path"}
+      {:boruta, "~> 2.2"}
     ]
   end
 
@@ -61,9 +62,9 @@ defmodule ExFleetYards.MixProject do
   defp aliases do
     [
       setup: ["deps.get", "ecto.setup"],
-      "ecto.setup": ["ecto.create", "ecto.migrate", "seedex.seed"],
+      "ecto.setup": ["ecto.create", "ecto.migrate", "seed"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
-      test: ["ecto.create --quiet", "ecto.migrate --quiet", "seedex.seed", "test"]
+      test: ["ecto.create --quiet", "ecto.migrate --quiet", "seed", "test"]
     ]
   end
 

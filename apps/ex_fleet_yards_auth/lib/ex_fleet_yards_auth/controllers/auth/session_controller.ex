@@ -5,44 +5,64 @@ defmodule ExFleetYardsAuth.SessionController do
   alias ExFleetYards.Repo.Account.User.Totp
   alias ExFleetYardsAuth.Auth
 
+  plug :put_view, html: ExFleetYardsAuth.SessionHTML
+
   def new(conn, params) do
     render(conn, "new.html", error: nil, email: params["login_hint"])
   end
 
   def create(conn, %{"sub" => sub, "otp_code" => code} = user_params) do
-    if Totp.valid?(sub, code) do
-      user = Account.get_user_by_sub(sub)
+    user = ExFleetYards.Account.get!(ExFleetYards.Account.User, [id: sub], load: [:totp])
 
-      conn
-      |> Auth.log_in_user(user, user_params)
-    else
-      render(conn, "otp.html",
-        error: "Invald code",
-        sub: sub,
-        remember_me: user_params["remember_me"]
-      )
+    user.totp
+    |> ExFleetYards.Account.Totp.use(code, actor: user, verbose?: true)
+    |> IO.inspect()
+    |> case do
+      {:ok, _} ->
+        conn
+        |> Auth.log_in_user(user, user_params)
+
+      {:error, _} ->
+        render(conn, "otp.html",
+          error: "Invald code",
+          sub: sub,
+          remember_me: user_params["remember_me"]
+        )
     end
   end
 
   def create(conn, user_params) do
     %{"email" => email, "password" => password} = user_params
+    IO.inspect(user_params)
 
-    Account.get_user_by_password(email, password)
+    ExFleetYards.Account.User
+    |> Ash.Query.for_read(:login, %{username: email})
+    |> Ash.Query.load(:totp)
+    |> ExFleetYards.Account.read_one()
     |> case do
-      nil ->
-        render(conn, "new.html", error: "Invalid email or password", email: email)
-
-      user ->
-        if Totp.exists?(user.id) do
-          render(conn, "otp.html",
-            error: nil,
-            sub: user.id,
-            remember_me: user_params["remember_me"]
-          )
+      {:ok, user} ->
+        if Bcrypt.verify_pass(password, user.password_hash) do
+          if totp = user.totp do
+            conn
+            |> render("otp.html",
+              error: nil,
+              sub: user.id,
+              remember_me: user_params["remember_me"]
+            )
+          else
+            conn
+            |> Auth.log_in_user(user, user_params)
+          end
         else
           conn
-          |> Auth.log_in_user(user, user_params)
+          |> render("new.html", error: "Invalid email or password", email: email)
         end
+
+      {:error, _} ->
+        Bcrypt.no_user_verify()
+
+        conn
+        |> render("new.html", error: "Invalid email or password", email: email)
     end
   end
 
