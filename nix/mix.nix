@@ -36,12 +36,12 @@ let
 
     boruta = buildMix rec {
       name = "boruta";
-      version = "2.2.2";
+      version = "2.3.0";
 
       src = fetchHex {
         pkg = "${name}";
         version = "${version}";
-        sha256 = "1bixcb3rqgm23yl8llxjaapqf683fwf5my6pm7705vrf0gqjmkhs";
+        sha256 = "0ax6l0kiyzfwgxjzv52gnzpjy9mbbk0w187akhcd1djqpp8wwm9f";
       };
 
       beamDeps = [ ecto_sql ex_json_schema joken jose nebulex phoenix plug postgrex puid secure_random shards ];
@@ -218,15 +218,15 @@ let
 
     db_connection = buildMix rec {
       name = "db_connection";
-      version = "2.4.3";
+      version = "2.5.0";
 
       src = fetchHex {
         pkg = "${name}";
         version = "${version}";
-        sha256 = "04iwywfqf8k125yfvm084l1mp0bcv82mwih7xlpb7kx61xdw29y1";
+        sha256 = "18jsnmabdjwj3i7ml43ljzrzzvfy1a3bnbaqywgsv7nndji5nbf9";
       };
 
-      beamDeps = [ connection telemetry ];
+      beamDeps = [ telemetry ];
     };
 
     decimal = buildMix rec {
@@ -270,12 +270,12 @@ let
 
     ecto = buildMix rec {
       name = "ecto";
-      version = "3.9.5";
+      version = "3.10.1";
 
       src = fetchHex {
         pkg = "${name}";
         version = "${version}";
-        sha256 = "0k5p40cy6zxi3wm885amf78724zvb5a8chmpljzw1kdsiifi3wyl";
+        sha256 = "0ypqfynvnh80sd5vj6c72pf2js1c21qxj3jcqxxdy6v0y5al5b6j";
       };
 
       beamDeps = [ decimal jason telemetry ];
@@ -296,12 +296,12 @@ let
 
     ecto_sql = buildMix rec {
       name = "ecto_sql";
-      version = "3.9.2";
+      version = "3.10.1";
 
       src = fetchHex {
         pkg = "${name}";
         version = "${version}";
-        sha256 = "0w1zplm8ndf10dwxffg60iwzvbz3hyyiy761x91cvnwg6nsfxd8y";
+        sha256 = "0sy5277akp828hvcg60yxhpfgj543y2z1bqy2z414pv9ppdmp8pn";
       };
 
       beamDeps = [ db_connection ecto postgrex telemetry ];
@@ -660,12 +660,12 @@ let
 
     open_api_spex = buildMix rec {
       name = "open_api_spex";
-      version = "3.16.1";
+      version = "3.16.2";
 
       src = fetchHex {
         pkg = "${name}";
         version = "${version}";
-        sha256 = "1yyvvyzzi6k2l55fl4wijhrzzdjns95asxcbnikgh6hjmiwdfvzg";
+        sha256 = "0jqh4nl4ghg5j83528rq6lalm8136kvzi9k84vxdmq4skskjpi2r";
       };
 
       beamDeps = [ jason plug ];
@@ -855,15 +855,15 @@ let
 
     postgrex = buildMix rec {
       name = "postgrex";
-      version = "0.16.5";
+      version = "0.17.1";
 
       src = fetchHex {
         pkg = "${name}";
         version = "${version}";
-        sha256 = "1s5jbwfzsdsyvlwgx3bqlfwilj2c468wi3qxq0c2d23fvhwxdspd";
+        sha256 = "0md5j9k1vkwwzql68in6hmj0vfcdbnav33shxszf4fz7i2s5gc0l";
       };
 
-      beamDeps = [ connection db_connection decimal jason ];
+      beamDeps = [ db_connection decimal jason ];
     };
 
     puid = buildMix rec {
