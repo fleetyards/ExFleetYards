@@ -121,6 +121,7 @@ defmodule ExFleetYards.Account.User do
   relationships do
     has_one :totp, ExFleetYards.Account.Totp
     has_many :tokens, ExFleetYards.Account.Token
+    has_many :sso_connections, ExFleetYards.Account.SSO
   end
 
   identities do

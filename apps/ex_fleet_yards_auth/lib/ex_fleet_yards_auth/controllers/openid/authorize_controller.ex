@@ -6,7 +6,6 @@ defmodule ExFleetYardsAuth.Openid.AuthorizeController do
   alias ExFleetYardsAuth.Auth
   import ExFleetYardsAuth.Oauth.AuthorizeController, only: [get_scopes: 1]
 
-  alias Boruta.Oauth.AuthorizeResponse
   alias Boruta.Oauth.Error
   alias Boruta.Oauth.ResourceOwner
 

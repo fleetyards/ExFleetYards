@@ -1,8 +1,6 @@
 defmodule ExFleetYardsAuth.SessionController do
   use ExFleetYardsAuth, :controller
 
-  alias ExFleetYards.Repo.Account
-  alias ExFleetYards.Repo.Account.User.Totp
   alias ExFleetYardsAuth.Auth
 
   plug :put_view, html: ExFleetYardsAuth.SessionHTML
@@ -42,7 +40,7 @@ defmodule ExFleetYardsAuth.SessionController do
     |> case do
       {:ok, user} ->
         if Bcrypt.verify_pass(password, user.password_hash) do
-          if totp = user.totp do
+          if user.totp && user.totp.active do
             conn
             |> render("otp.html",
               error: nil,

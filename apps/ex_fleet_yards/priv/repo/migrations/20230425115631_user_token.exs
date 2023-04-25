@@ -19,7 +19,8 @@ defmodule ExFleetYards.Repo.Migrations.UserToken do
             column: :id,
             name: "user_token_user_id_fkey",
             type: :uuid,
-            prefix: "public"
+            prefix: "public",
+            on_delete: :delete_all
           ),
           null: false
     end

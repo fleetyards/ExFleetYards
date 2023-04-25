@@ -5,7 +5,6 @@ defmodule ExFleetYardsAuth.Auth do
   import Plug.Conn
   import Phoenix.Controller
 
-  alias ExFleetYards.Repo.Account
   alias ExFleetYardsAuth.Router.Helpers, as: Routes
 
   # Make the remember me cookie valid for 60 days.

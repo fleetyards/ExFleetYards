@@ -6,6 +6,10 @@ defmodule ExFleetYards.Account.Token do
   postgres do
     table "user_token"
     repo ExFleetYards.Repo
+
+    references do
+      reference :user, on_delete: :delete
+    end
   end
 
   attributes do

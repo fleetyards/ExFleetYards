@@ -22,7 +22,8 @@ defmodule ExFleetYards.Repo.Migrations.Totp do
             column: :id,
             name: "user_totp_user_id_fkey",
             type: :uuid,
-            prefix: "public"
+            prefix: "public",
+            on_delete: :delete_all
           ), null: false
     end
   end

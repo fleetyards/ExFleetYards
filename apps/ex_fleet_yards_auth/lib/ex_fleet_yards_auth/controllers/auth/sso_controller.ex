@@ -6,17 +6,13 @@ defmodule ExFleetYardsAuth.Auth.SSOController do
 
   alias ExFleetYardsAuth.Auth
 
-  alias ExFleetYards.Repo
-  alias ExFleetYards.Repo.Account.User
-  alias ExFleetYards.Repo.Account.User.SSOConnection
-
   plug Ueberauth
 
   def callback(%{assigns: %{ueberauth_failure: fails}} = conn, _params) do
     IO.inspect(fails)
     # TODO: render error
     conn
-    |> redirect(to: "/")
+    |> redirect(to: "/login")
   end
 
   def callback(%{assigns: %{ueberauth_auth: auth}} = conn, _params) do
@@ -25,28 +21,44 @@ defmodule ExFleetYardsAuth.Auth.SSOController do
     identifier = to_string(identifier)
 
     # TODO: fetch session/user, if it is a connect call
-    SSOConnection.user(provider, identifier)
+    ExFleetYards.Account.SSO.connection(provider, identifier, load: :user)
     |> case do
-      nil ->
-        create_user(conn, auth, provider, identifier)
+      {:ok, connection} ->
+        Auth.log_in_user(conn, connection.user)
 
-      user ->
-        Auth.log_in_user(conn, user)
+      {:error, %Ash.Error.Query.NotFound{}} ->
+        create_user(conn, auth, provider, identifier)
     end
   end
 
   defp create_user(conn, auth, provider, identifier) do
-    attrs = account_attrs(auth)
+    attrs = account_attrs(auth) |> Map.put(:confirmed_at, DateTime.utc_now())
 
-    User.sso_create_changeset(attrs)
-    |> Repo.insert(returning: [:id])
-    |> case do
-      {:ok, user} ->
-        SSOConnection.create(user, provider, identifier)
-        |> case do
-          {:ok, _} ->
-            Auth.log_in_user(conn, user)
-        end
+    user =
+      ExFleetYards.Account.User
+      |> Ash.Changeset.for_create(:create, attrs)
+      |> ExFleetYards.Account.create()
+      |> case do
+        {:ok, user} ->
+          ExFleetYards.Account.SSO.create(user.id, provider, identifier, actor: user)
+          |> case do
+            {:ok, _sso} ->
+              Auth.log_in_user(conn, user)
+
+            {:error, error} ->
+              ExFleetYards.Account.destroy(user)
+              IO.inspect(error)
+              # TODO: render error
+              conn
+              |> redirect(to: "/login")
+          end
+          |> IO.inspect()
+      end
+
+    with {:ok, user} <- user,
+         {:ok, _sso} <-
+           ExFleetYards.Account.SSO.create(user.id, provider, identifier, actor: user) do
+      Auth.log_in_user(conn, user)
     end
   end
 

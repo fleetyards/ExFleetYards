@@ -7,6 +7,10 @@ defmodule ExFleetYards.Account.Totp do
   postgres do
     table "user_totp"
     repo ExFleetYards.Repo
+
+    references do
+      reference :user, on_delete: :delete
+    end
   end
 
   attributes do
@@ -93,8 +97,9 @@ defmodule ExFleetYards.Account.Totp do
       authorize_if always()
     end
 
-    policy always() do
-      authorize_if always()
+    policy action_type(:create) do
+      authorize_if expr(user_id == ^actor(:id))
+      # authorize_if always()
     end
   end
 
