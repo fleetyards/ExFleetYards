@@ -5,14 +5,13 @@ defmodule ExFleetYards.Checks.OauthScope do
     "The user must have the correct oauth scope"
   end
 
-  def match?(actor, contect, scope) when is_binary(scope), do: match?(actor, contect, [scope])
+  def match?(actor, contect, scope) when is_binary(scope),
+    do: match?(actor, contect, scopes: [scope])
 
-  def match?({user, %Boruta.Oauth.Token{scope: actor_scopes}}, _context, opts)
-      when is_list(opts) do
+  def match?(%ExFleetYards.Account.User{} = user, _context, opts) when is_list(opts) do
     required_scopes = Keyword.get(opts, :scopes, [])
 
-    IO.inspect(actor_scopes)
-    IO.inspect(required_scopes)
+    actor_scopes = Ash.Resource.get_metadata(user, :scopes)
 
     Enum.empty?(required_scopes -- actor_scopes)
   end

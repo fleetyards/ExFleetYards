@@ -19,7 +19,7 @@ defmodule ExFleetYards.Account.User do
 
   actions do
     # Add a set of simple actions. You'll customize these later.
-    defaults [:create, :read, :update, :destroy]
+    defaults [:create, :read, :destroy]
 
     create :register_user_with_password do
       accept [:username, :email, :locale, :sale_notify, :tracking, :public_hangar]
@@ -36,6 +36,16 @@ defmodule ExFleetYards.Account.User do
 
     read :login do
       argument :username, :string, allow_nil?: false
+
+      prepare build(limit: 1)
+
+      filter expr(
+               (email == ^arg(:username) or username == ^arg(:username)) and deactivated == false
+             )
+    end
+
+    read :user_or_email do
+      argument :username, :string, allow_nil?: true
 
       prepare build(limit: 1)
 
@@ -64,14 +74,11 @@ defmodule ExFleetYards.Account.User do
       end
     end
 
-    read :user_or_email do
-      argument :username, :string, allow_nil?: true
+    update :update do
+      primary? true
 
-      prepare build(limit: 1)
-
-      filter expr(
-               (email == ^arg(:username) or username == ^arg(:username)) and deactivated == false
-             )
+      # TODO: do username and email change via a change request database which requires a token to be issued for email confirmation
+      accept [:username, :email, :locale, :sale_notify, :tracking, :public_hangar]
     end
   end
 
@@ -128,5 +135,34 @@ defmodule ExFleetYards.Account.User do
     identity :username, :username
     identity :email, [:email]
     identity :id, [:id]
+  end
+
+  policies do
+    policy action(:update) do
+      forbid_if actor_attribute_equals(:deactived, true)
+
+      forbid_unless expr(id == ^actor(:id))
+      forbid_unless {ExFleetYards.Checks.OauthScopes, scopes: ["user"]}
+      authorize_if always()
+    end
+
+    policy always() do
+      authorize_if always()
+    end
+  end
+
+  json_api do
+    type "user"
+
+    routes do
+      base ""
+
+      get :read
+      post :register_user_with_password, route: "/register"
+      patch :update
+
+      # relationship :totp, :read
+      post_to_relationship :totp
+    end
   end
 end

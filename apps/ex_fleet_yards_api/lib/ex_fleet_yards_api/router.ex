@@ -8,7 +8,7 @@ defmodule ExFleetYardsApi.Router do
   pipeline :api do
     plug :accepts, ["json"]
     plug OpenApiSpex.Plug.PutApiSpec, module: ExFleetYardsApi.ApiSpec
-    plug :require_authenticated
+    # plug :require_authenticated
   end
 
   pipeline :ui do
@@ -38,6 +38,7 @@ defmodule ExFleetYardsApi.Router do
   scope "/v2", ExFleetYardsApi.Routes do
     pipe_through :api
 
+    forward "/users", AccountRouter
     forward "/data", DataRouter
 
     scope "/version" do

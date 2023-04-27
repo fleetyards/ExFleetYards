@@ -64,4 +64,16 @@ defmodule ExFleetYards.Account.SSO do
       authorize_if action_type(:create)
     end
   end
+
+  json_api do
+    type "user_sso_connection"
+
+    routes do
+      base "/sso"
+
+      get :read
+      index :read
+      get :connection, route: "/:provider/:identifier"
+    end
+  end
 end

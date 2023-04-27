@@ -36,10 +36,13 @@ defmodule ExFleetYardsApi.Plugs.AuthorizationBoruta do
     with [authorization_header] <- get_req_header(conn, "authorization"),
          [_auth_header, bearer] <- Regex.run(~r/^Bearer\s+(.+)$/, authorization_header),
          {:ok, token} <- Authorization.AccessToken.authorize(value: bearer) do
-      user = Account.get_user_by_sub(token.sub)
+      user =
+        Account.get_user_by_sub(token.sub)
+        |> Ash.Resource.put_metadata(:token, token)
+        |> Ash.Resource.put_metadata(:scopes, Scope.split(token.scope))
 
-      IO.inspect("setting actor")
-      Ash.set_actor({user, token})
+      IO.inspect("setting actor: #{inspect(user)}")
+      Ash.set_actor(user)
 
       conn
       |> assign(:current_token, token)

@@ -34,4 +34,15 @@ defmodule ExFleetYards.Scopes do
   def scope_list do
     @hangar_scopes ++ @fleet_scopes ++ @user_scopes ++ @openid_scopes
   end
+
+  def boruta_scope_list do
+    scope_list()
+    |> Enum.map(fn {name, descriptoon} ->
+      %Boruta.Oauth.Scope{
+        name: name,
+        label: descriptoon,
+        public: true
+      }
+    end)
+  end
 end
