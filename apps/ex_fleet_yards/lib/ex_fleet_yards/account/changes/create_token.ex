@@ -1,4 +1,7 @@
 defmodule ExFleetYards.Account.Changes.CreateToken do
+  @moduledoc """
+  Create a token for an account. with a hashed copy of the token.
+  """
   use Ash.Resource.Change
   import Ash.Changeset
 

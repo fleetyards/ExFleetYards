@@ -1,4 +1,7 @@
 defmodule ExFleetYards.Checks.OauthScope do
+  @moduledoc """
+  Check that the user has the correct oauth scope.
+  """
   use Ash.Policy.SimpleCheck
 
   def describe(_opts) do

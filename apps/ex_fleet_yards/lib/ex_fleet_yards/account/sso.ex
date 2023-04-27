@@ -1,4 +1,7 @@
 defmodule ExFleetYards.Account.SSO do
+  @moduledoc """
+  A single sign on connection.
+  """
   use Ash.Resource,
     data_layer: AshPostgres.DataLayer,
     extensions: [AshJsonApi.Resource],

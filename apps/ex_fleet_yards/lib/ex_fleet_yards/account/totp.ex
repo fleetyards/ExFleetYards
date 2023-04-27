@@ -1,4 +1,7 @@
 defmodule ExFleetYards.Account.Totp do
+  @moduledoc """
+  A TOTP User information.
+  """
   use Ash.Resource,
     data_layer: AshPostgres.DataLayer,
     extensions: [AshJsonApi.Resource],

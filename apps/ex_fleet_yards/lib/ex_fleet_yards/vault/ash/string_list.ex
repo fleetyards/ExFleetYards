@@ -1,4 +1,7 @@
 defmodule ExFleetYards.Vault.Ash.StringList do
+  @moduledoc """
+  A Vault type for storing a list of strings.
+  """
   use Ash.Type
 
   alias ExFleetYards.Vault.StringList

@@ -1,4 +1,7 @@
 defmodule ExFleetYards.Oauth.ResourceOwners do
+  @moduledoc """
+  Resource owner implementation for Boruta.Oauth.
+  """
   @behaviour Boruta.Oauth.ResourceOwners
 
   alias Boruta.Oauth.ResourceOwner

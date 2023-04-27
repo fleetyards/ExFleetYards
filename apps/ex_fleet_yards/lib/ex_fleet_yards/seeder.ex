@@ -1,4 +1,7 @@
 defmodule ExFleetYards.Seeder do
+  @moduledoc """
+  Seeds the database.
+  """
   require Logger
 
   def seed_paths(path, env) do

@@ -1,4 +1,7 @@
 defmodule ExFleetYards.Account.Token do
+  @moduledoc """
+  A token for a user.
+  """
   use Ash.Resource,
     data_layer: AshPostgres.DataLayer,
     authorizers: [Ash.Policy.Authorizer]

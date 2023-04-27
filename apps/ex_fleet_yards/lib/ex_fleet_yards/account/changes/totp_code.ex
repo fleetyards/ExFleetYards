@@ -1,4 +1,7 @@
 defmodule ExFleetYards.Account.Changes.TotpCode do
+  @moduledoc """
+  Validate a TOTP code.
+  """
   use Ash.Resource.Change
   import Ash.Changeset
 

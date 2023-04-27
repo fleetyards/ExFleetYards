@@ -1,4 +1,7 @@
 defmodule ExFleetYards.Account.User do
+  @moduledoc """
+  A user account.
+  """
   use Ash.Resource,
     data_layer: AshPostgres.DataLayer,
     extensions: [AshJsonApi.Resource],

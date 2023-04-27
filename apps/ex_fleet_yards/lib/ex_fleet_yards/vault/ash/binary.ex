@@ -1,4 +1,7 @@
 defmodule ExFleetYards.Vault.Ash.Binary do
+  @moduledoc """
+  A Vault type for storing binary data.
+  """
   use Ash.Type
 
   alias ExFleetYards.Vault.Binary

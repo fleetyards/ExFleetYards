@@ -1,4 +1,7 @@
 defmodule Mix.Tasks.Seed do
+  @moduledoc """
+  Run seed files.
+  """
   use Mix.Task
 
   @shortdoc "Run seed files"

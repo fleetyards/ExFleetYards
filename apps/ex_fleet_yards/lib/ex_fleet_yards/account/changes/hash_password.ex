@@ -1,4 +1,7 @@
 defmodule ExFleetYards.Account.Changes.HashPassword do
+  @moduledoc """
+  Hash a password.
+  """
   use Ash.Resource.Change
   import Ash.Changeset
 

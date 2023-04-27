@@ -1,4 +1,7 @@
 defmodule Mix.Tasks.Gen.Seed do
+  @moduledoc """
+  Generates a seed file for a resource
+  """
   use Mix.Task
 
   import Macro, only: [underscore: 1, camelize: 1]
