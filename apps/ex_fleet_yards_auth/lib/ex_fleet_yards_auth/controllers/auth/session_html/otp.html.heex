@@ -9,7 +9,7 @@
 
   <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
     <div class="bg-gray-800 py-8 px-4 shadow sm:rounded-lg sm:px-10">
-      <.form :let={f} for={%{}} as={:otp} action={~p"/login"} method="post">
+      <.form :let={_} for={%{}} as={:otp} action={~p"/login"} method="post">
         <.hidden_input name={:remember_me} value={@remember_me} />
         <.hidden_input name={:sub} value={@sub} />
         <div class="rounded-md shadow-sm -space-y-px">

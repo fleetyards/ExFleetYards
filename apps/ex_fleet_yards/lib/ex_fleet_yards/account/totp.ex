@@ -16,7 +16,7 @@ defmodule ExFleetYards.Account.Totp do
   attributes do
     uuid_primary_key :id
 
-    attribute :totp_secret, ExFleetYards.Vault.Binary do
+    attribute :totp_secret, ExFleetYards.Vault.Ash.Binary do
       sensitive? true
       default &NimbleTOTP.secret/0
       allow_nil? false
@@ -26,7 +26,7 @@ defmodule ExFleetYards.Account.Totp do
       default nil
     end
 
-    attribute :recovery_codes, ExFleetYards.Vault.StringList do
+    attribute :recovery_codes, ExFleetYards.Vault.Ash.StringList do
       sensitive? true
       default &generate_recovery_codes/0
       allow_nil? false

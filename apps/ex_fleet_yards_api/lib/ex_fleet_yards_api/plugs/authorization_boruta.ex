@@ -20,7 +20,7 @@ defmodule ExFleetYardsApi.Plugs.AuthorizationBoruta do
 
   import Plug.Conn
 
-  alias ExFleetYards.Repo.Account
+  alias ExFleetYards.Account
 
   alias Boruta.Oauth.Authorization
   alias Boruta.Oauth.Scope
@@ -37,7 +37,7 @@ defmodule ExFleetYardsApi.Plugs.AuthorizationBoruta do
          [_auth_header, bearer] <- Regex.run(~r/^Bearer\s+(.+)$/, authorization_header),
          {:ok, token} <- Authorization.AccessToken.authorize(value: bearer) do
       user =
-        Account.get_user_by_sub(token.sub)
+        Account.get(Account.User, token.sub)
         |> Ash.Resource.put_metadata(:token, token)
         |> Ash.Resource.put_metadata(:scopes, Scope.split(token.scope))
 

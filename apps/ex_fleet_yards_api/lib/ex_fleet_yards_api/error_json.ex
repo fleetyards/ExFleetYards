@@ -72,12 +72,6 @@ defmodule ExFleetYardsApi.ErrorJson do
     %{"code" => "not_found", "message" => message}
   end
 
-  def render("404.json", %{
-        reason: %ExFleetYards.Repo.Account.Vehicle.NotFoundException{username: username}
-      }) do
-    %{"code" => "not_found", "message" => "Could not find user `#{username}`"}
-  end
-
   def render("404.json", %{message: message}) do
     %{"code" => "not_found", "message" => message}
   end

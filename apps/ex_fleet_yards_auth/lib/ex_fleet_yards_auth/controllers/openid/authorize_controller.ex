@@ -72,6 +72,14 @@ defmodule ExFleetYardsAuth.Openid.AuthorizeController do
     )
   end
 
+  @impl Boruta.Oauth.AuthorizeApplication
+  def authorize_error(conn, resp),
+    do: ExFleetYardsAuth.Oauth.AuthorizeController.authorize_error(conn, resp)
+
+  @impl Boruta.Oauth.AuthorizeApplication
+  def authorize_success(conn, resp),
+    do: ExFleetYardsAuth.Oauth.AuthorizeController.authorize_success(conn, resp)
+
   defp put_unsigned_request(%Plug.Conn{query_params: query_params} = conn) do
     unsigned_request_params =
       with request <- Map.get(query_params, "request", ""),
