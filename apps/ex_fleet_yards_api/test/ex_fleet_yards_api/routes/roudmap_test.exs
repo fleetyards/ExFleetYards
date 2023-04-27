@@ -9,7 +9,7 @@ defmodule ExFleetYardsApi.Routes.RoudmapTest do
         |> get(~p"/v2/roadmap")
         |> json_response(200)
 
-      assert_schema json, "RoadmapItemList", spec
+      assert_schema(json, "RoadmapItemList", spec)
       assert json["data"] |> Enum.count() == 3
       assert json["metadata"]["limit"] == 25
       assert json["metadata"]["strategy"] == "id_roadmap"
@@ -21,7 +21,7 @@ defmodule ExFleetYardsApi.Routes.RoudmapTest do
         |> get(~p"/v2/roadmap/active")
         |> json_response(200)
 
-      assert_schema json, "RoadmapItemList", spec
+      assert_schema(json, "RoadmapItemList", spec)
       assert json["data"] |> Enum.count() == 3
       assert json["metadata"]["limit"] == 25
       assert json["metadata"]["strategy"] == "id_roadmap"
@@ -33,7 +33,7 @@ defmodule ExFleetYardsApi.Routes.RoudmapTest do
         |> get(~p"/v2/roadmap/released")
         |> json_response(200)
 
-      assert_schema json, "RoadmapItemList", spec
+      assert_schema(json, "RoadmapItemList", spec)
       assert json["data"] |> Enum.count() == 2
       assert json["metadata"]["limit"] == 25
       assert json["metadata"]["strategy"] == "id_roadmap"
@@ -45,7 +45,7 @@ defmodule ExFleetYardsApi.Routes.RoudmapTest do
         |> get(~p"/v2/roadmap/unreleased")
         |> json_response(200)
 
-      assert_schema json, "RoadmapItemList", spec
+      assert_schema(json, "RoadmapItemList", spec)
       assert json["data"] |> Enum.count() == 1
       assert json["metadata"]["limit"] == 25
       assert json["metadata"]["strategy"] == "id_roadmap"

@@ -10,7 +10,7 @@ defmodule ExFleetYardsApi.Routes.User.InfoTest do
         |> get(~p"/v2/user/testuser")
         |> json_response(200)
 
-      assert_schema json, "User", spec
+      assert_schema(json, "User", spec)
       assert json["username"] == "testuser"
       assert json["id"] == nil
       assert json["email"] == nil
@@ -24,7 +24,7 @@ defmodule ExFleetYardsApi.Routes.User.InfoTest do
         |> get(~p"/v2/user")
         |> json_response(200)
 
-      assert_schema json, "User", spec
+      assert_schema(json, "User", spec)
       assert json["username"] == "testuser"
       assert json["email"] == "testuser@example.org"
       assert json["id"] != nil
@@ -41,7 +41,7 @@ defmodule ExFleetYardsApi.Routes.User.InfoTest do
         })
         |> json_response(200)
 
-      assert_schema json, "User", spec
+      assert_schema(json, "User", spec)
       assert json["username"] == "testuser"
       assert json["email"] == "testuser@example.org"
       assert json["id"] != nil
@@ -54,7 +54,7 @@ defmodule ExFleetYardsApi.Routes.User.InfoTest do
         |> get(~p"/v2/user")
         |> json_response(200)
 
-      assert_schema json, "User", spec
+      assert_schema(json, "User", spec)
       assert json["username"] == "testuser"
       assert json["email"] == "testuser@example.org"
       assert json["id"] != nil

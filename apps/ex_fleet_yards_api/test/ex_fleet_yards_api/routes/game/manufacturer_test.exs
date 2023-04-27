@@ -9,7 +9,7 @@ defmodule ExFleetYardsApi.Routes.Game.ManufacturerTest do
         |> get(~p"/v2/game/manufacturers")
         |> json_response(200)
 
-      assert_schema json, "ManufacturerList", spec
+      assert_schema(json, "ManufacturerList", spec)
       assert json["data"] |> Enum.count() == 3
       assert json["metadata"]["limit"] == 25
       assert json["metadata"]["strategy"] == "slug"
@@ -21,7 +21,7 @@ defmodule ExFleetYardsApi.Routes.Game.ManufacturerTest do
         |> get(~p"/v2/game/manufacturers/with-models")
         |> json_response(200)
 
-      assert_schema json, "ManufacturerList", spec
+      assert_schema(json, "ManufacturerList", spec)
       assert json["data"] |> Enum.count() == 2
       assert json["metadata"]["limit"] == 25
       assert json["metadata"]["strategy"] == "slug"
@@ -33,7 +33,7 @@ defmodule ExFleetYardsApi.Routes.Game.ManufacturerTest do
         |> get(~p"/v2/game/manufacturers/roberts-space-industries")
         |> json_response(200)
 
-      assert_schema json, "Manufacturer", spec
+      assert_schema(json, "Manufacturer", spec)
       assert json["slug"] == "roberts-space-industries"
       assert json["name"] == "Roberts Space Industries"
     end

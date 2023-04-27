@@ -1,4 +1,4 @@
 [
-  import_deps: [:phoenix, :open_api_spex],
+  import_deps: [:phoenix],
   inputs: ["*.{ex,exs}", "{config,lib,test}/**/*.{ex,exs}"]
 ]

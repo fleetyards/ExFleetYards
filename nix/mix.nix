@@ -125,19 +125,6 @@ let
       beamDeps = [];
     };
 
-    chunkr = buildMix rec {
-      name = "chunkr";
-      version = "0.2.1";
-
-      src = fetchHex {
-        pkg = "${name}";
-        version = "${version}";
-        sha256 = "19z058r5xk9s48946shxgaqbx0i5215br9ij8wm9y6va6wsqlphi";
-      };
-
-      beamDeps = [ ecto_sql ];
-    };
-
     cloak = buildMix rec {
       name = "cloak";
       version = "1.1.2";
@@ -760,19 +747,6 @@ let
       };
 
       beamDeps = [ tesla ];
-    };
-
-    open_api_spex = buildMix rec {
-      name = "open_api_spex";
-      version = "3.16.2";
-
-      src = fetchHex {
-        pkg = "${name}";
-        version = "${version}";
-        sha256 = "0jqh4nl4ghg5j83528rq6lalm8136kvzi9k84vxdmq4skskjpi2r";
-      };
-
-      beamDeps = [ jason plug ];
     };
 
     parse_trans = buildRebar3 rec {

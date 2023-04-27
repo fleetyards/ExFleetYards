@@ -14,7 +14,7 @@ defmodule ExFleetYardsApi.Routes.User.RegisterTest do
         })
         |> json_response(200)
 
-      assert_schema json, "User", spec
+      assert_schema(json, "User", spec)
       assert json["email"] == "testregister@example.org"
       assert json["username"] == "testregister"
     end
@@ -27,14 +27,14 @@ defmodule ExFleetYardsApi.Routes.User.RegisterTest do
         |> get(~p"/v2/user/testuser")
         |> json_response(200)
 
-      assert_schema json, "User", spec
+      assert_schema(json, "User", spec)
 
       json =
         conn
         |> delete(~p"/v2/user/delete-account")
         |> json_response(200)
 
-      assert_schema json, "Error", spec
+      assert_schema(json, "Error", spec)
       assert json["code"] == "success"
       assert json["message"] == "Deleted user `testuser`"
 

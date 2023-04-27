@@ -13,25 +13,12 @@ defmodule ExFleetYardsWeb.Router do
   # only used for openapi endpoint
   pipeline :api do
     plug :accepts, ["json"]
-    plug OpenApiSpex.Plug.PutApiSpec, module: ExFleetYardsWeb.ApiSpec
   end
 
   scope "/", ExFleetYardsWeb do
     pipe_through :browser
 
     get "/", PageController, :index
-  end
-
-  scope "/openapi" do
-    pipe_through :browser
-
-    get "/", OpenApiSpex.Plug.SwaggerUI, path: "/openapi/spec/v2.json"
-
-    scope "/spec" do
-      pipe_through :api
-
-      get "/v2.json", OpenApiSpex.Plug.RenderSpec, []
-    end
   end
 
   # Enables LiveDashboard only for development

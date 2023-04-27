@@ -32,7 +32,6 @@ defmodule ExFleetYardsApi do
       alias ExFleetYards.Repo
       alias ExFleetYards.Repo.Game
 
-      use OpenApiSpex.ControllerSpecs
       alias ExFleetYardsApi.Schemas.Single.Error
 
       # use ExFleetYardsApi.ControllerHelpers
@@ -45,7 +44,6 @@ defmodule ExFleetYardsApi do
   def json do
     quote do
       @moduledoc false
-      import ExFleetYardsApi.JsonHelpers
 
       alias ExFleetYardsApi.ErrorJson
     end

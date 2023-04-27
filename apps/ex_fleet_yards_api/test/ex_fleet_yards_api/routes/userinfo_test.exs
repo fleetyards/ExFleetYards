@@ -22,7 +22,7 @@ defmodule ExFleetYardsApi.Routes.UserinfoTest do
         |> get("/v2/openid/userinfo")
         |> json_response(200)
 
-      assert_schema json, "Userinfo", spec
+      assert_schema(json, "Userinfo", spec)
       assert json == userinfo
     end
   end

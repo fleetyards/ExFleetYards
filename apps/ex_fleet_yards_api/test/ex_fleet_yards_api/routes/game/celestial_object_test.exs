@@ -9,7 +9,7 @@ defmodule ExFleetYardsApi.Routes.Game.CelestialObjectTest do
         |> get(~p"/v2/game/celestial-objects")
         |> json_response(200)
 
-      assert_schema json, "CelestialObjectList", spec
+      assert_schema(json, "CelestialObjectList", spec)
       assert json["data"] |> Enum.count() == 5
       assert json["metadata"]["limit"] == 25
       assert json["metadata"]["strategy"] == "slug"
@@ -21,7 +21,7 @@ defmodule ExFleetYardsApi.Routes.Game.CelestialObjectTest do
         |> get(~p"/v2/game/celestial-objects/crusader")
         |> json_response(200)
 
-      assert_schema json, "CelestialObject", spec
+      assert_schema(json, "CelestialObject", spec)
       assert json["slug"] == "crusader"
       assert json["name"] == "Crusader"
       assert json["moons"] |> Enum.count() == 2

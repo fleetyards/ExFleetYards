@@ -11,7 +11,7 @@ defmodule ExFleetYardsApi.Routes.VersionTest do
         |> get(Routes.version_path(conn, :index))
         |> json_response(200)
 
-      assert_schema json, "VersionResponse", spec
+      assert_schema(json, "VersionResponse", spec)
       assert json["version"] == Version.version()
       assert json["hash"] == Version.git_version()
       assert json["codename"] == Version.version_name()
@@ -23,7 +23,7 @@ defmodule ExFleetYardsApi.Routes.VersionTest do
         |> get(Routes.version_path(conn, :sc_data))
         |> json_response(200)
 
-      assert_schema json, "VersionResponse", spec
+      assert_schema(json, "VersionResponse", spec)
       assert json["version"] == "3.17.4-LIVE.8288902"
     end
   end
