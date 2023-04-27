@@ -14,7 +14,6 @@ defmodule ExFleetYardsAuth.SessionController do
 
     user.totp
     |> ExFleetYards.Account.Totp.use(code, actor: user, verbose?: true)
-    |> IO.inspect()
     |> case do
       {:ok, _} ->
         conn
@@ -31,7 +30,6 @@ defmodule ExFleetYardsAuth.SessionController do
 
   def create(conn, user_params) do
     %{"email" => email, "password" => password} = user_params
-    IO.inspect(user_params)
 
     ExFleetYards.Account.User
     |> Ash.Query.for_read(:login, %{username: email})

@@ -41,7 +41,6 @@ defmodule ExFleetYardsApi.Plugs.AuthorizationBoruta do
         |> Ash.Resource.put_metadata(:token, token)
         |> Ash.Resource.put_metadata(:scopes, Scope.split(token.scope))
 
-      IO.inspect("setting actor: #{inspect(user)}")
       Ash.set_actor(user)
 
       conn

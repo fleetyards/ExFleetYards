@@ -25,8 +25,6 @@ defmodule ExFleetYardsAuth.Auth do
 
     return_to = get_session(conn, :user_return_to)
 
-    IO.inspect(params)
-
     conn
     |> renew_session()
     |> put_session(:user_token, token)
