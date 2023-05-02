@@ -100,7 +100,7 @@ defmodule ExFleetYards.Game.StarSystem do
     type "star-systems"
 
     routes do
-      base "/star-systems"
+      base "/game/star-systems"
 
       index :read do
         paginate? true

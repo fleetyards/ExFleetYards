@@ -109,7 +109,7 @@ defmodule ExFleetYards.Game.CelestialObject do
     ]
 
     routes do
-      base "/celestial-objects"
+      base "/game/celestial-objects"
 
       index :read do
         paginate? true

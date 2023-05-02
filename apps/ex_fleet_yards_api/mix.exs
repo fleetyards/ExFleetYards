@@ -37,6 +37,8 @@ defmodule ExFleetYardsApi.MixProject do
       {:phoenix, "~> 1.7.2"},
       {:phoenix_view, "~> 2.0"},
       {:phoenix_ecto, "~> 4.4"},
+      {:open_api_spex, "~> 3.16"},
+      {:redoc_ui_plug, "~> 0.2.1"},
       {:telemetry_metrics, "~> 0.6"},
       {:telemetry_poller, "~> 1.0"},
       {:ex_fleet_yards, in_umbrella: true},

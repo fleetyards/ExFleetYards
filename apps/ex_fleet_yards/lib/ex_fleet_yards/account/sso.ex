@@ -72,7 +72,7 @@ defmodule ExFleetYards.Account.SSO do
     type "user_sso_connection"
 
     routes do
-      base "/sso"
+      base "/users/sso"
 
       get :read
       index :read

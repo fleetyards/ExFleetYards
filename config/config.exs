@@ -145,6 +145,8 @@ config :boruta, Boruta.Oauth,
 
 config :ueberauth, Ueberauth, providers: []
 
+config :ash, :use_all_identities_in_manage_relationship?, false
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 env =

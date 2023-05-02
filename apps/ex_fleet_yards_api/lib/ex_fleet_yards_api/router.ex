@@ -18,11 +18,18 @@ defmodule ExFleetYardsApi.Router do
     plug :put_secure_browser_headers
   end
 
+  scope "/v2" do
+    pipe_through :ui
+
+    forward "/docs", OpenApiSpex.Plug.SwaggerUI,
+      path: "/v2/open_api",
+      default_model_expand_depth: 4
+
+    forward "/redoc", Redoc.Plug.RedocUI, spec_url: "/v2/open_api"
+  end
+
   scope "/v2", ExFleetYardsApi.Routes do
     pipe_through :api
-
-    forward "/users", AccountRouter
-    forward "/game", GameRouter
 
     scope "/version" do
       get "/", VersionController, :index
@@ -34,5 +41,7 @@ defmodule ExFleetYardsApi.Router do
 
       get "/", UserinfoController, :userinfo
     end
+
+    forward "/", ApiRouter
   end
 end

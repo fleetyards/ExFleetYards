@@ -158,7 +158,7 @@ defmodule ExFleetYards.Account.User do
     type "user"
 
     routes do
-      base ""
+      base "/users"
 
       get :read
       post :register_user_with_password, route: "/register"

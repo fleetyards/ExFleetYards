@@ -13,6 +13,6 @@ defmodule ExFleetYards.Game do
   end
 
   json_api do
-    serve_schema? true
+    prefix "/v2"
   end
 end
