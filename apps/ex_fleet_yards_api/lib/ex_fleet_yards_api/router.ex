@@ -22,7 +22,7 @@ defmodule ExFleetYardsApi.Router do
     pipe_through :api
 
     forward "/users", AccountRouter
-    forward "/data", DataRouter
+    forward "/game", GameRouter
 
     scope "/version" do
       get "/", VersionController, :index

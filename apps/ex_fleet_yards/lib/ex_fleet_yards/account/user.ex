@@ -41,6 +41,7 @@ defmodule ExFleetYards.Account.User do
       argument :username, :string, allow_nil?: false
 
       prepare build(limit: 1)
+      get? true
 
       filter expr(
                (email == ^arg(:username) or username == ^arg(:username)) and deactivated == false
@@ -145,8 +146,7 @@ defmodule ExFleetYards.Account.User do
       forbid_if actor_attribute_equals(:deactived, true)
 
       forbid_unless expr(id == ^actor(:id))
-      forbid_unless {ExFleetYards.Checks.OauthScopes, scopes: ["user"]}
-      authorize_if always()
+      authorize_if {ExFleetYards.Checks.OauthScopes, scopes: ["user"]}
     end
 
     policy always() do

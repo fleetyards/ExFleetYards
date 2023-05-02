@@ -24,7 +24,7 @@ config :ex_fleet_yards,
   env: config_env(),
   git_commit: commit
 
-config :ex_fleet_yards, :ash_apis, [ExFleetYards.Account]
+config :ex_fleet_yards, :ash_apis, [ExFleetYards.Account, ExFleetYards.Game]
 
 config :ex_fleet_yards, ExFleetYards.Repo, migration_source: "ecto_schema_migrations"
 
