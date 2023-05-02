@@ -18,7 +18,7 @@ defmodule ExFleetYards.Repo.Migrations.CelestialObject do
       add :status, :text
       add :designation, :text
       add :last_updated_at, :utc_datetime_usec
-      add :descroption, :text
+      add :description, :text
       add :hidden, :boolean, default: false
       add :orbit_period, :float
       add :habitable, :boolean

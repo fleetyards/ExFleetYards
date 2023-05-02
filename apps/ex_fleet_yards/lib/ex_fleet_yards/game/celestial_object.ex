@@ -34,7 +34,7 @@ defmodule ExFleetYards.Game.CelestialObject do
     attribute :status, :string
     attribute :designation, :string
     attribute :last_updated_at, :utc_datetime_usec
-    attribute :descroption, :string
+    attribute :description, :string
     attribute :hidden, :boolean, default: false
     attribute :orbit_period, :float
     attribute :habitable, :boolean
@@ -85,6 +85,7 @@ defmodule ExFleetYards.Game.CelestialObject do
     read :slug do
       argument :slug, :string, allow_nil?: false
       get? true
+      primary? true
 
       filter expr(slug == ^arg(:slug))
     end
@@ -118,7 +119,7 @@ defmodule ExFleetYards.Game.CelestialObject do
       get :read, route: "/uuid/:id"
       get :slug, route: "/:slug"
 
-      # relationship :star_system, :read, route: "/:slug/relationships/star-system"
+      # related :star_system, :related_star_system, route: "/:slug/star-system"
     end
 
     primary_key do

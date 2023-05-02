@@ -57,6 +57,10 @@ defmodule ExFleetYards.Game.StarSystem do
     timestamps()
   end
 
+  relationships do
+    has_many :celestial_objects, ExFleetYards.Game.CelestialObject
+  end
+
   identities do
     identity :unique_slug, [:slug]
   end
@@ -108,6 +112,10 @@ defmodule ExFleetYards.Game.StarSystem do
 
       get :read, route: "/uuid/:id"
       get :slug, route: "/:slug"
+    end
+
+    primary_key do
+      keys [:slug]
     end
   end
 end

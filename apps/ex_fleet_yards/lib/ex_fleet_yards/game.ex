@@ -13,6 +13,7 @@ defmodule ExFleetYards.Game do
   end
 
   json_api do
+    router ExFleetYardsApi.Routes.ApiRouter
     prefix "/v2"
   end
 end
