@@ -34,7 +34,10 @@ defmodule ExFleetYards.Repo.Migrations.StarSystem do
       add :updated_at, :utc_datetime_usec, null: false, default: fragment("now()")
     end
 
-    create unique_index(:star_systems, [:slug], name: "star_systems_unique_slug_index")
+    create unique_index(:star_systems, [:slug],
+             where: "hidden = false",
+             name: "star_systems_unique_slug_index"
+           )
   end
 
   def down do

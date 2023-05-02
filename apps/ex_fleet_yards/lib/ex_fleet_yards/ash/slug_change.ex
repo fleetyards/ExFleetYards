@@ -12,6 +12,7 @@ defmodule ExFleetYards.Ash.SlugChange do
 
     if force || !get_argument_or_attribute(changeset, slug_field) do
       slug(changeset, slug_field, source_field, opts)
+      |> IO.inspect(label: "SlugChange")
     else
       changeset
     end

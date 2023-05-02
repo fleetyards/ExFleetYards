@@ -7,13 +7,15 @@ defmodule ExFleetYards.Seeder do
   def seed_paths(path, env) do
     seeds_file(path, env)
     |> compile_files
+    |> IO.inspect()
     |> Enum.each(&run_module/1)
   end
 
   def seeds_file(path, env) do
     (exs_files(path) ++ exs_files(Path.join(path, env)))
-    |> Enum.sort()
+    |> Enum.sort(:asc)
     |> Enum.filter(&(!String.starts_with?(&1, ".")))
+    |> IO.inspect()
   end
 
   defp exs_files(path) do
@@ -23,15 +25,20 @@ defmodule ExFleetYards.Seeder do
   end
 
   defp compile_files(files) do
-    Kernel.ParallelCompiler.compile(files)
-    |> case do
-      {:ok, modules, _} ->
-        modules
+    files
+    |> Stream.map(&Code.compile_file/1)
+    |> Stream.map(fn [{mod, _} | _] -> mod end)
+    |> Enum.into([])
 
-      _ ->
-        Logger.error("Failed to compile seed files")
-        []
-    end
+    # Kernel.ParallelCompiler.compile(files)
+    # |> case do
+    #  {:ok, modules, _} ->
+    #    modules
+
+    #  _ ->
+    #    Logger.error("Failed to compile seed files")
+    #    []
+    # end
   end
 
   defp run_module(module) do

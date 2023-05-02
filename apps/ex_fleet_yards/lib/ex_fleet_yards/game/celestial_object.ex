@@ -1,6 +1,6 @@
-defmodule ExFleetYards.Game.StarSystem do
+defmodule ExFleetYards.Game.CelestialObject do
   @moduledoc """
-  A star system.
+  A celestial object.
   """
   use Ash.Resource,
     data_layer: AshPostgres.DataLayer,
@@ -8,7 +8,7 @@ defmodule ExFleetYards.Game.StarSystem do
     authorizers: [Ash.Policy.Authorizer]
 
   postgres do
-    table "star_systems"
+    table "celestial_objects"
     repo ExFleetYards.Repo
     base_filter_sql "hidden = false"
   end
@@ -25,36 +25,41 @@ defmodule ExFleetYards.Game.StarSystem do
     attribute :name, :string
     attribute :slug, :string, allow_nil?: false
 
-    attribute :sotre_imge, :string
+    attribute :object_type, :atom do
+      constraints one_of: [:planet, :satellite, :asteroid_belt, :asteroid_field]
+    end
 
     attribute :rsi_id, :integer
     attribute :code, :string
-
-    attribute :position_x, :integer
-    attribute :position_y, :integer
-    attribute :position_z, :integer
-
     attribute :status, :string
+    attribute :designation, :string
     attribute :last_updated_at, :utc_datetime_usec
-
-    attribute :system_type, :atom do
-      constraints one_of: [:single, :binary, :trinary]
-    end
-
-    attribute :aggregated_size, :integer
-    attribute :aggregated_population, :integer
-    attribute :aggregated_economy, :integer
-    attribute :aggregated_danger, :integer
-
+    attribute :descroption, :string
     attribute :hidden, :boolean, default: false
+    attribute :orbit_period, :float
+    attribute :habitable, :boolean
+    attribute :fairchanceact, :boolean
+    attribute :sensor_population, :integer
+    attribute :sensor_economy, :integer
+    attribute :sensor_danger, :integer
+    attribute :size, :float
+    attribute :sub_tybe, :atom
 
-    attribute :description, :string
-
-    attribute :map, :string
-    attribute :map_x, :integer
-    attribute :map_y, :integer
+    attribute :store_image, :string
 
     timestamps()
+  end
+
+  relationships do
+    belongs_to :parent, __MODULE__ do
+      attribute_writable? true
+      allow_nil? true
+    end
+
+    belongs_to :star_system, ExFleetYards.Game.StarSystem do
+      attribute_writable? true
+      allow_nil? false
+    end
   end
 
   identities do
@@ -78,7 +83,6 @@ defmodule ExFleetYards.Game.StarSystem do
     end
 
     read :slug do
-      primary? true
       argument :slug, :string, allow_nil?: false
       get? true
 
@@ -97,10 +101,15 @@ defmodule ExFleetYards.Game.StarSystem do
   end
 
   json_api do
-    type "star-systems"
+    type "celestial-objects"
+
+    includes [
+      :parent,
+      :star_system
+    ]
 
     routes do
-      base "/star-systems"
+      base "/celestial-objects"
 
       index :read do
         paginate? true
@@ -108,6 +117,12 @@ defmodule ExFleetYards.Game.StarSystem do
 
       get :read, route: "/uuid/:id"
       get :slug, route: "/:slug"
+
+      # relationship :star_system, :read, route: "/:slug/relationships/star-system"
+    end
+
+    primary_key do
+      keys [:slug]
     end
   end
 end

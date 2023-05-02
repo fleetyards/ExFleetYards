@@ -3,7 +3,19 @@ defmodule ExFleetYards.Repo.Seeds.StarSystem do
     # random_systems()
 
     ExFleetYards.Game.StarSystem
-    |> Ash.Changeset.for_create(:create, %{name: "Stanton"})
+    |> Ash.Changeset.for_create(:create, %{name: "Stanton", system_type: :single},
+      authorize?: false
+    )
+    |> ExFleetYards.Game.create!()
+
+    ExFleetYards.Game.StarSystem
+    |> Ash.Changeset.for_create(:create, %{name: "sol", system_type: :single}, authorize?: false)
+    |> ExFleetYards.Game.create!()
+
+    ExFleetYards.Game.StarSystem
+    |> Ash.Changeset.for_create(:create, %{name: "oberon", system_type: :single},
+      authorize?: false
+    )
     |> ExFleetYards.Game.create!()
   end
 

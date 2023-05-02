@@ -8,5 +8,6 @@ defmodule ExFleetYards.Game.Registry do
 
   entries do
     entry ExFleetYards.Game.StarSystem
+    entry ExFleetYards.Game.CelestialObject
   end
 end
