@@ -11,5 +11,7 @@ defmodule ExFleetYards.Game.Registry do
     entry ExFleetYards.Game.CelestialObject
     entry ExFleetYards.Game.Station
     entry ExFleetYards.Game.Dock
+    entry ExFleetYards.Game.Manufacturer
+    entry ExFleetYards.Game.Component
   end
 end
