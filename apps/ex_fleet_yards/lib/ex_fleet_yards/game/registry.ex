@@ -9,5 +9,7 @@ defmodule ExFleetYards.Game.Registry do
   entries do
     entry ExFleetYards.Game.StarSystem
     entry ExFleetYards.Game.CelestialObject
+    entry ExFleetYards.Game.Station
+    entry ExFleetYards.Game.Dock
   end
 end

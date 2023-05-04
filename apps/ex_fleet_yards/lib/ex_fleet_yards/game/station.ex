@@ -1,6 +1,6 @@
-defmodule ExFleetYards.Game.CelestialObject do
+defmodule ExFleetYards.Game.Station do
   @moduledoc """
-  A celestial object.
+  A station.
   """
   use Ash.Resource,
     data_layer: AshPostgres.DataLayer,
@@ -8,7 +8,7 @@ defmodule ExFleetYards.Game.CelestialObject do
     authorizers: [Ash.Policy.Authorizer]
 
   postgres do
-    table "celestial_objects"
+    table "stations"
     repo ExFleetYards.Repo
     base_filter_sql "hidden = false"
   end
@@ -25,43 +25,54 @@ defmodule ExFleetYards.Game.CelestialObject do
     attribute :name, :string
     attribute :slug, :string, allow_nil?: false
 
-    attribute :object_type, :atom do
-      constraints one_of: [:planet, :satellite, :asteroid_belt, :asteroid_field]
+    attribute :station_type, :atom do
+      constraints one_of: [
+                    :landing_zone,
+                    :station,
+                    :asteroid_station,
+                    :district,
+                    :outpost,
+                    :aid_shelter
+                  ]
     end
 
-    attribute :rsi_id, :integer
-    attribute :code, :string
-    attribute :status, :string
-    attribute :designation, :string
-    attribute :last_updated_at, :utc_datetime_usec
-    attribute :description, :string
     attribute :hidden, :boolean, default: false
-    attribute :orbit_period, :float
-    attribute :habitable, :boolean
-    attribute :fairchanceact, :boolean
-    attribute :sensor_population, :integer
-    attribute :sensor_economy, :integer
-    attribute :sensor_danger, :integer
-    attribute :size, :float
-    attribute :sub_tybe, :atom
 
     attribute :store_image, :string
+
+    attribute :description, :string
+    attribute :location, :string
+
+    attribute :cargo_hub, :boolean
+    attribute :refinery, :boolean
+    attribute :habitable, :boolean, default: true
+
+    attribute :classification, :atom do
+      constraints one_of: [
+                    :city,
+                    :trading,
+                    :mining,
+                    :salvaging,
+                    :farming,
+                    :science,
+                    :security,
+                    :rest_stop,
+                    :settlement,
+                    :town,
+                    :drug_lab
+                  ]
+    end
 
     timestamps()
   end
 
   relationships do
-    belongs_to :parent, __MODULE__ do
+    belongs_to :celestial_object, ExFleetYards.Game.CelestialObject do
       attribute_writable? true
       allow_nil? true
     end
 
-    belongs_to :star_system, ExFleetYards.Game.StarSystem do
-      attribute_writable? true
-      allow_nil? false
-    end
-
-    has_many :stations, ExFleetYards.Game.Station
+    has_many :docks, ExFleetYards.Game.Dock
   end
 
   identities do
@@ -85,9 +96,9 @@ defmodule ExFleetYards.Game.CelestialObject do
     end
 
     read :slug do
+      primary? true
       argument :slug, :string, allow_nil?: false
       get? true
-      primary? true
 
       filter expr(slug == ^arg(:slug))
     end
@@ -104,10 +115,10 @@ defmodule ExFleetYards.Game.CelestialObject do
   end
 
   json_api do
-    type "celestial-objects"
+    type "station"
 
     routes do
-      base "/game/celestial-objects"
+      base "/game/stations"
 
       index :read do
         paginate? true
@@ -115,8 +126,6 @@ defmodule ExFleetYards.Game.CelestialObject do
 
       get :read, route: "/uuid/:id"
       get :slug, route: "/:slug"
-
-      # related :star_system, :related_star_system, route: "/:slug/star-system"
     end
 
     primary_key do
