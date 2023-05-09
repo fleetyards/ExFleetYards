@@ -71,7 +71,7 @@ defmodule ExFleetYards.Game.Shop do
 
   relationships do
     belongs_to :station, ExFleetYards.Game.Station
-    #has_many name, destination
+    # has_many name, destination
   end
 
   identities do

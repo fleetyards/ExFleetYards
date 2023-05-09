@@ -10,6 +10,7 @@ defmodule ExFleetYards.Game.Registry do
     entry ExFleetYards.Game.StarSystem
     entry ExFleetYards.Game.CelestialObject
     entry ExFleetYards.Game.Station
+    entry ExFleetYards.Game.Station.Habitation
     entry ExFleetYards.Game.Dock
     entry ExFleetYards.Game.Manufacturer
     entry ExFleetYards.Game.Component
