@@ -13,5 +13,8 @@ defmodule ExFleetYards.Game.Registry do
     entry ExFleetYards.Game.Dock
     entry ExFleetYards.Game.Manufacturer
     entry ExFleetYards.Game.Component
+    entry ExFleetYards.Game.Commodity
+    entry ExFleetYards.Game.Shop
+    entry ExFleetYards.Game.Shop.Commodity
   end
 end

@@ -73,6 +73,7 @@ defmodule ExFleetYards.Game.Station do
     end
 
     has_many :docks, ExFleetYards.Game.Dock
+    has_many :shops, ExFleetYards.Game.Shop
   end
 
   identities do
