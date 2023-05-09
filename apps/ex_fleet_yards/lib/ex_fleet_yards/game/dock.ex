@@ -46,6 +46,11 @@ defmodule ExFleetYards.Game.Dock do
       attribute_writable? true
       allow_nil? true
     end
+
+    belongs_to :model, ExFleetYards.Game.Model do
+      attribute_writable? true
+      allow_nil? true
+    end
   end
 
   actions do

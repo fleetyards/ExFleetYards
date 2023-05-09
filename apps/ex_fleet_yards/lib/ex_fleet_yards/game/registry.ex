@@ -17,5 +17,9 @@ defmodule ExFleetYards.Game.Registry do
     entry ExFleetYards.Game.Commodity
     entry ExFleetYards.Game.Shop
     entry ExFleetYards.Game.Shop.Commodity
+    entry ExFleetYards.Game.Model
+    entry ExFleetYards.Game.Model.Loaner
+    entry ExFleetYards.Game.Model.Paint
+    entry ExFleetYards.Game.Model.Hardpoint
   end
 end
