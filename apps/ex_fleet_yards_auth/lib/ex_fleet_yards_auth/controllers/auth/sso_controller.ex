@@ -52,7 +52,6 @@ defmodule ExFleetYardsAuth.Auth.SSOController do
               conn
               |> redirect(to: "/login")
           end
-          |> IO.inspect()
       end
 
     with {:ok, user} <- user,
