@@ -48,6 +48,6 @@
 
   packages = [
     (pkgs.writeShellScriptBin "garage"
-      "${pkgs.garage}/bin/garage -c ${config.env.DEVENV_STATE}/garage/config.toml $@")
+      "${pkgs.garage}/bin/garage -c ${config.env.DEVENV_STATE}/garage/config.toml \"$@\"")
   ];
 }
