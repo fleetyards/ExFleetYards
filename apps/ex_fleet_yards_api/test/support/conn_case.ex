@@ -45,16 +45,17 @@ defmodule ExFleetYardsApi.ConnCase do
       conn
       |> Plug.Conn.put_req_header("authorization", "Bearer #{token}")
 
-    {:ok, conn: conn, auth_conn: auth_conn, api_spec: ExFleetYardsApi.ApiSpec.spec()}
+    {:ok, conn: conn, auth_conn: auth_conn}
   end
 
   defp create_user_token() do
-    user = ExFleetYards.Repo.Account.get_user_by_username("testuser")
-    ExFleetYards.Repo.Account.get_api_token(user, ExFleetYards.Repo.Account.UserToken.scopes())
+    #user = ExFleetYards.Repo.Account.get_user_by_username("testuser")
+    #ExFleetYards.Repo.Account.get_api_token(user, ExFleetYards.Repo.Account.UserToken.scopes())
+    "todo"
   end
 
   defp delete_user_token(token) do
-    ExFleetYards.Repo.Account.get_user_by_token(token)
-    |> ExFleetYards.Repo.delete!()
+    #ExFleetYards.Repo.Account.get_user_by_token(token)
+    #|> ExFleetYards.Repo.delete!()
   end
 end
