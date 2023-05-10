@@ -78,6 +78,10 @@ defmodule ExFleetYards.Game.Station do
     has_many :shops, ExFleetYards.Game.Shop
   end
 
+  aggregates do
+    count :docks_count, :docks
+  end
+
   identities do
     identity :unique_slug, [:slug]
   end

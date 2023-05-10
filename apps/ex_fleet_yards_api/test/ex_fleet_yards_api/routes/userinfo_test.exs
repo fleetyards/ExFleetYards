@@ -4,7 +4,7 @@ defmodule ExFleetYardsApi.Routes.UserinfoTest do
 
   import OpenApiSpex.TestAssertions
 
-  #describe "userinfo" do
+  # describe "userinfo" do
   #  test "return userinfo response", %{conn: conn} do
   #    login_user("testuser", ["openid"])
 
@@ -24,5 +24,5 @@ defmodule ExFleetYardsApi.Routes.UserinfoTest do
 
   #    assert json == userinfo
   #  end
-  #end
+  # end
 end

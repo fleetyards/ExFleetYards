@@ -57,6 +57,8 @@ defmodule ExFleetYards.Game.Dock do
     defaults [:create, :update, :destroy]
 
     read :read do
+      primary? true
+
       pagination do
         keyset? true
         default_limit 50

@@ -28,7 +28,9 @@ defmodule ExFleetYards.DataCase do
   end
 
   setup tags do
-    ExFleetYards.DataCase.setup_sandbox(tags)
+    # ExFleetYards.DataCase.setup_sandbox(tags)
+    pid = Ecto.Adapter.SQL.Sandbox.start_owner!(ExFleetYards.Repo, shared: not tags[:async])
+    on_exit(fn -> Ecto.Adapter.SQL.Sandbox.stop_owner(pid) end)
     :ok
   end
 
