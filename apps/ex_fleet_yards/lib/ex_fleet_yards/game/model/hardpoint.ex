@@ -24,6 +24,7 @@ defmodule ExFleetYards.Game.Model.Hardpoint do
     attribute :name, :string
 
     attribute :size, :integer
+
     attribute :source, :atom do
       constraints one_of: [:ship_matrix, :game_files]
     end
@@ -31,20 +32,53 @@ defmodule ExFleetYards.Game.Model.Hardpoint do
     attribute :key, :string
 
     attribute :type, :atom do
-      constraints one_of: [:power_plants, :coolers, :shield_generators, :quantum_drives, :main_thrusters,
-      :maneuvering_thrusters, :weapons, :turrets, :missiles, :radar, :computers,
-      :fuel_intakes, :fuel_tanks, :jump_modules, :quantum_fuel_tanks, :utility_items]
+      constraints one_of: [
+                    :power_plants,
+                    :coolers,
+                    :shield_generators,
+                    :quantum_drives,
+                    :main_thrusters,
+                    :maneuvering_thrusters,
+                    :weapons,
+                    :turrets,
+                    :missiles,
+                    :radar,
+                    :computers,
+                    :fuel_intakes,
+                    :fuel_tanks,
+                    :jump_modules,
+                    :quantum_fuel_tanks,
+                    :utility_items
+                  ]
     end
+
     attribute :category, :atom do
-      constraints one_of: [:main, :retro, :vtol, :fixed, :gimbal, :joint, :manned_turret, :remote_turret,
-      :missile_turret, :missile_rack]
+      constraints one_of: [
+                    :main,
+                    :retro,
+                    :vtol,
+                    :fixed,
+                    :gimbal,
+                    :joint,
+                    :manned_turret,
+                    :remote_turret,
+                    :missile_turret,
+                    :missile_rack
+                  ]
     end
+
     attribute :sub_category, :atom do
-      constraints one_of: [:retro_thrusters, :vtol_thrusters, :manned_turrets, :remote_turrets,
-      :missile_turret]
+      constraints one_of: [
+                    :retro_thrusters,
+                    :vtol_thrusters,
+                    :manned_turrets,
+                    :remote_turrets,
+                    :missile_turret
+                  ]
     end
+
     attribute :group, :atom do
-     constraints one_of: [:avionic, :system, :propulsion, :thruster, :weapon]
+      constraints one_of: [:avionic, :system, :propulsion, :thruster, :weapon]
     end
 
     attribute :details, :string
@@ -54,7 +88,6 @@ defmodule ExFleetYards.Game.Model.Hardpoint do
     attribute :item_slots, :integer
 
     attribute :loadout_identifier, :string
-
 
     timestamps()
   end

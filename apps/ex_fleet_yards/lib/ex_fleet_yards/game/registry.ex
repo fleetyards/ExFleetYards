@@ -21,5 +21,7 @@ defmodule ExFleetYards.Game.Registry do
     entry ExFleetYards.Game.Model.Loaner
     entry ExFleetYards.Game.Model.Paint
     entry ExFleetYards.Game.Model.Hardpoint
+    entry ExFleetYards.Game.Faction
+    entry ExFleetYards.Game.Faction.Affiliation
   end
 end

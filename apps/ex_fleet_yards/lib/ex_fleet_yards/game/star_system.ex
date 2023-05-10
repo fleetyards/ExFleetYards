@@ -2,6 +2,9 @@ defmodule ExFleetYards.Game.StarSystem do
   @moduledoc """
   A star system.
   """
+
+  alias ExFleetYards.Game
+
   use Ash.Resource,
     data_layer: AshPostgres.DataLayer,
     extensions: [AshJsonApi.Resource],
@@ -59,6 +62,14 @@ defmodule ExFleetYards.Game.StarSystem do
 
   relationships do
     has_many :celestial_objects, ExFleetYards.Game.CelestialObject
+
+    many_to_many :factions, Game.Faction do
+      through Game.Faction.Affiliation
+      source_attribute :id
+      source_attribute_on_join_resource :starsystem_id
+      destination_attribute :id
+      destination_attribute_on_join_resource :faction_id
+    end
   end
 
   identities do

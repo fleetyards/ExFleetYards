@@ -2,6 +2,9 @@ defmodule ExFleetYards.Game.CelestialObject do
   @moduledoc """
   A celestial object.
   """
+
+  alias ExFleetYards.Game
+
   use Ash.Resource,
     data_layer: AshPostgres.DataLayer,
     extensions: [AshJsonApi.Resource],
@@ -62,6 +65,14 @@ defmodule ExFleetYards.Game.CelestialObject do
     end
 
     has_many :stations, ExFleetYards.Game.Station
+
+    many_to_many :factions, Game.Faction do
+      through Game.Faction.Affiliation
+      source_attribute :id
+      source_attribute_on_join_resource :celestial_object_id
+      destination_attribute :id
+      destination_attribute_on_join_resource :faction_id
+    end
   end
 
   identities do
