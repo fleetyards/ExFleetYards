@@ -128,6 +128,7 @@
                 '';
 
               })
+              (import ./nix/garage.nix)
             ];
           };
         });
