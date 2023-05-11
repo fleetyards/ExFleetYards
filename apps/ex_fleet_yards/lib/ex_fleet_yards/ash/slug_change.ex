@@ -23,15 +23,7 @@ defmodule ExFleetYards.Ash.SlugChange do
   end
 
   def generate_slug(source, _opts) do
-    slug =
-      source
-      |> String.downcase()
-      |> String.replace(~r/[^a-z0-9]/, "-")
-      |> String.replace(~r/^-/, "")
-      |> String.replace(~r/-$/, "")
-      |> String.replace(~r/-+/, "-")
-      |> String.replace(~r/^-/, "")
-      |> String.replace(~r/-$/, "")
+    slug = Slugger.slugify_downcase(source)
 
     if slug == "" do
       "unknown"

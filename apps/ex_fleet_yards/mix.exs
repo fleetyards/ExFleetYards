@@ -39,11 +39,10 @@ defmodule ExFleetYards.MixProject do
     [
       {:phoenix_pubsub, "~> 2.0"},
       {:ecto_sql, "~> 3.6"},
-      {:typed_ecto_schema, "~> 0.4.1", runtime: false},
       {:ash, "~> 2.9.1"},
       {:ash_postgres, "~> 1.3.23"},
       {:ash_json_api, "~> 0.31.2"},
-      {:ecto_autoslug_field, "~> 3.0"},
+      {:slugger, "~> 0.3.0"},
       {:cloak_ecto, "~> 1.2.0"},
       {:nimble_totp, "~> 1.0.0"},
       {:postgrex, ">= 0.0.0"},

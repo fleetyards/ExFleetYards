@@ -177,19 +177,6 @@ let
       beamDeps = [ typable ];
     };
 
-    connection = buildMix rec {
-      name = "connection";
-      version = "1.1.0";
-
-      src = fetchHex {
-        pkg = "${name}";
-        version = "${version}";
-        sha256 = "1746n8ba11amp1xhwzp38yfii2h051za8ndxlwdykyqqljq1wb3j";
-      };
-
-      beamDeps = [];
-    };
-
     conv_case = buildMix rec {
       name = "conv_case";
       version = "0.2.3";
@@ -331,19 +318,6 @@ let
       };
 
       beamDeps = [ decimal jason telemetry ];
-    };
-
-    ecto_autoslug_field = buildMix rec {
-      name = "ecto_autoslug_field";
-      version = "3.0.0";
-
-      src = fetchHex {
-        pkg = "${name}";
-        version = "${version}";
-        sha256 = "03ycq3c6sm79sx5cxsbv3yc1zvx0ss2a8mig0qr33wc5rz3m5hlf";
-      };
-
-      beamDeps = [ ecto slugger ];
     };
 
     ecto_sql = buildMix rec {
@@ -1202,19 +1176,6 @@ let
       };
 
       beamDeps = [];
-    };
-
-    typed_ecto_schema = buildMix rec {
-      name = "typed_ecto_schema";
-      version = "0.4.1";
-
-      src = fetchHex {
-        pkg = "${name}";
-        version = "${version}";
-        sha256 = "0fybixpflcr9rk92avycra029za0qfnwcnanvm1zanykg4prdil5";
-      };
-
-      beamDeps = [ ecto ];
     };
 
     ueberauth = buildMix rec {
