@@ -94,6 +94,8 @@ defmodule ExFleetYards.Game.Station do
     defaults [:create, :update, :destroy]
 
     read :read do
+      primary? true
+
       pagination do
         keyset? true
         default_limit 25
@@ -103,11 +105,7 @@ defmodule ExFleetYards.Game.Station do
     end
 
     read :slug do
-      primary? true
-      argument :slug, :string, allow_nil?: false
-      get? true
-
-      filter expr(slug == ^arg(:slug))
+      get_by :slug
     end
   end
 
@@ -132,7 +130,7 @@ defmodule ExFleetYards.Game.Station do
       end
 
       get :read, route: "/uuid/:id"
-      get :slug, route: "/:slug"
+      get :read, route: "/:slug"
     end
 
     primary_key do

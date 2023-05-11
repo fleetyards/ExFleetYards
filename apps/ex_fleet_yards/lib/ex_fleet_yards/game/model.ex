@@ -164,6 +164,8 @@ defmodule ExFleetYards.Game.Model do
     defaults [:create, :update, :destroy]
 
     read :read do
+      primary? true
+
       pagination do
         keyset? true
         default_limit 25
@@ -196,7 +198,12 @@ defmodule ExFleetYards.Game.Model do
       index :read, paginate?: true
 
       get :read, route: "/uuid/:id"
-      get :slug, route: "/:slug"
+      get :read, route: "/:slug"
+
+      related :manufacturer, :related_manufacturer, route: "/:slug/manufacturer"
+      related :base_model, :related_base_model, route: "/:slug/base-model"
+      related :loaners, :related_loaners, route: "/:slug/loaners"
+      related :loaned_by, :related_loaned_by, route: "/:slug/loaned-by"
     end
   end
 end

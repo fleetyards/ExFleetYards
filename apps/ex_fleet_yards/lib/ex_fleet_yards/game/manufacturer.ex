@@ -35,6 +35,7 @@ defmodule ExFleetYards.Game.Manufacturer do
   end
 
   relationships do
+    has_many :components, ExFleetYards.Game.Component
   end
 
   identities do
@@ -49,6 +50,8 @@ defmodule ExFleetYards.Game.Manufacturer do
     defaults [:create, :update, :destroy]
 
     read :read do
+      primary? true
+
       pagination do
         keyset? true
         default_limit 50
@@ -78,7 +81,9 @@ defmodule ExFleetYards.Game.Manufacturer do
         paginate? true
       end
 
-      get :slug, route: "/:slug"
+      get :read, route: "/:slug"
+
+      related :components, :read_components, route: "/:slug/components"
     end
   end
 end

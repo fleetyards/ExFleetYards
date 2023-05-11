@@ -65,6 +65,8 @@ defmodule ExFleetYards.Game.Faction do
     defaults [:create, :update, :destroy]
 
     read :read do
+      primary? true
+
       pagination do
         keyset? true
         default_limit 25
@@ -93,7 +95,10 @@ defmodule ExFleetYards.Game.Faction do
       index :read, paginate?: true
 
       get :read, route: "/uuid/:id"
-      get :slug, route: "/:slug"
+      get :read, route: "/:slug"
+
+      related :starsystems, :related_starsystems, route: "/:slug/starsystems"
+      related :celestial_objects, :related_celestial_objects, route: "/:slug/celestial-objects"
     end
 
     primary_key do

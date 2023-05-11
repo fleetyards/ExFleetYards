@@ -23,12 +23,12 @@ let
 
     ash = buildMix rec {
       name = "ash";
-      version = "2.9.1";
+      version = "2.9.5";
 
       src = fetchHex {
         pkg = "${name}";
         version = "${version}";
-        sha256 = "0nv5qp2a8a3icdjgfxk6v2avwyn1mpbhr0adxbr01rmfrnmgh3z9";
+        sha256 = "0vdgf77z783nj1r9jbb73cmdmydvg5nxadk21wnca3knn9fs3fdb";
       };
 
       beamDeps = [ comparable decimal ecto ets jason picosat_elixir plug spark stream_data telemetry ];
@@ -36,12 +36,12 @@ let
 
     ash_json_api = buildMix rec {
       name = "ash_json_api";
-      version = "0.31.2";
+      version = "0.31.3";
 
       src = fetchHex {
         pkg = "${name}";
         version = "${version}";
-        sha256 = "1yki67b6gl7w0kka4y8mlw5wighxx3xaj6dby9yhy3lf29hfcgck";
+        sha256 = "0hri0b4y9g2jlmfkbbnc3yd1qi8mllikryr9l4rbqsg9fw0aaywf";
       };
 
       beamDeps = [ ash jason json_xema open_api_spex plug ];
@@ -725,12 +725,12 @@ let
 
     open_api_spex = buildMix rec {
       name = "open_api_spex";
-      version = "3.16.2";
+      version = "3.16.3";
 
       src = fetchHex {
         pkg = "${name}";
         version = "${version}";
-        sha256 = "0jqh4nl4ghg5j83528rq6lalm8136kvzi9k84vxdmq4skskjpi2r";
+        sha256 = "1bgcp0sfj9j95nb353dn66m81085sq5pwdzwq80x1xc8mgpydjqv";
       };
 
       beamDeps = [ jason plug ];
@@ -1037,12 +1037,12 @@ let
 
     spark = buildMix rec {
       name = "spark";
-      version = "1.1.5";
+      version = "1.1.10";
 
       src = fetchHex {
         pkg = "${name}";
         version = "${version}";
-        sha256 = "089l2r1n95p8ykcfpmmkz2jsw70f2v7g91pgl7mbpyn2ni48kdwg";
+        sha256 = "1mc3sas486h20q350lnf9l904pbjbpgnd3yi1hk2g5kb34skb7dn";
       };
 
       beamDeps = [ nimble_options sourceror ];

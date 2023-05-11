@@ -98,4 +98,8 @@ defmodule ExFleetYards.Game.Model.Paint do
       filter expr(slug == ^arg(:slug))
     end
   end
+
+  json_api do
+    type "paints"
+  end
 end

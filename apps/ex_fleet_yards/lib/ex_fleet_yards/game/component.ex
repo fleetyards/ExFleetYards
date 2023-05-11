@@ -70,6 +70,8 @@ defmodule ExFleetYards.Game.Component do
     defaults [:create, :update, :destroy]
 
     read :read do
+      primary? true
+
       pagination do
         keyset? true
         default_limit 50
@@ -99,7 +101,9 @@ defmodule ExFleetYards.Game.Component do
         paginate? true
       end
 
-      get :slug, route: "/:slug"
+      get :read, route: "/:slug"
+
+      related :manufacturer, :read_manufacturer, route: "/:slug/manufacturer"
     end
 
     primary_key do

@@ -48,4 +48,8 @@ defmodule ExFleetYards.Game.Shop.Commodity do
     belongs_to :commodity, ExFleetYards.Game.Commodity
     belongs_to :component, ExFleetYards.Game.Component
   end
+
+  json_api do
+    type "shop-commodities"
+  end
 end

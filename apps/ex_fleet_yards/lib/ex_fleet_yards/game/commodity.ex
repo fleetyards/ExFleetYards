@@ -48,6 +48,8 @@ defmodule ExFleetYards.Game.Commodity do
     defaults [:create, :update, :destroy]
 
     read :read do
+      primary? true
+
       pagination do
         keyset? true
         default_limit 25

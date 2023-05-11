@@ -41,7 +41,7 @@ defmodule ExFleetYards.MixProject do
       {:ecto_sql, "~> 3.6"},
       {:ash, "~> 2.9.1"},
       {:ash_postgres, "~> 1.3.23"},
-      {:ash_json_api, "~> 0.31.2"},
+      {:ash_json_api, "~> 0.31.3"},
       {:slugger, "~> 0.3.0"},
       {:cloak_ecto, "~> 1.2.0"},
       {:nimble_totp, "~> 1.0.0"},

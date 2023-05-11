@@ -84,6 +84,8 @@ defmodule ExFleetYards.Game.StarSystem do
     defaults [:create, :update, :destroy]
 
     read :read do
+      primary? true
+
       pagination do
         keyset? true
         default_limit 25
@@ -93,11 +95,7 @@ defmodule ExFleetYards.Game.StarSystem do
     end
 
     read :slug do
-      primary? true
-      argument :slug, :string, allow_nil?: false
-      get? true
-
-      filter expr(slug == ^arg(:slug))
+      get_by :slug
     end
   end
 
@@ -122,7 +120,12 @@ defmodule ExFleetYards.Game.StarSystem do
       end
 
       get :read, route: "/uuid/:id"
-      get :slug, route: "/:slug"
+      get :read, route: "/:slug"
+
+      related :factions, :read_factions, route: "/:slug/relationships/factions"
+
+      related :celestial_objects, :read_celestial_objects,
+        route: "/:slug/relationships/celestial-objects"
     end
 
     primary_key do

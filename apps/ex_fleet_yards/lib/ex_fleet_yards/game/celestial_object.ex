@@ -87,6 +87,8 @@ defmodule ExFleetYards.Game.CelestialObject do
     defaults [:create, :update, :destroy]
 
     read :read do
+      primary? true
+
       pagination do
         keyset? true
         default_limit 25
@@ -96,11 +98,7 @@ defmodule ExFleetYards.Game.CelestialObject do
     end
 
     read :slug do
-      argument :slug, :string, allow_nil?: false
-      get? true
-      primary? true
-
-      filter expr(slug == ^arg(:slug))
+      get_by :slug
     end
   end
 
@@ -116,6 +114,7 @@ defmodule ExFleetYards.Game.CelestialObject do
 
   json_api do
     type "celestial-objects"
+    includes star_system: []
 
     routes do
       base "/game/celestial-objects"
@@ -125,9 +124,12 @@ defmodule ExFleetYards.Game.CelestialObject do
       end
 
       get :read, route: "/uuid/:id"
-      get :slug, route: "/:slug"
+      get :read, route: "/:slug"
 
-      # related :star_system, :related_star_system, route: "/:slug/star-system"
+      related :star_system, :related_star_system, route: "/:slug/star-system"
+      related :parent, :related_parent, route: "/:slug/parent"
+      related :stations, :related_stations, route: "/:slug/stations"
+      related :factions, :related_factions, route: "/:slug/factions"
     end
 
     primary_key do

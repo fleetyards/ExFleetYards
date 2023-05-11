@@ -83,6 +83,11 @@ defmodule ExFleetYards.Game.Dock do
       index :read do
         paginate? true
       end
+
+      get :read, route: "/:id"
+
+      related :station, :read_station, route: "/:id/station"
+      related :model, :read_model, route: "/:id/model"
     end
   end
 end
