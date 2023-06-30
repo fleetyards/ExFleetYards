@@ -127,6 +127,9 @@ config :ex_fleet_yards_import,
 config :mime, :types, %{
   "application/vnd.api+json" => ["json"]
 }
+config :mime, :extensions, %{
+  "json" => "application/vnd.api+json"
+}
 
 # Appsignal
 config :appsignal, :config,

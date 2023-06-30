@@ -1,4 +1,5 @@
 defmodule ExFleetYardsAuth.Auth do
+  use ExFleetYardsAuth, :controller
   @moduledoc """
   Auth helpers
   """
@@ -61,7 +62,8 @@ defmodule ExFleetYardsAuth.Auth do
     conn
     |> renew_session()
     |> delete_resp_cookie(@remember_me_cookie)
-    |> redirect(to: Routes.session_path(conn, :new))
+    |> redirect(to: ~p"/")
+    # TODO: |> redirect(to: Routes.session_path(conn, :new))
   end
 
   def fetch_current_user(conn, opts \\ []) do
@@ -111,7 +113,8 @@ defmodule ExFleetYardsAuth.Auth do
     else
       conn
       |> maybe_store_return_to()
-      |> redirect(to: Routes.session_path(conn, :new))
+      # TODO: |> redirect(to: Routes.session_path(conn, :new))
+      |> redirect(to: ~p"/")
       |> halt()
     end
   end
