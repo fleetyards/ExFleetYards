@@ -2,6 +2,7 @@ defmodule ExFleetYardsAuth.Router do
   use ExFleetYardsAuth, :router
 
   import ExFleetYardsAuth.Auth
+  alias ExFleetYards.Plugs.ApiAuthorization
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -69,5 +70,15 @@ defmodule ExFleetYardsAuth.Router do
 
     get "/openid/certs", Openid.JwksController, :jwks_index
     get "/.well-known/openid-configuration", Openid.ConfigurationController, :configuration
+
+    scope "/" do
+      pipe_through :require_authenticated_api
+
+      get "/openid/userinfo", Openid.UserinfoController, :userinfo
+    end
+  end
+
+  def require_authenticated_api(conn, scopes) do
+    ApiAuthorization.require_authenticated(conn, scopes)
   end
 end

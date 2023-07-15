@@ -66,4 +66,4 @@ config :ex_fleet_yards_auth, :oauth_module, Boruta.OauthMock
 config :ex_fleet_yards_auth, :openid_module, Boruta.OpenidMock
 
 # Mok authorization
-config :ex_fleet_yards_api, :authorization_module, ExFleetYardsApi.Plugs.AuthorizationMock
+config :ex_fleet_yards, :authorization_module, ExFleetYardsApi.Plugs.AuthorizationMock

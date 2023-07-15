@@ -2,8 +2,10 @@ defmodule ExFleetYardsAuth.Openid.UserinfoController do
   @behaviour Boruta.Openid.UserinfoApplication
 
   use ExFleetYardsAuth, :controller
+  import ExFleetYards.Plugs.ApiAuthorization
 
   plug :put_view, json: ExFleetYardsAuth.Openid.Json
+  plug(:authorize, ["openid"])
 
   def openid_module, do: Application.get_env(:ex_fleet_yards_auth, :openid_module, Boruta.Openid)
 
@@ -14,7 +16,7 @@ defmodule ExFleetYardsAuth.Openid.UserinfoController do
   @impl Boruta.Openid.UserinfoApplication
   def userinfo_fetched(conn, userinfo) do
     conn
-    |> render(:userinfo, userinfo: userinfo)
+    |> render(:userinfo, userinfo: userinfo.userinfo)
   end
 
   @impl Boruta.Openid.UserinfoApplication
