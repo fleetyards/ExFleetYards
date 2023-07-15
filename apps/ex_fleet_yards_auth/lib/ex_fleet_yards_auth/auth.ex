@@ -14,6 +14,10 @@ defmodule ExFleetYardsAuth.Auth do
   @remember_me_options [sign: true, max_age: @max_age, same_site: "Lax"]
 
   def log_in_user(conn, user, params \\ %{}) do
+    # Update last sign in
+    user
+    |> Account.update_last_signin!(conn)
+
     token = Account.get_auth_token(user)
     return_to = get_session(conn, :user_return_to)
 

@@ -38,6 +38,7 @@ defmodule ExFleetYardsAuth.MixProject do
       {:phoenix_ecto, "~> 4.4"},
       {:phoenix_live_view, "~> 0.18.18"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
+      {:remote_ip, "~> 1.1"},
 
       # Auth
       {:ueberauth, "~> 0.10"},

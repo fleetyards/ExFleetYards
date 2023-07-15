@@ -19,6 +19,7 @@ defmodule ExFleetYards.Repo.Account.User do
     field :sign_in_count, :integer
     field :current_sign_in_at, :naive_datetime
     field :last_sign_in_at, :naive_datetime
+    field :last_sign_in_ip, :string
     field :current_sign_in_ip, :string
     field :confirmation_token, :string, redact: true
     field :confirmed_at, :naive_datetime
@@ -200,6 +201,15 @@ defmodule ExFleetYards.Repo.Account.User do
 
   def login_changeset(user) do
     user
-    |> change(last_sign_in_at: NaiveDateTime.utc_now() |> NaiveDateTime.truncate(:second))
+    |> change(sign_in_count: user.sign_in_count + 1)
+    |> change(last_sign_in_at: user.current_sign_in_at)
+    |> change(last_sign_in_ip: user.current_sign_in_ip)
+    |> change(current_sign_in_at: NaiveDateTime.utc_now() |> NaiveDateTime.truncate(:second))
+  end
+
+  def login_changeset(user, conn) do
+    user
+    |> login_changeset()
+    |> change(current_sign_in_ip: to_string(:inet_parse.ntoa(conn.remote_ip)))
   end
 end

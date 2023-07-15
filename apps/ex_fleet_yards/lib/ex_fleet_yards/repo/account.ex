@@ -117,6 +117,12 @@ defmodule ExFleetYards.Repo.Account do
     |> Repo.update()
   end
 
+  def update_last_signin!(%User{} = user, conn) do
+    user
+    |> User.login_changeset(conn)
+    |> Repo.update!()
+  end
+
   def get_api_token(user, scopes) do
     {token, user_token} = UserToken.build_api_token(user, scopes)
     Repo.insert!(user_token)
