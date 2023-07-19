@@ -2,10 +2,8 @@ defmodule ExFleetYardsAuth.Openid.UserinfoController do
   @behaviour Boruta.Openid.UserinfoApplication
 
   use ExFleetYardsAuth, :controller
-  import ExFleetYards.Plugs.ApiAuthorization
 
   plug :put_view, json: ExFleetYardsAuth.Openid.Json
-  plug(:authorize, ["openid"])
 
   def openid_module, do: Application.get_env(:ex_fleet_yards_auth, :openid_module, Boruta.Openid)
 
@@ -22,10 +20,9 @@ defmodule ExFleetYardsAuth.Openid.UserinfoController do
   @impl Boruta.Openid.UserinfoApplication
   def unauthorized(conn, error) do
     conn
-    |> put_resp_header(
-      "www-authenticate",
-      "error=\"#{error.error}\", error_description=\"#{error.error_description}\""
-    )
-    |> send_resp(:unauthorized, "")
+    |> put_status(:unauthorized)
+    |> put_view(ExFleetYardsApi.ErrorJson)
+    |> render("401.json")
+    |> halt()
   end
 end

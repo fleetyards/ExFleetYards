@@ -23,6 +23,7 @@ defmodule ExFleetYardsAuth.ConnCase do
       import Plug.Conn
       import Phoenix.ConnTest
       import ExFleetYardsAuth.ConnCase
+      import Mox
 
       alias ExFleetYardsAuth.Router.Helpers, as: Routes
 

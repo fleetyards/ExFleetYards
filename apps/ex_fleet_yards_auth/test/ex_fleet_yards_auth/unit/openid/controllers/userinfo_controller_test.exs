@@ -1,72 +1,68 @@
 defmodule ExFleetYardsAuth.Controllers.Openid.UserinfoControllerTest do
-  # credo:disable-for-next-line
-  # FIXME: reneable as part of #67
-  # use ExUnit.Case, async: true
-  # import Phoenix.ConnTest
+  use ExFleetYardsAuth.ConnCase, async: true
 
-  # import Mox
+  alias Boruta.Oauth.Error
 
-  # alias Boruta.Oauth.Error
+  alias ExFleetYardsAuth.Openid.UserinfoController
 
-  # alias ExFleetYardsAuth.Openid.UserinfoController
+  setup :verify_on_exit!
 
-  # setup :verify_on_exit!
+  setup do
+    {:ok, conn: build_conn()}
+  end
 
-  # setup do
-  #  {:ok, conn: build_conn()}
-  # end
+  describe "userinfo/2" do
+    test "returns an error if unauthorized", %{conn: conn} do
+      error = %Error{status: :bad_request, error: :error, error_description: "error_description"}
 
-  # describe "userinfo/2" do
-  #  test "returns an error if unauthorized", %{conn: conn} do
-  #    error = %Error{status: :bad_request, error: :error, error_description: "error_description"}
+      Boruta.OpenidMock
+      |> expect(:userinfo, fn conn, module ->
+        module.unauthorized(conn, error)
+      end)
 
-  #    Boruta.OpenidMock
-  #    |> expect(:userinfo, fn conn, module ->
-  #      module.unauthorized(conn, error)
-  #    end)
+      conn = UserinfoController.userinfo(conn, %{})
 
-  #    conn = UserinfoController.userinfo(conn, %{})
+      assert json_response(conn, 401) == %{"code" => "unauthorized", "message" => "Unauthorized"}
+    end
 
-  #    assert response(conn, 401)
+    test "returns userinfo response", %{conn: conn} do
+      resource_owner_claims = %{
+        "sub" => "1",
+        "claim" => true
+      }
 
-  #    assert Plug.Conn.get_resp_header(conn, "www-authenticate") == [
-  #             "error=\"#{error.error}\", error_description=\"#{error.error_description}\""
-  #           ]
-  #  end
+      Boruta.OpenidMock
+      |> expect(:userinfo, fn conn, module ->
+        module.userinfo_fetched(conn, %Boruta.Openid.UserinfoResponse{
+          userinfo: resource_owner_claims,
+          format: :json
+        })
+      end)
 
-  #  test "returns userinfo response", %{conn: conn} do
-  #    resource_owner_claims = %{
-  #      "sub" => "1",
-  #      "claim" => true
-  #    }
+      conn =
+        conn
+        |> get(~p"/openid/userinfo/")
 
-  #    Boruta.OpenidMock
-  #    |> expect(:userinfo, fn conn, module ->
-  #      module.userinfo_fetched(conn, resource_owner_claims)
-  #    end)
+      assert json_response(conn, 200) == resource_owner_claims
+    end
+  end
 
-  #    conn = UserinfoController.userinfo(conn, %{})
-
-  #    assert json_response(conn, 200) == resource_owner_claims
-  #  end
-  # end
-
-  # def jwk_keys_fixture do
-  #  [
-  #    %{
-  #      "kid" => "1",
-  #      "e" => "AQAB",
-  #      "kty" => "RSA",
-  #      "n" =>
-  #        "1PaP_gbXix5itjRCaegvI_B3aFOeoxlwPPLvfLHGA4QfDmVOf8cU8OuZFAYzLArW3PnnwWWy39nVJOx42QRVGCGdUCmV7shDHRsr86-2DlL7pwUa9QyHsTj84fAJn2Fv9h9mqrIvUzAtEYRlGFvjVTGCwzEullpsB0GJafopUTFby8WdSq3dGLJBB1r-Q8QtZnAxxvolhwOmYkBkkidefmm48X7hFXL2cSJm2G7wQyinOey_U8xDZ68mgTakiqS2RtjnFD0dnpBl5CYTe4s6oZKEyFiFNiW4KkR1GVjsKwY9oC2tpyQ0AEUMvk9T9VdIltSIiAvOKlwFzL49cgwZDw"
-  #    },
-  #    %{
-  #      "kid" => "2",
-  #      "e" => "AQAB",
-  #      "kty" => "RSA",
-  #      "n" =>
-  #        "1PaP_gbXix5itjRCaegvI_B3aFOeoxlwPPLvfLHGA4QfDmVOf8cU8OuZFAYzLArW3PnnwWWy39nVJOx42QRVGCGdUCmV7shDHRsr86-2DlL7pwUa9QyHsTj84fAJn2Fv9h9mqrIvUzAtEYRlGFvjVTGCwzEullpsB0GJafopUTFby8WdSq3dGLJBB1r-Q8QtZnAxxvolhwOmYkBkkidefmm48X7hFXL2cSJm2G7wQyinOey_U8xDZ68mgTakiqS2RtjnFD0dnpBl5CYTe4s6oZKEyFiFNiW4KkR1GVjsKwY9oC2tpyQ0AEUMvk9T9VdIltSIiAvOKlwFzL49cgwZDw"
-  #    }
-  #  ]
-  # end
+  def jwk_keys_fixture do
+    [
+      %{
+        "kid" => "1",
+        "e" => "AQAB",
+        "kty" => "RSA",
+        "n" =>
+          "1PaP_gbXix5itjRCaegvI_B3aFOeoxlwPPLvfLHGA4QfDmVOf8cU8OuZFAYzLArW3PnnwWWy39nVJOx42QRVGCGdUCmV7shDHRsr86-2DlL7pwUa9QyHsTj84fAJn2Fv9h9mqrIvUzAtEYRlGFvjVTGCwzEullpsB0GJafopUTFby8WdSq3dGLJBB1r-Q8QtZnAxxvolhwOmYkBkkidefmm48X7hFXL2cSJm2G7wQyinOey_U8xDZ68mgTakiqS2RtjnFD0dnpBl5CYTe4s6oZKEyFiFNiW4KkR1GVjsKwY9oC2tpyQ0AEUMvk9T9VdIltSIiAvOKlwFzL49cgwZDw"
+      },
+      %{
+        "kid" => "2",
+        "e" => "AQAB",
+        "kty" => "RSA",
+        "n" =>
+          "1PaP_gbXix5itjRCaegvI_B3aFOeoxlwPPLvfLHGA4QfDmVOf8cU8OuZFAYzLArW3PnnwWWy39nVJOx42QRVGCGdUCmV7shDHRsr86-2DlL7pwUa9QyHsTj84fAJn2Fv9h9mqrIvUzAtEYRlGFvjVTGCwzEullpsB0GJafopUTFby8WdSq3dGLJBB1r-Q8QtZnAxxvolhwOmYkBkkidefmm48X7hFXL2cSJm2G7wQyinOey_U8xDZ68mgTakiqS2RtjnFD0dnpBl5CYTe4s6oZKEyFiFNiW4KkR1GVjsKwY9oC2tpyQ0AEUMvk9T9VdIltSIiAvOKlwFzL49cgwZDw"
+      }
+    ]
+  end
 end
