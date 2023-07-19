@@ -27,7 +27,11 @@ defmodule ExFleetYardsAuth.Router do
       post "/", SessionController, :create
     end
 
-    get "/logout", ExFleetYardsAuth.SessionController, :delete
+    scope "/logout", ExFleetYardsAuth do
+      pipe_through :require_authenticated_user
+
+      get "/", SessionController, :delete
+    end
   end
 
   scope "/" do
