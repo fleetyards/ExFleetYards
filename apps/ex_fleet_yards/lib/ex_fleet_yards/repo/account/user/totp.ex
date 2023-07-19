@@ -28,11 +28,13 @@ defmodule ExFleetYards.Repo.Account.User.Totp do
     |> Repo.insert(returning: [:id])
   end
 
+  def user_query(user_id, active \\ true)
+
   def user_query(user_id, nil) when is_binary(user_id) do
     from(t in __MODULE__, where: t.user_id == ^user_id)
   end
 
-  def user_query(user_id, active \\ true) when is_binary(user_id) and is_boolean(active) do
+  def user_query(user_id, active) when is_binary(user_id) and is_boolean(active) do
     user_query(user_id, nil)
     |> where(active: ^active)
   end
@@ -101,7 +103,7 @@ defmodule ExFleetYards.Repo.Account.User.Totp do
 
   def use_code(%__MODULE__{totp_secret: secret, last_used: last_used} = totp, code) do
     with true <- NimbleTOTP.valid?(secret, code, since: last_used),
-         {:ok, totp} <- update_last_used(totp) do
+         {:ok, _totp} <- update_last_used(totp) do
       :ok
     else
       _ ->

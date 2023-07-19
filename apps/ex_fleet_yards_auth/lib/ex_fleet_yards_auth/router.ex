@@ -30,6 +30,7 @@ defmodule ExFleetYardsAuth.Router do
     scope "/logout", ExFleetYardsAuth do
       pipe_through :require_authenticated_user
 
+      delete "/", SessionController, :delete
       get "/", SessionController, :delete
     end
   end
@@ -60,6 +61,20 @@ defmodule ExFleetYardsAuth.Router do
 
       get "/authorize", AuthorizeController, :preauthorize
     end
+
+    scope "/", ExFleetYardsAuth do
+      pipe_through [:api]
+
+      get "/openid/certs", Openid.JwksController, :jwks_index
+
+      scope "/" do
+        pipe_through :require_authenticated_api
+
+        get "/openid/userinfo", Openid.UserinfoController, :userinfo
+      end
+
+      get "/.well-known/openid-configuration", Openid.ConfigurationController, :configuration
+    end
   end
 
   scope "/auth", ExFleetYardsAuth.Auth do
@@ -67,19 +82,6 @@ defmodule ExFleetYardsAuth.Router do
 
     get "/:provider", SSOController, :request
     get "/:provider/callback", SSOController, :callback
-  end
-
-  scope "/", ExFleetYardsAuth do
-    pipe_through [:api]
-
-    get "/openid/certs", Openid.JwksController, :jwks_index
-    get "/.well-known/openid-configuration", Openid.ConfigurationController, :configuration
-
-    scope "/" do
-      pipe_through :require_authenticated_api
-
-      get "/openid/userinfo", Openid.UserinfoController, :userinfo
-    end
   end
 
   def require_authenticated_api(conn, scopes) do

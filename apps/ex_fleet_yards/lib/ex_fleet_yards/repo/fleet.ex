@@ -120,12 +120,11 @@ defmodule ExFleetYards.Repo.Fleet do
   end
 
   def invite_user(fleet, inviting_user, user_name, role) when is_binary(user_name) do
-    user =
-      Account.get_user_by_username(user_name)
-      |> case do
-        nil -> {:error, :user_not_found}
-        user -> invite_user(fleet, inviting_user, user, role)
-      end
+    Account.get_user_by_username(user_name)
+    |> case do
+      nil -> {:error, :user_not_found}
+      user -> invite_user(fleet, inviting_user, user, role)
+    end
   end
 
   def invite_user(

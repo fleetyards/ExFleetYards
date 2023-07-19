@@ -1,5 +1,4 @@
 defmodule ExFleetYards.Plugs.AuthorizationBoruta do
-  @moduledoc false
   @moduledoc """
   This module provides plugs for authorization and authentication.
 

@@ -35,9 +35,7 @@ defmodule ExFleetYardsAuth.Auth do
   end
 
   defp maybe_write_remember_me_cookie(conn, user, %{"remember_me" => "true"}) do
-    {:ok, token, _claims} =
-      Token.generate_remember_token(user)
-      |> IO.inspect()
+    {:ok, token, _claims} = Token.generate_remember_token(user)
 
     put_resp_cookie(conn, @remember_me_cookie, token, @remember_me_options)
   end
@@ -95,7 +93,7 @@ defmodule ExFleetYardsAuth.Auth do
   end
 
   defp ensure_user_token(conn) do
-    with user_token when user_token != nil <- get_session(conn, :user_token) |> IO.inspect(),
+    with user_token when user_token != nil <- get_session(conn, :user_token),
          {:ok, user_token} <- Token.verify_and_validate(user_token) do
       {user_token, conn}
     else

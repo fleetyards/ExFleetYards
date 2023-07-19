@@ -6,7 +6,6 @@ defmodule ExFleetYardsAuth.Openid.AuthorizeController do
   alias ExFleetYardsAuth.Auth
   import ExFleetYardsAuth.Oauth.AuthorizeController, only: [get_scopes: 1]
 
-  alias Boruta.Oauth.AuthorizeResponse
   alias Boruta.Oauth.Error
   alias Boruta.Oauth.ResourceOwner
 
@@ -71,6 +70,16 @@ defmodule ExFleetYardsAuth.Openid.AuthorizeController do
       error_description: response.error_description,
       redirect_uri: response.redirect_uri
     )
+  end
+
+  @impl Boruta.Oauth.AuthorizeApplication
+  def authorize_success(_conn, _response) do
+    raise "Unreachable"
+  end
+
+  @impl Boruta.Oauth.AuthorizeApplication
+  def authorize_error(_conn, _response) do
+    raise "Unreachable"
   end
 
   defp put_unsigned_request(%Plug.Conn{query_params: query_params} = conn) do
