@@ -49,7 +49,6 @@ defmodule ExFleetYards.Token do
     |> add_claim("nbf", fn -> Joken.current_time() end, &(Joken.current_time() >= &1))
     |> add_claim("iss", fn -> "fleetyards" end, &(&1 == "fleetyards"))
     |> add_claim("aud", fn -> "auth" end, &Enum.member?(@allowed_aud, &1))
-    # TODO: validate JTI with nebulex and ecto query (blacklist)
     |> add_claim("jti", &Joken.generate_jti/0)
   end
 
@@ -57,7 +56,7 @@ defmodule ExFleetYards.Token do
   def after_verify(_hook_options, result, input) do
     case result do
       {:ok, claims} ->
-        if TokenRevocation.verify_token(claims) do
+        if cache_if_revoked(claims) do
           {:cont, result, input}
         else
           {:halt, {:error, :token_revoked}}
@@ -66,5 +65,27 @@ defmodule ExFleetYards.Token do
       _ ->
         {:cont, result, input}
     end
+  end
+
+  def cache_if_revoked(%{"jti" => jti} = claims) do
+    valid = __MODULE__.Cache.get(jti)
+
+    if is_nil(valid) do
+      valid = TokenRevocation.verify_token(claims)
+      __MODULE__.Cache.put(jti, valid, ttl: :timer.hours(1))
+      valid
+    else
+      valid
+    end
+  end
+
+  def revoke_token(%{"jti" => jti} = claims) do
+    TokenRevocation.revoke_token(claims)
+    __MODULE__.Cache.put(jti, false)
+  end
+
+  def revoke_user(user_id) when is_binary(user_id) do
+    TokenRevocation.revoke_user(user_id)
+    __MODULE__.Cache.delete_all(nil)
   end
 end

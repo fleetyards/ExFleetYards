@@ -11,6 +11,7 @@ defmodule ExFleetYards.Application do
       # Start the Ecto repository
       ExFleetYards.Vault,
       ExFleetYards.Repo,
+      ExFleetYards.Token.Cache,
       # Start the PubSub system
       {Phoenix.PubSub, name: ExFleetYards.PubSub}
       # Start a worker by calling: ExFleetYards.Worker.start_link(arg)

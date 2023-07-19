@@ -22,15 +22,20 @@ defmodule ExFleetYards.Repo.Account.TokenRevocation do
   end
 
   @doc """
-  Revoke a token
+  Revoke a token.
+
+  This should not be called, but use ExFleetYards.Token.revoke_token/1
   """
   def revoke_token(attrs) do
     revoke_token_changeset(attrs)
     |> Repo.insert()
-
-    # TODO: invalidate cache
   end
 
+  @doc """
+  Revoke all old tokens of a user.
+
+  This should not be called, but use ExFleetYards.Token.revoke_user/1
+  """
   def revoke_user(user_id) when is_binary(user_id) do
     %__MODULE__{}
     |> cast(
@@ -42,8 +47,6 @@ defmodule ExFleetYards.Repo.Account.TokenRevocation do
       [:user_id, :iat, :exp]
     )
     |> Repo.insert()
-
-    # TODO: invalidate cache
   end
 
   @doc """
@@ -63,7 +66,6 @@ defmodule ExFleetYards.Repo.Account.TokenRevocation do
   @doc """
   Returns true if the token is not revoked
   """
-  # TODO: caching
   def verify_token(token) do
     !Repo.exists?(verify_token_query(token))
   end

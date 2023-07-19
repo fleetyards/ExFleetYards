@@ -55,7 +55,7 @@ defmodule ExFleetYardsAuth.Auth do
   def log_out_user(conn) do
     user_token = conn.assigns[:user_token]
 
-    Account.TokenRevocation.revoke_token(user_token)
+    Token.revoke_token(user_token)
 
     if live_socket_id = get_session(conn, :live_socket_id) do
       ExFleetYardsAuth.Endpoint.broadcast(live_socket_id, "disconnect", %{})
@@ -68,7 +68,7 @@ defmodule ExFleetYardsAuth.Auth do
     with user_cookie when user_cookie != nil <- conn.cookies[@remember_me_cookie],
          {:ok, claims} <- Token.verify_and_validate(user_cookie) do
       Logger.debug("Revoked remember me token", user_id: claims["sub"])
-      Account.TokenRevocation.revoke_token(claims)
+      Token.revoke_token(claims)
     else
       _ ->
         nil

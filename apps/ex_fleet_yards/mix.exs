@@ -50,6 +50,8 @@ defmodule ExFleetYards.MixProject do
       {:chunkr, "~> 0.2.1"},
       {:bcrypt_elixir, "~> 3.0"},
       {:boruta, "~> 2.2"},
+      {:nebulex, "~> 2.5", override: true},
+      {:shards, "~> 1.0"},
       {:seedex, "~> 0.3.0",
        only: [:dev, :test], github: "fleetyards/seedex", branch: "seeds_path"}
     ]

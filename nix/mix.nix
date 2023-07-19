@@ -608,12 +608,12 @@ let
 
     nebulex = buildMix rec {
       name = "nebulex";
-      version = "2.4.2";
+      version = "2.5.2";
 
       src = fetchHex {
         pkg = "${name}";
         version = "${version}";
-        sha256 = "0lms95b8zwpa634f6wnwa5nj259m5jhd142rr4a7dm0gfzjqiy69";
+        sha256 = "1izimabrgplq17fzcqplijws3ahsy8fmnl92r8gacbzl5hq258b1";
       };
 
       beamDeps = [ decorator shards telemetry ];

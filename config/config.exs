@@ -42,6 +42,15 @@ config :ex_fleet_yards, ExFleetYards.Repo, migration_source: "ecto_schema_migrat
 # at the `config/runtime.exs`.
 config :ex_fleet_yards, ExFleetYards.Mailer, adapter: Swoosh.Adapters.Local
 
+# Cache
+config :ex_fleet_yards, ExFleetYards.Token.Cache,
+  backend: :shards,
+  gc_interval: :timer.hours(6),
+  max_size: 1_000_000,
+  allocated_memory: 512_000_000,
+  gc_cleanup_min_timeout: :timer.seconds(10),
+  gc_cleanup_max_timeout: :timer.minutes(10)
+
 # Swoosh API client is needed for adapters other than SMTP.
 config :swoosh, :api_client, false
 
