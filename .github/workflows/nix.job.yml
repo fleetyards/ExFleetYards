@@ -21,4 +21,4 @@ jobs:
         name: fleetyards
         signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
     - run: nix build -L
-    - run: nix flake check
+    - run: nix flake check -L --impure
