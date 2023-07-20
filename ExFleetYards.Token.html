@@ -7,13 +7,13 @@
     <meta name="generator" content="ExDoc v0.29.4">
     <meta name="project" content="Fleetyards v0.1.0">
 
-    <title>ExFleetYards.Repo.Account.UserToken — Fleetyards v0.1.0</title>
+    <title>ExFleetYards.Token — Fleetyards v0.1.0</title>
     <link rel="stylesheet" href="dist/html-elixir-HHVY3JYD.css" />
 
 
     <script src="dist/handlebars.runtime-NWIB6V2M.js"></script>
     <script src="dist/handlebars.templates-XWGFFSCD.js"></script>
-    <script src="dist/sidebar_items-625BF1DD.js"></script>
+    <script src="dist/sidebar_items-FCE3D359.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -98,14 +98,14 @@ Fleetyards
 </button>
 
 
-  <span translate="no">ExFleetYards.Repo.Account.UserToken</span> 
+  <span translate="no">ExFleetYards.Token</span> 
   <small class="app-vsn" translate="no">(Fleetyards v0.1.0)</small>
 
 </h1>
 
 
   <section id="moduledoc">
-<p>User Token</p>
+<p>  Token Confirugation</p>
   </section>
 
 
@@ -124,7 +124,7 @@ Fleetyards
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#build_api_token/2" translate="no">build_api_token(user, scopes)</a>
+        <a href="#cache_if_revoked/1" translate="no">cache_if_revoked(claims)</a>
 
       </div>
 
@@ -132,7 +132,27 @@ Fleetyards
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#build_auth_token/1" translate="no">build_auth_token(user)</a>
+        <a href="#generate_and_sign/2" translate="no">generate_and_sign(extra_claims \\ %{}, key \\ __default_signer__())</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Combines <code class="inline">generate_claims/1</code> and <code class="inline">encode_and_sign/2</code></p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#generate_and_sign!/2" translate="no">generate_and_sign!(extra_claims \\ %{}, key \\ __default_signer__())</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Same as <a href="#generate_and_sign/2"><code class="inline">generate_and_sign/2</code></a> but raises if error</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#generate_auth_token/1" translate="no">generate_auth_token(user)</a>
 
       </div>
 
@@ -140,19 +160,7 @@ Fleetyards
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#build_hashed_token/2" translate="no">build_hashed_token(user, context \\ &quot;api&quot;)</a>
-
-      </div>
-
-        <div class="summary-synopsis"><p>Generates a token that will be stored in a signed place,
-such as session or cookie. As they are signed, those
-tokens do not need to be hashed.</p></div>
-
-    </div>
-
-    <div class="summary-row">
-      <div class="summary-signature">
-        <a href="#changeset/2" translate="no">changeset(token \\ %__MODULE__{}, attrs)</a>
+        <a href="#generate_remember_token/1" translate="no">generate_remember_token(user)</a>
 
       </div>
 
@@ -160,7 +168,7 @@ tokens do not need to be hashed.</p></div>
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#create_confirm_token/1" translate="no">create_confirm_token(user)</a>
+        <a href="#remember_exp/0" translate="no">remember_exp()</a>
 
       </div>
 
@@ -168,7 +176,17 @@ tokens do not need to be hashed.</p></div>
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#scopes/0" translate="no">scopes()</a>
+        <a href="#revoke_exp/0" translate="no">revoke_exp()</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Biggest exp, used to revoke tokens based on iat</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#revoke_token/1" translate="no">revoke_token(claims)</a>
 
       </div>
 
@@ -176,17 +194,7 @@ tokens do not need to be hashed.</p></div>
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#token_and_context_query/2" translate="no">token_and_context_query(token, context)</a>
-
-      </div>
-
-        <div class="summary-synopsis"><p>Returns the given token with the given context.</p></div>
-
-    </div>
-
-    <div class="summary-row">
-      <div class="summary-signature">
-        <a href="#transform_scope/1" translate="no">transform_scope(arg)</a>
+        <a href="#revoke_user/1" translate="no">revoke_user(user_id)</a>
 
       </div>
 
@@ -194,51 +202,21 @@ tokens do not need to be hashed.</p></div>
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#transform_scopes/1" translate="no">transform_scopes(scopes)</a>
+        <a href="#verify_and_validate/3" translate="no">verify_and_validate(bearer_token, key \\ __default_signer__(), context \\ %{})</a>
 
       </div>
+
+        <div class="summary-synopsis"><p>Combines <code class="inline">verify/2</code> and <code class="inline">validate/2</code></p></div>
 
     </div>
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#user_and_contexts_query/2" translate="no">user_and_contexts_query(user, context)</a>
+        <a href="#verify_and_validate!/3" translate="no">verify_and_validate!(bearer_token, key \\ __default_signer__(), context \\ %{})</a>
 
       </div>
 
-        <div class="summary-synopsis"><p>Gets all tokens for the given user for the given contexts.</p></div>
-
-    </div>
-
-    <div class="summary-row">
-      <div class="summary-signature">
-        <a href="#user_and_id_query/2" translate="no">user_and_id_query(user, id)</a>
-
-      </div>
-
-    </div>
-
-    <div class="summary-row">
-      <div class="summary-signature">
-        <a href="#verify_hashed_token/2" translate="no">verify_hashed_token(token, context \\ &quot;api&quot;)</a>
-
-      </div>
-
-    </div>
-
-    <div class="summary-row">
-      <div class="summary-signature">
-        <a href="#verify_token/2" translate="no">verify_token(token, context)</a>
-
-      </div>
-
-    </div>
-
-    <div class="summary-row">
-      <div class="summary-signature">
-        <a href="#verify_token/3" translate="no">verify_token(token, context, days)</a>
-
-      </div>
+        <div class="summary-synopsis"><p>Same as <a href="#verify_and_validate/2"><code class="inline">verify_and_validate/2</code></a> but raises if error</p></div>
 
     </div>
 
@@ -256,14 +234,14 @@ tokens do not need to be hashed.</p></div>
 Functions
     </h1>
     <div class="functions-list">
-<section class="detail" id="build_api_token/2">
+<section class="detail" id="cache_if_revoked/1">
 
   <div class="detail-header">
-    <a href="#build_api_token/2" class="detail-link" title="Link to this function">
+    <a href="#cache_if_revoked/1" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">build_api_token(user, scopes)</h1>
+    <h1 class="signature" translate="no">cache_if_revoked(claims)</h1>
 
 
   </div>
@@ -273,14 +251,69 @@ Functions
 
   </section>
 </section>
-<section class="detail" id="build_auth_token/1">
+<section class="detail" id="generate_and_sign/2">
+
+    <span id="generate_and_sign/0"></span>
+
+    <span id="generate_and_sign/1"></span>
 
   <div class="detail-header">
-    <a href="#build_auth_token/1" class="detail-link" title="Link to this function">
+    <a href="#generate_and_sign/2" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">build_auth_token(user)</h1>
+    <h1 class="signature" translate="no">generate_and_sign(extra_claims \\ %{}, key \\ __default_signer__())</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> generate_and_sign(<a href="https://hexdocs.pm/joken/2.6.0/Joken.html#t:claims/0">Joken.claims</a>(), <a href="https://hexdocs.pm/joken/2.6.0/Joken.html#t:signer_arg/0">Joken.signer_arg</a>()) ::
+  {:ok, <a href="https://hexdocs.pm/joken/2.6.0/Joken.html#t:bearer_token/0">Joken.bearer_token</a>(), <a href="https://hexdocs.pm/joken/2.6.0/Joken.html#t:claims/0">Joken.claims</a>()} | {:error, <a href="https://hexdocs.pm/joken/2.6.0/Joken.html#t:error_reason/0">Joken.error_reason</a>()}</pre>
+
+      </div>
+
+<p>Combines <code class="inline">generate_claims/1</code> and <code class="inline">encode_and_sign/2</code></p>
+  </section>
+</section>
+<section class="detail" id="generate_and_sign!/2">
+
+    <span id="generate_and_sign!/0"></span>
+
+    <span id="generate_and_sign!/1"></span>
+
+  <div class="detail-header">
+    <a href="#generate_and_sign!/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">generate_and_sign!(extra_claims \\ %{}, key \\ __default_signer__())</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> generate_and_sign!(<a href="https://hexdocs.pm/joken/2.6.0/Joken.html#t:claims/0">Joken.claims</a>(), <a href="https://hexdocs.pm/joken/2.6.0/Joken.html#t:signer_arg/0">Joken.signer_arg</a>()) :: <a href="https://hexdocs.pm/joken/2.6.0/Joken.html#t:bearer_token/0">Joken.bearer_token</a>()</pre>
+
+      </div>
+
+<p>Same as <a href="#generate_and_sign/2"><code class="inline">generate_and_sign/2</code></a> but raises if error</p>
+  </section>
+</section>
+<section class="detail" id="generate_auth_token/1">
+
+  <div class="detail-header">
+    <a href="#generate_auth_token/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">generate_auth_token(user)</h1>
 
 
   </div>
@@ -290,37 +323,14 @@ Functions
 
   </section>
 </section>
-<section class="detail" id="build_hashed_token/2">
-
-    <span id="build_hashed_token/1"></span>
+<section class="detail" id="generate_remember_token/1">
 
   <div class="detail-header">
-    <a href="#build_hashed_token/2" class="detail-link" title="Link to this function">
+    <a href="#generate_remember_token/1" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">build_hashed_token(user, context \\ &quot;api&quot;)</h1>
-
-
-  </div>
-
-  <section class="docstring">
-
-<p>Generates a token that will be stored in a signed place,
-such as session or cookie. As they are signed, those
-tokens do not need to be hashed.</p>
-  </section>
-</section>
-<section class="detail" id="changeset/2">
-
-    <span id="changeset/1"></span>
-
-  <div class="detail-header">
-    <a href="#changeset/2" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">changeset(token \\ %__MODULE__{}, attrs)</h1>
+    <h1 class="signature" translate="no">generate_remember_token(user)</h1>
 
 
   </div>
@@ -330,14 +340,14 @@ tokens do not need to be hashed.</p>
 
   </section>
 </section>
-<section class="detail" id="create_confirm_token/1">
+<section class="detail" id="remember_exp/0">
 
   <div class="detail-header">
-    <a href="#create_confirm_token/1" class="detail-link" title="Link to this function">
+    <a href="#remember_exp/0" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">create_confirm_token(user)</h1>
+    <h1 class="signature" translate="no">remember_exp()</h1>
 
 
   </div>
@@ -347,14 +357,31 @@ tokens do not need to be hashed.</p>
 
   </section>
 </section>
-<section class="detail" id="scopes/0">
+<section class="detail" id="revoke_exp/0">
 
   <div class="detail-header">
-    <a href="#scopes/0" class="detail-link" title="Link to this function">
+    <a href="#revoke_exp/0" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">scopes()</h1>
+    <h1 class="signature" translate="no">revoke_exp()</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Biggest exp, used to revoke tokens based on iat</p>
+  </section>
+</section>
+<section class="detail" id="revoke_token/1">
+
+  <div class="detail-header">
+    <a href="#revoke_token/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">revoke_token(claims)</h1>
 
 
   </div>
@@ -364,31 +391,14 @@ tokens do not need to be hashed.</p>
 
   </section>
 </section>
-<section class="detail" id="token_and_context_query/2">
+<section class="detail" id="revoke_user/1">
 
   <div class="detail-header">
-    <a href="#token_and_context_query/2" class="detail-link" title="Link to this function">
+    <a href="#revoke_user/1" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">token_and_context_query(token, context)</h1>
-
-
-  </div>
-
-  <section class="docstring">
-
-<p>Returns the given token with the given context.</p>
-  </section>
-</section>
-<section class="detail" id="transform_scope/1">
-
-  <div class="detail-header">
-    <a href="#transform_scope/1" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">transform_scope(arg)</h1>
+    <h1 class="signature" translate="no">revoke_user(user_id)</h1>
 
 
   </div>
@@ -398,108 +408,60 @@ tokens do not need to be hashed.</p>
 
   </section>
 </section>
-<section class="detail" id="transform_scopes/1">
+<section class="detail" id="verify_and_validate/3">
+
+    <span id="verify_and_validate/1"></span>
+
+    <span id="verify_and_validate/2"></span>
 
   <div class="detail-header">
-    <a href="#transform_scopes/1" class="detail-link" title="Link to this function">
+    <a href="#verify_and_validate/3" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">transform_scopes(scopes)</h1>
+    <h1 class="signature" translate="no">verify_and_validate(bearer_token, key \\ __default_signer__(), context \\ %{})</h1>
 
 
   </div>
 
   <section class="docstring">
 
+      <div class="specs">
 
+          <pre translate="no"><span class="attribute">@spec</span> verify_and_validate(<a href="https://hexdocs.pm/joken/2.6.0/Joken.html#t:bearer_token/0">Joken.bearer_token</a>(), <a href="https://hexdocs.pm/joken/2.6.0/Joken.html#t:signer_arg/0">Joken.signer_arg</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>()) ::
+  {:ok, <a href="https://hexdocs.pm/joken/2.6.0/Joken.html#t:claims/0">Joken.claims</a>()} | {:error, <a href="https://hexdocs.pm/joken/2.6.0/Joken.html#t:error_reason/0">Joken.error_reason</a>()}</pre>
+
+      </div>
+
+<p>Combines <code class="inline">verify/2</code> and <code class="inline">validate/2</code></p>
   </section>
 </section>
-<section class="detail" id="user_and_contexts_query/2">
+<section class="detail" id="verify_and_validate!/3">
+
+    <span id="verify_and_validate!/1"></span>
+
+    <span id="verify_and_validate!/2"></span>
 
   <div class="detail-header">
-    <a href="#user_and_contexts_query/2" class="detail-link" title="Link to this function">
+    <a href="#verify_and_validate!/3" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">user_and_contexts_query(user, context)</h1>
+    <h1 class="signature" translate="no">verify_and_validate!(bearer_token, key \\ __default_signer__(), context \\ %{})</h1>
 
 
   </div>
 
   <section class="docstring">
 
-<p>Gets all tokens for the given user for the given contexts.</p>
-  </section>
-</section>
-<section class="detail" id="user_and_id_query/2">
+      <div class="specs">
 
-  <div class="detail-header">
-    <a href="#user_and_id_query/2" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">user_and_id_query(user, id)</h1>
+          <pre translate="no"><span class="attribute">@spec</span> verify_and_validate!(<a href="https://hexdocs.pm/joken/2.6.0/Joken.html#t:bearer_token/0">Joken.bearer_token</a>(), <a href="https://hexdocs.pm/joken/2.6.0/Joken.html#t:signer_arg/0">Joken.signer_arg</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>()) ::
+  <a href="https://hexdocs.pm/joken/2.6.0/Joken.html#t:claims/0">Joken.claims</a>()</pre>
 
+      </div>
 
-  </div>
-
-  <section class="docstring">
-
-
-  </section>
-</section>
-<section class="detail" id="verify_hashed_token/2">
-
-    <span id="verify_hashed_token/1"></span>
-
-  <div class="detail-header">
-    <a href="#verify_hashed_token/2" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">verify_hashed_token(token, context \\ &quot;api&quot;)</h1>
-
-
-  </div>
-
-  <section class="docstring">
-
-
-  </section>
-</section>
-<section class="detail" id="verify_token/2">
-
-  <div class="detail-header">
-    <a href="#verify_token/2" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">verify_token(token, context)</h1>
-
-
-  </div>
-
-  <section class="docstring">
-
-
-  </section>
-</section>
-<section class="detail" id="verify_token/3">
-
-  <div class="detail-header">
-    <a href="#verify_token/3" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">verify_token(token, context, days)</h1>
-
-
-  </div>
-
-  <section class="docstring">
-
-
+<p>Same as <a href="#verify_and_validate/2"><code class="inline">verify_and_validate/2</code></a> but raises if error</p>
   </section>
 </section>
 

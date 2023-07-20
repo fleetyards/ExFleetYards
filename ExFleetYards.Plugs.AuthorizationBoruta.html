@@ -7,7 +7,7 @@
     <meta name="generator" content="ExDoc v0.29.4">
     <meta name="project" content="Fleetyards v0.1.0">
 
-    <title>ExFleetYards.Repo.Fleet.Slug.Type — Fleetyards v0.1.0</title>
+    <title>ExFleetYards.Plugs.AuthorizationBoruta — Fleetyards v0.1.0</title>
     <link rel="stylesheet" href="dist/html-elixir-HHVY3JYD.css" />
 
 
@@ -98,14 +98,33 @@ Fleetyards
 </button>
 
 
-  <span translate="no">ExFleetYards.Repo.Fleet.Slug.Type</span> 
+  <span translate="no">ExFleetYards.Plugs.AuthorizationBoruta</span> 
   <small class="app-vsn" translate="no">(Fleetyards v0.1.0)</small>
 
 </h1>
 
 
   <section id="moduledoc">
-<p>This module represent the auto-generated <a href="https://hexdocs.pm/ecto/3.10.1/Ecto.Type.html"><code class="inline">Ecto.Type</code></a> for slug-field.</p><p>It basically just calls the methods of the basic <code class="inline">Type</code> module.</p>
+<p>This module provides plugs for authorization and authentication.</p><h2 id="module-plugs" class="section-heading">
+  <a href="#module-plugs" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
+  <p class="sr-only">plugs</p>
+  </a>
+  Plugs
+</h2>
+<h3 id="module-require_authenticated-2" class="section-heading">
+  <a href="#module-require_authenticated-2" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
+  <p class="sr-only">require_authenticated-2</p>
+  </a>
+  <a href="#require_authenticated/2"><code class="inline">require_authenticated/2</code></a>
+</h3>
+<p>Ensures that the user is authenticated by checking for a valid bearer token in
+the <code class="inline">authorization</code> header.</p><p>It assigns the current token and user to the connection.</p><h3 id="module-authorize-2" class="section-heading">
+  <a href="#module-authorize-2" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
+  <p class="sr-only">authorize-2</p>
+  </a>
+  <a href="#authorize/2"><code class="inline">authorize/2</code></a>
+</h3>
+<p>Ensures that the user has the required OAuth2 scopes.</p><p>Takes a list of required scopes as a parameter.</p>
   </section>
 
 
@@ -124,61 +143,22 @@ Fleetyards
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#cast/1" translate="no">cast(value)</a>
+        <a href="#authorize/2" translate="no">authorize(conn, required_scopes)</a>
 
       </div>
 
-        <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/ecto/3.10.1/Ecto.Type.html#c:cast/1"><code class="inline">Ecto.Type.cast/1</code></a>.</p></div>
+        <div class="summary-synopsis"><p>Ensures that the user has the required OAuth2 scopes.</p></div>
 
     </div>
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#dump/1" translate="no">dump(value)</a>
+        <a href="#require_authenticated/2" translate="no">require_authenticated(conn, opts)</a>
 
       </div>
 
-        <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/ecto/3.10.1/Ecto.Type.html#c:dump/1"><code class="inline">Ecto.Type.dump/1</code></a>.</p></div>
-
-    </div>
-
-    <div class="summary-row">
-      <div class="summary-signature">
-        <a href="#embed_as/1" translate="no">embed_as(value)</a>
-
-      </div>
-
-        <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/ecto/3.10.1/Ecto.Type.html#c:embed_as/1"><code class="inline">Ecto.Type.embed_as/1</code></a>.</p></div>
-
-    </div>
-
-    <div class="summary-row">
-      <div class="summary-signature">
-        <a href="#equal?/2" translate="no">equal?(term1, term2)</a>
-
-      </div>
-
-        <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/ecto/3.10.1/Ecto.Type.html#c:equal?/2"><code class="inline">Ecto.Type.equal?/2</code></a>.</p></div>
-
-    </div>
-
-    <div class="summary-row">
-      <div class="summary-signature">
-        <a href="#load/1" translate="no">load(value)</a>
-
-      </div>
-
-        <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/ecto/3.10.1/Ecto.Type.html#c:load/1"><code class="inline">Ecto.Type.load/1</code></a>.</p></div>
-
-    </div>
-
-    <div class="summary-row">
-      <div class="summary-signature">
-        <a href="#type/0" translate="no">type()</a>
-
-      </div>
-
-        <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/ecto/3.10.1/Ecto.Type.html#c:type/0"><code class="inline">Ecto.Type.type/0</code></a>.</p></div>
+        <div class="summary-synopsis"><p>Ensures that the user is authenticated by checking for a valid bearer token in
+the <code class="inline">authorization</code> header.</p></div>
 
     </div>
 
@@ -196,106 +176,51 @@ Fleetyards
 Functions
     </h1>
     <div class="functions-list">
-<section class="detail" id="cast/1">
+<section class="detail" id="authorize/2">
 
   <div class="detail-header">
-    <a href="#cast/1" class="detail-link" title="Link to this function">
+    <a href="#authorize/2" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">cast(value)</h1>
+    <h1 class="signature" translate="no">authorize(conn, required_scopes)</h1>
 
 
   </div>
 
   <section class="docstring">
 
-<p>Callback implementation for <a href="https://hexdocs.pm/ecto/3.10.1/Ecto.Type.html#c:cast/1"><code class="inline">Ecto.Type.cast/1</code></a>.</p>
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> authorize(<a href="https://hexdocs.pm/plug/1.14.2/Plug.Conn.html#t:t/0">Plug.Conn.t</a>(), <a href="https://hexdocs.pm/elixir/Keyword.html#t:t/0">Keyword.t</a>()) :: <a href="https://hexdocs.pm/plug/1.14.2/Plug.Conn.html#t:t/0">Plug.Conn.t</a>()</pre>
+
+      </div>
+
+<p>Ensures that the user has the required OAuth2 scopes.</p><p>Takes a list of required scopes as a parameter.</p>
   </section>
 </section>
-<section class="detail" id="dump/1">
+<section class="detail" id="require_authenticated/2">
 
   <div class="detail-header">
-    <a href="#dump/1" class="detail-link" title="Link to this function">
+    <a href="#require_authenticated/2" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">dump(value)</h1>
+    <h1 class="signature" translate="no">require_authenticated(conn, opts)</h1>
 
 
   </div>
 
   <section class="docstring">
 
-<p>Callback implementation for <a href="https://hexdocs.pm/ecto/3.10.1/Ecto.Type.html#c:dump/1"><code class="inline">Ecto.Type.dump/1</code></a>.</p>
-  </section>
-</section>
-<section class="detail" id="embed_as/1">
+      <div class="specs">
 
-  <div class="detail-header">
-    <a href="#embed_as/1" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">embed_as(value)</h1>
+          <pre translate="no"><span class="attribute">@spec</span> require_authenticated(<a href="https://hexdocs.pm/plug/1.14.2/Plug.Conn.html#t:t/0">Plug.Conn.t</a>(), <a href="https://hexdocs.pm/elixir/Keyword.html#t:t/0">Keyword.t</a>()) :: <a href="https://hexdocs.pm/plug/1.14.2/Plug.Conn.html#t:t/0">Plug.Conn.t</a>()</pre>
 
+      </div>
 
-  </div>
-
-  <section class="docstring">
-
-<p>Callback implementation for <a href="https://hexdocs.pm/ecto/3.10.1/Ecto.Type.html#c:embed_as/1"><code class="inline">Ecto.Type.embed_as/1</code></a>.</p>
-  </section>
-</section>
-<section class="detail" id="equal?/2">
-
-  <div class="detail-header">
-    <a href="#equal?/2" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">equal?(term1, term2)</h1>
-
-
-  </div>
-
-  <section class="docstring">
-
-<p>Callback implementation for <a href="https://hexdocs.pm/ecto/3.10.1/Ecto.Type.html#c:equal?/2"><code class="inline">Ecto.Type.equal?/2</code></a>.</p>
-  </section>
-</section>
-<section class="detail" id="load/1">
-
-  <div class="detail-header">
-    <a href="#load/1" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">load(value)</h1>
-
-
-  </div>
-
-  <section class="docstring">
-
-<p>Callback implementation for <a href="https://hexdocs.pm/ecto/3.10.1/Ecto.Type.html#c:load/1"><code class="inline">Ecto.Type.load/1</code></a>.</p>
-  </section>
-</section>
-<section class="detail" id="type/0">
-
-  <div class="detail-header">
-    <a href="#type/0" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">type()</h1>
-
-
-  </div>
-
-  <section class="docstring">
-
-<p>Callback implementation for <a href="https://hexdocs.pm/ecto/3.10.1/Ecto.Type.html#c:type/0"><code class="inline">Ecto.Type.type/0</code></a>.</p>
+<p>Ensures that the user is authenticated by checking for a valid bearer token in
+the <code class="inline">authorization</code> header.</p><p>It assigns the current token and user to the connection.</p>
   </section>
 </section>
 

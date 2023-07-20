@@ -13,7 +13,7 @@
 
     <script src="dist/handlebars.runtime-NWIB6V2M.js"></script>
     <script src="dist/handlebars.templates-XWGFFSCD.js"></script>
-    <script src="dist/sidebar_items-625BF1DD.js"></script>
+    <script src="dist/sidebar_items-FCE3D359.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -132,47 +132,7 @@ Fleetyards
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#confirm_user_by_token/1" translate="no">confirm_user_by_token(token)</a>
-
-      </div>
-
-    </div>
-
-    <div class="summary-row">
-      <div class="summary-signature">
-        <a href="#create_confirm_token/1" translate="no">create_confirm_token(user)</a>
-
-      </div>
-
-    </div>
-
-    <div class="summary-row">
-      <div class="summary-signature">
-        <a href="#delete_token/2" translate="no">delete_token(token, context \\ &quot;api&quot;)</a>
-
-      </div>
-
-    </div>
-
-    <div class="summary-row">
-      <div class="summary-signature">
         <a href="#delete_user/1" translate="no">delete_user(user)</a>
-
-      </div>
-
-    </div>
-
-    <div class="summary-row">
-      <div class="summary-signature">
-        <a href="#get_api_token/2" translate="no">get_api_token(user, scopes)</a>
-
-      </div>
-
-    </div>
-
-    <div class="summary-row">
-      <div class="summary-signature">
-        <a href="#get_auth_token/1" translate="no">get_auth_token(user)</a>
 
       </div>
 
@@ -214,14 +174,6 @@ Fleetyards
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#get_user_by_token/2" translate="no">get_user_by_token(token, context \\ &quot;api&quot;)</a>
-
-      </div>
-
-    </div>
-
-    <div class="summary-row">
-      <div class="summary-signature">
         <a href="#get_user_by_username/2" translate="no">get_user_by_username(username, confirmed \\ true)</a>
 
       </div>
@@ -242,15 +194,7 @@ Fleetyards
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#send_confirm_token/1" translate="no">send_confirm_token(user)</a>
-
-      </div>
-
-    </div>
-
-    <div class="summary-row">
-      <div class="summary-signature">
-        <a href="#send_confirm_token/2" translate="no">send_confirm_token(user, token)</a>
+        <a href="#update_last_signin!/2" translate="no">update_last_signin!(user, conn)</a>
 
       </div>
 
@@ -289,67 +233,6 @@ Functions
 
   </section>
 </section>
-<section class="detail" id="confirm_user_by_token/1">
-
-  <div class="detail-header">
-    <a href="#confirm_user_by_token/1" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">confirm_user_by_token(token)</h1>
-
-
-  </div>
-
-  <section class="docstring">
-
-      <div class="specs">
-
-          <pre translate="no"><span class="attribute">@spec</span> confirm_user_by_token(<a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()) ::
-  {:ok, <a href="ExFleetYards.Repo.Account.User.html#t:t/0">ExFleetYards.Repo.Account.User.t</a>()}
-  | {:error, <a href="https://hexdocs.pm/ecto/3.10.1/Ecto.Changeset.html#t:t/0">Ecto.Changeset.t</a>() | :not_found}</pre>
-
-      </div>
-
-
-  </section>
-</section>
-<section class="detail" id="create_confirm_token/1">
-
-  <div class="detail-header">
-    <a href="#create_confirm_token/1" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">create_confirm_token(user)</h1>
-
-
-  </div>
-
-  <section class="docstring">
-
-
-  </section>
-</section>
-<section class="detail" id="delete_token/2">
-
-    <span id="delete_token/1"></span>
-
-  <div class="detail-header">
-    <a href="#delete_token/2" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">delete_token(token, context \\ &quot;api&quot;)</h1>
-
-
-  </div>
-
-  <section class="docstring">
-
-
-  </section>
-</section>
 <section class="detail" id="delete_user/1">
 
   <div class="detail-header">
@@ -370,40 +253,6 @@ Functions
   {:ok, <a href="ExFleetYards.Repo.Account.User.html#t:t/0">ExFleetYards.Repo.Account.User.t</a>()} | {:error, <a href="https://hexdocs.pm/ecto/3.10.1/Ecto.Changeset.html#t:t/0">Ecto.Changeset.t</a>()}</pre>
 
       </div>
-
-
-  </section>
-</section>
-<section class="detail" id="get_api_token/2">
-
-  <div class="detail-header">
-    <a href="#get_api_token/2" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">get_api_token(user, scopes)</h1>
-
-
-  </div>
-
-  <section class="docstring">
-
-
-  </section>
-</section>
-<section class="detail" id="get_auth_token/1">
-
-  <div class="detail-header">
-    <a href="#get_auth_token/1" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">get_auth_token(user)</h1>
-
-
-  </div>
-
-  <section class="docstring">
 
 
   </section>
@@ -449,9 +298,9 @@ Functions
   </a>
   Examples
 </h2>
-<pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="n">get_user_by_email</span><span class="p" data-group-id="7259464871-1">(</span><span class="s">&quot;foo@example.com&quot;</span><span class="p" data-group-id="7259464871-1">)</span><span class="w">
-</span><span class="p" data-group-id="7259464871-2">%</span><span class="nc" data-group-id="7259464871-2">User</span><span class="p" data-group-id="7259464871-2">{</span><span class="p" data-group-id="7259464871-2">}</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="n">get_user_by_email</span><span class="p" data-group-id="7259464871-3">(</span><span class="s">&quot;unknown@example.com&quot;</span><span class="p" data-group-id="7259464871-3">)</span><span class="w">
+<pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="n">get_user_by_email</span><span class="p" data-group-id="9620866766-1">(</span><span class="s">&quot;foo@example.com&quot;</span><span class="p" data-group-id="9620866766-1">)</span><span class="w">
+</span><span class="p" data-group-id="9620866766-2">%</span><span class="nc" data-group-id="9620866766-2">User</span><span class="p" data-group-id="9620866766-2">{</span><span class="p" data-group-id="9620866766-2">}</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">get_user_by_email</span><span class="p" data-group-id="9620866766-3">(</span><span class="s">&quot;unknown@example.com&quot;</span><span class="p" data-group-id="9620866766-3">)</span><span class="w">
 </span><span class="no">nil</span></code></pre>
   </section>
 </section>
@@ -493,25 +342,6 @@ Functions
 
   </section>
 </section>
-<section class="detail" id="get_user_by_token/2">
-
-    <span id="get_user_by_token/1"></span>
-
-  <div class="detail-header">
-    <a href="#get_user_by_token/2" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">get_user_by_token(token, context \\ &quot;api&quot;)</h1>
-
-
-  </div>
-
-  <section class="docstring">
-
-
-  </section>
-</section>
 <section class="detail" id="get_user_by_username/2">
 
     <span id="get_user_by_username/1"></span>
@@ -534,9 +364,9 @@ Functions
   </a>
   Examples
 </h2>
-<pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="n">get_user_by_username</span><span class="p" data-group-id="6498347587-1">(</span><span class="s">&quot;foo&quot;</span><span class="p" data-group-id="6498347587-1">)</span><span class="w">
-</span><span class="p" data-group-id="6498347587-2">%</span><span class="nc" data-group-id="6498347587-2">User</span><span class="p" data-group-id="6498347587-2">{</span><span class="p" data-group-id="6498347587-2">}</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="n">get_user_by_username</span><span class="p" data-group-id="6498347587-3">(</span><span class="s">&quot;unknown&quot;</span><span class="p" data-group-id="6498347587-3">)</span><span class="w">
+<pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="n">get_user_by_username</span><span class="p" data-group-id="6673132548-1">(</span><span class="s">&quot;foo&quot;</span><span class="p" data-group-id="6673132548-1">)</span><span class="w">
+</span><span class="p" data-group-id="6673132548-2">%</span><span class="nc" data-group-id="6673132548-2">User</span><span class="p" data-group-id="6673132548-2">{</span><span class="p" data-group-id="6673132548-2">}</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">get_user_by_username</span><span class="p" data-group-id="6673132548-3">(</span><span class="s">&quot;unknown&quot;</span><span class="p" data-group-id="6673132548-3">)</span><span class="w">
 </span><span class="no">nil</span></code></pre>
   </section>
 </section>
@@ -560,37 +390,20 @@ Functions
   </a>
   Examples
 </h2>
-<pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="n">register_user</span><span class="p" data-group-id="2568777215-1">(</span><span class="p" data-group-id="2568777215-2">%{</span><span class="ss">field</span><span class="p">:</span><span class="w"> </span><span class="n">value</span><span class="p" data-group-id="2568777215-2">}</span><span class="p" data-group-id="2568777215-1">)</span><span class="w">
-</span><span class="p" data-group-id="2568777215-3">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="2568777215-4">%</span><span class="nc" data-group-id="2568777215-4">User</span><span class="p" data-group-id="2568777215-4">{</span><span class="p" data-group-id="2568777215-4">}</span><span class="p" data-group-id="2568777215-3">}</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="n">register_user</span><span class="p" data-group-id="2568777215-5">(</span><span class="p" data-group-id="2568777215-6">%{</span><span class="ss">field</span><span class="p">:</span><span class="w"> </span><span class="n">bad_value</span><span class="p" data-group-id="2568777215-6">}</span><span class="p" data-group-id="2568777215-5">)</span><span class="w">
-</span><span class="p" data-group-id="2568777215-7">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="2568777215-8">%</span><span class="nc" data-group-id="2568777215-8">Ecto.Changeset</span><span class="p" data-group-id="2568777215-8">{</span><span class="p" data-group-id="2568777215-8">}</span><span class="p" data-group-id="2568777215-7">}</span></code></pre>
+<pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="n">register_user</span><span class="p" data-group-id="0003725704-1">(</span><span class="p" data-group-id="0003725704-2">%{</span><span class="ss">field</span><span class="p">:</span><span class="w"> </span><span class="n">value</span><span class="p" data-group-id="0003725704-2">}</span><span class="p" data-group-id="0003725704-1">)</span><span class="w">
+</span><span class="p" data-group-id="0003725704-3">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="0003725704-4">%</span><span class="nc" data-group-id="0003725704-4">User</span><span class="p" data-group-id="0003725704-4">{</span><span class="p" data-group-id="0003725704-4">}</span><span class="p" data-group-id="0003725704-3">}</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">register_user</span><span class="p" data-group-id="0003725704-5">(</span><span class="p" data-group-id="0003725704-6">%{</span><span class="ss">field</span><span class="p">:</span><span class="w"> </span><span class="n">bad_value</span><span class="p" data-group-id="0003725704-6">}</span><span class="p" data-group-id="0003725704-5">)</span><span class="w">
+</span><span class="p" data-group-id="0003725704-7">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="0003725704-8">%</span><span class="nc" data-group-id="0003725704-8">Ecto.Changeset</span><span class="p" data-group-id="0003725704-8">{</span><span class="p" data-group-id="0003725704-8">}</span><span class="p" data-group-id="0003725704-7">}</span></code></pre>
   </section>
 </section>
-<section class="detail" id="send_confirm_token/1">
+<section class="detail" id="update_last_signin!/2">
 
   <div class="detail-header">
-    <a href="#send_confirm_token/1" class="detail-link" title="Link to this function">
+    <a href="#update_last_signin!/2" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">send_confirm_token(user)</h1>
-
-
-  </div>
-
-  <section class="docstring">
-
-
-  </section>
-</section>
-<section class="detail" id="send_confirm_token/2">
-
-  <div class="detail-header">
-    <a href="#send_confirm_token/2" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">send_confirm_token(user, token)</h1>
+    <h1 class="signature" translate="no">update_last_signin!(user, conn)</h1>
 
 
   </div>

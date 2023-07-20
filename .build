@@ -3,12 +3,14 @@ ExFleetYards.Config.html
 ExFleetYards.Mailer.User.html
 ExFleetYards.Mailer.html
 ExFleetYards.Oauth.ResourceOwners.html
+ExFleetYards.Plugs.ApiAuthorization.html
+ExFleetYards.Plugs.AuthorizationBoruta.html
 ExFleetYards.Release.Ecto.html
 ExFleetYards.Release.Tasks.html
+ExFleetYards.Repo.Account.TokenRevocation.html
 ExFleetYards.Repo.Account.User.SSOConnection.html
 ExFleetYards.Repo.Account.User.Totp.html
 ExFleetYards.Repo.Account.User.html
-ExFleetYards.Repo.Account.UserToken.html
 ExFleetYards.Repo.Account.Vehicle.NotFoundException.html
 ExFleetYards.Repo.Account.Vehicle.html
 ExFleetYards.Repo.Account.html
@@ -61,6 +63,8 @@ ExFleetYards.Repo.Types.TokenScope.html
 ExFleetYards.Repo.Types.html
 ExFleetYards.Repo.html
 ExFleetYards.Scopes.html
+ExFleetYards.Token.Cache.html
+ExFleetYards.Token.html
 ExFleetYards.Vault.Binary.html
 ExFleetYards.Vault.StringList.html
 ExFleetYards.Vault.html
@@ -178,7 +182,7 @@ dist/merriweather-latin-ext-300-normal-K6L27CZ5.woff2
 dist/merriweather-vietnamese-300-italic-EHHNZPUO.woff2
 dist/merriweather-vietnamese-300-normal-U376L4Z4.woff2
 dist/remixicon-NKANDIL5.woff2
-dist/search_items-28ADDAB0.js
-dist/sidebar_items-625BF1DD.js
+dist/search_items-6385AC6B.js
+dist/sidebar_items-FCE3D359.js
 index.html
 search.html
