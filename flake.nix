@@ -2,7 +2,7 @@
   description = "ExFleetYards Fleetyards api backend";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.11";
+    nixpkgs.url = "github:NixOS/nixpkgs";
     devenv.url = "github:cachix/devenv";
   };
   inputs.devenv.inputs.nixpkgs.follows = "/nixpkgs";
@@ -94,13 +94,14 @@
             modules = [
               {
                 packages = with pkgs;
-                  [ mix2nix git gnumake gcc ]
+                  [ mix2nix git gnumake gcc convco ]
                   ++ lib.optional pkgs.stdenv.isLinux pkgs.inotify-tools;
                 languages.elixir.enable = true;
 
                 enterShell = "";
                 pre-commit.hooks.actionlint.enable = true;
                 pre-commit.hooks.nixfmt.enable = true;
+                pre-commit.hooks.convco.enable = true;
                 pre-commit.hooks.mixfmt = {
                   enable = false; # Broken??
                   name = "Mix format";
