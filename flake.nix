@@ -123,6 +123,37 @@
                   [{ name = "fleet_yards_dev"; }];
               }
               ({ config, ... }: {
+                certificates = [
+                  "fleetyards.localhost"
+                  "api.fleetyards.localhost"
+                  "auth.fleetyards.localhost"
+                ];
+
+                services.caddy.enable = true;
+                services.caddy.config = ''
+                  {
+                  	auto_https disable_redirects
+                  }
+                '';
+                services.caddy.virtualHosts = let
+                  elixir_host = port: {
+                    extraConfig = ''
+                      tls ${config.devenv.state}/mkcert/fleetyards.localhost+2.pem ${config.devenv.state}/mkcert/fleetyards.localhost+2-key.pem
+
+                      reverse_proxy * http://localhost:${toString port}
+                    '';
+                  };
+                  tls = name: ''
+                    tls ${config.devenv.state}/mkcert/fleetyards.localhost+2.pem ${config.devenv.state}/mkcert/fleetyards.localhost+2-key.pem
+                    auto_https disable_redirects'';
+                  #"tls ${config.devenv.state}/mkcert/${name}.pem ${config.devenv.state}/mkcert/${name}-key.pem";
+                in {
+                  "fleetyards.localhost:8443" = elixir_host 4000;
+                  "api.fleetyards.localhost:8443" = elixir_host 4001;
+                  "auth.fleetyards.localhost:8443" = elixir_host 4002;
+                };
+              })
+              ({ config, ... }: {
                 process.implementation = "hivemind";
                 scripts.devenv-up.exec = ''
                   ${config.procfileScript}

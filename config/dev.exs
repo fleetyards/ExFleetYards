@@ -2,6 +2,16 @@ import Config
 
 # Configure your database
 if System.get_env("FLEETYARDS_IN_DEVENV") == "1" do
+  config :ex_fleet_yards_web, ExFleetYardsWeb.Endpoint,
+    url: [host: "fleetyards.localhost", port: 8443, scheme: "https"]
+
+  config :ex_fleet_yards_api, ExFleetYardsApi.Endpoint,
+    url: [host: "api.fleetyards.localhost", port: 8443, scheme: "https"]
+
+  config :ex_fleet_yards_auth, ExFleetYardsAuth.Endpoint,
+    url: [host: "auth.fleetyards.localhost", port: 8443, scheme: "https"]
+
+  config :boruta, Boruta.Oauth, issuer: "https://auth.fleetyards.net"
 else
   config :ex_fleet_yards, ExFleetYards.Repo,
     username: "fleet_yards_dev",
