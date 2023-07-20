@@ -49,6 +49,12 @@ config :ex_fleet_yards_auth, ExFleetYardsAuth.Endpoint,
   secret_key_base: "MWnMFg79YoPGiD41M5xSRapqHYo9TIQ46u+XEfb8GeSGJ7LE77sHfuAgSfqDHr67",
   server: false
 
+config :joken,
+  default_signer: [
+    signer_alg: "HS256",
+    key_octet: "fIUp5vsfpuAOreMtW0kIF96tglSXdjtmEYJTwcOsv68="
+  ]
+
 config :ex_fleet_yards_import,
   enable: false
 
@@ -66,4 +72,4 @@ config :ex_fleet_yards_auth, :oauth_module, Boruta.OauthMock
 config :ex_fleet_yards_auth, :openid_module, Boruta.OpenidMock
 
 # Mok authorization
-config :ex_fleet_yards_api, :authorization_module, ExFleetYardsApi.Plugs.AuthorizationMock
+config :ex_fleet_yards, :authorization_module, ExFleetYards.Plugs.ApiAuthorizationMock

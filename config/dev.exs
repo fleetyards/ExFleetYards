@@ -60,6 +60,13 @@ config :ex_fleet_yards_auth, ExFleetYardsAuth.Endpoint,
     tailwind: {Tailwind, :install_and_run, [:auth, ~w(--watch)]}
   ]
 
+config :joken,
+  default_signer: [
+    signer_alg: "HS256",
+    key_octet:
+      "M9wSYbVcLFTHIsbG94wj1b8VdwsTh2QPlCrFxyAFwg7s7/kkqfTXQc7lHvfYg+zdYkbl3ETjDKsH0Tcqq5bNEQ=="
+  ]
+
 # ## SSL Support
 #
 # In order to use HTTPS in development, a self-signed
@@ -108,7 +115,12 @@ config :ex_fleet_yards_auth, ExFleetYardsAuth.Endpoint,
   reloadable_apps: [:ex_fleet_yards_auth, :ex_fleet_yards]
 
 # Do not include metadata nor timestamps in development logs
-config :logger, :console, format: "[$level] $message\n"
+config :logger, :console,
+  format: "$metadata[$level] $message\n",
+  metadata: [:request_id, :user_id],
+  compile_time_purge_matching: [
+    [level_lower_than: :debug]
+  ]
 
 # Initialize plugs at runtime for faster development compilation
 config :phoenix, :plug_init_mode, :runtime

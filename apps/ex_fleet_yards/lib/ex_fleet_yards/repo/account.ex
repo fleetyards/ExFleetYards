@@ -4,7 +4,7 @@ defmodule ExFleetYards.Repo.Account do
   """
 
   alias ExFleetYards.Repo
-  alias ExFleetYards.Repo.Account.{User, UserToken}
+  alias ExFleetYards.Repo.Account.User
   import Ecto.Query
 
   ## Database getters
@@ -87,23 +87,6 @@ defmodule ExFleetYards.Repo.Account do
     Repo.delete(user)
   end
 
-  @spec confirm_user_by_token(String.t()) ::
-          {:ok, User.t()}
-          | {:error, Ecto.Changeset.t() | :not_found}
-  def confirm_user_by_token(token) do
-    with %UserToken{} = token <- get_user_by_token(token, "confirm"),
-         {:ok, user} <- confirm_user(token.user),
-         {:ok, _} <- Repo.delete(token) do
-      {:ok, user}
-    else
-      nil ->
-        {:error, :not_found}
-
-      {:error, _} = error ->
-        error
-    end
-  end
-
   def confirm_user(user, time \\ NaiveDateTime.utc_now())
 
   def confirm_user(id, time) when is_binary(id) do
@@ -117,50 +100,10 @@ defmodule ExFleetYards.Repo.Account do
     |> Repo.update()
   end
 
-  def get_api_token(user, scopes) do
-    {token, user_token} = UserToken.build_api_token(user, scopes)
-    Repo.insert!(user_token)
-    token
-  end
-
-  def get_auth_token(user) do
-    {token, user_token} = UserToken.build_auth_token(user)
-    Repo.insert!(user_token)
-
-    User.login_changeset(user)
-    |> Repo.update()
-
-    token
-  end
-
-  def create_confirm_token(user) do
-    {token, user_token} = UserToken.create_confirm_token(user)
-    Repo.insert!(user_token)
-    token
-  end
-
-  def delete_token(token, context \\ "api") do
-    Repo.delete_all(
-      from(t in UserToken,
-        where: t.token == ^token and t.context == ^context
-      )
-    )
-  end
-
-  def send_confirm_token(user) do
-    token = create_confirm_token(user)
-    send_confirm_token(user, token)
-  end
-
-  def send_confirm_token(user, token) do
-  end
-
-  def get_user_by_token(token, context \\ "api") do
-    UserToken.verify_hashed_token(token, context)
-    |> case do
-      {:ok, query} -> Repo.one(query)
-      :error -> nil
-    end
+  def update_last_signin!(%User{} = user, conn) do
+    user
+    |> User.login_changeset(conn)
+    |> Repo.update!()
   end
 
   defp user_query_set_confirmed(query, true) do

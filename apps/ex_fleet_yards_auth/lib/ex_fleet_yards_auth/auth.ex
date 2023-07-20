@@ -4,28 +4,39 @@ defmodule ExFleetYardsAuth.Auth do
   """
   import Plug.Conn
   import Phoenix.Controller
+  require Logger
 
   alias ExFleetYards.Repo.Account
+  alias ExFleetYards.Token
   alias ExFleetYardsAuth.Router.Helpers, as: Routes
 
   # Make the remember me cookie valid for 60 days.
   @max_age 60 * 60 * 24 * 60
   @remember_me_cookie "_ex_fleet_yards_auth_user_remember_me"
-  @remember_me_options [sign: true, max_age: @max_age, same_site: "Lax"]
+  @remember_me_options [sign: false, max_age: @max_age, same_site: "Lax"]
 
   def log_in_user(conn, user, params \\ %{}) do
-    token = Account.get_auth_token(user)
+    # Update last sign in
+    user
+    |> Account.update_last_signin!(conn)
+
+    Logger.debug("Logging in user", user_id: user.id)
+
+    {:ok, token, _claims} = Token.generate_auth_token(user)
+
     return_to = get_session(conn, :user_return_to)
 
     conn
     |> renew_session()
     |> put_session(:user_token, token)
     |> put_session(:live_socket_id, "_user_sessions:#{token}")
-    |> maybe_write_remember_me_cookie(token, params)
+    |> maybe_write_remember_me_cookie(user, params)
     |> redirect(to: return_to || signed_in_path(conn))
   end
 
-  defp maybe_write_remember_me_cookie(conn, token, %{"remember_me" => "true"}) do
+  defp maybe_write_remember_me_cookie(conn, user, %{"remember_me" => "true"}) do
+    {:ok, token, _claims} = Token.generate_remember_token(user)
+
     put_resp_cookie(conn, @remember_me_cookie, token, @remember_me_options)
   end
 
@@ -40,11 +51,25 @@ defmodule ExFleetYardsAuth.Auth do
   end
 
   def log_out_user(conn) do
-    user_token = get_session(conn, :user_token)
-    _user_token = Account.delete_token(user_token, "auth")
+    user_token = conn.assigns[:user_token]
+
+    Token.revoke_token(user_token)
 
     if live_socket_id = get_session(conn, :live_socket_id) do
       ExFleetYardsAuth.Endpoint.broadcast(live_socket_id, "disconnect", %{})
+    end
+
+    conn =
+      conn
+      |> fetch_cookies()
+
+    with user_cookie when user_cookie != nil <- conn.cookies[@remember_me_cookie],
+         {:ok, claims} <- Token.verify_and_validate(user_cookie) do
+      Logger.debug("Revoked remember me token", user_id: claims["sub"])
+      Token.revoke_token(claims)
+    else
+      _ ->
+        nil
     end
 
     conn
@@ -56,30 +81,46 @@ defmodule ExFleetYardsAuth.Auth do
   def fetch_current_user(conn, _opts) do
     {user_token, conn} = ensure_user_token(conn)
 
-    user = user_token && Account.get_user_by_token(user_token, "auth")
+    if user = user_token && Account.get_user_by_sub(user_token["sub"]) do
+      Logger.debug("Fetched logged in user", user_id: user.id)
 
-    user
-    |> case do
-      %{user: user} ->
-        assign(conn, :current_user, user)
-
-      _ ->
-        conn
+      conn
+      |> assign(:user_token, user_token)
+      |> assign(:current_user, user)
+    else
+      conn
     end
   end
 
   defp ensure_user_token(conn) do
-    if user_token = get_session(conn, :user_token) do
+    with user_token when user_token != nil <- get_session(conn, :user_token),
+         {:ok, user_token} <- Token.verify_and_validate(user_token) do
       {user_token, conn}
     else
-      conn = fetch_cookies(conn, signed: [@remember_me_cookie])
+      nil ->
+        ensure_user_from_cookie(conn)
 
-      if user_token = conn.cookies[@remember_me_cookie] do
-        conn = put_session(conn, :user_token, user_token)
-        {user_token, conn}
-      else
+      {:error, _} ->
         {nil, conn}
-      end
+    end
+  end
+
+  defp ensure_user_from_cookie(conn) do
+    with conn <- fetch_cookies(conn),
+         user_token when user_token != nil <- conn.cookies[@remember_me_cookie],
+         {:ok, user_token} <- Token.verify_and_validate(user_token),
+         user <- Account.get_user_by_sub(user_token["sub"]),
+         {:ok, user_token, user_attr} <- Token.generate_auth_token(user) do
+      Logger.debug("No user session token found, regenerating from cookie.", user_id: user.id)
+
+      conn =
+        conn
+        |> renew_session
+        |> put_session(:user_token, user_token)
+
+      {user_attr, conn}
+    else
+      _ -> {nil, conn}
     end
   end
 

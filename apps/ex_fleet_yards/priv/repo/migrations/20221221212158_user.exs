@@ -15,6 +15,7 @@ defmodule ExFleetYards.Repo.Migrations.User do
       add(:current_sign_in_at, :naive_datetime)
       add(:last_sign_in_at, :naive_datetime)
       add(:current_sign_in_ip, :string)
+      add(:last_sign_in_ip, :string)
       add(:confirmation_token, :string)
       add(:confirmed_at, :naive_datetime)
       add(:confirmation_sent_at, :naive_datetime)

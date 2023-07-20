@@ -50,11 +50,7 @@ defmodule ExFleetYardsApi.ConnCase do
 
   defp create_user_token() do
     user = ExFleetYards.Repo.Account.get_user_by_username("testuser")
-    ExFleetYards.Repo.Account.get_api_token(user, ExFleetYards.Repo.Account.UserToken.scopes())
-  end
-
-  defp delete_user_token(token) do
-    ExFleetYards.Repo.Account.get_user_by_token(token)
-    |> ExFleetYards.Repo.delete!()
+    {:ok, token, _claims} = ExFleetYards.Token.generate_auth_token(user)
+    token
   end
 end

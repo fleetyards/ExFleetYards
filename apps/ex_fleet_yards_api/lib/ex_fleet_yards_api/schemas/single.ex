@@ -641,12 +641,10 @@ defmodule ExFleetYardsApi.Schemas.Single do
       description: "Login information",
       type: :object,
       properties: %{
-        scopes: %Schema{type: :object, properties: ExFleetYardsApi.Schemas.Gen.scope_properties()},
         username: %Schema{type: :string},
         password: %Schema{type: :string, format: :password},
         totp: %Schema{type: :string, format: :totp}
-      },
-      required: [:scopes]
+      }
     })
   end
 
@@ -659,7 +657,6 @@ defmodule ExFleetYardsApi.Schemas.Single do
       type: :object,
       properties: %{
         id: %Schema{type: :string, format: :uuid},
-        scopes: %Schema{type: :object, properties: ExFleetYardsApi.Schemas.Gen.scope_properties()},
         createdAt: %Schema{type: :string, description: "Create timestamp", format: :"date-time"},
         context: %Schema{type: :string, example: "api"}
       },

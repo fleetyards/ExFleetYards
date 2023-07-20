@@ -4,7 +4,6 @@ defmodule ExFleetYards.Repo.Import do
   """
 
   use Ecto.Schema
-  import Ecto.Query
   import Ecto.Changeset
   alias ExFleetYards.Repo
 

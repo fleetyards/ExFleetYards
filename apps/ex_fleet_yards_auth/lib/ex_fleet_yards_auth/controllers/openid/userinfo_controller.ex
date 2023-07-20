@@ -14,16 +14,15 @@ defmodule ExFleetYardsAuth.Openid.UserinfoController do
   @impl Boruta.Openid.UserinfoApplication
   def userinfo_fetched(conn, userinfo) do
     conn
-    |> render(:userinfo, userinfo: userinfo)
+    |> render(:userinfo, userinfo: userinfo.userinfo)
   end
 
   @impl Boruta.Openid.UserinfoApplication
   def unauthorized(conn, error) do
     conn
-    |> put_resp_header(
-      "www-authenticate",
-      "error=\"#{error.error}\", error_description=\"#{error.error_description}\""
-    )
-    |> send_resp(:unauthorized, "")
+    |> put_status(:unauthorized)
+    |> put_view(ExFleetYardsApi.ErrorJson)
+    |> render("401.json")
+    |> halt()
   end
 end

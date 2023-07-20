@@ -5,7 +5,7 @@ defmodule ExFleetYards.Oauth.ResourceOwners do
   alias ExFleetYards.Repo.Account
   alias ExFleetYards.Repo
 
-  @impl Borta.Oauth.ResourceOwners
+  @impl Boruta.Oauth.ResourceOwners
   def get_by(username: username) do
     case Account.get_user(username) do
       %Account.User{} = user ->
@@ -17,7 +17,7 @@ defmodule ExFleetYards.Oauth.ResourceOwners do
     end
   end
 
-  @impl Borta.Oauth.ResourceOwners
+  @impl Boruta.Oauth.ResourceOwners
   def get_by(sub: uuid) do
     Repo.get(Account.User, uuid)
     |> case do
@@ -30,7 +30,7 @@ defmodule ExFleetYards.Oauth.ResourceOwners do
     end
   end
 
-  @impl Borta.Oauth.ResourceOwners
+  @impl Boruta.Oauth.ResourceOwners
   def check_password(resource_owner, password) do
     user = Repo.get(Account.User, resource_owner.sub)
 
@@ -66,7 +66,8 @@ defmodule ExFleetYards.Oauth.ResourceOwners do
     ]
   end
 
-  defp add_claims(resource_owner, user, [scope | scopes]) do
+  # Get all non handled scopes
+  defp add_claims(resource_owner, user, [_scope | scopes]) do
     add_claims(resource_owner, user, scopes)
   end
 

@@ -200,5 +200,7 @@ defmodule ExFleetYards.Repo.Account.Vehicle do
     def exception([username, public]) when is_binary(username) do
       %__MODULE__{username: username, public: public}
     end
+
+    def message(_), do: "TODO"
   end
 end
