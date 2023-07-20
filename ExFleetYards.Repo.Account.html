@@ -4,20 +4,20 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="ExDoc v0.29.4">
+    <meta name="generator" content="ExDoc v0.30.3">
     <meta name="project" content="Fleetyards v0.1.0">
 
     <title>ExFleetYards.Repo.Account — Fleetyards v0.1.0</title>
-    <link rel="stylesheet" href="dist/html-elixir-HHVY3JYD.css" />
+    <link rel="stylesheet" href="dist/html-elixir-P5GXSCHE.css" />
 
 
     <script src="dist/handlebars.runtime-NWIB6V2M.js"></script>
-    <script src="dist/handlebars.templates-XWGFFSCD.js"></script>
-    <script src="dist/sidebar_items-FCE3D359.js"></script>
+    <script src="dist/handlebars.templates-NBND3S2D.js"></script>
+    <script src="dist/sidebar_items-D04CEED9.js"></script>
 
       <script src="docs_config.js"></script>
 
-    <script async src="dist/html-JDI3AVDD.js"></script>
+    <script async src="dist/html-CGDDOCMI.js"></script>
 
 
   </head>
@@ -113,9 +113,8 @@ Fleetyards
     <h1 class="section-heading">
       <a class="hover-link" href="#summary">
         <i class="ri-link-m" aria-hidden="true"></i>
-        <span class="sr-only">Link to this section</span>
+        Summary
       </a>
-      Summary
     </h1>
 <div class="summary-functions summary">
   <h2>
@@ -209,9 +208,8 @@ Fleetyards
     <h1 class="section-heading">
       <a class="hover-link" href="#functions">
         <i class="ri-link-m" aria-hidden="true"></i>
-        <span class="sr-only">Link to this section</span>
-      </a>
 Functions
+      </a>
     </h1>
     <div class="functions-list">
 <section class="detail" id="confirm_user/2">
@@ -250,7 +248,7 @@ Functions
       <div class="specs">
 
           <pre translate="no"><span class="attribute">@spec</span> delete_user(<a href="ExFleetYards.Repo.Account.User.html#t:t/0">ExFleetYards.Repo.Account.User.t</a>()) ::
-  {:ok, <a href="ExFleetYards.Repo.Account.User.html#t:t/0">ExFleetYards.Repo.Account.User.t</a>()} | {:error, <a href="https://hexdocs.pm/ecto/3.10.1/Ecto.Changeset.html#t:t/0">Ecto.Changeset.t</a>()}</pre>
+  {:ok, <a href="ExFleetYards.Repo.Account.User.html#t:t/0">ExFleetYards.Repo.Account.User.t</a>()} | {:error, <a href="https://hexdocs.pm/ecto/3.10.3/Ecto.Changeset.html#t:t/0">Ecto.Changeset.t</a>()}</pre>
 
       </div>
 
@@ -293,14 +291,14 @@ Functions
   <section class="docstring">
 
 <p>Gets a user by email.</p><h2 id="get_user_by_email/2-examples" class="section-heading">
-  <a href="#get_user_by_email/2-examples" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
-  <p class="sr-only">examples</p>
+  <a href="#get_user_by_email/2-examples">
+    <i class="ri-link-m" aria-hidden="true"></i>
+    Examples
   </a>
-  Examples
 </h2>
-<pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="n">get_user_by_email</span><span class="p" data-group-id="9620866766-1">(</span><span class="s">&quot;foo@example.com&quot;</span><span class="p" data-group-id="9620866766-1">)</span><span class="w">
-</span><span class="p" data-group-id="9620866766-2">%</span><span class="nc" data-group-id="9620866766-2">User</span><span class="p" data-group-id="9620866766-2">{</span><span class="p" data-group-id="9620866766-2">}</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="n">get_user_by_email</span><span class="p" data-group-id="9620866766-3">(</span><span class="s">&quot;unknown@example.com&quot;</span><span class="p" data-group-id="9620866766-3">)</span><span class="w">
+<pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="n">get_user_by_email</span><span class="p" data-group-id="1981007475-1">(</span><span class="s">&quot;foo@example.com&quot;</span><span class="p" data-group-id="1981007475-1">)</span><span class="w">
+</span><span class="p" data-group-id="1981007475-2">%</span><span class="nc" data-group-id="1981007475-2">User</span><span class="p" data-group-id="1981007475-2">{</span><span class="p" data-group-id="1981007475-2">}</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">get_user_by_email</span><span class="p" data-group-id="1981007475-3">(</span><span class="s">&quot;unknown@example.com&quot;</span><span class="p" data-group-id="1981007475-3">)</span><span class="w">
 </span><span class="no">nil</span></code></pre>
   </section>
 </section>
@@ -359,14 +357,14 @@ Functions
   <section class="docstring">
 
 <p>Gets a user by username.</p><h2 id="get_user_by_username/2-examples" class="section-heading">
-  <a href="#get_user_by_username/2-examples" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
-  <p class="sr-only">examples</p>
+  <a href="#get_user_by_username/2-examples">
+    <i class="ri-link-m" aria-hidden="true"></i>
+    Examples
   </a>
-  Examples
 </h2>
-<pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="n">get_user_by_username</span><span class="p" data-group-id="6673132548-1">(</span><span class="s">&quot;foo&quot;</span><span class="p" data-group-id="6673132548-1">)</span><span class="w">
-</span><span class="p" data-group-id="6673132548-2">%</span><span class="nc" data-group-id="6673132548-2">User</span><span class="p" data-group-id="6673132548-2">{</span><span class="p" data-group-id="6673132548-2">}</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="n">get_user_by_username</span><span class="p" data-group-id="6673132548-3">(</span><span class="s">&quot;unknown&quot;</span><span class="p" data-group-id="6673132548-3">)</span><span class="w">
+<pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="n">get_user_by_username</span><span class="p" data-group-id="7213826891-1">(</span><span class="s">&quot;foo&quot;</span><span class="p" data-group-id="7213826891-1">)</span><span class="w">
+</span><span class="p" data-group-id="7213826891-2">%</span><span class="nc" data-group-id="7213826891-2">User</span><span class="p" data-group-id="7213826891-2">{</span><span class="p" data-group-id="7213826891-2">}</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">get_user_by_username</span><span class="p" data-group-id="7213826891-3">(</span><span class="s">&quot;unknown&quot;</span><span class="p" data-group-id="7213826891-3">)</span><span class="w">
 </span><span class="no">nil</span></code></pre>
   </section>
 </section>
@@ -385,15 +383,15 @@ Functions
   <section class="docstring">
 
 <p>Registers a user.</p><h2 id="register_user/1-examples" class="section-heading">
-  <a href="#register_user/1-examples" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
-  <p class="sr-only">examples</p>
+  <a href="#register_user/1-examples">
+    <i class="ri-link-m" aria-hidden="true"></i>
+    Examples
   </a>
-  Examples
 </h2>
-<pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="n">register_user</span><span class="p" data-group-id="0003725704-1">(</span><span class="p" data-group-id="0003725704-2">%{</span><span class="ss">field</span><span class="p">:</span><span class="w"> </span><span class="n">value</span><span class="p" data-group-id="0003725704-2">}</span><span class="p" data-group-id="0003725704-1">)</span><span class="w">
-</span><span class="p" data-group-id="0003725704-3">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="0003725704-4">%</span><span class="nc" data-group-id="0003725704-4">User</span><span class="p" data-group-id="0003725704-4">{</span><span class="p" data-group-id="0003725704-4">}</span><span class="p" data-group-id="0003725704-3">}</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="n">register_user</span><span class="p" data-group-id="0003725704-5">(</span><span class="p" data-group-id="0003725704-6">%{</span><span class="ss">field</span><span class="p">:</span><span class="w"> </span><span class="n">bad_value</span><span class="p" data-group-id="0003725704-6">}</span><span class="p" data-group-id="0003725704-5">)</span><span class="w">
-</span><span class="p" data-group-id="0003725704-7">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="0003725704-8">%</span><span class="nc" data-group-id="0003725704-8">Ecto.Changeset</span><span class="p" data-group-id="0003725704-8">{</span><span class="p" data-group-id="0003725704-8">}</span><span class="p" data-group-id="0003725704-7">}</span></code></pre>
+<pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="n">register_user</span><span class="p" data-group-id="8204051279-1">(</span><span class="p" data-group-id="8204051279-2">%{</span><span class="ss">field</span><span class="p">:</span><span class="w"> </span><span class="n">value</span><span class="p" data-group-id="8204051279-2">}</span><span class="p" data-group-id="8204051279-1">)</span><span class="w">
+</span><span class="p" data-group-id="8204051279-3">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="8204051279-4">%</span><span class="nc" data-group-id="8204051279-4">User</span><span class="p" data-group-id="8204051279-4">{</span><span class="p" data-group-id="8204051279-4">}</span><span class="p" data-group-id="8204051279-3">}</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">register_user</span><span class="p" data-group-id="8204051279-5">(</span><span class="p" data-group-id="8204051279-6">%{</span><span class="ss">field</span><span class="p">:</span><span class="w"> </span><span class="n">bad_value</span><span class="p" data-group-id="8204051279-6">}</span><span class="p" data-group-id="8204051279-5">)</span><span class="w">
+</span><span class="p" data-group-id="8204051279-7">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="8204051279-8">%</span><span class="nc" data-group-id="8204051279-8">Ecto.Changeset</span><span class="p" data-group-id="8204051279-8">{</span><span class="p" data-group-id="8204051279-8">}</span><span class="p" data-group-id="8204051279-7">}</span></code></pre>
   </section>
 </section>
 <section class="detail" id="update_last_signin!/2">
@@ -434,7 +432,7 @@ Functions
 
         <p class="built-using">
           Built using
-          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.29.4) for the
+          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.30.3) for the
 
             <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
 
