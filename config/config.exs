@@ -156,6 +156,11 @@ config :boruta, Boruta.Oauth,
   ],
   issuer: "https://auth.fleetyards.net"
 
+config :wax_,
+  rp_id: :auto,
+  attestation: "none",
+  user_verification: "preferred"
+
 config :ueberauth, Ueberauth, providers: []
 
 # Import environment specific config. This must remain at the bottom

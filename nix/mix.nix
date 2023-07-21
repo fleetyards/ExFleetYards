@@ -21,6 +21,19 @@ let
       beamDeps = [ decimal decorator hackney jason telemetry ];
     };
 
+    asn1_compiler = buildMix rec {
+      name = "asn1_compiler";
+      version = "0.1.1";
+
+      src = fetchHex {
+        pkg = "${name}";
+        version = "${version}";
+        sha256 = "0pk9jkmyyii91q1kl7kfi335bpy2k87l0r48v02z78zi496d4l62";
+      };
+
+      beamDeps = [];
+    };
+
     bcrypt_elixir = buildMix rec {
       name = "bcrypt_elixir";
       version = "3.0.1";
@@ -68,6 +81,19 @@ let
         pkg = "${name}";
         version = "${version}";
         sha256 = "02rrljx2f6zhmiwqwyk7al0gdf66qpx4jm59sqg1cnyiylgb02k8";
+      };
+
+      beamDeps = [];
+    };
+
+    cbor = buildMix rec {
+      name = "cbor";
+      version = "1.0.1";
+
+      src = fetchHex {
+        pkg = "${name}";
+        version = "${version}";
+        sha256 = "18mnv2f71ywcin8pc65hi95a6di8008k7m4wd9zz223rgazaqcal";
       };
 
       beamDeps = [];
@@ -1113,6 +1139,19 @@ let
       beamDeps = [];
     };
 
+    wax_ = buildMix rec {
+      name = "wax_";
+      version = "0.6.2";
+
+      src = fetchHex {
+        pkg = "${name}";
+        version = "${version}";
+        sha256 = "1z7x258hr2gw6dddxzpdxbzidgmi5ibrqkq83z13yqi28b43j3zq";
+      };
+
+      beamDeps = [ asn1_compiler cbor jason x509 ];
+    };
+
     websock = buildMix rec {
       name = "websock";
       version = "0.5.2";
@@ -1137,6 +1176,19 @@ let
       };
 
       beamDeps = [ plug plug_cowboy websock ];
+    };
+
+    x509 = buildMix rec {
+      name = "x509";
+      version = "0.8.7";
+
+      src = fetchHex {
+        pkg = "${name}";
+        version = "${version}";
+        sha256 = "1d7nwbcs4zyr53nv481x1smwr7wrijsi0n4ki9pdlw81d9fi411n";
+      };
+
+      beamDeps = [];
     };
   };
 in self

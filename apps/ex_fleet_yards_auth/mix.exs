@@ -41,6 +41,7 @@ defmodule ExFleetYardsAuth.MixProject do
       {:remote_ip, "~> 1.1"},
 
       # Auth
+      {:wax_, "~> 0.6.0"},
       {:ueberauth, "~> 0.10"},
       {:ueberauth_github, "~> 0.8"},
 
