@@ -1,16 +1,16 @@
 'use strict';
 
-function isWebAuthnSupported() {
-    return window.PublicKeyCredential !== undefined && typeof window.PublicKeyCredential === "function"
-}
+//import './uf2_helper.js'
+import {isWebAuthnSupported, getCsrfToken, toBase64, fromBase64} from "./uf2_helper";
+
 
 function getLabel() {
     return document.getElementById('u2f_token_name').value
 }
 
-function getCsrfToken() {
+/*function getCsrfToken() {
     return document.head.querySelector('meta[name="csrf-token"]').content
-}
+}*/
 
 
 function webAuthnRegister() {
@@ -68,18 +68,6 @@ function webAuthnRegister() {
                 })
             })
         })
-}
-
-function toBase64(data) {
-    return btoa(String.fromCharCode.apply(null, new Uint8Array(data)));
-}
-
-function fromBase64(data) {
-    return toArray(atob(data))
-}
-
-function toArray(str) {
-    return Uint8Array.from(str, c => c.charCodeAt(0));
 }
 
 document.getElementById("u2fRegisterButton").addEventListener('click', webAuthnRegister)

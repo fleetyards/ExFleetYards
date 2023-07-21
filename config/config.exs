@@ -103,7 +103,7 @@ config :esbuild,
   ],
   auth: [
     args:
-      ~w(js/app.js js/u2f.js --bundle --target=es2017 --outdir=../priv/static/assets --external:/fonts/* --external:/images/*),
+      ~w(js/app.js js/u2f_register.js --bundle --target=es2017 --outdir=../priv/static/assets --external:/fonts/* --external:/images/*),
     cd: Path.expand("../apps/ex_fleet_yards_auth/assets", __DIR__),
     env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
   ]
