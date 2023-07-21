@@ -26,12 +26,22 @@ defmodule ExFleetYardsAuth.Auth do
 
     return_to = get_session(conn, :user_return_to)
 
+    conn =
+      conn
+      |> renew_session()
+      |> put_session(:user_token, token)
+      |> put_session(:live_socket_id, "_user_sessions:#{token}")
+      |> maybe_write_remember_me_cookie(user, params)
+
+    redir = return_to || signed_in_path(conn)
+    {conn, redir}
+  end
+
+  def log_in_user_redirect(conn, user, params \\ %{}) do
+    {conn, redir} = log_in_user(conn, user, params)
+
     conn
-    |> renew_session()
-    |> put_session(:user_token, token)
-    |> put_session(:live_socket_id, "_user_sessions:#{token}")
-    |> maybe_write_remember_me_cookie(user, params)
-    |> redirect(to: return_to || signed_in_path(conn))
+    |> redirect(to: redir)
   end
 
   defp maybe_write_remember_me_cookie(conn, user, %{"remember_me" => "true"}) do

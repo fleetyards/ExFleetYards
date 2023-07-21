@@ -38,6 +38,17 @@ defmodule ExFleetYards.Repo.Account.User.U2fToken do
 
   import Ecto.Query
 
+  def user_allow_credentials(%User{id: user_id}), do: user_allow_credentials(user_id)
+
+  def user_allow_credentials(user_id) when is_binary(user_id) do
+    user_query(user_id)
+    |> select([:credential_id, :cose_key])
+    |> Repo.all()
+    |> Enum.map(fn %__MODULE__{credential_id: id, cose_key: key} ->
+      {id, :erlang.binary_to_term(key)}
+    end)
+  end
+
   def user_query(user_id) when is_binary(user_id) do
     from u in __MODULE__, where: u.user_id == ^user_id
   end

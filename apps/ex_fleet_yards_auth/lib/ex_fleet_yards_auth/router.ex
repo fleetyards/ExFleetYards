@@ -50,9 +50,16 @@ defmodule ExFleetYardsAuth.Router do
       scope "/" do
         pipe_through :browser_api
 
-        post "/register/challenge", RegisterController, :challenge
+        post "/register/challenge", RegisterController, :register_challenge
         post "/register", RegisterController, :register
       end
+    end
+
+    scope "/webauthn/login", ExFleetYardsAuth.U2F do
+      pipe_through :browser_api
+
+      post "/challenge", RegisterController, :login_challenge
+      post "/", RegisterController, :login
     end
   end
 

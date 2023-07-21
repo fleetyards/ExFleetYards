@@ -20,3 +20,10 @@ export function fromBase64(data) {
 export function toArray(str) {
     return Uint8Array.from(str, c => c.charCodeAt(0));
 }
+
+export function errorMessage(e) {
+    switch (e.name) {
+        default:
+            return `There was a problem communicating with your device. (${e.name})`
+    }
+}
