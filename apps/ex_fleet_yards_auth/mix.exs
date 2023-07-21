@@ -64,7 +64,12 @@ defmodule ExFleetYardsAuth.MixProject do
 
   def aliases do
     [
-      "assets.deploy": ["tailwind auth --minify", "esbuild auth --minify", "phx.digest"]
+      "assets.deploy": [
+        "tailwind auth --minify",
+        "esbuild auth --minify",
+        "esbuild auth_u2f --minify",
+        "phx.digest"
+      ]
     ]
   end
 end

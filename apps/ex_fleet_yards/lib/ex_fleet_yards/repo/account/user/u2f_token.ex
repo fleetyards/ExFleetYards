@@ -13,19 +13,24 @@ defmodule ExFleetYards.Repo.Account.User.U2fToken do
   typed_schema "user_u2f_tokens" do
     field :name, :string
     field :credential_id, :binary
-    field :cose_key, :map
+    field :cose_key, :binary
 
     belongs_to :user, User, type: Ecto.UUID
 
     timestamps(inserted_at: :created_at, updated_at: false)
   end
 
-  def create(user_id, credential_id, cose_key, name \\ nil) when is_binary(user_id) do
+  def create(user, credential_id, cose_key, name \\ nil)
+
+  def create(%User{id: user_id}, credential_id, cose_key, name),
+    do: create(user_id, credential_id, cose_key, name)
+
+  def create(user_id, credential_id, cose_key, name) when is_binary(user_id) do
     %__MODULE__{}
     |> create_changeset(%{
       user_id: user_id,
       credential_id: credential_id,
-      cose_key: cose_key,
+      cose_key: :erlang.term_to_binary(cose_key),
       name: nil
     })
     |> Repo.insert()

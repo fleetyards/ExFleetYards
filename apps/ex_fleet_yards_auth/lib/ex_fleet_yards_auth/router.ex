@@ -5,10 +5,18 @@ defmodule ExFleetYardsAuth.Router do
   alias ExFleetYards.Plugs.ApiAuthorization
 
   pipeline :browser do
-    plug :accepts, ["html"]
+    plug :accepts, ["json"]
     plug :fetch_session
     plug :fetch_current_user
     plug :put_root_layout, {ExFleetYardsAuth.Layouts, :root}
+    plug :protect_from_forgery
+    plug :put_secure_browser_headers
+  end
+
+  pipeline :browser_api do
+    plug :accepts, ["json"]
+    plug :fetch_session
+    plug :fetch_current_user
     plug :protect_from_forgery
     plug :put_secure_browser_headers
   end
@@ -32,6 +40,19 @@ defmodule ExFleetYardsAuth.Router do
 
       delete "/", SessionController, :delete
       get "/", SessionController, :delete
+    end
+
+    scope "/u2f", ExFleetYardsAuth.U2F do
+      pipe_through :require_authenticated_user
+
+      get "/", RegisterController, :index
+
+      scope "/challenge" do
+        pipe_through :browser_api
+
+        post "/", RegisterController, :challenge
+        post "/register/:id", RegisterController, :register
+      end
     end
   end
 
