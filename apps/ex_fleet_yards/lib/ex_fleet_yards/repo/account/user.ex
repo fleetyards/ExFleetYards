@@ -5,6 +5,8 @@ defmodule ExFleetYards.Repo.Account.User do
   import Ecto.Changeset
   import ExFleetYards.Repo.Changeset
 
+  alias ExFleetYards.Repo
+
   @primary_key {:id, Ecto.UUID, []}
 
   typed_schema "users" do
@@ -49,8 +51,27 @@ defmodule ExFleetYards.Repo.Account.User do
     has_many :vehicles, ExFleetYards.Repo.Account.Vehicle
     has_many :sso_connections, ExFleetYards.Repo.Account.User.SSOConnection
     has_one :totp, ExFleetYards.Repo.Account.User.Totp
+    has_many :u2f_token, ExFleetYards.Repo.Account.User.U2fToken
 
     timestamps(inserted_at: :created_at, type: :utc_datetime)
+  end
+
+  @doc """
+  Returns if the user has u2f and totp enabled as tupl
+  """
+  @spec second_factors(__MODULE__.t() | Ecto.UUID.t()) ::
+          {:ok, {boolean(), boolean()}}
+          | {:error, any()}
+          | {:error, Ecto.Multi.name(), any(), any()}
+  def second_factors(%__MODULE__{id: user_id}), do: second_factors(user_id)
+
+  def second_factors(user) when is_binary(user) do
+    Repo.transaction(fn ->
+      u2f = Repo.exists?(__MODULE__.U2fToken.user_query(user))
+      totp = Repo.exists?(__MODULE__.Totp.user_query(user))
+
+      {u2f, totp}
+    end)
   end
 
   def info_changeset(user, attrs) do
