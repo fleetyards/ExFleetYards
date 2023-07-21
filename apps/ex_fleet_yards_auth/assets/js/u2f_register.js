@@ -1,17 +1,20 @@
 'use strict';
 
-//import './uf2_helper.js'
-import {isWebAuthnSupported, getCsrfToken, toBase64, fromBase64} from "./uf2_helper";
-
+//import './u2f_helper.js'
+import {
+    isWebAuthnSupported,
+    getCsrfToken,
+    toBase64,
+    fromBase64,
+} from "./u2f_helper";
+import {
+    WEBAUTHN_REGISTER_VALIDATE_URL,
+    WEBAUTHN_REGISTER_CHALLENGE_URL
+} from "./vars.js";
 
 function getLabel() {
     return document.getElementById('u2f_token_name').value
 }
-
-/*function getCsrfToken() {
-    return document.head.querySelector('meta[name="csrf-token"]').content
-}*/
-
 
 function webAuthnRegister() {
     if (!isWebAuthnSupported()) {
@@ -25,7 +28,7 @@ function webAuthnRegister() {
         return
     }
 
-    fetch("/u2f/challenge", {
+    fetch(WEBAUTHN_REGISTER_CHALLENGE_URL, {
         method: 'POST',
         credentials: 'same-origin',
         body: JSON.stringify({
@@ -38,7 +41,7 @@ function webAuthnRegister() {
     })
         .then(res => res.json())
         .then(response => {
-            const challenge = response.cc;
+            const challenge = response;
             challenge.publicKey.challenge = fromBase64(challenge.publicKey.challenge);
             console.log(toBase64(challenge.publicKey.challenge))
             challenge.publicKey.user.id = fromBase64(challenge.publicKey.user.id);
@@ -51,7 +54,7 @@ function webAuthnRegister() {
                 cc.response.clientDataJSON = toBase64(newCredential.response.clientDataJSON);
                 cc.type = newCredential.type;
                 cc.name = getLabel();
-                fetch("/u2f/challenge/register/" + response.id, {
+                fetch(WEBAUTHN_REGISTER_VALIDATE_URL, {
                     method: 'POST',
                     credentials: 'same-origin',
                     body: JSON.stringify(cc),

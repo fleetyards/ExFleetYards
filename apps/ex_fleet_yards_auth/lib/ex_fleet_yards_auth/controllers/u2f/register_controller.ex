@@ -28,47 +28,48 @@ defmodule ExFleetYardsAuth.U2F.RegisterController do
     conn
     |> put_session(:challenge, challenge)
     |> json(%{
-      id: "foo",
-      cc: %{
-        publicKey: %{
-          challenge: Base.encode64(challenge.bytes),
-          rp: %{
-            id: challenge.rp_id,
-            name: "Fleetyards SSO"
-          },
-          user: %{
-            id: Base.encode64(user.id),
-            name: user.email,
-            displayName: user.username
-          },
-          attestation: challenge.attestation,
-          authenticatorSelection: %{
-            requireResidentKey: false,
-            userVerification: challenge.user_verification
-          },
-          timeout: challenge.timeout,
-          pubKeyCredParams: [
-            %{type: "public-key", alg: -7},
-            %{type: "public-key", alg: -257}
-          ]
-        }
+      publicKey: %{
+        challenge: Base.encode64(challenge.bytes),
+        rp: %{
+          id: challenge.rp_id,
+          name: "Fleetyards SSO"
+        },
+        user: %{
+          id: Base.encode64(user.id),
+          name: user.email,
+          displayName: user.username
+        },
+        attestation: challenge.attestation,
+        authenticatorSelection: %{
+          requireResidentKey: false,
+          userVerification: challenge.user_verification
+        },
+        timeout: challenge.timeout,
+        pubKeyCredParams: [
+          %{type: "public-key", alg: -7},
+          %{type: "public-key", alg: -257}
+        ]
       }
     })
   end
 
-  def register(conn, %{"name" => name, "response" => response, "rawId" => rawId} = data) do
+  def register(conn, %{"name" => name, "response" => response, "rawId" => raw_id} = data) do
     user = conn.assigns[:current_user]
     challenge = get_session(conn, :challenge)
 
     attestation_object = Base.decode64!(response["attestationObject"])
-    clientData = Base.decode64!(response["clientDataJSON"])
+    client_data = Base.decode64!(response["clientDataJSON"])
+
+    conn =
+      conn
+      |> delete_session(:challenge)
 
     with {:ok, {authenticator_data, result}} <-
-           Wax.register(attestation_object, clientData, challenge),
+           Wax.register(attestation_object, client_data, challenge),
          {:ok, token} <-
            User.U2fToken.create(
              user,
-             rawId,
+             raw_id,
              authenticator_data.attested_credential_data.credential_public_key,
              name
            ) do

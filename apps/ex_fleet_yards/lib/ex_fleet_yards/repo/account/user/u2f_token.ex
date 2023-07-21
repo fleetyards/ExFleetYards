@@ -31,7 +31,7 @@ defmodule ExFleetYards.Repo.Account.User.U2fToken do
       user_id: user_id,
       credential_id: credential_id,
       cose_key: :erlang.term_to_binary(cose_key),
-      name: nil
+      name: name
     })
     |> Repo.insert()
   end

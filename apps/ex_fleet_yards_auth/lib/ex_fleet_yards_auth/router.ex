@@ -42,16 +42,16 @@ defmodule ExFleetYardsAuth.Router do
       get "/", SessionController, :delete
     end
 
-    scope "/u2f", ExFleetYardsAuth.U2F do
+    scope "/webauthn", ExFleetYardsAuth.U2F do
       pipe_through :require_authenticated_user
 
       get "/", RegisterController, :index
 
-      scope "/challenge" do
+      scope "/" do
         pipe_through :browser_api
 
-        post "/", RegisterController, :challenge
-        post "/register/:id", RegisterController, :register
+        post "/register/challenge", RegisterController, :challenge
+        post "/register", RegisterController, :register
       end
     end
   end
