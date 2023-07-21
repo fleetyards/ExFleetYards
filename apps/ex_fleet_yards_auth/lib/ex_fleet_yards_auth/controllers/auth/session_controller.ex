@@ -1,10 +1,12 @@
-defmodule ExFleetYardsAuth.SessionController do
+defmodule ExFleetYardsAuth.Auth.SessionController do
   use ExFleetYardsAuth, :controller
 
   alias ExFleetYards.Repo.Account
   alias ExFleetYards.Repo.Account.User
   alias ExFleetYards.Repo.Account.User.Totp
   alias ExFleetYardsAuth.Auth
+
+  plug :put_view, html: ExFleetYardsAuth.Auth.SessionHTML
 
   def new(conn, params) do
     render(conn, "new.html", error: nil, email: params["login_hint"])
@@ -46,8 +48,7 @@ defmodule ExFleetYardsAuth.SessionController do
             |> render("webauthn.html",
               sub: user.id,
               remember_me: user_params["remember_me"],
-              # totp
-              totp: true
+              totp: totp
             )
         end
     end

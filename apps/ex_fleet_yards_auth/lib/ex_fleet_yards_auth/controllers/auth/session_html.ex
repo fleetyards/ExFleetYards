@@ -1,4 +1,4 @@
-defmodule ExFleetYardsAuth.SessionHTML do
+defmodule ExFleetYardsAuth.Auth.SessionHTML do
   use ExFleetYardsAuth, :html
 
   embed_templates "session_html/*"

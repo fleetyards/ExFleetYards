@@ -53,6 +53,6 @@
 </div>
 
 <%= if @webauthn do %>
-  <script defer="" phx-track-static="" type="text/javascript" src={~p"/assets/u2f_login.js"} />
+  <script defer="" phx-track-static="" type="text/javascript" src={~p"/assets/webauthn/login.js"} />
   <element class="hidden" id="webauthn-user-id" value={@sub}></element>
 <% end %>

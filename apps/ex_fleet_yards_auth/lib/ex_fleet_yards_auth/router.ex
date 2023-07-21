@@ -28,38 +28,38 @@ defmodule ExFleetYardsAuth.Router do
   scope "/" do
     pipe_through :browser
 
-    scope "/login", ExFleetYardsAuth do
+    scope "/login", ExFleetYardsAuth.Auth do
       pipe_through :redirect_if_user_is_authenticated
 
       get "/", SessionController, :new
       post "/", SessionController, :create
+
+      scope "/webauthn" do
+        pipe_through :browser_api
+
+        post "/challenge", WebAuthNController, :login_challenge
+        post "/", WebAuthNController, :login
+      end
     end
 
-    scope "/logout", ExFleetYardsAuth do
+    scope "/logout", ExFleetYardsAuth.Auth do
       pipe_through :require_authenticated_user
 
       delete "/", SessionController, :delete
       get "/", SessionController, :delete
     end
 
-    scope "/webauthn", ExFleetYardsAuth.U2F do
+    scope "/webauthn", ExFleetYardsAuth.Auth do
       pipe_through :require_authenticated_user
 
-      get "/", RegisterController, :index
+      get "/", WebAuthNController, :index
 
       scope "/" do
         pipe_through :browser_api
 
-        post "/register/challenge", RegisterController, :register_challenge
-        post "/register", RegisterController, :register
+        post "/register/challenge", WebAuthNController, :register_challenge
+        post "/register", WebAuthNController, :register
       end
-    end
-
-    scope "/webauthn/login", ExFleetYardsAuth.U2F do
-      pipe_through :browser_api
-
-      post "/challenge", RegisterController, :login_challenge
-      post "/", RegisterController, :login
     end
   end
 

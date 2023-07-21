@@ -1,4 +1,4 @@
-defmodule ExFleetYardsAuth.U2F.RegisterController do
+defmodule ExFleetYardsAuth.Auth.WebAuthNController do
   @moduledoc """
   U2F controller to register new keys
   """
@@ -8,7 +8,7 @@ defmodule ExFleetYardsAuth.U2F.RegisterController do
   alias ExFleetYards.Repo.Account
   alias ExFleetYards.Repo.Account.User
 
-  plug :put_view, html: ExFleetYardsAuth.U2F.RegisterHTML
+  plug :put_view, html: ExFleetYardsAuth.Auth.WebAuthNHTML
 
   def index(conn, %{}) do
     user = conn.assigns[:current_user]

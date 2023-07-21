@@ -1,16 +1,16 @@
 'use strict';
 
-//import './u2f_helper.js'
+//import './helper.js'
 import {
     isWebAuthnSupported,
     getCsrfToken,
     toBase64,
     fromBase64,
-} from "./u2f_helper";
+} from "./helper";
 import {
     WEBAUTHN_REGISTER_VALIDATE_URL,
     WEBAUTHN_REGISTER_CHALLENGE_URL
-} from "./vars.js";
+} from "../vars";
 
 function getLabel() {
     return document.getElementById('u2f_token_name').value

@@ -1,7 +1,7 @@
 'use strict';
 
-import {errorMessage, fromBase64, getCsrfToken, isWebAuthnSupported, toBase64} from "./u2f_helper";
-import {WEBAUTHN_LOGIN_CHALLENGE_URL, WEBAUTHN_LOGIN_VALIDATE_URL} from "./vars";
+import {errorMessage, fromBase64, getCsrfToken, isWebAuthnSupported, toBase64} from "./helper";
+import {WEBAUTHN_LOGIN_CHALLENGE_URL, WEBAUTHN_LOGIN_VALIDATE_URL} from "../vars";
 
 function setMsg(msg) {
     document.getElementById('webauthn-msg-text').innerText = msg
@@ -28,7 +28,6 @@ function webAuthnLogin() {
         return res;
     }).then(res => res.json())
         .then(response => {
-            console.log(response)
             const challenge = response
             challenge.publicKey.challenge = fromBase64(challenge.publicKey.challenge)
             challenge.publicKey.allowCredentials = challenge.publicKey.allowCredentials.map(c => {
