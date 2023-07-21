@@ -33,6 +33,9 @@ defmodule ExFleetYardsAuth.Router do
 
       get "/", SessionController, :new
       post "/", SessionController, :create
+      get "/webauthn", SessionController, :webauthn
+      get "/otp", SessionController, :otp
+      post "/otp", SessionController, :otp_verify
 
       scope "/webauthn" do
         pipe_through :browser_api

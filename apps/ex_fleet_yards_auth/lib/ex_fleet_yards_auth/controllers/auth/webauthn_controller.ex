@@ -98,9 +98,7 @@ defmodule ExFleetYardsAuth.Auth.WebAuthNController do
   def login_challenge(conn, %{}) do
     user = get_session(conn, :user_id)
 
-    challenge =
-      Wax.new_authentication_challenge(auth_opts(user))
-      |> IO.inspect()
+    challenge = Wax.new_authentication_challenge(auth_opts(user))
 
     conn
     |> put_session(:challenge, challenge)

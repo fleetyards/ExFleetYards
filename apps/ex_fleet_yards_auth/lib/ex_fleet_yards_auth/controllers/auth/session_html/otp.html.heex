@@ -9,9 +9,7 @@
 
   <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
     <div class="bg-gray-800 py-8 px-4 shadow sm:rounded-lg sm:px-10">
-      <.form :let={f} for={%{}} as={:otp} action={~p"/login"} method="post">
-        <.hidden_input name={:remember_me} value={@remember_me} />
-        <.hidden_input name={:sub} value={@sub} />
+      <.form :let={f} for={%{}} as={:otp} action={~p"/login/otp"} method="post">
         <div class="rounded-md shadow-sm -space-y-px">
           <div>
             <label for="otp_code" class="sr-only">OTP Code</label>
@@ -47,12 +45,20 @@
             Submit
           </button>
         </div>
+        <%= if @webauthn do %>
+          <div class="mt-6">
+            <a
+              href={~p"/login/webauthn"}
+              class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-900 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            >
+              <span class="absolute left-0 inset-y-0 flex items-center pl-3">
+                <.icon name="hero-lock-closed-solid" />
+              </span>
+              Sign in via WebAuthN
+            </a>
+          </div>
+        <% end %>
       </.form>
     </div>
   </div>
 </div>
-
-<%= if @webauthn do %>
-  <script defer="" phx-track-static="" type="text/javascript" src={~p"/assets/webauthn/login.js"} />
-  <element class="hidden" id="webauthn-user-id" value={@sub}></element>
-<% end %>
