@@ -1,13 +1,13 @@
-defmodule ExFleetYardsAuth.Auth.WebAuthNLive do
+defmodule ExFleetYardsAuth.Auth.WebAuthnLive do
   @doc """
-  Live view for WebAuthN
+  Live view for WebAuthn
   """
   use ExFleetYardsAuth, :live_view
 
   alias ExFleetYards.Repo.Account.User
 
   def render(assigns) do
-    ExFleetYardsAuth.Auth.WebAuthNHTML.index(assigns)
+    ExFleetYardsAuth.Auth.WebAuthnHTML.index(assigns)
   end
 
   def mount(params, %{"user_token" => user_token}, socket) do

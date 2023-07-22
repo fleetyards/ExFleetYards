@@ -10,7 +10,7 @@ function setMsg(msg) {
 
 function webAuthnLogin() {
     if (!isWebAuthnSupported()) {
-        setMsg("This browser does not support WebAuthN")
+        setMsg("This browser does not support WebAuthn")
         return
     }
     fetch(WEBAUTHN_LOGIN_CHALLENGE_URL, {

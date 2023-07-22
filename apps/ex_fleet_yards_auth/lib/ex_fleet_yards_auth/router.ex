@@ -40,8 +40,8 @@ defmodule ExFleetYardsAuth.Router do
       scope "/webauthn" do
         pipe_through :browser_api
 
-        post "/challenge", WebAuthNController, :login_challenge
-        post "/", WebAuthNController, :login
+        post "/challenge", WebAuthnController, :login_challenge
+        post "/", WebAuthnController, :login
       end
     end
 
@@ -55,14 +55,13 @@ defmodule ExFleetYardsAuth.Router do
     scope "/webauthn", ExFleetYardsAuth.Auth do
       pipe_through :require_authenticated_user
 
-      # get "/", WebAuthNController, :index
-      live "/", WebAuthNLive
+      live "/", WebAuthnLive
 
       scope "/" do
         pipe_through :browser_api
 
-        post "/register/challenge", WebAuthNController, :register_challenge
-        post "/register", WebAuthNController, :register
+        post "/register/challenge", WebAuthnController, :register_challenge
+        post "/register", WebAuthnController, :register
       end
     end
   end

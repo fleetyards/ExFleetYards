@@ -1,4 +1,4 @@
-defmodule ExFleetYardsAuth.Auth.WebAuthNController do
+defmodule ExFleetYardsAuth.Auth.WebAuthnController do
   @moduledoc """
   U2F controller to register new keys
   """
@@ -8,18 +8,7 @@ defmodule ExFleetYardsAuth.Auth.WebAuthNController do
   alias ExFleetYards.Repo.Account
   alias ExFleetYards.Repo.Account.User
 
-  plug :put_view, html: ExFleetYardsAuth.Auth.WebAuthNHTML
-
-  def index(conn, %{}) do
-    user = conn.assigns[:current_user]
-    {:ok, {_, totp}} = User.second_factors(user)
-
-    conn
-    |> render("index.html",
-      u2f_tokens: [],
-      totp_tokens: totp
-    )
-  end
+  plug :put_view, html: ExFleetYardsAuth.Auth.WebAuthnHTML
 
   def register_challenge(conn, %{}) do
     user = conn.assigns[:current_user]
