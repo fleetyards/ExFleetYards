@@ -134,7 +134,6 @@ defmodule ExFleetYardsAuth.Auth.WebAuthNController do
         Logger.debug("authenticated with webauthn", user_id: user_id)
 
         user = Account.get_user_by_sub(user_id)
-        # TODO: params
         {conn, redir} = ExFleetYardsAuth.Auth.log_in_user(conn, user)
 
         conn

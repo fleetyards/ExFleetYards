@@ -34,7 +34,11 @@
         <% else %>
           <ul>
             <%= for token <- @webauthn_keys do %>
-              <.token token={token} />
+              <%= if @edit_key != nil and @edit_key.id == token.id do %>
+                <.edit_token token={token} form={@edit_form} />
+              <% else %>
+                <.token token={token} />
+              <% end %>
             <% end %>
           </ul>
         <% end %>
@@ -43,13 +47,12 @@
       <div class="rounded-md shadow-sm -space-y-px mt-4">
         <div>
           <label for="otp_code" class="sr-only">U2F Token Registration</label>
-          <input
-            id="webauthn_key_name"
+          <.input
             name="key_name"
+            id="webauthn_key_name"
             type="text"
             required
-            class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-500 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-            placeholder="Enter WebAuthN key Name"
+            placeholder="Enter WebAuthN key name"
           />
         </div>
       </div>

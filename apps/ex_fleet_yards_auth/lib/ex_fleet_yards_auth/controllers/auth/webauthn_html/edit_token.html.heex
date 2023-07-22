@@ -1,0 +1,34 @@
+<li
+  class="py-4 flex items-center justify-between"
+  id={@token.id}
+  xmlns="http://www.w3.org/1999/html"
+>
+  <.form
+    for={@form}
+    phx-change="validate_edit"
+    phx-submit="save_edit"
+    class="flex items-center justify-between w-full"
+  >
+    <div class="flex-grow">
+      <.input type="text" field={@form[:name]} minlength="2" maxlength="30" />
+    </div>
+    <div class="flex items-center">
+      <.button
+        type="submit"
+        class="mr-3 text-indigo-600 hover:text-indigo-800"
+        phx-disable-with="Saving..."
+      >
+        Save
+      </.button>
+      <.button
+        type="button"
+        role="cancel"
+        class="text-red-600 hover:text-red-800"
+        phx-click="cancel_edit"
+        phx-value-id={@token.id}
+      >
+        Cancel
+      </.button>
+    </div>
+  </.form>
+</li>

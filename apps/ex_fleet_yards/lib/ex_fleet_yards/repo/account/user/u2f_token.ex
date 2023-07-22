@@ -4,6 +4,7 @@ defmodule ExFleetYards.Repo.Account.User.U2fToken do
   """
 
   use TypedEctoSchema
+  require Logger
 
   alias ExFleetYards.Repo
   alias ExFleetYards.Repo.Account.User
@@ -38,6 +39,17 @@ defmodule ExFleetYards.Repo.Account.User.U2fToken do
   end
 
   import Ecto.Query
+
+  def get_key(user, key) do
+    key_query(user, key)
+    |> Repo.one()
+  end
+
+  def edit(key, params) do
+    edit_changeset(key, params)
+    |> Repo.update()
+    |> broadcast_change([:edit])
+  end
 
   def user_allow_credentials(%User{id: user_id}), do: user_allow_credentials(user_id)
 
@@ -86,7 +98,15 @@ defmodule ExFleetYards.Repo.Account.User.U2fToken do
     token
     |> cast(attrs, [:user_id, :credential_id, :cose_key, :name])
     |> validate_required([:user_id, :credential_id, :cose_key])
+    |> validate_length(:name, min: 2, max: 30)
     |> unique_constraint([:credential_id])
+  end
+
+  def edit_changeset(token, attrs) do
+    token
+    |> cast(attrs, [:name])
+    |> validate_length(:name, min: 2, max: 30)
+    |> validate_required([:name])
   end
 
   @doc """
@@ -108,6 +128,16 @@ defmodule ExFleetYards.Repo.Account.User.U2fToken do
   defp broadcast_change({:ok, {n, _}} = v, event, user_id)
        when is_integer(n) and is_binary(user_id) do
     Phoenix.PubSub.broadcast(ExFleetYards.PubSub, topic(user_id), {__MODULE__, event, n})
+    v
+  end
+
+  defp broadcast_change(v, _event) do
+    Logger.debug("Could not send broadcast for #{inspect(v)}")
+    v
+  end
+
+  defp broadcast_change(v, _event, _user) do
+    Logger.debug("Could not send broadcast for #{inspect(v)}")
     v
   end
 

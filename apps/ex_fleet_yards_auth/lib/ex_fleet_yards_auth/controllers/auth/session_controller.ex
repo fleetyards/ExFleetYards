@@ -34,7 +34,7 @@ defmodule ExFleetYardsAuth.Auth.SessionController do
 
   def otp_verify(conn, %{"otp_code" => code}) do
     sub = get_session(conn, :user_id)
-    # FIXME: use session instead of sub
+
     if Totp.valid?(sub, code) do
       user = Account.get_user_by_sub(sub)
 

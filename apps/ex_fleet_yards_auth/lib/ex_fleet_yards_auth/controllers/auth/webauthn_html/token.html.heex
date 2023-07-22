@@ -3,16 +3,11 @@
     <span><%= @token.name %></span>
   </div>
   <div class="flex items-center">
-    <button type="button" class="mr-3 text-indigo-600 hover:text-indigo-800">
+    <.button type="button" phx-click="edit_key" phx-value-id={@token.id}>
       Rename
-    </button>
-    <button
-      type="button"
-      class="text-red-600 hover:text-red-800"
-      phx-click="delete_key"
-      phx-value-id={@token.id}
-    >
+    </.button>
+    <.button type="button" role="cancel" phx-click="delete_key" phx-value-id={@token.id}>
       Delete
-    </button>
+    </.button>
   </div>
 </li>
