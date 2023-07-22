@@ -67,7 +67,6 @@ config :ex_fleet_yards_auth, ExFleetYardsAuth.Endpoint,
   watchers: [
     # Start the esbuild watcher by calling Esbuild.install_and_run(:auth, args)
     esbuild: {Esbuild, :install_and_run, [:auth, ~w(--sourcemap=inline --watch)]},
-    # esbuild: {Esbuild, :install_and_run, [:auth_u2f, ~w(--sourcemap=inline --watch)]},
     tailwind: {Tailwind, :install_and_run, [:auth, ~w(--watch)]}
   ]
 
