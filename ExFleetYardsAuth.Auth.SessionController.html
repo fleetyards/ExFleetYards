@@ -7,13 +7,13 @@
     <meta name="generator" content="ExDoc v0.30.3">
     <meta name="project" content="Fleetyards v0.1.0">
 
-    <title>ExFleetYardsAuth.SessionHTML — Fleetyards v0.1.0</title>
+    <title>ExFleetYardsAuth.Auth.SessionController — Fleetyards v0.1.0</title>
     <link rel="stylesheet" href="dist/html-elixir-P5GXSCHE.css" />
 
 
     <script src="dist/handlebars.runtime-NWIB6V2M.js"></script>
     <script src="dist/handlebars.templates-NBND3S2D.js"></script>
-    <script src="dist/sidebar_items-D04CEED9.js"></script>
+    <script src="dist/sidebar_items-737C663E.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -98,14 +98,14 @@ Fleetyards
 </button>
 
 
-  <span translate="no">ExFleetYardsAuth.SessionHTML</span> 
+  <span translate="no">ExFleetYardsAuth.Auth.SessionController</span> 
   <small class="app-vsn" translate="no">(Fleetyards v0.1.0)</small>
 
 </h1>
 
 
   <section id="moduledoc">
-<p>View module used for api</p>
+<p>Controller used for Auth</p>
   </section>
 
 
@@ -123,7 +123,7 @@ Fleetyards
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#new/1" translate="no">new(assigns)</a>
+        <a href="#create/2" translate="no">create(conn, map)</a>
 
       </div>
 
@@ -131,7 +131,7 @@ Fleetyards
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#otp/1" translate="no">otp(assigns)</a>
+        <a href="#delete/2" translate="no">delete(conn, params)</a>
 
       </div>
 
@@ -139,11 +139,33 @@ Fleetyards
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#sign_in_with/1" translate="no">sign_in_with(assigns)</a>
+        <a href="#new/2" translate="no">new(conn, params)</a>
 
       </div>
 
-        <div class="summary-synopsis"><h2>Attributes</h2><ul><li><code class="inline">id</code> (<code class="inline">:string</code>) (required)</li></ul></div>
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#otp/2" translate="no">otp(conn, user_id)</a>
+
+      </div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#otp_verify/2" translate="no">otp_verify(conn, map)</a>
+
+      </div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#webauthn/2" translate="no">webauthn(conn, user_id)</a>
+
+      </div>
 
     </div>
 
@@ -160,14 +182,14 @@ Functions
       </a>
     </h1>
     <div class="functions-list">
-<section class="detail" id="new/1">
+<section class="detail" id="create/2">
 
   <div class="detail-header">
-    <a href="#new/1" class="detail-link" title="Link to this function">
+    <a href="#create/2" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">new(assigns)</h1>
+    <h1 class="signature" translate="no">create(conn, map)</h1>
 
 
   </div>
@@ -177,14 +199,14 @@ Functions
 
   </section>
 </section>
-<section class="detail" id="otp/1">
+<section class="detail" id="delete/2">
 
   <div class="detail-header">
-    <a href="#otp/1" class="detail-link" title="Link to this function">
+    <a href="#delete/2" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">otp(assigns)</h1>
+    <h1 class="signature" translate="no">delete(conn, params)</h1>
 
 
   </div>
@@ -194,27 +216,72 @@ Functions
 
   </section>
 </section>
-<section class="detail" id="sign_in_with/1">
+<section class="detail" id="new/2">
 
   <div class="detail-header">
-    <a href="#sign_in_with/1" class="detail-link" title="Link to this function">
+    <a href="#new/2" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">sign_in_with(assigns)</h1>
+    <h1 class="signature" translate="no">new(conn, params)</h1>
 
 
   </div>
 
   <section class="docstring">
 
-<h2 id="sign_in_with/1-attributes" class="section-heading">
-  <a href="#sign_in_with/1-attributes">
-    <i class="ri-link-m" aria-hidden="true"></i>
-    Attributes
-  </a>
-</h2>
-<ul><li><code class="inline">id</code> (<code class="inline">:string</code>) (required)</li></ul>
+
+  </section>
+</section>
+<section class="detail" id="otp/2">
+
+  <div class="detail-header">
+    <a href="#otp/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">otp(conn, user_id)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="otp_verify/2">
+
+  <div class="detail-header">
+    <a href="#otp_verify/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">otp_verify(conn, map)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="webauthn/2">
+
+  <div class="detail-header">
+    <a href="#webauthn/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">webauthn(conn, user_id)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+
   </section>
 </section>
 

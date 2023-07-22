@@ -7,7 +7,7 @@
     <meta name="generator" content="ExDoc v0.30.3">
     <meta name="project" content="Fleetyards v0.1.0">
 
-    <title>ExFleetYards.Repo.Types.HardpointSize — Fleetyards v0.1.0</title>
+    <title>ExFleetYardsAuth.Auth.WebAuthnController — Fleetyards v0.1.0</title>
     <link rel="stylesheet" href="dist/html-elixir-P5GXSCHE.css" />
 
 
@@ -98,14 +98,14 @@ Fleetyards
 </button>
 
 
-  <span translate="no">ExFleetYards.Repo.Types.HardpointSize</span> 
+  <span translate="no">ExFleetYardsAuth.Auth.WebAuthnController</span> 
   <small class="app-vsn" translate="no">(Fleetyards v0.1.0)</small>
 
 </h1>
 
 
   <section id="moduledoc">
-<p>Elixir.HardpointSize Database enum type</p>
+<p>Controller used for Auth</p>
   </section>
 
 
@@ -123,7 +123,7 @@ Fleetyards
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#all/0" translate="no">all()</a>
+        <a href="#allow_credentials/1" translate="no">allow_credentials(user)</a>
 
       </div>
 
@@ -131,47 +131,7 @@ Fleetyards
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#cast/1" translate="no">cast(arg1)</a>
-
-      </div>
-
-        <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/ecto/3.10.3/Ecto.Type.html#c:cast/1"><code class="inline">Ecto.Type.cast/1</code></a>.</p></div>
-
-    </div>
-
-    <div class="summary-row">
-      <div class="summary-signature">
-        <a href="#dump/1" translate="no">dump(arg1)</a>
-
-      </div>
-
-        <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/ecto/3.10.3/Ecto.Type.html#c:dump/1"><code class="inline">Ecto.Type.dump/1</code></a>.</p></div>
-
-    </div>
-
-    <div class="summary-row">
-      <div class="summary-signature">
-        <a href="#embed_as/1" translate="no">embed_as(_)</a>
-
-      </div>
-
-        <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/ecto/3.10.3/Ecto.Type.html#c:embed_as/1"><code class="inline">Ecto.Type.embed_as/1</code></a>.</p></div>
-
-    </div>
-
-    <div class="summary-row">
-      <div class="summary-signature">
-        <a href="#equal?/2" translate="no">equal?(term1, term2)</a>
-
-      </div>
-
-        <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/ecto/3.10.3/Ecto.Type.html#c:equal?/2"><code class="inline">Ecto.Type.equal?/2</code></a>.</p></div>
-
-    </div>
-
-    <div class="summary-row">
-      <div class="summary-signature">
-        <a href="#humanize/1" translate="no">humanize(atom)</a>
+        <a href="#allowed_credentials/1" translate="no">allowed_credentials(challenge)</a>
 
       </div>
 
@@ -179,21 +139,49 @@ Fleetyards
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#load/1" translate="no">load(arg1)</a>
+        <a href="#auth_opts/1" translate="no">auth_opts(user)</a>
 
       </div>
-
-        <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/ecto/3.10.3/Ecto.Type.html#c:load/1"><code class="inline">Ecto.Type.load/1</code></a>.</p></div>
 
     </div>
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#type/0" translate="no">type()</a>
+        <a href="#login/2" translate="no">login(conn, map)</a>
 
       </div>
 
-        <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/ecto/3.10.3/Ecto.Type.html#c:type/0"><code class="inline">Ecto.Type.type/0</code></a>.</p></div>
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#login_challenge/2" translate="no">login_challenge(conn, map)</a>
+
+      </div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#register/2" translate="no">register(conn, data)</a>
+
+      </div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#register_challenge/2" translate="no">register_challenge(conn, map)</a>
+
+      </div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#register_opts/0" translate="no">register_opts()</a>
+
+      </div>
 
     </div>
 
@@ -210,14 +198,14 @@ Functions
       </a>
     </h1>
     <div class="functions-list">
-<section class="detail" id="all/0">
+<section class="detail" id="allow_credentials/1">
 
   <div class="detail-header">
-    <a href="#all/0" class="detail-link" title="Link to this function">
+    <a href="#allow_credentials/1" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">all()</h1>
+    <h1 class="signature" translate="no">allow_credentials(user)</h1>
 
 
   </div>
@@ -227,82 +215,14 @@ Functions
 
   </section>
 </section>
-<section class="detail" id="cast/1">
+<section class="detail" id="allowed_credentials/1">
 
   <div class="detail-header">
-    <a href="#cast/1" class="detail-link" title="Link to this function">
+    <a href="#allowed_credentials/1" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">cast(arg1)</h1>
-
-
-  </div>
-
-  <section class="docstring">
-
-<p>Callback implementation for <a href="https://hexdocs.pm/ecto/3.10.3/Ecto.Type.html#c:cast/1"><code class="inline">Ecto.Type.cast/1</code></a>.</p>
-  </section>
-</section>
-<section class="detail" id="dump/1">
-
-  <div class="detail-header">
-    <a href="#dump/1" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">dump(arg1)</h1>
-
-
-  </div>
-
-  <section class="docstring">
-
-<p>Callback implementation for <a href="https://hexdocs.pm/ecto/3.10.3/Ecto.Type.html#c:dump/1"><code class="inline">Ecto.Type.dump/1</code></a>.</p>
-  </section>
-</section>
-<section class="detail" id="embed_as/1">
-
-  <div class="detail-header">
-    <a href="#embed_as/1" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">embed_as(_)</h1>
-
-
-  </div>
-
-  <section class="docstring">
-
-<p>Callback implementation for <a href="https://hexdocs.pm/ecto/3.10.3/Ecto.Type.html#c:embed_as/1"><code class="inline">Ecto.Type.embed_as/1</code></a>.</p>
-  </section>
-</section>
-<section class="detail" id="equal?/2">
-
-  <div class="detail-header">
-    <a href="#equal?/2" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">equal?(term1, term2)</h1>
-
-
-  </div>
-
-  <section class="docstring">
-
-<p>Callback implementation for <a href="https://hexdocs.pm/ecto/3.10.3/Ecto.Type.html#c:equal?/2"><code class="inline">Ecto.Type.equal?/2</code></a>.</p>
-  </section>
-</section>
-<section class="detail" id="humanize/1">
-
-  <div class="detail-header">
-    <a href="#humanize/1" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">humanize(atom)</h1>
+    <h1 class="signature" translate="no">allowed_credentials(challenge)</h1>
 
 
   </div>
@@ -312,38 +232,106 @@ Functions
 
   </section>
 </section>
-<section class="detail" id="load/1">
+<section class="detail" id="auth_opts/1">
 
   <div class="detail-header">
-    <a href="#load/1" class="detail-link" title="Link to this function">
+    <a href="#auth_opts/1" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">load(arg1)</h1>
+    <h1 class="signature" translate="no">auth_opts(user)</h1>
 
 
   </div>
 
   <section class="docstring">
 
-<p>Callback implementation for <a href="https://hexdocs.pm/ecto/3.10.3/Ecto.Type.html#c:load/1"><code class="inline">Ecto.Type.load/1</code></a>.</p>
+
   </section>
 </section>
-<section class="detail" id="type/0">
+<section class="detail" id="login/2">
 
   <div class="detail-header">
-    <a href="#type/0" class="detail-link" title="Link to this function">
+    <a href="#login/2" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">type()</h1>
+    <h1 class="signature" translate="no">login(conn, map)</h1>
 
 
   </div>
 
   <section class="docstring">
 
-<p>Callback implementation for <a href="https://hexdocs.pm/ecto/3.10.3/Ecto.Type.html#c:type/0"><code class="inline">Ecto.Type.type/0</code></a>.</p>
+
+  </section>
+</section>
+<section class="detail" id="login_challenge/2">
+
+  <div class="detail-header">
+    <a href="#login_challenge/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">login_challenge(conn, map)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="register/2">
+
+  <div class="detail-header">
+    <a href="#register/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">register(conn, data)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="register_challenge/2">
+
+  <div class="detail-header">
+    <a href="#register_challenge/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">register_challenge(conn, map)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="register_opts/0">
+
+  <div class="detail-header">
+    <a href="#register_opts/0" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">register_opts()</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+
   </section>
 </section>
 

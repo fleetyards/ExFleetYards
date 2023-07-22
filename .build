@@ -10,6 +10,7 @@ ExFleetYards.Release.Tasks.html
 ExFleetYards.Repo.Account.TokenRevocation.html
 ExFleetYards.Repo.Account.User.SSOConnection.html
 ExFleetYards.Repo.Account.User.Totp.html
+ExFleetYards.Repo.Account.User.U2fToken.html
 ExFleetYards.Repo.Account.User.html
 ExFleetYards.Repo.Account.Vehicle.NotFoundException.html
 ExFleetYards.Repo.Account.Vehicle.html
@@ -119,6 +120,11 @@ ExFleetYardsApi.Telemetry.InstreamConnection.html
 ExFleetYardsApi.UnauthorizedException.html
 ExFleetYardsApi.html
 ExFleetYardsAuth.Auth.SSOController.html
+ExFleetYardsAuth.Auth.SessionController.html
+ExFleetYardsAuth.Auth.SessionHTML.html
+ExFleetYardsAuth.Auth.WebAuthnController.html
+ExFleetYardsAuth.Auth.WebAuthnHTML.html
+ExFleetYardsAuth.Auth.WebAuthnLive.html
 ExFleetYardsAuth.Auth.html
 ExFleetYardsAuth.CoreComponents.html
 ExFleetYardsAuth.Endpoint.html
@@ -138,8 +144,6 @@ ExFleetYardsAuth.Openid.UserinfoController.html
 ExFleetYardsAuth.OpenidView.html
 ExFleetYardsAuth.Release.Scopes.html
 ExFleetYardsAuth.Router.html
-ExFleetYardsAuth.SessionController.html
-ExFleetYardsAuth.SessionHTML.html
 ExFleetYardsAuth.html
 ExFleetYardsImport.Importer.Paint.html
 ExFleetYardsImport.html
@@ -182,7 +186,7 @@ dist/merriweather-latin-ext-300-normal-K6L27CZ5.woff2
 dist/merriweather-vietnamese-300-italic-EHHNZPUO.woff2
 dist/merriweather-vietnamese-300-normal-U376L4Z4.woff2
 dist/remixicon-NKANDIL5.woff2
-dist/search_data-4C77B77B.js
-dist/sidebar_items-D04CEED9.js
+dist/search_data-7F249226.js
+dist/sidebar_items-737C663E.js
 index.html
 search.html
