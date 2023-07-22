@@ -15,18 +15,43 @@ defmodule ExFleetYardsAuth.CoreComponents do
   """
   attr :type, :string, default: nil
   attr :class, :string, default: nil
+  attr :role, :string, default: "primary"
   attr :rest, :global, include: ~w(disabled form name value)
 
   slot :inner_block, required: true
 
-  def button(assigns) do
+  def button(%{role: "cancel"} = assigns) do
+    class_list = [
+      "bg-red-500 hover:bg-red-600 active:bg-red-700 focus:border-red-600 ring-red-300 text-white",
+      assigns["class"]
+    ]
+
+    assigns
+    |> assign(role: nil)
+    |> assign(class: Enum.join(class_list, ","))
+    |> button
+  end
+
+  def button(%{role: "primary"} = assigns) do
+    class_list = [
+      "bg-indigo-400 hover:bg-indigo-500 active:bg-indigo-600",
+      "focus:border-indigo-500 ring-indigo-300 text-white",
+      assigns["class"]
+    ]
+
+    assigns
+    |> assign(role: nil)
+    |> assign(class: Enum.join(class_list, ","))
+    |> button
+  end
+
+  def button(%{role: nil} = assigns) do
     ~H"""
     <button
       type={@type}
       class={[
-        "inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white",
-        "uppercase tracking-widest bg-indigo-400 hover:bg-indigo-500 active:bg-indigo-600 focus:outline-none",
-        "focus:border-indigo-500 focus:ring ring-indigo-300 disabled:opacity-25 transition ease-in-out duration-150",
+        "inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs uppercase",
+        "tracking-widest focus:outline-none focus:ring disabled:opacity-25 transition ease-in-out duration-150",
         @class
       ]}
       {@rest}
@@ -78,8 +103,11 @@ defmodule ExFleetYardsAuth.CoreComponents do
     assigns
     |> assign(field: nil, id: assigns.id || field.id)
     |> assign(:errors, Enum.map(field.errors, &translate_error(&1)))
-    |> assign_new(:name, fn -> if assigns.multiple, do: field.name <> "[]", else: field.name end)
-    |> assign_new(:value, fn -> field.value end)
+    |> assign(
+      :name,
+      assigns.name || if(assigns.multiple, do: field.name <> "[]", else: field.name)
+    )
+    |> assign(:value, assigns.value || field.value)
     |> input()
   end
 

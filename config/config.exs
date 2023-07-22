@@ -103,10 +103,17 @@ config :esbuild,
   ],
   auth: [
     args:
-      ~w(js/app.js --bundle --target=es2017 --outdir=../priv/static/assets --external:/fonts/* --external:/images/*),
+      ~w(js/app.js js/webauthn/register.js js/webauthn/login.js --bundle --target=es2017 --outdir=../priv/static/assets --external:/fonts/* --external:/images/*),
     cd: Path.expand("../apps/ex_fleet_yards_auth/assets", __DIR__),
     env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
   ]
+
+# auth_u2f: [
+#  args:
+#    ~w(js/u2f.js --bundle --target=es2017 --outdir=../priv/static/assets --external:/fonts/* --external:/images/*),
+#  cd: Path.expand("../apps/ex_fleet_yards_auth/assets", __DIR__),
+#  env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
+# ]
 
 config :tailwind,
   version: "3.2.7",
@@ -155,6 +162,11 @@ config :boruta, Boruta.Oauth,
     resource_owners: ExFleetYards.Oauth.ResourceOwners
   ],
   issuer: "https://auth.fleetyards.net"
+
+config :wax_,
+  rp_id: :auto,
+  attestation: "none",
+  user_verification: "preferred"
 
 config :ueberauth, Ueberauth, providers: []
 

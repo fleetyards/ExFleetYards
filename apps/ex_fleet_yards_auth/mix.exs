@@ -41,6 +41,7 @@ defmodule ExFleetYardsAuth.MixProject do
       {:remote_ip, "~> 1.1"},
 
       # Auth
+      {:wax_, "~> 0.6.0"},
       {:ueberauth, "~> 0.10"},
       {:ueberauth_github, "~> 0.8"},
 
@@ -63,7 +64,12 @@ defmodule ExFleetYardsAuth.MixProject do
 
   def aliases do
     [
-      "assets.deploy": ["tailwind auth --minify", "esbuild auth --minify", "phx.digest"]
+      "assets.deploy": [
+        "tailwind auth --minify",
+        "esbuild auth --minify",
+        "esbuild auth_u2f --minify",
+        "phx.digest"
+      ]
     ]
   end
 end

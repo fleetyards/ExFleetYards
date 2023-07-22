@@ -2,6 +2,16 @@ import Config
 
 # Configure your database
 if System.get_env("FLEETYARDS_IN_DEVENV") == "1" do
+  config :ex_fleet_yards_web, ExFleetYardsWeb.Endpoint,
+    url: [host: "fleetyards.localhost", port: 8443, scheme: "https"]
+
+  config :ex_fleet_yards_api, ExFleetYardsApi.Endpoint,
+    url: [host: "api.fleetyards.localhost", port: 8443, scheme: "https"]
+
+  config :ex_fleet_yards_auth, ExFleetYardsAuth.Endpoint,
+    url: [host: "auth.fleetyards.localhost", port: 8443, scheme: "https"]
+
+  config :boruta, Boruta.Oauth, issuer: "https://auth.fleetyards.localhost:8443"
 else
   config :ex_fleet_yards, ExFleetYards.Repo,
     username: "fleet_yards_dev",
@@ -57,6 +67,7 @@ config :ex_fleet_yards_auth, ExFleetYardsAuth.Endpoint,
   watchers: [
     # Start the esbuild watcher by calling Esbuild.install_and_run(:auth, args)
     esbuild: {Esbuild, :install_and_run, [:auth, ~w(--sourcemap=inline --watch)]},
+    # esbuild: {Esbuild, :install_and_run, [:auth_u2f, ~w(--sourcemap=inline --watch)]},
     tailwind: {Tailwind, :install_and_run, [:auth, ~w(--watch)]}
   ]
 

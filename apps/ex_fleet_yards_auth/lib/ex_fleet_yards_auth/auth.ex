@@ -15,7 +15,7 @@ defmodule ExFleetYardsAuth.Auth do
   @remember_me_cookie "_ex_fleet_yards_auth_user_remember_me"
   @remember_me_options [sign: false, max_age: @max_age, same_site: "Lax"]
 
-  def log_in_user(conn, user, params \\ %{}) do
+  def log_in_user(conn, user) do
     # Update last sign in
     user
     |> Account.update_last_signin!(conn)
@@ -26,15 +26,27 @@ defmodule ExFleetYardsAuth.Auth do
 
     return_to = get_session(conn, :user_return_to)
 
-    conn
-    |> renew_session()
-    |> put_session(:user_token, token)
-    |> put_session(:live_socket_id, "_user_sessions:#{token}")
-    |> maybe_write_remember_me_cookie(user, params)
-    |> redirect(to: return_to || signed_in_path(conn))
+    remember_me = get_session(conn, :remember_me)
+
+    conn =
+      conn
+      |> renew_session()
+      |> put_session(:user_token, token)
+      |> put_session(:live_socket_id, "_user_sessions:#{token}")
+      |> maybe_write_remember_me_cookie(user, remember_me)
+
+    redir = return_to || signed_in_path(conn)
+    {conn, redir}
   end
 
-  defp maybe_write_remember_me_cookie(conn, user, %{"remember_me" => "true"}) do
+  def log_in_user_redirect(conn, user) do
+    {conn, redir} = log_in_user(conn, user)
+
+    conn
+    |> redirect(to: redir)
+  end
+
+  defp maybe_write_remember_me_cookie(conn, user, "true") do
     {:ok, token, _claims} = Token.generate_remember_token(user)
 
     put_resp_cookie(conn, @remember_me_cookie, token, @remember_me_options)
@@ -154,4 +166,11 @@ defmodule ExFleetYardsAuth.Auth do
   end
 
   defp signed_in_path(_conn), do: "/"
+
+  def get_user_from_token(token) when is_binary(token) do
+    with {:ok, user_token} <- Token.verify_and_validate(token),
+         user when user != nil <- Account.get_user_by_sub(user_token["sub"]) do
+      {:ok, user_token, user}
+    end
+  end
 end

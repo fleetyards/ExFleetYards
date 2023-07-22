@@ -1,0 +1,75 @@
+<script
+  defer=""
+  phx-track-static=""
+  type="text/javascript"
+  src={~p"/assets/webauthn/register.js"}
+/>
+<div class="min-h-screen bg-gray-900 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+  <div class="sm:mx-auto sm:w-full sm:max-w-md">
+    <img class="mx-auto h-12 w-auto" src={~p"/images/logo-dark.png"} alt="Logo" />
+
+    <h2 class="mt-6 text-center text-3xl font-extrabold text-white">
+      WebAuthn Key Register and Management
+    </h2>
+  </div>
+
+  <%= if !@totp_tokens do %>
+    <a href={~p"/totp"}>
+      <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md py-2 px-4 bg-yellow-500 rounded-md">
+        <p class="text-md font-medium text-white">
+          No TOTP tokens are configured. You will not be able to recover your account if you lose your WebAuthn key.
+        </p>
+      </div>
+    </a>
+  <% end %>
+
+  <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+    <div class="bg-gray-800 py-8 px-4 shadow sm:rounded-lg sm:px-10">
+      <div class="rounded-md shadow-sm -space-y-px">
+        <div>
+          <p class="text-md font-medium text-white">Registered U2F Tokens:</p>
+        </div>
+        <%= if length(@webauthn_keys) == 0 do %>
+          No keys
+        <% else %>
+          <ul>
+            <%= for token <- @webauthn_keys do %>
+              <%= if @edit_key != nil and @edit_key.id == token.id do %>
+                <.edit_token token={token} form={@edit_form} />
+              <% else %>
+                <.token token={token} />
+              <% end %>
+            <% end %>
+          </ul>
+        <% end %>
+      </div>
+
+      <div class="rounded-md shadow-sm -space-y-px mt-4">
+        <div>
+          <label for="otp_code" class="sr-only">U2F Token Registration</label>
+          <.input
+            name="key_name"
+            id="webauthn_key_name"
+            type="text"
+            required
+            placeholder="Enter WebAuthn key name"
+          />
+        </div>
+      </div>
+
+      <div class="mt-6">
+        <button
+          type="button"
+          id="u2fRegisterButton"
+          class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+        >
+          <span class="absolute left-0 inset-y-0 flex items-center pl-3">
+            <.icon name="hero-lock-closed-solid" />
+          </span>
+          Register U2F Token
+        </button>
+        <button type="submit" />
+      </div>
+    </div>
+  </div>
+</div>

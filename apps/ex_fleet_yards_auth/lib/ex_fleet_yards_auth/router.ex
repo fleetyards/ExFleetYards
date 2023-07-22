@@ -5,10 +5,18 @@ defmodule ExFleetYardsAuth.Router do
   alias ExFleetYards.Plugs.ApiAuthorization
 
   pipeline :browser do
-    plug :accepts, ["html"]
+    plug :accepts, ["json"]
     plug :fetch_session
     plug :fetch_current_user
     plug :put_root_layout, {ExFleetYardsAuth.Layouts, :root}
+    plug :protect_from_forgery
+    plug :put_secure_browser_headers
+  end
+
+  pipeline :browser_api do
+    plug :accepts, ["json"]
+    plug :fetch_session
+    plug :fetch_current_user
     plug :protect_from_forgery
     plug :put_secure_browser_headers
   end
@@ -20,18 +28,41 @@ defmodule ExFleetYardsAuth.Router do
   scope "/" do
     pipe_through :browser
 
-    scope "/login", ExFleetYardsAuth do
+    scope "/login", ExFleetYardsAuth.Auth do
       pipe_through :redirect_if_user_is_authenticated
 
       get "/", SessionController, :new
       post "/", SessionController, :create
+      get "/webauthn", SessionController, :webauthn
+      get "/otp", SessionController, :otp
+      post "/otp", SessionController, :otp_verify
+
+      scope "/webauthn" do
+        pipe_through :browser_api
+
+        post "/challenge", WebAuthnController, :login_challenge
+        post "/", WebAuthnController, :login
+      end
     end
 
-    scope "/logout", ExFleetYardsAuth do
+    scope "/logout", ExFleetYardsAuth.Auth do
       pipe_through :require_authenticated_user
 
       delete "/", SessionController, :delete
       get "/", SessionController, :delete
+    end
+
+    scope "/webauthn", ExFleetYardsAuth.Auth do
+      pipe_through :require_authenticated_user
+
+      live "/", WebAuthnLive
+
+      scope "/" do
+        pipe_through :browser_api
+
+        post "/register/challenge", WebAuthnController, :register_challenge
+        post "/register", WebAuthnController, :register
+      end
     end
   end
 

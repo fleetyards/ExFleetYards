@@ -1,0 +1,46 @@
+<div class="min-h-screen bg-gray-900 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+  <div class="sm:mx-auto sm:w-full sm:max-w-md">
+    <img class="mx-auto h-12 w-auto" src={~p"/images/logo-dark.png"} alt="Logo" />
+
+    <h2 class="mt-6 text-center text-3xl font-extrabold text-white">
+      WebAuthn
+    </h2>
+  </div>
+
+  <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+    <div class="bg-gray-800 py-8 px-4 shadow sm:rounded-lg sm:px-10">
+      <div class="py-2 px-4 rounded-b-md text-sm text-white">
+        <p class="text-md font-medium text-white" id="webauthn-msg-text">
+          Trying to communicate with your device. Plug it in (if you haven't already) and press the button on the device now.
+        </p>
+      </div>
+      <div class="mt-6">
+        <button
+          type="button"
+          id="webauthn-retry-btn"
+          class="hidden group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-900 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+        >
+          <span class="absolute left-0 inset-y-0 flex items-center pl-3">
+            <.icon name="hero-lock-closed-solid" />
+          </span>
+          Try again?
+        </button>
+      </div>
+      <%= if @totp do %>
+        <div class="mt-6">
+          <a
+            href={~p"/login/otp"}
+            class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          >
+            <span class="absolute left-0 inset-y-0 flex items-center pl-3">
+              <.icon name="hero-lock-closed-solid" />
+            </span>
+            Sign in via 2FA code
+          </a>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<script defer="" phx-track-static="" type="text/javascript" src={~p"/assets/webauthn/login.js"} />

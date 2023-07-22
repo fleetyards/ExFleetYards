@@ -1,0 +1,13 @@
+<li class="py-4 flex items-center justify-between" id={@token.id}>
+  <div class="text-white">
+    <span><%= @token.name %></span>
+  </div>
+  <div class="flex items-center">
+    <.button type="button" phx-click="edit_key" phx-value-id={@token.id}>
+      Rename
+    </.button>
+    <.button type="button" role="cancel" phx-click="delete_key" phx-value-id={@token.id}>
+      Delete
+    </.button>
+  </div>
+</li>
