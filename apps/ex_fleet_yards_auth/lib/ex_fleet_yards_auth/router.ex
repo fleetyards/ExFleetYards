@@ -64,6 +64,12 @@ defmodule ExFleetYardsAuth.Router do
         post "/register", WebAuthnController, :register
       end
     end
+
+    scope "/totp", ExFleetYardsAuth.Auth do
+      pipe_through :require_authenticated_user
+
+      live "/", TotpLive
+    end
   end
 
   scope "/" do
