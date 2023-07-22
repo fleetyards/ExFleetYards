@@ -67,7 +67,6 @@ defmodule ExFleetYardsAuth.MixProject do
       "assets.deploy": [
         "tailwind auth --minify",
         "esbuild auth --minify",
-        "esbuild auth_u2f --minify",
         "phx.digest"
       ]
     ]
