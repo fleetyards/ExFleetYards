@@ -29,6 +29,7 @@ defmodule ExFleetYards.Repo.Account.User.Totp do
   end
 
   def user_query(user_id, active \\ true)
+  def user_query(%User{id: user_id}, active), do: user_query(user_id, active)
 
   def user_query(user_id, nil) when is_binary(user_id) do
     from(t in __MODULE__, where: t.user_id == ^user_id)

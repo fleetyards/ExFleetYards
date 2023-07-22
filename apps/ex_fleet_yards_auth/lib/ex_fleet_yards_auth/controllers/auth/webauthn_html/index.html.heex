@@ -9,7 +9,7 @@
     <img class="mx-auto h-12 w-auto" src={~p"/images/logo-dark.png"} alt="Logo" />
 
     <h2 class="mt-6 text-center text-3xl font-extrabold text-white">
-      U2F Token Register and Management
+      WebAuthN Key Register and Management
     </h2>
   </div>
 
@@ -17,7 +17,7 @@
     <a href={~p"/totp"}>
       <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md py-2 px-4 bg-yellow-500 rounded-md">
         <p class="text-md font-medium text-white">
-          No TOTP tokens are configured. You will not be able to recover your account if you lose your U2F tokens.
+          No TOTP tokens are configured. You will not be able to recover your account if you lose your WebAuthN key.
         </p>
       </div>
     </a>
@@ -28,13 +28,15 @@
       <div class="rounded-md shadow-sm -space-y-px">
         <div>
           <p class="text-md font-medium text-white">Registered U2F Tokens:</p>
-          <ul class="text-white">
-            <%= Enum.each(@u2f_tokens, fn token -> %>
-              <li><%= token.name %></li>
-            <% end ) %>
-          </ul>
         </div>
-        <%= if length(@u2f_tokens) == 0 do %>
+        <%= if length(@webauthn_keys) == 0 do %>
+          No keys
+        <% else %>
+          <ul>
+            <%= for token <- @webauthn_keys do %>
+              <.token token={token} />
+            <% end %>
+          </ul>
         <% end %>
       </div>
 
@@ -42,12 +44,12 @@
         <div>
           <label for="otp_code" class="sr-only">U2F Token Registration</label>
           <input
-            id="u2f_token_name"
-            name="u2f_token"
+            id="webauthn_key_name"
+            name="key_name"
             type="text"
             required
             class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-500 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-            placeholder="Enter U2F Token Name"
+            placeholder="Enter WebAuthN key Name"
           />
         </div>
       </div>

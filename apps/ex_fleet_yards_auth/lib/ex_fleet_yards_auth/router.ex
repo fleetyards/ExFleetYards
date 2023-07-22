@@ -55,7 +55,8 @@ defmodule ExFleetYardsAuth.Router do
     scope "/webauthn", ExFleetYardsAuth.Auth do
       pipe_through :require_authenticated_user
 
-      get "/", WebAuthNController, :index
+      # get "/", WebAuthNController, :index
+      live "/", WebAuthNLive
 
       scope "/" do
         pipe_through :browser_api

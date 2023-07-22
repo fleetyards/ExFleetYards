@@ -34,6 +34,7 @@ defmodule ExFleetYards.Repo.Account.User.U2fToken do
       name: name
     })
     |> Repo.insert()
+    |> broadcast_change([:create])
   end
 
   import Ecto.Query
@@ -49,8 +50,34 @@ defmodule ExFleetYards.Repo.Account.User.U2fToken do
     end)
   end
 
+  def key_list(user) do
+    user_query(user)
+    |> select([:id, :name])
+    |> Repo.all()
+  end
+
+  def delete_key(%User{id: user}, key), do: delete_key(user, key)
+
+  def delete_key(user, key) when is_binary(user) do
+    Repo.transaction(fn ->
+      key_query(user, key)
+      |> Repo.delete_all()
+    end)
+    |> broadcast_change([:delete], user)
+  end
+
+  def user_query(%User{id: user_id}), do: user_query(user_id)
+
   def user_query(user_id) when is_binary(user_id) do
     from u in __MODULE__, where: u.user_id == ^user_id
+  end
+
+  def key_query(user, key)
+  def key_query(user, %__MODULE__{id: key}), do: key_query(user, key)
+
+  def key_query(user, key) when is_binary(key) do
+    user_query(user)
+    |> where(id: ^key)
   end
 
   import Ecto.Changeset
@@ -61,4 +88,28 @@ defmodule ExFleetYards.Repo.Account.User.U2fToken do
     |> validate_required([:user_id, :credential_id, :cose_key])
     |> unique_constraint([:credential_id])
   end
+
+  @doc """
+  Subscribe to updates to the user webauthn key list.
+  """
+  @spec subscribe(User.t() | Ecto.UUID.t()) :: :ok | {:error, term()}
+  def subscribe(%User{id: user_id}), do: subscribe(user_id)
+
+  def subscribe(user) when is_binary(user) do
+    Phoenix.PubSub.subscribe(ExFleetYards.PubSub, topic(user))
+  end
+
+  defp broadcast_change({:ok, %__MODULE__{user_id: user_id} = result}, event) do
+    Phoenix.PubSub.broadcast(ExFleetYards.PubSub, topic(user_id), {__MODULE__, event, result})
+
+    {:ok, result}
+  end
+
+  defp broadcast_change({:ok, {n, _}} = v, event, user_id)
+       when is_integer(n) and is_binary(user_id) do
+    Phoenix.PubSub.broadcast(ExFleetYards.PubSub, topic(user_id), {__MODULE__, event, n})
+    v
+  end
+
+  defp topic(user_id) when is_binary(user_id), do: Atom.to_string(__MODULE__) <> ":" <> user_id
 end

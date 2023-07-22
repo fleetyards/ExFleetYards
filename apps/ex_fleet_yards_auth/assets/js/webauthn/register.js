@@ -13,7 +13,7 @@ import {
 } from "../vars";
 
 function getLabel() {
-    return document.getElementById('u2f_token_name').value
+    return document.getElementById('webauthn_key_name').value
 }
 
 function webAuthnRegister() {
@@ -54,6 +54,7 @@ function webAuthnRegister() {
                 cc.response.clientDataJSON = toBase64(newCredential.response.clientDataJSON);
                 cc.type = newCredential.type;
                 cc.name = getLabel();
+                document.getElementById('webauthn_key_name').value = "";
                 fetch(WEBAUTHN_REGISTER_VALIDATE_URL, {
                     method: 'POST',
                     credentials: 'same-origin',
@@ -67,10 +68,15 @@ function webAuthnRegister() {
                         alert("There is an internal error. Try again later.") // replace with inline error message
                         throw new Error("Oopps");
                     }
-                    document.location.reload(); // TODO: replace with live view?
                 })
             })
         })
 }
 
 document.getElementById("u2fRegisterButton").addEventListener('click', webAuthnRegister)
+document.getElementById('webauthn_key_name').addEventListener('keypress', function (event) {
+    if (event.key === 'Enter') {
+        event.preventDefault();
+        webAuthnRegister();
+    }
+});

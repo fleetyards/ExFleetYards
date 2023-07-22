@@ -166,4 +166,11 @@ defmodule ExFleetYardsAuth.Auth do
   end
 
   defp signed_in_path(_conn), do: "/"
+
+  def get_user_from_token(token) when is_binary(token) do
+    with {:ok, user_token} <- Token.verify_and_validate(token),
+         user when user != nil <- Account.get_user_by_sub(user_token["sub"]) do
+      {:ok, user_token, user}
+    end
+  end
 end
