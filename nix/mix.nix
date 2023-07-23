@@ -359,6 +359,19 @@ let
       beamDeps = [ castore ];
     };
 
+    eqrcode = buildMix rec {
+      name = "eqrcode";
+      version = "0.1.10";
+
+      src = fetchHex {
+        pkg = "${name}";
+        version = "${version}";
+        sha256 = "1wbn23l17my4bjlnhnn4ssb9i499c2qn91pmnrxd63vaqdry6c6s";
+      };
+
+      beamDeps = [];
+    };
+
     esbuild = buildMix rec {
       name = "esbuild";
       version = "0.7.1";

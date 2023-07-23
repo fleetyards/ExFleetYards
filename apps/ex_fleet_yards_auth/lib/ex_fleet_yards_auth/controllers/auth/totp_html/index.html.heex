@@ -1,0 +1,65 @@
+<div class="min-h-screen bg-gray-900 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+  <div class="sm:mx-auto sm:w-full sm:max-w-md">
+    <img class="mx-auto h-12 w-auto" src={~p"/images/logo-dark.png"} alt="Logo" />
+
+    <h2 class="mt-6 text-center text-3xl font-extrabold text-white">
+      TOTP management
+    </h2>
+  </div>
+
+  <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+    <div class="bg-gray-800 py-8 px-4 shadow sm:rounded-lg sm:px-10">
+      <%= if @stage == :has_totp do %>
+        <.button type="button" role="cancel" phx-click="remove_totp">
+          Delete key
+        </.button>
+      <% end %>
+      <%= if @stage == :empty do %>
+        <.button type="button" phx-click="create_totp">
+          Add TOTP
+        </.button>
+      <% end %>
+      <%= if @stage == :create do %>
+        <svg width="300" height="300" class="bg-white">
+          <%= {:safe, @totp_svg} %>
+        </svg>
+        <div class="secret-container">
+          <.button phx-click={JS.toggle(to: "#totp_secret")}>
+            Show Secret
+          </.button>
+          <div
+            class="bg-indigo-500 text-white text-sm py-2 px-4 rounded bottom-full left-1/2 transform -translate-x-1/2"
+            id="totp_secret"
+          >
+            <%= Base.encode32(@totp_secret) %>
+          </div>
+        </div>
+        <.form :let={f} for={%{}} as={:otp} phx-submit="submit_otp">
+          <.input
+            id="otp_code"
+            name="otp_code"
+            type="text"
+            pattern="([0-9]{6})|([0-9A-Za-z]{10})"
+            inputmode="numeric"
+            autocomplete="one-time-code"
+            required
+            class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-500 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+            placeholder="Enter Your OTP Code"
+          />
+        </.form>
+      <% end %>
+      <%= if @stage == :recovery do %>
+        <div class="bg-indigo-500 text-white text-sm py-2 px-4 rounded relative bottom-full left-1/2 transform -translate-x-1/2">
+          <ul class="list-disc pl-6">
+            <%= for code <- @totp.recovery_codes do %>
+              <li><%= code %></li>
+            <% end %>
+          </ul>
+        </div>
+        <.button phx-click="activate-totp">
+          I stored my codes
+        </.button>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -64,6 +64,12 @@ defmodule ExFleetYardsAuth.Router do
         post "/register", WebAuthnController, :register
       end
     end
+
+    scope "/totp", ExFleetYardsAuth.Auth do
+      pipe_through :require_authenticated_user
+
+      live "/", TotpLive
+    end
   end
 
   scope "/" do
@@ -99,6 +105,19 @@ defmodule ExFleetYardsAuth.Router do
       get "/openid/certs", Openid.JwksController, :jwks_index
       get "/openid/userinfo", Openid.UserinfoController, :userinfo
       get "/.well-known/openid-configuration", Openid.ConfigurationController, :configuration
+    end
+  end
+
+  scope "/api", ExFleetYardsAuth.Api do
+    pipe_through :api
+
+    scope "/totp" do
+      pipe_through :require_authenticated_api
+
+      get "/", TotpController, :index
+      delete "/", TotpController, :delete
+      post "/create", TotpController, :create
+      post "/", TotpController, :put
     end
   end
 

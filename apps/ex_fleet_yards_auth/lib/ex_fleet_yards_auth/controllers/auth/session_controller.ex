@@ -16,13 +16,14 @@ defmodule ExFleetYardsAuth.Auth.SessionController do
     otp(conn, get_session(conn, :user_id))
   end
 
-  def otp(conn, user_id) when is_binary(user_id) do
+  def otp(conn, user_id, error \\ nil) when is_binary(user_id) do
     case User.second_factors(user_id) do
       {:ok, {webauthn, true}} ->
         conn
         |> render("otp.html",
           error: nil,
-          webauthn: webauthn
+          webauthn: webauthn,
+          error: error
         )
 
       _ ->
@@ -41,7 +42,7 @@ defmodule ExFleetYardsAuth.Auth.SessionController do
       conn
       |> Auth.log_in_user_redirect(user)
     else
-      render(conn, "otp.html", error: "Invalid code")
+      otp(conn, sub, "Invalid code")
     end
   end
 
@@ -73,6 +74,10 @@ defmodule ExFleetYardsAuth.Auth.SessionController do
         render(conn, "new.html", error: "Invalid email or password", email: email)
 
       user ->
+        conn =
+          conn
+          |> put_session(:user_id, user.id)
+
         case User.second_factors(user) do
           {:ok, {false, false}} ->
             conn
@@ -80,15 +85,11 @@ defmodule ExFleetYardsAuth.Auth.SessionController do
 
           {:ok, {true, totp}} ->
             conn
-            |> put_session(:user_id, user.id)
             |> render("webauthn.html",
               totp: totp
             )
 
           {:ok, {false, true}} ->
-            conn
-            |> put_session(:user_id, user.id)
-
             conn
             |> render("otp.html",
               error: nil,
