@@ -7,7 +7,7 @@
     <meta name="generator" content="ExDoc v0.30.3">
     <meta name="project" content="Fleetyards v0.1.0">
 
-    <title>ExFleetYardsApi.UnauthorizedException — Fleetyards v0.1.0</title>
+    <title>ExFleetYardsAuth.Auth.TotpLive — Fleetyards v0.1.0</title>
     <link rel="stylesheet" href="dist/html-elixir-P5GXSCHE.css" />
 
 
@@ -21,7 +21,7 @@
 
 
   </head>
-  <body data-type="modules" class="page-exception">
+  <body data-type="modules" class="page-module">
     <script>
 
       try {
@@ -98,7 +98,7 @@ Fleetyards
 </button>
 
 
-  <span translate="no">ExFleetYardsApi.UnauthorizedException</span> <small>exception</small>
+  <span translate="no">ExFleetYardsAuth.Auth.TotpLive</span> 
   <small class="app-vsn" translate="no">(Fleetyards v0.1.0)</small>
 
 </h1>
@@ -119,17 +119,31 @@ Fleetyards
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#add_message/2" translate="no">add_message(error, arg2)</a>
+        <a href="#handle_event/3" translate="no">handle_event(binary, map, socket)</a>
 
       </div>
+
+        <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/phoenix_live_view/0.18.18/Phoenix.LiveView.html#c:handle_event/3"><code class="inline">Phoenix.LiveView.handle_event/3</code></a>.</p></div>
 
     </div>
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#add_scopes/2" translate="no">add_scopes(error, arg2)</a>
+        <a href="#mount/3" translate="no">mount(params, map, socket)</a>
 
       </div>
+
+        <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/phoenix_live_view/0.18.18/Phoenix.LiveView.html#c:mount/3"><code class="inline">Phoenix.LiveView.mount/3</code></a>.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#render/1" translate="no">render(assigns)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Live view for TOTP management</p></div>
 
     </div>
 
@@ -146,38 +160,55 @@ Functions
       </a>
     </h1>
     <div class="functions-list">
-<section class="detail" id="add_message/2">
+<section class="detail" id="handle_event/3">
 
   <div class="detail-header">
-    <a href="#add_message/2" class="detail-link" title="Link to this function">
+    <a href="#handle_event/3" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">add_message(error, arg2)</h1>
+    <h1 class="signature" translate="no">handle_event(binary, map, socket)</h1>
 
 
   </div>
 
   <section class="docstring">
 
-
+<p>Callback implementation for <a href="https://hexdocs.pm/phoenix_live_view/0.18.18/Phoenix.LiveView.html#c:handle_event/3"><code class="inline">Phoenix.LiveView.handle_event/3</code></a>.</p>
   </section>
 </section>
-<section class="detail" id="add_scopes/2">
+<section class="detail" id="mount/3">
 
   <div class="detail-header">
-    <a href="#add_scopes/2" class="detail-link" title="Link to this function">
+    <a href="#mount/3" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">add_scopes(error, arg2)</h1>
+    <h1 class="signature" translate="no">mount(params, map, socket)</h1>
 
 
   </div>
 
   <section class="docstring">
 
+<p>Callback implementation for <a href="https://hexdocs.pm/phoenix_live_view/0.18.18/Phoenix.LiveView.html#c:mount/3"><code class="inline">Phoenix.LiveView.mount/3</code></a>.</p>
+  </section>
+</section>
+<section class="detail" id="render/1">
 
+  <div class="detail-header">
+    <a href="#render/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">render(assigns)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Live view for TOTP management</p>
   </section>
 </section>
 

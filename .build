@@ -1,4 +1,5 @@
 404.html
+ExFleetYards.Auth.TotpHTML.html
 ExFleetYards.Config.html
 ExFleetYards.Mailer.User.html
 ExFleetYards.Mailer.html
@@ -119,9 +120,11 @@ ExFleetYardsApi.Telemetry.InstreamBufferedWritter.html
 ExFleetYardsApi.Telemetry.InstreamConnection.html
 ExFleetYardsApi.UnauthorizedException.html
 ExFleetYardsApi.html
+ExFleetYardsAuth.Api.TotpController.html
 ExFleetYardsAuth.Auth.SSOController.html
 ExFleetYardsAuth.Auth.SessionController.html
 ExFleetYardsAuth.Auth.SessionHTML.html
+ExFleetYardsAuth.Auth.TotpLive.html
 ExFleetYardsAuth.Auth.WebAuthnController.html
 ExFleetYardsAuth.Auth.WebAuthnHTML.html
 ExFleetYardsAuth.Auth.WebAuthnLive.html
@@ -186,7 +189,7 @@ dist/merriweather-latin-ext-300-normal-K6L27CZ5.woff2
 dist/merriweather-vietnamese-300-italic-EHHNZPUO.woff2
 dist/merriweather-vietnamese-300-normal-U376L4Z4.woff2
 dist/remixicon-NKANDIL5.woff2
-dist/search_data-7F249226.js
-dist/sidebar_items-737C663E.js
+dist/search_data-494183FD.js
+dist/sidebar_items-27D1AA23.js
 index.html
 search.html
