@@ -16,7 +16,7 @@ defmodule ExFleetYards.Repo.Account.User.Totp do
     field :totp_secret, ExFleetYards.Vault.Binary
     field :last_used, :utc_datetime
     field :recovery_codes, ExFleetYards.Vault.StringList
-    field :active, :boolean, default: false
+    field :active, :boolean, default: true
 
     belongs_to :user, User, type: Ecto.UUID
 
