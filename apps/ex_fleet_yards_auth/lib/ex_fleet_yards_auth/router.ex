@@ -108,6 +108,19 @@ defmodule ExFleetYardsAuth.Router do
     end
   end
 
+  scope "/api", ExFleetYardsAuth.Api do
+    pipe_through :api
+
+    scope "/totp" do
+      pipe_through :require_authenticated_api
+
+      get "/", TotpController, :index
+      delete "/", TotpController, :delete
+      post "/create", TotpController, :create
+      post "/", TotpController, :put
+    end
+  end
+
   scope "/auth", ExFleetYardsAuth.Auth do
     pipe_through :browser
 
