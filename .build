@@ -1,6 +1,7 @@
 404.html
 ExFleetYards.Auth.TotpHTML.html
 ExFleetYards.Config.html
+ExFleetYards.ErrorJSON.html
 ExFleetYards.Mailer.User.html
 ExFleetYards.Mailer.html
 ExFleetYards.Oauth.ResourceOwners.html
@@ -8,6 +9,7 @@ ExFleetYards.Plugs.ApiAuthorization.html
 ExFleetYards.Plugs.AuthorizationBoruta.html
 ExFleetYards.Release.Ecto.html
 ExFleetYards.Release.Tasks.html
+ExFleetYards.Repo.Account.OauthClient.html
 ExFleetYards.Repo.Account.TokenRevocation.html
 ExFleetYards.Repo.Account.User.SSOConnection.html
 ExFleetYards.Repo.Account.User.Totp.html
@@ -120,6 +122,8 @@ ExFleetYardsApi.Telemetry.InstreamBufferedWritter.html
 ExFleetYardsApi.Telemetry.InstreamConnection.html
 ExFleetYardsApi.UnauthorizedException.html
 ExFleetYardsApi.html
+ExFleetYardsAuth.Api.ClientController.html
+ExFleetYardsAuth.Api.ClientJSON.html
 ExFleetYardsAuth.Api.TotpController.html
 ExFleetYardsAuth.Auth.SSOController.html
 ExFleetYardsAuth.Auth.SessionController.html
@@ -132,6 +136,7 @@ ExFleetYardsAuth.Auth.html
 ExFleetYardsAuth.CoreComponents.html
 ExFleetYardsAuth.Endpoint.html
 ExFleetYardsAuth.ErrorHTML.html
+ExFleetYardsAuth.ErrorJSON.html
 ExFleetYardsAuth.Layouts.html
 ExFleetYardsAuth.Oauth.AuthorizeController.html
 ExFleetYardsAuth.Oauth.HTML.html
@@ -189,7 +194,7 @@ dist/merriweather-latin-ext-300-normal-K6L27CZ5.woff2
 dist/merriweather-vietnamese-300-italic-EHHNZPUO.woff2
 dist/merriweather-vietnamese-300-normal-U376L4Z4.woff2
 dist/remixicon-NKANDIL5.woff2
-dist/search_data-494183FD.js
-dist/sidebar_items-27D1AA23.js
+dist/search_data-F54DA2C5.js
+dist/sidebar_items-46BDCD5A.js
 index.html
 search.html
