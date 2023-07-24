@@ -119,6 +119,16 @@ defmodule ExFleetYardsAuth.Router do
       post "/create", TotpController, :create
       post "/", TotpController, :put
     end
+
+    scope "/oauth/clients" do
+      pipe_through :require_authenticated_api
+
+      get "/", ClientController, :index
+      post "/", ClientController, :post
+      get "/:id", ClientController, :get
+      patch "/:id", ClientController, :patch
+      delete "/:id", ClientController, :delete
+    end
   end
 
   scope "/auth", ExFleetYardsAuth.Auth do

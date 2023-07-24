@@ -52,6 +52,7 @@ defmodule ExFleetYards.Repo.Account.User do
     has_many :sso_connections, ExFleetYards.Repo.Account.User.SSOConnection
     has_one :totp, ExFleetYards.Repo.Account.User.Totp
     has_many :u2f_token, ExFleetYards.Repo.Account.User.U2fToken
+    has_many :oauth_clients, ExFleetYards.Repo.Account.OauthClient
 
     timestamps(inserted_at: :created_at, type: :utc_datetime)
   end
