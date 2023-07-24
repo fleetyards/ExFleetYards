@@ -88,7 +88,7 @@ config :ex_fleet_yards_auth, ExFleetYardsAuth.Endpoint,
   http: [ip: {127, 0, 0, 1}, port: 4002],
   pubsub_server: ExFleetYards.PubSub,
   render_errors: [
-    formats: [html: ExFleetYardsAuth.ErrorHTML],
+    formats: [html: ExFleetYardsAuth.ErrorHTML, json: ExFleetYardsAuth.ErrorJSON],
     layout: [html: {ExFleetYardsAuth.Layouts, :root}]
   ]
 
