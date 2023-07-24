@@ -72,7 +72,6 @@ defmodule ExFleetYardsAuth.Api.ClientController do
     user = conn.assigns[:current_user]
 
     OauthClient.delete(user, id)
-    |> IO.inspect()
     |> case do
       {:ok, nil} ->
         conn

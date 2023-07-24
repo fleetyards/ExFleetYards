@@ -9,7 +9,7 @@ defmodule ExFleetYardsAuth.Api.ClientJSON do
     |> Map.put(:secret, secret)
   end
 
-  @expose_keys ~w(id name access_token_ttl authorization_token_ttl refresh_token_ttl
+  @expose_keys ~w(id name access_token_ttl authorization_code_ttl refresh_token_ttl
   id_token_ttl redirect_uris supported_grant_types pkce)a
   def client(%{
         client: %{client: client}
