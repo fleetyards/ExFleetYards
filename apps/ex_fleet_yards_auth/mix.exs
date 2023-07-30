@@ -39,6 +39,7 @@ defmodule ExFleetYardsAuth.MixProject do
       {:phoenix_live_view, "~> 0.18.18"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:remote_ip, "~> 1.1"},
+      {:open_api_spex, "~> 3.16"},
 
       # Auth
       {:wax_, "~> 0.6.0"},

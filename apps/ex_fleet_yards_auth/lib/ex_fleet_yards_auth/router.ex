@@ -23,6 +23,7 @@ defmodule ExFleetYardsAuth.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug OpenApiSpex.Plug.PutApiSpec, module: ExFleetYardsAuth.ApiSpec
   end
 
   scope "/" do
@@ -108,7 +109,25 @@ defmodule ExFleetYardsAuth.Router do
     end
   end
 
-  scope "/api", ExFleetYardsAuth.Api do
+  scope "/api", OpenApiSpex.Plug do
+    scope "/v2/openapi" do
+      pipe_through :api
+      get "/", RenderSpec, []
+    end
+
+    scope "/" do
+      pipe_through :browser
+
+      get "/docs", SwaggerUI,
+        path: "/api/v2/openapi",
+        persist_authorization: true,
+        oauth: [appName: "Fleetyards API"]
+
+      get "/oauth2-redirect.html", SwaggerUiOAuth2Redirect, []
+    end
+  end
+
+  scope "/api/v2", ExFleetYardsAuth.Api do
     pipe_through :api
 
     scope "/totp" do

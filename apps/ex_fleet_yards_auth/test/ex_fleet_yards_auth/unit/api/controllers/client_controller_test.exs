@@ -12,13 +12,13 @@ defmodule ExFleetYardsAuth.Api.ClientControllerTest do
 
       conn =
         conn
-        |> get(~p"/api/oauth/clients")
+        |> get(~p"/api/v2/oauth/clients")
 
       assert json_response(conn, 200) == []
 
       conn =
         conn
-        |> post(~p"/api/oauth/clients", %{
+        |> post(~p"/api/v2/oauth/clients", %{
           "name" => "testclient",
           "redirect_uris" => ["https://example.com"],
           "access_token_ttl" => 3600,
@@ -31,7 +31,7 @@ defmodule ExFleetYardsAuth.Api.ClientControllerTest do
 
       conn =
         conn
-        |> get(~p"/api/oauth/clients")
+        |> get(~p"/api/v2/oauth/clients")
 
       assert Enum.count(json_response(conn, 200)) == 1
     end
@@ -41,7 +41,7 @@ defmodule ExFleetYardsAuth.Api.ClientControllerTest do
 
       conn =
         conn
-        |> post(~p"/api/oauth/clients", %{
+        |> post(~p"/api/v2/oauth/clients", %{
           "name" => "testclient",
           "redirect_uris" => ["https://example.com"],
           "access_token_ttl" => 3600,
@@ -67,7 +67,7 @@ defmodule ExFleetYardsAuth.Api.ClientControllerTest do
 
       conn =
         conn
-        |> post(~p"/api/oauth/clients", %{
+        |> post(~p"/api/v2/oauth/clients", %{
           "name" => "testclient",
           "redirect_uris" => ["https://example.com"],
           "access_token_ttl" => 3600,
@@ -80,7 +80,7 @@ defmodule ExFleetYardsAuth.Api.ClientControllerTest do
 
       conn =
         conn
-        |> patch(~p"/api/oauth/clients/" <> json["id"], %{
+        |> patch(~p"/api/v2/oauth/clients/" <> json["id"], %{
           "redirect_uris" => ["https://example.org"]
         })
 
@@ -101,7 +101,7 @@ defmodule ExFleetYardsAuth.Api.ClientControllerTest do
 
       conn =
         conn
-        |> post(~p"/api/oauth/clients", %{
+        |> post(~p"/api/v2/oauth/clients", %{
           "name" => "testclient",
           "redirect_uris" => ["https://example.com"],
           "access_token_ttl" => 3600,
@@ -114,7 +114,7 @@ defmodule ExFleetYardsAuth.Api.ClientControllerTest do
 
       conn =
         conn
-        |> delete(~p"/api/oauth/clients/" <> json["id"])
+        |> delete(~p"/api/v2/oauth/clients/" <> json["id"])
 
       json = json_response(conn, 200)
       assert json["code"] == "ok"

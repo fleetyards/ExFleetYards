@@ -10,7 +10,7 @@ defmodule ExFleetYardsAuth.Controllers.Api.TotpControllerTest do
 
       conn =
         conn
-        |> get(~p"/api/totp")
+        |> get(~p"/api/v2/totp")
 
       assert json_response(conn, 200) == %{
                "has_totp" => false
@@ -22,7 +22,7 @@ defmodule ExFleetYardsAuth.Controllers.Api.TotpControllerTest do
 
       conn =
         conn
-        |> delete(~p"/api/totp")
+        |> delete(~p"/api/v2/totp")
 
       assert json_response(conn, 404) == %{
                "code" => "not_found",
@@ -37,7 +37,7 @@ defmodule ExFleetYardsAuth.Controllers.Api.TotpControllerTest do
 
       conn =
         conn
-        |> post(~p"/api/totp/create")
+        |> post(~p"/api/v2/totp/create")
 
       json = json_response(conn, 200)
       assert json["code"] == "ok"
@@ -46,7 +46,7 @@ defmodule ExFleetYardsAuth.Controllers.Api.TotpControllerTest do
 
       conn =
         conn
-        |> delete(~p"/api/totp")
+        |> delete(~p"/api/v2/totp")
 
       assert json_response(conn, 404) == %{
                "code" => "not_found",
@@ -55,7 +55,7 @@ defmodule ExFleetYardsAuth.Controllers.Api.TotpControllerTest do
 
       conn =
         conn
-        |> post(~p"/api/totp", %{"secret" => "invalid_base32_secret"})
+        |> post(~p"/api/v2/totp", %{"secret" => "invalid_base32_secret"})
 
       assert json_response(conn, 400) == %{
                "code" => "invalid_secret",
