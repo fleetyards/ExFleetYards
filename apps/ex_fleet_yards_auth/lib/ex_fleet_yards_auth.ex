@@ -34,6 +34,27 @@ defmodule ExFleetYardsAuth do
     end
   end
 
+  def controller_api do
+    quote do
+      @moduledoc "Controller used for Auth"
+      use Phoenix.Controller,
+        formats: [:html, :json],
+        layouts: [html: ExFleetYardsAuth.Layouts]
+
+      use ExFleetYards.Schemas
+
+      import Plug.Conn
+
+      alias ExFleetYards.Repo
+
+      alias ExFleetYardsAuth.Router.Helpers, as: Routes
+
+      unquote(verified_routes())
+
+      import ExFleetYards.Plugs.ApiAuthorization, only: [authorize: 2]
+    end
+  end
+
   def live_view do
     quote do
       use Phoenix.LiveView,

@@ -92,7 +92,7 @@ defmodule ExFleetYards.Schemas do
   defmacro __using__(_opts) do
     quote do
       use OpenApiSpex.ControllerSpecs
-      alias __MODULE__.Result
+      alias unquote(__MODULE__).Result
     end
   end
 end

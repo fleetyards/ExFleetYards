@@ -2,11 +2,9 @@ defmodule ExFleetYardsAuth.Api.TotpController do
   @moduledoc """
   Totp controller
   """
-  use ExFleetYardsAuth, :controller
-  use ExFleetYards.Schemas
+  use ExFleetYardsAuth, :controller_api
   require Logger
 
-  import ExFleetYards.Plugs.ApiAuthorization, only: [authorize: 2]
   alias ExFleetYardsAuth.Api.TotpSchema
   alias ExFleetYards.Repo.Account.User
 
@@ -16,7 +14,7 @@ defmodule ExFleetYardsAuth.Api.TotpController do
 
   operation :index,
     summary: "Returns if user has totp setup",
-    response: [
+    responses: [
       ok: {"UserHasTotp", "application/json", TotpSchema.UserHasTotp}
     ]
 
@@ -31,7 +29,7 @@ defmodule ExFleetYardsAuth.Api.TotpController do
 
   operation :delete,
     summary: "Delete totp for user",
-    response: [
+    responses: [
       ok: {"Result", "application/json", Result},
       not_found: {"Result", "application/json", Result}
     ]
@@ -57,7 +55,7 @@ defmodule ExFleetYardsAuth.Api.TotpController do
 
   operation :create,
     summary: "Create totp secret for user",
-    response: [
+    responses: [
       ok: {"TotpSecret", "application/json", TotpSchema.TotpSecret},
       bad_request: {"Result", "application/json", Result}
     ]
@@ -81,7 +79,7 @@ defmodule ExFleetYardsAuth.Api.TotpController do
 
   operation :put,
     summary: "Put totp secret for user",
-    response: [
+    responses: [
       created: {"TotpRecovery", "application/json", TotpSchema.TotpRecovery},
       bad_request: {"Result", "application/json", Result}
     ]

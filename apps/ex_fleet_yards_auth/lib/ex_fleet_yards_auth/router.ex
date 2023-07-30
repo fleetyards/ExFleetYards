@@ -123,7 +123,7 @@ defmodule ExFleetYardsAuth.Router do
         persist_authorization: true,
         oauth: [
           app_name: "Fleetyards Auth API",
-          client_id: ExFleetYardsAuth.Release.OauthClient.get_or_create_swagger_client_id(),
+          client_id: ExFleetYardsAuth.Release.OauthClient.swagger_ui_uuid(),
           scopes: ["openid", "profile", "user", "user:security"]
         ]
 
