@@ -40,6 +40,6 @@ defmodule ExFleetYardsAuth.ConnCase do
 
     conn = Phoenix.ConnTest.build_conn()
 
-    {:ok, conn: conn}
+    {:ok, conn: conn, spec: ExFleetYardsAuth.ApiSpec.spec()}
   end
 end

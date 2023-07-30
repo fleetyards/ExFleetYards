@@ -1,24 +1,26 @@
 defmodule ExFleetYardsAuth.Api.ClientControllerTest do
   use ExFleetYardsAuth.ConnCase, async: true
   use ExFleetYardsAuth.Mox
+  import OpenApiSpex.TestAssertions
 
   setup :verify_on_exit!
 
   describe "oauth client" do
-    test "list clients", %{conn: conn} do
+    test "list clients", %{conn: conn, spec: spec} do
       login_user("testuser", "user:security")
       login_user("testuser", "user:security")
       login_user("testuser", "user:security")
 
       conn =
         conn
-        |> get(~p"/api/oauth/clients")
+        |> get(~p"/api/v2/oauth/clients")
 
+      assert_schema json_response(conn, 200), "ClientList", spec
       assert json_response(conn, 200) == []
 
       conn =
         conn
-        |> post(~p"/api/oauth/clients", %{
+        |> post(~p"/api/v2/oauth/clients", %{
           "name" => "testclient",
           "redirect_uris" => ["https://example.com"],
           "access_token_ttl" => 3600,
@@ -28,20 +30,22 @@ defmodule ExFleetYardsAuth.Api.ClientControllerTest do
         })
 
       json = json_response(conn, 201)
+      assert_schema json, "Client", spec
 
       conn =
         conn
-        |> get(~p"/api/oauth/clients")
+        |> get(~p"/api/v2/oauth/clients")
 
+      assert_schema json_response(conn, 200), "ClientList", spec
       assert Enum.count(json_response(conn, 200)) == 1
     end
 
-    test "create client", %{conn: conn} do
+    test "create client", %{conn: conn, spec: spec} do
       login_user("testuser", "user:security")
 
       conn =
         conn
-        |> post(~p"/api/oauth/clients", %{
+        |> post(~p"/api/v2/oauth/clients", %{
           "name" => "testclient",
           "redirect_uris" => ["https://example.com"],
           "access_token_ttl" => 3600,
@@ -51,6 +55,7 @@ defmodule ExFleetYardsAuth.Api.ClientControllerTest do
         })
 
       json = json_response(conn, 201)
+      assert_schema json, "Client", spec
       assert json["name"] == "testclient"
       assert json["redirect_uris"] == ["https://example.com"]
       assert json["pkce"] == false
@@ -61,13 +66,13 @@ defmodule ExFleetYardsAuth.Api.ClientControllerTest do
       assert json["secret"] != nil
     end
 
-    test "update client", %{conn: conn} do
+    test "update client", %{conn: conn, spec: spec} do
       login_user("testuser", "user:security")
       login_user("testuser", "user:security")
 
       conn =
         conn
-        |> post(~p"/api/oauth/clients", %{
+        |> post(~p"/api/v2/oauth/clients", %{
           "name" => "testclient",
           "redirect_uris" => ["https://example.com"],
           "access_token_ttl" => 3600,
@@ -77,14 +82,16 @@ defmodule ExFleetYardsAuth.Api.ClientControllerTest do
         })
 
       json = json_response(conn, 201)
+      assert_schema json, "Client", spec
 
       conn =
         conn
-        |> patch(~p"/api/oauth/clients/" <> json["id"], %{
+        |> patch(~p"/api/v2/oauth/clients/" <> json["id"], %{
           "redirect_uris" => ["https://example.org"]
         })
 
       json = json_response(conn, 200)
+      assert_schema json, "Client", spec
       assert json["name"] == "testclient"
       assert json["redirect_uris"] == ["https://example.org"]
       assert json["pkce"] == false
@@ -95,13 +102,13 @@ defmodule ExFleetYardsAuth.Api.ClientControllerTest do
       assert json["secret"] == nil
     end
 
-    test "delete client", %{conn: conn} do
+    test "delete client", %{conn: conn, spec: spec} do
       login_user("testuser", "user:security")
       login_user("testuser", "user:security")
 
       conn =
         conn
-        |> post(~p"/api/oauth/clients", %{
+        |> post(~p"/api/v2/oauth/clients", %{
           "name" => "testclient",
           "redirect_uris" => ["https://example.com"],
           "access_token_ttl" => 3600,
@@ -111,12 +118,14 @@ defmodule ExFleetYardsAuth.Api.ClientControllerTest do
         })
 
       json = json_response(conn, 201)
+      assert_schema json, "Client", spec
 
       conn =
         conn
-        |> delete(~p"/api/oauth/clients/" <> json["id"])
+        |> delete(~p"/api/v2/oauth/clients/" <> json["id"])
 
       json = json_response(conn, 200)
+      assert_schema json, "ClientDelete", spec
       assert json["code"] == "ok"
       assert json["message"] == "client deleted"
       assert json["client"]["name"] == "testclient"

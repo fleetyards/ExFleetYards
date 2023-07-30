@@ -2,15 +2,23 @@ defmodule ExFleetYardsAuth.Api.ClientController do
   @moduledoc """
   Boruta Client controller
   """
-  use ExFleetYardsAuth, :controller
+  use ExFleetYardsAuth, :controller_api
   require Logger
 
-  import ExFleetYards.Plugs.ApiAuthorization, only: [authorize: 2]
   alias ExFleetYards.Repo
   alias ExFleetYards.Repo.Account.User
   alias ExFleetYards.Repo.Account.OauthClient
+  alias ExFleetYardsAuth.Api.ClientSchema
 
   plug(:authorize, ["user:security"])
+  security [%{"authorization" => ["user:security"]}]
+  tags ["user", "security"]
+
+  operation :index,
+    summary: "Return clients owned by user",
+    responses: [
+      ok: {"ClientList", "application/json", ClientSchema.ClientList}
+    ]
 
   def index(conn, _params) do
     user =
@@ -20,6 +28,19 @@ defmodule ExFleetYardsAuth.Api.ClientController do
     conn
     |> render("index.json", clients: user.oauth_clients)
   end
+
+  operation :get,
+    summary: "Get specific client",
+    parameters: [
+      id: [
+        in: :path,
+        description: "Id of client",
+        type: %OpenApiSpex.Schema{type: :string, format: :uuid}
+      ]
+    ],
+    responses: [
+      ok: {"Client", "application/json", ClientSchema.Client}
+    ]
 
   def get(conn, %{"id" => id}) do
     user = conn.assigns[:current_user]
@@ -31,6 +52,13 @@ defmodule ExFleetYardsAuth.Api.ClientController do
     conn
     |> render("client.json", client: client)
   end
+
+  operation :post,
+    summary: "Create client",
+    request_body: {"Client", "application/json", ClientSchema.Client},
+    responses: [
+      created: {"Client", "application/json", ClientSchema.Client}
+    ]
 
   def post(conn, params) do
     user = conn.assigns[:current_user]
@@ -50,6 +78,20 @@ defmodule ExFleetYardsAuth.Api.ClientController do
     end
   end
 
+  operation :patch,
+    summary: "Update client",
+    parameters: [
+      id: [
+        in: :path,
+        description: "Id of client",
+        type: %OpenApiSpex.Schema{type: :string, format: :uuid}
+      ]
+    ],
+    request_body: {"Client", "application/json", ClientSchema.Client},
+    responses: [
+      ok: {"Client", "application/json", ClientSchema.Client}
+    ]
+
   def patch(conn, %{"id" => id} = params) do
     user = conn.assigns[:current_user]
 
@@ -67,6 +109,19 @@ defmodule ExFleetYardsAuth.Api.ClientController do
         |> render("client.json", client: client)
     end
   end
+
+  operation :delete,
+    summary: "Delete a client",
+    parameters: [
+      id: [
+        in: :path,
+        description: "Id of client",
+        type: %OpenApiSpex.Schema{type: :string, format: :uuid}
+      ]
+    ],
+    responses: [
+      ok: {"ClientDelete", "application/json", ClientSchema.ClientDelete}
+    ]
 
   def delete(conn, %{"id" => id}) do
     user = conn.assigns[:current_user]
