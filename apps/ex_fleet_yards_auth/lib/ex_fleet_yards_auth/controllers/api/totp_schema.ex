@@ -2,8 +2,7 @@ defmodule ExFleetYardsAuth.Api.TotpSchema do
   @moduledoc """
   Schema definitions for TOTP
   """
-  alias OpenApiSpex.Schema
-  require ExFleetYards.Schemas
+  use ExFleetYards.Schemas, :schema
 
   defmodule UserHasTotp do
     require OpenApiSpex
@@ -28,7 +27,7 @@ defmodule ExFleetYardsAuth.Api.TotpSchema do
     [:secret]
   )
 
-  ExFleetYards.Schemas.result(
+  result(
     TotpRecovery,
     "Totp Recovery",
     %{

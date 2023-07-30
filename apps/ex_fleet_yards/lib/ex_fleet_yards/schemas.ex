@@ -89,10 +89,22 @@ defmodule ExFleetYards.Schemas do
     end
   end
 
-  defmacro __using__(_opts) do
+  defmacro __using__(which) when is_atom(which) do
+    apply(__MODULE__, which, [])
+  end
+
+  def controller do
     quote do
       use OpenApiSpex.ControllerSpecs
       alias unquote(__MODULE__).Result
+    end
+  end
+
+  def schema do
+    quote do
+      alias OpenApiSpex.Schema
+      require unquote(__MODULE__)
+      import unquote(__MODULE__), only: [result: 4]
     end
   end
 end

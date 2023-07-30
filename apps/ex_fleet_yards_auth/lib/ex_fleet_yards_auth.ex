@@ -41,7 +41,7 @@ defmodule ExFleetYardsAuth do
         formats: [:html, :json],
         layouts: [html: ExFleetYardsAuth.Layouts]
 
-      use ExFleetYards.Schemas
+      use ExFleetYards.Schemas, :controller
 
       import Plug.Conn
 
