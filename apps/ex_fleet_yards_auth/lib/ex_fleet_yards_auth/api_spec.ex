@@ -40,6 +40,10 @@ defmodule ExFleetYardsAuth.ApiSpec do
                 authorizationUrl: Endpoint.url() <> ~p"/oauth/authorize",
                 tokenUrl: Endpoint.url() <> ~p"/oauth/token",
                 scopes: scope_list()
+              },
+              implicit: %OAuthFlow{
+                authorizationUrl: Endpoint.url() <> ~p"/oauth/authorize",
+                scopes: scope_list()
               }
             }
           }

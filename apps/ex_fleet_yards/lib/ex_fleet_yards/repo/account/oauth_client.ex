@@ -20,7 +20,8 @@ defmodule ExFleetYards.Repo.Account.OauthClient do
   def create(user, %Boruta.Ecto.Client{id: id}), do: create(user, id)
   def create(%User{id: user_id}, client), do: create(user_id, client)
 
-  def create(user_id, %Ecto.Changeset{} = client_changeset) when is_binary(user_id) do
+  def create(user_id, %Ecto.Changeset{} = client_changeset)
+      when is_binary(user_id) or is_nil(user_id) do
     if client_changeset.valid? do
       Repo.transaction(fn ->
         with {:ok, client} <- Repo.insert(client_changeset),
@@ -101,6 +102,7 @@ defmodule ExFleetYards.Repo.Account.OauthClient do
     id_token_signing_alg: "RS256",
     pkce: false
   }
+  def default_args, do: @default_args
 
   defp transform_client_args(args, true) do
     args =

@@ -121,9 +121,13 @@ defmodule ExFleetYardsAuth.Router do
       get "/docs", SwaggerUI,
         path: "/api/v2/openapi",
         persist_authorization: true,
-        oauth: [appName: "Fleetyards API"]
+        oauth: [
+          app_name: "Fleetyards Auth API",
+          client_id: ExFleetYardsAuth.Release.OauthClient.get_or_create_swagger_client_id(),
+          scopes: ["openid", "profile", "user", "user:security"]
+        ]
 
-      get "/oauth2-redirect.html", SwaggerUiOAuth2Redirect, []
+      get "/oauth2-redirect.html", SwaggerUIOAuth2Redirect, []
     end
   end
 
