@@ -37,7 +37,7 @@ defmodule ExFleetYardsApi.MixProject do
       {:phoenix, "~> 1.7.2"},
       {:phoenix_view, "~> 2.0"},
       {:phoenix_ecto, "~> 4.4"},
-      {:telemetry_metrics, "~> 0.6"},
+      {:telemetry_metrics, "~> 1.0"},
       {:telemetry_poller, "~> 1.0"},
       {:ex_fleet_yards, in_umbrella: true},
       {:jason, "~> 1.2"},
