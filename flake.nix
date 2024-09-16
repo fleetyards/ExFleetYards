@@ -36,7 +36,7 @@
       nixpkgsFor = forAllSystems (system:
         import nixpkgs {
           inherit system;
-          overlays = [ self.overlays.default ];
+          overlays = [ self.overlays.default self.overlays.docker ];
         });
     in {
       overlays.fleet = final: prev: {
@@ -77,10 +77,33 @@
               nativeBuildInputs = [ rebar3 ];
             }) { };
       };
+      overlays.docker = final: prev: {
+        ex_fleet_yards_docker = final.callPackage
+          ({ lib, ex_fleet_yards, dockerTools, buildEnv }:
+            dockerTools.buildImage {
+              name = "ExFleetYards";
+              tag = "latest";
+
+              copyToRoot = buildEnv {
+                name = "ex_fleet_yards-root";
+                paths = [ ex_fleet_yards ];
+                pathsToLink = [ "/bin" ];
+              };
+
+              config = {
+                Entrypoint = [ "/bin/ex_fleet_yards_web" ];
+                Cmd = [ "start" ];
+                ExposedPorts."4000/tcp" = { };
+                Env = [ "FLEETYARDS_CONFIG_PATH=/config/config.exs" ];
+                Volumes."/config/" = { };
+              };
+            }) { };
+      };
       overlays.default = self.overlays.fleet;
 
       packages = forAllSystems (system: {
-        inherit (nixpkgsFor.${system}) ex_fleet_yards appsignal_nif;
+        inherit (nixpkgsFor.${system})
+          ex_fleet_yards appsignal_nif ex_fleet_yards_docker;
         default = self.packages.${system}.ex_fleet_yards;
       });
 
