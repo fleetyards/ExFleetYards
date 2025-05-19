@@ -42,7 +42,7 @@ defmodule ExFleetYardsAuth.MixProject do
       {:open_api_spex, "~> 3.16"},
 
       # Auth
-      {:wax_, "~> 0.6.0"},
+      {:wax_, "~> 0.7.0"},
       {:eqrcode, "~> 0.1.10"},
       {:ueberauth, "~> 0.10"},
       {:ueberauth_github, "~> 0.8"},
