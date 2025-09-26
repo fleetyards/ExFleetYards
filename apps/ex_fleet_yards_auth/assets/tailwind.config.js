@@ -42,7 +42,6 @@ module.exports = {
       ])
     ),
 
-    ,
     // Embeds Hero Icons (https://heroicons.com) into your app.css bundle
     plugin(function ({ matchComponents, theme }) {
       let iconsDir = path.join(
