@@ -138,7 +138,7 @@ defmodule ExFleetYardsAuth.Auth.WebAuthnController do
   end
 
   def auth_opts(user) do
-    register_opts
+    register_opts()
     |> Keyword.put(:allow_credentials, allow_credentials(user))
   end
 
