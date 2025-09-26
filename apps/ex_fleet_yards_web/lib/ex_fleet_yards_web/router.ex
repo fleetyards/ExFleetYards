@@ -13,7 +13,7 @@ defmodule ExFleetYardsWeb.Router do
   # only used for openapi endpoint
   pipeline :api do
     plug :accepts, ["json"]
-    plug OpenApiSpex.Plug.PutApiSpec, module: ExFleetYardsWeb.ApiSpec
+    plug OpenApiSpex.Plug.PutApiSpec, module: ExFleetYardsApi.ApiSpec
   end
 
   scope "/", ExFleetYardsWeb do
