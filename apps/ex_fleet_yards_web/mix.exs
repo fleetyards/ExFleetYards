@@ -45,7 +45,7 @@ defmodule ExFleetYardsWeb.MixProject do
       {:floki, ">= 0.30.0", only: :test},
       {:phoenix_live_dashboard, "~> 0.7.2"},
       {:esbuild, "~> 0.4", runtime: Mix.env() == :dev},
-      {:gettext, "~> 0.18"},
+      {:gettext, "~> 1.0"},
       {:ex_fleet_yards, in_umbrella: true},
       {:ex_fleet_yards_api, in_umbrella: true},
       {:jason, "~> 1.2"}
